@@ -1,7 +1,10 @@
 import "../styles/css500.css"
 import dynamic from "next/dynamic";
-import { BicatoraContexProvider } from "../Context/BitacoraContext";
+
+import { BicatoraContexProvider } from "../context/BitacoraContext";
+
 import { usePageLoading } from "@/loading/usePageloading";
+
 export default function App({ Component, pageProps }) {
   const { isPageLoading } = usePageLoading();
   const Loading = dynamic(() => import("../components/Tools/Loading"));
