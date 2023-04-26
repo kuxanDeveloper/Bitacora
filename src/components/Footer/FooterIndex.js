@@ -2,7 +2,7 @@ import React from 'react'
 
 function FooterIndex() {
   return (
-    <div>FooterIndex</div>
+    <div><p>FooterIndex 🙃</p></div>
   )
 }
 
