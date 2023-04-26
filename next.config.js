@@ -33,6 +33,12 @@ const nextConfig = withPWA({
       },
     ];
   },
+  publicRuntimeConfig: {
+    apiUrl:
+      process.env.NODE_ENV === "development"
+        ? "https://zde4h.sse.codesandbox.io/api" // development api
+        : "https://zde4h.sse.codesandbox.io/api", // production api
+  },
   swcMinify: true,
 
   i18n: {

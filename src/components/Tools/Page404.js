@@ -80,69 +80,67 @@ function Page404({ stylesNotFound }) {
     animate();
   });
   return (
-    <div className={stylesNotFound.html}>
-      <div className={stylesNotFound.body}>
-        <div className={stylesNotFound.moon}></div>
-        <div
-          className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater1}`}
-        ></div>
-        <div
-          className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater2}`}
-        ></div>
-        <div
-          className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater3}`}
-        ></div>
+    <div className={`${stylesNotFound.body}`}>
+      <div className={stylesNotFound.moon}></div>
+      <div
+        className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater1}`}
+      ></div>
+      <div
+        className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater2}`}
+      ></div>
+      <div
+        className={`${stylesNotFound.moon__crater} ${stylesNotFound.moon__crater3}`}
+      ></div>
 
-        <div className={`${stylesNotFound.star} ${stylesNotFound.star1}`}></div>
-        <div className={`${stylesNotFound.star} ${stylesNotFound.star2}`}></div>
-        <div className={`${stylesNotFound.star} ${stylesNotFound.star3}`}></div>
-        <div className={`${stylesNotFound.star} ${stylesNotFound.star4}`}></div>
-        <div className={`${stylesNotFound.star} ${stylesNotFound.star5}`}></div>
+      <div className={`${stylesNotFound.star} ${stylesNotFound.star1}`}></div>
+      <div className={`${stylesNotFound.star} ${stylesNotFound.star2}`}></div>
+      <div className={`${stylesNotFound.star} ${stylesNotFound.star3}`}></div>
+      <div className={`${stylesNotFound.star} ${stylesNotFound.star4}`}></div>
+      <div className={`${stylesNotFound.star} ${stylesNotFound.star5}`}></div>
 
-        <div className={`${stylesNotFound.error}`}>
-          <div className={`${stylesNotFound.error__title}`}>404</div>
-          <div className={`${stylesNotFound.error__subtitle}`}>Hmmm...</div>
-          <div className={`${stylesNotFound.error__description}`}>
-            It looks like one of the developers fell asleep
-          </div>
-          <button
-            className={`${stylesNotFound.error__button} ${stylesNotFound.error__button_active}`}
-          >
-            LOGIN
-          </button>
-          <button className={`${stylesNotFound.error__button}`}>CONTACT</button>
+      <div className={`${stylesNotFound.error}`}>
+        <div className={`${stylesNotFound.error__title}`}>404</div>
+        <div className={`${stylesNotFound.error__subtitle}`}>Hmmm...</div>
+        <div className={`${stylesNotFound.error__description}`}>
+          It looks like one of the developers fell asleep
+        </div>
+        <button
+          className={`${stylesNotFound.error__button} ${stylesNotFound.error__button_active}`}
+        >
+          LOGIN
+        </button>
+        <button className={`${stylesNotFound.error__button}`}>CONTACT</button>
+      </div>
+
+      <div className={`${stylesNotFound.astronaut}`}>
+        <div className={`${stylesNotFound.astronaut__backpack}`}></div>
+        <div className={`${stylesNotFound.astronaut__body}`}></div>
+        <div className={`${stylesNotFound.astronaut__body__chest}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_left1}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_left2}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_right1}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_right2}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_thumb_left}`}></div>
+        <div className={`${stylesNotFound.astronaut__arm_thumb_right}`}></div>
+        <div className={`${stylesNotFound.astronaut__wrist_left}`}></div>
+        <div className={`${stylesNotFound.astronaut__wrist_right}`}></div>
+        <div className={`${stylesNotFound.astronaut__leg_left}`}></div>
+        <div className={`${stylesNotFound.astronaut__foot_right}`}></div>
+        <div className={`${stylesNotFound.astronaut__wrist_left}`}></div>
+        <div className={`${stylesNotFound.astronaut__wrist_right}`}></div>
+
+        <div className="astronaut__cord">
+          <canvas id="cord" height="500px" width="500px"></canvas>
         </div>
 
-        <div className={`${stylesNotFound.astronaut}`}>
-          <div className={`${stylesNotFound.astronaut__backpack}`}></div>
-          <div className={`${stylesNotFound.astronaut__body}`}></div>
-          <div className={`${stylesNotFound.astronaut__body__chest}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_left1}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_left2}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_right1}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_right2}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_thumb_left}`}></div>
-          <div className={`${stylesNotFound.astronaut__arm_thumb_right}`}></div>
-          <div className={`${stylesNotFound.astronaut__wrist_left}`}></div>
-          <div className={`${stylesNotFound.astronaut__wrist_right}`}></div>
-          <div className={`${stylesNotFound.astronaut__leg_left}`}></div>
-          <div className={`${stylesNotFound.astronaut__foot_right}`}></div>
-          <div className={`${stylesNotFound.astronaut__wrist_left}`}></div>
-          <div className={`${stylesNotFound.astronaut__wrist_right}`}></div>
-
-          <div className="astronaut__cord">
-            <canvas id="cord" height="500px" width="500px"></canvas>
-          </div>
-
-          <div className={`${stylesNotFound.astronaut__head}`}>
-            <canvas id="visor" width="60px" height="60px"></canvas>
-            <div
-              className={`${stylesNotFound.astronaut__head_visor_flare1}`}
-            ></div>
-            <div
-              className={`${stylesNotFound.astronaut__head_visor_flare2}`}
-            ></div>
-          </div>
+        <div className={`${stylesNotFound.astronaut__head}`}>
+          <canvas id="visor" width="60px" height="60px"></canvas>
+          <div
+            className={`${stylesNotFound.astronaut__head_visor_flare1}`}
+          ></div>
+          <div
+            className={`${stylesNotFound.astronaut__head_visor_flare2}`}
+          ></div>
         </div>
       </div>
     </div>
