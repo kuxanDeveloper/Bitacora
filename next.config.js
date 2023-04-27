@@ -33,11 +33,15 @@ const nextConfig = withPWA({
       },
     ];
   },
+  serverRuntimeConfig: {
+    AES256_LOGIN_Key: "Qml0YWNvcmFMb2dpbiMyMDIzS3V4YW4=",
+    AES256_USER_Key: "Qml0YWNvcmFVc3UjMjAyM0t1eGFuQw==",
+  },
   publicRuntimeConfig: {
     apiUrl:
       process.env.NODE_ENV === "development"
-        ? "https://zde4h.sse.codesandbox.io/api" // development api
-        : "https://zde4h.sse.codesandbox.io/api", // production api
+        ? "http://192.168.88.243:51421/ApiBitacora/api" // development api
+        : "http://192.168.88.243:51421/ApiBitacora/api", // production api
   },
   swcMinify: true,
 
