@@ -1,28 +1,43 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userService } from "../services/UserService";
-import { useRouter } from "next/router";
-
+import Router from "next/router";
 export default function Home() {
-  const [Authorize, setAuthorize] = useState(false);
-  const router = useRouter();
+  // useEffect(() => {
+  //   // redirect to home if already logged in
+  //   if (!userService.userValue) {
+  //     Router.push(`/Account/Login`);
+  //   }
 
-  useEffect(() => {
-    // redirect to home if already logged in
-    if (userService.userValue) {
-      setAuthorize(true);
-    }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return <></>;
+  return (
+    <>
+      hola{" "}
+      <button
+        onClick={() => {
+          userService.logout();
+        }}
+      >
+        cerrar sesion
+      </button>
+    </>
+  );
 }
 
-export async function getStaticProps() {
-  return {
-    props: {
-      path: null,
-    },
-    revalidate: 10,
-  };
+export async function getServerSideProps(ctx) {
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  if (cookie) {
+    return {
+      props: {
+        path: null,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/Account/Login",
+      },
+    };
+  }
 }

@@ -1,20 +1,18 @@
 import React, { Suspense } from "react";
-import dynamic from "next/dynamic";
-
+import FooterIndex from "../components/Footer/FooterIndex";
+import HeaderIndex from "../components/Header/HeaderIndex";
+import Loader from "../components/Body/Loader";
+import { initLogInactive } from "../components/Tools/Loginactivity";
 function Index({ children }) {
-  const HeaderIndex = dynamic(() => import("../components/Header/HeaderIndex"));
-  const FooterIndex = dynamic(() => import("../components/Footer/FooterIndex"));
-  const Loader = dynamic(() => import("../components/Body/Loader"));
   return (
     <>
-      <Loader></Loader>
-
+      {/* <Loader></Loader> */}
+      Hola layout
       {/*Header */}
       <HeaderIndex />
       {/*body */}
-
       <Suspense fallback={<Loader />}>
-        <main>{children}</main>
+        <main onLoad={initLogInactive()}>{children}</main>
       </Suspense>
       <FooterIndex />
     </>

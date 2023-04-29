@@ -31,18 +31,25 @@ const nextConfig = withPWA({
           },
         ],
       },
+      {
+        source: "/api/(.*)",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
+      },
     ];
   },
-  serverRuntimeConfig: {
-    AES256_LOGIN_Key: "Qml0YWNvcmFMb2dpbiMyMDIzS3V4YW4=",
-    AES256_USER_Key: "Qml0YWNvcmFVc3UjMjAyM0t1eGFuQw==",
-  },
-  publicRuntimeConfig: {
-    apiUrl:
-      process.env.NODE_ENV === "development"
-        ? "http://192.168.88.243:51421/ApiBitacora/api" // development api
-        : "http://192.168.88.243:51421/ApiBitacora/api", // production api
-  },
+
   swcMinify: true,
 
   i18n: {

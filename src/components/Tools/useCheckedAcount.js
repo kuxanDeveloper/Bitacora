@@ -1,30 +1,31 @@
 import Router from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { userService } from "../../services/UserService";
 export const VerifyAccount = () => {
-  const [user, setUser] = useState(null);
-  const [authorized, setAuthorized] = useState(false);
-
-  useEffect(() => {
-    // on initial load - run auth check
-    authCheck(Router.asPath, setUser, setAuthorized);
-    console.log(Router.asPath);
-
-  }, []);
-
-  return { user, authorized };
+  debugger;
+  let authorized = false;
+  if (userService.userValue) {
+    authorized = true;
+  }
+  return authorized;
 };
 
-function authCheck(url, setUser, setAuthorized) {
-  // redirect to login page if accessing a private page and not logged in
+export const urlAuthorized = () => {
+  let urlAuthorize = false;
+  useEffect(() => {
+    let url = Router.asPath;
+    const path = url.split("?")[0];
+    const publicPaths = [
+      "/Account/Register",
+      "/Account/Login",
+      "/Account/ForgotPassword",
+      "/Privacypolicy",
+    ];
 
-  console.log(userService.userValue,"service")
-  setUser(userService.userValue);
-  // const publicPaths = ["/Account/Login", "/Account/Register"];
-  // const path = url.split("?")[0];
-  if (!userService.userValue) {
-    setAuthorized(false);
-  } else {
-    setAuthorized(true);
-  }
-}
+    if (publicPaths.includes(path)) {
+      urlAuthorize = true;
+    }
+  });
+
+  return urlAuthorize;
+};

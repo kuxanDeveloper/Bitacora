@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
-// import { useRouter } from 'next/router';
-// import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-
+import Logincomponents from "@/components/Account/Logincomponents";
+import Router from "next/router";
+import { userService } from "../../services/UserService";
 function Login() {
+  useEffect(() => {
+    userService.logout();
+  }, []);
   return (
     <>
       <Head>
@@ -29,18 +31,26 @@ function Login() {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <div>Hola1</div>
+      <Logincomponents />
     </>
   );
 }
 
 export default Login;
 
-export async function getStaticProps() {
-  return {
-    props: {
-      path: null,
-    },
-    revalidate: 10,
-  };
+export async function getServerSideProps(ctx) {
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  if (!cookie) {
+    return {
+      props: {
+        path: null,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
 }

@@ -1,15 +1,19 @@
 import { BehaviorSubject } from "rxjs";
-import getConfig from "next/config";
 import Router from "next/router";
-
+import Cookies from "universal-cookie";
 import { fetchWrapper } from "../helpers/fetch-wrapper";
 
-const { publicRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+const baseUrl = `${
+  process.env.NEXT_PUBLIC_NODE_ENV == "development"
+    ? process.env.NEXT_PUBLIC_API_URL_DEVELOPMENT
+    : process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+}`;
 const userSubject = new BehaviorSubject(
-  process.browser && JSON.parse(localStorage.getItem("user"))
+  process.browser && localStorage.getItem("tokenUserLS")
 );
 
+const cookies = new Cookies();
+console.log(cookies.get("tokenUserCookie"));
 export const userService = {
   user: userSubject.asObservable(),
   get userValue() {
@@ -24,23 +28,53 @@ export const userService = {
   delete: _delete,
 };
 
-function login(username, password) {
-  return fetchWrapper
-    .post(`${baseUrl}/authenticate`, { username, password })
-    .then((user) => {
-      // publish user to subscribers and store in local storage to stay logged in between page refreshes
-      userSubject.next(user);
-      localStorage.setItem("user", JSON.stringify(user));
+async function login(username, password) {
+  let TokenUserLogin;
+  //#region keyToken Password
+  const utf8 = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", utf8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const tokenPassword = hashArray
+    .map((bytes) => bytes.toString(16).padStart(2, "0"))
+    .join("");
 
-      return user;
+  const formDataLogin = await new FormData();
+
+  formDataLogin.append("email", username);
+  formDataLogin.append("pass", tokenPassword);
+
+  let tokenGenerateLogin = await fetchWrapper.post(
+    `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
+    formDataLogin
+  );
+  //#endregion
+
+  //#region ValidateuserLogin
+  if (tokenGenerateLogin != "") {
+    const formDataUserSing = await new FormData();
+    formDataUserSing.append("loginToken", tokenGenerateLogin);
+    TokenUserLogin = await fetchWrapper.post(
+      `${baseUrl}/LoginBitacora/loginByToken`,
+      formDataUserSing
+    );
+  }
+
+  if (TokenUserLogin != undefined && TokenUserLogin != null) {
+    cookies.set("tokenUserCookie", TokenUserLogin, {
+      path: "/",
+      maxAge: 60 * 60 * 8,
     });
+    localStorage.setItem("tokenUserLS", TokenUserLogin);
+    userSubject.next(TokenUserLogin);
+  }
+  //#endregion
 }
 
 function logout() {
-  // remove user from local storage, publish null to user subscribers and redirect to login page
-  localStorage.removeItem("user");
+  cookies.remove("tokenUserCookie", { path: "/" });
+  localStorage.removeItem("tokenUserLS");
   userSubject.next(null);
-  Router.push("/Account/login");
+  Router.push("/Account/Login");
 }
 
 function register(user) {
