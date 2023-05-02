@@ -1,4 +1,5 @@
 import "../styles/css500.css";
+import "../styles/globals.css";
 import React, { useEffect, useState } from "react";
 import { BicatoraContexProvider } from "../context/BitacoraContext";
 import Loading from "../components/Tools/Loading";
@@ -60,7 +61,7 @@ export default function App({ Component, pageProps }) {
 
   // urlIsauthorized = urlAuthorized();
 
-  debugger;
+  // debugger;
   return !authorized || Urlauthorized ? (
     <ErrorBoundary>
       <div id="fb-root"></div>

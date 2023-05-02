@@ -20,15 +20,15 @@ function Logincomponents() {
 
   return (
     <div className={styleLogin.login}>
-      <figure className={styleLogin.login}>
+      <figure className={styleLogin.logo}>
         <ImageOptimize
           Values={{
-            src: "/img/login/Grupo_3@2x_logInit.png",
+            src: "/img/Becton_Dickinson_logo256x256.png",
             alt: "Login BD",
             title: "",
             classValue: styleLogin.logo_img,
-            width: 3760,
-            height: 2586,
+            width: 256,
+            height: 256,
             style: {},
           }}
         />
@@ -84,7 +84,7 @@ function Logincomponents() {
             </Link>
 
             <div className={styleLogin.btn_container}>
-              <button disabled={formState.isSubmitting} className="btn_login">
+              <button disabled={formState.isSubmitting} className={styleLogin.btn_login}>
                 {formState.isSubmitting && (
                   <span className="spinner-border spinner-border-sm mr-1"></span>
                 )}

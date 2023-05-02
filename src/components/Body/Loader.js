@@ -37,73 +37,7 @@ export default function Loader() {
         </svg>
       </div>
 
-      <style jsx>
-        {`
-        
-        #Grupo_129 {
-          width: 1117px;
-          height: 1715px;
-          overflow: visible;
-          --web-animation: fadein 0.30000001192092896s ease-out;
-          --web-action-type: view;
-          --web-action-target: Iniciar_sesin_;
-          cursor: pointer;
-          padding: 0px;
-        }
-        #Grupo_21 {
-          position: absolute;
-          width: 1117px;
-          height: 1715px;
-          left: 0px;
-          top: 0px;
-          overflow: visible;
-        }
-        #Grupo_130 {
-          position: absolute;
-          width: 305px;
-          height: 121px;
-          left: 376px;
-          top: 229px;
-          overflow: visible;
-        }
-        #Grupo_25 {
-          position: absolute;
-          width: 305px;
-          height: 121px;
-          left: 0px;
-          top: 0px;
-          overflow: visible;
-        }
-        #Grupo_131 {
-          position: absolute;
-          width: 211.029px;
-          height: 211.029px;
-          left: 422.986px;
-          top: 621.471px;
-          overflow: visible;
-        }
-        #Grupo_27 {
-          position: absolute;
-          width: 211.029px;
-          height: 211.029px;
-          left: 0px;
-          top: 0px;
-          overflow: visible;
-        }
-        #Trazado_60 {
-          fill: rgba(47,43,43,1);
-        }
-        .Trazado_60 {
-          overflow: visible;
-          position: absolute;
-          width: 77.446px;
-          height: 26.315px;
-          left: 487.681px;
-          top: 718.066px;
-          transform: matrix(1,0,0,1,0,0);
-        }
-        `}
-      </style>
+     
     </>
   );
 }

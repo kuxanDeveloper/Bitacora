@@ -1,14 +1,23 @@
 .login {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
+  background-image: url('/img/login/Login_background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 .login .logo {
   margin: 0;
+}
+
+.login .logo .logo_img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
 }
 
 .login .login_container {
@@ -43,9 +52,10 @@
 
 .login .login_container .container_cotent .inputs_container .username {
   border: #a8a8a8 solid 1px;
-  border-radius: 3px;
+  border-radius: 5px;
   outline: none;
-  margin-bottom: 2rem;
+  padding-left: .3rem;
+
 }
 
 .login .login_container .container_cotent .inputs_container .username:focus {
@@ -54,8 +64,9 @@
 
 .login .login_container .container_cotent .inputs_container .userpassword {
   border: #a8a8a8 solid 1px;
-  border-radius: 3px;
+  border-radius: 5px;
   outline: none;
+  padding-left: .3rem;
 }
 
 .login .login_container .container_cotent .inputs_container .userpassword:focus {
@@ -109,6 +120,7 @@
 
 
 .invalid_feedback {
+  margin-bottom: 2rem;
   display: block;
   width: 100%;
   margin-top: 0.25rem;
