@@ -1,5 +1,5 @@
 import React from "react";
-import CardStyles from "";
+import CardStyles from "../../styles/homeCard.module.css";
 
 export default function HomeCard() {
   return (
@@ -42,7 +42,7 @@ export default function HomeCard() {
                   className={CardStyles.follow_icon}
                   width="28"
                   height="28"
-                  src="/public/img/Imagen_3.png"
+                  src="/img/Imagen_3.png"
                   alt=""
                 />
                 <span className={CardStyles.follow_conunter}>68</span>
