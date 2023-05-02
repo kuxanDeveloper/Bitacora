@@ -7,7 +7,6 @@ function Index({ children }) {
   return (
     <>
       {/* <Loader></Loader> */}
-      Hola layout
       {/*Header */}
       <HeaderIndex />
       {/*body */}

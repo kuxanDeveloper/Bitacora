@@ -1,5 +1,5 @@
 import React from "react";
-import HederStyles from "../../styles/Header.module.css";
+import headerStyles from "../../styles/Header.module.css";
 
 function HeaderIndex() {
   return (
