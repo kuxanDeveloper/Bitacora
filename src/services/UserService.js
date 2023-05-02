@@ -13,7 +13,7 @@ const userSubject = new BehaviorSubject(
 );
 
 const cookies = new Cookies();
-console.log(cookies.get("tokenUserCookie"));
+
 export const userService = {
   user: userSubject.asObservable(),
   get userValue() {
