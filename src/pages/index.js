@@ -4,6 +4,8 @@ import Router from "next/router";
 import Filters from "@/components/Body/Filters";
 import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
+import CaseStatus from "@/components/CaseStatus";
+import Case from "@/components/Case";
 
 export default function Home() {
   // useEffect(() => {
@@ -47,7 +49,9 @@ export default function Home() {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <Filters></Filters>
+      <CaseStatus></CaseStatus>
       <HomeCard></HomeCard>
+      <Case></Case>
     </>
   );
 }

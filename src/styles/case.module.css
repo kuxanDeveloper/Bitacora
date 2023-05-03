@@ -1,0 +1,134 @@
+.cases {
+    padding: 1rem;
+    background-image: url("../../public/img/Grupo_3_bhy.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+  }
+  .cases .cases_container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1rem 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cases .cases_container .card {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    min-width: 240px;
+    max-width: 240px;
+    padding: 0.5rem;
+    border-radius: 15px;
+    max-height: 130px;
+    margin-bottom: 10px;
+  }
+  .cases .cases_container .card .sticker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .cases .cases_container .card .sticker .sticker_title {
+    text-transform: capitalize;
+    color: #495cbf;
+    margin: 0;
+    font-size: 1rem;
+  }
+  .cases .cases_container .card .sticker ._image {
+    background-color: rgb(217, 217, 217);
+    width: 70px;
+    height: 28px;
+    border-radius: 5px;
+  }
+  .cases .cases_container .card .card_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    text-transform: capitalize;
+  }
+  .cases .cases_container .card .card_body .card_state {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ff6e00;
+    border-radius: 70px;
+    top: 10px;
+    right: 10px;
+  }
+  .cases .cases_container .card .card_body .card_state.active {
+    background: #009c7f;
+  }
+  .cases .cases_container .card .card_body .body_title {
+    color: #495cbf;
+    display: block;
+    font-size: 1rem;
+  }
+  .cases .cases_container .card .card_body .card_number {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #56596a;
+  }
+  .cases .cases_container .card .card_body .card_date {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #56596a;
+  }
+  .cases .cases_container .card .card_body .card_btn_container {
+    text-align: right;
+  }
+  .cases .cases_container .card .card_body .card_btn_container .btn_sticker {
+    background-color: rgb(229, 125, 0);
+    font-size: 0.7rem;
+    color: #fff;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px 0px rgb(158, 158, 158);
+  }
+  
+  @media (min-width: 425px) {
+    .cases {
+      padding: 1rem;
+      background-image: url("../../public/img/Grupo_3_bhy.png");
+      min-height: 100vh;
+    }
+    .cases .cases_container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      gap: 10px;
+    }
+    .cases .cases_container .card {
+      min-width: unset;
+    }
+    .cases .cases_container .card .sticker ._image {
+      background-color: rgb(217, 217, 217);
+      width: 55px;
+      height: 28px;
+    }
+  }
+  @media (min-width: 768px) {
+    .cases {
+      padding: 1rem;
+      background-image: url("../../public/img/Grupo_3_bhy.png");
+      min-height: 100vh;
+    }
+    .cases .cases_container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .cases .cases_container .card .sticker ._image {
+      background-color: rgb(217, 217, 217);
+      width: 55px;
+      height: 28px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .cases .cases_container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }/*# sourceMappingURL=cases.css.map */

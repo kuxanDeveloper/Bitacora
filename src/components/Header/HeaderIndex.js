@@ -2,6 +2,7 @@ import React from "react";
 import headerStyles from "../../styles/Header.module.css";
 import { userService } from "@/services/UserService";
 import ImageOptimize from "../Tools/ImageOptimize";
+import Link from "next/link";
 
 function HeaderIndex() {
   return (
@@ -33,18 +34,19 @@ function HeaderIndex() {
               <polyline points="15 4 20 4 20 9" />
             </svg>
           </span>
-
-          <ImageOptimize
-            Values={{
-              src: "/img/Inicio Logo BD 65 x 25.svg",
-              alt: "Login BD Index",
-              title: "Inicio",
-              classValue: headerStyles.header_logo,
-              width: 65,
-              height: 25,
-              style: {},
-            }}
-          />
+          <Link href="#">
+            <ImageOptimize
+              Values={{
+                src: "/img/Inicio Logo BD 65 x 25.svg",
+                alt: "Login BD Index",
+                title: "Inicio",
+                classValue: headerStyles.header_logo,
+                width: 65,
+                height: 25,
+                style: {},
+              }}
+            />
+          </Link>
         </div>
       </header>
     </>
