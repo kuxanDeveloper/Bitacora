@@ -25,7 +25,6 @@ function Login() {
           content="Inicia sesión en bitácora"
         ></meta>
         <meta property="og:title" content="Inicio de sesion - Bitácora" />
-        <meta property="og:description" content="Inicio de sesion - Bitácora" />
         <meta property="og:description" content="Inicia sesion en bitácora" />
         <meta property="og:site_name" content="Bitácora" />
         <meta property="og:locale" content="es_CO" />

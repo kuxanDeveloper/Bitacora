@@ -1,23 +1,31 @@
 import React from "react";
 import headerStyles from "../../styles/Header.module.css";
+import { userService } from "@/services/UserService";
+import ImageOptimize from "../Tools/ImageOptimize";
 
 function HeaderIndex() {
   return (
     <>
       <header className={headerStyles.header}>
         <div className={headerStyles.header_conent}>
-          <span className={headerStyles.close_session}>
+          <span
+            title="Cerrar sesión"
+            onClick={() => {
+              userService.logout();
+            }}
+            className={headerStyles.close_session}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-external-link"
               width="28"
               height="28"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="#2f2f2f"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />
@@ -26,10 +34,16 @@ function HeaderIndex() {
             </svg>
           </span>
 
-          <img
-            src="https://www.bd.com/content/dam/bdcom-assets/en/en-us/images/graphic/icon/header-bd-logo.svg"
-            alt=""
-            className={headerStyles.header_logo}
+          <ImageOptimize
+            Values={{
+              src: "/img/Inicio Logo BD 65 x 25.svg",
+              alt: "Login BD Index",
+              title: "Inicio",
+              classValue: headerStyles.header_logo,
+              width: 65,
+              height: 25,
+              style: {},
+            }}
           />
         </div>
       </header>

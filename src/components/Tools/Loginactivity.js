@@ -49,8 +49,8 @@ export const initLogInactive = () => {
   }
 
   function reiniciarTiempo() {
-    clearTimeout(t);
-    t = setTimeout(tiempoExcedido, 900000);
+    clearInterval(t);
+    t = setInterval(tiempoExcedido, 15*60*1000);
     // 1000 milisegundos = 1 segundo
   }
 };
