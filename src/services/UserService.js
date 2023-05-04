@@ -25,6 +25,7 @@ export const userService = {
   getAll,
   getById,
   update,
+  logoutLogin,
   delete: _delete,
 };
 
@@ -75,6 +76,12 @@ function logout() {
   localStorage.removeItem("tokenUserLS");
   userSubject.next(null);
   Router.push("/Account/Login");
+}
+
+function logoutLogin() {
+  cookies.remove("tokenUserCookie", { path: "/" });
+  localStorage.removeItem("tokenUserLS");
+  userSubject.next(null);
 }
 
 function register(user) {

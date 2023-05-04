@@ -3,10 +3,13 @@ import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
 import Router from "next/router";
 import { userService } from "../../services/UserService";
-function Login() {
-  useEffect(() => {
-    userService.logout();
-  }, []);
+function Login({ cookie }) {
+  if (cookie) {
+    useEffect(() => {
+      userService.logoutLogin();
+    }, []);
+  }
+
   return (
     <>
       <Head>
@@ -42,7 +45,7 @@ export async function getServerSideProps(ctx) {
   if (!cookie) {
     return {
       props: {
-        path: null,
+        cookie: false,
       },
     };
   } else {
