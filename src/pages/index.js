@@ -1,21 +1,27 @@
 import { useEffect } from "react";
+import {
+  QueryActivegroup,
+  QueryInactivegroup,
+} from "../components/Tools//Security";
 import { userService } from "../services/UserService";
-import Router from "next/router";
 import Filters from "@/components/Body/Filters";
 import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import Case from "@/components/Case";
 
-export default function Home() {
-  // useEffect(() => {
-  //   // redirect to home if already logged in
-  //   if (!userService.userValue) {
-  //     Router.push(`/Account/Login`);
-  //   }
+export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
+  debugger;
+  if (
+    ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
+    ListadoGrupoInactivo == "401: Token incorrecto o vencido"
+  ) {
+    debugger;
+    userService.logout();
+    return "";
+  }
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+
 
   return (
     <>
@@ -50,8 +56,11 @@ export default function Home() {
       </Head>
       <Filters></Filters>
       <CaseStatus></CaseStatus>
-      <HomeCard></HomeCard>
-      <Case></Case>
+      <HomeCard
+        ListadoGrupoActivo={ListadoGrupoActivo}
+        ListadoGrupoInactivo={ListadoGrupoInactivo}
+      ></HomeCard>
+      {/* <Case></Case> */}
     </>
   );
 }
@@ -59,9 +68,16 @@ export default function Home() {
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
+    debugger;
+    const ListadoGrupoActivo = await QueryActivegroup(cookie);
+    const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
+
     return {
       props: {
-        path: null,
+        ListadoGrupoActivo:
+          ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
+        ListadoGrupoInactivo:
+          ListadoGrupoInactivo == undefined ? null : ListadoGrupoActivo,
       },
     };
   } else {

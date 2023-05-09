@@ -46,7 +46,7 @@ function Logincomponents() {
                 className={`${styleLogin.username} ${
                   errors.username ? styleLogin.is_invalid : ""
                 }`}
-                placeholder="usuario@dominio.co"
+                placeholder="usuario@dominio.co ó CI"
               />
               <div className={styleLogin.invalid_feedback}>
                 {errors.username?.message}

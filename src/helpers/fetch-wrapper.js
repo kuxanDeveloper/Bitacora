@@ -1,6 +1,10 @@
-import getConfig from "next/config";
 import { userService } from "../services/UserService";
-const { publicRuntimeConfig } = getConfig();
+
+const baseUrl = `${
+  process.env.NEXT_PUBLIC_NODE_ENV == "development"
+    ? process.env.NEXT_PUBLIC_API_URL_DEVELOPMENT
+    : process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+}`;
 
 export const fetchWrapper = {
   get,
@@ -9,19 +13,17 @@ export const fetchWrapper = {
   delete: _delete,
 };
 
-function get(url) {
+function get(url, cookie) {
   const requestOptions = {
     method: "GET",
-    headers: authHeader(url),
+    headers: authHeader(url, cookie),
   };
   return fetch(url, requestOptions).then(handleResponse);
 }
 
 function post(url, body) {
-  debugger;
   const requestOptions = {
     method: "POST",
-
     body: body,
   };
   return fetch(url, requestOptions).then(handleResponse);
@@ -47,13 +49,23 @@ function _delete(url) {
 
 // helper functions
 
-function authHeader(url) {
+function authHeader(url, cookie) {
   // return auth header with jwt if user is logged in and request is to the api url
-  const user = userService.userValue;
-  const isLoggedIn = user && user.token;
-  const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
+  let user = userService.userValue;
+  let isLoggedIn = user && user.token;
+  isLoggedIn =
+    isLoggedIn == false
+      ? cookie != null || cookie != undefined
+        ? true
+        : false
+      : false;
+  const isApiUrl = url.startsWith(baseUrl);
   if (isLoggedIn && isApiUrl) {
-    return { Authorization: `Bearer ${user.token}` };
+    return {
+      Token: `${
+        user.token == undefined || user.token == null ? cookie : user.token
+      }`,
+    };
   } else {
     return {};
   }
@@ -62,9 +74,13 @@ function authHeader(url) {
 function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
-
     if (!response.ok) {
-      if ([401, 403].includes(response.status) && userService.userValue) {
+      if (
+        ([401, 403].includes(response.status) ||
+          data.Message.indexOf("401") != -1 ||
+          data.Message.indexOf("403") != -1) &&
+        userService.userValue
+      ) {
         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
         userService.logout();
       }
