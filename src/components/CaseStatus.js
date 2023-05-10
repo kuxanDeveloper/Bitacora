@@ -1,33 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CaseStyles from "@/styles/CaseStatus.module.css";
 import Link from "next/link";
-import { useRouter } from "next/router";
-export default function CaseStatus() {
-  const [isTrueActive, setisTrueActive] = useState(false);
+export default function CaseStatus({ HrefArmado, isTrueActive }) {
+  const ObjectNew = (obj, NewValue) => {
+    let objnew = {};
+    objnew.id = obj.id;
+    objnew.ESTADO = NewValue;
 
-  const router = useRouter();
-
-  useEffect(() => {
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+    return objnew;
+  };
 
   return (
     <>
@@ -39,24 +20,50 @@ export default function CaseStatus() {
                 isTrueActive ? CaseStyles.active : ""
               }`}
             >
-              <Link
-                href={{ pathname: "/", hash: "Cactive" }}
-                className={CaseStyles.status_link}
-              >
-                Casos activos
-              </Link>
+              {HrefArmado.query != undefined && HrefArmado.query != null ? (
+                <Link
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    query: ObjectNew(HrefArmado.query, "1"),
+                    hash: "Cactive",
+                  }}
+                  className={CaseStyles.status_link}
+                >
+                  Casos activos
+                </Link>
+              ) : (
+                <Link
+                  href={{ pathname: HrefArmado.pathname, hash: "Cactive" }}
+                  className={CaseStyles.status_link}
+                >
+                  Casos activos
+                </Link>
+              )}
             </p>
             <p
               className={`${CaseStyles.status} ${
                 !isTrueActive ? CaseStyles.active : ""
               }`}
             >
-              <Link
-                href={{ pathname: "/", hash: "Cinactvie" }}
-                className={CaseStyles.status_link}
-              >
-                Casos inactivos
-              </Link>
+              {HrefArmado.query != undefined && HrefArmado.query != null ? (
+                <Link
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    query: ObjectNew(HrefArmado.query, "0"),
+                    hash: "Cinactvie",
+                  }}
+                  className={CaseStyles.status_link}
+                >
+                  Casos inactivos
+                </Link>
+              ) : (
+                <Link
+                  href={{ pathname: HrefArmado.pathname, hash: "Cinactvie" }}
+                  className={CaseStyles.status_link}
+                >
+                  Casos inactivos
+                </Link>
+              )}
             </p>
           </div>
         </div>

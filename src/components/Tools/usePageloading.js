@@ -15,7 +15,6 @@ export const usePageLoading = () => {
     Router.events.on("routeChangeStart", routeEventStart);
     Router.events.on("routeChangeComplete", routeEventEnd);
     Router.events.on("routeChangeError", routeEventEnd);
-    console.log("aquisssssss");
     return () => {
       Router.events.off("routeChangeStart", routeEventStart);
       Router.events.off("routeChangeComplete", routeEventEnd);

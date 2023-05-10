@@ -33,11 +33,11 @@ export default function Filters() {
                   width="28"
                   height="28"
                   viewBox="0 0 24 24"
-                  stroke-width="3"
+                  strokeWidth="3"
                   stroke="#ffffff"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <circle cx="10" cy="10" r="7" />
@@ -51,11 +51,11 @@ export default function Filters() {
                   width="28"
                   height="28"
                   viewBox="0 0 24 24"
-                  stroke-width="2"
+                  strokeWidth="2"
                   stroke="#ffffff"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <rect x="4" y="4" width="16" height="16" rx="2" />

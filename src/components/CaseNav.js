@@ -1,7 +1,7 @@
 import React from "react";
 import CaseNavStyles from "@/styles/CaseNav.module.css";
-
-export default function CaseNav() {
+import Link from "next/link";
+export default function CaseNav({ ListadoGrupo, idGruop, isTrueActive }) {
   return (
     <>
       {/* <!-- navegacion de los casos --> */}
@@ -10,40 +10,40 @@ export default function CaseNav() {
           <nav className={CaseNavStyles.navegation_bar}>
             {/* <!-- list item --> */}
             <li className={CaseNavStyles.nav_li}>
-              <a href="" className={CaseNavStyles.nav_link}>
+              <Link
+                href={{
+                  pathname: "/",
+                  hash: isTrueActive ? "Cactive" : "Cinactvie",
+                }}
+                className={CaseNavStyles.nav_link}
+              >
                 Inicio
-              </a>
+              </Link>
             </li>
-            {/* <!-- list item --> */}
-            <li className={`${CaseNavStyles.nav_li} ${CaseNavStyles.selected}`}>
-              <a href="" className={CaseNavStyles.nav_link}>
-                urocultivos
-              </a>
-            </li>
-            {/* <!-- list item --> */}
-            <li className={CaseNavStyles.nav_li}>
-              <a href="" className={CaseNavStyles.nav_link}>
-                hemocultivos
-              </a>
-            </li>
-            {/* <!-- list item --> */}
-            <li className={CaseNavStyles.nav_li}>
-              <a href="" className={CaseNavStyles.nav_link}>
-                Hongos
-              </a>
-            </li>
-            {/* <!-- list item --> */}
-            <li className={CaseNavStyles.nav_li}>
-              <a href="" className={CaseNavStyles.nav_link}>
-                Microbacteria
-              </a>
-            </li>
-            {/* <!-- list item --> */}
-            <li className={CaseNavStyles.nav_li}>
-              <a href="" className={CaseNavStyles.nav_link}>
-                Cultivos
-              </a>
-            </li>
+            {ListadoGrupo.map((data, index) => (
+              <li
+                key={index}
+                className={`${CaseNavStyles.nav_li} ${
+                  data.Id_grupo == idGruop ? CaseNavStyles.selected : ""
+                }`}
+              >
+                <Link
+                  href={{
+                    pathname: "/[id]",
+                    query: {
+                      id: data.Id_grupo,
+                      ESTADO: isTrueActive ? "1" : "0",
+                    },
+                    hash: isTrueActive ? "Cactive" : "Cinactvie",
+                  }}
+                  className={CaseNavStyles.nav_link}
+                >
+                  {data.NOMBRE_GRUPO}
+                </Link>
+              </li>
+            ))}
+
+          
           </nav>
         </div>
       </section>

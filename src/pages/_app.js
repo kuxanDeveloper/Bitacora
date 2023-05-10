@@ -9,7 +9,6 @@ import { usePageLoading } from "../components/Tools/usePageloading";
 
 function MyApp({ Component, pageProps }) {
   const { isPageLoading } = usePageLoading();
-  console.log(isPageLoading);
   // urlIsauthorized = urlAuthorized();
 
   // debugger;

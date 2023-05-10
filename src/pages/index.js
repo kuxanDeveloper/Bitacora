@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   QueryActivegroup,
   QueryInactivegroup,
@@ -8,20 +8,59 @@ import Filters from "@/components/Body/Filters";
 import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
-import Case from "@/components/Case";
-
+import { useRouter } from "next/router";
 export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
-  debugger;
+  const [isTrueActive, setisTrueActive] = useState(false);
+
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
     ListadoGrupoInactivo == "401: Token incorrecto o vencido"
   ) {
-    debugger;
     userService.logout();
     return "";
   }
 
+  const router = useRouter();
+  useEffect(() => {
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
+      let hashs2 = router.asPath.split("#")[1];
+      if (
+        hashs2 == "Cactive" ||
+        hashs2 == "" ||
+        hashs2 == null ||
+        hashs2 == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    }
 
+    const onHashChangeStart = (url) => {
+      let hash = url.split("#")[1];
+      if (
+        hash == "Cactive" ||
+        hash == "" ||
+        hash == null ||
+        hash == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    };
+
+    router.events.on("hashChangeStart", onHashChangeStart);
+
+    return () => {
+      router.events.off("hashChangeStart", onHashChangeStart);
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -55,8 +94,9 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <Filters></Filters>
-      <CaseStatus></CaseStatus>
+      <CaseStatus HrefArmado={{pathname:"/"}} isTrueActive={isTrueActive}></CaseStatus>
       <HomeCard
+        HabilitarActive={isTrueActive}
         ListadoGrupoActivo={ListadoGrupoActivo}
         ListadoGrupoInactivo={ListadoGrupoInactivo}
       ></HomeCard>
@@ -68,7 +108,6 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
-    debugger;
     const ListadoGrupoActivo = await QueryActivegroup(cookie);
     const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
 

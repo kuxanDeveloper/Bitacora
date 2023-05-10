@@ -11,6 +11,7 @@ export const fetchWrapper = {
   post,
   put,
   delete: _delete,
+  postHeader,
 };
 
 function get(url, cookie) {
@@ -24,6 +25,15 @@ function get(url, cookie) {
 function post(url, body) {
   const requestOptions = {
     method: "POST",
+    body: body,
+  };
+  return fetch(url, requestOptions).then(handleResponse);
+}
+
+function postHeader(url, cookie, body) {
+  const requestOptions = {
+    method: "POST",
+    headers: authHeader(url, cookie),
     body: body,
   };
   return fetch(url, requestOptions).then(handleResponse);

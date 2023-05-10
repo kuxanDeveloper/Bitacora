@@ -23,12 +23,9 @@ export const userService = {
   logout,
   ListGroupActive,
   ListGroupInactive,
-  // register,
-  // getAll,
-  // getById,
-  // update,
+  ListGroup,
+  ListGroupForMue,
   logoutLogin,
-  // delete: _delete,
 };
 
 async function login(username, password) {
@@ -87,11 +84,36 @@ function logoutLogin() {
 }
 
 function ListGroupActive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`);
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
 }
 
 function ListGroupInactive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupFalse`);
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupFalse`, cookie);
+}
+
+function ListGroup(cookie, estado) {
+  const formData = new FormData();
+
+  formData.append("ESTADO", estado);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/IndexBitacora/ListGroupViewOrdenes`,
+    cookie,
+    formData
+  );
+}
+
+function ListGroupForMue(cookie, Estado, idGroup) {
+  const formData = new FormData();
+
+  formData.append("ESTADO", Estado);
+  formData.append("GRUPO_ID", idGroup);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/IndexBitacora/ListGroupForMuestra`,
+    cookie,
+    formData
+  );
 }
 
 // function register(user) {
