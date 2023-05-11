@@ -9,6 +9,7 @@ import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import { useRouter } from "next/router";
+
 export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
   const [isTrueActive, setisTrueActive] = useState(false);
 
@@ -94,7 +95,10 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <Filters></Filters>
-      <CaseStatus HrefArmado={{pathname:"/"}} isTrueActive={isTrueActive}></CaseStatus>
+      <CaseStatus
+        HrefArmado={{ pathname: "/" }}
+        isTrueActive={isTrueActive}
+      ></CaseStatus>
       <HomeCard
         HabilitarActive={isTrueActive}
         ListadoGrupoActivo={ListadoGrupoActivo}

@@ -1,7 +1,7 @@
 import React from "react";
 import CasesStatusStyles from '../../styles/casesStatus.module.css';
 
-export default function casesStatus() {
+export default function CasesStatus() {
   return (
     <>
       <section className={CasesStatusStyles.type_cases_status}>
