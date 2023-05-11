@@ -22,6 +22,8 @@ function get(url, cookie) {
   return fetch(url, requestOptions).then(handleResponse);
 }
 
+
+
 function post(url, body) {
   const requestOptions = {
     method: "POST",

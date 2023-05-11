@@ -101,17 +101,17 @@ function HomeMuestraxGrupo({
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <Filters></Filters>
-      <CaseStatus
+       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
-      ></CaseStatus>
-      <Case
+      ></CaseStatus> {/**/}
+      {/**/} <Case
         ListadoGrupo={ListadoGrupo}
         ListadoMuestraActivo={ListadoMuestraActivo}
         ListadoMuestraInactivo={ListadoMuestraInactivo}
         isTrueActive={isTrueActive}
         idGruop={query.id}
-      ></Case>
+      ></Case> 
     </>
   );
 }
@@ -119,13 +119,9 @@ function HomeMuestraxGrupo({
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   let GroupName = "";
+  debugger;
   if (cookie) {
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null ||
-      ctx.query.ESTADO == null ||
-      ctx.query.ESTADO == undefined
-    ) {
+    if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
     const ListadoGrupo = await QueryGroupList(cookie);
@@ -147,8 +143,10 @@ export async function getServerSideProps(ctx) {
     return {
       props: {
         ListadoGrupo: ListadoGrupo == undefined ? null : ListadoGrupo,
+        /*null*/
         ListadoMuestraActivo:
           ListadoMuestraActivo == undefined ? null : ListadoMuestraActivo,
+        /*null*/
         ListadoMuestraInactivo:
           ListadoMuestraInactivo == undefined ? null : ListadoMuestraInactivo,
         GrupoNombre: GroupName,

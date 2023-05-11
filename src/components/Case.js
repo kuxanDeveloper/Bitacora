@@ -41,7 +41,7 @@ export default function Case({
                       Fecha de Ingreso
                     </span>
                     <p className={caseStyles.card_date}>
-                      {data.FECHA_CREADO_STRING}
+                      {data.FECHA_FORMAT_CREADO_BITACORA}
                     </p>
 
                     <div className={caseStyles.card_btn_container}>
@@ -69,7 +69,7 @@ export default function Case({
                       {" "}
                       Fecha de Ingreso
                     </span>
-                    <p className={caseStyles.card_date}>{data.FECHA_CREADO_STRING}</p>
+                    <p className={caseStyles.card_date}>{data.FECHA_FORMAT_CREADO_BITACORA}</p>
 
                     <div className={caseStyles.card_btn_container}>
                       <a href="" className={caseStyles.btn_sticker}>
