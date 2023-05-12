@@ -3,6 +3,8 @@
   justify-content: center;
   align-items: center;
   background-image: url('/img/login/Login_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   flex-direction: column;
   padding: 2rem 0;
 }
@@ -43,4 +45,5 @@
   letter-spacing: 1px;
   border-radius: 20px;
   font-size: 14.5px;
+  cursor: pointer;
 }/*# sourceMappingURL=legal.css.map */

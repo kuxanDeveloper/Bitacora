@@ -190,7 +190,7 @@ function Legal() {
             </p>
 
             <div className={LegalStyles.btn_container}>
-              <button className={LegalStyles.btn_back}>volver</button>
+              <button oonclick ={()=>{window.close}}className={LegalStyles.btn_back}>volver</button>
             </div>
           </div>
         </div>
