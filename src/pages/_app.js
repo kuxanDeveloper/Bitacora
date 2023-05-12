@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }) {
             <ErrorBoundary>
               <Component {...pageProps} />
             </ErrorBoundary>
+
           </Layout>
           // <Component {...pageProps} />
         )}

@@ -1,0 +1,46 @@
+.legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/img/login/Login_background.jpg');
+  flex-direction: column;
+  padding: 2rem 0;
+}
+.legal .logo {
+  margin: 0;
+}
+.legal .logo .logo_img {
+  margin-bottom: 2rem;
+}
+.legal .login_container {
+  background-color: #fff;
+  max-width: 1300px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.legal .login_container .container_cotent {
+  padding: 4rem 2rem 1rem 2rem;
+}
+.legal .login_container .container_cotent p {
+  line-height: 24pt;
+}
+.legal .login_container .container_cotent .btn_container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.legal .login_container .container_cotent .btn_container .btn_back {
+  width: 140px;
+  padding: 0.5rem 1rem;
+  background-color: #e57d00;
+  border: none;
+  color: white;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  font-size: 14.5px;
+}/*# sourceMappingURL=legal.css.map */
