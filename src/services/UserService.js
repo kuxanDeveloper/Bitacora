@@ -103,14 +103,40 @@ function ListGroup(cookie, estado) {
   );
 }
 
-function ListGroupForMue(cookie, Estado, idGroup) {
+function ListGroupForMue(
+  cookie,
+  Estado,
+  idGroup,
+  NumeroSticker,
+  ResultadoFinal,
+  FechaINgreso,
+  UserLoginSticker
+) {
   const formData = new FormData();
+  formData.append("Estado_sticker", Estado);
+  formData.append("Grupo_sticker", idGroup);
+  formData.append(
+    "Numero_Stickers",
+    NumeroSticker !== null && NumeroSticker !== undefined ? NumeroSticker : ""
+  );
+  formData.append(
+    "Resultado_Final",
+    ResultadoFinal !== null && ResultadoFinal !== undefined ? ResultadoFinal : ""
+  );
 
-  formData.append("ESTADO", Estado);
-  formData.append("GRUPO_ID", idGroup);
+  formData.append(
+    "Fecha_Sticker",
+    FechaINgreso !== null && FechaINgreso !== undefined ? FechaINgreso : ""
+  );
+
+  formData.append(
+    "Usuario_Sticker",
+    UserLoginSticker !== null && UserLoginSticker !== undefined ? UserLoginSticker : ""
+  );
+
 
   return fetchWrapper.postHeader(
-    `${baseUrl}/IndexBitacora/ListGroupForMuestra`,
+    `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
     cookie,
     formData
   );

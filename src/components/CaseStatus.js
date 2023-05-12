@@ -1,15 +1,7 @@
 import React from "react";
 import CaseStyles from "@/styles/CaseStatus.module.css";
 import Link from "next/link";
-export default function CaseStatus({ HrefArmado, isTrueActive }) {
-  const ObjectNew = (obj, NewValue) => {
-    let objnew = {};
-    objnew.id = obj.id;
-    objnew.ESTADO = NewValue;
-
-    return objnew;
-  };
-
+export default function CaseStatus({ HrefArmado, isTrueActive, isUserInterno }) {
   return (
     <>
       <section className={CaseStyles.case_status}>
@@ -24,8 +16,8 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 <Link
                   href={{
                     pathname: HrefArmado.pathname,
-                    query: ObjectNew(HrefArmado.query, "1"),
-                    hash: "Cactive",
+                    query: HrefArmado.query,
+                    hash: `Cactive${isUserInterno?"#UserInter":"#UserExter"}`,
                   }}
                   className={CaseStyles.status_link}
                 >
@@ -33,7 +25,10 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 </Link>
               ) : (
                 <Link
-                  href={{ pathname: HrefArmado.pathname, hash: "Cactive" }}
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    hash: "Cactive",
+                  }}
                   className={CaseStyles.status_link}
                 >
                   Casos activos
@@ -49,8 +44,8 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 <Link
                   href={{
                     pathname: HrefArmado.pathname,
-                    query: ObjectNew(HrefArmado.query, "0"),
-                    hash: "Cinactvie",
+                    query: HrefArmado.query,
+                    hash: `Cinactvie${isUserInterno?"#UserInter":"#UserExter"}`,
                   }}
                   className={CaseStyles.status_link}
                 >
@@ -58,7 +53,10 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 </Link>
               ) : (
                 <Link
-                  href={{ pathname: HrefArmado.pathname, hash: "Cinactvie" }}
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    hash: "Cinactvie",
+                  }}
                   className={CaseStyles.status_link}
                 >
                   Casos inactivos
