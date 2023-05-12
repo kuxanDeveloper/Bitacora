@@ -99,11 +99,13 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
       ></CaseStatus>
-      <HomeCard
-        HabilitarActive={isTrueActive}
-        ListadoGrupoActivo={ListadoGrupoActivo}
-        ListadoGrupoInactivo={ListadoGrupoInactivo}
-      ></HomeCard>
+      <div className="cases_container">
+        <HomeCard
+          HabilitarActive={isTrueActive}
+          ListadoGrupoActivo={ListadoGrupoActivo}
+          ListadoGrupoInactivo={ListadoGrupoInactivo}
+        ></HomeCard>
+      </div>
       {/* <Case></Case> */}
     </>
   );

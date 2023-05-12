@@ -11,7 +11,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
         ? ListadoGrupoActivo != undefined && ListadoGrupoActivo != null
           ? ListadoGrupoActivo.map((data, index) => (
               <section key={index} className={CardStyles.home_card}>
-                ACTIVE
+                {/* ACTIVE */}
                 <div className={CardStyles.card_content}>
                   <figure className={CardStyles.card_figure}>
                     <ImageOptimize
@@ -83,7 +83,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
         : ListadoGrupoInactivo != undefined && ListadoGrupoInactivo != null
         ? ListadoGrupoInactivo.map((data, index) => (
             <section key={index} className={CardStyles.home_card}>
-              IANCTVIE
+              {/* IANCTVIE */}
               <div className={CardStyles.card_content}>
                 <figure className={CardStyles.card_figure}>
                   <ImageOptimize

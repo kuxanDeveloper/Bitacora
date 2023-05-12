@@ -7,7 +7,7 @@ export default function Loading() {
       <section className={LoaderStyles.Loader}>
         <div className={LoaderStyles.loader_content}>
           <img
-            class= {LoaderStyles.logo}
+            className= {LoaderStyles.logo}
             src="https://www.bd.com/assets/images/international/logos/bd-header-logo.png"
             alt=""
           />
