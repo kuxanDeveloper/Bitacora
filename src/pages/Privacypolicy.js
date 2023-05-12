@@ -1,7 +1,7 @@
 import React from "react";
-
+import  Legal from "@/components/Body/Legal"
 function Privacypolicy() {
-  return <div>Politica de privacidad</div>;
+  return <Legal></Legal>;
 }
 
 export default Privacypolicy;
