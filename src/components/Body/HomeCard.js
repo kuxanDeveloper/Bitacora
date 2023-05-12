@@ -32,7 +32,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                       href={{
                         pathname: "/[id]",
                         query: { id: data.Id_grupo },
-                        hash: "Cactive",
+                        hash: "Cactive#UserInter",
                       }}
                       className={CardStyles.body_container}
                     >
@@ -104,7 +104,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                     href={{
                       pathname: "/[id]",
                       query: { id: data.Id_grupo },
-                      hash: "Cinactvie",
+                      hash: "Cinactvie#UserInter",
                     }}
                     className={CardStyles.body_container}
                   >

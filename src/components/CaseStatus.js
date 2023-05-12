@@ -1,8 +1,7 @@
 import React from "react";
 import CaseStyles from "@/styles/CaseStatus.module.css";
 import Link from "next/link";
-export default function CaseStatus({ HrefArmado, isTrueActive }) {
-
+export default function CaseStatus({ HrefArmado, isTrueActive, isUserInterno }) {
   return (
     <>
       <section className={CaseStyles.case_status}>
@@ -18,7 +17,7 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                   href={{
                     pathname: HrefArmado.pathname,
                     query: HrefArmado.query,
-                    hash: "Cactive",
+                    hash: `Cactive${isUserInterno?"#UserInter":"#UserExter"}`,
                   }}
                   className={CaseStyles.status_link}
                 >
@@ -26,7 +25,10 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 </Link>
               ) : (
                 <Link
-                  href={{ pathname: HrefArmado.pathname, hash: "Cactive" }}
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    hash: "Cactive",
+                  }}
                   className={CaseStyles.status_link}
                 >
                   Casos activos
@@ -43,7 +45,7 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                   href={{
                     pathname: HrefArmado.pathname,
                     query: HrefArmado.query,
-                    hash: "Cinactvie",
+                    hash: `Cinactvie${isUserInterno?"#UserInter":"#UserExter"}`,
                   }}
                   className={CaseStyles.status_link}
                 >
@@ -51,7 +53,10 @@ export default function CaseStatus({ HrefArmado, isTrueActive }) {
                 </Link>
               ) : (
                 <Link
-                  href={{ pathname: HrefArmado.pathname, hash: "Cinactvie" }}
+                  href={{
+                    pathname: HrefArmado.pathname,
+                    hash: "Cinactvie",
+                  }}
                   className={CaseStyles.status_link}
                 >
                   Casos inactivos

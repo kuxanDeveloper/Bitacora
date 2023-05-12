@@ -14,6 +14,7 @@ function HomeMuestraxGrupo({
   query,
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
+  const [isUserInterno, setisUserInterno] = useState(false);
   const router = useRouter();
   if (
     ListadoGrupo == "401: Token incorrecto o vencido" ||
@@ -31,21 +32,54 @@ function HomeMuestraxGrupo({
       window.performance.navigation.type ==
         window.performance.navigation.TYPE_NAVIGATE
     ) {
+      debugger;
+      let urlHref = window.location.href;
       let hashs2 = router.asPath.split("#")[1];
+      let hashs3 = router.asPath.split("#")[2];
       if (
         hashs2 == "Cactive" ||
         hashs2 == "" ||
         hashs2 == null ||
         hashs2 == undefined
       ) {
+        if (hashs2 == undefined) {
+          window.history.pushState(
+            { path: `${urlHref}#Cactive` },
+            "",
+            `${urlHref}#Cactive`
+          );
+          urlHref = window.location.href;
+        }
+
         setisTrueActive(true);
       } else {
         setisTrueActive(false);
+      }
+
+      if (
+        hashs3 == "UserInter" ||
+        hashs3 == "" ||
+        hashs3 == null ||
+        hashs3 == undefined
+      ) {
+        if (hashs3 == undefined){
+          window.history.pushState(
+            { path:`${urlHref}#UserInter` },
+            "",
+            `${urlHref}#UserInter`
+          );
+          urlHref = window.location.href;
+        }
+        setisUserInterno(true);
+      } else {
+        setisUserInterno(false);
       }
     }
 
     const onHashChangeStart = (url) => {
       let hash = url.split("#")[1];
+      let hashs3 = url.split("#")[2];
+      let urlHref = window.location.href;
       if (
         hash == "Cactive" ||
         hash == "" ||
@@ -55,6 +89,25 @@ function HomeMuestraxGrupo({
         setisTrueActive(true);
       } else {
         setisTrueActive(false);
+      }
+
+      if (
+        hashs3 == "UserInter" ||
+        hashs3 == "" ||
+        hashs3 == null ||
+        hashs3 == undefined
+      ) {
+        if (hashs3 == undefined){
+          window.history.pushState(
+            { path:`${urlHref}#UserInter` },
+            "",
+            `${urlHref}#UserInter`
+          );
+          urlHref = window.location.href;
+        }
+        setisUserInterno(true);
+      } else {
+        setisUserInterno(false);
       }
     };
 
@@ -101,17 +154,19 @@ function HomeMuestraxGrupo({
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <Filters></Filters>
-       <CaseStatus
+      <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
-      ></CaseStatus> {/**/}
-      {/**/} <Case
+        isUserInterno={isUserInterno}
+      ></CaseStatus>
+      <Case
         ListadoGrupo={ListadoGrupo}
         ListadoMuestraActivo={ListadoMuestraActivo}
         ListadoMuestraInactivo={ListadoMuestraInactivo}
         isTrueActive={isTrueActive}
         idGruop={query.id}
-      ></Case> 
+        isUserInterno={isUserInterno}
+      ></Case>
     </>
   );
 }
@@ -139,7 +194,7 @@ export async function getServerSideProps(ctx) {
     GroupName = ListadoGrupo.find(
       (data) => data.Id_grupo == ctx.query.id
     ).NOMBRE_GRUPO;
-
+debugger;
     return {
       props: {
         ListadoGrupo: ListadoGrupo == undefined ? null : ListadoGrupo,

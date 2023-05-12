@@ -1,7 +1,12 @@
 import React from "react";
 import CaseNavStyles from "@/styles/CaseNav.module.css";
 import Link from "next/link";
-export default function CaseNav({ ListadoGrupo, idGruop, isTrueActive }) {
+export default function CaseNav({
+  ListadoGrupo,
+  idGruop,
+  isTrueActive,
+  isUserInterno,
+}) {
   return (
     <>
       {/* <!-- navegacion de los casos --> */}
@@ -32,9 +37,10 @@ export default function CaseNav({ ListadoGrupo, idGruop, isTrueActive }) {
                     pathname: "/[id]",
                     query: {
                       id: data.Id_grupo,
-                      ESTADO: isTrueActive ? "1" : "0",
                     },
-                    hash: isTrueActive ? "Cactive" : "Cinactvie",
+                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+                      isUserInterno ? "#UserInter" : "#UserExter"
+                    }`,
                   }}
                   className={CaseNavStyles.nav_link}
                 >
@@ -42,8 +48,6 @@ export default function CaseNav({ ListadoGrupo, idGruop, isTrueActive }) {
                 </Link>
               </li>
             ))}
-
-          
           </nav>
         </div>
       </section>

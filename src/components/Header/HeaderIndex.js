@@ -34,7 +34,7 @@ function HeaderIndex() {
               <polyline points="15 4 20 4 20 9" />
             </svg>
           </span>
-          <Link href="#">
+          <Link href="/">
             <ImageOptimize
               Values={{
                 src: "/img/Inicio Logo BD 65 x 25.svg",
