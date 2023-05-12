@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 
 
 export const initLogInactive = () => {
-  debugger;
   let t;
   document.onkeypress = reiniciarTiempo;
   document.onload = reiniciarTiempo;

@@ -6,6 +6,7 @@ export default function CaseNav({
   idGruop,
   isTrueActive,
   isUserInterno,
+  isSampleGeneral,
 }) {
   return (
     <>
@@ -40,7 +41,7 @@ export default function CaseNav({
                     },
                     hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
                       isUserInterno ? "#UserInter" : "#UserExter"
-                    }`,
+                    }${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
                   }}
                   className={CaseNavStyles.nav_link}
                 >

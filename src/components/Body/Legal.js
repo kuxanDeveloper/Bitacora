@@ -189,7 +189,7 @@ function Legal() {
             </p>
 
             <div class="btn_container">
-              <button class="btn_back">volver</button>
+              <button class="btn_back" onClick={()=>{ window.close()}}>volver</button>
             </div>
           </div>
         </div>
