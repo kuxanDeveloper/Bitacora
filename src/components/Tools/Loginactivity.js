@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 
 
 export const initLogInactive = () => {
-  debugger;
   let t;
   document.onkeypress = reiniciarTiempo;
   document.onload = reiniciarTiempo;
@@ -70,7 +69,7 @@ export const initLogInactive = () => {
   function reiniciarTiempo() {
     clearInterval(t);
     t="";
-    t = setInterval(tiempoExcedido, 3 * 60 * 1000);
+    t = setInterval(tiempoExcedido, 15 * 60 * 1000);
     // 1000 milisegundos = 1 segundo
   }
 };

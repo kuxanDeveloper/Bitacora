@@ -1,7 +1,12 @@
 import React from "react";
 import CaseStyles from "@/styles/CaseStatus.module.css";
 import Link from "next/link";
-export default function CaseStatus({ HrefArmado, isTrueActive, isUserInterno }) {
+export default function CaseStatus({
+  HrefArmado,
+  isTrueActive,
+  isUserInterno,
+  isSampleGeneral,
+}) {
   return (
     <>
       <section className={CaseStyles.case_status}>
@@ -17,7 +22,9 @@ export default function CaseStatus({ HrefArmado, isTrueActive, isUserInterno }) 
                   href={{
                     pathname: HrefArmado.pathname,
                     query: HrefArmado.query,
-                    hash: `Cactive${isUserInterno?"#UserInter":"#UserExter"}`,
+                    hash: `Cactive${
+                      isUserInterno ? "#UserInter" : "#UserExter"
+                    }${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
                   }}
                   className={CaseStyles.status_link}
                 >
@@ -45,7 +52,9 @@ export default function CaseStatus({ HrefArmado, isTrueActive, isUserInterno }) 
                   href={{
                     pathname: HrefArmado.pathname,
                     query: HrefArmado.query,
-                    hash: `Cinactvie${isUserInterno?"#UserInter":"#UserExter"}`,
+                    hash: `Cinactvie${
+                      isUserInterno ? "#UserInter" : "#UserExter"
+                    }${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
                   }}
                   className={CaseStyles.status_link}
                 >

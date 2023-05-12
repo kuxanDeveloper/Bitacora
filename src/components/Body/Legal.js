@@ -97,10 +97,8 @@ function Legal() {
           </div>
         </div>
       </div>
-    </div>
-
     </>
-  )
+  );
 }
 
-export default Legal
+export default Legal;

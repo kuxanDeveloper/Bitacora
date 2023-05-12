@@ -81,16 +81,36 @@ function HomeMuestraxGrupo({
         setisUserInterno(false);
       }
       //#endregion
-    
+
       //#region Muestras generales o de urgencia
-      
+      if (
+        hashs4 == "OverallSample" ||
+        hashs4 == "" ||
+        hashs4 == null ||
+        hashs4 == undefined
+      ) {
+        if (hashs4 == undefined) {
+          window.history.pushState(
+            { path: `${urlHref}#OverallSample` },
+            "",
+            `${urlHref}#OverallSample`
+          );
+          urlHref = window.location.href;
+        }
+        setisSampleGeneral(true);
+      } else {
+        setisSampleGeneral(false);
+      }
       //#endregion
     }
 
     const onHashChangeStart = (url) => {
       let hash = url.split("#")[1];
       let hashs3 = url.split("#")[2];
+      let hashs4 = url.split("#")[3];
       let urlHref = window.location.href;
+
+      //#region Muestras activas/inactivas
       if (
         hash == "Cactive" ||
         hash == "" ||
@@ -101,6 +121,9 @@ function HomeMuestraxGrupo({
       } else {
         setisTrueActive(false);
       }
+      //#endregion
+
+      //#region usuario interno/usuario externo
 
       if (
         hashs3 == "UserInter" ||
@@ -120,6 +143,29 @@ function HomeMuestraxGrupo({
       } else {
         setisUserInterno(false);
       }
+      //#endregion
+    
+      //#region Muestras generales /urgencias
+      if (
+        hashs4 == "OverallSample" ||
+        hashs4 == "" ||
+        hashs4 == null ||
+        hashs4 == undefined
+      ) {
+        if (hashs4 == undefined) {
+          window.history.pushState(
+            { path: `${urlHref}#OverallSample` },
+            "",
+            `${urlHref}#OverallSample`
+          );
+          urlHref = window.location.href;
+        }
+        setisSampleGeneral(true);
+      } else {
+        setisSampleGeneral(false);
+      }
+      //#endregion
+    
     };
 
     router.events.on("hashChangeStart", onHashChangeStart);
@@ -169,6 +215,7 @@ function HomeMuestraxGrupo({
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
         isUserInterno={isUserInterno}
+        isSampleGeneral={isSampleGeneral}
       ></CaseStatus>
       <Case
         ListadoGrupo={ListadoGrupo}
@@ -177,6 +224,7 @@ function HomeMuestraxGrupo({
         isTrueActive={isTrueActive}
         idGruop={query.id}
         isUserInterno={isUserInterno}
+        isSampleGeneral={isSampleGeneral}
       ></Case>
     </>
   );

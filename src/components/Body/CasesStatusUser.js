@@ -5,6 +5,7 @@ export default function CasesStatusUser({
   idGruop,
   isTrueActive,
   isUserInterno,
+  isSampleGeneral,
 }) {
   return (
     <>
@@ -21,7 +22,9 @@ export default function CasesStatusUser({
                 href={{
                   pathname: "/[id]",
                   query: { id: idGruop },
-                  hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserInter`,
+                  hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserInter${
+                    isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+                  }`,
                 }}
                 className={CasesStatusStyles.status_link}
               >
@@ -37,7 +40,9 @@ export default function CasesStatusUser({
                 href={{
                   pathname: "/[id]",
                   query: { id: idGruop },
-                  hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserExter`,
+                  hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserExter${
+                    isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+                  }`,
                 }}
                 className={CasesStatusStyles.status_link}
               >
