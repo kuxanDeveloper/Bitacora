@@ -1,9 +1,38 @@
 import React from "react";
 import LegalStyles from "../../styles/Legal.module.css";
-
+import Head from "next/head";
 function Legal() {
   return (
     <>
+      <Head>
+        <title>{"Política y privacidad | Bitácora"}</title>
+        <meta
+          name="description"
+          content={
+            "Inicio donde se muestra los cultivos y demas grupos que utilizan en los laboratorio de la Bitacora"
+          }
+        />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta property="og:type" content="website" />
+        <meta name="language" content="spanish" />
+        <meta name="geo.region" content="CO" />
+        <meta name="twitter:title" content="Inicio - Bitácora" />
+        <meta
+          name="twitter:description"
+          content="Inicio donde se muestra los cultivos y demas grupos que utilizan en los laboratorio de la bitácora"
+        ></meta>
+        <meta property="og:title" content="Inicio - Bitácora" />
+        <meta
+          property="og:description"
+          content="Inicio donde se muestra los cultivos y demas grupos que utilizan en los laboratorio de la bitácora"
+        />
+        <meta property="og:site_name" content="Bitácora" />
+        <meta property="og:locale" content="es_CO" />
+        <meta property="og:locale:alternate" content="es_CO" />
+      </Head>
       <div className={LegalStyles.legal}>
         <figure className={LegalStyles.logo}>
           <img
