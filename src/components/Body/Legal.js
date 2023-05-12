@@ -1,19 +1,20 @@
 import React from 'react'
+import LegalStyles from "../../styles/Legal.module.css"
 
 function Legal() {
   return (
     <>
- <div  class="legal">
-      <figure class="logo">
+ <div  className={LegalStyles.legal}>
+      <figure className={LegalStyles.logo}>
         <img
           src="https://www.bd.com/content/dam/bdcom-assets/en/en-us/images/graphic/icon/header-bd-logo.svg"
           alt=""
-          class="logo_img"
+          className={LegalStyles.logo_img}
         />
       </figure>
 
-      <div class="login_container">
-        <div class="container_cotent">
+      <div className={LegalStyles.login_container}>
+        <div className={LegalStyles.container_cotent}>
           <h1>Política de privacidad</h1>
           <p>BD te informa sobre su Política de Privacidad respecto del tratamiento y protección de los datos de carácter personal de los usuarios y clientes que puedan ser recabados por la navegación o contratación de servicios a través del sitio Web www.BD.co</p>
           <p>En este sentido, BD garantiza el cumplimiento de la normativa vigente en materia de protección de datos personales, reflejada en la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y de Garantía de Derechos Digitales (LOPD GDD). Cumple también con el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo de 27 de abril de 2016 relativo a la protección de las personas físicas (RGPD).</p>
@@ -91,8 +92,8 @@ function Legal() {
             
             Estas políticas estarán vigentes hasta que sean modificadas por otras debidamente publicadas.</p>
 
-          <div class="btn_container">
-            <button class="btn_back">volver</button>
+          <div className={LegalStyles.btn_container}>
+            <button className={LegalStyles.btn_back}>volver</button>
           </div>
         </div>
       </div>
