@@ -105,7 +105,7 @@ const ListadoMuestrasInactiveUserExterno= UserExternosInactive(ListadoMuestraIna
 
                 <div className={caseStyles.card_body}>
                   <span
-                    className={`${caseStyles.card_state} ${caseStyles.active}`}
+                    className={`${caseStyles.card_state}`}
                   ></span>
                   <span className={caseStyles.body_title}>N° Sticker</span>
                   <p className={caseStyles.card_number}>
@@ -137,7 +137,7 @@ const ListadoMuestrasInactiveUserExterno= UserExternosInactive(ListadoMuestraIna
 
                 <div className={caseStyles.card_body}>
                   <span
-                    className={`${caseStyles.card_state} ${caseStyles.active}`}
+                    className={`${caseStyles.card_state}`}
                   ></span>
                   <span className={caseStyles.body_title}>N° Sticker</span>
                   <p className={caseStyles.card_number}>

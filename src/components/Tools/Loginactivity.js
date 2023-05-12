@@ -1,18 +1,21 @@
 import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
+
+
+
 export const initLogInactive = () => {
-  var t;
+  debugger;
+  let t;
   document.onkeypress = reiniciarTiempo;
   document.onload = reiniciarTiempo;
-  document.onmousemove = reiniciarTiempo;
-  document.onmousedown = reiniciarTiempo; // aplica para una pantalla touch
+  // document.onmousemove = reiniciarTiempo;
+  // document.onmousedown = reiniciarTiempo; // aplica para una pantalla touch
   document.ontouchstart = reiniciarTiempo;
   document.onclick = reiniciarTiempo; // aplica para un clic del touchpad
   document.onscroll = reiniciarTiempo; // navegando con flechas del teclado
   document.ondblclick = reiniciarTiempo;
   document.onresize = reiniciarTiempo;
-  document.onmouseup = reiniciarTiempo;
-  document.onmouseenter = reiniciarTiempo;
+  // document.onmouseup = reiniciarTiempo;
   document.onchange = reiniciarTiempo;
   document.onsubmit = reiniciarTiempo;
 
@@ -41,7 +44,23 @@ export const initLogInactive = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         reiniciarTiempo;
+        clearInterval(timerInterval);
+        clearInterval(t);
+        t="";
       } else if (result.dismiss === Swal.DismissReason.timer) {
+        clearInterval(timerInterval);
+        clearInterval(t);
+        t="";
+        document.onkeypress = "";
+        document.onload = "";
+        document.ontouchstart = "";
+        document.onclick = ""; // aplica para un clic del touchpad
+        document.onscroll = ""; // navegando con flechas del teclado
+        document.ondblclick = "";
+        document.onresize = "";
+        document.onchange = "";
+        document.onsubmit = "";
+      
         /* Read more about handling dismissals below */
         userService.logout();
       }
@@ -50,7 +69,8 @@ export const initLogInactive = () => {
 
   function reiniciarTiempo() {
     clearInterval(t);
-    t = setInterval(tiempoExcedido, 15*60*1000);
+    t="";
+    t = setInterval(tiempoExcedido, 3 * 60 * 1000);
     // 1000 milisegundos = 1 segundo
   }
 };

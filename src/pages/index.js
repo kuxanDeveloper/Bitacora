@@ -114,13 +114,13 @@ export async function getServerSideProps(ctx) {
   if (cookie) {
     const ListadoGrupoActivo = await QueryActivegroup(cookie);
     const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
-
+debugger;
     return {
       props: {
         ListadoGrupoActivo:
           ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
         ListadoGrupoInactivo:
-          ListadoGrupoInactivo == undefined ? null : ListadoGrupoActivo,
+          ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
       },
     };
   } else {

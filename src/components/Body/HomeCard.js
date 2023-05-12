@@ -32,7 +32,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                       href={{
                         pathname: "/[id]",
                         query: { id: data.Id_grupo },
-                        hash: "Cactive#UserInter",
+                        hash: "Cactive#UserInter#OverallSample",
                       }}
                       className={CardStyles.body_container}
                     >
@@ -81,7 +81,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
             ))
           : "Sin grupo"
         : ListadoGrupoInactivo != undefined && ListadoGrupoInactivo != null
-        ? ListadoGrupoInactivo.map((data, index) => (
+        ? ListadoGrupoInactivo.map((da, index) => (
             <section key={index} className={CardStyles.home_card}>
               IANCTVIE
               <div className={CardStyles.card_content}>
@@ -90,7 +90,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                     Values={{
                       src: "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
                       alt: "imagen de grupo",
-                      title: data.NOMBRE_GRUPO,
+                      title: da.NOMBRE_GRUPO,
                       classValue: CardStyles.card_img,
                       width: 1920,
                       height: 109,
@@ -103,13 +103,13 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                   <Link
                     href={{
                       pathname: "/[id]",
-                      query: { id: data.Id_grupo },
-                      hash: "Cinactvie#UserInter",
+                      query: { id: da.Id_grupo },
+                      hash: "Cinactvie#UserInter#OverallSample",
                     }}
                     className={CardStyles.body_container}
                   >
                     <h3 className={CardStyles.card_name}>
-                      {data.NOMBRE_GRUPO}
+                      {da.NOMBRE_GRUPO}
                       <i className={CardStyles.arrow_icon}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                         }}
                       />
                       <span className={CardStyles.follow_conunter}>
-                        {data.SEGUIMIENTOS}
+                        {da.SEGUIMIENTOS}
                       </span>
                       Seguimientos
                     </p>

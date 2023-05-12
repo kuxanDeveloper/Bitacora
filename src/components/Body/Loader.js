@@ -5,27 +5,27 @@ export default function Loader() {
   return (
     <>
       <div id="Carga_pwa_">
-        <div onclick="application.goToTargetView(event)" id="Grupo_129">
+        {/* <div onclick="application.goToTargetView(event)" id="Grupo_129">
           <img
             id="Grupo_21"
             src="Grupo_21.png"
             srcset="Grupo_21.png 1x, Grupo_21@2x.png 2x"
           />
-        </div>
-        <div id="Grupo_130">
+        </div> */}
+        {/* <div id="Grupo_130">
           <img
             id="Grupo_25"
             src="Grupo_25.png"
             srcset="Grupo_25.png 1x, Grupo_25@2x.png 2x"
           />
-        </div>
-        <div id="Grupo_131">
+        </div> */}
+        {/* <div id="Grupo_131">
           <img
             id="Grupo_27"
             src="Grupo_27.png"
             srcset="Grupo_27.png 1x, Grupo_27@2x.png 2x"
           />
-        </div>
+        </div> */}
         <svg
           className={styles.Trazado_60}
           viewBox="158.84 420.456 77.446 26.315"

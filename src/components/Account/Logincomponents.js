@@ -10,7 +10,7 @@ import * as Yup from "yup";
 function Logincomponents() {
   const validationSchema = Yup.object().shape({
     username: Yup.string().required(
-      "mire hijueputa usted es doctor no sea brutom como va a iniciar sesion así, se compro el titulo o que"
+      "Campo de usuario obligatorio"
     ),
     password: Yup.string().required("Campo de contraseña obligatorio"),
   });

@@ -15,6 +15,8 @@ function HomeMuestraxGrupo({
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
+  const [isSampleGeneral, setisSampleGeneral] = useState(false);
+
   const router = useRouter();
   if (
     ListadoGrupo == "401: Token incorrecto o vencido" ||
@@ -32,10 +34,12 @@ function HomeMuestraxGrupo({
       window.performance.navigation.type ==
         window.performance.navigation.TYPE_NAVIGATE
     ) {
-      debugger;
       let urlHref = window.location.href;
       let hashs2 = router.asPath.split("#")[1];
       let hashs3 = router.asPath.split("#")[2];
+      let hashs4 = router.asPath.split("#")[3];
+
+      //#region Muestras Activas
       if (
         hashs2 == "Cactive" ||
         hashs2 == "" ||
@@ -55,16 +59,18 @@ function HomeMuestraxGrupo({
       } else {
         setisTrueActive(false);
       }
+      //#endregion
 
+      //#region Usuario Interno o externo
       if (
         hashs3 == "UserInter" ||
         hashs3 == "" ||
         hashs3 == null ||
         hashs3 == undefined
       ) {
-        if (hashs3 == undefined){
+        if (hashs3 == undefined) {
           window.history.pushState(
-            { path:`${urlHref}#UserInter` },
+            { path: `${urlHref}#UserInter` },
             "",
             `${urlHref}#UserInter`
           );
@@ -74,6 +80,11 @@ function HomeMuestraxGrupo({
       } else {
         setisUserInterno(false);
       }
+      //#endregion
+    
+      //#region Muestras generales o de urgencia
+      
+      //#endregion
     }
 
     const onHashChangeStart = (url) => {
@@ -97,9 +108,9 @@ function HomeMuestraxGrupo({
         hashs3 == null ||
         hashs3 == undefined
       ) {
-        if (hashs3 == undefined){
+        if (hashs3 == undefined) {
           window.history.pushState(
-            { path:`${urlHref}#UserInter` },
+            { path: `${urlHref}#UserInter` },
             "",
             `${urlHref}#UserInter`
           );
@@ -174,7 +185,6 @@ function HomeMuestraxGrupo({
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   let GroupName = "";
-  debugger;
   if (cookie) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
@@ -194,7 +204,6 @@ export async function getServerSideProps(ctx) {
     GroupName = ListadoGrupo.find(
       (data) => data.Id_grupo == ctx.query.id
     ).NOMBRE_GRUPO;
-debugger;
     return {
       props: {
         ListadoGrupo: ListadoGrupo == undefined ? null : ListadoGrupo,
