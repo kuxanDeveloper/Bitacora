@@ -1,0 +1,74 @@
+.recovery {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/img/login/Login_background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+  }
+  .recovery .logo {
+    margin: 0;
+  }
+  .recovery .recovery_container {
+    background-color: #fff;
+    max-width: 425px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .recovery .recovery_container .container_cotent {
+    padding: 4rem 2rem 1rem 2rem;
+  }
+  .recovery .recovery_container .container_cotent .inputs_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .recovery .recovery_container .container_cotent .inputs_container .input_label {
+    font-size: clam(20px, 1.5rem, 1.8rem);
+    font-weight: bold;
+    color: #858585;
+    margin-bottom: 0.3rem;
+  }
+  .recovery .recovery_container .container_cotent .inputs_container .username {
+    border: #a8a8a8 solid 1px;
+    border-radius: 3px;
+    outline: none;
+    margin-bottom: 2rem;
+    color: #858585;
+    padding: 5px 0 5px 5px;
+  }
+  .recovery .recovery_container .container_cotent .inputs_container .username:focus {
+    outline: #e57d00 solid 1px;
+    border: none;
+  }
+  .recovery .recovery_container .container_cotent .error {
+    font-size: clam(0.8rem, 1.4rem, 1.6rem);
+    text-align: center;
+    color: #da3939;
+    display: block;
+    font-size: 11px;
+  }
+  .recovery .recovery_container .container_cotent .btn_container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .recovery .recovery_container .container_cotent .btn_container .btn_recovery {
+    width: 240px;
+    padding: 0.5rem 1rem;
+    background-color: #e57d00;
+    cursor: pointer;
+    border: none;
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 20px;
+    font-size: 14.5px;
+  }/*# sourceMappingURL=Recovery_password.css.map */

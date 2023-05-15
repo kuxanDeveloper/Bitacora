@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
-
+import StickerInfo from "@/components/Body/StickerInfo";
+import Recovery from "@/components/Recovery";
 function Login({ cookie }) {
   if (cookie) {
     useEffect(() => {
@@ -33,6 +34,8 @@ function Login({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
+
+      <Recovery></Recovery>
       <Logincomponents />
     </>
   );
