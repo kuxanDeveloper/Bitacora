@@ -39,6 +39,8 @@ export const initLogInactive = () => {
       },
       willClose: () => {
         clearInterval(timerInterval);
+        clearInterval(t);
+        t="";
       },
     }).then((result) => {
       if (result.isConfirmed) {

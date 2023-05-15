@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-} from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 export const BitacoraContext = createContext();
 import { useRouter } from "next/router";
@@ -13,7 +8,7 @@ export const useContextBitacora = () => useContext(BitacoraContext);
 export const BicatoraContexProvider = ({ children }) => {
   const router = useRouter();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
+  const [showModal, setShowModal] = useState(false);
   const [authorized, setAuthorized] = useState(false);
   const [Urlauthorized, setUrlauthorized] = useState(false);
   const origin =
@@ -22,7 +17,6 @@ export const BicatoraContexProvider = ({ children }) => {
       : "";
 
   const URL = `${origin}`;
-
 
   function authCheck() {
     // redirect to login page if accessing a private page and not logged in
@@ -69,7 +63,16 @@ export const BicatoraContexProvider = ({ children }) => {
   }, [authorized]);
 
   return (
-    <BitacoraContext.Provider value={{ isMobile, URL, authorized, Urlauthorized }}>
+    <BitacoraContext.Provider
+      value={{
+        isMobile,
+        URL,
+        authorized,
+        Urlauthorized,
+        showModal,
+        setShowModal,
+      }}
+    >
       {children}
     </BitacoraContext.Provider>
   );
