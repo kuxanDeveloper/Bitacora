@@ -4,6 +4,7 @@ import Logincomponents from "@/components/Account/Logincomponents";
 import Router from "next/router";
 import { userService } from "../../services/UserService";
 import StickerInfo from "@/components/Body/StickerInfo";
+import Pop_up from "@/components/Body/Pop_up";
 function Login({ cookie }) {
   if (cookie) {
     useEffect(() => {
@@ -34,6 +35,8 @@ function Login({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
+
+      <Pop_up></Pop_up>
       <Logincomponents />
     </>
   );
