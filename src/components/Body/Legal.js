@@ -1,9 +1,38 @@
 import React from "react";
 import LegalStyles from "../../styles/Legal.module.css";
-
+import Head from "next/head";
 function Legal() {
   return (
     <>
+      <Head>
+        <title>{"Política y privacidad | Bitácora BD"}</title>
+        <meta
+          name="description"
+          content={
+            "Política y privacidad del aplicativo, Bitácora BD"
+          }
+        />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta property="og:type" content="website" />
+        <meta name="language" content="spanish" />
+        <meta name="geo.region" content="CO" />
+        <meta name="twitter:title" content="Política y privacidad | Bitácora BD" />
+        <meta
+          name="twitter:description"
+          content="Política y privacidad del aplicativo, Bitácora BD"
+        ></meta>
+        <meta property="og:title" content="Política y privacidad | Bitácora BD" />
+        <meta
+          property="og:description"
+          content="Política y privacidad del aplicativo, Bitácora BD"
+        />
+        <meta property="og:site_name" content="Bitácora BD" />
+        <meta property="og:locale" content="es_CO" />
+        <meta property="og:locale:alternate" content="es_CO" />
+      </Head>
       <div className={LegalStyles.legal}>
         <figure className={LegalStyles.logo}>
           <img
@@ -190,7 +219,14 @@ function Legal() {
             </p>
 
             <div className={LegalStyles.btn_container}>
-              <button oonclick ={()=>{window.close}}className={LegalStyles.btn_back}>volver</button>
+              <button
+                onClick={() => {
+                  window.close();
+                }}
+                className={LegalStyles.btn_back}
+              >
+                volver
+              </button>
             </div>
           </div>
         </div>

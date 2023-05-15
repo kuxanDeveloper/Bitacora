@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
-import Router from "next/router";
 import { userService } from "../../services/UserService";
 import StickerInfo from "@/components/Body/StickerInfo";
 import Pop_up from "@/components/Body/Pop_up";
