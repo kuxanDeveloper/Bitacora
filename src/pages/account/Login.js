@@ -3,6 +3,7 @@ import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
 import Router from "next/router";
 import { userService } from "../../services/UserService";
+import StickerInfo from "@/components/Body/StickerInfo";
 function Login({ cookie }) {
   if (cookie) {
     useEffect(() => {
