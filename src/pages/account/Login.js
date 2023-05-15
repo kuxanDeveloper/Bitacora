@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
-import Router from "next/router";
 import { userService } from "../../services/UserService";
 function Login({ cookie }) {
   if (cookie) {

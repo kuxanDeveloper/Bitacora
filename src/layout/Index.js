@@ -1,13 +1,11 @@
 import React, { Suspense } from "react";
 // import FooterIndex from "../components/Footer/FooterIndex";
 import HeaderIndex from "../components/Header/HeaderIndex";
-import Loader from "../components/Body/Loader";
 import { initLogInactive } from "../components/Tools/Loginactivity";
 import { useContextBitacora } from "../context/BitacoraContext";
 function Index({ children }) {
   const { authorized, Urlauthorized } = useContextBitacora();
   return (
-
     <>
       {/* <Loader></Loader> */}
       {/*Header */}
@@ -15,13 +13,9 @@ function Index({ children }) {
 
       {/*body */}
       {authorized && !Urlauthorized ? (
-        <Suspense fallback={<Loader />}>
-          <main onLoad={initLogInactive()}>{children}</main>
-        </Suspense>
+        <main onLoad={initLogInactive()}>{children}</main>
       ) : (
-        <Suspense fallback={<Loader />}>
-          <main >{children}</main>
-        </Suspense>
+        <main>{children}</main>
       )}
       {/* <Suspense fallback={<Loader />}>
         <main onLoad={initLogInactive()}>{children}</main>
