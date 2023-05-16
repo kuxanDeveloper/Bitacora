@@ -11,6 +11,11 @@
   .recovery .logo {
     margin: 0;
   }
+
+  .recovery .logo .logo_img {
+    object-fit: contain;
+
+  }
   .recovery .recovery_container {
     background-color: #fff;
     max-width: 425px;
@@ -60,6 +65,9 @@
     margin-top: 2rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
   }
   .recovery .recovery_container .container_cotent .btn_container .btn_recovery {
     width: 240px;
@@ -71,6 +79,23 @@
     letter-spacing: 1px;
     border-radius: 20px;
     font-size: 14.5px;
+    text-align: center;
+  }
+  
+  
+  .recovery .recovery_container .container_cotent .btn_container .btn_back {
+    width: 140px;
+    padding: 0.5rem 1rem;
+    background-color: #858585;
+    cursor: pointer;
+    border: none;
+    color: white;
+    letter-spacing: 1px;
+    border-radius: 20px;
+    font-size: 14.5px;
+    text-align: center;
+    text-decoration: none;
+
   }/*# sourceMappingURL=Recovery_password.css.map */
 
 
