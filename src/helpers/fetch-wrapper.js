@@ -22,8 +22,6 @@ function get(url, cookie) {
   return fetch(url, requestOptions).then(handleResponse);
 }
 
-
-
 function post(url, body) {
   const requestOptions = {
     method: "POST",
@@ -64,19 +62,18 @@ function _delete(url) {
 function authHeader(url, cookie) {
   // return auth header with jwt if user is logged in and request is to the api url
   let user = userService.userValue;
-  let isLoggedIn = user && user.token;
+  let isLoggedIn =
+    user !== undefined && user !== null && user !== false ? true : false;
   isLoggedIn =
     isLoggedIn == false
-      ? cookie != null || cookie != undefined
+      ? cookie !== null && cookie !== undefined
         ? true
         : false
-      : false;
+      : isLoggedIn;
   const isApiUrl = url.startsWith(baseUrl);
   if (isLoggedIn && isApiUrl) {
     return {
-      Token: `${
-        user.token == undefined || user.token == null ? cookie : user.token
-      }`,
+      Token: `${user == undefined || user == null || user==false ? cookie : user}`,
     };
   } else {
     return {};

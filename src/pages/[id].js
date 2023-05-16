@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { QueryGroupList, QueryMueForGroup } from "../components/Tools/Security";
-import { userService } from "../services/UserService";
+
+import {ApiQueryGeneralSample} from "./api/[id]"
 import Case from "@/components/Case";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import Filters from "@/components/Body/Filters";
 import { useRouter } from "next/router";
 function HomeMuestraxGrupo({
-  ListadoGrupo,
-  GrupoNombre,
-  ListadoMuestraActivo,
-  ListadoMuestraInactivo,
+  cookie,
   query,
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
+  const [GrupoNombre, setGrupoNombre] = useState("");
+  const [ListadoGrupo, setListadoGrupo] = useState([]);
+  const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
+  const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
+
+
 
   const router = useRouter();
-  if (
-    ListadoGrupo == "401: Token incorrecto o vencido" ||
-    ListadoMuestraActivo == "401: Token incorrecto o vencido" ||
-    ListadoMuestraInactivo == "401: Token incorrecto o vencido"
-  ) {
-    userService.logout();
-    return "";
-  }
+
+  useEffect(() => {
+    ApiQueryGeneralSample(cookie, query.id,setGrupoNombre, setListadoGrupo, setListadoMuestraActivo, setListadoMuestraInactivo)
+
+  }, []);
+
+
 
   useEffect(() => {
     if (
@@ -144,7 +146,7 @@ function HomeMuestraxGrupo({
         setisUserInterno(false);
       }
       //#endregion
-    
+
       //#region Muestras generales /urgencias
       if (
         hashs4 == "OverallSample" ||
@@ -165,7 +167,6 @@ function HomeMuestraxGrupo({
         setisSampleGeneral(false);
       }
       //#endregion
-    
     };
 
     router.events.on("hashChangeStart", onHashChangeStart);
@@ -232,36 +233,13 @@ function HomeMuestraxGrupo({
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
-  let GroupName = "";
   if (cookie) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
-    const ListadoGrupo = await QueryGroupList(cookie);
-    const ListadoMuestraActivo = await QueryMueForGroup(
-      cookie,
-      "1",
-      ctx.query.id
-    );
-    const ListadoMuestraInactivo = await QueryMueForGroup(
-      cookie,
-      "0",
-      ctx.query.id
-    );
-
-    GroupName = ListadoGrupo.find(
-      (data) => data.Id_grupo == ctx.query.id
-    ).NOMBRE_GRUPO;
     return {
       props: {
-        ListadoGrupo: ListadoGrupo == undefined ? null : ListadoGrupo,
-        /*null*/
-        ListadoMuestraActivo:
-          ListadoMuestraActivo == undefined ? null : ListadoMuestraActivo,
-        /*null*/
-        ListadoMuestraInactivo:
-          ListadoMuestraInactivo == undefined ? null : ListadoMuestraInactivo,
-        GrupoNombre: GroupName,
+        cookie: cookie,
         query: ctx.query,
       },
     };

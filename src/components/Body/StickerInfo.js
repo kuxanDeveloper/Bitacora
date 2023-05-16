@@ -25,7 +25,8 @@ export default function StickerInfo({ InforSampleDetails }) {
 
           <p className={styles.title}>Información de sticker</p>
           <br />
-          <div className={styles.card}>
+          {
+            InforSampleDetails.infoBitacora!=undefined? <div className={styles.card}>
             <div className={styles.stickers_container}>
               <div className={styles.card_content}>
                 {InforSampleDetails.infoBitacora.map((data, index) => (
@@ -281,7 +282,9 @@ export default function StickerInfo({ InforSampleDetails }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div>:"cargando..."
+          }
+          
         </div>
       </div>
     </>

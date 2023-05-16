@@ -1,4 +1,4 @@
-import { errorHandler, jwtMiddleware } from 'helpers/api';
+import { errorHandler } from 'helpers/api';
 
 export { apiHandler };
 
@@ -11,8 +11,6 @@ function apiHandler(handler) {
             return res.status(405).end(`Metodo ${req.method} no encontrado`);
 
         try {
-            // global middleware
-            await jwtMiddleware(req, res);
 
             // route handler
             await handler[method](req, res);

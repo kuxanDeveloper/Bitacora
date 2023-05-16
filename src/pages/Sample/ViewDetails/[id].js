@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import StickerInfo from "../../../components/Body/StickerInfo";
-import { QueryMuestraEdit } from "../../../components/Tools/Security";
+import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
 import Head from "next/head";
-function ViewDetails({ InforSampleDetails, id }) {
+function ViewDetails({ cookie, id }) {
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsEdit(cookie, id, setLInforSampleDetails);
+
+    console.log(InforSampleDetails,"details")
+  }, []);
+
   return (
     <>
       <Head>
         <title>{`Información sticker N° ${id} | Bitácora BD`}</title>
-        <meta
-          name="description"
-          content={`Detalle del sticker de muestra`}
-        />
+        <meta name="description" content={`Detalle del sticker de muestra`} />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
         <meta name="google" content="notranslate" />
@@ -46,19 +50,18 @@ function ViewDetails({ InforSampleDetails, id }) {
 export default ViewDetails;
 
 export async function getServerSideProps(ctx) {
-  debugger;
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
 
-    const InforSampleDetails = await QueryMuestraEdit(cookie, ctx.query.id);
+    // const InforSampleDetails = await QueryMuestraEdit(cookie, ctx.query.id);
 
     return {
       props: {
-        InforSampleDetails: InforSampleDetails,
-        id: ctx.query.id
+        cookie: cookie,
+        id: ctx.query.id,
       },
     };
   } else {
