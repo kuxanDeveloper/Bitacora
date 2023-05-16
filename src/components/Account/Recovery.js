@@ -21,12 +21,12 @@ function Recovery() {
         <figure className={Styles.logo}>
           <ImageOptimize
             Values={{
-              src: "/img/Becton_Dickinson_logo64x64.png",
+              src: "/img/Becton_Dickinson_logo256x256.png",
               alt: "Login BD",
               title: "",
               classValue: Styles.logo_img,
-              width: 64,
-              height: 64,
+              width: 200,
+              height: 100,
               style: {},
             }}
           />
@@ -63,7 +63,7 @@ function Recovery() {
                 >
                   Recuperar Contraseña
                 </button>
-                <Link href={"/Account/Login"} className={Styles.btn_recovery}>
+                <Link href={"/Account/Login"} className={Styles.btn_back}>
                   Cancelar
                 </Link>
               </div>
