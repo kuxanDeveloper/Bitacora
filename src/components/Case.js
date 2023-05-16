@@ -67,33 +67,52 @@ export default function Case({
           isUserInterno={isUserInterno}
           isSampleGeneral={isSampleGeneral}
         ></CaseNav>
-        <div className={caseStyles.cases_nav}>
-          <div className={caseStyles.state}>
-            <p className={`${caseStyles.status} ${caseStyles.active}`}>
-              <a href="" className={caseStyles.status_link}>
-                casos internos
-              </a>
-            </p>
-            <p className={caseStyles.status}>
-              <a href="" className={caseStyles.status_link}>
-                casos externos
-              </a>
-            </p>
+        {isTrueActive ? (
+          <div className={caseStyles.cases_nav}>
+            <div className={caseStyles.state}>
+              <p
+                className={`${caseStyles.status} ${
+                  isSampleGeneral ? caseStyles.active : ""
+                }`}
+              >
+                <Link
+                  href={{
+                    pathname: "/[id]",
+                    query: { id: idGruop },
+                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+                      isUserInterno ? "#UserInter" : "#UserExter"
+                    }#OverallSample`,
+                  }}
+                  className={caseStyles.status_link}
+                >
+                  Casos generales
+                </Link>
+              </p>
+              <p
+                className={`${caseStyles.status} ${
+                  !isSampleGeneral ? caseStyles.active : ""
+                }`}
+              >
+                <Link
+                  href={{
+                    pathname: "/[id]",
+                    query: { id: idGruop },
+                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+                      isUserInterno ? "#UserInter" : "#UserExter"
+                    }#UrgentSamples`,
+                  }}
+                  className={caseStyles.status_link}
+                >
+                  Casos urgentes
+                </Link>
+              </p>
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
 
         <div className={caseStyles.cases_container}>
-          {isTrueActive ? (
-            <CasesStatusUrgentGen
-              isTrueActive={isTrueActive}
-              isSampleGeneral={isSampleGeneral}
-              isUserInterno={isUserInterno}
-              idGruop={idGruop}
-            ></CasesStatusUrgentGen>
-          ) : (
-            ""
-          )}
-
           {isTrueActive
             ? isUserInterno
               ? isSampleGeneral
