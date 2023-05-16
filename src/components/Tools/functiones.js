@@ -145,3 +145,8 @@ export const UserExternosActiveUrgencias = (query) => {
   });
   return ListadoNewRetorno;
 };
+
+
+export const backhistory = () => {
+  window.history.back();
+};

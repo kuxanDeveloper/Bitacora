@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Pop_up from "../components/Tools/Pop_up";
 
 import HeaderIndex from "../components/Header/HeaderIndex";

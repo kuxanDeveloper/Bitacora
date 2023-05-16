@@ -178,7 +178,7 @@ function HomeMuestraxGrupo({
   return (
     <>
       <Head>
-        <title>{`Muestras - ${GrupoNombre} | Bitácora`}</title>
+        <title>{`Muestras - ${GrupoNombre} | Bitácora BD`}</title>
         <meta
           name="description"
           content={`Donde indicaran todas las muestras activas o inactivas del grupo ${GrupoNombre}`}
@@ -192,7 +192,7 @@ function HomeMuestraxGrupo({
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Muestras - ${GrupoNombre} - Bitácora`}
+          content={`Muestras - ${GrupoNombre} - Bitácora BD`}
         />
         <meta
           name="twitter:description"
@@ -200,13 +200,13 @@ function HomeMuestraxGrupo({
         ></meta>
         <meta
           property="og:title"
-          content={`Muestras - ${GrupoNombre} - Bitácora`}
+          content={`Muestras - ${GrupoNombre} - Bitácora BD`}
         />
         <meta
           property="og:description"
           content={`Donde indicaran todas las muestras activas o inactivas del grupo ${GrupoNombre}`}
         />
-        <meta property="og:site_name" content="Bitácora" />
+        <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>

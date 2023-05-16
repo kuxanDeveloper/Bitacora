@@ -43,9 +43,8 @@ export const OnSubmitForward = ({ username }) => {
     confirmButtonText: "Cerrar",
   });
 
-  return   Router.push({pathname: "/Account/Login"})
-  
-  
+  return Router.push({ pathname: "/Account/Login" });
+
   // userService
   //   .login(username, password)
   //   .then(() => {
@@ -147,6 +146,29 @@ export const QueryGroupList = (cookie, estado) => {
 
 export const QueryMueForGroup = (cookie, Estado, idGroup) => {
   return userService.ListGroupForMue(cookie, Estado, idGroup).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "erro in login");
+    return error;
+  });
+};
+
+export const QueryMuestraEdit = (cookie, idSticker) => {
+  return userService.InfoSample(cookie, idSticker).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",

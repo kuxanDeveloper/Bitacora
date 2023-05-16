@@ -26,6 +26,7 @@ export const userService = {
   ListGroup,
   ListGroupForMue,
   logoutLogin,
+  InfoSample
 };
 
 async function login(username, password) {
@@ -121,7 +122,9 @@ function ListGroupForMue(
   );
   formData.append(
     "Resultado_Final",
-    ResultadoFinal !== null && ResultadoFinal !== undefined ? ResultadoFinal : ""
+    ResultadoFinal !== null && ResultadoFinal !== undefined
+      ? ResultadoFinal
+      : ""
   );
 
   formData.append(
@@ -131,9 +134,10 @@ function ListGroupForMue(
 
   formData.append(
     "Usuario_Sticker",
-    UserLoginSticker !== null && UserLoginSticker !== undefined ? UserLoginSticker : ""
+    UserLoginSticker !== null && UserLoginSticker !== undefined
+      ? UserLoginSticker
+      : ""
   );
-
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -142,34 +146,9 @@ function ListGroupForMue(
   );
 }
 
-// function register(user) {
-//   return fetchWrapper.post(`${baseUrl}/register`, user);
-// }
-
-// function getAll() {
-//   return fetchWrapper.get(baseUrl);
-// }
-
-// function getById(id) {
-//   return fetchWrapper.get(`${baseUrl}/${id}`);
-// }
-
-// function update(id, params) {
-//   return fetchWrapper.put(`${baseUrl}/${id}`, params).then((x) => {
-//     // update stored user if the logged in user updated their own record
-//     if (id === userSubject.value.id) {
-//       // update local storage
-//       const user = { ...userSubject.value, ...params };
-//       localStorage.setItem("user", JSON.stringify(user));
-
-//       // publish updated user to subscribers
-//       userSubject.next(user);
-//     }
-//     return x;
-//   });
-// }
-
-// // prefixed with underscored because delete is a reserved word in javascript
-// function _delete(id) {
-//   return fetchWrapper.delete(`${baseUrl}/${id}`);
-// }
+function InfoSample(cookie, idSticker) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultado?Numero_Sticker=${idSticker}`,
+    cookie
+  );
+}
