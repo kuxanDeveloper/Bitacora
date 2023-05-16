@@ -6,7 +6,7 @@
     z-index: 1000;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 64px);
     /* inset: 0 0 0 0; */
   }
   .img_upload .upload_container {

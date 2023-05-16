@@ -21,7 +21,6 @@ function Index({ children }) {
       {/*body */}
       {authorized && !Urlauthorized ? (
         <>
-          <main onLoad={initLogInactive()}>{children}</main>
           {showModal ? (
             <Pop_up
               onClose={() => {
@@ -31,6 +30,7 @@ function Index({ children }) {
           ) : (
             ""
           )}
+          <main onLoad={initLogInactive()}>{children}</main>
         </>
       ) : (
         <main>{children}</main>
