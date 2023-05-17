@@ -12,10 +12,21 @@ export default function CaseNav({
   function QueryReturnNew(obj, idNEw) {
     let newObje = {};
     newObje.id = idNEw;
-    newObje.Numstiker = obj.Numstiker;
-    newObje.DateAdmission = obj.DateAdmission;
-    newObje.result = obj.result;
-    newObje.URS = obj.URS;
+    if (
+      (obj.Numstiker !== undefined &&
+        obj.Numstiker !== null &&
+        obj.Numstiker !== "") ||
+      (obj.DateAdmission !== "" &&
+        obj.DateAdmission !== undefined &&
+        obj.DateAdmission !== null) ||
+      (obj.result !== "" && obj.result !== null && obj.result !== undefined) ||
+      (obj.URS !== "" && obj.URS !== null && obj.URS !== undefined)
+    ) {
+      newObje.Numstiker = obj.Numstiker;
+      newObje.DateAdmission = obj.DateAdmission;
+      newObje.result = obj.result;
+      newObje.URS = obj.URS;
+    }
 
     return newObje;
   }

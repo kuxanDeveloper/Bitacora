@@ -69,7 +69,6 @@ export const initLogInactive = () => {
   }
 
   function reiniciarTiempo() {
-    debugger;
     clearTimeout(t);
     t=null;
     t = setTimeout(tiempoExcedido, 15 * 60 * 1000);

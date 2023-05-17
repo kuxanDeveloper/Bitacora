@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { FilterQuerySearch,ClearFilter  } from "../Tools/functiones";
+import { FilterQuerySearch, ClearFilter } from "../Tools/functiones";
 import filterStyles from "../../styles/filters.module.css";
 import Link from "next/link";
+import { format } from "../Tools/FormatDate";
 import { useRouter } from "next/router";
 export default function Filters({
   CasosActivo_Inactivos,
@@ -46,7 +47,7 @@ export default function Filters({
                   onClick={(e) => setGruopValue(e.target.value)}
                   className={filterStyles.filter_input}
                 >
-                  <option value="" selected disabled>
+                  <option value="" disabled>
                     Seleccione un valor
                   </option>
                   {ListadoGrupoActivo != null
@@ -71,7 +72,8 @@ export default function Filters({
                 value={NumeroSticker}
               />
               <input
-                type="text"
+                type="date"
+                title="Fecha de ingreso"
                 className={filterStyles.filter_input}
                 placeholder="Fecha de ingreso"
                 onChange={(e) => {
@@ -94,7 +96,7 @@ export default function Filters({
                 onClick={(e) => setUserRegisterStiker(e.target.value)}
                 className={filterStyles.filter_input}
               >
-                <option value="" selected disabled>
+                <option value="" disabled>
                   Seleccione un valor
                 </option>
                 {ListadoUsuariosRegistrados != null
@@ -162,13 +164,7 @@ export default function Filters({
                 </svg>
               </Link>
               <button
-                onClick={(e) =>
-                  ClearFilter(
-                    e,
-                    router,
-                    GruopValue,
-                  )
-                }
+                onClick={(e) => ClearFilter(e, router, GruopValue)}
                 className={filterStyles.search}
               >
                 Limpiar filtros
