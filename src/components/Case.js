@@ -2,7 +2,6 @@ import React from "react";
 import caseStyles from "@/styles/Case.module.css";
 import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
-import CasesStatusUrgentGen from "./Body/CasesStatusUrgentGen";
 import {
   UserInternosActive,
   UserExternosActive,
@@ -22,6 +21,7 @@ export default function Case({
   idGruop,
   isUserInterno,
   isSampleGeneral,
+  HrefArmado,
 }) {
   const ListadoMuestrasActiveUserInter =
     UserInternosActive(ListadoMuestraActivo);
@@ -55,12 +55,14 @@ export default function Case({
     <>
       <section className={caseStyles.cases}>
         <CasesStatusUser
+          HrefArmado={HrefArmado}
           isTrueActive={isTrueActive}
           isUserInterno={isUserInterno}
           idGruop={idGruop}
           isSampleGeneral={isSampleGeneral}
         ></CasesStatusUser>
         <CaseNav
+          HrefArmado={HrefArmado}
           ListadoGrupo={ListadoGrupo}
           idGruop={idGruop}
           isTrueActive={isTrueActive}
@@ -78,7 +80,7 @@ export default function Case({
                 <Link
                   href={{
                     pathname: "/[id]",
-                    query: { id: idGruop },
+                    query: HrefArmado.query,
                     hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
                       isUserInterno ? "#UserInter" : "#UserExter"
                     }#OverallSample`,
@@ -96,7 +98,7 @@ export default function Case({
                 <Link
                   href={{
                     pathname: "/[id]",
-                    query: { id: idGruop },
+                    query: HrefArmado.query,
                     hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
                       isUserInterno ? "#UserInter" : "#UserExter"
                     }#UrgentSamples`,

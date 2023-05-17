@@ -7,7 +7,19 @@ export default function CaseNav({
   isTrueActive,
   isUserInterno,
   isSampleGeneral,
+  HrefArmado,
 }) {
+  function QueryReturnNew(obj, idNEw) {
+    let newObje = {};
+    newObje.id = idNEw;
+    newObje.Numstiker = obj.Numstiker;
+    newObje.DateAdmission = obj.DateAdmission;
+    newObje.result = obj.result;
+    newObje.URS = obj.URS;
+
+    return newObje;
+  }
+
   return (
     <>
       {/* <!-- navegacion de los casos --> */}
@@ -36,9 +48,7 @@ export default function CaseNav({
                 <Link
                   href={{
                     pathname: "/[id]",
-                    query: {
-                      id: data.Id_grupo,
-                    },
+                    query: QueryReturnNew(HrefArmado.query, data.Id_grupo),
                     hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
                       isUserInterno ? "#UserInter" : "#UserExter"
                     }${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
