@@ -30,11 +30,7 @@ function Recovery() {
               style: {},
             }}
           />
-          {/* <img
-            src="https://www.bd.com/content/dam/bdcom-assets/en/en-us/images/graphic/icon/header-bd-logo.svg"
-            alt=""
-            className={Styles.logo_img}
-          /> */}
+     
         </figure>
         <form onSubmit={handleSubmit(OnSubmitForward)}>
           <div className={Styles.recovery_container}>
@@ -42,6 +38,7 @@ function Recovery() {
               <div className={Styles.inputs_container}>
                 <label className={Styles.input_label}>Usuario</label>
                 <input
+                  placeholder="Ingrese su nombre de usuario"
                   id="usernameForward"
                   name="username"
                   {...register("username")}
@@ -50,6 +47,8 @@ function Recovery() {
                     errors.username ? Styles.is_invalid : ""
                   }`}
                 />
+                <p> Por favor Ingrese su nombre de usuario / Identificacion para poder enviarle un correo electrónico con la informacion de acceso a su cuenta</p>
+
               </div>
 
               <div className={Styles.invalid_feedback}>
