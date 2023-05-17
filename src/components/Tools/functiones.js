@@ -105,7 +105,6 @@ export const UserExternosActiveGenerales = (query) => {
   let ListadoNewRetorno = [];
   let fechaActual = new Date();
   query.forEach((element) => {
-    debugger;
     let FechaRegistro = fechaformatActualGeneralUrgencia(
       element.FECHA_ORIGINAL_CREADO_BITACORA,
       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
@@ -138,7 +137,6 @@ export const UserExternosActiveUrgencias = (query) => {
     );
     let diferencia = fechaActual.getTime() - FechaRegistro;
     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-    debugger;
     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
     if (diasDeDiferencia >= 0) {
       ListadoNewRetorno.push(element);
@@ -414,7 +412,6 @@ export const useEffecIDPerformance = (
 
 export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
-  debugger;
   let urlHref = window.location.href;
   let hashs2 = urlHref.split("#")[1];
   let hashs3 = urlHref.split("#")[2];

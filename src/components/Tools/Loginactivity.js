@@ -40,18 +40,18 @@ export const initLogInactive = () => {
       willClose: () => {
         clearInterval(timerInterval);
         clearInterval(t);
-        t="";
+        t=null;
       },
     }).then((result) => {
       if (result.isConfirmed) {
         reiniciarTiempo;
         clearInterval(timerInterval);
         clearInterval(t);
-        t="";
+        t=null;
       } else if (result.dismiss === Swal.DismissReason.timer) {
         clearInterval(timerInterval);
         clearInterval(t);
-        t="";
+        t=null;
         document.onkeypress = "";
         document.onload = "";
         document.ontouchstart = "";
@@ -69,9 +69,10 @@ export const initLogInactive = () => {
   }
 
   function reiniciarTiempo() {
-    clearInterval(t);
-    t="";
-    t = setInterval(tiempoExcedido, 15 * 60 * 1000);
+    debugger;
+    clearTimeout(t);
+    t=null;
+    t = setTimeout(tiempoExcedido, 15 * 60 * 1000);
     // 1000 milisegundos = 1 segundo
   }
 };
