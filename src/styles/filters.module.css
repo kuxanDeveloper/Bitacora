@@ -22,6 +22,15 @@
     padding: 10px 5px;
     border-radius: 5px;
     margin-bottom: 10px;
+  }
+  .filters .filters_container .inputs_container .filter_input_w100 {
+    color: #777777;
+    border: #a8a8a8 solid 1px;
+    outline: none;
+    width: 90%;
+    padding: 10px 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
     max-height: 42px;
   }
   .filters .filters_container .inputs_container .filter_input:focus {

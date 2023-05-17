@@ -53,22 +53,37 @@ export default function Case({
 
   return (
     <>
+      <CasesStatusUser
+        HrefArmado={HrefArmado}
+        isTrueActive={isTrueActive}
+        isUserInterno={isUserInterno}
+        idGruop={idGruop}
+        isSampleGeneral={isSampleGeneral}
+      ></CasesStatusUser>
+      {/* grupos */}
+
+      
+      <CaseNav
+        HrefArmado={HrefArmado}
+        ListadoGrupo={ListadoGrupo}
+        idGruop={idGruop}
+        isTrueActive={isTrueActive}
+        isUserInterno={isUserInterno}
+        isSampleGeneral={isSampleGeneral}
+      ></CaseNav>
+      <div className={caseStyles.filters_case}>
+        <select className={caseStyles.select_filter}>
+          <option>1</option>
+          <option>casos Activos </option>
+          <option>casos inactivos</option>
+        </select>
+        <select className={caseStyles.select_filter}>
+          <option selected="selected">Tipo de caso</option>
+          <option>casos internos</option>
+          <option>casos externos</option>
+        </select>
+      </div>
       <section className={caseStyles.cases}>
-        <CasesStatusUser
-          HrefArmado={HrefArmado}
-          isTrueActive={isTrueActive}
-          isUserInterno={isUserInterno}
-          idGruop={idGruop}
-          isSampleGeneral={isSampleGeneral}
-        ></CasesStatusUser>
-        <CaseNav
-          HrefArmado={HrefArmado}
-          ListadoGrupo={ListadoGrupo}
-          idGruop={idGruop}
-          isTrueActive={isTrueActive}
-          isUserInterno={isUserInterno}
-          isSampleGeneral={isSampleGeneral}
-        ></CaseNav>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
             <div className={caseStyles.state}>
