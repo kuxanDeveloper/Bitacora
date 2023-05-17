@@ -30,10 +30,15 @@ export const ApiQueryGeneralSample = async (
     URS
   );
   setListadoMuestraActivo(listActivoMue);
-  let listInactimue = await QueryMueForGroup(cookie, "0", id,     Numstiker,
-  DateAdmission,
-  result,
-  URS);
+  let listInactimue = await QueryMueForGroup(
+    cookie,
+    "0",
+    id,
+    Numstiker,
+    DateAdmission,
+    result,
+    URS
+  );
   setListadoMuestraInactivo(listInactimue);
   let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
     .NOMBRE_GRUPO;
