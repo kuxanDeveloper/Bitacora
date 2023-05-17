@@ -7,18 +7,18 @@ import Link from "next/link";
 function HeaderIndex() {
   return (
     <>
-      <header className={headerStyles.header}>
-        <div className={headerStyles.header_conent}>
+      <header classNameName={headerStyles.header}>
+        <div classNameName={headerStyles.header_conent}>
           <span
             title="Cerrar sesión"
             onClick={() => {
               userService.logout();
             }}
-            className={headerStyles.close_session}
+            classNameName={headerStyles.close_session}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-external-link"
+              classNameName="icon icon-tabler icon-tabler-external-link"
               width="28"
               height="28"
               viewBox="0 0 24 24"
@@ -40,13 +40,77 @@ function HeaderIndex() {
                 src: "/img/Inicio Logo BD 65 x 25.svg",
                 alt: "Login BD Index",
                 title: "Inicio",
-                classValue: headerStyles.header_logo,
+                classNameValue: headerStyles.header_logo,
                 width: 65,
                 height: 25,
                 style: {},
               }}
             />
           </Link>
+        </div>
+
+        {/* para abrir el menu coloque la clase open */}
+        <div className={`${headerStyles.menu} ${headerStyles.open}`}>
+          <section className={headerStyles.menu_container}>
+            <nav className={headerStyles.navegation}>
+              <ul className={headerStyles.nav_ul}>
+                <li className={headerStyles.nav_li}>
+                  {/* para señanlar el menu en el que se encuentra coloque la clase active */}
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link} ${headerStyles.active}`}
+                  >
+                    Home
+                  </a>
+                </li>
+
+                <li className={headerStyles.nav_li}>
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link}`}
+                  >
+                    Seguridad
+                  </a>
+                </li>
+
+                <li className={headerStyles.nav_li}>
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link}`}
+                  >
+                    Parametrizacion
+                  </a>
+                </li>
+
+                <li className={headerStyles.nav_li}>
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link}`}
+                  >
+                    Link
+                  </a>
+                </li>
+
+                <li className={headerStyles.nav_li}>
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link}`}
+                  >
+                    Lik
+                  </a>
+                </li>
+
+                <li className={headerStyles.nav_li}>
+                  <a
+                    href=""
+                    className={`${headerStyles.nav_link}`}
+                  >
+                    Lik
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </section>
         </div>
       </header>
     </>
