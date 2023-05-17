@@ -76,6 +76,28 @@ export const OnSubmitForward = ({ username }) => {
   //   });
 };
 
+export const queryListUserAll = (cookie) => {
+  return userService.listUserGetAll(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado Usuario");
+    return error;
+  });
+};
+
 export const QueryActivegroup = (cookie) => {
   return userService.ListGroupActive(cookie).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
@@ -93,7 +115,7 @@ export const QueryActivegroup = (cookie) => {
         confirmButtonText: "Cerrar",
       });
     }
-    console.log(error, "erro in login");
+    console.log(error, "erro in Activo grupo");
     return error;
   });
 };
@@ -116,7 +138,7 @@ export const QueryInactivegroup = (cookie) => {
       });
     }
 
-    console.log(error, "erro in login");
+    console.log(error, "erro in inactive grupo linea ");
     return error;
   });
 };
@@ -144,27 +166,45 @@ export const QueryGroupList = (cookie, estado) => {
   });
 };
 
-export const QueryMueForGroup = (cookie, Estado, idGroup) => {
-  return userService.ListGroupForMue(cookie, Estado, idGroup).catch((error) => {
-    if (error == "401: Token incorrecto o vencido") {
-      Swal.fire({
-        title: "¡Advertencia!",
-        text: error,
-        icon: "warning",
-        confirmButtonText: "Cerrar",
-      });
-    } else {
-      Swal.fire({
-        title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-    }
+export const QueryMueForGroup = (
+  cookie,
+  Estado,
+  idGroup,
+  Numstiker,
+  DateAdmission,
+  result,
+  URS
+) => {
+  return userService
+    .ListGroupForMue(
+      cookie,
+      Estado,
+      idGroup,
+      Numstiker,
+      DateAdmission,
+      result,
+      URS
+    )
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Porfavor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-    console.log(error, "erro in login");
-    return error;
-  });
+      console.log(error, "erro in login");
+      return error;
+    });
 };
 
 export const QueryMuestraEdit = (cookie, idSticker) => {

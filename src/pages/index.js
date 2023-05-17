@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   QueryActivegroup,
   QueryInactivegroup,
+  queryListUserAll,
 } from "../components/Tools//Security";
 import { userService } from "../services/UserService";
 import Filters from "@/components/Body/Filters";
 import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
-import { useRouter } from "next/router";
+import { useEffectIndexPerfomance } from "../components//Tools/functiones";
 
-export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
+export default function Home({
+  ListadoGrupoActivo,
+  ListadoGrupoInactivo,
+  ListadoUsuariosRegistrados,
+}) {
   const [isTrueActive, setisTrueActive] = useState(false);
 
   if (
@@ -21,47 +26,7 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
     return "";
   }
 
-  const router = useRouter();
-  useEffect(() => {
-    if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
-    ) {
-      let hashs2 = router.asPath.split("#")[1];
-      if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-    }
-
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  useEffectIndexPerfomance(setisTrueActive);
 
   return (
     <>
@@ -94,7 +59,12 @@ export default function Home({ ListadoGrupoActivo, ListadoGrupoInactivo }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <Filters></Filters>
+      <Filters
+        ListadoGrupoActivo={ListadoGrupoActivo}
+        isActiveGroup={true}
+        ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
+        CasosActivo_Inactivos={isTrueActive}
+      ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
@@ -116,13 +86,17 @@ export async function getServerSideProps(ctx) {
   if (cookie) {
     const ListadoGrupoActivo = await QueryActivegroup(cookie);
     const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
-debugger;
+    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
         ListadoGrupoActivo:
           ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
         ListadoGrupoInactivo:
           ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
+        ListadoUsuariosRegistrados:
+          ListadoUsuariosRegistrados == undefined
+            ? null
+            : ListadoUsuariosRegistrados,
       },
     };
   } else {

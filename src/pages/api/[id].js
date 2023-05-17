@@ -6,10 +6,13 @@ import {
 } from "../../components/Tools/Security";
 import { userService } from "../../services/UserService";
 
-
 export const ApiQueryGeneralSample = async (
   cookie,
   id,
+  Numstiker,
+  DateAdmission,
+  result,
+  URS,
   setGrupoNombre,
   setListadoGrupo,
   setListadoMuestraActivo,
@@ -17,9 +20,20 @@ export const ApiQueryGeneralSample = async (
 ) => {
   let Lisgrupo = await QueryGroupList(cookie);
   setListadoGrupo(Lisgrupo);
-  let listActivoMue = await QueryMueForGroup(cookie, "1", id);
+  let listActivoMue = await QueryMueForGroup(
+    cookie,
+    "1",
+    id,
+    Numstiker,
+    DateAdmission,
+    result,
+    URS
+  );
   setListadoMuestraActivo(listActivoMue);
-  let listInactimue = await QueryMueForGroup(cookie, "0", id);
+  let listInactimue = await QueryMueForGroup(cookie, "0", id,     Numstiker,
+  DateAdmission,
+  result,
+  URS);
   setListadoMuestraInactivo(listInactimue);
   let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
     .NOMBRE_GRUPO;

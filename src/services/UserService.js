@@ -1,4 +1,4 @@
-import { BehaviorSubject, async } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import Router from "next/router";
 import Cookies from "universal-cookie";
 import { fetchWrapper } from "../helpers/fetch-wrapper";
@@ -26,7 +26,8 @@ export const userService = {
   ListGroup,
   ListGroupForMue,
   logoutLogin,
-  InfoSample
+  InfoSample,
+  listUserGetAll,
 };
 
 async function login(username, password) {
@@ -109,8 +110,8 @@ function ListGroupForMue(
   Estado,
   idGroup,
   NumeroSticker,
-  ResultadoFinal,
   FechaINgreso,
+  ResultadoFinal,
   UserLoginSticker
 ) {
   const formData = new FormData();
@@ -151,4 +152,8 @@ function InfoSample(cookie, idSticker) {
     `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultado?Numero_Sticker=${idSticker}`,
     cookie
   );
+}
+
+function listUserGetAll(cookie) {
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListUserGetAll`, cookie);
 }

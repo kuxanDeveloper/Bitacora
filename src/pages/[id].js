@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-
-import {ApiQueryGeneralSample} from "./api/[id]"
+import React, { useState, useEffect } from "react";
+import { queryListUserAll } from "../components/Tools//Security";
 import Case from "@/components/Case";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import Filters from "@/components/Body/Filters";
-import { useRouter } from "next/router";
-function HomeMuestraxGrupo({
-  cookie,
-  query,
-}) {
+import { useEffecIDPerformance } from "../components/Tools/functiones";
+function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
@@ -18,163 +14,21 @@ function HomeMuestraxGrupo({
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
 
-
-
-  const router = useRouter();
-
-  useEffect(() => {
-    ApiQueryGeneralSample(cookie, query.id,setGrupoNombre, setListadoGrupo, setListadoMuestraActivo, setListadoMuestraInactivo)
-
-  }, []);
-
-
-
-  useEffect(() => {
-    if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
-    ) {
-      let urlHref = window.location.href;
-      let hashs2 = router.asPath.split("#")[1];
-      let hashs3 = router.asPath.split("#")[2];
-      let hashs4 = router.asPath.split("#")[3];
-
-      //#region Muestras Activas
-      if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        if (hashs2 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#Cactive` },
-            "",
-            `${urlHref}#Cactive`
-          );
-          urlHref = window.location.href;
-        }
-
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-      //#endregion
-
-      //#region Usuario Interno o externo
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
-      }
-      //#endregion
-
-      //#region Muestras generales o de urgencia
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
-        }
-        setisSampleGeneral(true);
-      } else {
-        setisSampleGeneral(false);
-      }
-      //#endregion
-    }
-
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      let hashs3 = url.split("#")[2];
-      let hashs4 = url.split("#")[3];
-      let urlHref = window.location.href;
-
-      //#region Muestras activas/inactivas
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-      //#endregion
-
-      //#region usuario interno/usuario externo
-
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
-      }
-      //#endregion
-
-      //#region Muestras generales /urgencias
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
-        }
-        setisSampleGeneral(true);
-      } else {
-        setisSampleGeneral(false);
-      }
-      //#endregion
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  useEffecIDPerformance(
+    cookie,
+    query.id,
+    query.Numstiker,
+    query.DateAdmission,
+    query.result,
+    query.URS,
+    setGrupoNombre,
+    setListadoGrupo,
+    setListadoMuestraActivo,
+    setListadoMuestraInactivo,
+    setisTrueActive,
+    setisUserInterno,
+    setisSampleGeneral
+  );
 
   return (
     <>
@@ -211,7 +65,16 @@ function HomeMuestraxGrupo({
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <Filters></Filters>
+      <Filters
+        isActiveGroup={false}
+        CasosActivo_Inactivos={isTrueActive}
+        id={query.id}
+        ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
+        NumSticker={query.Numstiker}
+        dateAdmision={query.DateAdmission}
+        result={query.result}
+        URS={query.URS}
+      ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
@@ -219,6 +82,7 @@ function HomeMuestraxGrupo({
         isSampleGeneral={isSampleGeneral}
       ></CaseStatus>
       <Case
+        HrefArmado={{ pathname: "/[id]", query: query }}
         ListadoGrupo={ListadoGrupo}
         ListadoMuestraActivo={ListadoMuestraActivo}
         ListadoMuestraInactivo={ListadoMuestraInactivo}
@@ -237,10 +101,13 @@ export async function getServerSideProps(ctx) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
+
+    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
         cookie: cookie,
         query: ctx.query,
+        ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
       },
     };
   } else {

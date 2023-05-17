@@ -6,7 +6,10 @@ export default function CasesStatusUser({
   isTrueActive,
   isUserInterno,
   isSampleGeneral,
+  HrefArmado,
 }) {
+
+
   return (
     <>
       <section className={CasesStatusStyles.type_cases_status}>
@@ -21,7 +24,7 @@ export default function CasesStatusUser({
               <Link
                 href={{
                   pathname: "/[id]",
-                  query: { id: idGruop },
+                  query: HrefArmado.query,
                   hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserInter${
                     isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                   }`,
@@ -39,7 +42,7 @@ export default function CasesStatusUser({
               <Link
                 href={{
                   pathname: "/[id]",
-                  query: { id: idGruop },
+                  query: HrefArmado.query,
                   hash: `${isTrueActive ? "Cactive" : "Cinactvie"}#UserExter${
                     isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                   }`,
