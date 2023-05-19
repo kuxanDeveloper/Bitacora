@@ -159,8 +159,14 @@
 
 .sticker_details .details_container .card .stickers_container .card_content .followup .update_icon,
 .sticker_details .details_container .card .stickers_container .card_content .restults .update_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
+    background-color: #e57d00;
+    padding: 10px;
     right: 5px;
+    border-radius: 50%;
     top: calc(50% - 30px);
 }
 

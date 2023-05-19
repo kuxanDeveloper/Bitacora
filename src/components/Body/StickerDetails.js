@@ -33,6 +33,8 @@ export default function StickerDetails() {
                     }}
                   ></ImageOptimize>
                 </a>
+
+
                 <div className={styles.form_group}>
                   {/* <!-- sticker -->
                 <!-- <div className={styles.}"info_group">
