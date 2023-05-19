@@ -13,39 +13,20 @@ function HRMenu() {
             <ul className={Styles.nav_ul}>
               <li className={Styles.nav_li}>
                 <a href="" className={`${Styles.nav_link} ${Styles.active}`}>
-                  Lik
+                  Home
                 </a>
               </li>
 
               <li className={Styles.nav_li}>
                 <a href="" className={`${Styles.nav_link} `}>
-                  {" "}
                   {/* ${Styles.active} */}
-                  Lik
+                  Permisos
                 </a>
               </li>
 
               <li className={Styles.nav_li}>
                 <a href="" className={`${Styles.nav_link} `}>
-                  Lik
-                </a>
-              </li>
-
-              <li className={Styles.nav_li}>
-                <a href="" className={`${Styles.nav_link} `}>
-                  Lik
-                </a>
-              </li>
-
-              <li className={Styles.nav_li}>
-                <a href="" className={`${Styles.nav_link} `}>
-                  Lik
-                </a>
-              </li>
-
-              <li className={Styles.nav_li}>
-                <a href="" className={`${Styles.nav_link} `}>
-                  Lik
+                  Configuración
                 </a>
               </li>
             </ul>
