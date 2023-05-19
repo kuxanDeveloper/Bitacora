@@ -6,7 +6,6 @@ import Loading from "../components/Tools/Loading";
 import Layout from "../layout/Index";
 import ErrorBoundary from "../components/Tools/ErrorBoundary";
 import { usePageLoading } from "../components/Tools/usePageloading";
-import StickerInfo from "@/components/Body/StickerInfo";
 
 function MyApp({ Component, pageProps }) {
   const { isPageLoading } = usePageLoading();

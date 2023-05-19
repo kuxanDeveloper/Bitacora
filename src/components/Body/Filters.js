@@ -109,8 +109,9 @@ export default function Filters({
             </div>
             <div className={filterStyles.buttons_container}>
               <Link
-                href={"#!"}
-                onClick={(e) =>
+                href={""}
+                onClick={(e) => {
+                  e.preventDefault();
                   FilterQuerySearch(
                     e,
                     router,
@@ -120,8 +121,8 @@ export default function Filters({
                     Resultado,
                     UserRegisterStiker,
                     CasosActivo_Inactivos
-                  )
-                }
+                  );
+                }}
                 className={filterStyles.search}
               >
                 <svg
@@ -167,8 +168,11 @@ export default function Filters({
                 </svg>
               </Link>
               <Link
-                href={"#!"}
-                onClick={(e) => ClearFilter(e, router, GruopValue)}
+                href={""}
+                onClick={(e) => {
+                  e.preventDefault();
+                  ClearFilter(e, router, GruopValue);
+                }}
                 className={filterStyles.search}
               >
                 <svg

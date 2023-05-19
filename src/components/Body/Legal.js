@@ -225,8 +225,9 @@ function Legal() {
 
             <div className={LegalStyles.btn_container}>
               <Link
-                href="#!"
-                onClick={() => {
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
                   window.close();
                 }}
                 className={LegalStyles.btn_back}
