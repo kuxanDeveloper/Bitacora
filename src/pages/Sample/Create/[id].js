@@ -39,7 +39,6 @@ function CreatePage({ ListadoGrupoActivo, cookie, id }) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <CreateSticker
-        cookie={cookie}
         ListadoGrupoActivo={ListadoGrupoActivo}
         id={id}
       ></CreateSticker>

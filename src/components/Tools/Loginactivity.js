@@ -1,8 +1,6 @@
 import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 
-
-
 export const initLogInactive = () => {
   let t;
   document.onkeypress = reiniciarTiempo;
@@ -38,20 +36,23 @@ export const initLogInactive = () => {
         }, 1000);
       },
       willClose: () => {
+        
         clearInterval(timerInterval);
-        clearInterval(t);
-        t=null;
+        clearTimeout(t);
+        t = null;
+        reiniciarTiempo()
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        reiniciarTiempo;
+   
         clearInterval(timerInterval);
-        clearInterval(t);
-        t=null;
+        clearTimeout(t);
+        t = null;
+        reiniciarTiempo();
       } else if (result.dismiss === Swal.DismissReason.timer) {
         clearInterval(timerInterval);
-        clearInterval(t);
-        t=null;
+        clearTimeout(t);
+        t = null;
         document.onkeypress = "";
         document.onload = "";
         document.ontouchstart = "";
@@ -61,7 +62,7 @@ export const initLogInactive = () => {
         document.onresize = "";
         document.onchange = "";
         document.onsubmit = "";
-      
+
         /* Read more about handling dismissals below */
         userService.logout();
       }
@@ -70,7 +71,7 @@ export const initLogInactive = () => {
 
   function reiniciarTiempo() {
     clearTimeout(t);
-    t=null;
+    t = null;
     t = setTimeout(tiempoExcedido, 15 * 60 * 1000);
     // 1000 milisegundos = 1 segundo
   }

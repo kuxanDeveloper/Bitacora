@@ -430,7 +430,60 @@ export const ClearFilter = (e, router, idGrupo) => {
 export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
   if (MenuShow) {
     setMenuShow(false);
-  }else{
+  } else {
     setMenuShow(true);
+  }
+};
+
+export const useEffecPerformancePruResultado = (setPruebas) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
+      let hashs2 = router.asPath.split("#")[1];
+      if (
+        hashs2 == "Pruebas" ||
+        hashs2 == "" ||
+        hashs2 == null ||
+        hashs2 == undefined
+      ) {
+        setPruebas(true);
+      } else {
+        setPruebas(false);
+      }
+    }
+
+    const onHashChangeStart = (url) => {
+      let hash = url.split("#")[1];
+      if (
+        hash == "Pruebas" ||
+        hash == "" ||
+        hash == null ||
+        hash == undefined
+      ) {
+        setPruebas(true);
+      } else {
+        setPruebas(false);
+      }
+    };
+
+    router.events.on("hashChangeStart", onHashChangeStart);
+
+    return () => {
+      router.events.off("hashChangeStart", onHashChangeStart);
+    };
+  }, [router.events]);
+};
+
+export const EstadoFunction = (InforSampleDetails) => {
+  if (
+    InforSampleDetails.infoBitacora != null &&
+    InforSampleDetails.infoBitacora != undefined
+  ) {
+    return InforSampleDetails.infoBitacora[0].ESTADO_STICKER;
   }
 };

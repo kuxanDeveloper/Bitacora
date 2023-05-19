@@ -40,7 +40,10 @@ function ViewDetails({ cookie, id }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <StickerInfo InforSampleDetails={InforSampleDetails}></StickerInfo>
+      <StickerInfo
+        InforSampleDetails={InforSampleDetails}
+        id={id}
+      ></StickerInfo>
     </>
   );
 }

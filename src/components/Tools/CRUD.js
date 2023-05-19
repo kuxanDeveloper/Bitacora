@@ -26,7 +26,7 @@ export const onSubmitCreate = ({
       Router.push({
         pathname: "/Sample/FullDetails/[id]",
         query: { id: StickerRetorno },
-        hash: "#Resultado",
+        hash: "#Pruebas",
       });
     })
     .catch((error) => {
