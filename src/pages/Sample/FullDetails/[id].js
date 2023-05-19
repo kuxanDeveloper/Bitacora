@@ -3,14 +3,18 @@ import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
 import StickerDetails from "../../../components/Body/StickerDetails";
 import { useEffecPerformancePruResultado } from "../../../components/Tools/functiones";
 import Head from "next/head";
+import { useRouter } from "next/router";
 function FullDetailsPage({ cookie, query }) {
+  const router = useRouter();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [Pruebas, setPruebas] = useState(false);
   useEffect(() => {
     SampleDetailsEdit(cookie, query.id, setLInforSampleDetails);
   }, []);
 
-  useEffecPerformancePruResultado(setPruebas);
+  useEffect(() => {
+    useEffecPerformancePruResultado(setPruebas, router);
+  }, [router.events]);
 
   return (
     <>

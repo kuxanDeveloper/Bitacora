@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ApiQueryGeneralSample } from "../../pages/api/[id]";
 import { useRouter } from "next/router";
 Date.prototype.addDays = function (days) {
@@ -186,48 +186,40 @@ export const FilterQuerySearch = (
   });
 };
 
-export const useEffectIndexPerfomance = (setisTrueActive) => {
-  const router = useRouter();
-  useEffect(() => {
+export const useEffectIndexPerfomance = (setisTrueActive, router) => {
+  if (
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_RELOAD ||
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_NAVIGATE
+  ) {
+    let hashs2 = router.asPath.split("#")[1];
     if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
+      hashs2 == "Cactive" ||
+      hashs2 == "" ||
+      hashs2 == null ||
+      hashs2 == undefined
     ) {
-      let hashs2 = router.asPath.split("#")[1];
-      if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
+      setisTrueActive(true);
+    } else {
+      setisTrueActive(false);
     }
+  }
 
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-    };
+  const onHashChangeStart = (url) => {
+    let hash = url.split("#")[1];
+    if (hash == "Cactive" || hash == "" || hash == null || hash == undefined) {
+      setisTrueActive(true);
+    } else {
+      setisTrueActive(false);
+    }
+  };
 
-    router.events.on("hashChangeStart", onHashChangeStart);
+  router.events.on("hashChangeStart", onHashChangeStart);
 
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  return () => {
+    router.events.off("hashChangeStart", onHashChangeStart);
+  };
 };
 
 export const useEffecIDPerformance = (
@@ -240,174 +232,167 @@ export const useEffecIDPerformance = (
   setGrupoNombre,
   setListadoGrupo,
   setListadoMuestraActivo,
-  setListadoMuestraInactivo,
+  setListadoMuestraInactivo
+) => {
+  ApiQueryGeneralSample(
+    cookie,
+    id,
+    Numstiker,
+    DateAdmission,
+    result,
+    URS,
+    setGrupoNombre,
+    setListadoGrupo,
+    setListadoMuestraActivo,
+    setListadoMuestraInactivo
+  );
+};
+
+export const useEffecIDPerformanceRouterEvents = (
   setisTrueActive,
   setisUserInterno,
-  setisSampleGeneral
+  setisSampleGeneral,
+  router
 ) => {
-  const router = useRouter();
+  if (
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_RELOAD ||
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_NAVIGATE
+  ) {
+    let urlHref = window.location.href;
+    let hashs2 = router.asPath.split("#")[1];
+    let hashs3 = router.asPath.split("#")[2];
+    let hashs4 = router.asPath.split("#")[3];
 
-  useEffect(() => {
-    ApiQueryGeneralSample(
-      cookie,
-      id,
-      Numstiker,
-      DateAdmission,
-      result,
-      URS,
-      setGrupoNombre,
-      setListadoGrupo,
-      setListadoMuestraActivo,
-      setListadoMuestraInactivo
-    );
-  }, []);
-
-  useEffect(() => {
+    //#region Muestras Activas
     if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
+      hashs2 == "Cactive" ||
+      hashs2 == "" ||
+      hashs2 == null ||
+      hashs2 == undefined
     ) {
-      let urlHref = window.location.href;
-      let hashs2 = router.asPath.split("#")[1];
-      let hashs3 = router.asPath.split("#")[2];
-      let hashs4 = router.asPath.split("#")[3];
-
-      //#region Muestras Activas
-      if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        if (hashs2 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#Cactive` },
-            "",
-            `${urlHref}#Cactive`
-          );
-          urlHref = window.location.href;
-        }
-
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
+      if (hashs2 == undefined) {
+        window.history.pushState(
+          { path: `${urlHref}#Cactive` },
+          "",
+          `${urlHref}#Cactive`
+        );
+        urlHref = window.location.href;
       }
-      //#endregion
 
-      //#region Usuario Interno o externo
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
-      }
-      //#endregion
-
-      //#region Muestras generales o de urgencia
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
-        }
-        setisSampleGeneral(true);
-      } else {
-        setisSampleGeneral(false);
-      }
-      //#endregion
+      setisTrueActive(true);
+    } else {
+      setisTrueActive(false);
     }
+    //#endregion
 
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      let hashs3 = url.split("#")[2];
-      let hashs4 = url.split("#")[3];
-      let urlHref = window.location.href;
-
-      //#region Muestras activas/inactivas
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
+    //#region Usuario Interno o externo
+    if (
+      hashs3 == "UserInter" ||
+      hashs3 == "" ||
+      hashs3 == null ||
+      hashs3 == undefined
+    ) {
+      if (hashs3 == undefined) {
+        window.history.pushState(
+          { path: `${urlHref}#UserInter` },
+          "",
+          `${urlHref}#UserInter`
+        );
+        urlHref = window.location.href;
       }
-      //#endregion
+      setisUserInterno(true);
+    } else {
+      setisUserInterno(false);
+    }
+    //#endregion
 
-      //#region usuario interno/usuario externo
-
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
+    //#region Muestras generales o de urgencia
+    if (
+      hashs4 == "OverallSample" ||
+      hashs4 == "" ||
+      hashs4 == null ||
+      hashs4 == undefined
+    ) {
+      if (hashs4 == undefined) {
+        window.history.pushState(
+          { path: `${urlHref}#OverallSample` },
+          "",
+          `${urlHref}#OverallSample`
+        );
+        urlHref = window.location.href;
       }
-      //#endregion
+      setisSampleGeneral(true);
+    } else {
+      setisSampleGeneral(false);
+    }
+    //#endregion
+  }
 
-      //#region Muestras generales /urgencias
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
-        }
-        setisSampleGeneral(true);
-      } else {
-        setisSampleGeneral(false);
+  const onHashChangeStart = (url) => {
+    let hash = url.split("#")[1];
+    let hashs3 = url.split("#")[2];
+    let hashs4 = url.split("#")[3];
+    let urlHref = window.location.href;
+
+    //#region Muestras activas/inactivas
+    if (hash == "Cactive" || hash == "" || hash == null || hash == undefined) {
+      setisTrueActive(true);
+    } else {
+      setisTrueActive(false);
+    }
+    //#endregion
+
+    //#region usuario interno/usuario externo
+
+    if (
+      hashs3 == "UserInter" ||
+      hashs3 == "" ||
+      hashs3 == null ||
+      hashs3 == undefined
+    ) {
+      if (hashs3 == undefined) {
+        window.history.pushState(
+          { path: `${urlHref}#UserInter` },
+          "",
+          `${urlHref}#UserInter`
+        );
+        urlHref = window.location.href;
       }
-      //#endregion
-    };
+      setisUserInterno(true);
+    } else {
+      setisUserInterno(false);
+    }
+    //#endregion
 
-    router.events.on("hashChangeStart", onHashChangeStart);
+    //#region Muestras generales /urgencias
+    if (
+      hashs4 == "OverallSample" ||
+      hashs4 == "" ||
+      hashs4 == null ||
+      hashs4 == undefined
+    ) {
+      if (hashs4 == undefined) {
+        window.history.pushState(
+          { path: `${urlHref}#OverallSample` },
+          "",
+          `${urlHref}#OverallSample`
+        );
+        urlHref = window.location.href;
+      }
+      setisSampleGeneral(true);
+    } else {
+      setisSampleGeneral(false);
+    }
+    //#endregion
+  };
 
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  router.events.on("hashChangeStart", onHashChangeStart);
+
+  return () => {
+    router.events.off("hashChangeStart", onHashChangeStart);
+  };
 };
 
 export const ClearFilter = (e, router, idGrupo) => {
@@ -435,48 +420,47 @@ export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
   }
 };
 
-export const useEffecPerformancePruResultado = (setPruebas) => {
-  const router = useRouter();
-  useEffect(() => {
+export const useEffecPerformancePruResultado = (setPruebas, router) => {
+
+
+  if (
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_RELOAD ||
+    window.performance.navigation.type ==
+      window.performance.navigation.TYPE_NAVIGATE
+  ) {
+    let hashs2 = router.asPath.split("#")[1];
     if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
+      hashs2 == "Pruebas" ||
+      hashs2 == "" ||
+      hashs2 == null ||
+      hashs2 == undefined
     ) {
-      let hashs2 = router.asPath.split("#")[1];
-      if (
-        hashs2 == "Pruebas" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        setPruebas(true);
-      } else {
-        setPruebas(false);
-      }
+      setPruebas(true);
+    } else {
+      setPruebas(false);
     }
+  }
 
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Pruebas" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setPruebas(true);
-      } else {
-        setPruebas(false);
-      }
-    };
+  const onHashChangeStart = (url) => {
+    let hash = url.split("#")[1];
+    if (
+      hash == "Pruebas" ||
+      hash == "" ||
+      hash == null ||
+      hash == undefined
+    ) {
+      setPruebas(true);
+    } else {
+      setPruebas(false);
+    }
+  };
 
-    router.events.on("hashChangeStart", onHashChangeStart);
+  router.events.on("hashChangeStart", onHashChangeStart);
 
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  return () => {
+    router.events.off("hashChangeStart", onHashChangeStart);
+  };
 };
 
 export const EstadoFunction = (InforSampleDetails) => {

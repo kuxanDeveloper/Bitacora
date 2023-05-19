@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { queryListUserAll } from "../components/Tools//Security";
 import Case from "@/components/Case";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import Filters from "@/components/Body/Filters";
-import { useEffecIDPerformance } from "../components/Tools/functiones";
+import { useRouter } from "next/router";
+import {
+  useEffecIDPerformance,
+  useEffecIDPerformanceRouterEvents,
+} from "../components/Tools/functiones";
 function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
@@ -13,22 +17,35 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
   const [ListadoGrupo, setListadoGrupo] = useState([]);
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
+  const router = useRouter();
 
-  useEffecIDPerformance(
-    cookie,
-    query.id,
-    query.Numstiker,
-    query.DateAdmission,
-    query.result,
-    query.URS,
-    setGrupoNombre,
-    setListadoGrupo,
-    setListadoMuestraActivo,
-    setListadoMuestraInactivo,
-    setisTrueActive,
-    setisUserInterno,
-    setisSampleGeneral
-  );
+  useEffect(() => {
+    useEffecIDPerformance(
+      cookie,
+      query.id,
+      query.Numstiker,
+      query.DateAdmission,
+      query.result,
+      query.URS,
+      setGrupoNombre,
+      setListadoGrupo,
+      setListadoMuestraActivo,
+      setListadoMuestraInactivo,
+      setisTrueActive,
+      setisUserInterno,
+      setisSampleGeneral,
+      router
+    );
+  }, []);
+
+  useEffect(() => {
+    useEffecIDPerformanceRouterEvents(
+      setisTrueActive,
+      setisUserInterno,
+      setisSampleGeneral,
+      router
+    );
+  }, [router.events]);
 
   return (
     <>
@@ -74,9 +91,8 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         dateAdmision={query.DateAdmission}
         result={query.result}
         URS={query.URS}
-        
       ></Filters>
-       <CaseStatus
+      <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
         isUserInterno={isUserInterno}
@@ -91,7 +107,7 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         idGruop={query.id}
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
-      ></Case> 
+      ></Case>
     </>
   );
 }

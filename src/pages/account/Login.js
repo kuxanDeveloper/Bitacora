@@ -3,11 +3,11 @@ import Head from "next/head";
 import Logincomponents from "@/components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
 function Login({ cookie }) {
-  if (cookie) {
-    useEffect(() => {
+  useEffect(() => {
+    if (cookie) {
       userService.logoutLogin();
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     <>
@@ -27,7 +27,10 @@ function Login({ cookie }) {
           content="Inicia sesión en bitácora"
         ></meta>
         <meta property="og:title" content="Inicio de sesion - Bitácora BD" />
-        <meta property="og:description" content="Inicia sesion en bitácora BD" />
+        <meta
+          property="og:description"
+          content="Inicia sesion en bitácora BD"
+        />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />

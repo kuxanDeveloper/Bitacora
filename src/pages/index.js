@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   QueryActivegroup,
   QueryInactivegroup,
@@ -10,14 +10,14 @@ import HomeCard from "@/components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "@/components/CaseStatus";
 import { useEffectIndexPerfomance } from "../components//Tools/functiones";
-
+import { useRouter } from "next/router";
 export default function Home({
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
   ListadoUsuariosRegistrados,
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
-
+  const router = useRouter();
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
     ListadoGrupoInactivo == "401: Token incorrecto o vencido"
@@ -26,7 +26,12 @@ export default function Home({
     return "";
   }
 
-  useEffectIndexPerfomance(setisTrueActive);
+
+  useEffect(() => {
+    useEffectIndexPerfomance(setisTrueActive, router);
+
+    
+  }, [router.events]);
 
   return (
     <>
