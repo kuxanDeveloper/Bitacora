@@ -426,3 +426,11 @@ export const ClearFilter = (e, router, idGrupo) => {
     });
   }
 };
+
+export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
+  if (MenuShow) {
+    setMenuShow(false);
+  }else{
+    setMenuShow(true);
+  }
+};

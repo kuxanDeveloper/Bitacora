@@ -12,8 +12,9 @@ export default function StickerInfo({ InforSampleDetails }) {
         <div className={styles.info_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href="#!"
-              onClick={() => {
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
                 backhistory();
               }}
               className={styles.back_btn}

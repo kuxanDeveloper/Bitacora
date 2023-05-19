@@ -19,7 +19,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
       "Campo observaciones iniciales obligatorio"
     ),
     UserCheckinter: Yup.bool(),
-    UserCheckexter: Yup.bool()
+    UserCheckexter: Yup.bool(),
   });
 
   // const uncheckEstado = () => {
@@ -111,8 +111,9 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href="#!"
-              onClick={() => {
+              href=""
+              onClick={(e) => {
+                e.preventDefault();
                 backhistory();
               }}
               className={styles.back_btn}
@@ -131,7 +132,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                   {/* <!-- imagenes --> */}
                   <div className={styles.images_container}>
                     <figure className={styles.sticker_figure}>
-                      <a href="#!">
+                      <a href="">
                         <ImageOptimize
                           Values={{
                             src: "/img/Camera@2x.png",
@@ -145,7 +146,12 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       </a>
                     </figure>
                     <figure className={styles.sticker_figure}>
-                      <Link href="#!">
+                      <Link
+                        href=""
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
                         <ImageOptimize
                           Values={{
                             src: "/img/Camera@2x.png",
@@ -191,8 +197,8 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                           {errors.estado?.message}
                         </div> */}
 
-                        {/* <!-- ---- --> */}
-                      {/* </div>
+                  {/* <!-- ---- --> */}
+                  {/* </div>
                     </div>
                   </div> */}
                   {/* <!-- form group --> */}
@@ -290,7 +296,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                     <button
                       type="button"
                       onClick={() => VerificacionSubmit()}
-                      href="#!"
                       className={styles.btn_send}
                     >
                       Guardar Cambios

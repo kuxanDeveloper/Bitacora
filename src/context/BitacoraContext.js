@@ -11,6 +11,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [authorized, setAuthorized] = useState(false);
   const [Urlauthorized, setUrlauthorized] = useState(false);
+  const [MenuShow, setMenuShow] = useState(false)
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
@@ -71,6 +72,8 @@ export const BicatoraContexProvider = ({ children }) => {
         Urlauthorized,
         showModal,
         setShowModal,
+        setMenuShow,
+        MenuShow
       }}
     >
       {children}
