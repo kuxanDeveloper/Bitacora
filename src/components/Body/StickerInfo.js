@@ -6,14 +6,13 @@ import ImageOptimize from "../Tools/ImageOptimize";
 import { useContextBitacora } from "../../context/BitacoraContext";
 export default function StickerInfo({ InforSampleDetails }) {
   const { setShowModal } = useContextBitacora();
-  console.log(InforSampleDetails);
   return (
     <>
       <div className={styles.sticker_info}>
         <div className={styles.info_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href="#"
+              href="#!"
               onClick={() => {
                 backhistory();
               }}

@@ -89,7 +89,7 @@ function Page500() {
           <p>Parece que tenemos un problema, por favor intenta de nuevo más tarde.</p>
           <br></br>
           <a href="/" class="bg-gradient-to-r from-green-fedegan to-green-600 hover:from-red-fedega-hover hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-md mr-6">Inicio</a>
-          <a href="javascript:window.location.reload(true)" class="bg-gradient-to-r from-green-fedegan to-green-600 hover:from-red-fedega-hover hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-md mr-6">Volver a intentarlo</a>
+          <a href="#!" onclick="window.location.reload(true)" class="bg-gradient-to-r from-green-fedegan to-green-600 hover:from-red-fedega-hover hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-md mr-6">Volver a intentarlo</a>
       </div>
       <div class="stack-container">
           <div class="card-container">

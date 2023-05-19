@@ -1,6 +1,7 @@
 import React from "react";
 import LegalStyles from "../../styles/Legal.module.css";
 import Head from "next/head";
+import { Link } from "react-scroll";
 function Legal() {
   return (
     <>
@@ -8,9 +9,7 @@ function Legal() {
         <title>{"Política y privacidad | Bitácora BD"}</title>
         <meta
           name="description"
-          content={
-            "Política y privacidad del aplicativo, Bitácora BD"
-          }
+          content={"Política y privacidad del aplicativo, Bitácora BD"}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -19,12 +18,18 @@ function Legal() {
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta name="twitter:title" content="Política y privacidad | Bitácora BD" />
+        <meta
+          name="twitter:title"
+          content="Política y privacidad | Bitácora BD"
+        />
         <meta
           name="twitter:description"
           content="Política y privacidad del aplicativo, Bitácora BD"
         ></meta>
-        <meta property="og:title" content="Política y privacidad | Bitácora BD" />
+        <meta
+          property="og:title"
+          content="Política y privacidad | Bitácora BD"
+        />
         <meta
           property="og:description"
           content="Política y privacidad del aplicativo, Bitácora BD"
@@ -219,14 +224,15 @@ function Legal() {
             </p>
 
             <div className={LegalStyles.btn_container}>
-              <button
+              <Link
+                href="#!"
                 onClick={() => {
                   window.close();
                 }}
                 className={LegalStyles.btn_back}
               >
                 volver
-              </button>
+              </Link>
             </div>
           </div>
         </div>

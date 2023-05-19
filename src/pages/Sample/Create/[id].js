@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
-import StickerInfo from "../../../components/Body/StickerInfo";
-import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
+import React from "react";
 import Head from "next/head";
-function ViewDetails({ cookie, id }) {
-  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-  useEffect(() => {
-    SampleDetailsEdit(cookie, id, setLInforSampleDetails);
-  }, []);
-
+import CreateSticker from "../../../components/Body/CreateSticker";
+import { QueryActivegroup } from "../../../components/Tools/CRUD";
+function CreatePage({ ListadoGrupoActivo, cookie, id }) {
   return (
     <>
       <Head>
-        <title>{`Información sticker N° ${id} | Bitácora BD`}</title>
-        <meta name="description" content={`Detalle del sticker de muestra`} />
+        <title>{`Creación de sticker | Bitácora BD`}</title>
+        <meta
+          name="description"
+          content={`Lugar donde crea el sticker para su registro posterior de resultados`}
+        />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
         <meta name="google" content="notranslate" />
@@ -22,43 +20,44 @@ function ViewDetails({ cookie, id }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Información sticker N° ${id} | Bitácora BD`}
+          content={`Creación de sticker - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Detalle del sticker de muestra`}
+          content={`Lugar donde crea el sticker para su registro posterior de resultados`}
         ></meta>
         <meta
           property="og:title"
-          content={`Información sticker N° ${id} | Bitácora BD`}
+          content={`Creación de sticker - Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Detalle del sticker de muestra`}
+          content={`Lugar donde crea el sticker para su registro posterior de resultados`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <StickerInfo InforSampleDetails={InforSampleDetails}></StickerInfo>
+      <CreateSticker
+        cookie={cookie}
+        ListadoGrupoActivo={ListadoGrupoActivo}
+        id={id}
+      ></CreateSticker>
     </>
   );
 }
 
-export default ViewDetails;
+export default CreatePage;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
-    if (ctx.query.id == undefined || ctx.query.id == null) {
-      return { notFound: true };
-    }
-
-    // const InforSampleDetails = await QueryMuestraEdit(cookie, ctx.query.id);
+    const ListadoGrupoActivo = await QueryActivegroup(cookie);
 
     return {
       props: {
         cookie: cookie,
+        ListadoGrupoActivo: ListadoGrupoActivo,
         id: ctx.query.id,
       },
     };

@@ -78,7 +78,7 @@ export default function Case({
           <option>casos inactivos</option>
         </select>
         <select className={caseStyles.select_filter}>
-          <option selected="selected">Tipo de caso</option>
+          <option >Tipo de caso</option>
           <option>casos internos</option>
           <option>casos externos</option>
         </select>

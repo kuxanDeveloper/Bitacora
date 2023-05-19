@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FilterQuerySearch, ClearFilter } from "../Tools/functiones";
 import filterStyles from "../../styles/filters.module.css";
 import Link from "next/link";
-import { format } from "../Tools/FormatDate";
 import { useRouter } from "next/router";
 export default function Filters({
   CasosActivo_Inactivos,
@@ -37,7 +36,7 @@ export default function Filters({
   return (
     <>
       <div className={filterStyles.filters}>
-        <form action="">
+        <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
               {isActiveGroup ? (
@@ -109,7 +108,8 @@ export default function Filters({
               </select>
             </div>
             <div className={filterStyles.buttons_container}>
-              <button
+              <Link
+                href={"#!"}
                 onClick={(e) =>
                   FilterQuerySearch(
                     e,
@@ -140,9 +140,12 @@ export default function Filters({
                   <circle cx="10" cy="10" r="7" />
                   <line x1="21" y1="21" x2="15" y2="15" />
                 </svg>
-              </button>
+              </Link>
               <Link
-                href={"/Sample/Create"}
+                href={{
+                  pathname: "/Sample/Create/[id]",
+                  query: { id: GruopValue == "" ? 6 : GruopValue },
+                }}
                 className={filterStyles.add_followup}
               >
                 <svg
@@ -163,14 +166,9 @@ export default function Filters({
                   <line x1="12" y1="9" x2="12" y2="15" />
                 </svg>
               </Link>
-              <button
-                onClick={(e) =>
-                  ClearFilter(
-                    e,
-                    router,
-                    GruopValue,
-                  )
-                }
+              <Link
+                href={"#!"}
+                onClick={(e) => ClearFilter(e, router, GruopValue)}
                 className={filterStyles.search}
               >
                 <svg
@@ -178,17 +176,17 @@ export default function Filters({
                   width="28"
                   height="28"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#fff"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M19 20h-10.5l-4.21 -4.3a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9.2 9.3" />
                   <path d="M18 13.3l-6.3 -6.3" />
                 </svg>
-              </button>
+              </Link>
             </div>
           </div>
         </form>

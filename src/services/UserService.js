@@ -28,6 +28,7 @@ export const userService = {
   logoutLogin,
   InfoSample,
   listUserGetAll,
+  CreatSticker
 };
 
 async function login(username, password) {
@@ -156,4 +157,22 @@ function InfoSample(cookie, idSticker) {
 
 function listUserGetAll(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListUserGetAll`, cookie);
+}
+
+function CreatSticker(
+  NumSticker,
+  GrupoSticker,
+  ObservaInici,
+  UserCheckinter,
+  UserCheckexter
+) {
+  const formData = new FormData();
+
+  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Grupo_sticker", GrupoSticker);
+  formData.append("Usuario_interno", UserCheckinter? "1":"0");
+  formData.append("Usuario_externo", UserCheckexter? "1":"0");
+  formData.append("Observaciones_iniciales", ObservaInici);
+
+  return fetchWrapper.postHeader(`${baseUrl}/Stickers/GuardBitacoraMuestra`,null,formData)
 }

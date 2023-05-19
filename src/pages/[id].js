@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { queryListUserAll } from "../components/Tools//Security";
 import Case from "@/components/Case";
 import Head from "next/head";
@@ -74,8 +74,9 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         dateAdmision={query.DateAdmission}
         result={query.result}
         URS={query.URS}
+        
       ></Filters>
-      <CaseStatus
+       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
         isUserInterno={isUserInterno}
@@ -90,7 +91,7 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         idGruop={query.id}
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
-      ></Case>
+      ></Case> 
     </>
   );
 }
