@@ -32,7 +32,6 @@ function Login({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-
       <Logincomponents />
     </>
   );

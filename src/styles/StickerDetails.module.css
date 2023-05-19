@@ -1,0 +1,336 @@
+.sticker_details {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    background-image: url("https://images.unsplash.com/photo-1604313890727-5542ff314405?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.sticker_details .details_container {
+    background-color: rgba(20, 20, 20, 0.664);
+    max-width: 700px;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+}
+
+.sticker_details .details_container .back_btn_container {
+    margin-bottom: 0.3rem;
+}
+
+.sticker_details .details_container .back_btn_container .back_btn {
+    color: #fff;
+    font-size: clamp(14px, 1.1rem, 1.3rem);
+    text-decoration: none;
+    position: relative;
+    margin-left: -0.8rem;
+}
+
+.sticker_details .details_container .back_btn_container .back_btn::before {
+    content: "<";
+    font-size: 1.4rem;
+    left: 0;
+    top: 0;
+    color: #e57d00;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.sticker_details .details_container .title {
+    font-size: clamp(20px, 1.7rem, 1.8rem);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.sticker_details .details_container .card {
+    position: relative;
+    background-color: white;
+    max-width: 90%;
+    min-width: 260px;
+    margin: auto;
+    padding: 1.8rem 0.7rem;
+    bottom: 10px;
+    border-radius: 10px;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .status {
+    margin-left: 1rem;
+    font-size: clamp(14px, 1rem, 1.2rem);
+    position: absolute;
+    color: #a8a8a8;
+    padding-left: 20px;
+    text-transform: capitalize;
+    z-index: 100;
+    right: 1rem;
+    top: 1rem;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .status .status_icon {
+    display: block;
+    background: #ff6e00;
+    border-radius: 70px;
+    width: 10px;
+    height: 10px;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .status .status_icon.active {
+    background: #009c7f;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .img_icon {
+    position: absolute;
+    right: 5px;
+    top: 2.6rem;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group .info_group {
+    width: 100%;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_title {
+    display: block;
+    font-size: clamp(14px, 1.3rem, 1.6rem);
+    color: #4b73bd;
+    margin: 0.3rem 0;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_text {
+    width: 80%;
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    color: #636363;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 10px;
+    font-size: clamp(14px, 1rem, 1.2rem);
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .group_figure {
+    margin: 0;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .group_figure .img_sticker {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    background-color: #a8a8a8;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: #636363 1px solid;
+    padding-bottom: 0.6rem;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .nav .nav_items {
+    margin: 0;
+    padding: 0 0.5rem 0 0.5rem;
+    color: #252525;
+    -o-object-fit: cover;
+    object-fit: cover;
+    text-transform: capitalize;
+    font-size: clamp(14px, 1rem, 1.2rem);
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .nav .nav_items.selected {
+    border-bottom: #e57d00 2.5px solid;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .followup,
+.sticker_details .details_container .card .stickers_container .card_content .restults {
+    position: relative;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .followup .update_icon,
+.sticker_details .details_container .card .stickers_container .card_content .restults .update_icon {
+    position: absolute;
+    right: 5px;
+    top: calc(50% - 30px);
+}
+
+@media (min-width: 768px) {
+    .sticker_details {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        background-image: url("https://images.unsplash.com/photo-1604313890727-5542ff314405?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .sticker_details .details_container {
+        background-color: rgba(20, 20, 20, 0.664);
+        max-width: 700px;
+        border-radius: 10px;
+        padding: 1rem 1.2rem;
+    }
+
+    .sticker_details .details_container .back_btn_container {
+        margin-bottom: 0.3rem;
+    }
+
+    .sticker_details .details_container .back_btn_container .back_btn {
+        color: #fff;
+        font-size: clamp(14px, 1.1rem, 1.3rem);
+        text-decoration: none;
+        position: relative;
+        margin-left: -0.8rem;
+    }
+
+    .sticker_details .details_container .back_btn_container .back_btn::before {
+        content: "<";
+        font-size: 1.4rem;
+        left: 0;
+        top: 0;
+        color: #e57d00;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    .sticker_details .details_container .title {
+        font-size: clamp(20px, 1.7rem, 1.8rem);
+        color: #fff;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .sticker_details .details_container .card {
+        position: relative;
+        background-color: white;
+        max-width: 90%;
+        min-width: 260px;
+        margin: auto;
+        padding: 1.5rem 0.7rem;
+        bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .status {
+        margin-left: 1rem;
+        font-size: clamp(14px, 1rem, 1.2rem);
+        position: absolute;
+        color: #a8a8a8;
+        padding-left: 20px;
+        text-transform: capitalize;
+        z-index: 100;
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .status .status_icon {
+        display: block;
+        background: #ff6e00;
+        border-radius: 70px;
+        width: 10px;
+        height: 10px;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .status .status_icon.active {
+        background: #009c7f;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .img_icon {
+        position: absolute;
+        right: 5px;
+        top: 2.6rem;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group {
+        width: 100%;
+        flex: 1;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_title {
+        display: block;
+        font-size: clamp(14px, 1.3rem, 1.6rem);
+        color: #4b73bd;
+        margin: 0.3rem 0;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_text {
+        width: 90%;
+        margin: 0;
+        padding: 0.5rem 0 0.5rem 0.5rem;
+        color: #636363;
+        -o-object-fit: cover;
+        object-fit: cover;
+        border-radius: 10px;
+        font-size: clamp(14px, 1rem, 1.2rem);
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .group_figure {
+        margin: 0;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .group_figure .img_sticker {
+        width: 100%;
+        height: 60px;
+        border-radius: 10px;
+        background-color: #a8a8a8;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 20px auto;
+        border-bottom: #636363 1px solid;
+        padding-bottom: 0.6rem;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .nav .nav_items {
+        margin: 0;
+        padding: 0 0.5rem 0 0.5rem;
+        color: #252525;
+        -o-object-fit: cover;
+        object-fit: cover;
+        text-transform: capitalize;
+        font-size: clamp(14px, 1rem, 1.2rem);
+        font-weight: 600;
+        text-align: center;
+        border: none;
+        background-color: transparent;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .nav .nav_items.selected {
+        border-bottom: #e57d00 2.5px solid;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .followup,
+    .sticker_details .details_container .card .stickers_container .card_content .restults {
+        position: relative;
+    }
+
+    .sticker_details .details_container .card .stickers_container .card_content .followup .update_icon,
+    .sticker_details .details_container .card .stickers_container .card_content .restults .update_icon {
+        position: absolute;
+        right: 5px;
+        top: calc(50% - 30px);
+    }
+}
+
+/*# sourceMappingURL=details.css.map */
