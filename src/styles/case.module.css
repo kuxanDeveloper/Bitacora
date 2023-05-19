@@ -213,6 +213,10 @@
     min-height: 100vh;
   }
 
+  .cases .cases_nav .state {
+    gap: 3rem;
+  }
+
   .cases .cases_container {
     grid-template-columns: repeat(3, 1fr);
   }
