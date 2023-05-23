@@ -16,6 +16,13 @@ html {
   /* 2 */
 }
 
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 /* Sections
    ========================================================================== */
 
