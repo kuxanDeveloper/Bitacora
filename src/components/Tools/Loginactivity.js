@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const initLogInactive = () => {
   let t;
   document.onkeypress = reiniciarTiempo;
-  document.onload = reiniciarTiempo;
+  window.onload = reiniciarTiempo;
   // document.onmousemove = reiniciarTiempo;
   // document.onmousedown = reiniciarTiempo; // aplica para una pantalla touch
   document.ontouchstart = reiniciarTiempo;
@@ -36,15 +36,13 @@ export const initLogInactive = () => {
         }, 1000);
       },
       willClose: () => {
-        
         clearInterval(timerInterval);
         clearTimeout(t);
         t = null;
-        reiniciarTiempo()
+        reiniciarTiempo();
       },
     }).then((result) => {
       if (result.isConfirmed) {
-   
         clearInterval(timerInterval);
         clearTimeout(t);
         t = null;
@@ -76,3 +74,4 @@ export const initLogInactive = () => {
     // 1000 milisegundos = 1 segundo
   }
 };
+

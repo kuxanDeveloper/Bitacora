@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Pop_up from "../components/Tools/Pop_up";
 
 import HeaderIndex from "../components/Header/HeaderIndex";
@@ -11,6 +11,7 @@ function Index({ children }) {
   const HandleButtonClick_Close = (stateModal) => {
     setShowModal(stateModal);
   };
+  useEffect(() => initLogInactive(), []);
 
   return (
     <>
@@ -30,7 +31,7 @@ function Index({ children }) {
           ) : (
             ""
           )}
-          <main onLoad={initLogInactive()}>{children}</main>
+          <main>{children}</main>
         </>
       ) : (
         <main>{children}</main>

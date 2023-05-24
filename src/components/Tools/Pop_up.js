@@ -85,11 +85,11 @@ export default function Pop_up({ onClose }) {
             </div>
 
             <div className={styles.prevew}>
-              <img
+              {/* <img
                 className={styles.prevew_img}
                 src="https://images.unsplash.com/photo-1683914791767-764d03299719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=401&q=80"
                 alt=""
-              />
+              /> */}
             </div>
           </div>
         </div>

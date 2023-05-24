@@ -8,12 +8,50 @@ function FullDetailsPage({ cookie, query }) {
   const router = useRouter();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [Pruebas, setPruebas] = useState(false);
+
   useEffect(() => {
     SampleDetailsEdit(cookie, query.id, setLInforSampleDetails);
   }, []);
 
   useEffect(() => {
-    useEffecPerformancePruResultado(setPruebas, router);
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
+      let hashs2 = router.asPath.split("#")[1];
+      if (
+        hashs2 == "Pruebas" ||
+        hashs2 == "" ||
+        hashs2 == null ||
+        hashs2 == undefined
+      ) {
+        setPruebas(true);
+      } else {
+        setPruebas(false);
+      }
+    }
+
+    const onHashChangeStart = (url) => {
+      let hash = url.split("#")[1];
+      if (
+        hash == "Pruebas" ||
+        hash == "" ||
+        hash == null ||
+        hash == undefined
+      ) {
+        setPruebas(true);
+      } else {
+        setPruebas(false);
+      }
+    };
+
+    router.events.on("hashChangeStart", onHashChangeStart);
+
+    return () => {
+      router.events.off("hashChangeStart", onHashChangeStart);
+    };
   }, [router.events]);
 
   return (
