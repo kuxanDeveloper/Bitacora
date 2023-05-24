@@ -108,6 +108,11 @@
 
 }
 
+.login .login_container .container_cotent .btn_container .btn_login.disabled {
+  pointer-events: none;
+}
+
+
 /*# sourceMappingURL=Login.css.map */
 
 .is_invalid {

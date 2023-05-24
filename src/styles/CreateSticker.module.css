@@ -91,9 +91,19 @@
     text-transform: capitalize;
 }
 
+.Create_sticker .sticker_container .card .stickers_container .card_sticker .form_group .input_group .group_title_check {
+    display: inline-block;
+    font-size: clamp(13px, 0.6rem, 1.2rem);
+    color: #4b73bd;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-right: .5rem;
+    margin-bottom: 2px;
+}
+
 .Create_sticker .sticker_container .card .stickers_container .card_sticker .sticker_status input[type=checkbox] {
-    height: 15px;
-    width: 15px;
+    height: 13px;
+    width: 13px;
     margin: 0;
 }
 
@@ -140,7 +150,9 @@
     color: #56565a;
     border-radius: 5px;
     border: solid 1px #a5a5a5;
-    width: 90%;
+    max-width: 380px;
+    width: 99%;
+    max-height: 250px;
 }
 
 .Create_sticker .sticker_container .card .stickers_container .card_sticker .btn_container_send {
@@ -236,16 +248,16 @@
 
     .Create_sticker .sticker_container .card .stickers_container .card_sticker .images_container .sticker_figure {
         margin: 0;
-        width: 130px;
-        height: 60px;
+        width: 80%;
+        height: 65px;
         background-color: #cccccc;
         border-radius: 10px;
     }
 
     .Create_sticker .sticker_container .card .stickers_container .card_sticker .images_container .sticker_figure .img_camera {
-        margin-top: 16px;
-        width: 24px;
-        height: 24px;
+        margin-top: 8px;
+        width: 50px;
+        height: 50px;
         object-fit: cover;
     }
 
@@ -263,6 +275,14 @@
     }
 
     .Create_sticker .sticker_container .card .stickers_container .card_sticker .form_group .input_group .group_title {
+        font-size: clamp(13px, 0.6rem, 1.2rem);
+        color: #4b73bd;
+        text-transform: capitalize;
+        font-weight: 700;
+    }
+
+    .Create_sticker .sticker_container .card .stickers_container .card_sticker .form_group .input_group .group_title_check {
+        display: inline-block;
         font-size: clamp(13px, 0.6rem, 1.2rem);
         color: #4b73bd;
         text-transform: capitalize;

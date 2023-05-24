@@ -131,7 +131,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                   <p className={styles.sticker_title}>Sticker</p>
                   {/* <!-- imagenes --> */}
                   <div className={styles.images_container}>
-                    <figure className={styles.sticker_figure}>
+                    {/* <figure className={styles.sticker_figure}>
                       <a href="">
                         <ImageOptimize
                           Values={{
@@ -144,7 +144,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                           }}
                         ></ImageOptimize>
                       </a>
-                    </figure>
+                    </figure> */}
                     <figure className={styles.sticker_figure}>
                       <Link
                         href=""
@@ -246,8 +246,13 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                   {/* <!-- form group --> */}
 
                   <div className={styles.form_group}>
-                    <div className={styles.sticker_status}>
-                      <label>Usuario interno</label>
+                    <div className={styles.input_group}>
+                      <label
+                        className={styles.group_title_check}
+                        for="UserCheckinter"
+                      >
+                        Usuario interno
+                      </label>
                       <input
                         {...register("UserCheckinter")}
                         name="UserCheckinter"
@@ -256,7 +261,16 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         onClick={() => uncheckUserInterExterno()}
                       />
 
-                      <label>Usuario externo</label>
+                      {/* <!-- ---- --> */}
+                    </div>
+
+                    <div className={styles.input_group}>
+                      <label
+                        for="UserCheckexter"
+                        className={styles.group_title_check}
+                      >
+                        Usuario externo
+                      </label>
                       <input
                         {...register("UserCheckexter")}
                         name="UserCheckexter"
@@ -264,12 +278,10 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         type="checkbox"
                         onClick={() => uncheckUserInterExterno()}
                       />
-
-                      {/* <!-- ---- --> */}
                     </div>
-                    <div className={styles.invalid_feedback}>
-                      {errors.UserInternoExterno?.message}
-                    </div>
+                  </div>
+                  <div className={styles.invalid_feedback}>
+                    {errors.UserInternoExterno?.message}
                   </div>
 
                   {/* <!-- form group --> */}

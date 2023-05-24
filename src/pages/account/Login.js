@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "../../components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
+import Loading from "@/components/Tools/Loading";
 function Login({ cookie }) {
   useEffect(() => {
     if (cookie) {
