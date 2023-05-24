@@ -9,7 +9,6 @@ import Filters from "../components/Body/Filters";
 import HomeCard from "../components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "../components/CaseStatus";
-import { useEffectIndexPerfomance } from "../components//Tools/functiones";
 import { useRouter } from "next/router";
 export default function Home({
   ListadoGrupoActivo,

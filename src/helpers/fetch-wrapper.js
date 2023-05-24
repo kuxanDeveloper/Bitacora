@@ -37,6 +37,7 @@ function postHeader(url, cookie, body) {
     headers: authHeader(url, cookie),
     body: body,
   };
+  debugger;
   return fetch(url, requestOptions).then(handleResponse);
 }
 
