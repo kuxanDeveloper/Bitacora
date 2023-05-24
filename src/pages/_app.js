@@ -13,25 +13,21 @@ function MyApp({ Component, pageProps }) {
 
   // debugger;
   return (
-
     <ErrorBoundary>
-          HOLA
-      {/* <BicatoraContexProvider>
+      <BicatoraContexProvider>
         {isPageLoading ? (
           <Loading></Loading>
         ) : (
-          
           <Layout>
-
-            <div id="fb-root"></div>
+            HOLA
+            {/* <div id="fb-root"></div>
             <ErrorBoundary>
               <Component {...pageProps} />
-            </ErrorBoundary>
-
+            </ErrorBoundary> */}
           </Layout>
           // <Component {...pageProps} />
         )}
-      </BicatoraContexProvider> */}
+      </BicatoraContexProvider>
     </ErrorBoundary>
   );
 }
