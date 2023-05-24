@@ -51,14 +51,15 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                       alt: "Logo de camara",
                       title: "Imagen número 1",
                       classValue: styles.img_camera,
-                      width: 40,
-                      height: 40,
+                      width: 35,
+                      height: 35,
                     }}
                   ></ImageOptimize>
                 </button>
                 {Pruebas ? (
                   <Link
                     title="agregar resultado"
+                    className={styles.add_icon}
                     href={{
                       pathname: "/Sample/CreateResult/[id]",
                       query: {
@@ -72,17 +73,48 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                       },
                     }}
                   >
-                    agregar resultado
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="38"
+                      height="38"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#2f2f2f"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M9 12l6 0" />
+                      <path d="M12 9l0 6" />
+                    </svg>
                   </Link>
                 ) : (
                   <Link
                     title="Agregar segumiento"
+                    className={styles.add_icon}
                     href={{
                       pathname: "/Sample/CreateFollowUp/[id]",
                       query: { id: query.id },
                     }}
                   >
-                    agregar seguimiento
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="38"
+                      height="38"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#2f2f2f"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M9 12l6 0" />
+                      <path d="M12 9l0 6" />
+                    </svg>
                   </Link>
                 )}
                 {InforSampleDetails.infoBitacora != undefined &&
@@ -122,7 +154,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }`}
                   >
                     Pruebas
-                    <span className={styles.icon}>
+                    {/* <span className={styles.icon}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -139,7 +171,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                         <path d="M9 12l6 0" />
                         <path d="M12 9l0 6" />
                       </svg>
-                    </span>
+                    </span> */}
                   </Link>
                   <Link
                     href={{
@@ -152,7 +184,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }`}
                   >
                     Notas
-                    <span className={styles.icon}>
+                    {/* <span className={styles.icon}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -169,7 +201,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                         <path d="M9 12l6 0" />
                         <path d="M12 9l0 6" />
                       </svg>
-                    </span>
+                    </span> */}
                   </Link>
                 </div>
 

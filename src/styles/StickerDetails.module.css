@@ -89,6 +89,16 @@
     border: none;
 }
 
+.sticker_details .details_container .card .stickers_container .card_content .add_icon {
+    position: absolute;
+    right: 8px;
+    top: 5.6rem;
+    background-color: transparent;
+    border: none;
+}
+
+
+
 .sticker_details .details_container .card .stickers_container .card_content .form_group {
     display: flex;
     flex-wrap: wrap;
@@ -307,7 +317,7 @@
 
     .sticker_details .details_container .card .stickers_container .card_content .nav {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         width: 100%;
         margin: 20px auto;
         border-bottom: #636363 1px solid;
