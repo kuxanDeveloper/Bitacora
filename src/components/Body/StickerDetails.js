@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../../styles/StickerDetails.module.css";
 import ImageOptimize from "../Tools/ImageOptimize";
-import { backhistory, EstadoFunction } from "../Tools/functiones";
+import { EstadoFunction } from "../Tools/functiones";
+import { useContextBitacora } from "../../context/BitacoraContext";
 import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
 export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
+  const { setShowModal } = useContextBitacora();
   return (
     <>
       <div className={styles.sticker_details}>
@@ -13,13 +15,9 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/[id]",
+                pathname: "/Sample/ViewDetails/[id]",
                 query: {
-                  id:
-                    InforSampleDetails.infoBitacora != null &&
-                    InforSampleDetails.infoBitacora != undefined
-                      ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
-                      : "",
+                  id: query.id,
                 },
               }}
               className={styles.back_btn}
@@ -58,6 +56,35 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }}
                   ></ImageOptimize>
                 </button>
+                {Pruebas ? (
+                  <Link
+                    title="agregar resultado"
+                    href={{
+                      pathname: "/Sample/CreateResult/[id]",
+                      query: {
+                        id: query.id,
+                        group:
+                          InforSampleDetails.infoBitacora != undefined &&
+                          InforSampleDetails.infoBitacora != null
+                            ? InforSampleDetails.infoBitacora[0]
+                                .ID_GRUPO_ASIGNADO
+                            : "",
+                      },
+                    }}
+                  >
+                    agregar resultado
+                  </Link>
+                ) : (
+                  <Link
+                    title="Agregar segumiento"
+                    href={{
+                      pathname: "/Sample/CreateFollowUp/[id]",
+                      query: { id: query.id },
+                    }}
+                  >
+                    agregar seguimiento
+                  </Link>
+                )}
                 {InforSampleDetails.infoBitacora != undefined &&
                 InforSampleDetails.infoBitacora != null
                   ? InforSampleDetails.infoBitacora.map((data, index) => (
