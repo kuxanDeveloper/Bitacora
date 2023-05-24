@@ -71,7 +71,7 @@ export default function Case({
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-      <div className={caseStyles.filters_case}>
+      {/* <div className={caseStyles.filters_case}>
         <select className={caseStyles.select_filter}>
           <option>1</option>
           <option>casos Activos </option>
@@ -82,7 +82,7 @@ export default function Case({
           <option>casos internos</option>
           <option>casos externos</option>
         </select>
-      </div>
+      </div> */}
       <section className={caseStyles.cases}>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>

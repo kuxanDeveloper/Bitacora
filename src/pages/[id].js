@@ -86,15 +86,20 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         isActiveGroup={false}
         CasosActivo_Inactivos={isTrueActive}
         id={query.id}
+        isActiveCase={true}
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         NumSticker={query.Numstiker}
         dateAdmision={query.DateAdmission}
         result={query.result}
         URS={query.URS}
+        HrefArmado={{ pathname: "/[id]", query: query }}
+        isUserInterno={isUserInterno}
+        isSampleGeneral={isSampleGeneral}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
+        isActiveCase={false}
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseStatus>

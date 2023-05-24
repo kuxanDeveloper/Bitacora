@@ -421,8 +421,6 @@ export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
 };
 
 export const useEffecPerformancePruResultado = (setPruebas, router) => {
-
-
   if (
     window.performance.navigation.type ==
       window.performance.navigation.TYPE_RELOAD ||
@@ -444,12 +442,7 @@ export const useEffecPerformancePruResultado = (setPruebas, router) => {
 
   const onHashChangeStart = (url) => {
     let hash = url.split("#")[1];
-    if (
-      hash == "Pruebas" ||
-      hash == "" ||
-      hash == null ||
-      hash == undefined
-    ) {
+    if (hash == "Pruebas" || hash == "" || hash == null || hash == undefined) {
       setPruebas(true);
     } else {
       setPruebas(false);
@@ -469,5 +462,39 @@ export const EstadoFunction = (InforSampleDetails) => {
     InforSampleDetails.infoBitacora != undefined
   ) {
     return InforSampleDetails.infoBitacora[0].ESTADO_STICKER;
+  }
+};
+
+export const OnclickComboEstadoCase = (
+  value,
+  router,
+  hrefarmado,
+  isUserInterno,
+  isSampleGeneral
+) => {
+  if (value.toLowerCase()==="true") {
+    if (hrefarmado.query != undefined && hrefarmado.query != null) {
+      router.push({
+        pathname: hrefarmado.pathname,
+        query: hrefarmado.query,
+        hash: `Cactive${isUserInterno ? "#UserInter" : "#UserExter"}${
+          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+        }`,
+      });
+    } else {
+      router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
+    }
+  } else {
+    if (hrefarmado.query != undefined && hrefarmado.query != null) {
+      router.push({
+        pathname: hrefarmado.pathname,
+        query: hrefarmado.query,
+        hash: `Cinactvie${isUserInterno ? "#UserInter" : "#UserExter"}${
+          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+        }`,
+      });
+    } else {
+      router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
+    }
   }
 };
