@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { FilterQuerySearch, ClearFilter } from "../Tools/functiones";
+import {
+  FilterQuerySearch,
+  ClearFilter,
+  OnclickComboEstadoCase,
+} from "../Tools/functiones";
 import filterStyles from "../../styles/filters.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,14 +12,17 @@ export default function Filters({
   isActiveGroup,
   id,
   ListadoUsuariosRegistrados,
+  isActiveCase,
   ListadoGrupoActivo,
   NumSticker,
   dateAdmision,
   result,
   URS,
+  isUserInterno,
+  isSampleGeneral,
+  HrefArmado,
 }) {
   const router = useRouter();
-
   const [GruopValue, setGruopValue] = useState(
     id != undefined && id != null ? id : ""
   );
@@ -47,7 +54,7 @@ export default function Filters({
                   className={filterStyles.filter_input_w100}
                 >
                   <option value="" disabled>
-                    Seleccione un valor
+                    Seleccione un Grupo (Obligatorio)
                   </option>
                   {ListadoGrupoActivo != null
                     ? ListadoGrupoActivo.map((data, index) => (
@@ -56,6 +63,22 @@ export default function Filters({
                         </option>
                       ))
                     : ""}
+                </select>
+              ) : (
+                ""
+              )}
+
+              {isActiveCase ? (
+                <select
+                  value={CasosActivo_Inactivos}
+                  name="ListCasos"
+                  onChange={(e) =>
+                    OnclickComboEstadoCase(e.target.value, router, HrefArmado, isUserInterno, isSampleGeneral)
+                  }
+                  className={filterStyles.filter_input_w100}
+                >
+                  <option value={true}>Activo</option>
+                  <option value={false}>Inactivo</option>
                 </select>
               ) : (
                 ""
@@ -96,7 +119,7 @@ export default function Filters({
                 className={filterStyles.filter_input}
               >
                 <option value="" disabled>
-                  Seleccione un valor
+                  Seleccione un usuario
                 </option>
                 {ListadoUsuariosRegistrados != null
                   ? ListadoUsuariosRegistrados.map((data, index) => (

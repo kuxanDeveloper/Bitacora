@@ -259,3 +259,37 @@ export const EstadoFunction = (InforSampleDetails) => {
     return InforSampleDetails.infoBitacora[0].ESTADO_STICKER;
   }
 };
+
+export const OnclickComboEstadoCase = (
+  value,
+  router,
+  hrefarmado,
+  isUserInterno,
+  isSampleGeneral
+) => {
+  if (value.toLowerCase()==="true") {
+    if (hrefarmado.query != undefined && hrefarmado.query != null) {
+      router.push({
+        pathname: hrefarmado.pathname,
+        query: hrefarmado.query,
+        hash: `Cactive${isUserInterno ? "#UserInter" : "#UserExter"}${
+          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+        }`,
+      });
+    } else {
+      router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
+    }
+  } else {
+    if (hrefarmado.query != undefined && hrefarmado.query != null) {
+      router.push({
+        pathname: hrefarmado.pathname,
+        query: hrefarmado.query,
+        hash: `Cinactvie${isUserInterno ? "#UserInter" : "#UserExter"}${
+          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+        }`,
+      });
+    } else {
+      router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
+    }
+  }
+};

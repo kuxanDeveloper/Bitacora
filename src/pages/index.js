@@ -5,10 +5,10 @@ import {
   queryListUserAll,
 } from "../components/Tools//Security";
 import { userService } from "../services/UserService";
-import Filters from "@/components/Body/Filters";
-import HomeCard from "@/components/Body/HomeCard";
+import Filters from "../components/Body/Filters";
+import HomeCard from "../components/Body/HomeCard";
 import Head from "next/head";
-import CaseStatus from "@/components/CaseStatus";
+import CaseStatus from "../components/CaseStatus";
 import { useEffectIndexPerfomance } from "../components//Tools/functiones";
 import { useRouter } from "next/router";
 export default function Home({
@@ -101,12 +101,14 @@ export default function Home({
       <Filters
         ListadoGrupoActivo={ListadoGrupoActivo}
         isActiveGroup={true}
+        isActiveCase={false}
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         CasosActivo_Inactivos={isTrueActive}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
+        isActiveCase={true}
       ></CaseStatus>
       <div className="cases_container">
         <HomeCard

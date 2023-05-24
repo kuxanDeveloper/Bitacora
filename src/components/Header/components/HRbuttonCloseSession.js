@@ -1,7 +1,7 @@
 import React from "react";
 import Styles from "../../../styles/Header.module.css";
 import Link from "next/link";
-import { userService } from "@/services/UserService";
+import { userService } from "../../../services/UserService";
 function HRbuttonCloseSession() {
   return (
     <>

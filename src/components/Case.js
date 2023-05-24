@@ -1,5 +1,5 @@
 import React from "react";
-import caseStyles from "@/styles/Case.module.css";
+import caseStyles from "../styles/case.module.css";
 import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
 import {
@@ -71,7 +71,7 @@ export default function Case({
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-      <div className={caseStyles.filters_case}>
+      {/* <div className={caseStyles.filters_case}>
         <select className={caseStyles.select_filter}>
           <option>1</option>
           <option>casos Activos </option>
@@ -82,7 +82,7 @@ export default function Case({
           <option>casos internos</option>
           <option>casos externos</option>
         </select>
-      </div>
+      </div> */}
       <section className={caseStyles.cases}>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { queryListUserAll } from "../components/Tools//Security";
-import Case from "@/components/Case";
+import Case from "../components/Case";
 import Head from "next/head";
-import CaseStatus from "@/components/CaseStatus";
-import Filters from "@/components/Body/Filters";
+import CaseStatus from "../components/CaseStatus";
+import Filters from "../components/Body/Filters";
 import { useRouter } from "next/router";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
@@ -218,15 +218,20 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         isActiveGroup={false}
         CasosActivo_Inactivos={isTrueActive}
         id={query.id}
+        isActiveCase={true}
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         NumSticker={query.Numstiker}
         dateAdmision={query.DateAdmission}
         result={query.result}
         URS={query.URS}
+        HrefArmado={{ pathname: "/[id]", query: query }}
+        isUserInterno={isUserInterno}
+        isSampleGeneral={isSampleGeneral}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
+        isActiveCase={false}
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseStatus>

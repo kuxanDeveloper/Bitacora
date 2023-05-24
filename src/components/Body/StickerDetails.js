@@ -181,7 +181,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                         <Results key={index} data={data}></Results>
                       ))
                     ) : (
-                      <h2>Sin resultados registrados</h2>
+                      <h2>Sin Pruebas registradas</h2>
                     )
                   ) : (
                     "cargando..."
@@ -193,7 +193,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                       <Details key={index} data={data}></Details>
                     ))
                   ) : (
-                    <h2>Sin seguimientos registrados</h2>
+                    <h2>Sin Notas registrados</h2>
                   )
                 ) : (
                   "cargando..."

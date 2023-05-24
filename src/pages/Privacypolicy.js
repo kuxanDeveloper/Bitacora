@@ -1,5 +1,5 @@
 import React from "react";
-import Legal from "@/components/Body/Legal";
+import Legal from "../components/Body/Legal";
 import Head from "next/head";
 function Privacypolicy() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "@/styles/Recovery.module.css";
+import Styles from "../../styles/Recovery.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { OnSubmitForward } from "../Tools/Security";
