@@ -19,11 +19,12 @@ function MyApp({ Component, pageProps }) {
           <Loading></Loading>
         ) : (
           <Layout>
-            HOLA
-            {/* <div id="fb-root"></div>
-            <ErrorBoundary>
-              <Component {...pageProps} />
-            </ErrorBoundary> */}
+           
+            <div id="fb-root"></div>
+             <ErrorBoundary>
+             HOLA
+              {/*<Component {...pageProps} />*/}
+            </ErrorBoundary> 
           </Layout>
           // <Component {...pageProps} />
         )}
