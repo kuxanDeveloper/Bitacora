@@ -42,19 +42,19 @@ function Login({ cookie }) {
 
 export default Login;
 
-export async function getServerSideProps(ctx) {
-  const cookie = ctx.req.cookies["tokenUserCookie"];
-  if (!cookie) {
-    return {
-      props: {
-        cookie: false,
-      },
-    };
-  } else {
-    return {
-      redirect: {
-        destination: "/#Cactive",
-      },
-    };
-  }
-}
+// export async function getServerSideProps(ctx) {
+//   const cookie = ctx.req.cookies["tokenUserCookie"];
+//   if (!cookie) {
+//     return {
+//       props: {
+//         cookie: false,
+//       },
+//     };
+//   } else {
+//     return {
+//       redirect: {
+//         destination: "/#Cactive",
+//       },
+//     };
+//   }
+// }
