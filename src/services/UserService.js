@@ -11,7 +11,7 @@ const baseUrl = `${
 const userSubject = new BehaviorSubject(
   process.browser && localStorage.getItem("tokenUserLS")
 );
-
+debugger;
 const cookies = new Cookies();
 
 export const userService = {
@@ -45,7 +45,7 @@ async function login(username, password) {
 
   formDataLogin.append("Num_Identidad", username);
   formDataLogin.append("pass", tokenPassword);
-
+  debugger;
   let tokenGenerateLogin = await fetchWrapper.post(
     `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
     formDataLogin
