@@ -69,7 +69,7 @@ export default function Home({
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{"Inicio | Bitácora"}</title>
         <meta
           name="description"
@@ -116,35 +116,36 @@ export default function Home({
           ListadoGrupoActivo={ListadoGrupoActivo}
           ListadoGrupoInactivo={ListadoGrupoInactivo}
         ></HomeCard>
-      </div>
+      </div> */}
       {/* <Case></Case> */}
     </>
   );
 }
 
-export async function getServerSideProps(ctx) {
-  const cookie = ctx.req.cookies["tokenUserCookie"];
-  if (cookie) {
-    const ListadoGrupoActivo = await QueryActivegroup(cookie);
-    const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
-    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
-    return {
-      props: {
-        ListadoGrupoActivo:
-          ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
-        ListadoGrupoInactivo:
-          ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
-        ListadoUsuariosRegistrados:
-          ListadoUsuariosRegistrados == undefined
-            ? null
-            : ListadoUsuariosRegistrados,
-      },
-    };
-  } else {
-    return {
-      redirect: {
-        destination: "/Account/Login",
-      },
-    };
-  }
-}
+// export async function getServerSideProps(ctx) {
+//   const cookie = ctx.req.cookies["tokenUserCookie"];
+//   if (cookie) {
+//     const ListadoGrupoActivo = await QueryActivegroup(cookie);
+//     const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
+//     const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
+//     return {
+//       props: {
+//         ListadoGrupoActivo:
+//           ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
+//         ListadoGrupoInactivo:
+//           ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
+//         ListadoUsuariosRegistrados:
+//           ListadoUsuariosRegistrados == undefined
+//             ? null
+//             : ListadoUsuariosRegistrados,
+//       },
+//     };
+//   } else {
+//     return {
+//       redirect: {
+//         destination: "/Account/Login",
+
+//       },
+//     };
+//   }
+// }
