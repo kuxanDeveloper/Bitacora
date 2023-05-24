@@ -22,11 +22,10 @@ function MyApp({ Component, pageProps }) {
            
             <div id="fb-root"></div>
              <ErrorBoundary>
-             HOLA
-              {/*<Component {...pageProps} />*/}
+             
+              <Component {...pageProps} />
             </ErrorBoundary> 
           </Layout>
-          // <Component {...pageProps} />
         )}
       </BicatoraContexProvider>
     </ErrorBoundary>
