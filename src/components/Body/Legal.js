@@ -2,6 +2,7 @@ import React from "react";
 import LegalStyles from "../../styles/Legal.module.css";
 import Head from "next/head";
 import { Link } from "react-scroll";
+import ImageOptimize from "../Tools/ImageOptimize";
 function Legal() {
   return (
     <>
@@ -40,10 +41,15 @@ function Legal() {
       </Head>
       <div className={LegalStyles.legal}>
         <figure className={LegalStyles.logo}>
-          <img
-            src="https://www.bd.com/content/dam/bdcom-assets/en/en-us/images/graphic/icon/header-bd-logo.svg"
-            alt=""
-            className={LegalStyles.logo_img}
+          <ImageOptimize
+            Values={{
+              src: "/img/Becton_Dickinson_logo64x64.png",
+              alt: "Login BD",
+              classValue: LegalStyles.logo_img,
+              width: 64,
+              height: 64,
+              style: {},
+            }}
           />
         </figure>
 

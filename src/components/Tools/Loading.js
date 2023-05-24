@@ -1,15 +1,23 @@
 import React from "react";
 import LoaderStyles from "../../styles/Loader.module.css";
-
+import ImageOptimize from "../Tools/ImageOptimize"
 export default function Loading() {
   return (
     <>
       <section className={LoaderStyles.Loader}>
         <div className={LoaderStyles.loader_content}>
-          <img
-            className= {LoaderStyles.logo}
-            src="https://www.bd.com/assets/images/international/logos/bd-header-logo.png"
-            alt=""
+          <ImageOptimize
+          Values={{
+            src: "/img/Becton_Dickinson_logo 128x128.png",
+            alt: "Login BD",
+            classValue: LoaderStyles.logo,
+            width: 64,
+            height: 64,
+            style: {},
+          }}
+            // className= {LoaderStyles.logo}
+            // src="https://www.bd.com/assets/images/international/logos/bd-header-logo.png"
+            // alt=""
           />
           <svg
             version="1.1"

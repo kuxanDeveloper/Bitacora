@@ -18,6 +18,47 @@ export default function Home({
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
+      let hashs2 = router.asPath.split("#")[1];
+      if (
+        hashs2 == "Cactive" ||
+        hashs2 == "" ||
+        hashs2 == null ||
+        hashs2 == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    }
+
+    const onHashChangeStart = (url) => {
+      let hash = url.split("#")[1];
+      if (
+        hash == "Cactive" ||
+        hash == "" ||
+        hash == null ||
+        hash == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    };
+
+    router.events.on("hashChangeStart", onHashChangeStart);
+    return () => {
+      router.events.off("hashChangeStart", onHashChangeStart);
+    };
+  }, [router.events]);
+
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
     ListadoGrupoInactivo == "401: Token incorrecto o vencido"
@@ -25,13 +66,6 @@ export default function Home({
     userService.logout();
     return "";
   }
-
-
-  useEffect(() => {
-    useEffectIndexPerfomance(setisTrueActive, router);
-
-    
-  }, [router.events]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import { useEffect } from "react";
-import { ApiQueryGeneralSample } from "../../pages/api/[id]";
+// import { ApiQueryGeneralSample } from "../../pages/api/[id]";
 import { useRouter } from "next/router";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -186,214 +186,41 @@ export const FilterQuerySearch = (
   });
 };
 
-export const useEffectIndexPerfomance = (setisTrueActive, router) => {
-  if (
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_RELOAD ||
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_NAVIGATE
-  ) {
-    let hashs2 = router.asPath.split("#")[1];
-    if (
-      hashs2 == "Cactive" ||
-      hashs2 == "" ||
-      hashs2 == null ||
-      hashs2 == undefined
-    ) {
-      setisTrueActive(true);
-    } else {
-      setisTrueActive(false);
-    }
-  }
 
-  const onHashChangeStart = (url) => {
-    let hash = url.split("#")[1];
-    if (hash == "Cactive" || hash == "" || hash == null || hash == undefined) {
-      setisTrueActive(true);
-    } else {
-      setisTrueActive(false);
-    }
-  };
+// export const useEffecIDPerformance = (
+//   cookie,
+//   id,
+//   Numstiker,
+//   DateAdmission,
+//   result,
+//   URS,
+//   setGrupoNombre,
+//   setListadoGrupo,
+//   setListadoMuestraActivo,
+//   setListadoMuestraInactivo
+// ) => {
+//   ApiQueryGeneralSample(
+//     cookie,
+//     id,
+//     Numstiker,
+//     DateAdmission,
+//     result,
+//     URS,
+//     setGrupoNombre,
+//     setListadoGrupo,
+//     setListadoMuestraActivo,
+//     setListadoMuestraInactivo
+//   );
+// };
 
-  router.events.on("hashChangeStart", onHashChangeStart);
-
-  return () => {
-    router.events.off("hashChangeStart", onHashChangeStart);
-  };
-};
-
-export const useEffecIDPerformance = (
-  cookie,
-  id,
-  Numstiker,
-  DateAdmission,
-  result,
-  URS,
-  setGrupoNombre,
-  setListadoGrupo,
-  setListadoMuestraActivo,
-  setListadoMuestraInactivo
-) => {
-  ApiQueryGeneralSample(
-    cookie,
-    id,
-    Numstiker,
-    DateAdmission,
-    result,
-    URS,
-    setGrupoNombre,
-    setListadoGrupo,
-    setListadoMuestraActivo,
-    setListadoMuestraInactivo
-  );
-};
-
-export const useEffecIDPerformanceRouterEvents = (
-  setisTrueActive,
-  setisUserInterno,
-  setisSampleGeneral,
-  router
-) => {
-  if (
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_RELOAD ||
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_NAVIGATE
-  ) {
-    let urlHref = window.location.href;
-    let hashs2 = router.asPath.split("#")[1];
-    let hashs3 = router.asPath.split("#")[2];
-    let hashs4 = router.asPath.split("#")[3];
-
-    //#region Muestras Activas
-    if (
-      hashs2 == "Cactive" ||
-      hashs2 == "" ||
-      hashs2 == null ||
-      hashs2 == undefined
-    ) {
-      if (hashs2 == undefined) {
-        window.history.pushState(
-          { path: `${urlHref}#Cactive` },
-          "",
-          `${urlHref}#Cactive`
-        );
-        urlHref = window.location.href;
-      }
-
-      setisTrueActive(true);
-    } else {
-      setisTrueActive(false);
-    }
-    //#endregion
-
-    //#region Usuario Interno o externo
-    if (
-      hashs3 == "UserInter" ||
-      hashs3 == "" ||
-      hashs3 == null ||
-      hashs3 == undefined
-    ) {
-      if (hashs3 == undefined) {
-        window.history.pushState(
-          { path: `${urlHref}#UserInter` },
-          "",
-          `${urlHref}#UserInter`
-        );
-        urlHref = window.location.href;
-      }
-      setisUserInterno(true);
-    } else {
-      setisUserInterno(false);
-    }
-    //#endregion
-
-    //#region Muestras generales o de urgencia
-    if (
-      hashs4 == "OverallSample" ||
-      hashs4 == "" ||
-      hashs4 == null ||
-      hashs4 == undefined
-    ) {
-      if (hashs4 == undefined) {
-        window.history.pushState(
-          { path: `${urlHref}#OverallSample` },
-          "",
-          `${urlHref}#OverallSample`
-        );
-        urlHref = window.location.href;
-      }
-      setisSampleGeneral(true);
-    } else {
-      setisSampleGeneral(false);
-    }
-    //#endregion
-  }
-
-  const onHashChangeStart = (url) => {
-    let hash = url.split("#")[1];
-    let hashs3 = url.split("#")[2];
-    let hashs4 = url.split("#")[3];
-    let urlHref = window.location.href;
-
-    //#region Muestras activas/inactivas
-    if (hash == "Cactive" || hash == "" || hash == null || hash == undefined) {
-      setisTrueActive(true);
-    } else {
-      setisTrueActive(false);
-    }
-    //#endregion
-
-    //#region usuario interno/usuario externo
-
-    if (
-      hashs3 == "UserInter" ||
-      hashs3 == "" ||
-      hashs3 == null ||
-      hashs3 == undefined
-    ) {
-      if (hashs3 == undefined) {
-        window.history.pushState(
-          { path: `${urlHref}#UserInter` },
-          "",
-          `${urlHref}#UserInter`
-        );
-        urlHref = window.location.href;
-      }
-      setisUserInterno(true);
-    } else {
-      setisUserInterno(false);
-    }
-    //#endregion
-
-    //#region Muestras generales /urgencias
-    if (
-      hashs4 == "OverallSample" ||
-      hashs4 == "" ||
-      hashs4 == null ||
-      hashs4 == undefined
-    ) {
-      if (hashs4 == undefined) {
-        window.history.pushState(
-          { path: `${urlHref}#OverallSample` },
-          "",
-          `${urlHref}#OverallSample`
-        );
-        urlHref = window.location.href;
-      }
-      setisSampleGeneral(true);
-    } else {
-      setisSampleGeneral(false);
-    }
-    //#endregion
-  };
-
-  router.events.on("hashChangeStart", onHashChangeStart);
-
-  return () => {
-    router.events.off("hashChangeStart", onHashChangeStart);
-  };
-};
+// export const useEffecIDPerformanceRouterEvents = (
+//   setisTrueActive,
+//   setisUserInterno,
+//   setisSampleGeneral,
+//   router
+// ) => {
+ 
+// };
 
 export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
@@ -420,48 +247,9 @@ export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
   }
 };
 
-export const useEffecPerformancePruResultado = (setPruebas, router) => {
-
-
-  if (
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_RELOAD ||
-    window.performance.navigation.type ==
-      window.performance.navigation.TYPE_NAVIGATE
-  ) {
-    let hashs2 = router.asPath.split("#")[1];
-    if (
-      hashs2 == "Pruebas" ||
-      hashs2 == "" ||
-      hashs2 == null ||
-      hashs2 == undefined
-    ) {
-      setPruebas(true);
-    } else {
-      setPruebas(false);
-    }
-  }
-
-  const onHashChangeStart = (url) => {
-    let hash = url.split("#")[1];
-    if (
-      hash == "Pruebas" ||
-      hash == "" ||
-      hash == null ||
-      hash == undefined
-    ) {
-      setPruebas(true);
-    } else {
-      setPruebas(false);
-    }
-  };
-
-  router.events.on("hashChangeStart", onHashChangeStart);
-
-  return () => {
-    router.events.off("hashChangeStart", onHashChangeStart);
-  };
-};
+// export const useEffecPerformancePruResultado = (setPruebas, router) => {
+ 
+// };
 
 export const EstadoFunction = (InforSampleDetails) => {
   if (
