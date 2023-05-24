@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }) {
   return (
 
     <ErrorBoundary>
-          "HOLA"
+          HOLA
       {/* <BicatoraContexProvider>
         {isPageLoading ? (
           <Loading></Loading>
