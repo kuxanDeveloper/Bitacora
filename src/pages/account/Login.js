@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "../../components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
-function Login({ cookie }) {
+function Loginpages({ cookie }) {
   // useEffect(() => {
   //   if (cookie) {
   //     userService.logoutLogin();
@@ -40,7 +40,7 @@ function Login({ cookie }) {
   );
 }
 
-export default Login;
+export default Loginpages;
 
 // export async function getServerSideProps(ctx) {
 //   const cookie = ctx.req.cookies["tokenUserCookie"];
