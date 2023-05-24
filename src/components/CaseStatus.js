@@ -1,5 +1,5 @@
 import React from "react";
-import CaseStyles from "@/styles/CaseStatus.module.css";
+import CaseStyles from "../styles/CaseStatus.module.css";
 import Link from "next/link";
 export default function CaseStatus({
   HrefArmado,

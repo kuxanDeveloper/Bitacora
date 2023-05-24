@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { queryListUserAll } from "../components/Tools//Security";
-import Case from "@/components/Case";
+import Case from "../components/Case";
 import Head from "next/head";
-import CaseStatus from "@/components/CaseStatus";
-import Filters from "@/components/Body/Filters";
+import CaseStatus from "../components/CaseStatus";
+import Filters from "../components/Body/Filters";
 import { useRouter } from "next/router";
 import {
   useEffecIDPerformance,
