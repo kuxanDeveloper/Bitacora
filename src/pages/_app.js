@@ -13,25 +13,26 @@ function MyApp({ Component, pageProps }) {
 
   // debugger;
   return (
-    "HOLA"
-    // <ErrorBoundary>
-    //   <BicatoraContexProvider>
-    //     {isPageLoading ? (
-    //       <Loading></Loading>
-    //     ) : (
+
+    <ErrorBoundary>
+          "HOLA"
+      {/* <BicatoraContexProvider>
+        {isPageLoading ? (
+          <Loading></Loading>
+        ) : (
           
-    //       <Layout>
+          <Layout>
 
-    //         <div id="fb-root"></div>
-    //         <ErrorBoundary>
-    //           <Component {...pageProps} />
-    //         </ErrorBoundary>
+            <div id="fb-root"></div>
+            <ErrorBoundary>
+              <Component {...pageProps} />
+            </ErrorBoundary>
 
-    //       </Layout>
-    //       // <Component {...pageProps} />
-    //     )}
-    //   </BicatoraContexProvider>
-    // </ErrorBoundary>
+          </Layout>
+          // <Component {...pageProps} />
+        )}
+      </BicatoraContexProvider> */}
+    </ErrorBoundary>
   );
 }
 
