@@ -1,7 +1,7 @@
 import React from "react";
 import Recovery from "../../components/Account/Recovery";
 import Head from "next/head";
-function ForgotPasswordPages() {
+function ForgotPassword() {
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ function ForgotPasswordPages() {
   );
 }
 
-export default ForgotPasswordPages;
+export default ForgotPassword;
 
 export async function getStaticProps() {
   return {

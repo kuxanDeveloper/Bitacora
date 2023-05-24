@@ -19,13 +19,13 @@ function MyApp({ Component, pageProps }) {
           <Loading></Loading>
         ) : (
           <Layout>
-           
             <div id="fb-root"></div>
-             <ErrorBoundary>
-             
+            <ErrorBoundary>
               <Component {...pageProps} />
-            </ErrorBoundary> 
+            </ErrorBoundary>
+
           </Layout>
+          // <Component {...pageProps} />
         )}
       </BicatoraContexProvider>
     </ErrorBoundary>

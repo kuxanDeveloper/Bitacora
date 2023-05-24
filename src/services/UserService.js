@@ -77,7 +77,7 @@ function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   userSubject.next(null);
-  Router.push("/Account/Login");
+  Router.push("/account/Login");
 }
 
 function logoutLogin() {

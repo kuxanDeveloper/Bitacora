@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "../../components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
-function Loginpages({ cookie }) {
-  // useEffect(() => {
-  //   if (cookie) {
-  //     userService.logoutLogin();
-  //   }
-  // }, []);
+function Login({ cookie }) {
+  useEffect(() => {
+    if (cookie) {
+      userService.logoutLogin();
+    }
+  }, []);
 
   return (
     <>
@@ -35,26 +35,26 @@ function Loginpages({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      {/* <Logincomponents /> */}
+      <Logincomponents />
     </>
   );
 }
 
-export default Loginpages;
+export default Login;
 
-// export async function getServerSideProps(ctx) {
-//   const cookie = ctx.req.cookies["tokenUserCookie"];
-//   if (!cookie) {
-//     return {
-//       props: {
-//         cookie: false,
-//       },
-//     };
-//   } else {
-//     return {
-//       redirect: {
-//         destination: "/#Cactive",
-//       },
-//     };
-//   }
-// }
+export async function getServerSideProps(ctx) {
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  if (!cookie) {
+    return {
+      props: {
+        cookie: false,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/#Cactive",
+      },
+    };
+  }
+}
