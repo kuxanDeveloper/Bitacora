@@ -1,5 +1,5 @@
 import React from "react";
-import caseStyles from "../styles/Case.module.css";
+import caseStyles from "../styles/case.module.css";
 import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
 import {
