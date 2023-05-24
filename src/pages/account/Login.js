@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import Logincomponents from "@/components/Account/Logincomponents";
+import Logincomponents from "../../components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
 function Login({ cookie }) {
   useEffect(() => {
