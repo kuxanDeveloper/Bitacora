@@ -9,9 +9,7 @@ import * as Yup from "yup";
 
 function Logincomponents() {
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required(
-      "Campo de usuario obligatorio"
-    ),
+    username: Yup.string().required("Campo de usuario obligatorio"),
     password: Yup.string().required("Campo de contraseña obligatorio"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -84,12 +82,17 @@ function Logincomponents() {
             </Link>
 
             <div className={styleLogin.btn_container}>
-              <button disabled={formState.isSubmitting} className={`${styleLogin.btn_login}`}>  {/*${styleLogin.disabled}*/}
-                {formState.isSubmitting && (
-                  <span className="spinner-border spinner-border-sm mr-1"></span>
-                )}
-                Ingresar
-              </button>
+              {!formState.isSubmitting && (
+                <button
+                  className={`${styleLogin.btn_login} ${
+                    formState.isSubmitting && styleLogin.disabled
+                  }`}
+                >
+                  {" "}
+                  {/*${styleLogin.disabled}*/}
+                  Ingresar
+                </button>
+              )}
             </div>
           </form>
         </div>

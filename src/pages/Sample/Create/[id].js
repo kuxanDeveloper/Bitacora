@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import CreateSticker from "../../../components/Body/CreateSticker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
-function CreatePage({ ListadoGrupoActivo, cookie, id }) {
+function CreatePage({ ListadoGrupoActivo, id }) {
   return (
     <>
       <Head>

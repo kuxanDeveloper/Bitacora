@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "../../styles/CreateSticker.module.css";
-import { backhistory } from "../Tools/functiones";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -111,11 +110,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href=""
-              onClick={(e) => {
-                e.preventDefault();
-                backhistory();
-              }}
+              href="/6"
               className={styles.back_btn}
             >
               Volver{" "}
@@ -131,20 +126,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                   <p className={styles.sticker_title}>Sticker</p>
                   {/* <!-- imagenes --> */}
                   <div className={styles.images_container}>
-                    {/* <figure className={styles.sticker_figure}>
-                      <a href="">
-                        <ImageOptimize
-                          Values={{
-                            src: "/img/Camera@2x.png",
-                            alt: "Logo de camara",
-                            title: "Imagen número 1",
-                            classValue: styles.img_camera,
-                            width: 24,
-                            height: 24,
-                          }}
-                        ></ImageOptimize>
-                      </a>
-                    </figure> */}
                     <figure className={styles.sticker_figure}>
                       <Link
                         href=""

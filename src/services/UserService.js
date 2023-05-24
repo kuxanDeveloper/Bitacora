@@ -28,7 +28,8 @@ export const userService = {
   logoutLogin,
   InfoSample,
   listUserGetAll,
-  CreatSticker
+  CreatSticker,
+  ListTests,
 };
 
 async function login(username, password) {
@@ -40,7 +41,7 @@ async function login(username, password) {
   const tokenPassword = hashArray
     .map((bytes) => bytes.toString(16).padStart(2, "0"))
     .join("");
-
+debugger;
   const formDataLogin = await new FormData();
 
   formDataLogin.append("Num_Identidad", username);
@@ -155,6 +156,13 @@ function InfoSample(cookie, idSticker) {
   );
 }
 
+function ListTests(cookie, idGroup) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboPruebas?Id_grupo=${idGroup}`,
+    cookie
+  );
+}
+
 function listUserGetAll(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListUserGetAll`, cookie);
 }
@@ -170,9 +178,13 @@ function CreatSticker(
 
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter? "1":"0");
-  formData.append("Usuario_externo", UserCheckexter? "1":"0");
+  formData.append("Usuario_interno", UserCheckinter ? "1" : "0");
+  formData.append("Usuario_externo", UserCheckexter ? "1" : "0");
   formData.append("Observaciones_iniciales", ObservaInici);
 
-  return fetchWrapper.postHeader(`${baseUrl}/Stickers/GuardBitacoraMuestra`,null,formData)
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardBitacoraMuestra`,
+    null,
+    formData
+  );
 }
