@@ -30,6 +30,7 @@ export const userService = {
   listUserGetAll,
   CreatSticker,
   ListTests,
+  ListResults
 };
 
 async function login(username, password) {
@@ -159,6 +160,13 @@ function InfoSample(cookie, idSticker) {
 function ListTests(cookie, idGroup) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ComboPruebas?Id_grupo=${idGroup}`,
+    cookie
+  );
+}
+
+function ListResults(cookie, idPrueba) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboResultados?idPrueba=${idPrueba}`,
     cookie
   );
 }

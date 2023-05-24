@@ -3,25 +3,27 @@ import Head from "next/head";
 import {
   ListgroupApi,
   ListPruebaxGroupApi,
+  ListPlanResultadosxPru,
 } from "../../api/Sample/CreateResultApi";
 import ComponentCreateResult from "../../../components/Body/ResultCrud/Create";
 
 function PageCreateResult({ id, cookie }) {
   const [ListGroup, setListGroup] = useState([]);
+  const [ListResultados, setListResultados] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
   const [valueGroupchange, setvalueGroupchange] = useState("6");
+  const [valuePruebachange, setvaluePruebachange] = useState("1");
   useEffect(() => {
     ListgroupApi(cookie, setListGroup);
-    
   }, []);
 
   useEffect(() => {
-    ListPruebaxGroupApi(
-      cookie,
-      setListPruebas,
-      valueGroupchange
-    );
+    ListPruebaxGroupApi(cookie, setListPruebas, valueGroupchange);
   }, [valueGroupchange]);
+
+  useEffect(() => {
+    ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange);
+  }, [valuePruebachange]);
 
   return (
     <>
@@ -61,8 +63,11 @@ function PageCreateResult({ id, cookie }) {
       <ComponentCreateResult
         ListGroup={ListGroup}
         ListPruebas={ListPruebas}
+        ListResultados={ListResultados}
         valueGroupchange={valueGroupchange}
         setvalueGroupchange={setvalueGroupchange}
+        valuePruebachange={valuePruebachange}
+        setvaluePruebachange={setvaluePruebachange}
       />
     </>
   );
@@ -73,10 +78,7 @@ export default PageCreateResult;
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null
-    ) {
+    if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
 
@@ -85,7 +87,7 @@ export async function getServerSideProps(ctx) {
     return {
       props: {
         cookie: cookie,
-        id: ctx.query.id
+        id: ctx.query.id,
       },
     };
   } else {

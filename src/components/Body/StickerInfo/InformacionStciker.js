@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
+import {useContextBitacora} from "../../../context/BitacoraContext"
 function InformacionStciker({ data, CountSeguimienti }) {
+  const { setShowModal} = useContextBitacora();
   return (
     <>
       <div className={styles.card_sticker}>

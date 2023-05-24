@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../styles/StickerInfo.module.css";
-import { backhistory } from "../Tools/functiones";
 import Link from "next/link";
 import InformacionStciker from "./StickerInfo/InformacionStciker";
 import Lastfollow_up from "./StickerInfo/Lastfollow_up";
