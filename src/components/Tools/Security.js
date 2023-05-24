@@ -43,7 +43,7 @@ export const OnSubmitForward = ({ username }) => {
     confirmButtonText: "Cerrar",
   });
 
-  return Router.push({ pathname: "/Account/Login" });
+  return Router.push({ pathname: "/account/Login" });
 
   // userService
   //   .login(username, password)

@@ -63,7 +63,7 @@ export async function getServerSideProps(ctx) {
   } else {
     return {
       redirect: {
-        destination: "/Account/Login",
+        destination: "/account/Login",
       },
     };
   }

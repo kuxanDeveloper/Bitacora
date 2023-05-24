@@ -11,7 +11,7 @@ const baseUrl = `${
 const userSubject = new BehaviorSubject(
   process.browser && localStorage.getItem("tokenUserLS")
 );
-
+debugger;
 const cookies = new Cookies();
 
 export const userService = {
@@ -46,7 +46,7 @@ debugger;
 
   formDataLogin.append("Num_Identidad", username);
   formDataLogin.append("pass", tokenPassword);
-
+  debugger;
   let tokenGenerateLogin = await fetchWrapper.post(
     `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
     formDataLogin
@@ -78,7 +78,7 @@ function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   userSubject.next(null);
-  Router.push("/Account/Login");
+  Router.push("/account/Login");
 }
 
 function logoutLogin() {

@@ -24,9 +24,9 @@ export const BicatoraContexProvider = ({ children }) => {
     let url = router.asPath;
     const path = url.split("?")[0];
     const publicPaths = [
-      "/Account/Register",
-      "/Account/Login",
-      "/Account/ForgotPassword",
+      "/account/Register",
+      "/account/Login",
+      "/account/ForgotPassword",
       "/Privacypolicy",
     ];
 

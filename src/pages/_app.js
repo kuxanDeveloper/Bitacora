@@ -18,9 +18,7 @@ function MyApp({ Component, pageProps }) {
         {isPageLoading ? (
           <Loading></Loading>
         ) : (
-          
           <Layout>
-
             <div id="fb-root"></div>
             <ErrorBoundary>
               <Component {...pageProps} />

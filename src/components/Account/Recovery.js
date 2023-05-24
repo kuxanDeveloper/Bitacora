@@ -62,7 +62,7 @@ function Recovery() {
                 >
                   Recuperar Contraseña
                 </button>
-                <Link href={"/Account/Login"} className={Styles.btn_back}>
+                <Link href={"/account/Login"} className={Styles.btn_back}>
                   Cancelar
                 </Link>
               </div>
