@@ -288,9 +288,10 @@
 
     .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_title {
         display: block;
-        font-size: clamp(14px, 1.3rem, 1.6rem);
+        font-size: clamp(14px, 1.2rem, 1.6rem);
         color: #4b73bd;
         margin: 0.3rem 0;
+        padding-right: 20px;
     }
 
     .sticker_details .details_container .card .stickers_container .card_content .form_group .info_group .info_text {
