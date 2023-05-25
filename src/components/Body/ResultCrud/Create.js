@@ -49,11 +49,13 @@ function ComponentCreateResult({
             <option disabled value="">
               Seleccione una opción
             </option>
-            {ListPruebas.map((data, index) => (
-              <option key={index} value={data.COD_PRUEBA}>
-                {`${data.CODIGO_VISIBLE} - ${data.NOMBRE_PRUEBA}`}
-              </option>
-            ))}
+            {ListPruebas != undefined && ListPruebas != null
+              ? ListPruebas.map((data, index) => (
+                  <option key={index} value={data.COD_PRUEBA}>
+                    {`${data.CODIGO_VISIBLE} - ${data.NOMBRE_PRUEBA}`}
+                  </option>
+                ))
+              : ""}
           </select>
           <div>{errors.Codigo_prueba?.message}</div>
         </div>
@@ -89,11 +91,13 @@ function ComponentCreateResult({
             <option disabled value="">
               Seleccione una opción
             </option>
-            {ListResultados.map((data, index) => (
-              <option key={index} value={data.COD_PLANTILLA}>
-                {`${data.RESULTADO_PLANTILLA}`}
-              </option>
-            ))}
+            {ListResultados != null && ListResultados != undefined
+              ? ListResultados.map((data, index) => (
+                  <option key={index} value={data.COD_PLANTILLA}>
+                    {`${data.RESULTADO_PLANTILLA}`}
+                  </option>
+                ))
+              : ""}
           </select>
           <div>{errors.Codigo_resultado_preliminar_2?.message}</div>
         </div>
@@ -109,11 +113,13 @@ function ComponentCreateResult({
             <option disabled value="">
               Seleccione una opción
             </option>
-            {ListResultados.map((data, index) => (
-              <option key={index} value={data.COD_PLANTILLA}>
-                {`${data.RESULTADO_PLANTILLA}`}
-              </option>
-            ))}
+            {ListResultados != null && ListResultados != undefined
+              ? ListResultados.map((data, index) => (
+                  <option key={index} value={data.COD_PLANTILLA}>
+                    {`${data.RESULTADO_PLANTILLA}`}
+                  </option>
+                ))
+              : ""}
           </select>
           <div>{errors.Codigo_resultado_preliminar_3?.message}</div>
         </div>
@@ -129,11 +135,13 @@ function ComponentCreateResult({
             <option disabled value="">
               Seleccione una opción
             </option>
-            {ListResultados.map((data, index) => (
-              <option key={index} value={data.COD_PLANTILLA}>
-                {`${data.RESULTADO_PLANTILLA}`}
-              </option>
-            ))}
+            {ListResultados != null && ListResultados != undefined
+              ? ListResultados.map((data, index) => (
+                  <option key={index} value={data.COD_PLANTILLA}>
+                    {`${data.RESULTADO_PLANTILLA}`}
+                  </option>
+                ))
+              : ""}
           </select>
           <div>{errors.Codigo_resultado_final?.message}</div>
         </div>
