@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
-  ListgroupApi,
   ListPruebaxGroupApi,
   ListPlanResultadosxPru,
 } from "../../api/Sample/CreateResultApi";
 import ComponentCreateResult from "../../../components/Body/ResultCrud/Create";
 
-function PageCreateResult({ id, cookie }) {
-  const [ListGroup, setListGroup] = useState([]);
+function PageCreateResult({ id, cookie, group }) {
   const [ListResultados, setListResultados] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
-  const [valueGroupchange, setvalueGroupchange] = useState("6");
   const [valuePruebachange, setvaluePruebachange] = useState("1");
   useEffect(() => {
-    ListgroupApi(cookie, setListGroup);
+    ListPruebaxGroupApi(cookie, setListPruebas, group);
   }, []);
-
-  useEffect(() => {
-    ListPruebaxGroupApi(cookie, setListPruebas, valueGroupchange);
-  }, [valueGroupchange]);
 
   useEffect(() => {
     ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange);
@@ -61,13 +54,11 @@ function PageCreateResult({ id, cookie }) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <ComponentCreateResult
-        ListGroup={ListGroup}
         ListPruebas={ListPruebas}
         ListResultados={ListResultados}
-        valueGroupchange={valueGroupchange}
-        setvalueGroupchange={setvalueGroupchange}
-        valuePruebachange={valuePruebachange}
         setvaluePruebachange={setvaluePruebachange}
+        id={id}
+        group={group}
       />
     </>
   );
@@ -78,7 +69,12 @@ export default PageCreateResult;
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
-    if (ctx.query.id == undefined || ctx.query.id == null) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      ctx.query.group == null ||
+      ctx.query.group == undefined
+    ) {
       return { notFound: true };
     }
 
@@ -88,6 +84,7 @@ export async function getServerSideProps(ctx) {
       props: {
         cookie: cookie,
         id: ctx.query.id,
+        group: ctx.query.group,
       },
     };
   } else {

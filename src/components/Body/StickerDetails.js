@@ -64,6 +64,12 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                       pathname: "/Sample/CreateResult/[id]",
                       query: {
                         id: query.id,
+                        group:
+                          InforSampleDetails.infoBitacora != undefined &&
+                          InforSampleDetails.infoBitacora != null
+                            ? InforSampleDetails.infoBitacora[0]
+                                .ID_GRUPO_ASIGNADO
+                            : "",
                       },
                     }}
                   >

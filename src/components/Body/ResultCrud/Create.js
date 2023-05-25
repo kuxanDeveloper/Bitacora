@@ -1,57 +1,38 @@
 import React from "react";
-import Link from "next/link";
+import { onclickPruebaTarget } from "../../Tools/functiones";
+import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import Link from "next/link";
 function ComponentCreateResult({
-  ListGroup,
   ListPruebas,
   ListResultados,
-  valueGroupchange,
-  setvalueGroupchange,
-  valuePruebachange,
   setvaluePruebachange,
+  id,
+  group,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().required("Campo prueba obligatorio"),
-    GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     Codigo_resultado_preliminar_1: Yup.string(),
     Codigo_resultado_preliminar_2: Yup.string(),
     Codigo_resultado_preliminar_3: Yup.string(),
     Codigo_resultado_final: Yup.string(),
+    NumSticker: Yup.string(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState, setError, clearErrors } =
-    useForm(formOptions);
+  const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
 
   return (
     <section>
       <p>Crear seguimiento</p>
-      <form>
-        <div>
-          <label>Grupo</label>
-          <select
-            {...register("GrupoSticker")}
-            name="GrupoSticker"
-            id="GrupoSticker"
-            value={valueGroupchange}
-            onChange={(e) => {
-              setvalueGroupchange(e.target.value);
-            }}
-          >
-            <option disabled value="">
-              Seleccione una opción
-            </option>
-            {ListGroup.map((data, index) => (
-              <option key={index} value={data.Id_grupo}>
-                {data.NOMBRE_GRUPO}
-              </option>
-            ))}
-          </select>
-          <div>{errors.GrupoSticker?.message}</div>
-        </div>
+      <form onSubmit={handleSubmit(onSubmitCreateResult)}>
+        {/* <div>
+          <label>Grupo : {group}</label>
+
+        </div> */}
 
         <div>
           <label>Prueba</label>
@@ -62,6 +43,7 @@ function ComponentCreateResult({
             defaultValue={""}
             onChange={(e) => {
               setvaluePruebachange(e.target.value);
+              onclickPruebaTarget();
             }}
           >
             <option disabled value="">
@@ -98,21 +80,75 @@ function ComponentCreateResult({
 
         <div>
           <label>Resultado preliminar 2</label>
-
+          <select
+            {...register("Codigo_resultado_preliminar_2")}
+            name="Codigo_resultado_preliminar_2"
+            id="Codigo_resultado_preliminar_2"
+            defaultValue={""}
+          >
+            <option disabled value="">
+              Seleccione una opción
+            </option>
+            {ListResultados.map((data, index) => (
+              <option key={index} value={data.COD_PLANTILLA}>
+                {`${data.RESULTADO_PLANTILLA}`}
+              </option>
+            ))}
+          </select>
           <div>{errors.Codigo_resultado_preliminar_2?.message}</div>
         </div>
 
         <div>
           <label>Resultado preliminar 3</label>
-
+          <select
+            {...register("Codigo_resultado_preliminar_3")}
+            name="Codigo_resultado_preliminar_3"
+            id="Codigo_resultado_preliminar_3"
+            defaultValue={""}
+          >
+            <option disabled value="">
+              Seleccione una opción
+            </option>
+            {ListResultados.map((data, index) => (
+              <option key={index} value={data.COD_PLANTILLA}>
+                {`${data.RESULTADO_PLANTILLA}`}
+              </option>
+            ))}
+          </select>
           <div>{errors.Codigo_resultado_preliminar_3?.message}</div>
         </div>
 
         <div>
           <label>Resultado final</label>
-
+          <select
+            {...register("Codigo_resultado_final")}
+            name="Codigo_resultado_final"
+            id="Codigo_resultado_final"
+            defaultValue={""}
+          >
+            <option disabled value="">
+              Seleccione una opción
+            </option>
+            {ListResultados.map((data, index) => (
+              <option key={index} value={data.COD_PLANTILLA}>
+                {`${data.RESULTADO_PLANTILLA}`}
+              </option>
+            ))}
+          </select>
           <div>{errors.Codigo_resultado_final?.message}</div>
         </div>
+        <button onClick={() => setValue("NumSticker", id)}>
+          guardar cambios
+        </button>
+        <Link
+          href={{
+            pathname: "/Sample/FullDetails/[id]",
+            query: { id: id },
+            hash: "Pruebas",
+          }}
+        >
+          Cancelar
+        </Link>
       </form>
     </section>
   );
