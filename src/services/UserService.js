@@ -31,6 +31,7 @@ export const userService = {
   ListTests,
   ListResults,
   CrearResult,
+  CrearNote,
 };
 
 async function login(username, password) {
@@ -226,6 +227,21 @@ function CrearResult(
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
+    null,
+    formData
+  );
+}
+
+function CrearNote(
+  Observaciones_detalle,
+  NumSticker,
+) {
+  const formData = new FormData();
+  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Observaciones_detalle", Observaciones_detalle);
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,
     formData
   );
