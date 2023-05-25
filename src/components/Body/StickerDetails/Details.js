@@ -12,7 +12,7 @@ function Details({ data }) {
           height="30"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="#ff9300"
+          stroke="#fff"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -41,7 +41,10 @@ function Details({ data }) {
           <p className={styles.info_text}>{data.OBSERVACIONES_DETALLE}</p>
         </div>
       </div>
+      <hr />
+
     </div>
+    
   );
 }
 

@@ -231,7 +231,6 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   "cargando..."
                 )}
 
-                <hr />
               </div>
             </div>
           </div>
