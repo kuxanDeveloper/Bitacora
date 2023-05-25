@@ -186,7 +186,6 @@ export const FilterQuerySearch = (
   });
 };
 
-
 // export const useEffecIDPerformance = (
 //   cookie,
 //   id,
@@ -219,7 +218,7 @@ export const FilterQuerySearch = (
 //   setisSampleGeneral,
 //   router
 // ) => {
- 
+
 // };
 
 export const ClearFilter = (e, router, idGrupo) => {
@@ -248,7 +247,7 @@ export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
 };
 
 // export const useEffecPerformancePruResultado = (setPruebas, router) => {
- 
+
 // };
 
 export const EstadoFunction = (InforSampleDetails) => {
@@ -267,7 +266,7 @@ export const OnclickComboEstadoCase = (
   isUserInterno,
   isSampleGeneral
 ) => {
-  if (value.toLowerCase()==="true") {
+  if (value.toLowerCase() === "true") {
     if (hrefarmado.query != undefined && hrefarmado.query != null) {
       router.push({
         pathname: hrefarmado.pathname,
@@ -292,4 +291,11 @@ export const OnclickComboEstadoCase = (
       router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
     }
   }
+};
+
+export const onclickPruebaTarget = (valor, setvalueGroupchange) => {
+  document.getElementById("Codigo_resultado_preliminar_1").value = "";
+  document.getElementById("Codigo_resultado_preliminar_2").value = "";
+  document.getElementById("Codigo_resultado_preliminar_3").value = "";
+  document.getElementById("Codigo_resultado_final").value = "";
 };

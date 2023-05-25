@@ -11,7 +11,6 @@ const baseUrl = `${
 const userSubject = new BehaviorSubject(
   process.browser && localStorage.getItem("tokenUserLS")
 );
-debugger;
 const cookies = new Cookies();
 
 export const userService = {
@@ -30,7 +29,8 @@ export const userService = {
   listUserGetAll,
   CreatSticker,
   ListTests,
-  ListResults
+  ListResults,
+  CrearResult,
 };
 
 async function login(username, password) {
@@ -42,7 +42,7 @@ async function login(username, password) {
   const tokenPassword = hashArray
     .map((bytes) => bytes.toString(16).padStart(2, "0"))
     .join("");
-debugger;
+  debugger;
   const formDataLogin = await new FormData();
 
   formDataLogin.append("Num_Identidad", username);
@@ -152,7 +152,7 @@ function ListGroupForMue(
 
 function InfoSample(cookie, idSticker) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultado?Numero_Sticker=${idSticker}`,
+    `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultadoFullDatils?Numero_Sticker=${idSticker}`,
     cookie
   );
 }
@@ -192,6 +192,40 @@ function CreatSticker(
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
+    null,
+    formData
+  );
+}
+
+function CrearResult(
+  Codigo_prueba,
+  Codigo_resultado_preliminar_1,
+  Codigo_resultado_preliminar_2,
+  Codigo_resultado_preliminar_3,
+  Codigo_resultado_final,
+  NumSticker
+) {
+  const formData = new FormData();
+  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Codigo_prueba", Codigo_prueba);
+  formData.append(
+    "Codigo_resultado_preliminar_1",
+    Codigo_resultado_preliminar_1
+  );
+  formData.append(
+    "Codigo_resultado_preliminar_2",
+    Codigo_resultado_preliminar_2
+  );
+  formData.append(
+    "Codigo_resultado_preliminar_3",
+    Codigo_resultado_preliminar_3
+  );
+  formData.append("Codigo_resultado_final", Codigo_resultado_final);
+
+
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardBitacoraResultado`,
     null,
     formData
   );
