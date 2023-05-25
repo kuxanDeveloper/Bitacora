@@ -11,7 +11,6 @@ function ComponentCreateResult({
   ListResultados,
   setvaluePruebachange,
   id,
-  group,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().required("Campo prueba obligatorio"),
@@ -36,7 +35,7 @@ function ComponentCreateResult({
             </a>
           </div>
 
-          <p className={styles.title}>Crear seguimiento</p>
+          <p className={styles.title}>Crear prueba</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitCreateResult)}>
@@ -181,12 +180,15 @@ function ComponentCreateResult({
                   </div>
 
                   <div className={styles.btn_container_send}>
-                    <button
-                      className={styles.btn_send}
-                      onClick={() => setValue("NumSticker", id)}
-                    >
-                      guardar cambios
-                    </button>
+                    {!formState.isSubmitting && (
+                      <button
+                        className={styles.btn_send}
+                        onClick={() => setValue("NumSticker", id)}
+                      >
+                        guardar cambios
+                      </button>
+                    )}
+
                     <Link
                       className={styles.btn_cancel}
                       href={{

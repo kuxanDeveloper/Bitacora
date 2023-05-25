@@ -58,7 +58,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                 </button>
                 {Pruebas ? (
                   <Link
-                    title="agregar resultado"
+                    title="Agregar prueba"
                     className={styles.add_icon}
                     href={{
                       pathname: "/Sample/CreateResult/[id]",
@@ -75,24 +75,25 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="38"
-                      height="38"
+                      className="icon icon-tabler icon-tabler-square-plus"
+                      width="28"
+                      height="28"
                       viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2f2f2f"
+                      strokeWidth="2"
+                      stroke="#ffffff"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                      <path d="M9 12l6 0" />
-                      <path d="M12 9l0 6" />
+                      <rect x="4" y="4" width="16" height="16" rx="2" />
+                      <line x1="9" y1="12" x2="15" y2="12" />
+                      <line x1="12" y1="9" x2="12" y2="15" />
                     </svg>
                   </Link>
                 ) : (
                   <Link
-                    title="Agregar segumiento"
+                    title="Agregar nota"
                     className={styles.add_icon}
                     href={{
                       pathname: "/Sample/CreateFollowUp/[id]",
@@ -101,19 +102,20 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="38"
-                      height="38"
+                      className="icon icon-tabler icon-tabler-square-plus"
+                      width="28"
+                      height="28"
                       viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2f2f2f"
+                      strokeWidth="2"
+                      stroke="#ffffff"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                      <path d="M9 12l6 0" />
-                      <path d="M12 9l0 6" />
+                      <rect x="4" y="4" width="16" height="16" rx="2" />
+                      <line x1="9" y1="12" x2="15" y2="12" />
+                      <line x1="12" y1="9" x2="12" y2="15" />
                     </svg>
                   </Link>
                 )}
@@ -230,7 +232,6 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                 ) : (
                   "cargando..."
                 )}
-
               </div>
             </div>
           </div>

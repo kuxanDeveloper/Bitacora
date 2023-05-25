@@ -30,6 +30,10 @@ html {
  * Remove the margin in all browsers.
  */
 
+ textarea {
+  resize: vertical; /* user can resize vertically, but width is fixed */
+}
+
 body {
   margin: 0;
   font-family: 'IBM Plex Sans', sans-serif;

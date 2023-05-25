@@ -11,7 +11,6 @@ export const onSubmitCreate = ({
   UserCheckexter,
 }) => {
   const StickerRetorno = NumSticker;
-  debugger;
   return userService
     .CreatSticker(
       NumSticker,
@@ -21,7 +20,6 @@ export const onSubmitCreate = ({
       UserCheckexter
     )
     .then(() => {
-      debugger;
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
         pathname: "/Sample/FullDetails/[id]",
@@ -54,68 +52,7 @@ export const onSubmitCreate = ({
     });
 };
 
-// export const OnSubmitForward = ({ username }) => {
-//   Swal.fire({
-//     title: "¡Enviado!",
-//     text: `Se envio un correo al ${username} para restablecer la contraseña`,
-//     icon: "success",
-//     confirmButtonText: "Cerrar",
-//   });
 
-//   return Router.push({ pathname: "/Account/Login" });
-
-//   // userService
-//   //   .login(username, password)
-//   //   .then(() => {
-//   //     //   const returnUrl = router.query.returnUrl || "/";
-//   //     Router.push({ pathname: "/", hash: "Cactive" });
-//   //   })
-//   //   .catch((error) => {
-//   //     if (
-//   //       error == "Límite de tiempo excedido" ||
-//   //       error == "Usuario o clave incorrectos" ||
-//   //       error == "No se pudo hacer el login, revise los datos enviados"
-//   //     ) {
-//   //       Swal.fire({
-//   //         title: "¡Advertencia!",
-//   //         text: error,
-//   //         icon: "warning",
-//   //         confirmButtonText: "Cerrar",
-//   //       });
-//   //     } else {
-//   //       Swal.fire({
-//   //         title: "¡Ha ocurrido un error!",
-//   //         text: "Porfavor comunicarse con soporte técnico",
-//   //         icon: "error",
-//   //         confirmButtonText: "Cerrar",
-//   //       });
-//   //     }
-
-//   //     console.log(error, "erro in login");
-//   //   });
-// };
-
-// export const queryListUserAll = (cookie) => {
-//   return userService.listUserGetAll(cookie).catch((error) => {
-//     if (error == "401: Token incorrecto o vencido") {
-//       Swal.fire({
-//         title: "¡Advertencia!",
-//         text: error,
-//         icon: "warning",
-//         confirmButtonText: "Cerrar",
-//       });
-//     } else {
-//       Swal.fire({
-//         title: "¡Ha ocurrido un error!",
-//         text: "Porfavor comunicarse con soporte técnico",
-//         icon: "error",
-//         confirmButtonText: "Cerrar",
-//       });
-//     }
-//     console.log(error, "erro in Listado Usuario");
-//     return error;
-//   });
-// };
 
 export const QueryActivegroup = (cookie) => {
   return userService.ListGroupActive(cookie).catch((error) => {
@@ -162,7 +99,7 @@ export const onSubmitCreateResult = ({
       Router.push({
         pathname: "/Sample/FullDetails/[id]",
         query: { id: StickerRetorno },
-        hash: "#Pruebas",
+        hash: "Pruebas",
       });
     })
     .catch((error) => {
@@ -186,6 +123,50 @@ export const onSubmitCreateResult = ({
         });
       }
 
-      console.log(error, "erro in crear");
+      console.log(error, "erro in crear resultado");
     });
 };
+
+export const onSubmitCreateNote = ({
+  Observaciones_detalle,
+  NumSticker,
+}) => {
+  const StickerRetorno = NumSticker;
+  return userService
+    .CrearNote(
+      Observaciones_detalle,
+      NumSticker,
+    )
+    .then(() => {
+      //   const returnUrl = router.query.returnUrl || "/";
+      Router.push({
+        pathname: "/Sample/FullDetails/[id]",
+        query: { id: StickerRetorno },
+        hash: "Notas",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in crear nota");
+    });
+};
+
