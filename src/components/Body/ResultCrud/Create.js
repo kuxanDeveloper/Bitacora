@@ -39,7 +39,7 @@ function ComponentCreateResult({
           <p className={styles.title}>Crear seguimiento</p>
           <br />
           <div className={styles.card}>
-            <form>
+            <form onSubmit={handleSubmit(onSubmitCreateResult)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
@@ -62,11 +62,13 @@ function ComponentCreateResult({
                         <option disabled value="">
                           Seleccione una opción
                         </option>
-                        {ListPruebas.map((data, index) => (
-                          <option key={index} value={data.COD_PRUEBA}>
-                            {`${data.CODIGO_VISIBLE} - ${data.NOMBRE_PRUEBA}`}
-                          </option>
-                        ))}
+                        {ListPruebas != null && ListPruebas != undefined
+                          ? ListPruebas.map((data, index) => (
+                              <option key={index} value={data.COD_PRUEBA}>
+                                {`${data.CODIGO_VISIBLE} - ${data.NOMBRE_PRUEBA}`}
+                              </option>
+                            ))
+                          : ""}
                       </select>
 
                       <div>{errors.Codigo_prueba?.message}</div>
@@ -88,11 +90,13 @@ function ComponentCreateResult({
                         <option disabled value="">
                           Seleccione una opción
                         </option>
-                        {ListResultados.map((data, index) => (
-                          <option key={index} value={data.COD_PLANTILLA}>
-                            {`${data.RESULTADO_PLANTILLA}`}
-                          </option>
-                        ))}
+                        {ListResultados != null && ListResultados != undefined
+                          ? ListResultados.map((data, index) => (
+                              <option key={index} value={data.COD_PLANTILLA}>
+                                {`${data.RESULTADO_PLANTILLA}`}
+                              </option>
+                            ))
+                          : ""}
                       </select>
                       <div>{errors.Codigo_resultado_preliminar_1?.message}</div>
                     </div>
@@ -111,11 +115,13 @@ function ComponentCreateResult({
                         <option disabled value="">
                           Seleccione una opción
                         </option>
-                        {ListResultados.map((data, index) => (
-                          <option key={index} value={data.COD_PLANTILLA}>
-                            {`${data.RESULTADO_PLANTILLA}`}
-                          </option>
-                        ))}
+                        {ListResultados != null && ListResultados != undefined
+                          ? ListResultados.map((data, index) => (
+                              <option key={index} value={data.COD_PLANTILLA}>
+                                {`${data.RESULTADO_PLANTILLA}`}
+                              </option>
+                            ))
+                          : ""}
                       </select>
                       <div>{errors.Codigo_resultado_preliminar_2?.message}</div>
                     </div>
@@ -134,11 +140,13 @@ function ComponentCreateResult({
                         <option disabled value="">
                           Seleccione una opción
                         </option>
-                        {ListResultados.map((data, index) => (
-                          <option key={index} value={data.COD_PLANTILLA}>
-                            {`${data.RESULTADO_PLANTILLA}`}
-                          </option>
-                        ))}
+                        {ListResultados != null && ListResultados != undefined
+                          ? ListResultados.map((data, index) => (
+                              <option key={index} value={data.COD_PLANTILLA}>
+                                {`${data.RESULTADO_PLANTILLA}`}
+                              </option>
+                            ))
+                          : ""}
                       </select>
                       <div>{errors.Codigo_resultado_preliminar_3?.message}</div>
                     </div>
@@ -160,11 +168,13 @@ function ComponentCreateResult({
                         <option disabled value="">
                           Seleccione una opción
                         </option>
-                        {ListResultados.map((data, index) => (
-                          <option key={index} value={data.COD_PLANTILLA}>
-                            {`${data.RESULTADO_PLANTILLA}`}
-                          </option>
-                        ))}
+                        {ListResultados != null && ListResultados != undefined
+                          ? ListResultados.map((data, index) => (
+                              <option key={index} value={data.COD_PLANTILLA}>
+                                {`${data.RESULTADO_PLANTILLA}`}
+                              </option>
+                            ))
+                          : ""}
                       </select>
                       <div>{errors.Codigo_resultado_final?.message}</div>
                     </div>
@@ -193,15 +203,6 @@ function ComponentCreateResult({
             </form>
           </div>
         </div>
-      </section>
-
-      <section className={styles.create_results}>
-        <form onSubmit={handleSubmit(onSubmitCreateResult)}>
-          {/* <div>
-          <label>Grupo : {group}</label>
-
-        </div> */}
-        </form>
       </section>
     </>
   );
