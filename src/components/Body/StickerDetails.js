@@ -26,7 +26,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
             </Link>
           </div>
 
-          <p className={styles.title}>Informacion de sticker</p>
+          <p className={styles.title}>Detalle de sticker</p>
           <br />
           <div className={styles.card}>
             <div className={styles.stickers_container}>
@@ -76,8 +76,8 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-square-plus"
-                      width="28"
-                      height="28"
+                      width="25"
+                      height="25"
                       viewBox="0 0 24 24"
                       strokeWidth="2"
                       stroke="#ffffff"
@@ -103,8 +103,8 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="icon icon-tabler icon-tabler-square-plus"
-                      width="28"
-                      height="28"
+                      width="25"
+                      height="25"
                       viewBox="0 0 24 24"
                       strokeWidth="2"
                       stroke="#ffffff"
