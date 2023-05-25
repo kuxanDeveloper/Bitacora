@@ -10,7 +10,7 @@ function Results({ data }) {
           height="30"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="#ff9300"
+          stroke="#fff"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -65,6 +65,7 @@ function Results({ data }) {
           </p>
         </div>
       </div>
+      <hr/>
     </div>
   );
 }
