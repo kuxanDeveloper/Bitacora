@@ -32,6 +32,8 @@ export default function Pop_up({ onClose }) {
               <div className={styles.option_group}>
                 <p className={styles.option_title}>Tomar fotografia</p>
                 <a href="" className={styles.option_link}>
+                <input type="file" capture="camera" className={styles.hide_input}></input>
+
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="28"

@@ -107,8 +107,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
   return (
     <>
       <section className={styles.Create_sticker}>
-      <input type="file" capture="camera"></input>
-
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link href="/6" className={styles.back_btn}>
