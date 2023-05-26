@@ -9,6 +9,7 @@ export const onSubmitCreate = ({
   // estado,
   UserCheckinter,
   UserCheckexter,
+  file,
 }) => {
   const StickerRetorno = NumSticker;
   return userService
@@ -17,7 +18,8 @@ export const onSubmitCreate = ({
       GrupoSticker,
       ObservaInici,
       UserCheckinter,
-      UserCheckexter
+      UserCheckexter,
+      file
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -51,8 +53,6 @@ export const onSubmitCreate = ({
       console.log(error, "erro in crear");
     });
 };
-
-
 
 export const QueryActivegroup = (cookie) => {
   return userService.ListGroupActive(cookie).catch((error) => {
@@ -92,7 +92,7 @@ export const onSubmitCreateResult = ({
       Codigo_resultado_preliminar_2,
       Codigo_resultado_preliminar_3,
       Codigo_resultado_final,
-      NumSticker,
+      NumSticker
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -127,16 +127,10 @@ export const onSubmitCreateResult = ({
     });
 };
 
-export const onSubmitCreateNote = ({
-  Observaciones_detalle,
-  NumSticker,
-}) => {
+export const onSubmitCreateNote = ({ Observaciones_detalle, NumSticker }) => {
   const StickerRetorno = NumSticker;
   return userService
-    .CrearNote(
-      Observaciones_detalle,
-      NumSticker,
-    )
+    .CrearNote(Observaciones_detalle, NumSticker)
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
@@ -169,4 +163,3 @@ export const onSubmitCreateNote = ({
       console.log(error, "erro in crear nota");
     });
 };
-

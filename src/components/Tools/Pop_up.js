@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "../../styles/Pop_up.module.css";
+import ImageOptimize from "../Tools/ImageOptimize";
+import { UploadImageSticker } from "../Tools/functiones";
+export default function Pop_up({ onClose, ishabiliteBtn,
+  setishabiliteBtn,
+  ValueImagesrc,
+  setValueImagesrc, }) {
 
-export default function Pop_up({ onClose }) {
+    console.log(ValueImagesrc)
   return (
     <>
       <div className={styles.img_upload}>
@@ -28,71 +34,96 @@ export default function Pop_up({ onClose }) {
           </span>
 
           <div className={styles.container_body}>
-            <div className={styles.options}>
-              <div className={styles.option_group}>
-                <p className={styles.option_title}>Tomar fotografia</p>
-                <a href="" className={styles.option_link}>
-                <input type="file" capture="camera" className={styles.hide_input}></input>
+            {ishabiliteBtn ? (
+              <div className={styles.options}>
+                <div className={styles.option_group}>
+                  <p className={styles.option_title}>Tomar fotografia</p>
+                  <button className={styles.option_link}>
+                    <input
+                      onChange={(e) => UploadImageSticker(e, setValueImagesrc)}
+                      id="filePhoto"
+                      type="file"
+                      capture="camera"
+                      className={styles.hide_input}
+                    ></input>
 
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="#2f2f2f"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 20h-7a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3" />
-                    <path d="M14.973 13.406a3 3 0 1 0 -2.973 2.594" />
-                    <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M19.001 15.5v1.5" />
-                    <path d="M19.001 21v1.5" />
-                    <path d="M22.032 17.25l-1.299 .75" />
-                    <path d="M17.27 20l-1.3 .75" />
-                    <path d="M15.97 17.25l1.3 .75" />
-                    <path d="M20.733 20l1.3 .75" />
-                  </svg>
-                </a>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#2f2f2f"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 20h-7a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3" />
+                      <path d="M14.973 13.406a3 3 0 1 0 -2.973 2.594" />
+                      <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                      <path d="M19.001 15.5v1.5" />
+                      <path d="M19.001 21v1.5" />
+                      <path d="M22.032 17.25l-1.299 .75" />
+                      <path d="M17.27 20l-1.3 .75" />
+                      <path d="M15.97 17.25l1.3 .75" />
+                      <path d="M20.733 20l1.3 .75" />
+                    </svg>
+                  </button>
+                </div>
+
+                <div className={styles.option_group}>
+                  <p className={styles.option_title}>Subir archivo</p>
+
+                  <button className={styles.option_link}>
+                  <input
+                      onChange={(e) => UploadImageSticker(e, setValueImagesrc)}
+                      id="filePhoto2"
+                      type="file"
+                      className={styles.hide_input}
+                    ></input>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#2f2f2f"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M15 8h.01" />
+                      <path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5" />
+                      <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l3.5 3.5" />
+                      <path d="M14 14l1 -1c.679 -.653 1.473 -.829 2.214 -.526" />
+                      <path d="M19 22v-6" />
+                      <path d="M22 19l-3 -3l-3 3" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-
-              <div className={styles.option_group}>
-                <p className={styles.option_title}>Subir archivo</p>
-
-                <a href="" className={styles.option_link}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="#2f2f2f"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M15 8h.01" />
-                    <path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5" />
-                    <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l3.5 3.5" />
-                    <path d="M14 14l1 -1c.679 -.653 1.473 -.829 2.214 -.526" />
-                    <path d="M19 22v-6" />
-                    <path d="M22 19l-3 -3l-3 3" />
-                  </svg>
-                </a>
+            ) : (
+              ""
+            )}
+            {ValueImagesrc !== null ? (
+              <div className={styles.prevew}>
+                <ImageOptimize
+                  Values={{
+                    src: URL.createObjectURL(ValueImagesrc),
+                    alt: "sticker imagen",
+                    title: "Sticker",
+                    classValue: styles.prevew_img,
+                    width: 256,
+                    height: 256,
+                    style: {},
+                  }}
+                ></ImageOptimize>
               </div>
-            </div>
-
-            <div className={styles.prevew}>
-              {/* <img
-                className={styles.prevew_img}
-                src="https://images.unsplash.com/photo-1683914791767-764d03299719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=401&q=80"
-                alt=""
-              /> */}
-            </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

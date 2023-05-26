@@ -293,9 +293,146 @@ export const OnclickComboEstadoCase = (
   }
 };
 
-export const onclickPruebaTarget = (valor, setvalueGroupchange) => {
+export const onclickPruebaTarget = () => {
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
   document.getElementById("Codigo_resultado_preliminar_2").value = "";
   document.getElementById("Codigo_resultado_preliminar_3").value = "";
   document.getElementById("Codigo_resultado_final").value = "";
+};
+
+export const setCheckinvalue = (setValue) => {
+  var checbox1 = document.getElementById("UserCheckinter");
+  var checbox2 = document.getElementById("UserCheckexter");
+
+  if (
+    (checbox1.checked != null &&
+      checbox1.checked != undefined &&
+      checbox1.checked != false) ||
+    (checbox2.checked != null &&
+      checbox2.checked != undefined &&
+      checbox2.checked != false)
+  ) {
+    if (
+      checbox1.checked == null ||
+      checbox1.checked == undefined ||
+      checbox1.checked == false
+    ) {
+      setValue("UserCheckinter", "0");
+    } else {
+      setValue("UserCheckinter", "1");
+    }
+
+    if (
+      checbox2.checked == null ||
+      checbox2.checked == undefined ||
+      checbox2.checked == false
+    ) {
+      setValue("UserCheckexter", "0");
+    } else {
+      setValue("UserCheckexter", "1");
+    }
+  }
+};
+
+export const setImagenFile = (ValueImagesrc, setValue)=>{
+  setValue("file", ValueImagesrc);
+}
+
+export const uncheckUserInterExterno = () => {
+  var checkbox1 = document.getElementById("UserCheckinter");
+  var checkbox2 = document.getElementById("UserCheckexter");
+
+  checkbox1.onclick = function () {
+    if (checkbox1.checked != false) {
+      checkbox2.checked = null;
+    }
+  };
+
+  checkbox2.onclick = function () {
+    if (checkbox2.checked != false) {
+      checkbox1.checked = null;
+    }
+  };
+};
+
+export const UploadImageSticker = (event, setValueImagesrc) => {
+  const ext = event.target.value.match(/\.(.+)$/)[1];
+  const photo = document.getElementById("filePhoto");
+  const photo2 = document.getElementById("filePhoto2");
+  let validador = true;
+  setValueImagesrc(null);
+  switch (ext) {
+    case "jpg":
+      var sizebyte = parseInt(event.target.files[0].size / 1024);
+      if (sizebyte > 3001) {
+        Swal.fire({
+          title: "Tamaño",
+          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+        photo.value = "";
+        photo2.value = "";
+        validador = false;
+      }
+      break;
+    case "jpeg":
+      var sizebyte = parseInt(event.target.files[0].size / 1024);
+      if (sizebyte > 3001) {
+        Swal.fire({
+          title: "Tamaño",
+          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+        photo.value = "";
+        photo2.value = "";
+        validador = false;
+      }
+      break;
+    case "png":
+      var sizebyte = parseInt(event.target.files[0].size / 1024);
+      if (sizebyte > 3001) {
+        Swal.fire({
+          title: "Tamaño",
+          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+        photo.value = "";
+        photo2.value = "";
+        validador = false;
+      }
+      break;
+    case "bmp":
+      var sizebyte = parseInt(event.target.files[0].size / 1024);
+      if (sizebyte > 3001) {
+        Swal.fire({
+          title: "Tamaño",
+          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+        photo.value = "";
+        photo2.value = "";
+        validador = false;
+      }
+      break;
+    default:
+      Swal.fire({
+        title: "Formato",
+        text: `No se permite este tipo de formato para la imagen del sticker`,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      photo.value = "";
+      photo2.value = "";
+      validador = false;
+  }
+
+  if (validador) {
+    setValueImagesrc(event.target.files[0]);
+    photo.value = "";
+    photo2.value = "";
+  }
 };

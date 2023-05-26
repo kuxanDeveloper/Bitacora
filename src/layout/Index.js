@@ -5,8 +5,16 @@ import HeaderIndex from "../components/Header/HeaderIndex";
 import { initLogInactive } from "../components/Tools/Loginactivity";
 import { useContextBitacora } from "../context/BitacoraContext";
 function Index({ children }) {
-  const { authorized, Urlauthorized, showModal, setShowModal } =
-    useContextBitacora();
+  const {
+    authorized,
+    Urlauthorized,
+    showModal,
+    setShowModal,
+    ishabiliteBtn,
+    setishabiliteBtn,
+    ValueImagesrc,
+    setValueImagesrc,
+  } = useContextBitacora();
 
   const HandleButtonClick_Close = (stateModal) => {
     setShowModal(stateModal);
@@ -27,6 +35,10 @@ function Index({ children }) {
               onClose={() => {
                 HandleButtonClick_Close(false);
               }}
+              ishabiliteBtn={ishabiliteBtn}
+              setishabiliteBtn={setishabiliteBtn}
+              ValueImagesrc={ValueImagesrc}
+              setValueImagesrc={setValueImagesrc}
             ></Pop_up>
           ) : (
             ""
