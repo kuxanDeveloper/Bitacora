@@ -181,16 +181,17 @@ function CreatSticker(
   GrupoSticker,
   ObservaInici,
   UserCheckinter,
-  UserCheckexter
+  UserCheckexter,
+  file
 ) {
   const formData = new FormData();
 
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter ? "1" : "0");
-  formData.append("Usuario_externo", UserCheckexter ? "1" : "0");
+  formData.append("Usuario_interno", UserCheckinter);
+  formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
-
+  formData.append("file", file);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
     null,
@@ -223,8 +224,6 @@ function CrearResult(
   );
   formData.append("Codigo_resultado_final", Codigo_resultado_final);
 
-
-  
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
     null,
@@ -232,14 +231,11 @@ function CrearResult(
   );
 }
 
-function CrearNote(
-  Observaciones_detalle,
-  NumSticker,
-) {
+function CrearNote(Observaciones_detalle, NumSticker) {
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Observaciones_detalle", Observaciones_detalle);
-  
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,
