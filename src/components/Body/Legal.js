@@ -46,8 +46,8 @@ function Legal() {
               src: "/img/Becton_Dickinson_logo64x64.png",
               alt: "Login BD",
               classValue: LegalStyles.logo_img,
-              width: 64,
-              height: 64,
+              width: 70,
+              height: 70,
               style: {},
             }}
           />
