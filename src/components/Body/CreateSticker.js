@@ -77,8 +77,8 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                               alt: "Logo de camara",
                               title: "Imagen",
                               classValue: styles.img_camera,
-                              width: 24,
-                              height: 24,
+                              width: 34,
+                              height: 34,
                             }}
                           ></ImageOptimize>
                         </Link>

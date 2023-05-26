@@ -69,6 +69,10 @@
     gap: 10px;
 }
 
+.Create_sticker .sticker_container .card .stickers_container .card_sticker .images_container img{
+    object-fit: contain;
+}
+
 .Create_sticker .sticker_container .card .stickers_container .card_sticker .images_container .sticker_figure {
     margin: 0;
     width: 100%;
@@ -77,6 +81,8 @@
     border-radius: 10px;
     text-align: center;
 }
+
+
 
 .Create_sticker .sticker_container .card .stickers_container .card_sticker .images_container .sticker_figure .img_camera {
     margin-top: 16px;
