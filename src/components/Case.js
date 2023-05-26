@@ -180,8 +180,7 @@ export default function Case({
                       <div className={caseStyles.sticker}>
                         <p className={caseStyles.sticker_title}>Sticker</p>
 
-                        <div className={caseStyles._image}></div>
-                        <div className={caseStyles._image}></div>
+                        <img className={caseStyles._image}/>
                       </div>
 
                       <div className={caseStyles.card_body}>
@@ -222,8 +221,7 @@ export default function Case({
                     <div className={caseStyles.sticker}>
                       <p className={caseStyles.sticker_title}>Sticker</p>
 
-                      <div className={caseStyles._image}></div>
-                      <div className={caseStyles._image}></div>
+                      <img className={caseStyles._image}/>
                     </div>
 
                     <div className={caseStyles.card_body}>
@@ -261,8 +259,7 @@ export default function Case({
                     <div className={caseStyles.sticker}>
                       <p className={caseStyles.sticker_title}>Sticker</p>
 
-                      <div className={caseStyles._image}></div>
-                      <div className={caseStyles._image}></div>
+                      <img className={caseStyles._image}/>
                     </div>
 
                     <div className={caseStyles.card_body}>
@@ -301,8 +298,7 @@ export default function Case({
                   <div className={caseStyles.sticker}>
                     <p className={caseStyles.sticker_title}>Sticker</p>
 
-                    <div className={caseStyles._image}></div>
-                    <div className={caseStyles._image}></div>
+                    <img className={caseStyles._image}/>
                   </div>
 
                   <div className={caseStyles.card_body}>
@@ -338,8 +334,7 @@ export default function Case({
                   <div className={caseStyles.sticker}>
                     <p className={caseStyles.sticker_title}>Sticker</p>
 
-                    <div className={caseStyles._image}></div>
-                    <div className={caseStyles._image}></div>
+                    <img className={caseStyles._image}/>
                   </div>
 
                   <div className={caseStyles.card_body}>
