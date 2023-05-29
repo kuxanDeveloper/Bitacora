@@ -97,6 +97,8 @@ export default function Home({
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
+
+
       <Filters
         ListadoGrupoActivo={ListadoGrupoActivo}
         isActiveGroup={true}
