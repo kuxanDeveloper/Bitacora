@@ -7,7 +7,11 @@ import Filters from "../components/Body/Filters";
 import { useRouter } from "next/router";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
-function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
+function HomeMuestraxGrupo({
+  cookie,
+  query,
+  ListadoUsuariosRegistrados,
+}) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
@@ -256,7 +260,7 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
+    const ListadoUsuariosRegistrados =  await queryListUserAll(cookie);
     return {
       props: {
         cookie: cookie,

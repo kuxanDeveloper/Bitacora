@@ -1,5 +1,4 @@
 import React from "react";
-import caseStyles from "../styles/case.module.css";
 import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
 import {
@@ -12,6 +11,8 @@ import {
   UserExternosActiveGenerales,
   UserExternosActiveUrgencias,
 } from "./Tools/functiones";
+import CaseComponent from "./Body/Casecomponents/CaseComponent";
+import caseStyles from "../styles/case.module.css";
 import Link from "next/link";
 export default function Case({
   ListadoGrupo,
@@ -62,7 +63,6 @@ export default function Case({
       ></CasesStatusUser>
       {/* grupos */}
 
-      
       <CaseNav
         HrefArmado={HrefArmado}
         ListadoGrupo={ListadoGrupo}
@@ -71,18 +71,7 @@ export default function Case({
         isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-      {/* <div className={caseStyles.filters_case}>
-        <select className={caseStyles.select_filter}>
-          <option>1</option>
-          <option>casos Activos </option>
-          <option>casos inactivos</option>
-        </select>
-        <select className={caseStyles.select_filter}>
-          <option >Tipo de caso</option>
-          <option>casos internos</option>
-          <option>casos externos</option>
-        </select>
-      </div> */}
+
       <section className={caseStyles.cases}>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
@@ -134,241 +123,24 @@ export default function Case({
             ? isUserInterno
               ? isSampleGeneral
                 ? ListadoUsuariosInternosActivesGenerales.map((data, index) => (
-                    <div key={index} className={caseStyles.card}>
-                      <div className={caseStyles.sticker}>
-                        <p className={caseStyles.sticker_title}>Sticker</p>
-
-                        <img className={caseStyles._image}>
-                          
-                        </img>
-                      </div>
-
-                      <div className={caseStyles.card_body}>
-                        <span
-                          className={`${caseStyles.card_state} ${caseStyles.active}`}
-                        ></span>
-                        <span className={caseStyles.body_title}>
-                          N° Sticker
-                        </span>
-                        <p className={caseStyles.card_number}>
-                          {data.NUMERO_STICKER}
-                        </p>
-                        <span className={caseStyles.body_title}>
-                          {" "}
-                          Fecha de Ingreso
-                        </span>
-                        <p className={caseStyles.card_date}>
-                          {data.FECHA_FORMAT_CREADO_BITACORA}
-                        </p>
-
-                        <div className={caseStyles.card_btn_container}>
-                          <Link
-                            href={{
-                              pathname: "/Sample/ViewDetails/[id]",
-                              query: { id: data.NUMERO_STICKER },
-                            }}
-                            className={caseStyles.btn_sticker}
-                          >
-                            Ver Más
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                    <CaseComponent key={index} data={data}></CaseComponent>
                   ))
                 : ListadoUsuariosInternosActivesUrgencias.map((data, index) => (
-                    <div key={index} className={caseStyles.card}>
-                      <div className={caseStyles.sticker}>
-                        <p className={caseStyles.sticker_title}>Sticker</p>
-
-                        <div className={caseStyles._image}></div>
-                        <div className={caseStyles._image}></div>
-                      </div>
-
-                      <div className={caseStyles.card_body}>
-                        <span
-                          className={`${caseStyles.card_state} ${caseStyles.active}`}
-                        ></span>
-                        <span className={caseStyles.body_title}>
-                          N° Sticker
-                        </span>
-                        <p className={caseStyles.card_number}>
-                          {data.NUMERO_STICKER}
-                        </p>
-                        <span className={caseStyles.body_title}>
-                          {" "}
-                          Fecha de Ingreso
-                        </span>
-                        <p className={caseStyles.card_date}>
-                          {data.FECHA_FORMAT_CREADO_BITACORA}
-                        </p>
-
-                        <div className={caseStyles.card_btn_container}>
-                          <Link
-                            href={{
-                              pathname: "/Sample/ViewDetails/[id]",
-                              query: { id: data.NUMERO_STICKER },
-                            }}
-                            className={caseStyles.btn_sticker}
-                          >
-                            Ver Más
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                    <CaseComponent key={index} data={data}></CaseComponent>
                   ))
               : isSampleGeneral
               ? ListadoUsuariosExternosActivesGenerales.map((data, index) => (
-                  <div key={index} className={caseStyles.card}>
-                    <div className={caseStyles.sticker}>
-                      <p className={caseStyles.sticker_title}>Sticker</p>
-
-                      <div className={caseStyles._image}></div>
-                      <div className={caseStyles._image}></div>
-                    </div>
-
-                    <div className={caseStyles.card_body}>
-                      <span
-                        className={`${caseStyles.card_state} ${caseStyles.active}`}
-                      ></span>
-                      <span className={caseStyles.body_title}>N° Sticker</span>
-                      <p className={caseStyles.card_number}>
-                        {data.NUMERO_STICKER}
-                      </p>
-                      <span className={caseStyles.body_title}>
-                        {" "}
-                        Fecha de Ingreso
-                      </span>
-                      <p className={caseStyles.card_date}>
-                        {data.FECHA_FORMAT_CREADO_BITACORA}
-                      </p>
-
-                      <div className={caseStyles.card_btn_container}>
-                        <Link
-                          href={{
-                            pathname: "/Sample/ViewDetails/[id]",
-                            query: { id: data.NUMERO_STICKER },
-                          }}
-                          className={caseStyles.btn_sticker}
-                        >
-                          Ver Más
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  <CaseComponent key={index} data={data}></CaseComponent>
                 ))
               : ListadoUsuariosExternosActivesUrgencias.map((data, index) => (
-                  <div key={index} className={caseStyles.card}>
-                    <div className={caseStyles.sticker}>
-                      <p className={caseStyles.sticker_title}>Sticker</p>
-
-                      <div className={caseStyles._image}></div>
-                      <div className={caseStyles._image}></div>
-                    </div>
-
-                    <div className={caseStyles.card_body}>
-                      <span
-                        className={`${caseStyles.card_state} ${caseStyles.active}`}
-                      ></span>
-                      <span className={caseStyles.body_title}>N° Sticker</span>
-                      <p className={caseStyles.card_number}>
-                        {data.NUMERO_STICKER}
-                      </p>
-                      <span className={caseStyles.body_title}>
-                        {" "}
-                        Fecha de Ingreso
-                      </span>
-                      <p className={caseStyles.card_date}>
-                        {data.FECHA_FORMAT_CREADO_BITACORA}
-                      </p>
-
-                      <div className={caseStyles.card_btn_container}>
-                        <Link
-                          href={{
-                            pathname: "/Sample/ViewDetails/[id]",
-                            query: { id: data.NUMERO_STICKER },
-                          }}
-                          className={caseStyles.btn_sticker}
-                        >
-                          Ver Más
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                  <CaseComponent key={index} data={data}></CaseComponent>
                 ))
             : isUserInterno
             ? ListadoMuestrasInactiveUserInter.map((data, index) => (
-                <div key={index} className={caseStyles.card}>
-                  <div className={caseStyles.sticker}>
-                    <p className={caseStyles.sticker_title}>Sticker</p>
-
-                    <div className={caseStyles._image}></div>
-                    <div className={caseStyles._image}></div>
-                  </div>
-
-                  <div className={caseStyles.card_body}>
-                    <span className={`${caseStyles.card_state}`}></span>
-                    <span className={caseStyles.body_title}>N° Sticker</span>
-                    <p className={caseStyles.card_number}>
-                      {data.NUMERO_STICKER}
-                    </p>
-                    <span className={caseStyles.body_title}>
-                      {" "}
-                      Fecha de Ingreso
-                    </span>
-                    <p className={caseStyles.card_date}>
-                      {data.FECHA_FORMAT_CREADO_BITACORA}
-                    </p>
-
-                    <div className={caseStyles.card_btn_container}>
-                      <Link
-                        href={{
-                          pathname: "/Sample/ViewDetails/[id]",
-                          query: { id: data.NUMERO_STICKER },
-                        }}
-                        className={caseStyles.btn_sticker}
-                      >
-                        Ver Más
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <CaseComponent key={index} data={data}></CaseComponent>
               ))
             : ListadoMuestrasInactiveUserExterno.map((data, index) => (
-                <div key={index} className={caseStyles.card}>
-                  <div className={caseStyles.sticker}>
-                    <p className={caseStyles.sticker_title}>Sticker</p>
-
-                    <div className={caseStyles._image}></div>
-                    <div className={caseStyles._image}></div>
-                  </div>
-
-                  <div className={caseStyles.card_body}>
-                    <span className={`${caseStyles.card_state}`}></span>
-                    <span className={caseStyles.body_title}>N° Sticker</span>
-                    <p className={caseStyles.card_number}>
-                      {data.NUMERO_STICKER}
-                    </p>
-                    <span className={caseStyles.body_title}>
-                      {" "}
-                      Fecha de Ingreso
-                    </span>
-                    <p className={caseStyles.card_date}>
-                      {data.FECHA_FORMAT_CREADO_BITACORA}
-                    </p>
-
-                    <div className={caseStyles.card_btn_container}>
-                      <Link
-                        href={{
-                          pathname: "/Sample/ViewDetails/[id]",
-                          query: { id: data.NUMERO_STICKER },
-                        }}
-                        className={caseStyles.btn_sticker}
-                      >
-                        Ver Más
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                <CaseComponent key={index} data={data}></CaseComponent>
               ))}
         </div>
       </section>

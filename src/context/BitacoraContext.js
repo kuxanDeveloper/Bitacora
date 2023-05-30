@@ -14,6 +14,10 @@ export const BicatoraContexProvider = ({ children }) => {
   const [MenuShow, setMenuShow] = useState(false);
   const [ishabiliteBtn, setishabiliteBtn] = useState(false);
   const [ValueImagesrc, setValueImagesrc] = useState(null);
+  const [ValueImagesrc2, setValueImagesrc2] = useState(null);
+  const [isImagenOne, setisImagenOne] = useState(false);
+  const [DobleImagen, setdobleImagen] = useState(false);
+  const [isImagenExterna, setisImagenExterna] = useState(false);
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
@@ -80,6 +84,14 @@ export const BicatoraContexProvider = ({ children }) => {
         setishabiliteBtn,
         ValueImagesrc,
         setValueImagesrc,
+        ValueImagesrc2,
+        setValueImagesrc2,
+        isImagenOne,
+        setisImagenOne,
+        DobleImagen,
+        setdobleImagen,
+        isImagenExterna,
+        setisImagenExterna,
       }}
     >
       {children}

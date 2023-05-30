@@ -72,7 +72,7 @@ export default function StickerInfo({ InforSampleDetails, id }) {
                       InforSampleDetails.infoResultado
                         .slice(0, 1)
                         .map((data, index) => (
-                        <Result data={data} key={Result}></Result>
+                        <Result  data={data} key={index}></Result>
                         ))
                     ) : (
                       <h2>Sin resultado registrado</h2>

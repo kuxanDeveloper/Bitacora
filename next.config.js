@@ -53,8 +53,17 @@ const nextConfig = withPWA({
   swcMinify: true,
 
   i18n: {
-    locales: ["es"],
-    defaultLocale: "es",
+    locales: ["es-co"],
+    defaultLocale: "es-co",
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 });
 

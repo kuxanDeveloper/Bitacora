@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
 import { onSubmitCreateNote } from "../../Tools/CRUD";
 import styles from "../../../styles/CreateNotes.module.scss";
-
+import { useContextBitacora } from "../../../context/BitacoraContext";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentsCreateNote({ id }) {
+  const {
+    setValueImagesrc,
+    ValueImagesrc,
+    setishabiliteBtn,
+    setShowModal,
+    setisImagenOne,
+  } = useContextBitacora();
+
   const validationSchema = Yup.object().shape({
     Observaciones_detalle: Yup.string().required(
       "Campo observaciones obligatorio"
     ),
     NumSticker: Yup.string(),
+    file: Yup.mixed(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
+
+  useEffect(() => {
+    setValueImagesrc(null);
+  }, []);
 
   return (
     <>
@@ -34,6 +48,66 @@ function ComponentsCreateNote({ id }) {
             <form onSubmit={handleSubmit(onSubmitCreateNote)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
+                  {/* <!-- imagenes --> */}
+                  <div className={styles.images_container}>
+                    {ValueImagesrc != null ? (
+                      <>
+                        <ImageOptimize
+                          Values={{
+                            src: URL.createObjectURL(ValueImagesrc),
+                            alt: "sticker",
+                            title: "imagen nota",
+                            classValue: styles.sticker_figure,
+                            width: 80,
+                            height: 65,
+                          }}
+                        ></ImageOptimize>
+                        <Link
+                          href=""
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowModal(true);
+                            setishabiliteBtn(true);
+                            setisImagenOne(true);
+                          }}
+                        >
+                          <ImageOptimize
+                            Values={{
+                              src: "/img/Camera@2x.png",
+                              alt: "Logo de camara",
+                              title: "Imagen",
+                              classValue: styles.img_camera,
+                              width: 34,
+                              height: 34,
+                            }}
+                          ></ImageOptimize>
+                        </Link>
+                      </>
+                    ) : (
+                      <figure className={styles.sticker_figure}>
+                        <Link
+                          href=""
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowModal(true);
+                            setishabiliteBtn(true);
+                            setisImagenOne(true);
+                          }}
+                        >
+                          <ImageOptimize
+                            Values={{
+                              src: "/img/Camera@2x.png",
+                              alt: "Logo de camara",
+                              title: "Imagen",
+                              classValue: styles.img_camera,
+                              width: 24,
+                              height: 24,
+                            }}
+                          ></ImageOptimize>
+                        </Link>
+                      </figure>
+                    )}
+                  </div>
                   {/* <!-- estado --> */}
 
                   <div className={styles.form_group}>
@@ -66,7 +140,10 @@ function ComponentsCreateNote({ id }) {
                     {!formState.isSubmitting && (
                       <button
                         className={styles.btn_send}
-                        onClick={() => setValue("NumSticker", id)}
+                        onClick={() => {
+                          setValue("NumSticker", id);
+                          setValue("file", ValueImagesrc);
+                        }}
                       >
                         Guardar cambios
                       </button>
@@ -89,8 +166,6 @@ function ComponentsCreateNote({ id }) {
           </div>
         </div>
       </section>
-
-  
     </>
   );
 }

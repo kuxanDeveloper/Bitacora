@@ -1,7 +1,4 @@
 import Swal from "sweetalert2";
-import { useEffect } from "react";
-// import { ApiQueryGeneralSample } from "../../pages/api/[id]";
-import { useRouter } from "next/router";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
   return this;
@@ -334,9 +331,10 @@ export const setCheckinvalue = (setValue) => {
   }
 };
 
-export const setImagenFile = (ValueImagesrc, setValue)=>{
+export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
   setValue("file", ValueImagesrc);
-}
+  setValue("file2", ValueImagesrc2);
+};
 
 export const uncheckUserInterExterno = () => {
   var checkbox1 = document.getElementById("UserCheckinter");

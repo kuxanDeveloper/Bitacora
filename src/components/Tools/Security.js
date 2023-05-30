@@ -94,7 +94,7 @@ export const queryListUserAll = (cookie) => {
       });
     }
     console.log(error, "erro in Listado Usuario");
-    return error;
+    return null;
   });
 };
 
@@ -116,7 +116,7 @@ export const QueryActivegroup = (cookie) => {
       });
     }
     console.log(error, "erro in Activo grupo");
-    return error;
+    return null;
   });
 };
 
@@ -139,7 +139,7 @@ export const QueryInactivegroup = (cookie) => {
     }
 
     console.log(error, "erro in inactive grupo linea ");
-    return error;
+    return null;
   });
 };
 
@@ -202,7 +202,7 @@ export const QueryMueForGroup = (
         });
       }
 
-      console.log(error, "erro in login");
+      console.log(error, "erro in active grupo");
       return error;
     });
 };
@@ -225,7 +225,7 @@ export const QueryMuestraEdit = (cookie, idSticker) => {
       });
     }
 
-    console.log(error, "erro in login");
+    console.log(error, "erro in muestra edit");
     return error;
   });
 };
@@ -249,7 +249,7 @@ export const queryTestListxGroup = (cookie, idGroup) =>{
       });
     }
 
-    console.log(error, "erro in login");
+    console.log(error, "erro in listado de prueba grupo");
     return error;
   });
 }
