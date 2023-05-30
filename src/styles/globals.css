@@ -405,6 +405,13 @@ template {
 }
 
 
+/* utilidades */
+
+.no_margin {
+  margin: 0;
+}
+
+
 /* clases globales de contenedores */
 
 .cases_container {

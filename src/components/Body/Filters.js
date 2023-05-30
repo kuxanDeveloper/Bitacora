@@ -7,6 +7,7 @@ import {
 import filterStyles from "../../styles/filters.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CaseStatus from "../CaseStatus";
 export default function Filters({
   CasosActivo_Inactivos,
   isActiveGroup,
@@ -42,7 +43,19 @@ export default function Filters({
 
   return (
     <>
-      <div className={ isActiveGroup ? `${filterStyles.filters} ${filterStyles.special_filters}` : filterStyles.filters  }>
+      <div
+        className={
+          isActiveGroup
+            ? `${filterStyles.filters} ${filterStyles.special_filters}`
+            : filterStyles.filters
+        }
+      >
+        <CaseStatus
+          HrefArmado={{ pathname: "/" }}
+          isTrueActive={true}
+          isActiveCase={true}
+        ></CaseStatus>
+
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
@@ -73,7 +86,13 @@ export default function Filters({
                   value={CasosActivo_Inactivos}
                   name="ListCasos"
                   onChange={(e) =>
-                    OnclickComboEstadoCase(e.target.value, router, HrefArmado, isUserInterno, isSampleGeneral)
+                    OnclickComboEstadoCase(
+                      e.target.value,
+                      router,
+                      HrefArmado,
+                      isUserInterno,
+                      isSampleGeneral
+                    )
                   }
                   className={filterStyles.filter_input_w100}
                 >
