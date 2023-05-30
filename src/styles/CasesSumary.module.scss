@@ -1,0 +1,100 @@
+.CasesSumary {
+  height: calc(100vh - 40px);
+  background-image: url("https://images.unsplash.com/photo-1631824686833-deb5156dea8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=518&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+  }
+  .container {
+    .card {
+      position: relative;
+      width: 270px;
+      background: rgba(3, 3, 3, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding-right: 45px;
+      text-decoration: none;
+      border-top: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+
+      .card_arrow {
+        position: absolute;
+        right: 5px;
+        top: calc(50% - 30px);
+      }
+
+      .title {
+        font-size: clamp(14px, 1.4rem, 1.5rem);
+        color: #fff;
+        font-weight: 600;
+        text-align: right;
+        text-decoration: none;
+      }
+      .card_paragraph {
+        font-size: clamp(14px, 1.1rem, 1.2rem);
+        color: #fff;
+        text-align: right;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+    .CasesSumary {
+        height: calc(100vh - 64px);
+        background-image: url("https://images.unsplash.com/photo-1631824686833-deb5156dea8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=518&q=80");
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+        a {
+          text-decoration: none;
+        }
+        .container {
+          .card {
+            position: relative;
+            width: 360px;
+            background: rgba(3, 3, 3, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding-right: 65px;
+            text-decoration: none;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+      
+            .card_arrow {
+              position: absolute;
+              right: 5px;
+              top: calc(50% - 30px);
+            }
+      
+            .title {
+              font-size: clamp(14px, 1.4rem, 1.5rem);
+              color: #fff;
+              font-weight: 600;
+              text-align: right;
+              text-decoration: none;
+            }
+            .card_paragraph {
+              font-size: clamp(14px, 1.1rem, 1.2rem);
+              color: #fff;
+              text-align: right;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+      
+}

@@ -63,6 +63,7 @@ export default function Case({
       ></CasesStatusUser>
       {/* grupos */}
 
+
       <CaseNav
         HrefArmado={HrefArmado}
         ListadoGrupo={ListadoGrupo}
