@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/CreateSticker.module.css";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
@@ -13,8 +13,15 @@ import { onSubmitCreate } from "../Tools/CRUD";
 import * as Yup from "yup";
 import { useContextBitacora } from "../../context/BitacoraContext";
 function CreateSticker({ ListadoGrupoActivo, id }) {
-  const { setShowModal, setishabiliteBtn, ValueImagesrc } =
-    useContextBitacora();
+  const {
+    setShowModal,
+    setishabiliteBtn,
+    ValueImagesrc,
+    ValueImagesrc2,
+    setisImagenOne,
+    setValueImagesrc,
+    setValueImagesrc2,
+  } = useContextBitacora();
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
@@ -24,7 +31,13 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     UserCheckinter: Yup.string().required("Campo obligatorio"),
     UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed(),
+    file2: Yup.mixed(),
   });
+
+  useEffect(() => {
+    setValueImagesrc(null);
+    setValueImagesrc2(null);
+  }, []);
 
   //The class name can vary
 
@@ -69,6 +82,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                             e.preventDefault();
                             setShowModal(true);
                             setishabiliteBtn(true);
+                            setisImagenOne(true);
                           }}
                         >
                           <ImageOptimize
@@ -91,6 +105,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                             e.preventDefault();
                             setShowModal(true);
                             setishabiliteBtn(true);
+                            setisImagenOne(true);
                           }}
                         >
                           <ImageOptimize
@@ -106,43 +121,68 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         </Link>
                       </figure>
                     )}
+
+                    {ValueImagesrc2 != null ? (
+                      <>
+                        <ImageOptimize
+                          Values={{
+                            src: URL.createObjectURL(ValueImagesrc2),
+                            alt: "sticker",
+                            title: "imagen sticker 2",
+                            classValue: styles.sticker_figure,
+                            width: 80,
+                            height: 65,
+                          }}
+                        ></ImageOptimize>
+                        <Link
+                          href=""
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowModal(true);
+                            setishabiliteBtn(true);
+                            setisImagenOne(false);
+                          }}
+                        >
+                          <ImageOptimize
+                            Values={{
+                              src: "/img/Camera@2x.png",
+                              alt: "Logo de camara",
+                              title: "Imagen",
+                              classValue: styles.img_camera,
+                              width: 34,
+                              height: 34,
+                            }}
+                          ></ImageOptimize>
+                        </Link>
+                      </>
+                    ) : (
+                      <figure className={styles.sticker_figure}>
+                        <Link
+                          href=""
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowModal(true);
+                            setishabiliteBtn(true);
+                            setisImagenOne(false);
+                          }}
+                        >
+                          <ImageOptimize
+                            Values={{
+                              src: "/img/Camera@2x.png",
+                              alt: "Logo de camara ",
+                              title: "Imagen 2",
+                              classValue: styles.img_camera,
+                              width: 24,
+                              height: 24,
+                            }}
+                          ></ImageOptimize>
+                        </Link>
+                      </figure>
+                    )}
                   </div>
 
                   {/* <!-- estado --> */}
 
-                  {/* <div className={styles.form_group}>
-                    <div className={styles.input_group}>
-                      <div className={styles.sticker_status}>
-                        <span className={styles.group_title}>estado</span>
-
-                        <label>Activo</label>
-                        <input
-                          {...register("estado")}
-                          name="estado"
-                          type="checkbox"
-                          id="Activo"
-                          value={true}
-                          onClick={() => uncheckEstado()}
-                        />
-
-                        <label>Inactivo</label>
-                        <input
-                          {...register("estado")}
-                          name="estado"
-                          type="checkbox"
-                          id="Inactivo"
-                          value={false}
-                          onClick={() => uncheckEstado()}
-                        />
-
-                        <div className={styles.invalid_feedback}>
-                          {errors.estado?.message}
-                        </div> */}
-
-                  {/* <!-- ---- --> */}
-                  {/* </div>
-                    </div>
-                  </div> */}
                   {/* <!-- form group --> */}
 
                   <div className={styles.form_group}>
@@ -246,7 +286,11 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       <button
                         onClick={() => {
                           setCheckinvalue(setValue);
-                          setImagenFile(ValueImagesrc, setValue);
+                          setImagenFile(
+                            ValueImagesrc,
+                            ValueImagesrc2,
+                            setValue
+                          );
                         }}
                         className={styles.btn_send}
                       >

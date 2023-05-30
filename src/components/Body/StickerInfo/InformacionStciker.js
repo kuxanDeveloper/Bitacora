@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
-import {useContextBitacora} from "../../../context/BitacoraContext"
+import { useContextBitacora } from "../../../context/BitacoraContext";
 function InformacionStciker({ data, CountSeguimienti }) {
-  const { setShowModal} = useContextBitacora();
+  const { setShowModal, setdobleImagen } = useContextBitacora();
   return (
     <>
       <div className={styles.card_sticker}>
@@ -17,6 +17,7 @@ function InformacionStciker({ data, CountSeguimienti }) {
               type="button"
               onClick={() => {
                 setShowModal(true);
+                setdobleImagen(true);
               }}
               className={styles.photo}
             >
@@ -76,9 +77,7 @@ function InformacionStciker({ data, CountSeguimienti }) {
 
         <div className={styles.card_group}>
           <p className={styles.group_title}>N° seguimientos</p>
-          <span className={styles.group_result}>
-            {CountSeguimienti}
-          </span>
+          <span className={styles.group_result}>{CountSeguimienti}</span>
         </div>
 
         <div className={styles.card_group}>

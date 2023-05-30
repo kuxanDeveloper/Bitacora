@@ -2,12 +2,17 @@ import React from "react";
 import styles from "../../styles/Pop_up.module.css";
 import ImageOptimize from "../Tools/ImageOptimize";
 import { UploadImageSticker } from "../Tools/functiones";
-export default function Pop_up({ onClose, ishabiliteBtn,
-  setishabiliteBtn,
+export default function Pop_up({
+  onClose,
+  ishabiliteBtn,
   ValueImagesrc,
-  setValueImagesrc, }) {
-
-    console.log(ValueImagesrc)
+  setValueImagesrc,
+  ValueImagesrc2,
+  setValueImagesrc2,
+  isImagenOne,
+  DobleImagen,
+  isImagenExterna,
+}) {
   return (
     <>
       <div className={styles.img_upload}>
@@ -40,7 +45,12 @@ export default function Pop_up({ onClose, ishabiliteBtn,
                   <p className={styles.option_title}>Tomar fotografia</p>
                   <button className={styles.option_link}>
                     <input
-                      onChange={(e) => UploadImageSticker(e, setValueImagesrc)}
+                      onChange={(e) =>
+                        UploadImageSticker(
+                          e,
+                          isImagenOne ? setValueImagesrc : setValueImagesrc2
+                        )
+                      }
                       id="filePhoto"
                       type="file"
                       capture="camera"
@@ -76,8 +86,13 @@ export default function Pop_up({ onClose, ishabiliteBtn,
                   <p className={styles.option_title}>Subir archivo</p>
 
                   <button className={styles.option_link}>
-                  <input
-                      onChange={(e) => UploadImageSticker(e, setValueImagesrc)}
+                    <input
+                      onChange={(e) =>
+                        UploadImageSticker(
+                          e,
+                          isImagenOne ? setValueImagesrc : setValueImagesrc2
+                        )
+                      }
                       id="filePhoto2"
                       type="file"
                       className={styles.hide_input}
@@ -107,12 +122,71 @@ export default function Pop_up({ onClose, ishabiliteBtn,
             ) : (
               ""
             )}
-            {ValueImagesrc !== null ? (
+            {DobleImagen ? (
+              ValueImagesrc !== null || ValueImagesrc != null ? (
+                <>
+                  <div className={styles.prevew}>
+                    <ImageOptimize
+                      Values={{
+                        src: isImagenExterna
+                          ? ValueImagesrc
+                          : URL.createObjectURL(ValueImagesrc),
+                        alt: "sticker imagen",
+                        title: "Sticker",
+                        classValue: styles.prevew_img,
+                        width: 256,
+                        height: 256,
+                        style: {},
+                      }}
+                    ></ImageOptimize>
+                  </div>
+                  <div className={styles.prevew}>
+                    <ImageOptimize
+                      Values={{
+                        src: isImagenExterna
+                          ? ValueImagesrc2
+                          : URL.createObjectURL(ValueImagesrc2),
+                        alt: "sticker imagen 2",
+                        title: "Sticker",
+                        classValue: styles.prevew_img,
+                        width: 256,
+                        height: 256,
+                        style: {},
+                      }}
+                    ></ImageOptimize>
+                  </div>
+                </>
+              ) : (
+                ""
+              )
+            ) : isImagenOne ? (
+              ValueImagesrc !== null ? (
+                <div className={styles.prevew}>
+                  <ImageOptimize
+                    Values={{
+                      src: isImagenExterna
+                        ? ValueImagesrc
+                        : URL.createObjectURL(ValueImagesrc),
+                      alt: "sticker imagen",
+                      title: "Sticker",
+                      classValue: styles.prevew_img,
+                      width: 256,
+                      height: 256,
+                      style: {},
+                    }}
+                  ></ImageOptimize>
+                </div>
+              ) : (
+                ""
+              )
+            ) : ValueImagesrc2 !== null ? (
               <div className={styles.prevew}>
                 <ImageOptimize
                   Values={{
-                    src: URL.createObjectURL(ValueImagesrc),
-                    alt: "sticker imagen",
+                    src: isImagenExterna
+                      ? ValueImagesrc2
+                      : URL.createObjectURL(ValueImagesrc2),
+                    alt: "sticker imagen 2",
                     title: "Sticker",
                     classValue: styles.prevew_img,
                     width: 256,

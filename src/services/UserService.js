@@ -43,12 +43,12 @@ async function login(username, password) {
   const tokenPassword = hashArray
     .map((bytes) => bytes.toString(16).padStart(2, "0"))
     .join("");
-  debugger;
+
   const formDataLogin = await new FormData();
 
   formDataLogin.append("Num_Identidad", username);
   formDataLogin.append("pass", tokenPassword);
-  debugger;
+
   let tokenGenerateLogin = await fetchWrapper.post(
     `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
     formDataLogin
@@ -182,7 +182,8 @@ function CreatSticker(
   ObservaInici,
   UserCheckinter,
   UserCheckexter,
-  file
+  file,
+  file2
 ) {
   const formData = new FormData();
 
@@ -192,6 +193,7 @@ function CreatSticker(
   formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
+  formData.append("file2", file2);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
     null,
@@ -231,11 +233,11 @@ function CrearResult(
   );
 }
 
-function CrearNote(Observaciones_detalle, NumSticker) {
+function CrearNote(Observaciones_detalle, NumSticker, file) {
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Observaciones_detalle", Observaciones_detalle);
-
+  formData.append("file", file);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,

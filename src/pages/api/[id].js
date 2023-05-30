@@ -40,9 +40,11 @@ export const ApiQueryGeneralSample = async (
     URS
   );
   setListadoMuestraInactivo(listInactimue);
-  let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
-    .NOMBRE_GRUPO;
-  setGrupoNombre(nombreGrupo);
+  if (Lisgrupo != null && Lisgrupo != undefined) {
+    let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
+      .NOMBRE_GRUPO;
+    setGrupoNombre(nombreGrupo);
+  }
 
   if (
     Lisgrupo == "401: Token incorrecto o vencido" ||

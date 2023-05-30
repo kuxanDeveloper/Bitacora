@@ -1,15 +1,35 @@
 import React from "react";
 import styles from "../../../styles/StickerDetails.module.css";
-function Details({ data }) {
+import ImageOptimize from "../../Tools/ImageOptimize"
+function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
   return (
     <div className={styles.followup}>
       {/* <!-- pruebas --> */}
-
+      <button
+        type="button"
+        onClick={() => {
+          setShowModal(true);
+          setdobleImagen(true);
+          setisImagenExterna(true);
+        }}
+        className={styles.img_icon}
+      >
+        <ImageOptimize
+          Values={{
+            src: "/img/Camera@2x.png",
+            alt: "Logo dde camara",
+            title: "Imagen de seguimiento",
+            classValue: styles.img_camera,
+            width: 35,
+            height: 35,
+          }}
+        ></ImageOptimize>
+      </button>
       <a className={styles.update_icon}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="#fff"
@@ -42,9 +62,7 @@ function Details({ data }) {
         </div>
       </div>
       <hr />
-
     </div>
-    
   );
 }
 

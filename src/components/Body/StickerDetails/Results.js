@@ -3,6 +3,7 @@ import styles from "../../../styles/StickerDetails.module.css";
 function Results({ data }) {
   return (
     <div className={styles.restults}>
+
       <a className={styles.update_icon}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +21,7 @@ function Results({ data }) {
           <path d="M13.5 6.5l4 4" />
         </svg>
       </a>
+      
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>

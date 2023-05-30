@@ -7,7 +7,8 @@ import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
 export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
-  const { setShowModal } = useContextBitacora();
+  const { setShowModal, setdobleImagen, setisImagenExterna } =
+    useContextBitacora();
   return (
     <>
       <div className={styles.sticker_details}>
@@ -42,6 +43,8 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   type="button"
                   onClick={() => {
                     setShowModal(true);
+                    setdobleImagen(true);
+                    setisImagenExterna(true);
                   }}
                   className={styles.img_icon}
                 >
@@ -224,7 +227,13 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   InforSampleDetails.infoDetalle != null ? (
                   InforSampleDetails.infoDetalle.length > 0 ? (
                     InforSampleDetails.infoDetalle.map((data, index) => (
-                      <Details key={index} data={data}></Details>
+                      <Details
+                        setShowModal={setShowModal}
+                        setdobleImagen={setdobleImagen}
+                        setisImagenExterna={setisImagenExterna}
+                        key={index}
+                        data={data}
+                      ></Details>
                     ))
                   ) : (
                     <h2>Sin Notas registrados</h2>

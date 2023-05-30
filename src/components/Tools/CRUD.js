@@ -10,6 +10,7 @@ export const onSubmitCreate = ({
   UserCheckinter,
   UserCheckexter,
   file,
+  file2
 }) => {
   const StickerRetorno = NumSticker;
   return userService
@@ -19,7 +20,8 @@ export const onSubmitCreate = ({
       ObservaInici,
       UserCheckinter,
       UserCheckexter,
-      file
+      file,
+      file2
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -127,10 +129,10 @@ export const onSubmitCreateResult = ({
     });
 };
 
-export const onSubmitCreateNote = ({ Observaciones_detalle, NumSticker }) => {
+export const onSubmitCreateNote = ({ Observaciones_detalle, NumSticker, file }) => {
   const StickerRetorno = NumSticker;
   return userService
-    .CrearNote(Observaciones_detalle, NumSticker)
+    .CrearNote(Observaciones_detalle, NumSticker, file)
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({

@@ -14,10 +14,22 @@ function Index({ children }) {
     setishabiliteBtn,
     ValueImagesrc,
     setValueImagesrc,
+    ValueImagesrc2,
+    setValueImagesrc2,
+    isImagenOne,
+    setisImagenOne,
+    DobleImagen,
+    setdobleImagen,
+    isImagenExterna,
+    setisImagenExterna,
   } = useContextBitacora();
 
   const HandleButtonClick_Close = (stateModal) => {
     setShowModal(stateModal);
+    setishabiliteBtn(false);
+    setisImagenOne(false);
+    setdobleImagen(false);
+    setisImagenExterna(false);
   };
   useEffect(() => initLogInactive(), []);
 
@@ -36,9 +48,14 @@ function Index({ children }) {
                 HandleButtonClick_Close(false);
               }}
               ishabiliteBtn={ishabiliteBtn}
-              setishabiliteBtn={setishabiliteBtn}
               ValueImagesrc={ValueImagesrc}
               setValueImagesrc={setValueImagesrc}
+              ValueImagesrc2={ValueImagesrc2}
+              setValueImagesrc2={setValueImagesrc2}
+              isImagenOne={isImagenOne}
+              setisImagenOne={setisImagenOne}
+              DobleImagen={DobleImagen}
+              isImagenExterna={isImagenExterna}
             ></Pop_up>
           ) : (
             ""
