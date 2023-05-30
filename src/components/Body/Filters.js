@@ -4,7 +4,7 @@ import {
   ClearFilter,
   OnclickComboEstadoCase,
 } from "../Tools/functiones";
-import filterStyles from "../../styles/filters.module.css";
+import filterStyles from "../../styles/filters.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 export default function Filters({
@@ -42,7 +42,7 @@ export default function Filters({
 
   return (
     <>
-      <div className={filterStyles.filters}>
+      <div className={ isActiveGroup ? `${filterStyles.filters} ${filterStyles.special_filters}` : filterStyles.filters  }>
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>

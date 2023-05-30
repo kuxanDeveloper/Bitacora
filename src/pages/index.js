@@ -106,6 +106,7 @@ export default function Home({
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         CasosActivo_Inactivos={isTrueActive}
       ></Filters>
+      
       <CaseStatus
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
