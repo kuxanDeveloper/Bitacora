@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FilterQuerySearch,
   ClearFilter,
   OnclickComboEstadoCase,
 } from "../Tools/functiones";
-import filterStyles from "../../styles/filters.module.css";
+import filterStyles from "../../styles/filters.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CaseStatus from "../CaseStatus";
 export default function Filters({
   CasosActivo_Inactivos,
   isActiveGroup,
@@ -39,10 +40,66 @@ export default function Filters({
   const [UserRegisterStiker, setUserRegisterStiker] = useState(
     URS != undefined && URS != null ? URS : ""
   );
+  const [isTrueActive, setisTrueActive] = useState(false);
+
+  useEffect(() => {
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
+      let hashs2 = router.asPath.split("#")[1];
+      if (
+        hashs2 == "Cactive" ||
+        hashs2 == "" ||
+        hashs2 == null ||
+        hashs2 == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    }
+
+    const onHashChangeStart = (url) => {
+      let hash = url.split("#")[1];
+      if (
+        hash == "Cactive" ||
+        hash == "" ||
+        hash == null ||
+        hash == undefined
+      ) {
+        setisTrueActive(true);
+      } else {
+        setisTrueActive(false);
+      }
+    };
+
+    router.events.on("hashChangeStart", onHashChangeStart);
+    return () => {
+      router.events.off("hashChangeStart", onHashChangeStart);
+    };
+  }, [router.events]);
 
   return (
     <>
-      <div className={filterStyles.filters}>
+      <div
+        className={
+          isActiveGroup
+            ? `${filterStyles.filters} ${filterStyles.special_filters}`
+            : filterStyles.filters
+        }
+      >
+        {isActiveGroup ? (
+          <CaseStatus
+            HrefArmado={{ pathname: "/" }}
+            isTrueActive={isTrueActive}
+            isActiveCase={true}
+          ></CaseStatus>
+        ) : (
+          <></>
+        )}
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
@@ -73,7 +130,13 @@ export default function Filters({
                   value={CasosActivo_Inactivos}
                   name="ListCasos"
                   onChange={(e) =>
-                    OnclickComboEstadoCase(e.target.value, router, HrefArmado, isUserInterno, isSampleGeneral)
+                    OnclickComboEstadoCase(
+                      e.target.value,
+                      router,
+                      HrefArmado,
+                      isUserInterno,
+                      isSampleGeneral
+                    )
                   }
                   className={filterStyles.filter_input_w100}
                 >

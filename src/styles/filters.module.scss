@@ -1,0 +1,196 @@
+.filters {
+  padding: 1rem 0;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  .filters_container {
+    padding: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+
+    .inputs_container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      .filter_input {
+        color: #777777;
+        border: #a8a8a8 solid 1px;
+        outline: none;
+        width: 45%;
+        padding: 10px 5px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        max-height: 42px;
+        &:focus {
+          outline: solid 1px #5c5c5c;
+        }
+      }
+
+      .filter_input_w100 {
+        color: #777777;
+        border: #a8a8a8 solid 1px;
+        outline: none;
+        width: 90.5%;
+        padding: 10px 5px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        max-height: 42px;
+
+        &:focus {
+          outline: solid 1px #5c5c5c;
+        }
+      }
+    }
+    .buttons_container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      .search {
+        padding: 3px;
+        border-radius: 10px;
+        background-color: #e57d00;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .add_followup {
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #e57d00;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .filters {
+    position: relative;
+    padding: 1rem 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+
+    &.special_filters {
+      position: absolute;
+      padding: 1rem 0;
+      top: 10rem;
+      right: calc(50% - 325px);
+      background-color: rgb(255, 255, 255);
+      z-index: 2;
+      min-width: 650px;
+      max-width: 650px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 2px 5px -1px rgba(54, 54, 54, 0.52);
+      -moz-box-shadow: 0px 2px 5px -1px rgba(54, 54, 54, 0.52);
+      box-shadow: 0px 2px 5px -1px rgba(54, 54, 54, 0.52);
+    }
+
+    .filters_container {
+      padding: 0 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+
+      .inputs_container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        .filter_input {
+          color: #777777;
+          border: #a8a8a8 solid 1px;
+          outline: none;
+          width: 45%;
+          padding: 10px 5px;
+          border-radius: 5px;
+          margin-bottom: unset;
+          max-height: 42px;
+          &:focus {
+            outline: solid 1px #5c5c5c;
+          }
+        }
+
+        .filter_input_w100 {
+          color: #777777;
+          border: #a8a8a8 solid 1px;
+          outline: none;
+          width: 90.5%;
+          padding: 10px 5px;
+          border-radius: 5px;
+          margin-bottom: 10px;
+          max-height: 42px;
+
+          &:focus {
+            outline: solid 1px #5c5c5c;
+          }
+        }
+      }
+      .buttons_container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .search {
+          padding: 3px;
+          border-radius: 10px;
+          background-color: #e57d00;
+          border: none;
+        }
+
+        .add_followup {
+          padding: 5px;
+          border-radius: 10px;
+          background-color: #e57d00;
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .filters {
+    justify-content: space-evenly;
+    &.special_filters {
+      position: absolute;
+      padding: 1rem 0;
+      width: 80%;
+      top: 10rem;
+      right: calc(50% - 425px);
+      background-color: rgb(255, 255, 255);
+      z-index: 2;
+      min-width: 850px;
+      max-width: 850px;
+    }
+
+    .filters_container {
+      .inputs_container {
+        .filter_input {
+          &:focus {
+            outline: solid 1px #5c5c5c;
+          }
+        }
+
+        .filter_input_w100 {
+          &:focus {
+            outline: solid 1px #5c5c5c;
+          }
+        }
+      }
+      .buttons_container {
+        .search {
+        }
+
+        .add_followup {
+        }
+      }
+    }
+  }
+}

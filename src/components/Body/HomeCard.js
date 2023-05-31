@@ -1,5 +1,5 @@
 import React from "react";
-import CardStyles from "../../styles/homeCard.module.css";
+import CardStyles from "../../styles/homeCard.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, HabilitarActive }) {
@@ -39,7 +39,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                       <h3 className={CardStyles.card_name}>
                         {data.NOMBRE_GRUPO}
                         <i className={CardStyles.arrow_icon}>
-                          <svg
+                          {/* <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="icon icon-tabler icon-tabler-chevron-right"
                             width="28"
@@ -53,7 +53,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                           >
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <polyline points="9 6 15 12 9 18" />
-                          </svg>
+                          </svg> */}
                         </i>
                       </h3>
 
@@ -111,7 +111,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                     <h3 className={CardStyles.card_name}>
                       {da.NOMBRE_GRUPO}
                       <i className={CardStyles.arrow_icon}>
-                        <svg
+                        {/* <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-chevron-right"
                           width="28"
@@ -125,7 +125,7 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <polyline points="9 6 15 12 9 18" />
-                        </svg>
+                        </svg> */}
                       </i>
                     </h3>
 

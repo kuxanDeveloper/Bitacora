@@ -106,11 +106,11 @@ export default function Home({
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         CasosActivo_Inactivos={isTrueActive}
       ></Filters>
-      <CaseStatus
+      {/* <CaseStatus
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
         isActiveCase={true}
-      ></CaseStatus>
+      ></CaseStatus> */}
       <div className="cases_container">
         <HomeCard
           HabilitarActive={isTrueActive}
@@ -129,19 +129,12 @@ export async function getServerSideProps(ctx) {
     const ListadoGrupoActivo = await QueryActivegroup(cookie);
     const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
     const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
-
-    debugger;
-
     return {
       props: {
         ListadoGrupoActivo:
-          ListadoGrupoActivo == undefined 
-            ? null
-            : ListadoGrupoActivo,
+          ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
         ListadoGrupoInactivo:
-          ListadoGrupoInactivo == undefined 
-            ? null
-            : ListadoGrupoInactivo,
+          ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
         ListadoUsuariosRegistrados:
           ListadoUsuariosRegistrados == undefined
             ? null

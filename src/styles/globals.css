@@ -19,7 +19,10 @@ html {
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -30,8 +33,9 @@ html {
  * Remove the margin in all browsers.
  */
 
- textarea {
-  resize: vertical; /* user can resize vertically, but width is fixed */
+textarea {
+  resize: vertical;
+  /* user can resize vertically, but width is fixed */
 }
 
 body {
@@ -45,13 +49,6 @@ body {
   min-height: 100vh;
 }
 
-.cases_container {
-  display: flex;
-  height: 71vh;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-}
 
 /**
  * Render the `main` element consistently in IE.
@@ -405,4 +402,36 @@ template {
 
 [hidden] {
   display: none;
+}
+
+
+/* utilidades */
+
+.no_margin {
+  margin: 0;
+}
+
+
+/* clases globales de contenedores */
+
+.cases_container {
+  display: flex;
+  height: 71vh;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+}
+
+@media (min-width: 768px) {
+
+  .cases_container {
+    display: flex;
+    height: calc(100vh - 64px);
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    gap: 15px;
+    padding: 1rem .5rem;
+  }
+
 }

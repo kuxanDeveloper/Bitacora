@@ -1,0 +1,229 @@
+.home_card {
+  position: relative;
+  max-height: 109px;
+  height: 109px;
+  .card_content {
+    max-height: 109px;
+    position: relative;
+    .card_figure {
+      max-height: 109px;
+      margin: 0;
+      .card_img {
+        max-height: 109px;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .card_body {
+      max-height: 109px;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: calc(50% - 54.5px);
+      border-top: 1px solid #bbbbbb;
+      background-color: rgba(20, 20, 20, 0.8);
+      .body_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+        text-decoration: none;
+        .card_name {
+          color: #fff;
+          font-size: 25px;
+          display: flex;
+          align-items: flex-start;
+          margin: 0;
+          .arrow_icon {
+          }
+        }
+        .follow {
+          margin: 0;
+          position: relative;
+          color: #fff;
+          margin-right: 20px;
+          .follow_icon {
+            position: absolute;
+            left: -40px;
+            top: -44%;
+          }
+          .follow_conunter {
+            margin-right: 0.5rem;
+           
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .home_card {
+    position: relative;
+    max-height: unset;
+    height: 100%;
+    border-radius: 10px;
+    max-width: 300px;
+
+    .card_content {
+      max-height: unset;
+      height: 100%;
+      position: relative;
+      .card_figure {
+        max-height: unset;
+        height: 100%;
+        margin: 0;
+        .card_img {
+          max-height: unset;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+
+        }
+      }
+      .card_body {
+        max-height: unset;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        border-top: 1px solid #bbbbbb;
+        background-color: rgba(20, 20, 20, 0.8);
+        border-radius: 10px;
+
+        .body_container {
+          position: absolute;
+          width: unset;
+          height: 100%;
+          display: block;
+          top: 0;
+          text-align: center;
+          align-items: flex-end;
+          flex-direction: column;
+          text-decoration: none;
+          width: 100%;
+          .card_name {
+            position: absolute;
+            top: calc(65% - 10px);
+            width: 100%;
+            color: #fff;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            .arrow_icon {
+            }
+          }
+          .follow {
+            position: absolute;
+            top: calc(75% - 10px);
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            color: #fff;
+            margin-right: unset;
+            text-align: center;
+            .follow_icon {
+              position: absolute;
+              right: calc(50% - 14px);
+              left: unset;
+              top: -30px;
+            }
+            .follow_conunter {
+              margin-right: 0.5rem;
+              position: absolute;
+              right: 18%;
+              font-weight: 600;
+              top: -130%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .home_card {
+
+    .card_content {
+
+      .card_figure {
+    
+        .card_img {
+       
+
+        }
+      }
+      .card_body {
+  
+
+        .body_container {
+       
+          .card_name {
+          
+            .arrow_icon {
+            }
+          }
+          .follow {
+        
+            .follow_icon {
+         
+            }
+            .follow_conunter {
+              margin-right: 0.5rem;
+              position: absolute;
+              right: 30%;
+              font-weight: 600;
+              top: -130%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1440px) {
+  .home_card {
+
+    .card_content {
+
+      .card_figure {
+    
+        .card_img {
+       
+
+        }
+      }
+      .card_body {
+  
+
+        .body_container {
+       
+          .card_name {
+          
+            .arrow_icon {
+            }
+          }
+          .follow {
+        
+            .follow_icon {
+         
+            }
+            .follow_conunter {
+              margin-right: 0.5rem;
+              position: absolute;
+              right: 32%;
+              font-weight: 600;
+              
+            }
+          }
+        }
+      }
+    }
+  }
+}

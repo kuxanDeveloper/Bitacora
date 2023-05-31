@@ -113,6 +113,12 @@
   font-size: 1rem;
 }
 
+.cases .cases_container .card .sticker  button {
+  background-color: transparent;
+  border: none;
+}
+
+
 .cases .cases_container .card .sticker ._image {
   background-color: rgb(217, 217, 217);
   width: 70px;
