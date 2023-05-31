@@ -93,7 +93,7 @@
   }
   .header .menu .menu_container {
     background-color: rgb(252, 252, 252);
-    height: calc(100% - 49px);
+    height: 100%;
     width: 30%;
     padding: 1.5rem;
     max-width: 360px;

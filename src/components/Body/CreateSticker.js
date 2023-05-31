@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "../../styles/CreateSticker.module.css";
+import styles from "../../styles/CreateSticker.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 import { useForm } from "react-hook-form";

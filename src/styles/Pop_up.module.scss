@@ -1,0 +1,115 @@
+.img_upload {
+  height: calc(100% - 40px);
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.39);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  position: absolute;
+  .upload_container {
+    position: relative;
+    max-height: 80vh;
+    width: 90vw;
+    background-color: #fff;
+    border-radius: 10px;
+    .close_btn {
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .container_body {
+        padding: 3rem 0.5rem;
+      .options {
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        background-color: #ebebeb;
+        border: solid 1px #e57d00;
+        .option_group {
+            min-width: 120px;
+          .option_title {
+            margin: 5px 0;
+            text-align: center;
+            color: #e57d00;
+            font-size: .9rem;
+          }
+          .option_link {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            max-width: 100%;
+            background-color: transparent;
+            border: none;
+            width: 100%;
+            .hide_input {
+              position: absolute;
+              display: inline-block;
+              max-width: 80%;
+              opacity: .0;
+            
+            }
+          }
+        }
+      }
+
+      .prevew {
+        margin-top: 1.5rem;
+        .prevew_img {
+            width: 100%;
+            max-width: 100%;
+            // max-height: 11rem;
+            object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+    .img_upload {
+      height: calc(100% - 64px);
+        .upload_container {
+          height: 80vh;
+          width: 80vw;
+          max-width: 1100px;
+          .close_btn {
+         
+          }
+          .container_body {
+            .options {
+              gap: 2rem;
+              .option_group {
+                  min-width: 120px;
+                .option_title {
+                  margin: 5px 0;
+                  text-align: center;
+                  color: #e57d00;
+                  font-size: .9rem;
+                }
+                .option_link {
+                  display: block;
+                  display: flex;
+                  justify-content: center;
+                }
+              }
+            }
+      
+            .prevew {
+                display: flex;
+                justify-content: center;
+                max-height: 100%;
+
+              .prevew_img {
+                  width: 100%;
+                  max-width: 600px;
+                  max-height: 100%;
+                  object-fit: contain;
+              }
+            }
+          }
+        }
+      }
+}
