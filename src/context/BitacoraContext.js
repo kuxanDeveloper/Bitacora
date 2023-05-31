@@ -15,6 +15,9 @@ export const BicatoraContexProvider = ({ children }) => {
   const [ishabiliteBtn, setishabiliteBtn] = useState(false);
   const [ValueImagesrc, setValueImagesrc] = useState(null);
   const [ValueImagesrc2, setValueImagesrc2] = useState(null);
+
+  const [ValueImagesrcExterna, setValueImagesrcExterna] = useState(null);
+  const [ValueImagesrcExterna2, setValueImagesrcExterna2] = useState(null);
   const [isImagenOne, setisImagenOne] = useState(false);
   const [DobleImagen, setdobleImagen] = useState(false);
   const [isImagenExterna, setisImagenExterna] = useState(false);
@@ -92,6 +95,10 @@ export const BicatoraContexProvider = ({ children }) => {
         setdobleImagen,
         isImagenExterna,
         setisImagenExterna,
+        ValueImagesrcExterna,
+        setValueImagesrcExterna,
+        ValueImagesrcExterna2,
+        setValueImagesrcExterna2,
       }}
     >
       {children}

@@ -103,7 +103,10 @@ export default FullDetailsPage;
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   if (cookie) {
-    if (ctx.query.id == undefined || ctx.query.id == null) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null 
+    ) {
       return { notFound: true };
     }
     return {

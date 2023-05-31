@@ -97,6 +97,19 @@
     border: none;
     position: absolute;
     right: 10px;
+    top: 8.6rem;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sticker_details .details_container .card .stickers_container .card_content .Edit_icon {
+    padding: 6px;
+    border-radius: 50px;
+    background-color: #fe700c;
+    border: none;
+    position: absolute;
+    right: 10px;
     top: 5.6rem;
     display: flex;
     justify-content: center;

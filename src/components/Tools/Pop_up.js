@@ -12,6 +12,9 @@ export default function Pop_up({
   isImagenOne,
   DobleImagen,
   isImagenExterna,
+  setisImagenExterna,
+  ValueImagesrcExterna,
+  ValueImagesrcExterna2,
 }) {
   return (
     <>
@@ -48,6 +51,7 @@ export default function Pop_up({
                       onChange={(e) =>
                         UploadImageSticker(
                           e,
+                          setisImagenExterna,
                           isImagenOne ? setValueImagesrc : setValueImagesrc2
                         )
                       }
@@ -90,6 +94,7 @@ export default function Pop_up({
                       onChange={(e) =>
                         UploadImageSticker(
                           e,
+                          setisImagenExterna,
                           isImagenOne ? setValueImagesrc : setValueImagesrc2
                         )
                       }
@@ -123,13 +128,13 @@ export default function Pop_up({
               ""
             )}
             {DobleImagen ? (
-              ValueImagesrc !== null || ValueImagesrc != null ? (
-                <>
+              <>
+                {ValueImagesrc !== null || ValueImagesrcExterna !== null ? (
                   <div className={styles.prevew}>
                     <ImageOptimize
                       Values={{
                         src: isImagenExterna
-                          ? ValueImagesrc
+                          ? ValueImagesrcExterna
                           : URL.createObjectURL(ValueImagesrc),
                         alt: "sticker imagen",
                         title: "Sticker",
@@ -140,11 +145,15 @@ export default function Pop_up({
                       }}
                     ></ImageOptimize>
                   </div>
+                ) : (
+                  ""
+                )}
+                {ValueImagesrc2 != null || ValueImagesrcExterna2!==null ? (
                   <div className={styles.prevew}>
                     <ImageOptimize
                       Values={{
                         src: isImagenExterna
-                          ? ValueImagesrc2
+                          ? ValueImagesrcExterna2
                           : URL.createObjectURL(ValueImagesrc2),
                         alt: "sticker imagen 2",
                         title: "Sticker",
@@ -155,17 +164,17 @@ export default function Pop_up({
                       }}
                     ></ImageOptimize>
                   </div>
-                </>
-              ) : (
-                ""
-              )
+                ) : (
+                  ""
+                )}
+              </>
             ) : isImagenOne ? (
-              ValueImagesrc !== null ? (
+              ValueImagesrc !== null || ValueImagesrcExterna!==null ? (
                 <div className={styles.prevew}>
                   <ImageOptimize
                     Values={{
                       src: isImagenExterna
-                        ? ValueImagesrc
+                        ? ValueImagesrcExterna
                         : URL.createObjectURL(ValueImagesrc),
                       alt: "sticker imagen",
                       title: "Sticker",
@@ -179,12 +188,12 @@ export default function Pop_up({
               ) : (
                 ""
               )
-            ) : ValueImagesrc2 !== null ? (
+            ) : ValueImagesrc2 !== null || ValueImagesrcExterna2 !==null ? (
               <div className={styles.prevew}>
                 <ImageOptimize
                   Values={{
                     src: isImagenExterna
-                      ? ValueImagesrc2
+                      ? ValueImagesrcExterna2
                       : URL.createObjectURL(ValueImagesrc2),
                     alt: "sticker imagen 2",
                     title: "Sticker",

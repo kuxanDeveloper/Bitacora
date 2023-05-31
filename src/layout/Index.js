@@ -22,6 +22,10 @@ function Index({ children }) {
     setdobleImagen,
     isImagenExterna,
     setisImagenExterna,
+    ValueImagesrcExterna,
+    setValueImagesrcExterna,
+    ValueImagesrcExterna2,
+    setValueImagesrcExterna2,
   } = useContextBitacora();
 
   const HandleButtonClick_Close = (stateModal) => {
@@ -29,7 +33,6 @@ function Index({ children }) {
     setishabiliteBtn(false);
     setisImagenOne(false);
     setdobleImagen(false);
-    setisImagenExterna(false);
   };
   useEffect(() => initLogInactive(), []);
 
@@ -56,6 +59,9 @@ function Index({ children }) {
               setisImagenOne={setisImagenOne}
               DobleImagen={DobleImagen}
               isImagenExterna={isImagenExterna}
+              ValueImagesrcExterna={ValueImagesrcExterna}
+              ValueImagesrcExterna2={ValueImagesrcExterna2}
+              setisImagenExterna={setisImagenExterna}
             ></Pop_up>
           ) : (
             ""
