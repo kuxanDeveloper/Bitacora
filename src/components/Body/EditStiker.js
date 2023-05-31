@@ -11,6 +11,9 @@ import {
   uncheckUserInterExterno,
   setImagenFile,
 } from "../Tools/functiones";
+
+
+
 function EditStickerComponents({
   ListadoGrupoActivo,
   InforSampleDetails,
@@ -24,8 +27,6 @@ function EditStickerComponents({
     ValueImagesrc2,
     setisImagenOne,
     setisImagenExterna,
-    setValueImagesrc2,
-    isImagenExterna,
 
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
@@ -64,7 +65,7 @@ function EditStickerComponents({
         <p className={styles.title}>Edición sticker</p>
         <br />
         <div className={styles.card}>
-          <form>
+          <form onSubmit={handleSubmit()}>
             {InforSampleDetails.infoBitacora != null &&
             InforSampleDetails.infoBitacora != undefined
               ? InforSampleDetails.infoBitacora.map((data, index) => (
@@ -277,6 +278,11 @@ function EditStickerComponents({
                             // name="UserCheckinter"
                             id="UserCheckinter"
                             type="checkbox"
+                            checked={
+                              data.CLIENTE_INTERNO == null
+                                ? false
+                                : data.CLIENTE_INTERNO
+                            }
                             onClick={() => uncheckUserInterExterno()}
                           />
 
@@ -291,6 +297,11 @@ function EditStickerComponents({
                             // name="UserCheckexter"
                             id="UserCheckexter"
                             type="checkbox"
+                            checked={
+                              data.CLIENTE_EXTERNO == null
+                                ? false
+                                : data.CLIENTE_EXTERNO
+                            }
                             onClick={() => uncheckUserInterExterno()}
                           />
                         </div>
@@ -314,6 +325,7 @@ function EditStickerComponents({
                             cols="70"
                             rows="5"
                             maxLength="2000"
+                            value={data.OBSERVACIONES_INICIALES}
                           ></textarea>
                           <div className={styles.invalid_feedback}>
                             {errors.ObservaInici?.message}
@@ -331,6 +343,7 @@ function EditStickerComponents({
                                 ValueImagesrc2,
                                 setValue
                               );
+                              setValue("NumSticker",data.NUMERO_STICKER)
                             }}
                             className={styles.btn_send}
                           >
@@ -344,9 +357,9 @@ function EditStickerComponents({
                 ></button> */}
                         <Link
                           href={{
-                            pathname: "/[id]",
+                            pathname: "/Sample/FullDetails/[id]",
                             query: { id: id },
-                            hash: "Cactive#UserInter#OverallSample",
+                            hash: "Pruebas",
                           }}
                           className={styles.btn_cancel}
                         >

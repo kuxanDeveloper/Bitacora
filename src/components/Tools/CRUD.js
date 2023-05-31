@@ -1,6 +1,7 @@
 import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import { useDebugValue } from "react";
 
 export const onSubmitCreate = ({
   NumSticker,
@@ -54,6 +55,60 @@ export const onSubmitCreate = ({
 
       console.log(error, "erro in crear");
     });
+};
+
+export const onSubmitUpdate = ({
+  NumSticker,
+  GrupoSticker,
+  ObservaInici,
+  UserCheckinter,
+  UserCheckexter,
+  file,
+  file2
+}) => {
+  const StickerRetorno = NumSticker;
+  debugger;
+  // return userService
+  //   .CreatSticker(
+  //     NumSticker,
+  //     GrupoSticker,
+  //     ObservaInici,
+  //     UserCheckinter,
+  //     UserCheckexter,
+  //     file,
+  //     file2
+  //   )
+  //   .then(() => {
+  //     //   const returnUrl = router.query.returnUrl || "/";
+  //     Router.push({
+  //       pathname: "/Sample/FullDetails/[id]",
+  //       query: { id: StickerRetorno },
+  //       hash: "#Pruebas",
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     if (
+  //       error == "Límite de tiempo excedido" ||
+  //       error == "Usuario o clave incorrectos" ||
+  //       error == "No se pudo hacer el login, revise los datos enviados"
+  //     ) {
+  //       Swal.fire({
+  //         title: "¡Advertencia!",
+  //         text: error,
+  //         icon: "warning",
+  //         confirmButtonText: "Cerrar",
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         title: "¡Ha ocurrido un error!",
+  //         text: error,
+  //         icon: "error",
+  //         confirmButtonText: "Cerrar",
+  //       });
+  //     }
+
+  //     console.log(error, "erro in crear");
+  //   });
 };
 
 export const QueryActivegroup = (cookie) => {
