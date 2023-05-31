@@ -7,8 +7,14 @@ import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
 export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
-  const { setShowModal, setdobleImagen, setisImagenExterna } =
-    useContextBitacora();
+  const {
+    setShowModal,
+    setdobleImagen,
+    setisImagenExterna,
+    setValueImagesrcExterna2,
+    setValueImagesrcExterna,
+    setishabiliteBtn,
+  } = useContextBitacora();
   return (
     <>
       <div className={styles.sticker_details}>
@@ -39,12 +45,44 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }`}
                   ></i>
                 </span>
+
                 <button
                   type="button"
                   onClick={() => {
                     setShowModal(true);
                     setdobleImagen(true);
                     setisImagenExterna(true);
+                    setishabiliteBtn(false);
+                    setValueImagesrcExterna(
+                      InforSampleDetails.infoBitacora != undefined &&
+                        InforSampleDetails.infoBitacora != null
+                        ? InforSampleDetails.infoBitacora[0]
+                            .URL_PRIMERA_IMAGEN != null &&
+                          InforSampleDetails.infoBitacora[0]
+                            .URL_PRIMERA_IMAGEN != undefined &&
+                          InforSampleDetails.infoBitacora[0]
+                            .URL_PRIMERA_IMAGEN != ""
+                          ? process.env.NEXT_PUBLIC_URL_API +
+                            InforSampleDetails.infoBitacora[0]
+                              .URL_PRIMERA_IMAGEN
+                          : null
+                        : null
+                    );
+                    setValueImagesrcExterna2(
+                      InforSampleDetails.infoBitacora != undefined &&
+                        InforSampleDetails.infoBitacora != null
+                        ? InforSampleDetails.infoBitacora[0]
+                            .URL_SEGUNDA_IMAGEN != null &&
+                          InforSampleDetails.infoBitacora[0]
+                            .URL_SEGUNDA_IMAGEN != undefined &&
+                          InforSampleDetails.infoBitacora[0]
+                            .URL_SEGUNDA_IMAGEN != ""
+                          ? process.env.NEXT_PUBLIC_URL_API +
+                            InforSampleDetails.infoBitacora[0]
+                              .URL_SEGUNDA_IMAGEN
+                          : null
+                        : null
+                    );
                   }}
                   className={styles.img_icon}
                 >
@@ -59,6 +97,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }}
                   ></ImageOptimize>
                 </button>
+
                 {Pruebas ? (
                   <Link
                     title="Agregar prueba"
@@ -122,6 +161,38 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     </svg>
                   </Link>
                 )}
+
+                <Link
+                  title="Editar sticker"
+                  className={styles.Edit_icon}
+                  href={{
+                    pathname: "/Sample/Edit/[id]",
+                    query: {
+                      id: query.id,
+                      group:
+                        InforSampleDetails.infoBitacora != undefined &&
+                        InforSampleDetails.infoBitacora != null
+                          ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
+                          : "",
+                    },
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#fff"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                    <path d="M13.5 6.5l4 4" />
+                  </svg>
+                </Link>
                 {InforSampleDetails.infoBitacora != undefined &&
                 InforSampleDetails.infoBitacora != null
                   ? InforSampleDetails.infoBitacora.map((data, index) => (
@@ -159,24 +230,6 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }`}
                   >
                     Pruebas
-                    {/* <span className={styles.icon}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#2f2f2f"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                        <path d="M9 12l6 0" />
-                        <path d="M12 9l0 6" />
-                      </svg>
-                    </span> */}
                   </Link>
                   <Link
                     href={{
@@ -189,24 +242,6 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                     }`}
                   >
                     Notas
-                    {/* <span className={styles.icon}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#2f2f2f"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                        <path d="M9 12l6 0" />
-                        <path d="M12 9l0 6" />
-                      </svg>
-                    </span> */}
                   </Link>
                 </div>
 

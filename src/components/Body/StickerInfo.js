@@ -3,24 +3,25 @@ import styles from "../../styles/StickerInfo.module.css";
 import Link from "next/link";
 import InformacionStciker from "./StickerInfo/InformacionStciker";
 import Lastfollow_up from "./StickerInfo/Lastfollow_up";
-import Result from "./StickerInfo/Result"
+import Result from "./StickerInfo/Result";
 export default function StickerInfo({ InforSampleDetails, id }) {
+
   return (
     <>
       <div className={styles.sticker_info}>
         <div className={styles.info_container}>
           <div className={styles.back_btn_container}>
             <Link
-            href={{
-              pathname: "/[id]",
-              query: {
-                id:
-                  InforSampleDetails.infoBitacora != null &&
-                  InforSampleDetails.infoBitacora != undefined
-                    ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
-                    : "",
-              },
-            }}
+              href={{
+                pathname: "/[id]",
+                query: {
+                  id:
+                    InforSampleDetails.infoBitacora != null &&
+                    InforSampleDetails.infoBitacora != undefined
+                      ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
+                      : "",
+                },
+              }}
               // onClick={(e) => {
               //   e.preventDefault();
               //   backhistory();
@@ -72,7 +73,7 @@ export default function StickerInfo({ InforSampleDetails, id }) {
                       InforSampleDetails.infoResultado
                         .slice(0, 1)
                         .map((data, index) => (
-                        <Result  data={data} key={index}></Result>
+                          <Result data={data} key={index}></Result>
                         ))
                     ) : (
                       <h2>Sin resultado registrado</h2>

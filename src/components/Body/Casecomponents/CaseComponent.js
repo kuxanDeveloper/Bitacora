@@ -4,8 +4,8 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 function CaseComponent({ data }) {
-  const { setShowModal, setishabiliteBtn } = useContextBitacora();
-  console.log(data);
+  const { setShowModal, setishabiliteBtn, setdobleImagen, setisImagenExterna, setValueImagesrcExterna2, setValueImagesrcExterna } =
+    useContextBitacora();
   return (
     <div className={caseStyles.card}>
       <div className={caseStyles.sticker}>
@@ -16,6 +16,22 @@ function CaseComponent({ data }) {
           onClick={() => {
             setShowModal(true);
             setishabiliteBtn(false);
+            setdobleImagen(true);
+            setisImagenExterna(true);
+            setValueImagesrcExterna(
+              data.URL_PRIMERA_IMAGEN != null &&
+                data.URL_PRIMERA_IMAGEN != undefined &&
+                data.URL_PRIMERA_IMAGEN != ""
+                ? process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN
+                : null
+            );
+            setValueImagesrcExterna2(
+              data.URL_SEGUNDA_IMAGEN != null &&
+                data.URL_SEGUNDA_IMAGEN != undefined &&
+                data.URL_SEGUNDA_IMAGEN != ""
+                ? process.env.NEXT_PUBLIC_URL_API + data.URL_SEGUNDA_IMAGEN
+                : null
+            );
           }}
         >
           {data.URL_PRIMERA_IMAGEN != undefined &&

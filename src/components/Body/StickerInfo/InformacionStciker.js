@@ -2,8 +2,17 @@ import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import { useContextBitacora } from "../../../context/BitacoraContext";
+import { ClearFilter } from "@/components/Tools/functiones";
 function InformacionStciker({ data, CountSeguimienti }) {
-  const { setShowModal, setdobleImagen } = useContextBitacora();
+  const {
+    setShowModal,
+    setishabiliteBtn,
+    setdobleImagen,
+    setisImagenExterna,
+    setValueImagesrcExterna,
+    setValueImagesrcExterna2,
+  } = useContextBitacora();
+
   return (
     <>
       <div className={styles.card_sticker}>
@@ -18,6 +27,22 @@ function InformacionStciker({ data, CountSeguimienti }) {
               onClick={() => {
                 setShowModal(true);
                 setdobleImagen(true);
+                setishabiliteBtn(false);
+                setisImagenExterna(true);
+                setValueImagesrcExterna(
+                  data.URL_PRIMERA_IMAGEN != null &&
+                    data.URL_PRIMERA_IMAGEN != undefined &&
+                    data.URL_PRIMERA_IMAGEN != ""
+                    ? process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN
+                    : null
+                );
+                setValueImagesrcExterna2(
+                  data.URL_SEGUNDA_IMAGEN != null &&
+                    data.URL_SEGUNDA_IMAGEN != undefined &&
+                    data.URL_SEGUNDA_IMAGEN != ""
+                    ? process.env.NEXT_PUBLIC_URL_API + data.URL_SEGUNDA_IMAGEN
+                    : null
+                );
               }}
               className={styles.photo}
             >

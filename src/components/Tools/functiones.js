@@ -353,7 +353,7 @@ export const uncheckUserInterExterno = () => {
   };
 };
 
-export const UploadImageSticker = (event, setValueImagesrc) => {
+export const UploadImageSticker = (event,setisImagenExterna, setValueImagesrc) => {
   const ext = event.target.value.match(/\.(.+)$/)[1];
   const photo = document.getElementById("filePhoto");
   const photo2 = document.getElementById("filePhoto2");
@@ -429,6 +429,7 @@ export const UploadImageSticker = (event, setValueImagesrc) => {
   }
 
   if (validador) {
+    setisImagenExterna(false);
     setValueImagesrc(event.target.files[0]);
     photo.value = "";
     photo2.value = "";
