@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "../../styles/CreateSticker.module.css";
+import styles from "../../styles/CreateSticker.module.scss";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

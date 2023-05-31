@@ -120,7 +120,7 @@ export default function Home({
         ></HomeCard>
       </div>
 
-      {/* <Skeleton></Skeleton> */}
+      <Skeleton></Skeleton>
       {/* <Case></Case> */}
     </>
   );
