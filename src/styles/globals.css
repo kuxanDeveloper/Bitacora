@@ -426,12 +426,12 @@ template {
 
   .cases_container {
     display: flex;
-    height: 100vh;
+    height: calc(100vh - 64px);
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: nowrap;
     gap: 15px;
-    padding: 0 .5rem;
+    padding: 1rem .5rem;
   }
 
 }

@@ -106,11 +106,11 @@ export default function Home({
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         CasosActivo_Inactivos={isTrueActive}
       ></Filters>
-      <CaseStatus
+      {/* <CaseStatus
         HrefArmado={{ pathname: "/" }}
         isTrueActive={isTrueActive}
         isActiveCase={true}
-      ></CaseStatus>
+      ></CaseStatus> */}
       <div className="cases_container">
         <HomeCard
           HabilitarActive={isTrueActive}
