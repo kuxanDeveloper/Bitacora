@@ -10,6 +10,7 @@ import HomeCard from "../components/Body/HomeCard";
 import Head from "next/head";
 import CaseStatus from "../components/CaseStatus";
 import { useRouter } from "next/router";
+import Skeleton from "@/components/Tools/Skeleton";
 export default function Home({
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
@@ -118,6 +119,8 @@ export default function Home({
           ListadoGrupoInactivo={ListadoGrupoInactivo}
         ></HomeCard>
       </div>
+
+      {/* <Skeleton></Skeleton> */}
       {/* <Case></Case> */}
     </>
   );

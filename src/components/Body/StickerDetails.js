@@ -196,24 +196,37 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                 {InforSampleDetails.infoBitacora != undefined &&
                 InforSampleDetails.infoBitacora != null
                   ? InforSampleDetails.infoBitacora.map((data, index) => (
-                      <div key={index} className={styles.form_group}>
-                        {/* <!-- info sticker --> */}
-                        <div className={styles.info_group}>
-                          <span className={styles.info_title}>N° Sticker</span>
-                          <p className={styles.info_text}>
-                            {data.NUMERO_STICKER}
-                          </p>
-                        </div>
+                      <>
+                        <div key={index} className={styles.form_group}>
+                          {/* <!-- info sticker --> */}
+                          <div className={styles.info_group}>
+                            <span className={styles.info_title}>
+                              N° Sticker
+                            </span>
+                            <p className={styles.info_text}>
+                              {data.NUMERO_STICKER}
+                            </p>
+                          </div>
 
-                        <div className={styles.info_group}>
-                          <span className={styles.info_title}>
-                            Fecha del sticker
-                          </span>
-                          <p className={styles.info_text}>
-                            {data.FECHA_FORMAT_CREADO_COMPLETA}
-                          </p>
+                          <div className={styles.info_group}>
+                            <span className={styles.info_title}>
+                              Fecha del sticker
+                            </span>
+                            <p className={styles.info_text}>
+                              {data.FECHA_FORMAT_CREADO_COMPLETA}
+                            </p>
+                          </div>
                         </div>
-                      </div>
+                        <div className={styles.form_group}>
+                          {/* <!-- info sticker --> */}
+                          <div className={styles.info_group}>
+                            <span className={styles.info_title}>
+                              Grupo
+                            </span>
+                            <p className={styles.info_text}>Grupo</p>
+                          </div>
+                        </div>
+                      </>
                     ))
                   : "cargando..."}
 

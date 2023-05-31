@@ -81,7 +81,7 @@
     &.special_filters {
       position: absolute;
       padding: 1rem 0;
-      top: 10rem;
+      top: 6rem;
       right: calc(50% - 325px);
       background-color: rgb(255, 255, 255);
       z-index: 2;
@@ -98,7 +98,6 @@
       display: flex;
       justify-content: center;
       gap: 5px;
-
       .inputs_container {
         display: flex;
         justify-content: center;

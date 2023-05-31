@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Pop_up.module.css";
+import styles from "../../styles/Pop_up.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import { UploadImageSticker } from "../Tools/functiones";
 export default function Pop_up({

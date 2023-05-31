@@ -51,7 +51,6 @@
           }
           .follow_conunter {
             margin-right: 0.5rem;
-           
           }
         }
       }
@@ -80,7 +79,6 @@
           height: 100%;
           object-fit: cover;
           border-radius: 10px;
-
         }
       }
       .card_body {
@@ -90,8 +88,14 @@
         height: 100%;
         top: 0;
         border-top: 1px solid #bbbbbb;
-        background-color: rgba(20, 20, 20, 0.8);
+        background-color: rgba(20, 20, 20, 0.192);
         border-radius: 10px;
+        transition: all .5s;
+        &:hover {
+          -webkit-box-shadow: 0px 10px 15px -4px rgba(87, 87, 87, 1);
+          -moz-box-shadow: 0px 10px 15px -4px rgba(87, 87, 87, 1);
+          box-shadow: 0px 10px 15px -4px rgb(49, 49, 49);
+        }
 
         .body_container {
           position: absolute;
@@ -106,7 +110,7 @@
           width: 100%;
           .card_name {
             position: absolute;
-            top: calc(65% - 10px);
+            top: calc(75% - 10px);
             width: 100%;
             color: #fff;
             font-size: 22px;
@@ -119,7 +123,7 @@
           }
           .follow {
             position: absolute;
-            top: calc(75% - 10px);
+            top: calc(85% - 10px);
             width: 100%;
             text-align: center;
             margin: 0;
@@ -149,30 +153,19 @@
 
 @media (min-width: 1280px) {
   .home_card {
-
     .card_content {
-
       .card_figure {
-    
         .card_img {
-       
-
         }
       }
       .card_body {
-  
-
         .body_container {
-       
           .card_name {
-          
             .arrow_icon {
             }
           }
           .follow {
-        
             .follow_icon {
-         
             }
             .follow_conunter {
               margin-right: 0.5rem;
@@ -189,37 +182,27 @@
 }
 @media (min-width: 1440px) {
   .home_card {
-
     .card_content {
-
       .card_figure {
-    
         .card_img {
-       
-
         }
       }
       .card_body {
-  
-
         .body_container {
-       
           .card_name {
-          
+            top: calc(77% - 10px);
+
             .arrow_icon {
             }
           }
           .follow {
-        
             .follow_icon {
-         
             }
             .follow_conunter {
               margin-right: 0.5rem;
               position: absolute;
               right: 32%;
               font-weight: 600;
-              
             }
           }
         }
