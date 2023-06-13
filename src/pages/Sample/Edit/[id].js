@@ -3,7 +3,7 @@ import Head from "next/head";
 import EditStickerComponents from "../../../components/Body/EditStiker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
 import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
-function EditPage({ ListadoGrupoActivo, id, group, cookie }) {
+function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
     SampleDetailsEdit(cookie, id, setLInforSampleDetails);
@@ -13,10 +13,7 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie }) {
     <>
       <Head>
         <title>{`Edición de sticker N° ${id} | Bitácora BD`}</title>
-        <meta
-          name="description"
-          content={`Se puede editar el sticker`}
-        />
+        <meta name="description" content={`Se puede editar el sticker`} />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
         <meta name="google" content="notranslate" />
@@ -49,6 +46,7 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie }) {
         InforSampleDetails={InforSampleDetails}
         group={group}
         id={id}
+        isHabilteGroup={isHabilteGroup}
       ></EditStickerComponents>
     </>
   );
@@ -63,7 +61,9 @@ export async function getServerSideProps(ctx) {
       ctx.query.id == undefined ||
       ctx.query.id == null ||
       ctx.query.group == null ||
-      ctx.query.group == undefined
+      ctx.query.group == undefined ||
+      ctx.query.isHabilteGroup == undefined ||
+      ctx.query.isHabilteGroup == null
     ) {
       return { notFound: true };
     }
@@ -76,6 +76,7 @@ export async function getServerSideProps(ctx) {
         ListadoGrupoActivo: ListadoGrupoActivo,
         id: ctx.query.id,
         group: ctx.query.group,
+        isHabilteGroup: ctx.query.isHabilteGroup,
       },
     };
   } else {

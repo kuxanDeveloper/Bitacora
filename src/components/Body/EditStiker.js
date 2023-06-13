@@ -19,6 +19,7 @@ function EditStickerComponents({
   InforSampleDetails,
   group,
   id,
+  isHabilteGroup,
 }) {
   const {
     setShowModal,
@@ -63,6 +64,13 @@ function EditStickerComponents({
         InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO == false
           ? null
           : InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO;
+
+      var grupoSticker = document.getElementById("GrupoSticker");
+      if (isHabilteGroup == "true") {
+        grupoSticker.setAttribute("disabled", "");
+      } else {
+        grupoSticker.disabled = false;
+      }
     }
   }, [InforSampleDetails.infoBitacora]);
 
@@ -344,6 +352,9 @@ function EditStickerComponents({
                         {!formState.isSubmitting && (
                           <button
                             onClick={() => {
+                              isHabilteGroup == "true"
+                                ? setValue("GrupoSticker", group)
+                                : "";
                               setCheckinvalue(setValue);
                               setImagenFileUpdate(
                                 ValueImagesrc,

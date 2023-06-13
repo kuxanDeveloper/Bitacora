@@ -5,7 +5,6 @@ import InformacionStciker from "./StickerInfo/InformacionStciker";
 import Lastfollow_up from "./StickerInfo/Lastfollow_up";
 import Result from "./StickerInfo/Result";
 export default function StickerInfo({ InforSampleDetails, id }) {
-
   return (
     <>
       <div className={styles.sticker_info}>
@@ -39,6 +38,11 @@ export default function StickerInfo({ InforSampleDetails, id }) {
                       data={data}
                       key={index}
                       CountSeguimienti={InforSampleDetails.infoDetalle.length}
+                      GrupoHabilite={
+                        InforSampleDetails.infoResultado.length > 0
+                          ? true
+                          : false
+                      }
                     />
                   ))}
 

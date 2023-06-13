@@ -3,7 +3,7 @@ import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import Link from "next/link";
-function InformacionStciker({ data, CountSeguimienti }) {
+function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -71,6 +71,7 @@ function InformacionStciker({ data, CountSeguimienti }) {
                     data.ID_GRUPO_ASIGNADO != null
                       ? data.ID_GRUPO_ASIGNADO
                       : "",
+                  isHabilteGroup: GrupoHabilite,
                 },
               }}
             >
