@@ -32,6 +32,8 @@ export const userService = {
   ListResults,
   CrearResult,
   CrearNote,
+  EditSticker,
+  InfoSampleNote,
 };
 
 async function login(username, password) {
@@ -242,5 +244,41 @@ function CrearNote(Observaciones_detalle, NumSticker, file) {
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,
     formData
+  );
+}
+
+function EditSticker(
+  NumSticker,
+  GrupoSticker,
+  ObservaInici,
+  UserCheckinter,
+  UserCheckexter,
+  file,
+  file2,
+  Cod_Imagen1,
+  Cod_Imagen2
+) {
+  const formData = new FormData();
+  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Grupo_sticker", GrupoSticker);
+  formData.append("Usuario_interno", UserCheckinter);
+  formData.append("Usuario_externo", UserCheckexter);
+  formData.append("Observaciones_iniciales", ObservaInici);
+  formData.append("file", file);
+  formData.append("file2", file2);
+  formData.append("Cod_Imagen1", Cod_Imagen1);
+  formData.append("Cod_Imagen2", Cod_Imagen2);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditBitacoraMuestra`,
+    null,
+    formData
+  );
+}
+
+function InfoSampleNote(cookie, idNote) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InformacionDetalleBitacora?Numero_Sticker=&Codigo_Detalle=${idNote}`,
+    cookie
   );
 }

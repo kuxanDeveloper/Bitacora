@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../../styles/StickerDetails.module.css";
-import ImageOptimize from "../../Tools/ImageOptimize"
+import ImageOptimize from "../../Tools/ImageOptimize";
+import Link from "next/link";
 function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
   return (
     <div className={styles.followup}>
@@ -17,7 +18,7 @@ function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
         <ImageOptimize
           Values={{
             src: "/img/Camera@2x.png",
-            alt: "Logo dde camara",
+            alt: "Logo de camara",
             title: "Imagen de seguimiento",
             classValue: styles.img_camera,
             width: 35,
@@ -25,11 +26,18 @@ function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
           }}
         ></ImageOptimize>
       </button>
-      <a className={styles.update_icon}>
+      <Link
+        title="Editar nota"
+        href={{
+          pathname: "/Sample/EditFollowUp/[id]",
+          query: { id: data.COD_DETALLE_BITACORA },
+        }}
+        className={styles.update_icon}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="25"
+          height="25"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="#fff"
@@ -41,7 +49,7 @@ function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
           <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
           <path d="M13.5 6.5l4 4" />
         </svg>
-      </a>
+      </Link>
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>

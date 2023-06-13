@@ -196,8 +196,8 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                 {InforSampleDetails.infoBitacora != undefined &&
                 InforSampleDetails.infoBitacora != null
                   ? InforSampleDetails.infoBitacora.map((data, index) => (
-                      <>
-                        <div key={index} className={styles.form_group}>
+                      <div key={index} >
+                        <div className={styles.form_group}>
                           {/* <!-- info sticker --> */}
                           <div className={styles.info_group}>
                             <span className={styles.info_title}>
@@ -223,10 +223,10 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                             <span className={styles.info_title}>
                               Grupo
                             </span>
-                            <p className={styles.info_text}>Grupo</p>
+                            <p className={styles.info_text}>{data.NOMBRE_GRUPO_ASIGNADO}</p>
                           </div>
                         </div>
-                      </>
+                      </div>
                     ))
                   : "cargando..."}
 

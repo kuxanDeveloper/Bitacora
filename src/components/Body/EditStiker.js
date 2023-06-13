@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "../../styles/CreateSticker.module.css";
+import styles from "../../styles/CreateSticker.module.scss";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,10 +9,10 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import {
   setCheckinvalue,
   uncheckUserInterExterno,
-  setImagenFile,
+  setImagenFileUpdate,
 } from "../Tools/functiones";
 
-
+import { onSubmitUpdate } from "../Tools/CRUD";
 
 function EditStickerComponents({
   ListadoGrupoActivo,
@@ -34,24 +34,41 @@ function EditStickerComponents({
 
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string(),
+    Cod_Imagen1: Yup.string(),
+    Cod_Imagen2: Yup.string(),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     ObservaInici: Yup.string(),
     UserCheckinter: Yup.string().required("Campo obligatorio"),
     UserCheckexter: Yup.string().required("Campo obligatorio"),
-    file: Yup.mixed(),
-    file2: Yup.mixed(),
+    file: Yup.mixed().notRequired(),
+    file2: Yup.mixed().notRequired(),
   });
 
   useEffect(() => {
     setisImagenExterna(true);
-  }, []);
+
+    if (
+      InforSampleDetails.infoBitacora != null &&
+      InforSampleDetails.infoBitacora != undefined
+    ) {
+      var checkbox1 = document.getElementById("UserCheckinter");
+      var checkbox2 = document.getElementById("UserCheckexter");
+
+      checkbox1.checked =
+        InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO == false
+          ? null
+          : InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO;
+
+      checkbox2.checked =
+        InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO == false
+          ? null
+          : InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO;
+    }
+  }, [InforSampleDetails.infoBitacora]);
+
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-
-  console.log(ListadoGrupoActivo, "grupo");
-  console.log(InforSampleDetails, "edit");
-  console.log(group, "group");
 
   return (
     <section className={styles.Create_sticker}>
@@ -65,7 +82,7 @@ function EditStickerComponents({
         <p className={styles.title}>Edición sticker</p>
         <br />
         <div className={styles.card}>
-          <form onSubmit={handleSubmit()}>
+          <form onSubmit={handleSubmit(onSubmitUpdate)}>
             {InforSampleDetails.infoBitacora != null &&
             InforSampleDetails.infoBitacora != undefined
               ? InforSampleDetails.infoBitacora.map((data, index) => (
@@ -278,12 +295,7 @@ function EditStickerComponents({
                             // name="UserCheckinter"
                             id="UserCheckinter"
                             type="checkbox"
-                            checked={
-                              data.CLIENTE_INTERNO == null
-                                ? false
-                                : data.CLIENTE_INTERNO
-                            }
-                            onClick={() => uncheckUserInterExterno()}
+                            onChange={() => uncheckUserInterExterno()}
                           />
 
                           {/* <!-- ---- --> */}
@@ -297,12 +309,7 @@ function EditStickerComponents({
                             // name="UserCheckexter"
                             id="UserCheckexter"
                             type="checkbox"
-                            checked={
-                              data.CLIENTE_EXTERNO == null
-                                ? false
-                                : data.CLIENTE_EXTERNO
-                            }
-                            onClick={() => uncheckUserInterExterno()}
+                            onChange={() => uncheckUserInterExterno()}
                           />
                         </div>
                       </div>
@@ -325,7 +332,7 @@ function EditStickerComponents({
                             cols="70"
                             rows="5"
                             maxLength="2000"
-                            value={data.OBSERVACIONES_INICIALES}
+                            defaultValue={data.OBSERVACIONES_INICIALES}
                           ></textarea>
                           <div className={styles.invalid_feedback}>
                             {errors.ObservaInici?.message}
@@ -338,12 +345,14 @@ function EditStickerComponents({
                           <button
                             onClick={() => {
                               setCheckinvalue(setValue);
-                              setImagenFile(
+                              setImagenFileUpdate(
                                 ValueImagesrc,
                                 ValueImagesrc2,
-                                setValue
+                                setValue,
+                                data.CODIGO_PRIMERA_IMAGEN,
+                                data.CODIGO_SEGUNDA_IMAGEN
                               );
-                              setValue("NumSticker",data.NUMERO_STICKER)
+                              setValue("NumSticker", data.NUMERO_STICKER);
                             }}
                             className={styles.btn_send}
                           >

@@ -22,10 +22,6 @@ export default function StickerInfo({ InforSampleDetails, id }) {
                       : "",
                 },
               }}
-              // onClick={(e) => {
-              //   e.preventDefault();
-              //   backhistory();
-              // }}
               className={styles.back_btn}
             >
               Volver{" "}

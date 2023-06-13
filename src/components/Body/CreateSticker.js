@@ -25,13 +25,11 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
-    ObservaInici: Yup.string().required(
-      "Campo observaciones iniciales obligatorio"
-    ),
+    ObservaInici: Yup.string(),
     UserCheckinter: Yup.string().required("Campo obligatorio"),
     UserCheckexter: Yup.string().required("Campo obligatorio"),
-    file: Yup.mixed(),
-    file2: Yup.mixed(),
+    file: Yup.mixed().notRequired(),
+    file2: Yup.mixed().notRequired(),
   });
 
   useEffect(() => {
@@ -273,11 +271,11 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         id="ObservaInici"
                         cols="70"
                         rows="5"
-                        maxLength="2000"
+                        maxLength="1500"
                       ></textarea>
-                      <div className={styles.invalid_feedback}>
+                      {/* <div className={styles.invalid_feedback}>
                         {errors.ObservaInici?.message}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

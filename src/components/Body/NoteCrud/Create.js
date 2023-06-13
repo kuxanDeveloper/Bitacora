@@ -37,9 +37,16 @@ function ComponentsCreateNote({ id }) {
       <section className={styles.create_note}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
-            <a href="" className={styles.back_btn}>
+            <Link
+              href={{
+                pathname: "/Sample/FullDetails/[id]",
+                query: { id: id },
+                hash: "Notas",
+              }}
+              className={styles.back_btn}
+            >
               Volver{" "}
-            </a>
+            </Link>
           </div>
 
           <p className={styles.title}>Crear nota de seguimiento</p>
