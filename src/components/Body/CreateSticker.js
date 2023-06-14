@@ -271,7 +271,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         id="ObservaInici"
                         cols="70"
                         rows="5"
-                        maxLength="1500"
+                        maxLength={1500}
                       ></textarea>
                       {/* <div className={styles.invalid_feedback}>
                         {errors.ObservaInici?.message}

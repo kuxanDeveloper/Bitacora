@@ -62,7 +62,7 @@ function ComponentsCreateNote({ id }) {
                         <ImageOptimize
                           Values={{
                             src: URL.createObjectURL(ValueImagesrc),
-                            alt: "sticker",
+                            alt: "Notaimg",
                             title: "imagen nota",
                             classValue: styles.sticker_figure,
                             width: 80,

@@ -339,7 +339,7 @@ function EditStickerComponents({
                             id="ObservaInici"
                             cols="70"
                             rows="5"
-                            maxLength="2000"
+                            maxLength={1500}
                             defaultValue={data.OBSERVACIONES_INICIALES}
                           ></textarea>
                           <div className={styles.invalid_feedback}>

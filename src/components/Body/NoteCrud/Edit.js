@@ -5,22 +5,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
-function ComponentEditNote({ InfoNote, id }) {
-  console.log(InfoNote);
-
+import styles from "../../../styles/CreateNotes.module.scss";
+import { setImagenfileUpdateNote } from "../../Tools/functiones";
+import { UpdateNote } from "../../../pages/api/Note/Crud";
+function ComponentEditNote({ InfoNote }) {
   const {
     setShowModal,
     setishabiliteBtn,
     ValueImagesrc,
+    setValueImagesrc,
     setisImagenOne,
     setisImagenExterna,
     setValueImagesrcExterna,
   } = useContextBitacora();
 
   const validationSchema = Yup.object().shape({
+    codigo_detalle_bitacora: Yup.string(),
     NumSticker: Yup.string(),
     Cod_Imagen1: Yup.string(),
-    GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     Observaciones_detalle: Yup.string().required(
       "Campo observaciones obligatorio"
     ),
@@ -35,148 +37,183 @@ function ComponentEditNote({ InfoNote, id }) {
     setisImagenExterna(true);
     setValueImagesrc(null);
   }, []);
-
-  
   return (
     <section className={styles.create_note}>
-    <div className={styles.sticker_container}>
-      <div className={styles.back_btn_container}>
-        <Link
-          href={{
-            pathname: "/Sample/FullDetails/[id]",
-            query: { id: id },
-            hash: "Notas",
-          }}
-          className={styles.back_btn}
-        >
-          Volver{" "}
-        </Link>
+      <div className={styles.sticker_container}>
+        <div className={styles.back_btn_container}>
+          <Link
+            href={{
+              pathname: "/Sample/FullDetails/[id]",
+              query: {
+                id:
+                  InfoNote != undefined &&
+                  InfoNote != null &&
+                  InfoNote.length > 0
+                    ? InfoNote[0].NUMERO_STICKER
+                    : null,
+              },
+              hash: "Notas",
+            }}
+            className={styles.back_btn}
+          >
+            Volver{" "}
+          </Link>
+        </div>
+
+        <p className={styles.title}>Editar nota de seguimiento</p>
+        <br />
+        <div className={styles.card}>
+          <form onSubmit={handleSubmit(UpdateNote)}>
+            {InfoNote != null && InfoNote != undefined && InfoNote.length > 0
+              ? InfoNote.map((data, index) => (
+                  <div key={index} className={styles.stickers_container}>
+                    <div className={styles.card_sticker}>
+                      {/* <!-- imagenes --> */}
+                      <div className={styles.images_container}>
+                        {ValueImagesrc != null ||
+                        data.URL_PRIMERA_IMAGEN_DETALLE != null ? (
+                          <>
+                            <ImageOptimize
+                              Values={{
+                                src:
+                                  ValueImagesrc != null
+                                    ? URL.createObjectURL(ValueImagesrc)
+                                    : process.env.NEXT_PUBLIC_URL_API +
+                                      data.URL_PRIMERA_IMAGEN_DETALLE,
+                                alt: "Notaimg",
+                                title: "imagen nota",
+                                classValue: styles.sticker_figure,
+                                width: 80,
+                                height: 65,
+                              }}
+                            ></ImageOptimize>
+                            <Link
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowModal(true);
+                                setishabiliteBtn(true);
+                                setisImagenOne(true);
+                                ValueImagesrc != null
+                                  ? setisImagenExterna(false)
+                                  : setisImagenExterna(true);
+                                data.URL_PRIMERA_IMAGEN_DETALLE != null
+                                  ? setValueImagesrcExterna(
+                                      process.env.NEXT_PUBLIC_URL_API +
+                                        data.URL_PRIMERA_IMAGEN_DETALLE
+                                    )
+                                  : setValueImagesrcExterna(null);
+                              }}
+                            >
+                              <ImageOptimize
+                                Values={{
+                                  src: "/img/Camera@2x.png",
+                                  alt: "Logo de camara",
+                                  title: "Imagen",
+                                  classValue: styles.img_camera,
+                                  width: 34,
+                                  height: 34,
+                                }}
+                              ></ImageOptimize>
+                            </Link>
+                          </>
+                        ) : (
+                          <figure className={styles.sticker_figure}>
+                            <Link
+                              href=""
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setShowModal(true);
+                                setishabiliteBtn(true);
+                                setisImagenOne(true);
+                                setisImagenExterna(false);
+                              }}
+                            >
+                              <ImageOptimize
+                                Values={{
+                                  src: "/img/Camera@2x.png",
+                                  alt: "Logo de camara",
+                                  title: "Imagen",
+                                  classValue: styles.img_camera,
+                                  width: 24,
+                                  height: 24,
+                                }}
+                              ></ImageOptimize>
+                            </Link>
+                          </figure>
+                        )}
+                      </div>
+                      {/* <!-- estado --> */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Número de sticker :
+                          </label>
+
+                          <p>{data.NUMERO_STICKER}</p>
+                        </div>
+                      </div>
+
+                      {/* <!-- form group --> */}
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Observación
+                          </label>
+                          <textarea
+                            rows="5"
+                            cols="50"
+                            name="Observaciones_detalle"
+                            className={styles.input_group}
+                            maxLength={1500}
+                            {...register("Observaciones_detalle")}
+                            defaultValue={data.OBSERVACIONES_DETALLE}
+                          ></textarea>
+                          <div>{errors.Observaciones_detalle?.message}</div>
+                        </div>
+                      </div>
+
+                      <div className={styles.btn_container_send}>
+                        {!formState.isSubmitting && (
+                          <button
+                            className={styles.btn_send}
+                            onClick={() => {
+                              setValue("NumSticker", data.NUMERO_STICKER);
+                              setValue(
+                                "codigo_detalle_bitacora",
+                                data.COD_DETALLE_BITACORA
+                              );
+                              setImagenfileUpdateNote(
+                                ValueImagesrc,
+                                setValue,
+                                data.CODIGO_PRIMERA_IMAGEN_DETALLE
+                              );
+                            }}
+                          >
+                            Guardar cambios
+                          </button>
+                        )}
+                        <Link
+                          className={styles.btn_cancel}
+                          href={{
+                            pathname: "/Sample/FullDetails/[id]",
+                            query: { id: data.NUMERO_STICKER },
+                            hash: "Notas",
+                          }}
+                        >
+                          Cancelar
+                        </Link>
+                        {/* ----- */}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : "cargando..."}
+          </form>
+        </div>
       </div>
-
-      <p className={styles.title}>Crear nota de seguimiento</p>
-      <br />
-      <div className={styles.card}>
-        <form onSubmit={handleSubmit(onSubmitCreateNote)}>
-          <div className={styles.stickers_container}>
-            <div className={styles.card_sticker}>
-              {/* <!-- imagenes --> */}
-              <div className={styles.images_container}>
-                {ValueImagesrc != null ? (
-                  <>
-                    <ImageOptimize
-                      Values={{
-                        src: URL.createObjectURL(ValueImagesrc),
-                        alt: "sticker",
-                        title: "imagen nota",
-                        classValue: styles.sticker_figure,
-                        width: 80,
-                        height: 65,
-                      }}
-                    ></ImageOptimize>
-                    <Link
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowModal(true);
-                        setishabiliteBtn(true);
-                        setisImagenOne(true);
-                      }}
-                    >
-                      <ImageOptimize
-                        Values={{
-                          src: "/img/Camera@2x.png",
-                          alt: "Logo de camara",
-                          title: "Imagen",
-                          classValue: styles.img_camera,
-                          width: 34,
-                          height: 34,
-                        }}
-                      ></ImageOptimize>
-                    </Link>
-                  </>
-                ) : (
-                  <figure className={styles.sticker_figure}>
-                    <Link
-                      href=""
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowModal(true);
-                        setishabiliteBtn(true);
-                        setisImagenOne(true);
-                      }}
-                    >
-                      <ImageOptimize
-                        Values={{
-                          src: "/img/Camera@2x.png",
-                          alt: "Logo de camara",
-                          title: "Imagen",
-                          classValue: styles.img_camera,
-                          width: 24,
-                          height: 24,
-                        }}
-                      ></ImageOptimize>
-                    </Link>
-                  </figure>
-                )}
-              </div>
-              {/* <!-- estado --> */}
-
-              <div className={styles.form_group}>
-                <div className={styles.input_group}>
-                  <label className={styles.group_title}>
-                    Número de sticker :
-                  </label>
-
-                  <p>{id}</p>
-                </div>
-              </div>
-
-              {/* <!-- form group --> */}
-              <div className={styles.form_group}>
-                <div className={styles.input_group}>
-                  <label className={styles.group_title}>Observación</label>
-                  <textarea
-                    rows="5"
-                    cols="50"
-                    name="Observaciones_detalle"
-                    className={styles.input_group}
-                    maxLength={1500}
-                    {...register("Observaciones_detalle")}
-                  ></textarea>
-                  <div>{errors.Observaciones_detalle?.message}</div>
-                </div>
-              </div>
-
-              <div className={styles.btn_container_send}>
-                {!formState.isSubmitting && (
-                  <button
-                    className={styles.btn_send}
-                    onClick={() => {
-                      setValue("NumSticker", id);
-                      setValue("file", ValueImagesrc);
-                    }}
-                  >
-                    Guardar cambios
-                  </button>
-                )}
-                <Link
-                  className={styles.btn_cancel}
-                  href={{
-                    pathname: "/Sample/FullDetails/[id]",
-                    query: { id: id },
-                    hash: "Notas",
-                  }}
-                >
-                  Cancelar
-                </Link>
-                {/* ----- */}
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
+    </section>
   );
 }
 

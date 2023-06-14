@@ -314,7 +314,7 @@ export const setImagenFileUpdate = (
     } else {
       setValue("Cod_Imagen1", "");
     }
-  }else{
+  } else {
     setValue("Cod_Imagen1", "");
   }
 
@@ -324,8 +324,26 @@ export const setImagenFileUpdate = (
     } else {
       setValue("Cod_Imagen2", "");
     }
-  }else{
+  } else {
     setValue("Cod_Imagen2", "");
+  }
+};
+
+export const setImagenfileUpdateNote = (
+  ValueImagesrc,
+  setValue,
+  Cod_Imagen1
+) => {
+  setValue("file", ValueImagesrc);
+
+  if (ValueImagesrc != null) {
+    if (Cod_Imagen1 != null) {
+      setValue("Cod_Imagen1", cod_imagen1);
+    } else {
+      setValue("Cod_Imagen1", "");
+    }
+  } else {
+    setValue("Cod_Imagen1", "");
   }
 };
 
