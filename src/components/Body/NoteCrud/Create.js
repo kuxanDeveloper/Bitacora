@@ -21,7 +21,7 @@ function ComponentsCreateNote({ id }) {
       "Campo observaciones obligatorio"
     ),
     NumSticker: Yup.string(),
-    file: Yup.mixed(),
+    file: Yup.mixed().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };

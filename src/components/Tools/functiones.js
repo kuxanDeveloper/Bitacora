@@ -338,7 +338,7 @@ export const setImagenfileUpdateNote = (
 
   if (ValueImagesrc != null) {
     if (Cod_Imagen1 != null) {
-      setValue("Cod_Imagen1", cod_imagen1);
+      setValue("Cod_Imagen1", Cod_Imagen1);
     } else {
       setValue("Cod_Imagen1", "");
     }

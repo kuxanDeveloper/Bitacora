@@ -9,6 +9,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setImagenfileUpdateNote } from "../../Tools/functiones";
 import { UpdateNote } from "../../../pages/api/Note/Crud";
 function ComponentEditNote({ InfoNote }) {
+  console.log(InfoNote);
   const {
     setShowModal,
     setishabiliteBtn,
