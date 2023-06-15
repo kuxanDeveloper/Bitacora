@@ -58,45 +58,44 @@ function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
                 }}
               />
             </button>
-
-            <Link
-              title="Editar sticker"
-              className={styles.Edit_icon}
-              href={{
-                pathname: "/Sample/Edit/[id]",
-                query: {
-                  id: data.NUMERO_STICKER,
-                  group:
-                    data.ID_GRUPO_ASIGNADO != undefined &&
-                    data.ID_GRUPO_ASIGNADO != null
-                      ? data.ID_GRUPO_ASIGNADO
-                      : "",
-                  isHabilteGroup: GrupoHabilite,
-                },
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#fff"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                <path d="M13.5 6.5l4 4" />
-              </svg>
-            </Link>
           </div>
         </div>
       </div>
 
       {/* <!-- estado --> */}
       <div className={styles.card_body}>
+        <Link
+          title="Editar sticker"
+          className={styles.Edit_icon}
+          href={{
+            pathname: "/Sample/Edit/[id]",
+            query: {
+              id: data.NUMERO_STICKER,
+              group:
+                data.ID_GRUPO_ASIGNADO != undefined &&
+                data.ID_GRUPO_ASIGNADO != null
+                  ? data.ID_GRUPO_ASIGNADO
+                  : "",
+              isHabilteGroup: GrupoHabilite,
+            },
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#fff"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+            <path d="M13.5 6.5l4 4" />
+          </svg>
+        </Link>
         <div className={styles.sticker_status}>
           <span className={styles.status_title}>Estado</span>
           <span className={styles.status}>
