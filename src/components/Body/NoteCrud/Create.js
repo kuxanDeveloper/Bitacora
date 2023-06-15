@@ -21,7 +21,7 @@ function ComponentsCreateNote({ id }) {
       "Campo observaciones obligatorio"
     ),
     NumSticker: Yup.string(),
-    file: Yup.mixed(),
+    file: Yup.mixed().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -37,9 +37,16 @@ function ComponentsCreateNote({ id }) {
       <section className={styles.create_note}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
-            <a href="" className={styles.back_btn}>
+            <Link
+              href={{
+                pathname: "/Sample/FullDetails/[id]",
+                query: { id: id },
+                hash: "Notas",
+              }}
+              className={styles.back_btn}
+            >
               Volver{" "}
-            </a>
+            </Link>
           </div>
 
           <p className={styles.title}>Crear nota de seguimiento</p>
@@ -55,7 +62,7 @@ function ComponentsCreateNote({ id }) {
                         <ImageOptimize
                           Values={{
                             src: URL.createObjectURL(ValueImagesrc),
-                            alt: "sticker",
+                            alt: "Notaimg",
                             title: "imagen nota",
                             classValue: styles.sticker_figure,
                             width: 80,

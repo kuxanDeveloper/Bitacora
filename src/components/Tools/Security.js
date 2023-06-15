@@ -230,8 +230,7 @@ export const QueryMuestraEdit = (cookie, idSticker) => {
   });
 };
 
-
-export const queryTestListxGroup = (cookie, idGroup) =>{
+export const queryTestListxGroup = (cookie, idGroup) => {
   return userService.ListTests(cookie, idGroup).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
@@ -252,10 +251,9 @@ export const queryTestListxGroup = (cookie, idGroup) =>{
     console.log(error, "erro in listado de prueba grupo");
     return error;
   });
-}
+};
 
-
-export const queryResultListxTests = (cookie, idPrueba) =>{
+export const queryResultListxTests = (cookie, idPrueba) => {
   return userService.ListResults(cookie, idPrueba).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
@@ -276,5 +274,27 @@ export const queryResultListxTests = (cookie, idPrueba) =>{
     console.log(error, "erro in login");
     return error;
   });
-}
+};
 
+export const QueryNoteEdit = (cookie, idNote) => {
+  return userService.InfoSampleNote(cookie, idNote).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "erro in editar nota");
+    return error;
+  });
+};

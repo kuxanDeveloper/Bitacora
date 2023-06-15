@@ -32,6 +32,9 @@ export const userService = {
   ListResults,
   CrearResult,
   CrearNote,
+  EditSticker,
+  InfoSampleNote,
+  UpdateNote,
 };
 
 async function login(username, password) {
@@ -240,6 +243,60 @@ function CrearNote(Observaciones_detalle, NumSticker, file) {
   formData.append("file", file);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
+    null,
+    formData
+  );
+}
+
+function EditSticker(
+  NumSticker,
+  GrupoSticker,
+  ObservaInici,
+  UserCheckinter,
+  UserCheckexter,
+  file,
+  file2,
+  Cod_Imagen1,
+  Cod_Imagen2
+) {
+  const formData = new FormData();
+  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Grupo_sticker", GrupoSticker);
+  formData.append("Usuario_interno", UserCheckinter);
+  formData.append("Usuario_externo", UserCheckexter);
+  formData.append("Observaciones_iniciales", ObservaInici);
+  formData.append("file", file);
+  formData.append("file2", file2);
+  formData.append("Cod_Imagen1", Cod_Imagen1);
+  formData.append("Cod_Imagen2", Cod_Imagen2);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditBitacoraMuestra`,
+    null,
+    formData
+  );
+}
+
+function InfoSampleNote(cookie, idNote) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InformacionDetalleBitacora?Numero_Sticker=&Codigo_Detalle=${idNote}`,
+    cookie
+  );
+}
+
+function UpdateNote(
+  codigo_detalle_bitacora,
+  Cod_Imagen1,
+  Observaciones_detalle,
+  file
+) {
+  const formData = new FormData();
+  formData.append("codigo_detalle_bitacora", codigo_detalle_bitacora);
+  formData.append("Observaciones_detalle", Observaciones_detalle);
+  formData.append("file", file);
+  formData.append("Cod_Imagen1", Cod_Imagen1);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditBitacoraDetalle`,
     null,
     formData
   );

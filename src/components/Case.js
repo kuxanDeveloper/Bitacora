@@ -124,24 +124,24 @@ export default function Case({
             ? isUserInterno
               ? isSampleGeneral
                 ? ListadoUsuariosInternosActivesGenerales.map((data, index) => (
-                    <CaseComponent key={index} data={data}></CaseComponent>
+                    <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
                   ))
                 : ListadoUsuariosInternosActivesUrgencias.map((data, index) => (
-                    <CaseComponent key={index} data={data}></CaseComponent>
+                    <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
                   ))
               : isSampleGeneral
               ? ListadoUsuariosExternosActivesGenerales.map((data, index) => (
-                  <CaseComponent key={index} data={data}></CaseComponent>
+                  <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
                 ))
               : ListadoUsuariosExternosActivesUrgencias.map((data, index) => (
-                  <CaseComponent key={index} data={data}></CaseComponent>
+                  <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
                 ))
             : isUserInterno
             ? ListadoMuestrasInactiveUserInter.map((data, index) => (
-                <CaseComponent key={index} data={data}></CaseComponent>
+                <CaseComponent key={index} data={data} isActive={false}></CaseComponent>
               ))
             : ListadoMuestrasInactiveUserExterno.map((data, index) => (
-                <CaseComponent key={index} data={data}></CaseComponent>
+                <CaseComponent key={index} data={data} isActive={false}></CaseComponent>
               ))}
         </div>
       </section>

@@ -63,6 +63,10 @@ const nextConfig = withPWA({
         protocol: "https",
         hostname: "**",
       },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
     ],
   },
 });

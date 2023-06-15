@@ -1,3 +1,4 @@
+import { set } from "react-hook-form";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -183,41 +184,6 @@ export const FilterQuerySearch = (
   });
 };
 
-// export const useEffecIDPerformance = (
-//   cookie,
-//   id,
-//   Numstiker,
-//   DateAdmission,
-//   result,
-//   URS,
-//   setGrupoNombre,
-//   setListadoGrupo,
-//   setListadoMuestraActivo,
-//   setListadoMuestraInactivo
-// ) => {
-//   ApiQueryGeneralSample(
-//     cookie,
-//     id,
-//     Numstiker,
-//     DateAdmission,
-//     result,
-//     URS,
-//     setGrupoNombre,
-//     setListadoGrupo,
-//     setListadoMuestraActivo,
-//     setListadoMuestraInactivo
-//   );
-// };
-
-// export const useEffecIDPerformanceRouterEvents = (
-//   setisTrueActive,
-//   setisUserInterno,
-//   setisSampleGeneral,
-//   router
-// ) => {
-
-// };
-
 export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
   let urlHref = window.location.href;
@@ -242,10 +208,6 @@ export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
     setMenuShow(true);
   }
 };
-
-// export const useEffecPerformancePruResultado = (setPruebas, router) => {
-
-// };
 
 export const EstadoFunction = (InforSampleDetails) => {
   if (
@@ -336,24 +298,77 @@ export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
   setValue("file2", ValueImagesrc2);
 };
 
+export const setImagenFileUpdate = (
+  ValueImagesrc,
+  ValueImagesrc2,
+  setValue,
+  cod_imagen1,
+  cod_imagen2
+) => {
+  setValue("file", ValueImagesrc);
+  setValue("file2", ValueImagesrc2);
+
+  if (ValueImagesrc != null) {
+    if (cod_imagen1 != null) {
+      setValue("Cod_Imagen1", cod_imagen1);
+    } else {
+      setValue("Cod_Imagen1", "");
+    }
+  } else {
+    setValue("Cod_Imagen1", "");
+  }
+
+  if (ValueImagesrc2 != null) {
+    if (cod_imagen2 != null) {
+      setValue("Cod_Imagen2", cod_imagen2);
+    } else {
+      setValue("Cod_Imagen2", "");
+    }
+  } else {
+    setValue("Cod_Imagen2", "");
+  }
+};
+
+export const setImagenfileUpdateNote = (
+  ValueImagesrc,
+  setValue,
+  Cod_Imagen1
+) => {
+  setValue("file", ValueImagesrc);
+
+  if (ValueImagesrc != null) {
+    if (Cod_Imagen1 != null) {
+      setValue("Cod_Imagen1", Cod_Imagen1);
+    } else {
+      setValue("Cod_Imagen1", "");
+    }
+  } else {
+    setValue("Cod_Imagen1", "");
+  }
+};
+
 export const uncheckUserInterExterno = () => {
   var checkbox1 = document.getElementById("UserCheckinter");
   var checkbox2 = document.getElementById("UserCheckexter");
 
-  checkbox1.onclick = function () {
+  checkbox1.onchange = function () {
     if (checkbox1.checked != false) {
       checkbox2.checked = null;
     }
   };
 
-  checkbox2.onclick = function () {
+  checkbox2.onchange = function () {
     if (checkbox2.checked != false) {
       checkbox1.checked = null;
     }
   };
 };
 
-export const UploadImageSticker = (event,setisImagenExterna, setValueImagesrc) => {
+export const UploadImageSticker = (
+  event,
+  setisImagenExterna,
+  setValueImagesrc
+) => {
   const ext = event.target.value.match(/\.(.+)$/)[1];
   const photo = document.getElementById("filePhoto");
   const photo2 = document.getElementById("filePhoto2");

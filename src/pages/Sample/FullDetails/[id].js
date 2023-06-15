@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
 import StickerDetails from "../../../components/Body/StickerDetails";
-import { useEffecPerformancePruResultado } from "../../../components/Tools/functiones";
 import Head from "next/head";
 import { useRouter } from "next/router";
 function FullDetailsPage({ cookie, query }) {
