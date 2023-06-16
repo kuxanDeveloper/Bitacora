@@ -19,7 +19,7 @@ export default function Filters({
   dateAdmision,
   result,
   URS,
-  isUserInterno,
+  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
 }) {
@@ -134,7 +134,7 @@ export default function Filters({
                       e.target.value,
                       router,
                       HrefArmado,
-                      isUserInterno,
+                      // isUserInterno,
                       isSampleGeneral
                     )
                   }

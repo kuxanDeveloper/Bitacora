@@ -32,28 +32,13 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                       href={{
                         pathname: "/[id]",
                         query: { id: data.Id_grupo },
-                        hash: "Cactive#UserInter#OverallSample",
+                        hash: "Cactive#OverallSample",
                       }}
                       className={CardStyles.body_container}
                     >
                       <h3 className={CardStyles.card_name}>
                         {data.NOMBRE_GRUPO}
                         <i className={CardStyles.arrow_icon}>
-                          {/* <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-chevron-right"
-                            width="28"
-                            height="28"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#ffffff"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="9 6 15 12 9 18" />
-                          </svg> */}
                         </i>
                       </h3>
 
@@ -104,28 +89,13 @@ export default function HomeCard({ ListadoGrupoActivo, ListadoGrupoInactivo, Hab
                     href={{
                       pathname: "/[id]",
                       query: { id: da.Id_grupo },
-                      hash: "Cinactvie#UserInter#OverallSample",
+                      hash: "Cinactvie#OverallSample",
                     }}
                     className={CardStyles.body_container}
                   >
                     <h3 className={CardStyles.card_name}>
                       {da.NOMBRE_GRUPO}
                       <i className={CardStyles.arrow_icon}>
-                        {/* <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-chevron-right"
-                          width="28"
-                          height="28"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#ffffff"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <polyline points="9 6 15 12 9 18" />
-                        </svg> */}
                       </i>
                     </h3>
 

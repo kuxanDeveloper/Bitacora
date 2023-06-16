@@ -183,8 +183,8 @@ function CreatSticker(
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
   file2
 ) {
@@ -192,8 +192,8 @@ function CreatSticker(
 
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter);
-  formData.append("Usuario_externo", UserCheckexter);
+  // formData.append("Usuario_interno", UserCheckinter);
+  // formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
@@ -252,8 +252,8 @@ function EditSticker(
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
   file2,
   Cod_Imagen1,
@@ -262,8 +262,8 @@ function EditSticker(
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter);
-  formData.append("Usuario_externo", UserCheckexter);
+  // formData.append("Usuario_interno", UserCheckinter);
+  // formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);

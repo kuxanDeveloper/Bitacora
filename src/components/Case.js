@@ -1,16 +1,7 @@
 import React from "react";
 import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
-import {
-  UserInternosActive,
-  UserExternosActive,
-  UserInternosInactive,
-  UserExternosInactive,
-  UserInternosActiveGenerales,
-  UserInternosActiveUrgencias,
-  UserExternosActiveGenerales,
-  UserExternosActiveUrgencias,
-} from "./Tools/functiones";
+import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.css";
 import Link from "next/link";
@@ -20,59 +11,56 @@ export default function Case({
   ListadoMuestraInactivo,
   isTrueActive,
   idGruop,
-  isUserInterno,
+  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
 }) {
-  const ListadoMuestrasActiveUserInter =
-    UserInternosActive(ListadoMuestraActivo);
-  const ListadoMuestrasActiveUserExterno =
-    UserExternosActive(ListadoMuestraActivo);
+  const ListadoMuestraActiveGenerals =
+    UserActiveGenerales(ListadoMuestraActivo);
+  const ListadoMuestrasActivePendiente =
+    UserActiveUrgencias(ListadoMuestraActivo);
 
-  const ListadoMuestrasInactiveUserInter = UserInternosInactive(
-    ListadoMuestraInactivo
-  );
-  const ListadoMuestrasInactiveUserExterno = UserExternosInactive(
-    ListadoMuestraInactivo
-  );
+  // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
+  //   ListadoMuestraInactivo
+  // );
+  // const ListadoMuestrasInactiveUserExterno = UserExternosInactive(
+  //   ListadoMuestraInactivo
+  // );
 
-  const ListadoUsuariosInternosActivesGenerales = UserInternosActiveGenerales(
-    ListadoMuestrasActiveUserInter
-  );
+  // const ListadoUsuariosInternosActivesGenerales = UserInternosActiveGenerales(
+  //   ListadoMuestrasActiveUserInter
+  // );
 
-  const ListadoUsuariosInternosActivesUrgencias = UserInternosActiveUrgencias(
-    ListadoMuestrasActiveUserInter
-  );
+  // const ListadoUsuariosInternosActivesUrgencias = UserInternosActiveUrgencias(
+  //   ListadoMuestrasActiveUserInter
+  // );
 
-  const ListadoUsuariosExternosActivesGenerales = UserExternosActiveGenerales(
-    ListadoMuestrasActiveUserExterno
-  );
+  // const ListadoUsuariosExternosActivesGenerales = UserExternosActiveGenerales(
+  //   ListadoMuestrasActiveUserExterno
+  // );
 
-  const ListadoUsuariosExternosActivesUrgencias = UserExternosActiveUrgencias(
-    ListadoMuestrasActiveUserExterno
-  );
+  // const ListadoUsuariosExternosActivesUrgencias = UserExternosActiveUrgencias(
+  //   ListadoMuestrasActiveUserExterno
+  // );
 
   return (
     <>
-      <CasesStatusUser
+      {/* usuario externo o interno... <CasesStatusUser
         HrefArmado={HrefArmado}
         isTrueActive={isTrueActive}
         isUserInterno={isUserInterno}
         idGruop={idGruop}
         isSampleGeneral={isSampleGeneral}
-      ></CasesStatusUser>
+      ></CasesStatusUser> */}
       {/* grupos */}
-
-
       <CaseNav
         HrefArmado={HrefArmado}
         ListadoGrupo={ListadoGrupo}
         idGruop={idGruop}
         isTrueActive={isTrueActive}
-        isUserInterno={isUserInterno}
+        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-
       <section className={caseStyles.cases}>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
@@ -86,13 +74,13 @@ export default function Case({
                   href={{
                     pathname: "/[id]",
                     query: HrefArmado.query,
-                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
-                      isUserInterno ? "#UserInter" : "#UserExter"
+                    hash: `${
+                      isTrueActive ? "Cactive" : "Cinactvie"
                     }#OverallSample`,
                   }}
                   className={caseStyles.status_link}
                 >
-                  Casos generales
+                  Ordenes generales
                 </Link>
               </p>
               <p
@@ -104,13 +92,13 @@ export default function Case({
                   href={{
                     pathname: "/[id]",
                     query: HrefArmado.query,
-                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
-                      isUserInterno ? "#UserInter" : "#UserExter"
+                    hash: `${
+                      isTrueActive ? "Cactive" : "Cinactvie"
                     }#UrgentSamples`,
                   }}
                   className={caseStyles.status_link}
                 >
-                  Casos urgentes
+                  Ordenes pendientes
                 </Link>
               </p>
             </div>
@@ -121,30 +109,41 @@ export default function Case({
 
         <div className={caseStyles.cases_container}>
           {isTrueActive
-            ? isUserInterno
-              ? isSampleGeneral
-                ? ListadoUsuariosInternosActivesGenerales.map((data, index) => (
-                    <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
-                  ))
-                : ListadoUsuariosInternosActivesUrgencias.map((data, index) => (
-                    <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
-                  ))
-              : isSampleGeneral
-              ? ListadoUsuariosExternosActivesGenerales.map((data, index) => (
-                  <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
+            ? isSampleGeneral
+              ? ListadoMuestraActiveGenerals.map((data, index) => (
+                  <CaseComponent
+                    key={index}
+                    data={data}
+                    isActive={true}
+                  ></CaseComponent>
                 ))
-              : ListadoUsuariosExternosActivesUrgencias.map((data, index) => (
-                  <CaseComponent key={index} data={data} isActive={true}></CaseComponent>
+              : ListadoMuestrasActivePendiente.map((data, index) => (
+                  <CaseComponent
+                    key={index}
+                    data={data}
+                    isActive={true}
+                  ></CaseComponent>
                 ))
-            : isUserInterno
+            : ListadoMuestraInactivo.length > 0
+            ? ListadoMuestraInactivo.map((data, index) => (
+                <CaseComponent
+                  key={index}
+                  data={data}
+                  isActive={false}
+                ></CaseComponent>
+              ))
+            : "Cargando..."}
+        </div>
+      </section>{" "}
+      {/* */}
+    </>
+  );
+}
+
+/*isUserInterno
             ? ListadoMuestrasInactiveUserInter.map((data, index) => (
                 <CaseComponent key={index} data={data} isActive={false}></CaseComponent>
               ))
             : ListadoMuestrasInactiveUserExterno.map((data, index) => (
                 <CaseComponent key={index} data={data} isActive={false}></CaseComponent>
-              ))}
-        </div>
-      </section>
-    </>
-  );
-}
+            ))*/

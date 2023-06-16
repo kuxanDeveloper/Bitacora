@@ -7,11 +7,7 @@ import Filters from "../components/Body/Filters";
 import { useRouter } from "next/router";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
-function HomeMuestraxGrupo({
-  cookie,
-  query,
-  ListadoUsuariosRegistrados,
-}) {
+function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
@@ -45,8 +41,8 @@ function HomeMuestraxGrupo({
     ) {
       let urlHref = window.location.href;
       let hashs2 = router.asPath.split("#")[1];
-      let hashs3 = router.asPath.split("#")[2];
-      let hashs4 = router.asPath.split("#")[3];
+      // let hashs3 = router.asPath.split("#")[2];
+      let hashs4 = router.asPath.split("#")[2];
 
       //#region Muestras Activas
       if (
@@ -71,24 +67,24 @@ function HomeMuestraxGrupo({
       //#endregion
 
       //#region Usuario Interno o externo
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
-      }
+      // if (
+      //   hashs3 == "UserInter" ||
+      //   hashs3 == "" ||
+      //   hashs3 == null ||
+      //   hashs3 == undefined
+      // ) {
+      //   if (hashs3 == undefined) {
+      //     window.history.pushState(
+      //       { path: `${urlHref}#UserInter` },
+      //       "",
+      //       `${urlHref}#UserInter`
+      //     );
+      //     urlHref = window.location.href;
+      //   }
+      //   setisUserInterno(true);
+      // } else {
+      //   setisUserInterno(false);
+      // }
       //#endregion
 
       //#region Muestras generales o de urgencia
@@ -115,8 +111,8 @@ function HomeMuestraxGrupo({
 
     const onHashChangeStart = (url) => {
       let hash = url.split("#")[1];
-      let hashs3 = url.split("#")[2];
-      let hashs4 = url.split("#")[3];
+      // let hashs3 = url.split("#")[2];
+      let hashs4 = url.split("#")[2];
       let urlHref = window.location.href;
 
       //#region Muestras activas/inactivas
@@ -134,24 +130,24 @@ function HomeMuestraxGrupo({
 
       //#region usuario interno/usuario externo
 
-      if (
-        hashs3 == "UserInter" ||
-        hashs3 == "" ||
-        hashs3 == null ||
-        hashs3 == undefined
-      ) {
-        if (hashs3 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#UserInter` },
-            "",
-            `${urlHref}#UserInter`
-          );
-          urlHref = window.location.href;
-        }
-        setisUserInterno(true);
-      } else {
-        setisUserInterno(false);
-      }
+      // if (
+      //   hashs3 == "UserInter" ||
+      //   hashs3 == "" ||
+      //   hashs3 == null ||
+      //   hashs3 == undefined
+      // ) {
+      //   if (hashs3 == undefined) {
+      //     window.history.pushState(
+      //       { path: `${urlHref}#UserInter` },
+      //       "",
+      //       `${urlHref}#UserInter`
+      //     );
+      //     urlHref = window.location.href;
+      //   }
+      //   setisUserInterno(true);
+      // } else {
+      //   setisUserInterno(false);
+      // }
       //#endregion
 
       //#region Muestras generales /urgencias
@@ -229,14 +225,14 @@ function HomeMuestraxGrupo({
         result={query.result}
         URS={query.URS}
         HrefArmado={{ pathname: "/[id]", query: query }}
-        isUserInterno={isUserInterno}
+        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
         isActiveCase={false}
-        isUserInterno={isUserInterno}
+        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseStatus>
       <Case
@@ -246,7 +242,7 @@ function HomeMuestraxGrupo({
         ListadoMuestraInactivo={ListadoMuestraInactivo}
         isTrueActive={isTrueActive}
         idGruop={query.id}
-        isUserInterno={isUserInterno}
+        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></Case>
     </>
@@ -260,7 +256,7 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoUsuariosRegistrados =  await queryListUserAll(cookie);
+    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
         cookie: cookie,

@@ -26,8 +26,8 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     ObservaInici: Yup.string(),
-    UserCheckinter: Yup.string().required("Campo obligatorio"),
-    UserCheckexter: Yup.string().required("Campo obligatorio"),
+    // UserCheckinter: Yup.string().required("Campo obligatorio"),
+    // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
   });
@@ -226,7 +226,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                   </div>
                   {/* <!-- form group --> */}
 
-                  <div className={styles.form_group}>
+                  {/* <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title_check}>
                         Usuario interno
@@ -238,7 +238,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         onClick={() => uncheckUserInterExterno()}
                       />
 
-                      {/* <!-- ---- --> */}
                     </div>
 
                     <div className={styles.input_group}>
@@ -252,12 +251,13 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         onClick={() => uncheckUserInterExterno()}
                       />
                     </div>
-                  </div>
-                  <div className={styles.invalid_feedback}>
+                  </div> */}
+
+                  {/* <div className={styles.invalid_feedback}>
                     {errors.UserCheckexter?.message != ""
                       ? errors.UserCheckexter?.message
                       : errors.UserCheckinter?.message}
-                  </div>
+                  </div> */}
 
                   {/* <!-- form group --> */}
                   <div className={styles.form_group}>
@@ -283,7 +283,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                          setCheckinvalue(setValue);
+                          // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,
                             ValueImagesrc2,
@@ -304,7 +304,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       href={{
                         pathname: "/[id]",
                         query: { id: id },
-                        hash: "Cactive#UserInter#OverallSample",
+                        hash: "Cactive#OverallSample",
                       }}
                       className={styles.btn_cancel}
                     >
