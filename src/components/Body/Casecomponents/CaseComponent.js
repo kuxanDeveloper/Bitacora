@@ -73,8 +73,6 @@ function CaseComponent({ data, isActive }) {
           ) : (
             <img className={caseStyles._image}></img>
           )}
-          {/* <img className={caseStyles._image}></img> */}
-          {/* <img className={caseStyles._image}></img> */}
         </button>
       </div>
 
@@ -103,6 +101,7 @@ function CaseComponent({ data, isActive }) {
           </Link>
         </div>
       </div>
+      {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}
     </div>
   );
 }

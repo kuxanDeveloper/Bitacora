@@ -57,31 +57,40 @@ async function login(username, password) {
     formDataLogin
   );
   //#endregion
-
   //#region ValidateuserLogin
   if (tokenGenerateLogin != "") {
     const formDataUserSing = await new FormData();
     formDataUserSing.append("loginToken", tokenGenerateLogin);
-    TokenUserLogin = await fetchWrapper.post(
+    let UserLogin = await fetchWrapper.post(
       `${baseUrl}/LoginBitacora/loginByToken`,
       formDataUserSing
     );
+
+    if (UserLogin.token != undefined && UserLogin.token != null) {
+      cookies.set("tokenUserCookie", UserLogin.token, {
+        path: "/",
+        maxAge: 60 * 60 * 8,
+      });
+      localStorage.setItem("tokenUserLS", UserLogin.token);
+      userSubject.next(UserLogin.token);
+    }
+
+    if (UserLogin.lstRoles != undefined && UserLogin.lstRoles != null) {
+      let arrayObject = [];
+      if (UserLogin.lstRoles.length > 0) {
+        UserLogin.lstRoles.map((data) => arrayObject.push(data.Id));
+      }
+      localStorage.setItem("RolUser", JSON.stringify(arrayObject));
+    }
   }
 
-  if (TokenUserLogin != undefined && TokenUserLogin != null) {
-    cookies.set("tokenUserCookie", TokenUserLogin, {
-      path: "/",
-      maxAge: 60 * 60 * 8,
-    });
-    localStorage.setItem("tokenUserLS", TokenUserLogin);
-    userSubject.next(TokenUserLogin);
-  }
   //#endregion
 }
 
 function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
+  localStorage.removeItem("RolUser");
   userSubject.next(null);
   Router.push("/account/Login");
 }
@@ -89,6 +98,7 @@ function logout() {
 function logoutLogin() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
+  localStorage.removeItem("RolUser");
   userSubject.next(null);
 }
 
