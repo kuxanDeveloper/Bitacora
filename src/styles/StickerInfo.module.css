@@ -112,6 +112,16 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+  position: relative;
+}
+
+.sticker_info .info_container .card .stickers_container .card_content .card_body .Edit_icon {
+  position: absolute;
+  background-color: #e57d00;
+  border-radius: 50%;
+  padding: .5rem;
+  right: 0;
+  top: calc(50% - 25px);
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status_title {

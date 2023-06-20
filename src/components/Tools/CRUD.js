@@ -7,10 +7,10 @@ export const onSubmitCreate = ({
   GrupoSticker,
   ObservaInici,
   // estado,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
-  file2
+  file2,
 }) => {
   const StickerRetorno = NumSticker;
   return userService
@@ -18,8 +18,8 @@ export const onSubmitCreate = ({
       NumSticker,
       GrupoSticker,
       ObservaInici,
-      UserCheckinter,
-      UserCheckexter,
+      // UserCheckinter,
+      // UserCheckexter,
       file,
       file2
     )
@@ -60,12 +60,12 @@ export const onSubmitUpdate = ({
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
   file2,
   Cod_Imagen1,
-  Cod_Imagen2
+  Cod_Imagen2,
 }) => {
   const StickerRetorno = NumSticker;
   debugger;
@@ -74,8 +74,8 @@ export const onSubmitUpdate = ({
       NumSticker,
       GrupoSticker,
       ObservaInici,
-      UserCheckinter,
-      UserCheckexter,
+      // UserCheckinter,
+      // UserCheckexter,
       file,
       file2,
       Cod_Imagen1,
@@ -187,7 +187,11 @@ export const onSubmitCreateResult = ({
     });
 };
 
-export const onSubmitCreateNote = ({ Observaciones_detalle, NumSticker, file }) => {
+export const onSubmitCreateNote = ({
+  Observaciones_detalle,
+  NumSticker,
+  file,
+}) => {
   const StickerRetorno = NumSticker;
   return userService
     .CrearNote(Observaciones_detalle, NumSticker, file)
@@ -196,6 +200,53 @@ export const onSubmitCreateNote = ({ Observaciones_detalle, NumSticker, file }) 
       Router.push({
         pathname: "/Sample/FullDetails/[id]",
         query: { id: StickerRetorno },
+        hash: "Notas",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in crear nota");
+    });
+};
+
+export const onSubmitUpdateNote = (
+  codigo_detalle_bitacora,
+  Cod_Imagen1,
+  Observaciones_detalle,
+  NumSticker,
+  file
+) => {
+  return userService
+    .UpdateNote(
+      codigo_detalle_bitacora,
+      Cod_Imagen1,
+      Observaciones_detalle,
+      file
+    )
+    .then(() => {
+      //   const returnUrl = router.query.returnUrl || "/";
+      Router.push({
+        pathname: "/Sample/FullDetails/[id]",
+        query: { id: NumSticker },
         hash: "Notas",
       });
     })

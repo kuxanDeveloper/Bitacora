@@ -7,8 +7,8 @@ import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../context/BitacoraContext";
 import {
-  setCheckinvalue,
-  uncheckUserInterExterno,
+  // setCheckinvalue,
+  // uncheckUserInterExterno,
   setImagenFileUpdate,
 } from "../Tools/functiones";
 
@@ -19,6 +19,7 @@ function EditStickerComponents({
   InforSampleDetails,
   group,
   id,
+  isHabilteGroup,
 }) {
   const {
     setShowModal,
@@ -38,8 +39,8 @@ function EditStickerComponents({
     Cod_Imagen2: Yup.string(),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     ObservaInici: Yup.string(),
-    UserCheckinter: Yup.string().required("Campo obligatorio"),
-    UserCheckexter: Yup.string().required("Campo obligatorio"),
+    // UserCheckinter: Yup.string().required("Campo obligatorio"),
+    // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
   });
@@ -51,18 +52,25 @@ function EditStickerComponents({
       InforSampleDetails.infoBitacora != null &&
       InforSampleDetails.infoBitacora != undefined
     ) {
-      var checkbox1 = document.getElementById("UserCheckinter");
-      var checkbox2 = document.getElementById("UserCheckexter");
+      // var checkbox1 = document.getElementById("UserCheckinter");
+      // var checkbox2 = document.getElementById("UserCheckexter");
 
-      checkbox1.checked =
-        InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO == false
-          ? null
-          : InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO;
+      // checkbox1.checked =
+      //   InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO == false
+      //     ? null
+      //     : InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO;
 
-      checkbox2.checked =
-        InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO == false
-          ? null
-          : InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO;
+      // checkbox2.checked =
+      //   InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO == false
+      //     ? null
+      //     : InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO;
+
+      var grupoSticker = document.getElementById("GrupoSticker");
+      if (isHabilteGroup == "true") {
+        grupoSticker.setAttribute("disabled", "");
+      } else {
+        grupoSticker.disabled = false;
+      }
     }
   }, [InforSampleDetails.infoBitacora]);
 
@@ -286,7 +294,7 @@ function EditStickerComponents({
                       </div>
                       {/* <!-- form group --> */}
 
-                      <div className={styles.form_group}>
+                      {/* <div className={styles.form_group}>
                         <div className={styles.input_group}>
                           <label className={styles.group_title_check}>
                             Usuario interno
@@ -297,8 +305,6 @@ function EditStickerComponents({
                             type="checkbox"
                             onChange={() => uncheckUserInterExterno()}
                           />
-
-                          {/* <!-- ---- --> */}
                         </div>
 
                         <div className={styles.input_group}>
@@ -317,7 +323,7 @@ function EditStickerComponents({
                         {errors.UserCheckexter?.message != ""
                           ? errors.UserCheckexter?.message
                           : errors.UserCheckinter?.message}
-                      </div>
+                      </div> */}
 
                       {/* <!-- form group --> */}
                       <div className={styles.form_group}>
@@ -331,7 +337,7 @@ function EditStickerComponents({
                             id="ObservaInici"
                             cols="70"
                             rows="5"
-                            maxLength="2000"
+                            maxLength={1500}
                             defaultValue={data.OBSERVACIONES_INICIALES}
                           ></textarea>
                           <div className={styles.invalid_feedback}>
@@ -344,7 +350,10 @@ function EditStickerComponents({
                         {!formState.isSubmitting && (
                           <button
                             onClick={() => {
-                              setCheckinvalue(setValue);
+                              isHabilteGroup == "true"
+                                ? setValue("GrupoSticker", group)
+                                : "";
+                              // setCheckinvalue(setValue);
                               setImagenFileUpdate(
                                 ValueImagesrc,
                                 ValueImagesrc2,

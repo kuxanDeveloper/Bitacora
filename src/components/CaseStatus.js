@@ -5,7 +5,7 @@ export default function CaseStatus({
   HrefArmado,
   isActiveCase,
   isTrueActive,
-  isUserInterno,
+  // isUserInterno,
   isSampleGeneral,
 }) {
   return (
@@ -25,8 +25,6 @@ export default function CaseStatus({
                       pathname: HrefArmado.pathname,
                       query: HrefArmado.query,
                       hash: `Cactive${
-                        isUserInterno ? "#UserInter" : "#UserExter"
-                      }${
                         isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                       }`,
                     }}
@@ -57,8 +55,6 @@ export default function CaseStatus({
                       pathname: HrefArmado.pathname,
                       query: HrefArmado.query,
                       hash: `Cinactvie${
-                        isUserInterno ? "#UserInter" : "#UserExter"
-                      }${
                         isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                       }`,
                     }}

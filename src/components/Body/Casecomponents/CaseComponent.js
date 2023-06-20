@@ -3,9 +3,15 @@ import caseStyles from "../../../styles/case.module.css";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
-function CaseComponent({ data }) {
-  const { setShowModal, setishabiliteBtn, setdobleImagen, setisImagenExterna, setValueImagesrcExterna2, setValueImagesrcExterna } =
-    useContextBitacora();
+function CaseComponent({ data, isActive }) {
+  const {
+    setShowModal,
+    setishabiliteBtn,
+    setdobleImagen,
+    setisImagenExterna,
+    setValueImagesrcExterna2,
+    setValueImagesrcExterna,
+  } = useContextBitacora();
   return (
     <div className={caseStyles.card}>
       <div className={caseStyles.sticker}>
@@ -67,14 +73,14 @@ function CaseComponent({ data }) {
           ) : (
             <img className={caseStyles._image}></img>
           )}
-          {/* <img className={caseStyles._image}></img> */}
-          {/* <img className={caseStyles._image}></img> */}
         </button>
       </div>
 
       <div className={caseStyles.card_body}>
         <span
-          className={`${caseStyles.card_state} ${caseStyles.active}`}
+          className={`${caseStyles.card_state} ${
+            isActive ? caseStyles.active : ""
+          }`}
         ></span>
         <span className={caseStyles.body_title}>N° Sticker</span>
         <p className={caseStyles.card_number}>{data.NUMERO_STICKER}</p>
@@ -95,6 +101,7 @@ function CaseComponent({ data }) {
           </Link>
         </div>
       </div>
+      {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}
     </div>
   );
 }

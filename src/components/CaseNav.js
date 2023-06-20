@@ -5,7 +5,7 @@ export default function CaseNav({
   ListadoGrupo,
   idGruop,
   isTrueActive,
-  isUserInterno,
+  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
 }) {
@@ -61,8 +61,8 @@ export default function CaseNav({
                     pathname: "/[id]",
                     query: QueryReturnNew(HrefArmado.query, data.Id_grupo),
                     hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
-                      isUserInterno ? "#UserInter" : "#UserExter"
-                    }${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
+                      isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+                    }`,
                   }}
                   className={CaseNavStyles.nav_link}
                 >

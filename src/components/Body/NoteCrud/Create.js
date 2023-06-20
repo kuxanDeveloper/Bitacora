@@ -21,7 +21,7 @@ function ComponentsCreateNote({ id }) {
       "Campo observaciones obligatorio"
     ),
     NumSticker: Yup.string(),
-    file: Yup.mixed(),
+    file: Yup.mixed().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -62,7 +62,7 @@ function ComponentsCreateNote({ id }) {
                         <ImageOptimize
                           Values={{
                             src: URL.createObjectURL(ValueImagesrc),
-                            alt: "sticker",
+                            alt: "Notaimg",
                             title: "imagen nota",
                             classValue: styles.sticker_figure,
                             width: 80,

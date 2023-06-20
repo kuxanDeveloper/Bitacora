@@ -11,138 +11,187 @@ const fechaformatActualGeneralUrgencia = (Fecha, DaysMore) => {
   return d.getTime();
 };
 
-export const UserInternosActive = (query) => {
-  let RetornoQuery = [];
-  if (query != null && query != undefined) {
-    RetornoQuery = query.filter(
-      (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
-    );
-  }
-  return RetornoQuery;
-};
+// export const UserInternosActive = (query) => {
+//   let RetornoQuery = [];
+//   if (query != null && query != undefined) {
+//     RetornoQuery = query.filter(
+//       (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
+//     );
+//   }
+//   return RetornoQuery;
+// };
 
-export const UserExternosActive = (query) => {
-  let RetornoQuery = [];
-  if (query != null && query != undefined) {
-    RetornoQuery = query.filter(
-      (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
-    );
-  }
-  return RetornoQuery;
-};
+// export const UserExternosActive = (query) => {
+//   let RetornoQuery = [];
+//   if (query != null && query != undefined) {
+//     RetornoQuery = query.filter(
+//       (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
+//     );
+//   }
+//   return RetornoQuery;
+// };
 
-export const UserInternosInactive = (query) => {
-  let RetornoQuery = [];
-  if (query != null && query != undefined) {
-    RetornoQuery = query.filter(
-      (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
-    );
-  }
-  return RetornoQuery;
-};
+// export const UserInternosInactive = (query) => {
+//   let RetornoQuery = [];
+//   if (query != null && query != undefined) {
+//     RetornoQuery = query.filter(
+//       (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
+//     );
+//   }
+//   return RetornoQuery;
+// };
 
-export const UserExternosInactive = (query) => {
-  let RetornoQuery = [];
-  if (query != null && query != undefined) {
-    RetornoQuery = query.filter(
-      (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
-    );
-  }
-  return RetornoQuery;
-};
+// export const UserExternosInactive = (query) => {
+//   let RetornoQuery = [];
+//   if (query != null && query != undefined) {
+//     RetornoQuery = query.filter(
+//       (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
+//     );
+//   }
+//   return RetornoQuery;
+// };
 
 //Muestras generales y Urgencias
-export const UserInternosActiveGenerales = (query) => {
+// export const UserInternosActiveGenerales = (query) => {
+//   let ListadoNewRetorno = [];
+//   let fechaActual = new Date();
+//   query.forEach((element) => {
+//     let FechaRegistro = fechaformatActualGeneralUrgencia(
+//       element.FECHA_ORIGINAL_CREADO_BITACORA,
+//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+//         element.DIAS_PARA_ALERTA_GRUPO == null
+//         ? 0
+//         : element.DIAS_PARA_ALERTA_GRUPO
+//     );
+//     let diferencia = fechaActual.getTime() - FechaRegistro;
+//     let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+//     ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
+//     if (diasDeDiferencia < 0) {
+//       ListadoNewRetorno.push(element);
+//     }
+//     // if ()
+//     // ListadoNewRetorno.push
+//   });
+//   return ListadoNewRetorno;
+// };
+
+// export const UserInternosActiveUrgencias = (query) => {
+//   let fechaActual = new Date();
+//   let ListadoNewRetorno = [];
+//   query.forEach((element) => {
+//     let FechaRegistro = fechaformatActualGeneralUrgencia(
+//       element.FECHA_ORIGINAL_CREADO_BITACORA,
+//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+//         element.DIAS_PARA_ALERTA_GRUPO == null
+//         ? 0
+//         : element.DIAS_PARA_ALERTA_GRUPO
+//     );
+//     let diferencia = fechaActual.getTime() - FechaRegistro;
+//     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+//     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+//     if (diasDeDiferencia >= 0) {
+//       ListadoNewRetorno.push(element);
+//     }
+
+//     // if ()
+//     // ListadoNewRetorno.push
+//   });
+//   return ListadoNewRetorno;
+// };
+
+// export const UserExternosActiveGenerales = (query) => {
+//   let ListadoNewRetorno = [];
+//   let fechaActual = new Date();
+//   query.forEach((element) => {
+//     let FechaRegistro = fechaformatActualGeneralUrgencia(
+//       element.FECHA_ORIGINAL_CREADO_BITACORA,
+//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+//         element.DIAS_PARA_ALERTA_GRUPO == null
+//         ? 0
+//         : element.DIAS_PARA_ALERTA_GRUPO
+//     );
+//     let diferencia = fechaActual.getTime() - FechaRegistro;
+//     let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+//     ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
+//     if (diasDeDiferencia < 0) {
+//       ListadoNewRetorno.push(element);
+//     }
+//     // if ()
+//     // ListadoNewRetorno.push
+//   });
+//   return ListadoNewRetorno;
+// };
+
+// export const UserExternosActiveUrgencias = (query) => {
+//   let fechaActual = new Date();
+//   let ListadoNewRetorno = [];
+//   query.forEach((element) => {
+//     let FechaRegistro = fechaformatActualGeneralUrgencia(
+//       element.FECHA_ORIGINAL_CREADO_BITACORA,
+//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+//         element.DIAS_PARA_ALERTA_GRUPO == null
+//         ? 0
+//         : element.DIAS_PARA_ALERTA_GRUPO
+//     );
+//     let diferencia = fechaActual.getTime() - FechaRegistro;
+//     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+//     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+//     if (diasDeDiferencia >= 0) {
+//       ListadoNewRetorno.push(element);
+//     }
+
+//     // if ()
+//     // ListadoNewRetorno.push
+//   });
+//   return ListadoNewRetorno;
+// };
+
+export const UserActiveGenerales = (query) => {
   let ListadoNewRetorno = [];
   let fechaActual = new Date();
-  query.forEach((element) => {
-    let FechaRegistro = fechaformatActualGeneralUrgencia(
-      element.FECHA_ORIGINAL_CREADO_BITACORA,
-      element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-        element.DIAS_PARA_ALERTA_GRUPO == null
-        ? 0
-        : element.DIAS_PARA_ALERTA_GRUPO
-    );
-    let diferencia = fechaActual.getTime() - FechaRegistro;
-    let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-    ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-    if (diasDeDiferencia < 0) {
-      ListadoNewRetorno.push(element);
-    }
-    // if ()
-    // ListadoNewRetorno.push
-  });
+
+  if (query != null && query != undefined) {
+    query.forEach((element) => {
+      let FechaRegistro = fechaformatActualGeneralUrgencia(
+        element.FECHA_ORIGINAL_CREADO_BITACORA,
+        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+          element.DIAS_PARA_ALERTA_GRUPO == null
+          ? 0
+          : element.DIAS_PARA_ALERTA_GRUPO
+      );
+      let diferencia = fechaActual.getTime() - FechaRegistro;
+      let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
+      ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
+      if (diasDeDiferencia < 0) {
+        ListadoNewRetorno.push(element);
+      }
+    });
+  }
   return ListadoNewRetorno;
 };
 
-export const UserInternosActiveUrgencias = (query) => {
-  let fechaActual = new Date();
-  let ListadoNewRetorno = [];
-  query.forEach((element) => {
-    let FechaRegistro = fechaformatActualGeneralUrgencia(
-      element.FECHA_ORIGINAL_CREADO_BITACORA,
-      element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-        element.DIAS_PARA_ALERTA_GRUPO == null
-        ? 0
-        : element.DIAS_PARA_ALERTA_GRUPO
-    );
-    let diferencia = fechaActual.getTime() - FechaRegistro;
-    let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-    ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-    if (diasDeDiferencia >= 0) {
-      ListadoNewRetorno.push(element);
-    }
-
-    // if ()
-    // ListadoNewRetorno.push
-  });
-  return ListadoNewRetorno;
-};
-
-export const UserExternosActiveGenerales = (query) => {
+export const UserActiveUrgencias = (query) => {
   let ListadoNewRetorno = [];
   let fechaActual = new Date();
-  query.forEach((element) => {
-    let FechaRegistro = fechaformatActualGeneralUrgencia(
-      element.FECHA_ORIGINAL_CREADO_BITACORA,
-      element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-        element.DIAS_PARA_ALERTA_GRUPO == null
-        ? 0
-        : element.DIAS_PARA_ALERTA_GRUPO
-    );
-    let diferencia = fechaActual.getTime() - FechaRegistro;
-    let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-    ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-    if (diasDeDiferencia < 0) {
-      ListadoNewRetorno.push(element);
-    }
-    // if ()
-    // ListadoNewRetorno.push
-  });
-  return ListadoNewRetorno;
-};
 
-export const UserExternosActiveUrgencias = (query) => {
-  let fechaActual = new Date();
-  let ListadoNewRetorno = [];
-  query.forEach((element) => {
-    let FechaRegistro = fechaformatActualGeneralUrgencia(
-      element.FECHA_ORIGINAL_CREADO_BITACORA,
-      element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-        element.DIAS_PARA_ALERTA_GRUPO == null
-        ? 0
-        : element.DIAS_PARA_ALERTA_GRUPO
-    );
-    let diferencia = fechaActual.getTime() - FechaRegistro;
-    let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-    ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-    if (diasDeDiferencia >= 0) {
-      ListadoNewRetorno.push(element);
-    }
+  if (query != null && query != undefined) {
+    query.forEach((element) => {
+      let FechaRegistro = fechaformatActualGeneralUrgencia(
+        element.FECHA_ORIGINAL_CREADO_BITACORA,
+        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+          element.DIAS_PARA_ALERTA_GRUPO == null
+          ? 0
+          : element.DIAS_PARA_ALERTA_GRUPO
+      );
+      let diferencia = fechaActual.getTime() - FechaRegistro;
+      let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+      ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+      if (diasDeDiferencia >= 0) {
+        ListadoNewRetorno.push(element);
+      }
+    });
+  }
 
-    // if ()
-    // ListadoNewRetorno.push
-  });
   return ListadoNewRetorno;
 };
 
@@ -188,15 +237,15 @@ export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
   let urlHref = window.location.href;
   let hashs2 = urlHref.split("#")[1];
-  let hashs3 = urlHref.split("#")[2];
-  let hashs4 = urlHref.split("#")[3];
+  // let hashs3 = urlHref.split("#")[2];
+  let hashs4 = urlHref.split("#")[2];
   if (router.pathname === "/") {
     router.push({ pathname: router.pathname, hash: `${hashs2}` });
   } else {
     router.push({
       pathname: router.pathname,
       query: { id: idGrupo },
-      hash: `${hashs2}#${hashs3}#${hashs4}`,
+      hash: `${hashs2}#${hashs4}`,
     });
   }
 };
@@ -222,7 +271,7 @@ export const OnclickComboEstadoCase = (
   value,
   router,
   hrefarmado,
-  isUserInterno,
+  // isUserInterno,
   isSampleGeneral
 ) => {
   if (value.toLowerCase() === "true") {
@@ -230,9 +279,7 @@ export const OnclickComboEstadoCase = (
       router.push({
         pathname: hrefarmado.pathname,
         query: hrefarmado.query,
-        hash: `Cactive${isUserInterno ? "#UserInter" : "#UserExter"}${
-          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
-        }`,
+        hash: `Cactive${isSampleGeneral ? "#OverallSample" : "#UrgentSamples"}`,
       });
     } else {
       router.push({ pathname: hrefarmado.pathname, hash: "Cactive" });
@@ -242,7 +289,7 @@ export const OnclickComboEstadoCase = (
       router.push({
         pathname: hrefarmado.pathname,
         query: hrefarmado.query,
-        hash: `Cinactvie${isUserInterno ? "#UserInter" : "#UserExter"}${
+        hash: `Cinactvie${
           isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
         }`,
       });
@@ -259,39 +306,39 @@ export const onclickPruebaTarget = () => {
   document.getElementById("Codigo_resultado_final").value = "";
 };
 
-export const setCheckinvalue = (setValue) => {
-  var checbox1 = document.getElementById("UserCheckinter");
-  var checbox2 = document.getElementById("UserCheckexter");
+// export const setCheckinvalue = (setValue) => {
+//   var checbox1 = document.getElementById("UserCheckinter");
+//   var checbox2 = document.getElementById("UserCheckexter");
 
-  if (
-    (checbox1.checked != null &&
-      checbox1.checked != undefined &&
-      checbox1.checked != false) ||
-    (checbox2.checked != null &&
-      checbox2.checked != undefined &&
-      checbox2.checked != false)
-  ) {
-    if (
-      checbox1.checked == null ||
-      checbox1.checked == undefined ||
-      checbox1.checked == false
-    ) {
-      setValue("UserCheckinter", "0");
-    } else {
-      setValue("UserCheckinter", "1");
-    }
+//   if (
+//     (checbox1.checked != null &&
+//       checbox1.checked != undefined &&
+//       checbox1.checked != false) ||
+//     (checbox2.checked != null &&
+//       checbox2.checked != undefined &&
+//       checbox2.checked != false)
+//   ) {
+//     if (
+//       checbox1.checked == null ||
+//       checbox1.checked == undefined ||
+//       checbox1.checked == false
+//     ) {
+//       setValue("UserCheckinter", "0");
+//     } else {
+//       setValue("UserCheckinter", "1");
+//     }
 
-    if (
-      checbox2.checked == null ||
-      checbox2.checked == undefined ||
-      checbox2.checked == false
-    ) {
-      setValue("UserCheckexter", "0");
-    } else {
-      setValue("UserCheckexter", "1");
-    }
-  }
-};
+//     if (
+//       checbox2.checked == null ||
+//       checbox2.checked == undefined ||
+//       checbox2.checked == false
+//     ) {
+//       setValue("UserCheckexter", "0");
+//     } else {
+//       setValue("UserCheckexter", "1");
+//     }
+//   }
+// };
 
 export const setCheckindividual = (setValue) => {
   var checbox1 = document.getElementById("EstadoGrupo");
@@ -329,7 +376,7 @@ export const setImagenFileUpdate = (
     } else {
       setValue("Cod_Imagen1", "");
     }
-  }else{
+  } else {
     setValue("Cod_Imagen1", "");
   }
 
@@ -339,27 +386,45 @@ export const setImagenFileUpdate = (
     } else {
       setValue("Cod_Imagen2", "");
     }
-  }else{
+  } else {
     setValue("Cod_Imagen2", "");
   }
 };
 
-export const uncheckUserInterExterno = () => {
-  var checkbox1 = document.getElementById("UserCheckinter");
-  var checkbox2 = document.getElementById("UserCheckexter");
+export const setImagenfileUpdateNote = (
+  ValueImagesrc,
+  setValue,
+  Cod_Imagen1
+) => {
+  setValue("file", ValueImagesrc);
 
-  checkbox1.onchange = function () {
-    if (checkbox1.checked != false) {
-      checkbox2.checked = null;
+  if (ValueImagesrc != null) {
+    if (Cod_Imagen1 != null) {
+      setValue("Cod_Imagen1", Cod_Imagen1);
+    } else {
+      setValue("Cod_Imagen1", "");
     }
-  };
-
-  checkbox2.onchange = function () {
-    if (checkbox2.checked != false) {
-      checkbox1.checked = null;
-    }
-  };
+  } else {
+    setValue("Cod_Imagen1", "");
+  }
 };
+
+// export const uncheckUserInterExterno = () => {
+//   var checkbox1 = document.getElementById("UserCheckinter");
+//   var checkbox2 = document.getElementById("UserCheckexter");
+
+//   checkbox1.onchange = function () {
+//     if (checkbox1.checked != false) {
+//       checkbox2.checked = null;
+//     }
+//   };
+
+//   checkbox2.onchange = function () {
+//     if (checkbox2.checked != false) {
+//       checkbox1.checked = null;
+//     }
+//   };
+// };
 
 export const UploadImageSticker = (
   event,

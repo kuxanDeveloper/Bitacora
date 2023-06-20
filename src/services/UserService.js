@@ -37,6 +37,7 @@ export const userService = {
   CreatGroup,
   EditGroup,
   InfoGroup,
+  UpdateNote,
 };
 
 async function login(username, password) {
@@ -59,31 +60,40 @@ async function login(username, password) {
     formDataLogin
   );
   //#endregion
-
   //#region ValidateuserLogin
   if (tokenGenerateLogin != "") {
     const formDataUserSing = await new FormData();
     formDataUserSing.append("loginToken", tokenGenerateLogin);
-    TokenUserLogin = await fetchWrapper.post(
+    let UserLogin = await fetchWrapper.post(
       `${baseUrl}/LoginBitacora/loginByToken`,
       formDataUserSing
     );
+
+    if (UserLogin.token != undefined && UserLogin.token != null) {
+      cookies.set("tokenUserCookie", UserLogin.token, {
+        path: "/",
+        maxAge: 60 * 60 * 8,
+      });
+      localStorage.setItem("tokenUserLS", UserLogin.token);
+      userSubject.next(UserLogin.token);
+    }
+
+    if (UserLogin.lstRoles != undefined && UserLogin.lstRoles != null) {
+      let arrayObject = [];
+      if (UserLogin.lstRoles.length > 0) {
+        UserLogin.lstRoles.map((data) => arrayObject.push(data.Id));
+      }
+      localStorage.setItem("RolUser", JSON.stringify(arrayObject));
+    }
   }
 
-  if (TokenUserLogin != undefined && TokenUserLogin != null) {
-    cookies.set("tokenUserCookie", TokenUserLogin, {
-      path: "/",
-      maxAge: 60 * 60 * 8,
-    });
-    localStorage.setItem("tokenUserLS", TokenUserLogin);
-    userSubject.next(TokenUserLogin);
-  }
   //#endregion
 }
 
 function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
+  localStorage.removeItem("RolUser");
   userSubject.next(null);
   Router.push("/account/Login");
 }
@@ -91,6 +101,7 @@ function logout() {
 function logoutLogin() {
   cookies.remove("tokenUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
+  localStorage.removeItem("RolUser");
   userSubject.next(null);
 }
 
@@ -185,8 +196,8 @@ function CreatSticker(
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
   file2
 ) {
@@ -194,8 +205,8 @@ function CreatSticker(
 
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter);
-  formData.append("Usuario_externo", UserCheckexter);
+  // formData.append("Usuario_interno", UserCheckinter);
+  // formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
@@ -254,8 +265,8 @@ function EditSticker(
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  UserCheckinter,
-  UserCheckexter,
+  // UserCheckinter,
+  // UserCheckexter,
   file,
   file2,
   Cod_Imagen1,
@@ -264,8 +275,8 @@ function EditSticker(
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  formData.append("Usuario_interno", UserCheckinter);
-  formData.append("Usuario_externo", UserCheckexter);
+  // formData.append("Usuario_interno", UserCheckinter);
+  // formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
@@ -325,5 +336,23 @@ function InfoGroup(estado, idGrupo,cookie) {
   return fetchWrapper.get(
     `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
     cookie
+  );
+}
+
+function UpdateNote(
+  codigo_detalle_bitacora,
+  Cod_Imagen1,
+  Observaciones_detalle,
+  file
+) {
+  const formData = new FormData();
+  formData.append("codigo_detalle_bitacora", codigo_detalle_bitacora);
+  formData.append("Observaciones_detalle", Observaciones_detalle);
+  formData.append("file", file);
+  formData.append("Cod_Imagen1", Cod_Imagen1);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditBitacoraDetalle`,
+    null,
+    formData
   );
 }
