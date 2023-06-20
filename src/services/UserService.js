@@ -34,6 +34,9 @@ export const userService = {
   CrearNote,
   EditSticker,
   InfoSampleNote,
+  CreatGroup,
+  EditGroup,
+  InfoGroup,
 };
 
 async function login(username, password) {
@@ -279,6 +282,48 @@ function EditSticker(
 function InfoSampleNote(cookie, idNote) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/InformacionDetalleBitacora?Numero_Sticker=&Codigo_Detalle=${idNote}`,
+    cookie
+  );
+}
+
+function CreatGroup(
+  NombreGrupo,
+  EstadoGrupo
+) {
+  const formData = new FormData();
+debugger;
+  formData.append("nombre_Grupo", NombreGrupo);
+  formData.append("estado_Grupo", EstadoGrupo);
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Grupos/GuardGrupos`,
+    null,
+    formData
+  );
+}
+
+function EditGroup(
+  IdGrupo,
+  NombreGrupo,
+  EstadoGrupo
+) {
+  const formData = new FormData();
+
+  formData.append("Id_Grupo", IdGrupo);
+  formData.append("nombre_Grupo", NombreGrupo);
+  formData.append("estado_Grupo", EstadoGrupo);
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Grupos/EditarGrupos`,
+    null,
+    formData
+  );
+}
+
+function InfoGroup(estado, idGrupo,cookie) {
+  debugger;
+  return fetchWrapper.get(
+    `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
     cookie
   );
 }
