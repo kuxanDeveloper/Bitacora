@@ -283,9 +283,6 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   InforSampleDetails.infoDetalle.length > 0 ? (
                     InforSampleDetails.infoDetalle.map((data, index) => (
                       <Details
-                        setShowModal={setShowModal}
-                        setdobleImagen={setdobleImagen}
-                        setisImagenExterna={setisImagenExterna}
                         key={index}
                         data={data}
                       ></Details>

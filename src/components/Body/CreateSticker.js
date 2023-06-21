@@ -21,6 +21,9 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     setisImagenOne,
     setValueImagesrc,
     setValueImagesrc2,
+    setValueImagesrcExterna,
+    setValueImagesrcExterna2,
+    setisImagenExterna
   } = useContextBitacora();
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
@@ -35,6 +38,9 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
   useEffect(() => {
     setValueImagesrc(null);
     setValueImagesrc2(null);
+    setisImagenExterna(false);
+    setValueImagesrcExterna(null);
+    setValueImagesrcExterna2(null)
   }, []);
 
   //The class name can vary

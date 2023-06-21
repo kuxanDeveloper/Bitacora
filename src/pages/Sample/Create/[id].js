@@ -2,6 +2,13 @@ import React from "react";
 import Head from "next/head";
 import CreateSticker from "../../../components/Body/CreateSticker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
+import {
+  OptionAdministrator,
+  OptionAsiste,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../../../components/Tools/OpcitionHabilite";
 function CreatePage({ ListadoGrupoActivo, id }) {
   return (
     <>
@@ -50,7 +57,34 @@ export default CreatePage;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
-  if (cookie) {
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
+
+  if (cookie && RolUser) {
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
+    if (!Options.BtnCrearStickerAndUrl) {
+      return { notFound: true };
+    }
+
     const ListadoGrupoActivo = await QueryActivegroup(cookie);
 
     return {

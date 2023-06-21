@@ -5,11 +5,23 @@ import Head from "next/head";
 import CaseStatus from "../components/CaseStatus";
 import Filters from "../components/Body/Filters";
 import { useRouter } from "next/router";
+import {
+  OptionAdministrator,
+  OptionAsiste,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../components/Tools/OpcitionHabilite";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
-function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
+function HomeMuestraxGrupo({
+  cookie,
+  query,
+  ListadoUsuariosRegistrados,
+  Options,
+}) {
   const [isTrueActive, setisTrueActive] = useState(false);
-  const [isUserInterno, setisUserInterno] = useState(false);
+  // const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
   const [GrupoNombre, setGrupoNombre] = useState("");
   const [ListadoGrupo, setListadoGrupo] = useState([]);
@@ -227,6 +239,7 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
         HrefArmado={{ pathname: "/[id]", query: query }}
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
+        Options={Options}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
@@ -251,9 +264,31 @@ function HomeMuestraxGrupo({ cookie, query, ListadoUsuariosRegistrados }) {
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
   if (cookie) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
+    }
+
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
     }
 
     const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
@@ -262,6 +297,7 @@ export async function getServerSideProps(ctx) {
         cookie: cookie,
         query: ctx.query,
         ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
+        Options,
       },
     };
   } else {

@@ -2,16 +2,36 @@ import React from "react";
 import styles from "../../../styles/StickerDetails.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
-function Details({ data, setShowModal, setdobleImagen, setisImagenExterna }) {
+import { useContextBitacora } from "../../../context/BitacoraContext";
+function Details({ data }) {
+  const {
+    setShowModal,
+    setishabiliteBtn,
+    setdobleImagen,
+    setisImagenExterna,
+    setValueImagesrcExterna2,
+    setValueImagesrcExterna,
+    setisImagenOne,
+  } = useContextBitacora();
   return (
     <div className={styles.followup}>
       {/* <!-- pruebas --> */}
       <button
         type="button"
         onClick={() => {
+          setishabiliteBtn(false);
           setShowModal(true);
-          setdobleImagen(true);
+          setdobleImagen(false);
           setisImagenExterna(true);
+          setisImagenOne(true);
+          setValueImagesrcExterna(
+            data.URL_PRIMERA_IMAGEN_DETALLE != null &&
+              data.URL_PRIMERA_IMAGEN_DETALLE != undefined
+              ? process.env.NEXT_PUBLIC_URL_API +
+                  data.URL_PRIMERA_IMAGEN_DETALLE
+              : null
+          );
+          setValueImagesrcExterna2(null);
         }}
         className={styles.img_icon}
       >

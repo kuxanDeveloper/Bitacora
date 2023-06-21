@@ -10,10 +10,14 @@ import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentsCreateNote({ id }) {
   const {
     setValueImagesrc,
+    setValueImagesrc2,
     ValueImagesrc,
     setishabiliteBtn,
     setShowModal,
     setisImagenOne,
+    setValueImagesrcExterna,
+    setValueImagesrcExterna2,
+    setisImagenExterna,
   } = useContextBitacora();
 
   const validationSchema = Yup.object().shape({
@@ -30,6 +34,10 @@ function ComponentsCreateNote({ id }) {
 
   useEffect(() => {
     setValueImagesrc(null);
+    setValueImagesrc2(null);
+    setisImagenExterna(false);
+    setValueImagesrcExterna(null);
+    setValueImagesrcExterna2(null);
   }, []);
 
   return (

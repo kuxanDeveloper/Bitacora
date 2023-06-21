@@ -7,6 +7,7 @@ export default function CaseStatus({
   isTrueActive,
   // isUserInterno,
   isSampleGeneral,
+  Options,
 }) {
   return (
     <>

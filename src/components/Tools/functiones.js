@@ -497,3 +497,13 @@ export const UploadImageSticker = (
     photo2.value = "";
   }
 };
+
+export const LocationUrl = (router, value) => {
+  let aciteMenuClass = false;
+
+  if (router.pathname.toLowerCase().includes(value)) {
+    aciteMenuClass = true;
+  }
+
+  return aciteMenuClass;
+};

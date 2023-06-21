@@ -105,10 +105,12 @@ function EditStickerComponents({
                             <ImageOptimize
                               Values={{
                                 src:
-                                  ValueImagesrc != null
+                                  data.URL_PRIMERA_IMAGEN != null
+                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                      data.URL_PRIMERA_IMAGEN
+                                    : ValueImagesrc != null
                                     ? URL.createObjectURL(ValueImagesrc)
-                                    : process.env.NEXT_PUBLIC_URL_API +
-                                      data.URL_PRIMERA_IMAGEN,
+                                    : "",
                                 alt: "sticker",
                                 title: "imagen sticker",
                                 classValue: styles.sticker_figure,
@@ -123,6 +125,7 @@ function EditStickerComponents({
                                 setShowModal(true);
                                 setishabiliteBtn(true);
                                 setisImagenOne(true);
+                                data.URL_PRIMERA_IMAGEN == null &&
                                 ValueImagesrc != null
                                   ? setisImagenExterna(false)
                                   : setisImagenExterna(true);
@@ -178,10 +181,12 @@ function EditStickerComponents({
                             <ImageOptimize
                               Values={{
                                 src:
-                                  ValueImagesrc2 != null
+                                  data.URL_PRIMERA_IMAGEN != null
+                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                      data.URL_SEGUNDA_IMAGEN
+                                    : ValueImagesrc2 != null
                                     ? URL.createObjectURL(ValueImagesrc2)
-                                    : process.env.NEXT_PUBLIC_URL_API +
-                                      data.URL_SEGUNDA_IMAGEN,
+                                    : "",
 
                                 alt: "sticker",
                                 title: "imagen sticker 2",
@@ -197,6 +202,7 @@ function EditStickerComponents({
                                 setShowModal(true);
                                 setishabiliteBtn(true);
                                 setisImagenOne(false);
+                                data.URL_SEGUNDA_IMAGEN == null &&
                                 ValueImagesrc2 != null
                                   ? setisImagenExterna(false)
                                   : setisImagenExterna(true);

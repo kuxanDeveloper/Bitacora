@@ -71,6 +71,7 @@ async function login(username, password) {
         path: "/",
         maxAge: 60 * 60 * 8,
       });
+
       localStorage.setItem("tokenUserLS", UserLogin.token);
       userSubject.next(UserLogin.token);
     }
@@ -80,6 +81,10 @@ async function login(username, password) {
       if (UserLogin.lstRoles.length > 0) {
         UserLogin.lstRoles.map((data) => arrayObject.push(data.Id));
       }
+      cookies.set("RolUserCookie", arrayObject, {
+        path: "/",
+        maxAge: 60 * 60 * 8,
+      });
       localStorage.setItem("RolUser", JSON.stringify(arrayObject));
     }
   }
@@ -89,6 +94,7 @@ async function login(username, password) {
 
 function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
+  cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
   userSubject.next(null);
@@ -97,6 +103,7 @@ function logout() {
 
 function logoutLogin() {
   cookies.remove("tokenUserCookie", { path: "/" });
+  cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
   userSubject.next(null);
