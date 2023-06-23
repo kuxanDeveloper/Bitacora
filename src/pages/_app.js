@@ -1,5 +1,6 @@
 import "../styles/css500.css";
 import "../styles/globals.css";
+import "../styles/styleuniqueLecto.css"
 import React from "react";
 import { BicatoraContexProvider } from "../context/BitacoraContext";
 import Loading from "../components/Tools/Loading";

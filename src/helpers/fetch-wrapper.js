@@ -23,6 +23,7 @@ function get(url, cookie) {
 }
 
 function post(url, body) {
+  alert("error " + body + url);
   const requestOptions = {
     method: "POST",
     body: body,
@@ -73,7 +74,9 @@ function authHeader(url, cookie) {
   const isApiUrl = url.startsWith(baseUrl);
   if (isLoggedIn && isApiUrl) {
     return {
-      Token: `${user == undefined || user == null || user==false ? cookie : user}`,
+      Token: `${
+        user == undefined || user == null || user == false ? cookie : user
+      }`,
     };
   } else {
     return {};

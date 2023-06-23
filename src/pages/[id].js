@@ -37,6 +37,7 @@ function HomeMuestraxGrupo({
       query.DateAdmission,
       query.result,
       query.URS,
+      "",
       setGrupoNombre,
       setListadoGrupo,
       setListadoMuestraActivo,

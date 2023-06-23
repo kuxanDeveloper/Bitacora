@@ -3,9 +3,9 @@ import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export const onSubmit = ({ username, password }) => {
+export const onSubmit = ({ username, pass }) => {
   return userService
-    .login(username, password)
+    .login(username, pass)
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({ pathname: "/", hash: "Cactive" });
@@ -25,7 +25,7 @@ export const onSubmit = ({ username, password }) => {
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico",
+          text: "Porfavor comunicarse con soporte técnico"+error,
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -173,7 +173,8 @@ export const QueryMueForGroup = (
   Numstiker,
   DateAdmission,
   result,
-  URS
+  URS,
+  Cod_sticker
 ) => {
   return userService
     .ListGroupForMue(
@@ -183,7 +184,8 @@ export const QueryMueForGroup = (
       Numstiker,
       DateAdmission,
       result,
-      URS
+      URS,
+      Cod_sticker
     )
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {

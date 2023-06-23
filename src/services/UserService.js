@@ -2,7 +2,7 @@ import { BehaviorSubject } from "rxjs";
 import Router from "next/router";
 import Cookies from "universal-cookie";
 import { fetchWrapper } from "../helpers/fetch-wrapper";
-
+import CryptoJS from "crypto-js";
 const baseUrl = `${
   process.env.NEXT_PUBLIC_NODE_ENV == "development"
     ? process.env.NEXT_PUBLIC_API_URL_DEVELOPMENT
@@ -40,22 +40,26 @@ export const userService = {
 async function login(username, password) {
   let TokenUserLogin;
   //#region keyToken Password
-  const utf8 = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", utf8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const tokenPassword = hashArray
-    .map((bytes) => bytes.toString(16).padStart(2, "0"))
-    .join("");
+
+  let hashBuffer = CryptoJS.SHA256(password);
+  const tokenPassword = hashBuffer.toString(CryptoJS.enc.Hex);
+
+  // const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+  // const tokenPassword = hashArray
+  //   .map((bytes) => bytes.toString(16).padStart(2, "0"))
+  //   .join("");
 
   const formDataLogin = await new FormData();
 
   formDataLogin.append("Num_Identidad", username);
   formDataLogin.append("pass", tokenPassword);
-
+  
   let tokenGenerateLogin = await fetchWrapper.post(
     `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
     formDataLogin
   );
+
   //#endregion
   //#region ValidateuserLogin
   if (tokenGenerateLogin != "") {
@@ -136,7 +140,8 @@ function ListGroupForMue(
   NumeroSticker,
   FechaINgreso,
   ResultadoFinal,
-  UserLoginSticker
+  UserLoginSticker,
+  Cod_sticker
 ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
@@ -163,6 +168,8 @@ function ListGroupForMue(
       ? UserLoginSticker
       : ""
   );
+
+  formData.append("COD_BITACORA", Cod_sticker);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -203,7 +210,8 @@ function CreatSticker(
   // UserCheckinter,
   // UserCheckexter,
   file,
-  file2
+  file2,
+  Sufijo
 ) {
   const formData = new FormData();
 
@@ -214,6 +222,7 @@ function CreatSticker(
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
+  formData.append("Sufijo", Sufijo);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
     null,

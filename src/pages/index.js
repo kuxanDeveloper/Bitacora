@@ -184,17 +184,32 @@ export default function Home({
               break;
             case 2:
               ValorRetorno = (
-                <IndexComponentTechni key={index}></IndexComponentTechni>
+                <IndexComponentTechni
+                  key={index}
+                  HabilitarActive={isTrueActive}
+                  ListadoGrupoActivo={ListadoGrupoActivo}
+                  ListadoGrupoInactivo={ListadoGrupoInactivo}
+                ></IndexComponentTechni>
               );
               break;
             case 3:
               ValorRetorno = (
-                <IndexComponentAssis key={index}></IndexComponentAssis>
+                <IndexComponentAssis
+                  key={index}
+                  HabilitarActive={isTrueActive}
+                  ListadoGrupoActivo={ListadoGrupoActivo}
+                  ListadoGrupoInactivo={ListadoGrupoInactivo}
+                ></IndexComponentAssis>
               );
               break;
             case 4:
               ValorRetorno = (
-                <IndexComponentConsul key={index}></IndexComponentConsul>
+                <IndexComponentConsul
+                  key={index}
+                  HabilitarActive={isTrueActive}
+                  ListadoGrupoActivo={ListadoGrupoActivo}
+                  ListadoGrupoInactivo={ListadoGrupoInactivo}
+                ></IndexComponentConsul>
               );
               break;
             default:

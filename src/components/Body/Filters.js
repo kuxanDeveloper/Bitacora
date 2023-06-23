@@ -96,10 +96,8 @@ export default function Filters({
     <>
       <div
         className={
-          Options.OrdersInactive
-            ? isActiveGroup
-              ? `${filterStyles.filters} ${filterStyles.special_filters}`
-              : filterStyles.filters
+          isActiveGroup
+            ? `${filterStyles.filters} ${filterStyles.special_filters}`
             : filterStyles.filters
         }
       >

@@ -152,19 +152,7 @@ export const UserActiveGenerales = (query) => {
 
   if (query != null && query != undefined) {
     query.forEach((element) => {
-      let FechaRegistro = fechaformatActualGeneralUrgencia(
-        element.FECHA_ORIGINAL_CREADO_BITACORA,
-        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-          element.DIAS_PARA_ALERTA_GRUPO == null
-          ? 0
-          : element.DIAS_PARA_ALERTA_GRUPO
-      );
-      let diferencia = fechaActual.getTime() - FechaRegistro;
-      let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-      ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-      if (diasDeDiferencia < 0) {
-        ListadoNewRetorno.push(element);
-      }
+      ListadoNewRetorno.push(element);
     });
   }
   return ListadoNewRetorno;
@@ -172,25 +160,25 @@ export const UserActiveGenerales = (query) => {
 
 export const UserActiveUrgencias = (query) => {
   let ListadoNewRetorno = [];
-  let fechaActual = new Date();
+  // let fechaActual = new Date();
 
-  if (query != null && query != undefined) {
-    query.forEach((element) => {
-      let FechaRegistro = fechaformatActualGeneralUrgencia(
-        element.FECHA_ORIGINAL_CREADO_BITACORA,
-        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-          element.DIAS_PARA_ALERTA_GRUPO == null
-          ? 0
-          : element.DIAS_PARA_ALERTA_GRUPO
-      );
-      let diferencia = fechaActual.getTime() - FechaRegistro;
-      let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-      ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-      if (diasDeDiferencia >= 0) {
-        ListadoNewRetorno.push(element);
-      }
-    });
-  }
+  // if (query != null && query != undefined) {
+  //   query.forEach((element) => {
+  //     let FechaRegistro = fechaformatActualGeneralUrgencia(
+  //       element.FECHA_ORIGINAL_CREADO_BITACORA,
+  //       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+  //         element.DIAS_PARA_ALERTA_GRUPO == null
+  //         ? 0
+  //         : element.DIAS_PARA_ALERTA_GRUPO
+  //     );
+  //     let diferencia = fechaActual.getTime() - FechaRegistro;
+  //     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+  //     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+  //     if (diasDeDiferencia >= 0) {
+  //       ListadoNewRetorno.push(element);
+  //     }
+  //   });
+  // }
 
   return ListadoNewRetorno;
 };

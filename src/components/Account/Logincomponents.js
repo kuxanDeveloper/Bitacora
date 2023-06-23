@@ -10,7 +10,7 @@ import * as Yup from "yup";
 function Logincomponents() {
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Campo de usuario obligatorio"),
-    password: Yup.string().required("Campo de contraseña obligatorio"),
+    pass: Yup.string().required("Campo de contraseña obligatorio"),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
@@ -52,8 +52,8 @@ function Logincomponents() {
 
               <label className={styleLogin.input_label}>Contraseña</label>
               <input
-                {...register("password")}
-                name="password"
+                {...register("pass")}
+                name="pass"
                 type="password"
                 className={`${styleLogin.userpassword} ${
                   errors.password ? styleLogin.is_invalid : ""

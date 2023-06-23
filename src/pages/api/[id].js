@@ -13,6 +13,7 @@ export const ApiQueryGeneralSample = async (
   DateAdmission,
   result,
   URS,
+  Cod_sticker,
   setGrupoNombre,
   setListadoGrupo,
   setListadoMuestraActivo,
@@ -27,7 +28,8 @@ export const ApiQueryGeneralSample = async (
     Numstiker,
     DateAdmission,
     result,
-    URS
+    URS,
+    Cod_sticker
   );
   setListadoMuestraActivo(listActivoMue);
   let listInactimue = await QueryMueForGroup(
@@ -37,7 +39,8 @@ export const ApiQueryGeneralSample = async (
     Numstiker,
     DateAdmission,
     result,
-    URS
+    URS,
+    Cod_sticker
   );
   setListadoMuestraInactivo(listInactimue);
   if (Lisgrupo != null && Lisgrupo != undefined) {

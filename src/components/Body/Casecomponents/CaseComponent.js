@@ -83,7 +83,7 @@ function CaseComponent({ data, isActive }) {
           }`}
         ></span>
         <span className={caseStyles.body_title}>N° Sticker</span>
-        <p className={caseStyles.card_number}>{data.NUMERO_STICKER}</p>
+        <p className={caseStyles.card_number}>{data.NUMERO_STICKER +`-`+ data.SUFIJO}</p>
         <span className={caseStyles.body_title}> Fecha de Ingreso</span>
         <p className={caseStyles.card_date}>
           {data.FECHA_FORMAT_CREADO_BITACORA}
