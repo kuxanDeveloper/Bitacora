@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Quagga from "quagga";
 
-function indexPrueba() {
+function IndexPrueba() {
   useEffect(() => {
     const $resultados = document.querySelector("#resultado");
     Quagga.init(
@@ -45,7 +45,7 @@ function indexPrueba() {
   );
 }
 
-export default indexPrueba;
+export default IndexPrueba;
 
 export async function getStaticProps() {
   return {
