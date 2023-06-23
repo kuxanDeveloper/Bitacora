@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Pop_up from "../components/Tools/Pop_up";
-
+import Pop_upScanner from "../components/Tools/Pop_upScanner";
 import HeaderIndex from "../components/Header/HeaderIndex";
 import { initLogInactive } from "../components/Tools/Loginactivity";
 import { useContextBitacora } from "../context/BitacoraContext";
@@ -26,6 +26,10 @@ function Index({ children }) {
     setValueImagesrcExterna,
     ValueImagesrcExterna2,
     setValueImagesrcExterna2,
+    showModalScanner,
+    setshowModalScanner,
+    ResultScanner,
+    setResultScanner,
   } = useContextBitacora();
 
   const HandleButtonClick_Close = (stateModal) => {
@@ -63,6 +67,16 @@ function Index({ children }) {
               ValueImagesrcExterna2={ValueImagesrcExterna2}
               setisImagenExterna={setisImagenExterna}
             ></Pop_up>
+          ) : (
+            ""
+          )}
+
+          {showModalScanner ? (
+            <Pop_upScanner
+              ResultScanner={ResultScanner}
+              setResultScanner={setResultScanner}
+              setshowModalScanner={setshowModalScanner}
+            ></Pop_upScanner>
           ) : (
             ""
           )}

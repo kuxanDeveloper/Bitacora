@@ -17,7 +17,6 @@ export default function Pop_up({
   ValueImagesrcExterna2,
 }) {
 
-  console.log(ValueImagesrcExterna)
   return (
     <>
       <div className={styles.img_upload}>

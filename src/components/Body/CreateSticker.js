@@ -24,6 +24,8 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
     setisImagenExterna,
+    ResultScanner,
+    setshowModalScanner,
   } = useContextBitacora();
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
@@ -44,21 +46,27 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     setValueImagesrcExterna2(null);
   }, []);
 
+  useEffect(() => {
+    if (ResultScanner != "" && ResultScanner != null) {
+      const SplitScanner = ResultScanner.split("-");
+      if (SplitScanner != null && SplitScanner != undefined) {
+        if (SplitScanner.lenght > 1) {
+          document.getElementById("NumSticker").value = SplitScanner[0];
+          document.getElementById("Sufijo").value = SplitScanner[1];
+        } else {
+          document.getElementById("NumSticker").value = SplitScanner[0];
+        }
+      } else {
+        document.getElementById("NumSticker").value = ResultScanner;
+      }
+    }
+  }, [ResultScanner]);
+
   //The class name can vary
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-
-  function RecorridoSufijo() {
-    let idSelect = document.getElementById("Sufijo");
-    for (let index = 1; index <= 6; index++) {
-      let opt = document.createElement("option");
-      opt.value = index;
-      opt.textContent = index;
-      idSelect.appendChild(opt);
-    }
-  }
 
   return (
     <>
@@ -211,6 +219,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         maxLength="100"
                         type="number"
                         min="0"
+                        id="NumSticker"
                         className={styles.group_input}
                       />
                       <div className={styles.invalid_feedback}>
@@ -223,7 +232,8 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       <input
                         {...register("Sufijo")}
                         name="Sufijo"
-                        maxLength="Sufijo"
+                        id="Sufijo"
+                        maxLength="10"
                         type="number"
                         min="0"
                         className={styles.group_input}
@@ -233,6 +243,14 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         {errors.GrupoSticker?.message}
                       </div>
                     </div>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setshowModalScanner(true);
+                      }}
+                    >
+                      escanear codigo de barras
+                    </button>
                   </div>
 
                   {/*-------------------------------Grupo------------------------------------------- */}
