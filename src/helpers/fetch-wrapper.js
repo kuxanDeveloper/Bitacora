@@ -23,7 +23,6 @@ function get(url, cookie) {
 }
 
 function post(url, body) {
-  alert("error " + body + url);
   const requestOptions = {
     method: "POST",
     body: body,

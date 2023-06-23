@@ -44,11 +44,6 @@ async function login(username, password) {
   let hashBuffer = CryptoJS.SHA256(password);
   const tokenPassword = hashBuffer.toString(CryptoJS.enc.Hex);
 
-  // const hashArray = Array.from(new Uint8Array(hashBuffer));
-
-  // const tokenPassword = hashArray
-  //   .map((bytes) => bytes.toString(16).padStart(2, "0"))
-  //   .join("");
 
   const formDataLogin = await new FormData();
 

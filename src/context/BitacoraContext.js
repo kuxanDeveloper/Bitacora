@@ -37,7 +37,6 @@ export const BicatoraContexProvider = ({ children }) => {
       "/account/Login",
       "/account/ForgotPassword",
       "/Privacypolicy",
-      "/Prueba"
     ];
 
     if (userService.userValue) {
