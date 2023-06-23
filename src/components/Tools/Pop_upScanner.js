@@ -67,6 +67,7 @@ const Pop_UpScanner = ({
       setResultScanner(data.codeResult.code);
       Sonido.play();
       Quagga.stop(data);
+      setshowModalScanner(false);
     });
   }, []);
 
@@ -103,9 +104,10 @@ const Pop_UpScanner = ({
             </svg>
           </span>
           <p>{`Codigo de barra escaneado: ${ResultScanner}`}</p>
-          <div className={styles.container_body}>
-            <div id="interactive" className="viewport" />
-          </div>
+          <div id="interactive" className="viewport" />
+          {/* <div className={styles.container_body}>
+           
+          </div> */}
         </div>
       </div>
     </>
