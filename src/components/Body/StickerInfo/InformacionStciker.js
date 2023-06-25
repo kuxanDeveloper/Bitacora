@@ -2,7 +2,9 @@ import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import { useContextBitacora } from "../../../context/BitacoraContext";
+import { AperturaandCierre } from "../../Tools/functiones";
 import Link from "next/link";
+
 function InformacionStciker({
   data,
   CountSeguimienti,
@@ -17,6 +19,7 @@ function InformacionStciker({
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
   } = useContextBitacora();
+
   return (
     <>
       <div className={styles.card_sticker}>
@@ -64,6 +67,55 @@ function InformacionStciker({
                 }}
               />
             </button>
+            {data.ESTADO_STICKER ? (
+              Options.Cerrarorden ? (
+                <button
+                  type="button"
+                  title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
+                  onClick={() => {
+                    AperturaandCierre(data);
+                  }}
+                  className={styles.photo}
+                >
+                  <ImageOptimize
+                    Values={{
+                      src: "/img/Close512x512.png",
+                      alt: "Logo de cierre ó apertura",
+                      title: "",
+                      classValue: styles.photo_img,
+                      width: 40,
+                      height: 40,
+                      style: {},
+                    }}
+                  />
+                </button>
+              ) : (
+                ""
+              )
+            ) : Options.ActivarOrden ? (
+              <button
+                type="button"
+                title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
+                onClick={() => {
+                  AperturaandCierre(data);
+                }}
+                className={styles.photo}
+              >
+                <ImageOptimize
+                  Values={{
+                    src: "/img/Close512x512.png",
+                    alt: "Logo de cierre ó apertura",
+                    title: "",
+                    classValue: styles.photo_img,
+                    width: 40,
+                    height: 40,
+                    style: {},
+                  }}
+                />
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

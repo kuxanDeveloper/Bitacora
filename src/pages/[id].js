@@ -258,6 +258,7 @@ function HomeMuestraxGrupo({
         idGruop={query.id}
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
+        Options={Options}
       ></Case>
     </>
   );

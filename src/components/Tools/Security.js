@@ -256,26 +256,28 @@ export const queryTestListxGroup = (cookie, idGroup, idBitacora) => {
 };
 
 export const queryResultListxTests = (cookie, idPrueba, idBitacora) => {
-  return userService.ListResults(cookie, idPrueba, idBitacora).catch((error) => {
-    if (error == "401: Token incorrecto o vencido") {
-      Swal.fire({
-        title: "¡Advertencia!",
-        text: error,
-        icon: "warning",
-        confirmButtonText: "Cerrar",
-      });
-    } else {
-      Swal.fire({
-        title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-    }
+  return userService
+    .ListResults(cookie, idPrueba, idBitacora)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Porfavor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-    console.log(error, "erro in login");
-    return error;
-  });
+      console.log(error, "erro in login");
+      return error;
+    });
 };
 
 export const queryOptionesListxPlantilla = (cookie, idPlantilla) => {
@@ -344,5 +346,23 @@ export const queryInfoEditResult = (cookie, idResult) => {
 
     console.log(error, "erro in editar resultado");
     return error;
+  });
+};
+
+export const QueryCloseCaseSample = (id,observacionCaso,Estado) => {
+  return userService.CloseCaseSample(id,observacionCaso,Estado).catch((error) => {
+    // if (error == "401: Token incorrecto o vencido") {
+    //   Swal.showValidationMessage(`Request failed: ${error}`);
+    // } else {
+    //   Swal.fire({
+    //     title: "¡Ha ocurrido un error!",
+    //     text: "Porfavor comunicarse con soporte técnico",
+    //     icon: "error",
+    //     confirmButtonText: "Cerrar",
+    //   });
+    // }
+
+    console.log(error, "erro in editar resultado");
+    return Swal.showValidationMessage(`Request failed: ${error}`);
   });
 };

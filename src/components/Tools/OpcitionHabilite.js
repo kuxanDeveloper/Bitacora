@@ -8,6 +8,8 @@ export const OptionAsiste = {
   MenuSetting: false,
   OrdersActive: true,
   OrdersInactive: false,
+  Cerrarorden: false,
+  ActivarOrden: false,
 };
 
 export const OptionTecnichal = {
@@ -20,6 +22,8 @@ export const OptionTecnichal = {
   MenuSetting: true,
   OrdersActive: true,
   OrdersInactive: true,
+  Cerrarorden: true,
+  ActivarOrden: true,
 };
 
 export const OptionConsult = {
@@ -32,6 +36,8 @@ export const OptionConsult = {
   MenuSetting: false,
   OrdersActive: true,
   OrdersInactive: false,
+  Cerrarorden: false,
+  ActivarOrden: false,
 };
 
 export const OptionAdministrator = {
@@ -44,6 +50,8 @@ export const OptionAdministrator = {
   MenuSetting: true,
   OrdersActive: true,
   OrdersInactive: true,
+  Cerrarorden: true,
+  ActivarOrden: true,
 };
 
 export const OptionDefault = {
@@ -56,4 +64,6 @@ export const OptionDefault = {
   MenuSetting: false,
   OrdersActive: true,
   OrdersInactive: false,
+  Cerrarorden: false,
+  ActivarOrden: false,
 };

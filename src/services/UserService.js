@@ -37,7 +37,8 @@ export const userService = {
   InfoSampleNote,
   UpdateNote,
   InfoSampleResult,
-  EditResult
+  EditResult,
+  CloseCaseSample,
 };
 
 async function login(username, password) {
@@ -189,7 +190,7 @@ function ListTests(cookie, idGroup, idBitacora) {
   );
 }
 
-function ListResults(cookie, idPrueba,idBitacora) {
+function ListResults(cookie, idPrueba, idBitacora) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ComboResultados?idPrueba=${idPrueba}&COD_BITACORA=${idBitacora}&COD_RESULTADO=`,
     cookie
@@ -351,5 +352,17 @@ function InfoSampleResult(cookie, idResult) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/InformacionResultadoBitacora?CODIGO_BITACORA=&Codigo_Resultado=${idResult}`,
     cookie
+  );
+}
+
+function CloseCaseSample(id, observacionCaso, Estado) {
+  const formData = new FormData();
+  formData.append("COD_BITACORA", id);
+  formData.append("Observacion_estado", observacionCaso);
+  formData.append("Estado_sticker", Estado);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/CambioEstadoBitacora`,
+    null,
+    formData
   );
 }

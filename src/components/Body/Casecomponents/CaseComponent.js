@@ -3,7 +3,8 @@ import caseStyles from "../../../styles/case.module.css";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
-function CaseComponent({ data, isActive }) {
+import { AperturaandCierre } from "../../Tools/functiones";
+function CaseComponent({ data, isActive, Options }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -94,6 +95,34 @@ function CaseComponent({ data, isActive }) {
         </p>
 
         <div className={caseStyles.card_btn_container}>
+          {isActive ? (
+            Options.Cerrarorden ? (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  AperturaandCierre(data);
+                }}
+                className={caseStyles.btn_sticker}
+              >
+                {isActive ? "Cerrar orden" : "Abrir orden"}
+              </button>
+            ) : (
+              ""
+            )
+          ) : Options.ActivarOrden ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                AperturaandCierre(data);
+              }}
+              className={caseStyles.btn_sticker}
+            >
+              {isActive ? "Cerrar orden" : "Abrir orden"}
+            </button>
+          ) : (
+            ""
+          )}
+
           <Link
             href={{
               pathname: "/Sample/ViewDetails/[id]",

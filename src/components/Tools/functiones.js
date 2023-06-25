@@ -1,4 +1,4 @@
-import { set } from "react-hook-form";
+import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -505,4 +505,97 @@ export const LocationUrl = (router, value) => {
   }
 
   return aciteMenuClass;
+};
+
+
+
+export const AperturaandCierre = (data) => {
+  Swal.fire({
+    title: data.ESTADO_STICKER
+      ? `Cerrar orden ${data.NUMERO_STICKER}-${data.SUFIJO}`
+      : `Abrir orden ${data.NUMERO_STICKER}-${data.SUFIJO}`,
+    text: data.ESTADO_STICKER
+      ? "¿Estás seguro de que deseas cerrar el caso de esta orden?"
+      : "¿Estás seguro de que deseas abrir el caso de esta orden?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: data.ESTADO_STICKER
+      ? "Si,cerrar orden"
+      : "Si,abrir orden",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        input: "textarea",
+        inputPlaceholder: data.ESTADO_STICKER
+          ? "Deje una observación para el cierre de la orden..."
+          : "Deje una observación del porqué abre la orden...",
+        inputAttributes: {
+          maxlength: 1000,
+          autocapitalize: "off",
+          "aria-label": data.ESTADO_STICKER
+            ? "Deje una observación para el cierre de la orden..."
+            : "Deje una observación del porqué abre la orden...",
+        },
+        customClass: {
+          cancelButton: "HidenLoaderCancel",
+        },
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonColor: "#d33",
+        showLoaderOnConfirm: true,
+        inputValidator: (value) => {
+          let classCancel =
+            document.getElementsByClassName("HidenLoaderCancel")[0];
+
+          classCancel.style.display = "none";
+
+          if (!value) {
+            return data.ESTADO_STICKER
+              ? "Es obligatorio la observación de la orden de cierre"
+              : "Es obligatorio la observación del porqué abre la orden";
+          }
+        },
+        preConfirm: (ValueObservacion) => {
+          return CloseCaseSample(
+            data.CODIGO_BITACORA,
+            ValueObservacion,
+            data.ESTADO_STICKER ? "0" : "1"
+          );
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          data.ESTADO_STICKER
+            ? Swal.fire({
+                icon: "success",
+                title: "Orden cerrada",
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  window.location.reload();
+                }
+              })
+            : Swal.fire({
+                icon: "success",
+                title: "Orden abierta",
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  window.location.reload();
+                }
+              });
+        }
+      });
+    }
+  });
 };
