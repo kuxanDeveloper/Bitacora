@@ -5,14 +5,14 @@ export const UpdateNote = ({
   codigo_detalle_bitacora,
   Cod_Imagen1,
   Observaciones_detalle,
-  NumSticker,
+  CODIGO_BITACORA,
   file,
 }) => {
   return onSubmitUpdateNote(
     codigo_detalle_bitacora,
     Cod_Imagen1,
     Observaciones_detalle,
-    NumSticker,
+    CODIGO_BITACORA,
     file
   );
 };

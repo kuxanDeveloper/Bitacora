@@ -3,7 +3,14 @@ import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
 import StickerDetails from "../../../components/Body/StickerDetails";
 import Head from "next/head";
 import { useRouter } from "next/router";
-function FullDetailsPage({ cookie, query }) {
+import {
+  OptionAdministrator,
+  OptionTecnichal,
+  OptionAsiste,
+  OptionConsult,
+  OptionDefault,
+} from "../../../components/Tools/OpcitionHabilite";
+function FullDetailsPage({ cookie, query, Options }) {
   const router = useRouter();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [Pruebas, setPruebas] = useState(false);
@@ -56,7 +63,14 @@ function FullDetailsPage({ cookie, query }) {
   return (
     <>
       <Head>
-        <title>{`Detalles sticker N° ${query.id} | Bitácora BD`}</title>
+        <title>{`Detalles sticker N° ${
+          InforSampleDetails.infoBitacora != null &&
+          InforSampleDetails.infoBitacora != undefined
+            ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+              "-" +
+              InforSampleDetails.infoBitacora[0].SUFIJO
+            : ""
+        } | Bitácora BD`}</title>
         <meta
           name="description"
           content={`Detalles generales del sticker como su resultados y sus notas`}
@@ -70,7 +84,14 @@ function FullDetailsPage({ cookie, query }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Detalles sticker N° ${query.id} | Bitácora BD`}
+          content={`Detalles sticker N° ${
+            InforSampleDetails.infoBitacora != null &&
+            InforSampleDetails.infoBitacora != undefined
+              ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                "-" +
+                InforSampleDetails.infoBitacora[0].SUFIJO
+              : ""
+          }  | Bitácora BD`}
         />
         <meta
           name="twitter:description"
@@ -78,7 +99,14 @@ function FullDetailsPage({ cookie, query }) {
         ></meta>
         <meta
           property="og:title"
-          content={`Información sticker N° ${query.id} | Bitácora BD`}
+          content={`Información sticker N° ${
+            InforSampleDetails.infoBitacora != null &&
+            InforSampleDetails.infoBitacora != undefined
+              ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                "-" +
+                InforSampleDetails.infoBitacora[0].SUFIJO
+              : ""
+          }  | Bitácora BD`}
         />
         <meta
           property="og:description"
@@ -92,6 +120,7 @@ function FullDetailsPage({ cookie, query }) {
         InforSampleDetails={InforSampleDetails}
         query={query}
         Pruebas={Pruebas}
+        Options={Options}
       />
     </>
   );
@@ -101,17 +130,39 @@ export default FullDetailsPage;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
   if (cookie) {
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null 
-    ) {
+    if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };
     }
+
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
     return {
       props: {
         cookie: cookie,
         query: ctx.query,
+        Options,
+        Roles,
       },
     };
   } else {

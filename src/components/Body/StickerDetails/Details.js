@@ -3,7 +3,7 @@ import styles from "../../../styles/StickerDetails.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
-function Details({ data }) {
+function Details({ data, Options, name_group, sticker }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -46,30 +46,39 @@ function Details({ data }) {
           }}
         ></ImageOptimize>
       </button>
-      <Link
-        title="Editar nota"
-        href={{
-          pathname: "/Sample/EditFollowUp/[id]",
-          query: { id: data.COD_DETALLE_BITACORA },
-        }}
-        className={styles.update_icon}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="#fff"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+
+      {Options.BtnEditNotaAndUrl ? (
+        <Link
+          title="Editar nota"
+          href={{
+            pathname: "/Sample/EditFollowUp/[id]",
+            query: {
+              id: data.COD_DETALLE_BITACORA,
+              name_group: name_group,
+              sticker: sticker,
+            },
+          }}
+          className={styles.update_icon}
         >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-          <path d="M13.5 6.5l4 4" />
-        </svg>
-      </Link>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#fff"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+            <path d="M13.5 6.5l4 4" />
+          </svg>
+        </Link>
+      ) : (
+        ""
+      )}
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>

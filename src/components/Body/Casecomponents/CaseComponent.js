@@ -12,6 +12,8 @@ function CaseComponent({ data, isActive }) {
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
   } = useContextBitacora();
+
+  console.log(data);
   return (
     <div className={caseStyles.card}>
       <div className={caseStyles.sticker}>
@@ -83,7 +85,9 @@ function CaseComponent({ data, isActive }) {
           }`}
         ></span>
         <span className={caseStyles.body_title}>N° Sticker</span>
-        <p className={caseStyles.card_number}>{data.NUMERO_STICKER +`-`+ data.SUFIJO}</p>
+        <p className={caseStyles.card_number}>
+          {data.NUMERO_STICKER + `-` + data.SUFIJO}
+        </p>
         <span className={caseStyles.body_title}> Fecha de Ingreso</span>
         <p className={caseStyles.card_date}>
           {data.FECHA_FORMAT_CREADO_BITACORA}
@@ -93,7 +97,7 @@ function CaseComponent({ data, isActive }) {
           <Link
             href={{
               pathname: "/Sample/ViewDetails/[id]",
-              query: { id: data.NUMERO_STICKER },
+              query: { id: data.CODIGO_BITACORA },
             }}
             className={caseStyles.btn_sticker}
           >

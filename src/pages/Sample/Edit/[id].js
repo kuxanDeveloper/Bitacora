@@ -20,7 +20,14 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
   return (
     <>
       <Head>
-        <title>{`Edición de sticker N° ${id} | Bitácora BD`}</title>
+        <title>{`Edición de sticker N° ${
+          InforSampleDetails.infoBitacora != null &&
+          InforSampleDetails.infoBitacora != undefined
+            ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+              "-" +
+              InforSampleDetails.infoBitacora[0].SUFIJO
+            : ""
+        } | Bitácora BD`}</title>
         <meta name="description" content={`Se puede editar el sticker`} />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -31,7 +38,14 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Edición de sticker N° ${id} | Bitácora BD`}
+          content={`Edición de sticker N° ${
+            InforSampleDetails.infoBitacora != null &&
+            InforSampleDetails.infoBitacora != undefined
+              ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                "-" +
+                InforSampleDetails.infoBitacora[0].SUFIJO
+              : ""
+          } | Bitácora BD`}
         />
         <meta
           name="twitter:description"
@@ -39,7 +53,14 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
         ></meta>
         <meta
           property="og:title"
-          content={`Edición de sticker N° ${id} | Bitácora BD`}
+          content={`Edición de sticker N° ${
+            InforSampleDetails.infoBitacora != null &&
+            InforSampleDetails.infoBitacora != undefined
+              ? InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                "-" +
+                InforSampleDetails.infoBitacora[0].SUFIJO
+              : ""
+          } | Bitácora BD`}
         />
         <meta
           property="og:description"

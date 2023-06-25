@@ -25,7 +25,7 @@ export const onSubmit = ({ username, pass }) => {
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico"+error,
+          text: "Porfavor comunicarse con soporte técnico" + error,
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -232,8 +232,8 @@ export const QueryMuestraEdit = (cookie, idSticker) => {
   });
 };
 
-export const queryTestListxGroup = (cookie, idGroup) => {
-  return userService.ListTests(cookie, idGroup).catch((error) => {
+export const queryTestListxGroup = (cookie, idGroup, idBitacora) => {
+  return userService.ListTests(cookie, idGroup, idBitacora).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -255,8 +255,8 @@ export const queryTestListxGroup = (cookie, idGroup) => {
   });
 };
 
-export const queryResultListxTests = (cookie, idPrueba) => {
-  return userService.ListResults(cookie, idPrueba).catch((error) => {
+export const queryResultListxTests = (cookie, idPrueba, idBitacora) => {
+  return userService.ListResults(cookie, idPrueba, idBitacora).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -274,6 +274,29 @@ export const queryResultListxTests = (cookie, idPrueba) => {
     }
 
     console.log(error, "erro in login");
+    return error;
+  });
+};
+
+export const queryOptionesListxPlantilla = (cookie, idPlantilla) => {
+  return userService.ListoptionPlantilla(cookie, idPlantilla).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "erro in optionesPlantilla");
     return error;
   });
 };
@@ -297,6 +320,29 @@ export const QueryNoteEdit = (cookie, idNote) => {
     }
 
     console.log(error, "erro in editar nota");
+    return error;
+  });
+};
+
+export const queryInfoEditResult = (cookie, idResult) => {
+  return userService.InfoSampleResult(cookie, idResult).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "erro in editar resultado");
     return error;
   });
 };

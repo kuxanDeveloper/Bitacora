@@ -4,8 +4,9 @@ import {
   ListPruebaxGroupApi,
   ListPlanResultadosxPru,
   ListOptionesxPlantilla,
-} from "../../api/Sample/CreateResultApi";
-import ComponentCreateResult from "../../../components/Body/ResultCrud/Create";
+  InfoResultEdiApi,
+} from "../../api/Sample/EditResultApi";
+import ComponentEditResult from "../../../components/Body/ResultCrud/Edit";
 import {
   OptionAdministrator,
   OptionTecnichal,
@@ -14,30 +15,41 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 
 function PageCreateResult({ id, cookie, group, name_group, sticker }) {
+  const [InfoResul, setInfoResul] = useState([]);
   const [ListResultados, setListResultados] = useState([]);
   const [ListOptiones, setListOptiones] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
   const [valuePruebachange, setvaluePruebachange] = useState("");
   const [valuePlantillachange, setvaluePlantillachange] = useState("");
   useEffect(() => {
-    ListPruebaxGroupApi(cookie, setListPruebas, group,id);
+    InfoResultEdiApi(cookie, id, setInfoResul);
+    ListPruebaxGroupApi(cookie, setListPruebas, group);
   }, []);
 
   useEffect(() => {
-    ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange,id);
+    ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange);
   }, [valuePruebachange]);
 
   useEffect(() => {
-    ListOptionesxPlantilla(cookie, setListOptiones, valuePlantillachange, id);
+    ListOptionesxPlantilla(cookie, setListOptiones, valuePlantillachange);
   }, [valuePlantillachange]);
+
+  useEffect(() => {
+    if (InfoResul != null && InfoResul != undefined) {
+      if (InfoResul.length > 0) {
+        setvaluePruebachange(InfoResul[0].CODIGO_PRUEBA);
+        setvaluePlantillachange(InfoResul[0].CODIGO_RESULTADO_PLANILLA);
+      }
+    }
+  }, [InfoResul]);
 
   return (
     <>
       <Head>
-        <title>{`Agregar resultado al sticker N° ${sticker} | Bitácora BD`}</title>
+        <title>{`Editar resultado del sticker N° ${sticker} | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Agrega una prueba con un resultado realizado al sticker con su grupo perteneciente`}
+          content={`Edita la prueba realizada al sticker con su grupo perteneciente`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -48,25 +60,26 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Agregar resultado al sticker N° ${sticker} | Bitácora BD`}
+          content={`Editar resultado del sticker N° ${sticker} | Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Agrega una prueba con un resultado realizado al sticker con su grupo perteneciente`}
+          content={`Edita la prueba realizada al sticker con su grupo perteneciente`}
         ></meta>
         <meta
           property="og:title"
-          content={`Agregar resultado al sticker N° ${sticker} | Bitácora BD`}
+          content={`Editar resultado del sticker N° ${sticker} | Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Agrega una prueba con un resultado realizado al sticker con su grupo perteneciente`}
+          content={`Edita la prueba realizada al sticker con su grupo perteneciente`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <ComponentCreateResult
+      <ComponentEditResult
+        InfoResul={InfoResul}
         ListPruebas={ListPruebas}
         ListResultados={ListResultados}
         ListOptiones={ListOptiones}
@@ -117,7 +130,7 @@ export async function getServerSideProps(ctx) {
       ctx.query.name_group == null ||
       ctx.query.sticker == null ||
       ctx.query.sticker == null ||
-      !Options.BtnCrearResultAndUrl
+      !Options.BtnEditResultAndUrl
     ) {
       return { notFound: true };
     }

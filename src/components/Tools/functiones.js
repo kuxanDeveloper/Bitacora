@@ -287,11 +287,22 @@ export const OnclickComboEstadoCase = (
   }
 };
 
-export const onclickPruebaTarget = () => {
+export const onclickPruebaTarget = (setvaluePlantillachange, setValue) => {
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
-  document.getElementById("Codigo_resultado_preliminar_2").value = "";
-  document.getElementById("Codigo_resultado_preliminar_3").value = "";
-  document.getElementById("Codigo_resultado_final").value = "";
+  setvaluePlantillachange([]);
+  setValue("Codigo_opcion", "");
+  let option = document.getElementById("Codigo_opcion");
+  if (option != null && option != undefined) {
+    document.getElementById("Codigo_opcion").value = "";
+  }
+};
+
+export const onclickPlantillaTarget = (setValue) => {
+  let option = document.getElementById("Codigo_opcion");
+  setValue("Codigo_opcion", "");
+  if (option != null && option != undefined) {
+    document.getElementById("Codigo_opcion").value = "";
+  }
 };
 
 // export const setCheckinvalue = (setValue) => {

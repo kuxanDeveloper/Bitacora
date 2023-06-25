@@ -49,7 +49,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {
-      alert(ResultScanner);
       const SplitScanner = ResultScanner.split("-");
       if (SplitScanner != null && SplitScanner != undefined) {
         if (SplitScanner.length > 1) {
@@ -248,7 +247,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        setResultScanner("305220108-220");
                         setshowModalScanner(true);
                       }}
                     >

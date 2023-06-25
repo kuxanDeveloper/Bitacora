@@ -6,7 +6,12 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
-export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
+export default function StickerDetails({
+  InforSampleDetails,
+  query,
+  Pruebas,
+  Options,
+}) {
   const {
     setShowModal,
     setdobleImagen,
@@ -99,11 +104,116 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                 </button>
 
                 {Pruebas ? (
+                  <>
+                    {Options.BtnCrearResultAndUrl ? (
+                      <Link
+                        title="Agregar prueba"
+                        className={styles.add_icon}
+                        href={{
+                          pathname: "/Sample/CreateResult/[id]",
+                          query: {
+                            id: query.id,
+                            group:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .ID_GRUPO_ASIGNADO
+                                : "",
+                            name_group:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .NOMBRE_GRUPO_ASIGNADO
+                                : "",
+                            sticker:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .NUMERO_STICKER +
+                                  "-" +
+                                  InforSampleDetails.infoBitacora[0].SUFIJO
+                                : "",
+                          },
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-square-plus"
+                          width="25"
+                          height="25"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="#ffffff"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <rect x="4" y="4" width="16" height="16" rx="2" />
+                          <line x1="9" y1="12" x2="15" y2="12" />
+                          <line x1="12" y1="9" x2="12" y2="15" />
+                        </svg>
+                      </Link>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {Options.BtnCrearNotaAndUrl ? (
+                      <Link
+                        title="Agregar nota"
+                        className={styles.add_icon}
+                        href={{
+                          pathname: "/Sample/CreateFollowUp/[id]",
+                          query: {
+                            id: query.id,
+                            name_group:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .NOMBRE_GRUPO_ASIGNADO
+                                : "",
+                            sticker:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .NUMERO_STICKER +
+                                  "-" +
+                                  InforSampleDetails.infoBitacora[0].SUFIJO
+                                : "",
+                          },
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-square-plus"
+                          width="25"
+                          height="25"
+                          viewBox="0 0 24 24"
+                          strokeWidth="2"
+                          stroke="#ffffff"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <rect x="4" y="4" width="16" height="16" rx="2" />
+                          <line x1="9" y1="12" x2="15" y2="12" />
+                          <line x1="12" y1="9" x2="12" y2="15" />
+                        </svg>
+                      </Link>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                )}
+                {Options.BtnEditStickerAndUrl ? (
                   <Link
-                    title="Agregar prueba"
-                    className={styles.add_icon}
+                    title="Editar sticker"
+                    className={styles.Edit_icon}
                     href={{
-                      pathname: "/Sample/CreateResult/[id]",
+                      pathname: "/Sample/Edit/[id]",
                       query: {
                         id: query.id,
                         group:
@@ -112,94 +222,36 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                             ? InforSampleDetails.infoBitacora[0]
                                 .ID_GRUPO_ASIGNADO
                             : "",
+                        isHabilteGroup:
+                          InforSampleDetails.infoBitacora != undefined &&
+                          InforSampleDetails.infoBitacora != null
+                            ? InforSampleDetails.infoResultado.length > 0
+                              ? true
+                              : false
+                            : false,
                       },
                     }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-square-plus"
                       width="25"
                       height="25"
                       viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="#ffffff"
+                      strokeWidth="1.5"
+                      stroke="#fff"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <rect x="4" y="4" width="16" height="16" rx="2" />
-                      <line x1="9" y1="12" x2="15" y2="12" />
-                      <line x1="12" y1="9" x2="12" y2="15" />
+                      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                      <path d="M13.5 6.5l4 4" />
                     </svg>
                   </Link>
                 ) : (
-                  <Link
-                    title="Agregar nota"
-                    className={styles.add_icon}
-                    href={{
-                      pathname: "/Sample/CreateFollowUp/[id]",
-                      query: { id: query.id },
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-square-plus"
-                      width="25"
-                      height="25"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="#ffffff"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <rect x="4" y="4" width="16" height="16" rx="2" />
-                      <line x1="9" y1="12" x2="15" y2="12" />
-                      <line x1="12" y1="9" x2="12" y2="15" />
-                    </svg>
-                  </Link>
+                  ""
                 )}
 
-                <Link
-                  title="Editar sticker"
-                  className={styles.Edit_icon}
-                  href={{
-                    pathname: "/Sample/Edit/[id]",
-                    query: {
-                      id: query.id,
-                      group:
-                        InforSampleDetails.infoBitacora != undefined &&
-                        InforSampleDetails.infoBitacora != null
-                          ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
-                          : "",
-                      isHabilteGroup:
-                        InforSampleDetails.infoBitacora != undefined &&
-                        InforSampleDetails.infoBitacora != null
-                          ? InforSampleDetails.infoResultado.length > 0
-                            ? true
-                            : false
-                          : false,
-                    },
-                  }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="25"
-                    height="25"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="#fff"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                    <path d="M13.5 6.5l4 4" />
-                  </svg>
-                </Link>
                 {InforSampleDetails.infoBitacora != undefined &&
                 InforSampleDetails.infoBitacora != null
                   ? InforSampleDetails.infoBitacora.map((data, index) => (
@@ -211,7 +263,7 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                               N° Sticker
                             </span>
                             <p className={styles.info_text}>
-                              {data.NUMERO_STICKER}
+                              {`${data.NUMERO_STICKER}-${data.SUFIJO}`}
                             </p>
                           </div>
 
@@ -270,7 +322,27 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                   InforSampleDetails.infoResultado != null ? (
                     InforSampleDetails.infoResultado.length > 0 ? (
                       InforSampleDetails.infoResultado.map((data, index) => (
-                        <Results key={index} data={data}></Results>
+                        <Results
+                          key={index}
+                          data={data}
+                          Options={Options}
+                          group={
+                            InforSampleDetails.infoBitacora != undefined &&
+                            InforSampleDetails.infoBitacora != null
+                              ? InforSampleDetails.infoBitacora[0]
+                                  .ID_GRUPO_ASIGNADO
+                              : ""
+                          }
+                          name_group={
+                            InforSampleDetails.infoBitacora[0]
+                              .NOMBRE_GRUPO_ASIGNADO
+                          }
+                          sticker={
+                            InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                            "-" +
+                            InforSampleDetails.infoBitacora[0].SUFIJO
+                          }
+                        ></Results>
                       ))
                     ) : (
                       <h2>Sin Pruebas registradas</h2>
@@ -285,6 +357,16 @@ export default function StickerDetails({ InforSampleDetails, query, Pruebas }) {
                       <Details
                         key={index}
                         data={data}
+                        Options={Options}
+                        name_group={
+                          InforSampleDetails.infoBitacora[0]
+                            .NOMBRE_GRUPO_ASIGNADO
+                        }
+                        sticker={
+                          InforSampleDetails.infoBitacora[0].NUMERO_STICKER +
+                          "-" +
+                          InforSampleDetails.infoBitacora[0].SUFIJO
+                        }
                       ></Details>
                     ))
                   ) : (
