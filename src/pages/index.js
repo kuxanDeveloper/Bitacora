@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  QueryActivegroup,
-  QueryInactivegroup,
-  queryListUserAll,
-} from "../components/Tools//Security";
+import { QueryActiveInactivegroup_GetUsers } from "../components/Tools//Security";
 import { userService } from "../services/UserService";
 import Filters from "../components/Body/Filters";
 import Head from "next/head";
@@ -250,10 +246,11 @@ export async function getServerSideProps(ctx) {
         }
       });
     }
+    const consultataGeneral = await QueryActiveInactivegroup_GetUsers(cookie);
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie);
-    const ListadoGrupoInactivo = await QueryInactivegroup(cookie);
-    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
+    const ListadoGrupoActivo = await consultataGeneral.lstGroupActive;
+    const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
+    const ListadoUsuariosRegistrados = consultataGeneral.ListaUsuario;
 
     return {
       props: {

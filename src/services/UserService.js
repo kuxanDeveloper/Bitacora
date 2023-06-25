@@ -20,13 +20,11 @@ export const userService = {
   },
   login,
   logout,
-  ListGroupActive,
-  ListGroupInactive,
+  ListGroupActiveeInactive_ListUsers,
   ListGroup,
   ListGroupForMue,
   logoutLogin,
   InfoSample,
-  listUserGetAll,
   CreatSticker,
   ListTests,
   ListResults,
@@ -39,6 +37,7 @@ export const userService = {
   InfoSampleResult,
   EditResult,
   CloseCaseSample,
+  listUserGetAll,
 };
 
 async function login(username, password) {
@@ -111,12 +110,11 @@ function logoutLogin() {
   userSubject.next(null);
 }
 
-function ListGroupActive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
-}
-
-function ListGroupInactive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupFalse`, cookie);
+function ListGroupActiveeInactive_ListUsers(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser`,
+    cookie
+  );
 }
 
 function ListGroup(cookie, estado) {

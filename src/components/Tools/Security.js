@@ -76,6 +76,29 @@ export const OnSubmitForward = ({ username }) => {
   //   });
 };
 
+
+export const QueryActiveInactivegroup_GetUsers = (cookie) => {
+  return userService.ListGroupActiveeInactive_ListUsers(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado grupo y usuarios");
+    return null;
+  });
+};
+
 export const queryListUserAll = (cookie) => {
   return userService.listUserGetAll(cookie).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
@@ -98,50 +121,6 @@ export const queryListUserAll = (cookie) => {
   });
 };
 
-export const QueryActivegroup = (cookie) => {
-  return userService.ListGroupActive(cookie).catch((error) => {
-    if (error == "401: Token incorrecto o vencido") {
-      Swal.fire({
-        title: "¡Advertencia!",
-        text: error,
-        icon: "warning",
-        confirmButtonText: "Cerrar",
-      });
-    } else {
-      Swal.fire({
-        title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-    }
-    console.log(error, "erro in Activo grupo");
-    return null;
-  });
-};
-
-export const QueryInactivegroup = (cookie) => {
-  return userService.ListGroupInactive(cookie).catch((error) => {
-    if (error == "401: Token incorrecto o vencido") {
-      Swal.fire({
-        title: "¡Advertencia!",
-        text: error,
-        icon: "warning",
-        confirmButtonText: "Cerrar",
-      });
-    } else {
-      Swal.fire({
-        title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-    }
-
-    console.log(error, "erro in inactive grupo linea ");
-    return null;
-  });
-};
 
 export const QueryGroupList = (cookie, estado) => {
   return userService.ListGroup(cookie, estado).catch((error) => {
