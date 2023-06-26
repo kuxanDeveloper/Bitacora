@@ -11,6 +11,7 @@ export const onSubmitCreate = ({
   // UserCheckexter,
   file,
   file2,
+  Sufijo,
 }) => {
   const StickerRetorno = NumSticker;
   return userService
@@ -21,14 +22,15 @@ export const onSubmitCreate = ({
       // UserCheckinter,
       // UserCheckexter,
       file,
-      file2
+      file2,
+      Sufijo
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
-        pathname: "/Sample/FullDetails/[id]",
-        query: { id: StickerRetorno },
-        hash: "#Pruebas",
+        pathname: "/[id]",
+        query: { id: GrupoSticker },
+        hash: "Cactive#OverallSample",
       });
     })
     .catch((error) => {
@@ -66,8 +68,10 @@ export const onSubmitUpdate = ({
   file2,
   Cod_Imagen1,
   Cod_Imagen2,
+  COD_BITACORA,
+  Sufijo,
 }) => {
-  const StickerRetorno = NumSticker;
+  const StickerRetorno = COD_BITACORA;
   debugger;
   return userService
     .EditSticker(
@@ -79,7 +83,9 @@ export const onSubmitUpdate = ({
       file,
       file2,
       Cod_Imagen1,
-      Cod_Imagen2
+      Cod_Imagen2,
+      COD_BITACORA,
+      Sufijo
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -139,20 +145,16 @@ export const QueryActivegroup = (cookie) => {
 export const onSubmitCreateResult = ({
   Codigo_prueba,
   Codigo_resultado_preliminar_1,
-  Codigo_resultado_preliminar_2,
-  Codigo_resultado_preliminar_3,
-  Codigo_resultado_final,
-  NumSticker,
+  Codigo_opcion,
+  COD_BITACORA,
 }) => {
-  const StickerRetorno = NumSticker;
+  const StickerRetorno = COD_BITACORA;
   return userService
     .CrearResult(
       Codigo_prueba,
       Codigo_resultado_preliminar_1,
-      Codigo_resultado_preliminar_2,
-      Codigo_resultado_preliminar_3,
-      Codigo_resultado_final,
-      NumSticker
+      Codigo_opcion,
+      COD_BITACORA
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -187,14 +189,62 @@ export const onSubmitCreateResult = ({
     });
 };
 
+export const onSubmitEditResult = ({
+  Codigo_resultado_bitacora,
+  Codigo_prueba,
+  Codigo_resultado_preliminar_1,
+  Codigo_opcion,
+  COD_BITACORA,
+}) => {
+  const StickerRetorno = COD_BITACORA;
+  return userService
+    .EditResult(
+      Codigo_prueba,
+      Codigo_resultado_preliminar_1,
+      Codigo_opcion,
+      Codigo_resultado_bitacora,
+    )
+    .then(() => {
+      //   const returnUrl = router.query.returnUrl || "/";
+      Router.push({
+        pathname: "/Sample/FullDetails/[id]",
+        query: { id: StickerRetorno },
+        hash: "Pruebas",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in editar resultado");
+    });
+};
+
 export const onSubmitCreateNote = ({
   Observaciones_detalle,
-  NumSticker,
   file,
+  COD_BITACORA,
 }) => {
-  const StickerRetorno = NumSticker;
+  const StickerRetorno = COD_BITACORA;
   return userService
-    .CrearNote(Observaciones_detalle, NumSticker, file)
+    .CrearNote(Observaciones_detalle, file, COD_BITACORA)
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
@@ -232,7 +282,7 @@ export const onSubmitUpdateNote = (
   codigo_detalle_bitacora,
   Cod_Imagen1,
   Observaciones_detalle,
-  NumSticker,
+  CODIGO_BITACORA,
   file
 ) => {
   return userService
@@ -246,7 +296,7 @@ export const onSubmitUpdateNote = (
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
         pathname: "/Sample/FullDetails/[id]",
-        query: { id: NumSticker },
+        query: { id: CODIGO_BITACORA },
         hash: "Notas",
       });
     })

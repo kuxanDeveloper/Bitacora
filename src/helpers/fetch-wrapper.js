@@ -73,7 +73,9 @@ function authHeader(url, cookie) {
   const isApiUrl = url.startsWith(baseUrl);
   if (isLoggedIn && isApiUrl) {
     return {
-      Token: `${user == undefined || user == null || user==false ? cookie : user}`,
+      Token: `${
+        user == undefined || user == null || user == false ? cookie : user
+      }`,
     };
   } else {
     return {};
@@ -97,7 +99,6 @@ function handleResponse(response) {
       const error = (data && data.Message) || response.statusText;
       return Promise.reject(error);
     }
-
     return data;
   });
 }

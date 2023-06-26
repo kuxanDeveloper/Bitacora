@@ -21,6 +21,12 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     setisImagenOne,
     setValueImagesrc,
     setValueImagesrc2,
+    setValueImagesrcExterna,
+    setValueImagesrcExterna2,
+    setisImagenExterna,
+    ResultScanner,
+    setshowModalScanner,
+    setResultScanner,
   } = useContextBitacora();
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
@@ -30,12 +36,32 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
+    Sufijo: Yup.number().notRequired(),
   });
 
   useEffect(() => {
     setValueImagesrc(null);
     setValueImagesrc2(null);
+    setisImagenExterna(false);
+    setValueImagesrcExterna(null);
+    setValueImagesrcExterna2(null);
   }, []);
+
+  useEffect(() => {
+    if (ResultScanner != "" && ResultScanner != null) {
+      const SplitScanner = ResultScanner.split("-");
+      if (SplitScanner != null && SplitScanner != undefined) {
+        if (SplitScanner.length > 1) {
+          document.getElementById("NumSticker").value = SplitScanner[0];
+          document.getElementById("Sufijo").value = SplitScanner[1];
+        } else {
+          document.getElementById("NumSticker").value = SplitScanner[0];
+        }
+      } else {
+        document.getElementById("NumSticker").value = ResultScanner;
+      }
+    }
+  }, [ResultScanner]);
 
   //The class name can vary
 
@@ -194,6 +220,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         maxLength="100"
                         type="number"
                         min="0"
+                        id="NumSticker"
                         className={styles.group_input}
                       />
                       <div className={styles.invalid_feedback}>
@@ -201,6 +228,35 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       </div>
                     </div>
 
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>N° sufijo</label>
+                      <input
+                        {...register("Sufijo")}
+                        name="Sufijo"
+                        id="Sufijo"
+                        maxLength="10"
+                        type="number"
+                        min="0"
+                        className={styles.group_input}
+                      />
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.GrupoSticker?.message}
+                      </div>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setshowModalScanner(true);
+                      }}
+                    >
+                      escanear codigo de barras
+                    </button>
+                  </div>
+
+                  {/*-------------------------------Grupo------------------------------------------- */}
+
+                  <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Grupo</label>
                       <select
@@ -224,6 +280,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                       </div>
                     </div>
                   </div>
+
                   {/* <!-- form group --> */}
 
                   {/* <div className={styles.form_group}>

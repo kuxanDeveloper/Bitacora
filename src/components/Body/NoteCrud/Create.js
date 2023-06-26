@@ -7,20 +7,24 @@ import { onSubmitCreateNote } from "../../Tools/CRUD";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentsCreateNote({ id }) {
+function ComponentsCreateNote({ id, sticker, name_group }) {
   const {
     setValueImagesrc,
+    setValueImagesrc2,
     ValueImagesrc,
     setishabiliteBtn,
     setShowModal,
     setisImagenOne,
+    setValueImagesrcExterna,
+    setValueImagesrcExterna2,
+    setisImagenExterna,
   } = useContextBitacora();
 
   const validationSchema = Yup.object().shape({
     Observaciones_detalle: Yup.string().required(
       "Campo observaciones obligatorio"
     ),
-    NumSticker: Yup.string(),
+    COD_BITACORA: Yup.number(),
     file: Yup.mixed().notRequired(),
   });
 
@@ -30,6 +34,10 @@ function ComponentsCreateNote({ id }) {
 
   useEffect(() => {
     setValueImagesrc(null);
+    setValueImagesrc2(null);
+    setisImagenExterna(false);
+    setValueImagesrcExterna(null);
+    setValueImagesrcExterna2(null);
   }, []);
 
   return (
@@ -122,8 +130,11 @@ function ComponentsCreateNote({ id }) {
                       <label className={styles.group_title}>
                         Número de sticker :
                       </label>
-
-                      <p>{id}</p>
+                      <p>{sticker}</p>
+                    </div>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>Grupo :</label>
+                      <p>{name_group}</p>
                     </div>
                   </div>
 
@@ -148,7 +159,7 @@ function ComponentsCreateNote({ id }) {
                       <button
                         className={styles.btn_send}
                         onClick={() => {
-                          setValue("NumSticker", id);
+                          setValue("COD_BITACORA", id);
                           setValue("file", ValueImagesrc);
                         }}
                       >

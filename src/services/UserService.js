@@ -2,7 +2,7 @@ import { BehaviorSubject } from "rxjs";
 import Router from "next/router";
 import Cookies from "universal-cookie";
 import { fetchWrapper } from "../helpers/fetch-wrapper";
-
+import CryptoJS from "crypto-js";
 const baseUrl = `${
   process.env.NEXT_PUBLIC_NODE_ENV == "development"
     ? process.env.NEXT_PUBLIC_API_URL_DEVELOPMENT
@@ -20,16 +20,15 @@ export const userService = {
   },
   login,
   logout,
-  ListGroupActive,
-  ListGroupInactive,
+  ListGroupActiveeInactive_ListUsers,
   ListGroup,
   ListGroupForMue,
   logoutLogin,
   InfoSample,
-  listUserGetAll,
   CreatSticker,
   ListTests,
   ListResults,
+  ListoptionPlantilla,
   CrearResult,
   CrearNote,
   EditSticker,
@@ -38,17 +37,18 @@ export const userService = {
   EditGroup,
   InfoGroup,
   UpdateNote,
+  InfoSampleResult,
+  EditResult,
+  CloseCaseSample,
+  listUserGetAll,
 };
 
 async function login(username, password) {
   let TokenUserLogin;
   //#region keyToken Password
-  const utf8 = new TextEncoder().encode(password);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", utf8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const tokenPassword = hashArray
-    .map((bytes) => bytes.toString(16).padStart(2, "0"))
-    .join("");
+
+  let hashBuffer = CryptoJS.SHA256(password);
+  const tokenPassword = hashBuffer.toString(CryptoJS.enc.Hex);
 
   const formDataLogin = await new FormData();
 
@@ -59,6 +59,7 @@ async function login(username, password) {
     `${baseUrl}/LoginBitacora/tokenComprobarUsuario`,
     formDataLogin
   );
+
   //#endregion
   //#region ValidateuserLogin
   if (tokenGenerateLogin != "") {
@@ -74,6 +75,7 @@ async function login(username, password) {
         path: "/",
         maxAge: 60 * 60 * 8,
       });
+
       localStorage.setItem("tokenUserLS", UserLogin.token);
       userSubject.next(UserLogin.token);
     }
@@ -83,6 +85,10 @@ async function login(username, password) {
       if (UserLogin.lstRoles.length > 0) {
         UserLogin.lstRoles.map((data) => arrayObject.push(data.Id));
       }
+      cookies.set("RolUserCookie", arrayObject, {
+        path: "/",
+        maxAge: 60 * 60 * 8,
+      });
       localStorage.setItem("RolUser", JSON.stringify(arrayObject));
     }
   }
@@ -92,6 +98,7 @@ async function login(username, password) {
 
 function logout() {
   cookies.remove("tokenUserCookie", { path: "/" });
+  cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
   userSubject.next(null);
@@ -100,17 +107,17 @@ function logout() {
 
 function logoutLogin() {
   cookies.remove("tokenUserCookie", { path: "/" });
+  cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
   userSubject.next(null);
 }
 
-function ListGroupActive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
-}
-
-function ListGroupInactive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupFalse`, cookie);
+function ListGroupActiveeInactive_ListUsers(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser`,
+    cookie
+  );
 }
 
 function ListGroup(cookie, estado) {
@@ -132,7 +139,8 @@ function ListGroupForMue(
   NumeroSticker,
   FechaINgreso,
   ResultadoFinal,
-  UserLoginSticker
+  UserLoginSticker,
+  Cod_sticker
 ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
@@ -160,6 +168,8 @@ function ListGroupForMue(
       : ""
   );
 
+  formData.append("COD_BITACORA", Cod_sticker);
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
     cookie,
@@ -169,21 +179,28 @@ function ListGroupForMue(
 
 function InfoSample(cookie, idSticker) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultadoFullDatils?Numero_Sticker=${idSticker}`,
+    `${baseUrl}/Stickers/InformacionBitacoraXSeguimientoXresultadoFullDatils?Numero_Sticker=&CODIGO_BITACORA=${idSticker}`,
     cookie
   );
 }
 
-function ListTests(cookie, idGroup) {
+function ListTests(cookie, idGroup, idBitacora) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboPruebas?Id_grupo=${idGroup}`,
+    `${baseUrl}/Stickers/ComboPruebas?Id_grupo=${idGroup}&COD_BITACORA=${idBitacora}&COD_RESULTADO=`,
     cookie
   );
 }
 
-function ListResults(cookie, idPrueba) {
+function ListResults(cookie, idPrueba, idBitacora) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboResultados?idPrueba=${idPrueba}`,
+    `${baseUrl}/Stickers/ComboResultados?idPrueba=${idPrueba}&COD_BITACORA=${idBitacora}&COD_RESULTADO=`,
+    cookie
+  );
+}
+
+function ListoptionPlantilla(cookie, idResult, idBitacora) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboOptionesPlantilla?Id_plantilla=${idResult}&COD_BITACORA=${idBitacora}&COD_RESULTADO=`,
     cookie
   );
 }
@@ -199,7 +216,8 @@ function CreatSticker(
   // UserCheckinter,
   // UserCheckexter,
   file,
-  file2
+  file2,
+  Sufijo
 ) {
   const formData = new FormData();
 
@@ -210,6 +228,7 @@ function CreatSticker(
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
+  formData.append("Sufijo", Sufijo);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
     null,
@@ -220,27 +239,17 @@ function CreatSticker(
 function CrearResult(
   Codigo_prueba,
   Codigo_resultado_preliminar_1,
-  Codigo_resultado_preliminar_2,
-  Codigo_resultado_preliminar_3,
-  Codigo_resultado_final,
-  NumSticker
+  Codigo_opcion,
+  COD_BITACORA
 ) {
   const formData = new FormData();
-  formData.append("Numero_Stickers", NumSticker);
+  formData.append("COD_BITACORA", COD_BITACORA);
   formData.append("Codigo_prueba", Codigo_prueba);
   formData.append(
     "Codigo_resultado_preliminar_1",
     Codigo_resultado_preliminar_1
   );
-  formData.append(
-    "Codigo_resultado_preliminar_2",
-    Codigo_resultado_preliminar_2
-  );
-  formData.append(
-    "Codigo_resultado_preliminar_3",
-    Codigo_resultado_preliminar_3
-  );
-  formData.append("Codigo_resultado_final", Codigo_resultado_final);
+  formData.append("Codigo_opcion", Codigo_opcion);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
@@ -249,11 +258,33 @@ function CrearResult(
   );
 }
 
-function CrearNote(Observaciones_detalle, NumSticker, file) {
+function EditResult(
+  Codigo_prueba,
+  Codigo_resultado_preliminar_1,
+  Codigo_opcion,
+  Codigo_resultado_bitacora
+) {
   const formData = new FormData();
-  formData.append("Numero_Stickers", NumSticker);
+  formData.append("Codigo_resultado_bitacora", Codigo_resultado_bitacora);
+  formData.append("Codigo_prueba", Codigo_prueba);
+  formData.append(
+    "Codigo_resultado_preliminar_1",
+    Codigo_resultado_preliminar_1
+  );
+  formData.append("Codigo_opcion", Codigo_opcion);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarBitacoraResultado`,
+    null,
+    formData
+  );
+}
+
+function CrearNote(Observaciones_detalle, file, COD_BITACORA) {
+  const formData = new FormData();
   formData.append("Observaciones_detalle", Observaciones_detalle);
   formData.append("file", file);
+  formData.append("COD_BITACORA", COD_BITACORA);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,
@@ -270,7 +301,9 @@ function EditSticker(
   file,
   file2,
   Cod_Imagen1,
-  Cod_Imagen2
+  Cod_Imagen2,
+  COD_BITACORA,
+  Sufijo
 ) {
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
@@ -282,7 +315,8 @@ function EditSticker(
   formData.append("file2", file2);
   formData.append("Cod_Imagen1", Cod_Imagen1);
   formData.append("Cod_Imagen2", Cod_Imagen2);
-
+  formData.append("COD_BITACORA", COD_BITACORA);
+  formData.append("Sufijo", Sufijo);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditBitacoraMuestra`,
     null,
@@ -292,7 +326,7 @@ function EditSticker(
 
 function InfoSampleNote(cookie, idNote) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/InformacionDetalleBitacora?Numero_Sticker=&Codigo_Detalle=${idNote}`,
+    `${baseUrl}/Stickers/InformacionDetalleBitacora?CODIGO_BITACORA=&Codigo_Detalle=${idNote}`,
     cookie
   );
 }
@@ -351,6 +385,25 @@ function UpdateNote(
   formData.append("Cod_Imagen1", Cod_Imagen1);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditBitacoraDetalle`,
+    null,
+    formData
+  );
+}
+
+function InfoSampleResult(cookie, idResult) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InformacionResultadoBitacora?CODIGO_BITACORA=&Codigo_Resultado=${idResult}`,
+    cookie
+  );
+}
+
+function CloseCaseSample(id, observacionCaso, Estado) {
+  const formData = new FormData();
+  formData.append("COD_BITACORA", id);
+  formData.append("Observacion_estado", observacionCaso);
+  formData.append("Estado_sticker", Estado);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/CambioEstadoBitacora`,
     null,
     formData
   );

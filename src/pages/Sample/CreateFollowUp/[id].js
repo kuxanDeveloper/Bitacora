@@ -1,12 +1,17 @@
 import React from "react";
 import Head from "next/head";
 import ComponentsCreateNote from "../../../components/Body/NoteCrud/Create";
-function PageCreateFollowup({id}) {
-
+import {
+  OptionAdministrator,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../../../components/Tools/OpcitionHabilite";
+function PageCreateFollowup({ id, sticker, name_group }) {
   return (
     <>
       <Head>
-        <title>{`Agregar nota al sticker N° ${id} | Bitácora BD`}</title>
+        <title>{`Agregar nota al sticker N° ${sticker} | Bitácora BD`}</title>
         <meta
           name="description"
           content={`Agrega una nota de seguimiento al sticker con su grupo perteneciente`}
@@ -20,7 +25,7 @@ function PageCreateFollowup({id}) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Agregar nota al sticker N° ${id} | Bitácora BD`}
+          content={`Agregar nota al sticker N° ${sticker} | Bitácora BD`}
         />
         <meta
           name="twitter:description"
@@ -28,7 +33,7 @@ function PageCreateFollowup({id}) {
         ></meta>
         <meta
           property="og:title"
-          content={`Agregar nota al sticker N° ${id} | Bitácora BD`}
+          content={`Agregar nota al sticker N° ${sticker} | Bitácora BD`}
         />
         <meta
           property="og:description"
@@ -38,7 +43,7 @@ function PageCreateFollowup({id}) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <ComponentsCreateNote id={id} />
+      <ComponentsCreateNote id={id} sticker={sticker} name_group={name_group} />
     </>
   );
 }
@@ -47,8 +52,38 @@ export default PageCreateFollowup;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
   if (cookie) {
-    if (ctx.query.id == undefined || ctx.query.id == null) {
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      ctx.query.name_group == undefined ||
+      ctx.query.name_group == null ||
+      ctx.query.sticker == null ||
+      ctx.query.sticker == null ||
+      !Options.BtnCrearNotaAndUrl
+    ) {
       return { notFound: true };
     }
 
@@ -56,6 +91,8 @@ export async function getServerSideProps(ctx) {
       props: {
         cookie: cookie,
         id: ctx.query.id,
+        sticker: ctx.query.sticker,
+        name_group: ctx.query.name_group,
       },
     };
   } else {

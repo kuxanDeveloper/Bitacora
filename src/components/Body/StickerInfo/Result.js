@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 function Result({ data }) {
+  console.log(data);
   return (
     <div className={styles.result_body}>
       <div className={styles.card_group}>
@@ -17,47 +18,30 @@ function Result({ data }) {
       </div>
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Resultado preliminar 1</p>
+        <p className={styles.group_title}>Resultado</p>
 
         <span className={styles.group_result}>
-          {data.PRIMER_RESULTADO_PARCIAL !== null &&
-          data.PRIMER_RESULTADO_PARCIAL !== undefined
-            ? data.PRIMER_RESULTADO_PARCIAL
+          {data.PLANTILLA_RESULTADO !== null &&
+          data.PLANTILLA_RESULTADO !== undefined
+            ? data.PLANTILLA_RESULTADO
             : ""}
         </span>
       </div>
+      {data.OPCION_DESCRIPCION != null &&
+      data.OPCION_DESCRIPCION != undefined ? (
+        <div className={styles.card_group}>
+          <p className={styles.group_title}>Opciones</p>
 
-      <div className={styles.card_group}>
-        <p className={styles.group_title}>Resultado preliminar 2</p>
-
-        <span className={styles.group_result}>
-          {data.SEGUNDO_RESULTADO_PARCIAL !== null &&
-          data.SEGUNDO_RESULTADO_PARCIAL !== undefined
-            ? data.SEGUNDO_RESULTADO_PARCIAL
-            : ""}
-        </span>
-      </div>
-
-      <div className={styles.card_group}>
-        <p className={styles.group_title}>Resultado preliminar 3</p>
-
-        <span className={styles.group_result}>
-          {data.TERCER_RESULTADO_PARCIAL !== null &&
-          data.TERCER_RESULTADO_PARCIAL !== undefined
-            ? data.TERCER_RESULTADO_PARCIAL
-            : ""}
-        </span>
-      </div>
-
-      <div className={styles.card_group}>
-        <p className={styles.group_title}>Resultado final</p>
-
-        <span className={styles.group_result}>
-          {data.RESULTADO_FINAL !== null && data.RESULTADO_FINAL !== undefined
-            ? data.RESULTADO_FINAL
-            : ""}
-        </span>
-      </div>
+          <span className={styles.group_result}>
+            {data.OPCION_DESCRIPCION !== null &&
+            data.OPCION_DESCRIPCION !== undefined
+              ? data.OPCION_DESCRIPCION
+              : ""}
+          </span>
+        </div>
+      ) : (
+        <></>
+      )}
 
       <div className={styles.card_group}>
         <p className={styles.group_title}>Fecha de último resultado</p>

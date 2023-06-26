@@ -1,8 +1,8 @@
 import React from "react";
-import CardStyles from "../../styles/homeCard.module.scss";
-import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
-export default function HomeCard({
+import ImageOptimize from "../../Tools/ImageOptimize";
+import CardStyles from "../../../styles/homeCard.module.scss";
+function IndexComponentAdmin({
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
   HabilitarActive,
@@ -125,3 +125,5 @@ export default function HomeCard({
     </>
   );
 }
+
+export default IndexComponentAdmin;

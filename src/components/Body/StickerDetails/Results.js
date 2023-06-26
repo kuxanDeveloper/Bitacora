@@ -1,73 +1,79 @@
 import React from "react";
 import styles from "../../../styles/StickerDetails.module.css";
-function Results({ data }) {
+import Link from "next/link";
+
+function Results({ data, Options, group, name_group, sticker }) {
   return (
     <div className={styles.restults}>
-
-      <a className={styles.update_icon}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="25"
-          height="25"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="#fff"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {Options.BtnEditResultAndUrl ? (
+        <Link
+          title="Editar prueba"
+          href={{
+            pathname: "/Sample/EditResult/[id]",
+            query: {
+              id: data.CODIGO_RESULTADO_BITACORA,
+              group: group,
+              name_group: name_group,
+              sticker: sticker,
+            },
+          }}
+          className={styles.update_icon}
         >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-          <path d="M13.5 6.5l4 4" />
-        </svg>
-      </a>
-      
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#fff"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+            <path d="M13.5 6.5l4 4" />
+          </svg>
+        </Link>
+      ) : (
+        ""
+      )}
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Resultado preliminar 1</span>
+          <span className={styles.info_title}>Prueba</span>
           <p className={styles.info_text}>
-            {data.PRIMER_RESULTADO_PARCIAL !== null &&
-            data.PRIMER_RESULTADO_PARCIAL !== undefined
-              ? data.PRIMER_RESULTADO_PARCIAL
+            {data.NOMBRE_PRUEBA !== null && data.NOMBRE_PRUEBA !== undefined
+              ? data.NOMBRE_PRUEBA
               : ""}
           </p>
         </div>
 
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Resultado preliminar 2</span>
+          <span className={styles.info_title}>Resultado</span>
           <p className={styles.info_text}>
             {" "}
-            {data.SEGUNDO_RESULTADO_PARCIAL !== null &&
-            data.SEGUNDO_RESULTADO_PARCIAL !== undefined
-              ? data.SEGUNDO_RESULTADO_PARCIAL
+            {data.PLANTILLA_RESULTADO !== null &&
+            data.PLANTILLA_RESULTADO !== undefined
+              ? data.PLANTILLA_RESULTADO
               : ""}
           </p>
         </div>
-
-        <div className={styles.info_group}>
-          <span className={styles.info_title}>Resultado preliminar</span>
-          <p className={styles.info_text}>
-            {" "}
-            {data.TERCER_RESULTADO_PARCIAL !== null &&
-            data.TERCER_RESULTADO_PARCIAL !== undefined
-              ? data.TERCER_RESULTADO_PARCIAL
-              : ""}
-          </p>
-        </div>
+        {data.OPCION_DESCRIPCION != null ? (
+          <div className={styles.info_group}>
+            <span className={styles.info_title}>Opciones</span>
+            <p className={styles.info_text}>
+              {data.OPCION_DESCRIPCION !== null &&
+              data.OPCION_DESCRIPCION !== undefined
+                ? data.OPCION_DESCRIPCION
+                : ""}
+            </p>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
-
-      <div className={styles.form_group}>
-        <div className={styles.info_group}>
-          <span className={styles.info_title}>Resultado Final</span>
-          <p className={styles.info_text}>
-            {data.RESULTADO_FINAL !== null && data.RESULTADO_FINAL !== undefined
-              ? data.RESULTADO_FINAL
-              : ""}
-          </p>
-        </div>
-      </div>
-      <hr/>
+      <hr />
     </div>
   );
 }

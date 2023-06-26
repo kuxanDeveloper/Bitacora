@@ -3,7 +3,8 @@ import caseStyles from "../../../styles/case.module.css";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
-function CaseComponent({ data, isActive }) {
+import { AperturaandCierre } from "../../Tools/functiones";
+function CaseComponent({ data, isActive, Options }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -12,6 +13,8 @@ function CaseComponent({ data, isActive }) {
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
   } = useContextBitacora();
+
+  console.log(data);
   return (
     <div className={caseStyles.card}>
       <div className={caseStyles.sticker}>
@@ -83,17 +86,47 @@ function CaseComponent({ data, isActive }) {
           }`}
         ></span>
         <span className={caseStyles.body_title}>N° Sticker</span>
-        <p className={caseStyles.card_number}>{data.NUMERO_STICKER}</p>
+        <p className={caseStyles.card_number}>
+          {data.NUMERO_STICKER + `-` + data.SUFIJO}
+        </p>
         <span className={caseStyles.body_title}> Fecha de Ingreso</span>
         <p className={caseStyles.card_date}>
           {data.FECHA_FORMAT_CREADO_BITACORA}
         </p>
 
         <div className={caseStyles.card_btn_container}>
+          {isActive ? (
+            Options.Cerrarorden ? (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  AperturaandCierre(data);
+                }}
+                className={caseStyles.btn_sticker}
+              >
+                {isActive ? "Cerrar orden" : "Abrir orden"}
+              </button>
+            ) : (
+              ""
+            )
+          ) : Options.ActivarOrden ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                AperturaandCierre(data);
+              }}
+              className={caseStyles.btn_sticker}
+            >
+              {isActive ? "Cerrar orden" : "Abrir orden"}
+            </button>
+          ) : (
+            ""
+          )}
+
           <Link
             href={{
               pathname: "/Sample/ViewDetails/[id]",
-              query: { id: data.NUMERO_STICKER },
+              query: { id: data.CODIGO_BITACORA },
             }}
             className={caseStyles.btn_sticker}
           >

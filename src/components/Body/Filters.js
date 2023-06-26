@@ -22,6 +22,7 @@ export default function Filters({
   // isUserInterno,
   isSampleGeneral,
   HrefArmado,
+  Options,
 }) {
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
@@ -43,36 +44,45 @@ export default function Filters({
   const [isTrueActive, setisTrueActive] = useState(false);
 
   useEffect(() => {
-    if (
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_RELOAD ||
-      window.performance.navigation.type ==
-        window.performance.navigation.TYPE_NAVIGATE
-    ) {
-      let hashs2 = router.asPath.split("#")[1];
+    if (Options.OrdersInactive) {
       if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
+        window.performance.navigation.type ==
+          window.performance.navigation.TYPE_RELOAD ||
+        window.performance.navigation.type ==
+          window.performance.navigation.TYPE_NAVIGATE
       ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
+        let hashs2 = router.asPath.split("#")[1];
+        if (
+          hashs2 == "Cactive" ||
+          hashs2 == "" ||
+          hashs2 == null ||
+          hashs2 == undefined
+        ) {
+          setisTrueActive(true);
+        } else {
+          setisTrueActive(false);
+        }
       }
+    } else {
+      setisTrueActive(true);
     }
 
     const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
+      if (Options.OrdersInactive) {
+        let hash = url.split("#")[1];
+
+        if (
+          hash == "Cactive" ||
+          hash == "" ||
+          hash == null ||
+          hash == undefined
+        ) {
+          setisTrueActive(true);
+        } else {
+          setisTrueActive(false);
+        }
       } else {
-        setisTrueActive(false);
+        setisTrueActive(true);
       }
     };
 
@@ -91,12 +101,17 @@ export default function Filters({
             : filterStyles.filters
         }
       >
-        {isActiveGroup ? (
-          <CaseStatus
-            HrefArmado={{ pathname: "/" }}
-            isTrueActive={isTrueActive}
-            isActiveCase={true}
-          ></CaseStatus>
+        {Options.OrdersInactive ? (
+          isActiveGroup ? (
+            <CaseStatus
+              Options={Options}
+              HrefArmado={{ pathname: "/" }}
+              isTrueActive={isTrueActive}
+              isActiveCase={true}
+            ></CaseStatus>
+          ) : (
+            <></>
+          )
         ) : (
           <></>
         )}
@@ -125,24 +140,28 @@ export default function Filters({
                 ""
               )}
 
-              {isActiveCase ? (
-                <select
-                  value={CasosActivo_Inactivos}
-                  name="ListCasos"
-                  onChange={(e) =>
-                    OnclickComboEstadoCase(
-                      e.target.value,
-                      router,
-                      HrefArmado,
-                      // isUserInterno,
-                      isSampleGeneral
-                    )
-                  }
-                  className={filterStyles.filter_input_w100}
-                >
-                  <option value={true}>Activo</option>
-                  <option value={false}>Inactivo</option>
-                </select>
+              {Options.OrdersInactive ? (
+                isActiveCase ? (
+                  <select
+                    value={CasosActivo_Inactivos}
+                    name="ListCasos"
+                    onChange={(e) =>
+                      OnclickComboEstadoCase(
+                        e.target.value,
+                        router,
+                        HrefArmado,
+                        // isUserInterno,
+                        isSampleGeneral
+                      )
+                    }
+                    className={filterStyles.filter_input_w100}
+                  >
+                    <option value={true}>Activo</option>
+                    <option value={false}>Inactivo</option>
+                  </select>
+                ) : (
+                  ""
+                )
               ) : (
                 ""
               )}
@@ -228,31 +247,37 @@ export default function Filters({
                   <line x1="21" y1="21" x2="15" y2="15" />
                 </svg>
               </Link>
-              <Link
-                href={{
-                  pathname: "/Sample/Create/[id]",
-                  query: { id: GruopValue == "" ? 6 : GruopValue },
-                }}
-                className={filterStyles.add_followup}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-square-plus"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="#ffffff"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {Options.BtnCrearStickerAndUrl ? (
+                <Link
+                  href={{
+                    pathname: "/Sample/Create/[id]",
+                    query: { id: GruopValue == "" ? 6 : GruopValue },
+                  }}
+                  title="Crear sticker"
+                  className={filterStyles.add_followup}
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <line x1="9" y1="12" x2="15" y2="12" />
-                  <line x1="12" y1="9" x2="12" y2="15" />
-                </svg>
-              </Link>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-square-plus"
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="#ffffff"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                  </svg>
+                </Link>
+              ) : (
+                ""
+              )}
+
               <Link
                 href={""}
                 onClick={(e) => {
@@ -260,6 +285,7 @@ export default function Filters({
                   ClearFilter(e, router, GruopValue);
                 }}
                 className={filterStyles.search}
+                title="Limpiar filtros de búsqueda"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

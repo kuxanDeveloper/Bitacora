@@ -16,6 +16,7 @@ export default function Pop_up({
   ValueImagesrcExterna,
   ValueImagesrcExterna2,
 }) {
+
   return (
     <>
       <div className={styles.img_upload}>
@@ -42,7 +43,8 @@ export default function Pop_up({
           </span>
 
           <div className={styles.container_body}>
-            {ishabiliteBtn ? (
+            {
+            ishabiliteBtn ? (
               <div className={styles.options}>
                 <div className={styles.option_group}>
                   <p className={styles.option_title}>Tomar fotografia</p>

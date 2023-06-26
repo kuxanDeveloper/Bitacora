@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import * as Yup from "yup";
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
@@ -8,8 +8,7 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setImagenfileUpdateNote } from "../../Tools/functiones";
 import { UpdateNote } from "../../../pages/api/Note/Crud";
-function ComponentEditNote({ InfoNote }) {
-  console.log(InfoNote);
+function ComponentEditNote({ InfoNote, sticker, name_group }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -21,8 +20,8 @@ function ComponentEditNote({ InfoNote }) {
   } = useContextBitacora();
 
   const validationSchema = Yup.object().shape({
+    CODIGO_BITACORA: Yup.number(),
     codigo_detalle_bitacora: Yup.string(),
-    NumSticker: Yup.string(),
     Cod_Imagen1: Yup.string(),
     Observaciones_detalle: Yup.string().required(
       "Campo observaciones obligatorio"
@@ -50,7 +49,7 @@ function ComponentEditNote({ InfoNote }) {
                   InfoNote != undefined &&
                   InfoNote != null &&
                   InfoNote.length > 0
-                    ? InfoNote[0].NUMERO_STICKER
+                    ? InfoNote[0].CODIGO_BITACORA
                     : null,
               },
               hash: "Notas",
@@ -151,8 +150,11 @@ function ComponentEditNote({ InfoNote }) {
                           <label className={styles.group_title}>
                             Número de sticker :
                           </label>
-
-                          <p>{data.NUMERO_STICKER}</p>
+                          <p>{sticker}</p>
+                        </div>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>Grupo :</label>
+                          <p>{name_group}</p>
                         </div>
                       </div>
 
@@ -180,11 +182,11 @@ function ComponentEditNote({ InfoNote }) {
                           <button
                             className={styles.btn_send}
                             onClick={() => {
-                              setValue("NumSticker", data.NUMERO_STICKER);
                               setValue(
                                 "codigo_detalle_bitacora",
                                 data.COD_DETALLE_BITACORA
                               );
+                              setValue("CODIGO_BITACORA", data.CODIGO_BITACORA);
                               setImagenfileUpdateNote(
                                 ValueImagesrc,
                                 setValue,
@@ -199,7 +201,7 @@ function ComponentEditNote({ InfoNote }) {
                           className={styles.btn_cancel}
                           href={{
                             pathname: "/Sample/FullDetails/[id]",
-                            query: { id: data.NUMERO_STICKER },
+                            query: { id: data.CODIGO_BITACORA },
                             hash: "Notas",
                           }}
                         >

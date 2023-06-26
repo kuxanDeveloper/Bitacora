@@ -2,8 +2,15 @@ import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import { useContextBitacora } from "../../../context/BitacoraContext";
+import { AperturaandCierre } from "../../Tools/functiones";
 import Link from "next/link";
-function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
+
+function InformacionStciker({
+  data,
+  CountSeguimienti,
+  GrupoHabilite,
+  Options,
+}) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -21,7 +28,9 @@ function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
           <p className={styles.sticker_title}>Sticker</p>
 
           <div className={styles.sticker_number}>
-            <p className={styles.info_sticker}>{data.NUMERO_STICKER}</p>
+            <p
+              className={styles.info_sticker}
+            >{`${data.NUMERO_STICKER}-${data.SUFIJO}`}</p>
             <button
               type="button"
               onClick={() => {
@@ -58,44 +67,98 @@ function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
                 }}
               />
             </button>
+            {data.ESTADO_STICKER ? (
+              Options.Cerrarorden ? (
+                <button
+                  type="button"
+                  title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
+                  onClick={() => {
+                    AperturaandCierre(data);
+                  }}
+                  className={styles.photo}
+                >
+                  <ImageOptimize
+                    Values={{
+                      src: "/img/Close512x512.png",
+                      alt: "Logo de cierre ó apertura",
+                      title: "",
+                      classValue: styles.photo_img,
+                      width: 40,
+                      height: 40,
+                      style: {},
+                    }}
+                  />
+                </button>
+              ) : (
+                ""
+              )
+            ) : Options.ActivarOrden ? (
+              <button
+                type="button"
+                title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
+                onClick={() => {
+                  AperturaandCierre(data);
+                }}
+                className={styles.photo}
+              >
+                <ImageOptimize
+                  Values={{
+                    src: "/img/Close512x512.png",
+                    alt: "Logo de cierre ó apertura",
+                    title: "",
+                    classValue: styles.photo_img,
+                    width: 40,
+                    height: 40,
+                    style: {},
+                  }}
+                />
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
 
       {/* <!-- estado --> */}
       <div className={styles.card_body}>
-        <Link
-          title="Editar sticker"
-          className={styles.Edit_icon}
-          href={{
-            pathname: "/Sample/Edit/[id]",
-            query: {
-              id: data.NUMERO_STICKER,
-              group:
-                data.ID_GRUPO_ASIGNADO != undefined &&
-                data.ID_GRUPO_ASIGNADO != null
-                  ? data.ID_GRUPO_ASIGNADO
-                  : "",
-              isHabilteGroup: GrupoHabilite,
-            },
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#fff"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        {Options.BtnEditResultAndUrl ? (
+          <Link
+            title="Editar sticker"
+            className={styles.Edit_icon}
+            href={{
+              pathname: "/Sample/Edit/[id]",
+              query: {
+                id: data.CODIGO_BITACORA,
+                group:
+                  data.ID_GRUPO_ASIGNADO != undefined &&
+                  data.ID_GRUPO_ASIGNADO != null
+                    ? data.ID_GRUPO_ASIGNADO
+                    : "",
+                isHabilteGroup: GrupoHabilite,
+              },
+            }}
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-            <path d="M13.5 6.5l4 4" />
-          </svg>
-        </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#fff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+              <path d="M13.5 6.5l4 4" />
+            </svg>
+          </Link>
+        ) : (
+          ""
+        )}
+
         <div className={styles.sticker_status}>
           <span className={styles.status_title}>Estado</span>
           <span className={styles.status}>
@@ -113,22 +176,6 @@ function InformacionStciker({ data, CountSeguimienti, GrupoHabilite }) {
           <p className={styles.date_title}>Fecha de creación</p>
           <span className={styles.group_date}>
             {data.FECHA_FORMAT_CREADO_COMPLETA}
-          </span>
-        </div>
-
-        <div className={styles.card_group}>
-          <p className={styles.group_title}>Tipo de cliente</p>
-          {/* <!-- anada la palabra internopara indicar que es interno nointerno para no interno --> */}
-          <span
-            className={`${styles.group_result}  ${
-              data.CLIENTE_INTERNO ? styles.interno : ""
-            }`}
-          >
-            {data.CLIENTE_INTERNO
-              ? "Interno"
-              : data.CLIENTE_EXTERNO
-              ? "Externo"
-              : ""}
           </span>
         </div>
 

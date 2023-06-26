@@ -1,4 +1,4 @@
-import { set } from "react-hook-form";
+import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -152,19 +152,7 @@ export const UserActiveGenerales = (query) => {
 
   if (query != null && query != undefined) {
     query.forEach((element) => {
-      let FechaRegistro = fechaformatActualGeneralUrgencia(
-        element.FECHA_ORIGINAL_CREADO_BITACORA,
-        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-          element.DIAS_PARA_ALERTA_GRUPO == null
-          ? 0
-          : element.DIAS_PARA_ALERTA_GRUPO
-      );
-      let diferencia = fechaActual.getTime() - FechaRegistro;
-      let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-      ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-      if (diasDeDiferencia < 0) {
-        ListadoNewRetorno.push(element);
-      }
+      ListadoNewRetorno.push(element);
     });
   }
   return ListadoNewRetorno;
@@ -172,25 +160,25 @@ export const UserActiveGenerales = (query) => {
 
 export const UserActiveUrgencias = (query) => {
   let ListadoNewRetorno = [];
-  let fechaActual = new Date();
+  // let fechaActual = new Date();
 
-  if (query != null && query != undefined) {
-    query.forEach((element) => {
-      let FechaRegistro = fechaformatActualGeneralUrgencia(
-        element.FECHA_ORIGINAL_CREADO_BITACORA,
-        element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-          element.DIAS_PARA_ALERTA_GRUPO == null
-          ? 0
-          : element.DIAS_PARA_ALERTA_GRUPO
-      );
-      let diferencia = fechaActual.getTime() - FechaRegistro;
-      let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-      ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-      if (diasDeDiferencia >= 0) {
-        ListadoNewRetorno.push(element);
-      }
-    });
-  }
+  // if (query != null && query != undefined) {
+  //   query.forEach((element) => {
+  //     let FechaRegistro = fechaformatActualGeneralUrgencia(
+  //       element.FECHA_ORIGINAL_CREADO_BITACORA,
+  //       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+  //         element.DIAS_PARA_ALERTA_GRUPO == null
+  //         ? 0
+  //         : element.DIAS_PARA_ALERTA_GRUPO
+  //     );
+  //     let diferencia = fechaActual.getTime() - FechaRegistro;
+  //     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+  //     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+  //     if (diasDeDiferencia >= 0) {
+  //       ListadoNewRetorno.push(element);
+  //     }
+  //   });
+  // }
 
   return ListadoNewRetorno;
 };
@@ -299,11 +287,22 @@ export const OnclickComboEstadoCase = (
   }
 };
 
-export const onclickPruebaTarget = () => {
+export const onclickPruebaTarget = (setvaluePlantillachange, setValue) => {
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
-  document.getElementById("Codigo_resultado_preliminar_2").value = "";
-  document.getElementById("Codigo_resultado_preliminar_3").value = "";
-  document.getElementById("Codigo_resultado_final").value = "";
+  setvaluePlantillachange([]);
+  setValue("Codigo_opcion", "");
+  let option = document.getElementById("Codigo_opcion");
+  if (option != null && option != undefined) {
+    document.getElementById("Codigo_opcion").value = "";
+  }
+};
+
+export const onclickPlantillaTarget = (setValue) => {
+  let option = document.getElementById("Codigo_opcion");
+  setValue("Codigo_opcion", "");
+  if (option != null && option != undefined) {
+    document.getElementById("Codigo_opcion").value = "";
+  }
 };
 
 // export const setCheckinvalue = (setValue) => {
@@ -511,4 +510,107 @@ export const UploadImageSticker = (
     photo.value = "";
     photo2.value = "";
   }
+};
+
+export const LocationUrl = (router, value) => {
+  let aciteMenuClass = false;
+
+  if (router.pathname.toLowerCase().includes(value)) {
+    aciteMenuClass = true;
+  }
+
+  return aciteMenuClass;
+};
+
+
+
+export const AperturaandCierre = (data) => {
+  Swal.fire({
+    title: data.ESTADO_STICKER
+      ? `Cerrar orden ${data.NUMERO_STICKER}-${data.SUFIJO}`
+      : `Abrir orden ${data.NUMERO_STICKER}-${data.SUFIJO}`,
+    text: data.ESTADO_STICKER
+      ? "¿Estás seguro de que deseas cerrar el caso de esta orden?"
+      : "¿Estás seguro de que deseas abrir el caso de esta orden?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: data.ESTADO_STICKER
+      ? "Si,cerrar orden"
+      : "Si,abrir orden",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        input: "textarea",
+        inputPlaceholder: data.ESTADO_STICKER
+          ? "Deje una observación para el cierre de la orden..."
+          : "Deje una observación del porqué abre la orden...",
+        inputAttributes: {
+          maxlength: 1000,
+          autocapitalize: "off",
+          "aria-label": data.ESTADO_STICKER
+            ? "Deje una observación para el cierre de la orden..."
+            : "Deje una observación del porqué abre la orden...",
+        },
+        customClass: {
+          cancelButton: "HidenLoaderCancel",
+        },
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonColor: "#d33",
+        showLoaderOnConfirm: true,
+        inputValidator: (value) => {
+          let classCancel =
+            document.getElementsByClassName("HidenLoaderCancel")[0];
+
+          classCancel.style.display = "none";
+
+          if (!value) {
+            return data.ESTADO_STICKER
+              ? "Es obligatorio la observación de la orden de cierre"
+              : "Es obligatorio la observación del porqué abre la orden";
+          }
+        },
+        preConfirm: (ValueObservacion) => {
+          return CloseCaseSample(
+            data.CODIGO_BITACORA,
+            ValueObservacion,
+            data.ESTADO_STICKER ? "0" : "1"
+          );
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          data.ESTADO_STICKER
+            ? Swal.fire({
+                icon: "success",
+                title: "Orden cerrada",
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  window.location.reload();
+                }
+              })
+            : Swal.fire({
+                icon: "success",
+                title: "Orden abierta",
+                showConfirmButton: false,
+                timer: 5000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+              }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                  window.location.reload();
+                }
+              });
+        }
+      });
+    }
+  });
 };

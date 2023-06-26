@@ -6,11 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../context/BitacoraContext";
-import {
-  // setCheckinvalue,
-  // uncheckUserInterExterno,
-  setImagenFileUpdate,
-} from "../Tools/functiones";
+import { setImagenFileUpdate } from "../Tools/functiones";
 
 import { onSubmitUpdate } from "../Tools/CRUD";
 
@@ -34,15 +30,17 @@ function EditStickerComponents({
   } = useContextBitacora();
 
   const validationSchema = Yup.object().shape({
+    COD_BITACORA: Yup.number(),
     NumSticker: Yup.string(),
     Cod_Imagen1: Yup.string(),
     Cod_Imagen2: Yup.string(),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
-    ObservaInici: Yup.string(),
+    ObservaInici: Yup.string().notRequired(),
     // UserCheckinter: Yup.string().required("Campo obligatorio"),
     // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
+    Sufijo: Yup.number().notRequired(),
   });
 
   useEffect(() => {
@@ -82,7 +80,7 @@ function EditStickerComponents({
     <section className={styles.Create_sticker}>
       <div className={styles.sticker_container}>
         <div className={styles.back_btn_container}>
-          <Link href="/6" className={styles.back_btn}>
+          <Link href={`/${group}`} className={styles.back_btn}>
             Volver{" "}
           </Link>
         </div>
@@ -105,10 +103,12 @@ function EditStickerComponents({
                             <ImageOptimize
                               Values={{
                                 src:
-                                  ValueImagesrc != null
+                                  data.URL_PRIMERA_IMAGEN != null
+                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                      data.URL_PRIMERA_IMAGEN
+                                    : ValueImagesrc != null
                                     ? URL.createObjectURL(ValueImagesrc)
-                                    : process.env.NEXT_PUBLIC_URL_API +
-                                      data.URL_PRIMERA_IMAGEN,
+                                    : "",
                                 alt: "sticker",
                                 title: "imagen sticker",
                                 classValue: styles.sticker_figure,
@@ -123,6 +123,7 @@ function EditStickerComponents({
                                 setShowModal(true);
                                 setishabiliteBtn(true);
                                 setisImagenOne(true);
+                                data.URL_PRIMERA_IMAGEN == null &&
                                 ValueImagesrc != null
                                   ? setisImagenExterna(false)
                                   : setisImagenExterna(true);
@@ -178,10 +179,12 @@ function EditStickerComponents({
                             <ImageOptimize
                               Values={{
                                 src:
-                                  ValueImagesrc2 != null
+                                  data.URL_PRIMERA_IMAGEN != null
+                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                      data.URL_SEGUNDA_IMAGEN
+                                    : ValueImagesrc2 != null
                                     ? URL.createObjectURL(ValueImagesrc2)
-                                    : process.env.NEXT_PUBLIC_URL_API +
-                                      data.URL_SEGUNDA_IMAGEN,
+                                    : "",
 
                                 alt: "sticker",
                                 title: "imagen sticker 2",
@@ -197,6 +200,7 @@ function EditStickerComponents({
                                 setShowModal(true);
                                 setishabiliteBtn(true);
                                 setisImagenOne(false);
+                                data.URL_SEGUNDA_IMAGEN == null &&
                                 ValueImagesrc2 != null
                                   ? setisImagenExterna(false)
                                   : setisImagenExterna(true);
@@ -258,15 +262,7 @@ function EditStickerComponents({
                           <label className={styles.group_title}>
                             N° de Sticker
                           </label>
-                          {/* <input
-                            {...register("NumSticker")}
-                            name="NumSticker"
-                            maxLength="100"
-                            type="number"
-                            min="0"
-                            className={styles.group_input}
-                          /> */}
-                          <label>{data.NUMERO_STICKER}</label>
+                          <label>{`${data.NUMERO_STICKER}-${data.SUFIJO}`}</label>
                         </div>
 
                         <div className={styles.input_group}>
@@ -362,6 +358,8 @@ function EditStickerComponents({
                                 data.CODIGO_SEGUNDA_IMAGEN
                               );
                               setValue("NumSticker", data.NUMERO_STICKER);
+                              setValue("COD_BITACORA", data.CODIGO_BITACORA);
+                              setValue("Sufijo", data.SUFIJO);
                             }}
                             className={styles.btn_send}
                           >
