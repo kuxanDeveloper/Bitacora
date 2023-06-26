@@ -3,7 +3,7 @@ import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
 import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
-import caseStyles from "../styles/case.module.css";
+import caseStyles from "../styles/case.module.scss";
 import Link from "next/link";
 export default function Case({
   ListadoGrupo,

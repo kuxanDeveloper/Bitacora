@@ -374,8 +374,8 @@
     .sticker_details .details_container .card .stickers_container .card_content .followup .update_icon,
     .sticker_details .details_container .card .stickers_container .card_content .restults .update_icon {
         position: absolute;
-        right: 5px;
-        top: calc(15% - 30px);
+        right: 10px;
+        top: calc(50% - 30px);
     }
 }
 

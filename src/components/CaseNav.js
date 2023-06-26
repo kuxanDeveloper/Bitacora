@@ -1,5 +1,5 @@
 import React from "react";
-import CaseNavStyles from "../styles/CaseNav.module.css";
+import CaseNavStyles from "../styles/CaseNav.module.scss";
 import Link from "next/link";
 export default function CaseNav({
   ListadoGrupo,

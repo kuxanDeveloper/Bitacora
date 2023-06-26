@@ -34,7 +34,7 @@ function Details({ data, Options, name_group, sticker }) {
           setValueImagesrcExterna2(null);
         }}
         className={styles.img_icon}
-      >
+      > 
         <ImageOptimize
           Values={{
             src: "/img/Camera@2x.png",

@@ -436,6 +436,7 @@ template {
 
   .cases_container::-webkit-scrollbar {
     background: transparent;
+    height: 10px;
   }
 
 
