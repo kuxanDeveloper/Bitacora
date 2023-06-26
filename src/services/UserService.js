@@ -38,6 +38,7 @@ export const userService = {
   EditResult,
   CloseCaseSample,
   listUserGetAll,
+  ListGroupActive,
 };
 
 async function login(username, password) {
@@ -115,6 +116,10 @@ function ListGroupActiveeInactive_ListUsers(cookie) {
     `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser`,
     cookie
   );
+}
+
+function ListGroupActive(cookie) {
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
 }
 
 function ListGroup(cookie, estado) {
