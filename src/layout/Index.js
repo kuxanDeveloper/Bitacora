@@ -38,7 +38,7 @@ function Index({ children }) {
     setisImagenOne(false);
     setdobleImagen(false);
   };
-  useEffect(() => initLogInactive(), []);
+  // useEffect(() => initLogInactive(), []);
 
   return (
     <>
