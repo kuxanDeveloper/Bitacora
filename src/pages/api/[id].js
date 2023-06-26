@@ -47,11 +47,14 @@ export const ApiQueryGeneralSample = async (
   );
   setListadoMuestraInactivo(listInactimue.LstBitacora);
   setListadoResultadoxMuestra(listInactimue.ListResultxBitacora);
-  
   if (Lisgrupo != null && Lisgrupo != undefined) {
-    let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
-      .NOMBRE_GRUPO;
-    setGrupoNombre(nombreGrupo);
+    try {
+      let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
+        .NOMBRE_GRUPO;
+      setGrupoNombre(nombreGrupo);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (

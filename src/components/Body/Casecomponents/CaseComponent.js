@@ -4,7 +4,12 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { AperturaandCierre } from "../../Tools/functiones";
-export default function CaseComponent({ data, isActive, Options }) {
+export default function CaseComponent({
+  data,
+  isActive,
+  Options,
+  isSampleGeneral,
+}) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -14,7 +19,6 @@ export default function CaseComponent({ data, isActive, Options }) {
     setValueImagesrcExterna,
   } = useContextBitacora();
 
-  console.log(data);
   return (
     <div className={caseStyles.card}>
       <div className={caseStyles.card_container}>
@@ -139,9 +143,13 @@ export default function CaseComponent({ data, isActive, Options }) {
         </div>
         {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}
       </div>
-      <p className={caseStyles.card_info}>Los casos de esta orden superaron el tiempo máximo permitido</p>
-
+      {!isSampleGeneral ? (
+        <p className={caseStyles.card_info}>
+          Los casos de esta orden superaron el tiempo máximo permitido de su procesamiento.
+        </p>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
-

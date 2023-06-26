@@ -123,6 +123,7 @@ export default function Case({
                     data={data}
                     isActive={true}
                     Options={Options}
+                    isSampleGeneral={isSampleGeneral}
                   ></CaseComponent>
                 ))
               : ListadoMuestrasActivePendiente.map((data, index) => (
