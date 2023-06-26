@@ -2,6 +2,13 @@ import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import IndexGroup from "../../../components/Body/GroupCrud/Index";
 import { SampleDetailsGroup } from "../ViewDetailsParameters/[id]";
+import {
+  OptionAdministrator,
+  OptionAsiste,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage(cookie) {
 
@@ -47,11 +54,58 @@ function CreatePage(cookie) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <IndexGroup
-      InforSampleDetails={InforSampleDetails}>
-        
+      InforSampleDetails={InforSampleDetails}>        
       </IndexGroup>
     </>
   );
 }
 
 export default CreatePage;
+
+export async function getServerSideProps(ctx) {
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
+  debugger;
+  if (cookie && RolUser) {
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      ctx.query.group == null ||
+      ctx.query.group == undefined ||
+      ctx.query.isHabilteGroup == undefined ||
+      ctx.query.isHabilteGroup == null ||
+      !Options.BtnEditStickerAndUrl
+    ) {
+      return { notFound: true };
+    }
+
+  } else {
+    return {
+      redirect: {
+        destination: "/account/Login",
+      },
+    };
+  }
+}

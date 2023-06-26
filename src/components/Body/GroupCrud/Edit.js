@@ -51,6 +51,28 @@ function ComponentGroup(InforGroup,id)
               Volver{" "}
             </Link>
           </div>
+          <div className={styles.btn_container_send}>
+                    {!formState.isSubmitting && (
+                      <button   
+                      onClick={() => {
+                        setCheckindividual(setValue);                        
+                      }}                     
+                        className={styles.btn_send}
+                      >
+                        Guardar Grupo
+                      </button>
+                    )}
+                    
+                    <Link
+                      href={{
+                        pathname: "/[id]",
+                        hash: "Normal",
+                      }}
+                      className={styles.btn_cancel}
+                    >
+                      Cancelar
+                    </Link>
+                  </div>
 
           <p className={styles.title}>Editar grupo</p>
           <br />

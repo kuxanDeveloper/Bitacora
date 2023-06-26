@@ -1,7 +1,4 @@
 import React,{useEffect} from "react";
-import {useForm} from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/CreateNotes.module.scss";
 
@@ -28,7 +25,19 @@ function ComponentGroupIndex(InforSampleDetails)
             >
               Volver{" "}
             </Link>
+
+            <Link
+                      href={{
+                        pathname: "/[id]",
+                        hash: "Normal",
+                      }}
+                      className={styles.btn_cancel}
+                    >
+                      Crear Grupo
+                    </Link>
           </div>
+
+         
 
           <p className={styles.title}>Listado de Grupos</p>
           <br />
