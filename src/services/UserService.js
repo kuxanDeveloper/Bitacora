@@ -332,7 +332,6 @@ function EditGroup(
 }
 
 function InfoGroup(estado, idGrupo,cookie) {
-  debugger;
   return fetchWrapper.get(
     `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
     cookie

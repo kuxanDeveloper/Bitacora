@@ -86,20 +86,12 @@ Router.push({
 
 };
 
-export const getListGroup = ({
-  estado,
-  idGrupo,
-  cookie
-}) => {
+export const getListGroup = (estado, idGrupo, cookie) => {
     return userService.InfoGroup(
-        estado ?? "", 
-        idGrupo ?? "",
+        (estado == null ? "" : estado), 
+        (idGrupo == null ? "" : idGrupo),
         cookie
-    ).then(() =>
-    {
-
-    }    
-    ).catch(() => {
+    ).catch((error) => {
 
         if (
             error == "Límite de tiempo excedido" ||

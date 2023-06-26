@@ -8,7 +8,7 @@ function CreatePage(cookie) {
     const [InforSampleDetails, setLInforSampleDetails] = useState([]);
     useEffect(() => {
       debugger;
-      SampleDetailsGroup(setLInforSampleDetails,cookie);
+      SampleDetailsGroup(setLInforSampleDetails,cookie,"");
     }, []);
 
   return (
@@ -47,7 +47,7 @@ function CreatePage(cookie) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <IndexGroup
-      ListadoGrupo={InforSampleDetails}>
+      InforSampleDetails={InforSampleDetails}>
         
       </IndexGroup>
     </>

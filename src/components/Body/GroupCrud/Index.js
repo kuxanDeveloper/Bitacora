@@ -5,9 +5,15 @@ import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/CreateNotes.module.scss";
 
-function ComponentGroupIndex(ListadoGrupo)
+function ComponentGroupIndex(InforSampleDetails)
 {
-    
+  useEffect(() => {
+
+    console.log(InforSampleDetails);
+    debugger;
+  });
+
+
     return (
     <>
 <section className={styles.create_note}>
@@ -24,20 +30,25 @@ function ComponentGroupIndex(ListadoGrupo)
             </Link>
           </div>
 
-          <p className={styles.title}>Crear grupo</p>
+          <p className={styles.title}>Listado de Grupos</p>
           <br />
           <div className={styles.card}>
 
-          {ListadoGrupo.infoBitacora != null &&
-            ListadoGrupo.infoBitacora != undefined
-              ? ListadoGrupo.infoBitacora.map((data, index) => (
-            <>
-                              <p>data.Id_grupo</p>
-                              <p>data.NOMBRE_GRUPO</p>
-                              <p>data.ESTADO</p>
-                              <p>data.USU_CREADOR</p>
-                              <p>data.FECHA_CREADO</p>
-                              <p><Link
+          {InforSampleDetails.InforSampleDetails != null &&
+            InforSampleDetails.InforSampleDetails != undefined
+              ? InforSampleDetails.InforSampleDetails.map((data, index) => (
+            <>            
+                              <p>Codigo Grupo</p>
+                              <p>{data.Id_grupo}</p>
+                              <p>Nombre Grupo</p>
+                              <p>{data.NOMBRE_GRUPO}</p>
+                              <p>Estado Grupo</p>
+                              <p>{data.ESTADO == true ? "Activo" : "Inactivo"}</p>
+                              <p>Usuario Creador</p>
+                              <p>{data.Email}</p>
+                              <p>Fecha Creacion</p>
+                              <p>{data.FECHA_CREADO}</p>
+                              <div><Link
                     title="Agregar nota"
                     className={styles.add_icon}
                     href={{
@@ -45,24 +56,9 @@ function ComponentGroupIndex(ListadoGrupo)
                       query: { id: data.Id_grupo },
                     }}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-square-plus"
-                      width="25"
-                      height="25"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2"
-                      stroke="#ffffff"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <rect x="4" y="4" width="16" height="16" rx="2" />
-                      <line x1="9" y1="12" x2="15" y2="12" />
-                      <line x1="12" y1="9" x2="12" y2="15" />
-                    </svg>
-                  </Link></p>
+                    Editar Grupo
+                  </Link></div>
+                  <hr></hr>
             </> ))
           : ""  
           }

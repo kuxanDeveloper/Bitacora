@@ -5,7 +5,6 @@ import {
 
 export const SampleDetailsEdit = async (cookie, id, setLInforSampleDetails) => {
   let inforSample = await QueryMuestraEdit(cookie, id);
-  debugger;
   setLInforSampleDetails(inforSample);
 };
 

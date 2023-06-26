@@ -28,7 +28,7 @@ function ComponentGroup()
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Sample/FullDetails/[id]",
+                pathname: "/parameters/Groups/IndexGroup",
                 hash: "Normal",
               }}
               className={styles.back_btn}
@@ -86,15 +86,11 @@ function ComponentGroup()
                         Guardar Grupo
                       </button>
                     )}
-
-                    {/* <button
-                      id="buttonSubmitUnico"
-                      style={{ display: "none" }}
-                    ></button> */}
+                    
                     <Link
                       href={{
                         pathname: "/[id]",
-                        hash: "Cactive#UserInter#OverallSample",
+                        hash: "Normal",
                       }}
                       className={styles.btn_cancel}
                     >
