@@ -15,11 +15,16 @@ export default function Case({
   isSampleGeneral,
   HrefArmado,
   Options,
+  ListadoResultadoxMuestra,
 }) {
-  const ListadoMuestraActiveGenerals =
-    UserActiveGenerales(ListadoMuestraActivo);
-  const ListadoMuestrasActivePendiente =
-    UserActiveUrgencias(ListadoMuestraActivo);
+  const ListadoMuestraActiveGenerals = UserActiveGenerales(
+    ListadoMuestraActivo,
+    ListadoResultadoxMuestra
+  );
+  const ListadoMuestrasActivePendiente = UserActiveUrgencias(
+    ListadoMuestraActivo,
+    ListadoResultadoxMuestra
+  );
 
   // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
   //   ListadoMuestraInactivo

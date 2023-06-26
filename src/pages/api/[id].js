@@ -17,7 +17,8 @@ export const ApiQueryGeneralSample = async (
   setGrupoNombre,
   setListadoGrupo,
   setListadoMuestraActivo,
-  setListadoMuestraInactivo
+  setListadoMuestraInactivo,
+  setListadoResultadoxMuestra
 ) => {
   let Lisgrupo = await QueryGroupList(cookie);
   setListadoGrupo(Lisgrupo);
@@ -31,7 +32,9 @@ export const ApiQueryGeneralSample = async (
     URS,
     Cod_sticker
   );
-  setListadoMuestraActivo(listActivoMue);
+  setListadoMuestraActivo(listActivoMue.LstBitacora);
+  setListadoResultadoxMuestra(listActivoMue.ListResultxBitacora);
+
   let listInactimue = await QueryMueForGroup(
     cookie,
     "0",
@@ -42,7 +45,9 @@ export const ApiQueryGeneralSample = async (
     URS,
     Cod_sticker
   );
-  setListadoMuestraInactivo(listInactimue);
+  setListadoMuestraInactivo(listInactimue.LstBitacora);
+  setListadoResultadoxMuestra(listInactimue.ListResultxBitacora);
+  
   if (Lisgrupo != null && Lisgrupo != undefined) {
     let nombreGrupo = await Lisgrupo.find((data) => data.Id_grupo == id)
       .NOMBRE_GRUPO;
