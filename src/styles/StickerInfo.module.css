@@ -91,13 +91,17 @@
   align-items: center;
   border: none;
   background-color: transparent;
+  background-color: #e57d00;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
 }
 
 
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .images_container .sticker_number .Edit_icon {
   padding: 6px;
   border-radius: 50px;
-  background-color: #fe700c;
+  background-color: #e57d00;
   border: none;
   position: absolute;
   right: 10px;

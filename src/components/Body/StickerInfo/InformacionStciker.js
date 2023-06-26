@@ -55,17 +55,23 @@ function InformacionStciker({
               }}
               className={styles.photo}
             >
-              <ImageOptimize
-                Values={{
-                  src: "/img/Camera@2x.png",
-                  alt: "Logo de camara",
-                  title: "",
-                  classValue: styles.photo_img,
-                  width: 40,
-                  height: 40,
-                  style: {},
-                }}
-              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#ffffff"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 20h-7a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3.5" />
+                <path d="M16 19h6" />
+                <path d="M19 16v6" />
+                <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+              </svg>
             </button>
             {data.ESTADO_STICKER ? (
               Options.Cerrarorden ? (
@@ -77,7 +83,7 @@ function InformacionStciker({
                   }}
                   className={styles.photo}
                 >
-                  {data.ESTADO_STICKER ? (
+              
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className=""
@@ -85,7 +91,7 @@ function InformacionStciker({
                       height="50"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
-                      stroke="#e57d00"
+                      stroke="#fff"
                       fill="none"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -94,8 +100,23 @@ function InformacionStciker({
                       <path d="M18 6l-12 12" />
                       <path d="M6 6l12 12" />
                     </svg>
-                  ) : (
-                    <svg
+              
+                   
+                  
+                </button>
+              ) : (
+                ""
+              )
+            ) : Options.ActivarOrden ? (
+              <button
+                type="button"
+                title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
+                onClick={() => {
+                  AperturaandCierre(data);
+                }}
+                className={styles.photo}
+              >
+                 <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className=""
                       width="50"
@@ -111,31 +132,6 @@ function InformacionStciker({
                       <path d="M12 5l0 14" />
                       <path d="M5 12l14 0" />
                     </svg>
-                  )}
-                </button>
-              ) : (
-                ""
-              )
-            ) : Options.ActivarOrden ? (
-              <button
-                type="button"
-                title={data.ESTADO_STICKER ? "Cerrar orden" : "Abrir orden"}
-                onClick={() => {
-                  AperturaandCierre(data);
-                }}
-                className={styles.photo}
-              >
-                <ImageOptimize
-                  Values={{
-                    src: "/img/Close512x512.png",
-                    alt: "Logo de cierre ó apertura",
-                    title: "",
-                    classValue: styles.photo_img,
-                    width: 40,
-                    height: 40,
-                    style: {},
-                  }}
-                />
               </button>
             ) : (
               ""
