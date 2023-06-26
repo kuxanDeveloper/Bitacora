@@ -4,7 +4,7 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { AperturaandCierre } from "../../Tools/functiones";
-function CaseComponent({ data, isActive, Options }) {
+export default function CaseComponent({ data, isActive, Options }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -139,10 +139,9 @@ function CaseComponent({ data, isActive, Options }) {
         </div>
         {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}
       </div>
-      <p className={caseStyles.card_info}>Casos Urgentes</p>
+      <p className={caseStyles.card_info}>Los casos de esta orden superaron el tiempo máximo permitido</p>
 
     </div>
   );
 }
 
-export default CaseComponent;

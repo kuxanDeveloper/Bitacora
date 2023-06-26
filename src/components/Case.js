@@ -25,6 +25,7 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
+  console.log(ListadoMuestraInactivo)
 
   // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
   //   ListadoMuestraInactivo

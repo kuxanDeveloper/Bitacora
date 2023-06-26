@@ -29,7 +29,6 @@ function HomeMuestraxGrupo({
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
   const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
   const router = useRouter();
-  console.log(ListadoResultadoxMuestra);
   useEffect(() => {
     ApiQueryGeneralSample(
       cookie,
