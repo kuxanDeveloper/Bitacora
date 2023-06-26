@@ -74,7 +74,7 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
       <section className={styles.Create_sticker}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
-            <Link href="/6" className={styles.back_btn}>
+            <Link href={`/${id}`} className={styles.back_btn}>
               Volver{" "}
             </Link>
           </div>
