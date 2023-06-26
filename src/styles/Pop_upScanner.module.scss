@@ -1,0 +1,43 @@
+.img_upload {
+  height: calc(100% - 40px);
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.39);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  position: absolute;
+  .upload_container {
+    position: relative;
+    max-height: 80vh;
+    width: 90vw;
+    background-color: #fff;
+    border-radius: 10px;
+    .close_btn {
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    .viewport {
+      width: 100%;
+      video {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .img_upload {
+    height: calc(100% - 64px);
+    .upload_container {
+      height: 80vh;
+      width: 80vw;
+      max-width: 1100px;
+      .close_btn {
+      }
+    }
+  }
+}
