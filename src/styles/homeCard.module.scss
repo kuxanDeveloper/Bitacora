@@ -36,6 +36,9 @@
           display: flex;
           align-items: flex-start;
           margin: 0;
+          margin-bottom: 10px;
+          text-align: right;
+          padding-right: 5px;
           .arrow_icon {
           }
         }
@@ -64,8 +67,8 @@
     max-height: unset;
     height: 100%;
     border-radius: 10px;
-    max-width: 300px;
-    min-width: 300px;
+    max-width: 270px;
+    min-width: 270px;
 
     .card_content {
       max-height: unset;
@@ -191,8 +194,8 @@
       .card_body {
         .body_container {
           .card_name {
-            top: calc(77% - 10px);
-
+            top: calc(74% - 10px);
+            text-align: center;
             .arrow_icon {
             }
           }
