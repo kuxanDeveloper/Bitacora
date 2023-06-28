@@ -1,4 +1,4 @@
-import { elementAt } from "rxjs";
+import style from "../../styles/filters.module.scss";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
@@ -545,7 +545,21 @@ export const LocationUrl = (router, value) => {
   return aciteMenuClass;
 };
 
-export const AperturaandCierre = (data) => {
+export const AperturaandCierre = (data, LstObservacionesPrede) => {
+  console.log(LstObservacionesPrede);
+
+  window.OnchangeValueSelect = function (value) {
+    let valueGetId = document.getElementById("Observacionother");
+
+    if (valueGetId != undefined && valueGetId != null) {
+      if (value == "5") {
+        valueGetId.style.display = "";
+      } else {
+        valueGetId.style.display = "none";
+      }
+    }
+  };
+
   Swal.fire({
     title: data.ESTADO_STICKER
       ? `Cerrar orden ${data.NUMERO_STICKER}-${data.SUFIJO}`
@@ -563,17 +577,33 @@ export const AperturaandCierre = (data) => {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
-        input: "textarea",
-        inputPlaceholder: data.ESTADO_STICKER
-          ? "Deje una observación para el cierre de la orden..."
-          : "Deje una observación del porqué abre la orden...",
-        inputAttributes: {
-          maxlength: 1000,
-          autocapitalize: "off",
-          "aria-label": data.ESTADO_STICKER
-            ? "Deje una observación para el cierre de la orden..."
-            : "Deje una observación del porqué abre la orden...",
-        },
+        title: data.ESTADO_STICKER
+          ? "Observación de cierre"
+          : "Observación de apertura",
+        html:
+          `<select id='sltObservcaciones' onclick="window.OnchangeValueSelect(
+          this.value)" class="swal2-input">
+          <option disabled selected value="">Seleccione una observación</option>
+         ${LstObservacionesPrede.map((info) => {
+           if (data.ESTADO_STICKER) {
+             if (info.Observacion_cierre) {
+               return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+             }
+           } else {
+             if (info.Observacion_reapertura) {
+               return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+             }
+           }
+         })}
+          </select>` +
+          `<textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+          placeholder="${
+            data.ESTADO_STICKER
+              ? "Deje una observación para el cierre de la orden..."
+              : "Deje una observación del porqué abre la orden..."
+          }"                         cols="30"
+          rows="10"></textarea>`,
+
         customClass: {
           cancelButton: "HidenLoaderCancel",
         },
@@ -581,24 +611,44 @@ export const AperturaandCierre = (data) => {
         confirmButtonText: "OK",
         cancelButtonColor: "#d33",
         showLoaderOnConfirm: true,
-        inputValidator: (value) => {
-          let classCancel =
-            document.getElementsByClassName("HidenLoaderCancel")[0];
+        // inputValidator: (value) => {
+        //   let classCancel =
+        //     document.getElementsByClassName("HidenLoaderCancel")[0];
 
-          classCancel.style.display = "none";
+        //   classCancel.style.display = "none";
 
-          if (!value) {
-            return data.ESTADO_STICKER
-              ? "Es obligatorio la observación de la orden de cierre"
-              : "Es obligatorio la observación del porqué abre la orden";
+        //   if (!value) {
+        //     return data.ESTADO_STICKER
+        //       ? "Es obligatorio la observación de la orden de cierre"
+        //       : "Es obligatorio la observación del porqué abre la orden";
+        //   }
+        // },
+        preConfirm: () => {
+          let selectObserva = document.getElementById("sltObservcaciones");
+          let TextAreaObservacion = document.getElementById("Observacionother");
+          // Validate input
+          if (
+            selectObserva.value == "" ||
+            (selectObserva.value == "5" && TextAreaObservacion.value == "")
+          ) {
+            Swal.showValidationMessage(
+              data.ESTADO_STICKER
+                ? "Es obligatorio la observación de la orden de cierre"
+                : "Es obligatorio la observación del porqué abre la orden"
+            );
+            Swal.hideLoading();
+            Swal.enableButtons();
+          } else {
+            Swal.resetValidationMessage();
+
+            return CloseCaseSample(
+              data.CODIGO_BITACORA,
+              selectObserva.value == "5"
+                ? TextAreaObservacion.value
+                : selectObserva.options[selectObserva.selectedIndex].text,
+              data.ESTADO_STICKER ? "0" : "1"
+            );
           }
-        },
-        preConfirm: (ValueObservacion) => {
-          return CloseCaseSample(
-            data.CODIGO_BITACORA,
-            ValueObservacion,
-            data.ESTADO_STICKER ? "0" : "1"
-          );
         },
         allowOutsideClick: () => !Swal.isLoading(),
       }).then((result) => {
@@ -608,7 +658,7 @@ export const AperturaandCierre = (data) => {
                 icon: "success",
                 title: "Orden cerrada",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 4000,
                 timerProgressBar: true,
                 allowOutsideClick: false,
               }).then((result) => {
@@ -621,7 +671,7 @@ export const AperturaandCierre = (data) => {
                 icon: "success",
                 title: "Orden abierta",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 4000,
                 timerProgressBar: true,
                 allowOutsideClick: false,
               }).then((result) => {
@@ -634,4 +684,8 @@ export const AperturaandCierre = (data) => {
       });
     }
   });
+};
+
+export const onChangeSelectObserva = (value) => {
+  console.log(value);
 };

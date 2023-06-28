@@ -12,7 +12,7 @@ function Result({ data }) {
         </span>
       </div>
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Prueba</p>
+        <p className={styles.group_title}>Estatus</p>
 
         <span className={styles.group_result}>{data.NOMBRE_PRUEBA}</span>
       </div>

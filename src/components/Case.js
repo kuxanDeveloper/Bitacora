@@ -16,6 +16,7 @@ export default function Case({
   HrefArmado,
   Options,
   ListadoResultadoxMuestra,
+  LstObservacionesPrede,
 }) {
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
     ListadoMuestraActivo,
@@ -25,7 +26,6 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
-  console.log(ListadoMuestraInactivo)
 
   // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
   //   ListadoMuestraInactivo
@@ -124,6 +124,7 @@ export default function Case({
                     isActive={true}
                     Options={Options}
                     isSampleGeneral={isSampleGeneral}
+                    LstObservacionesPrede={LstObservacionesPrede}
                   ></CaseComponent>
                 ))
               : ListadoMuestrasActivePendiente.map((data, index) => (
@@ -132,6 +133,7 @@ export default function Case({
                     data={data}
                     isActive={true}
                     Options={Options}
+                    LstObservacionesPrede={LstObservacionesPrede}
                   ></CaseComponent>
                 ))
             : ListadoMuestraInactivo.length > 0
@@ -141,6 +143,7 @@ export default function Case({
                   data={data}
                   isActive={false}
                   Options={Options}
+                  LstObservacionesPrede={LstObservacionesPrede}
                 ></CaseComponent>
               ))
             : "Cargando..."}

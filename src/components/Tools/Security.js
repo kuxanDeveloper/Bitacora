@@ -76,27 +76,28 @@ export const OnSubmitForward = ({ username }) => {
   //   });
 };
 
-
 export const QueryActiveInactivegroup_GetUsers = (cookie) => {
-  return userService.ListGroupActiveeInactive_ListUsers(cookie).catch((error) => {
-    if (error == "401: Token incorrecto o vencido") {
-      Swal.fire({
-        title: "¡Advertencia!",
-        text: error,
-        icon: "warning",
-        confirmButtonText: "Cerrar",
-      });
-    } else {
-      Swal.fire({
-        title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-    }
-    console.log(error, "erro in Listado grupo y usuarios");
-    return null;
-  });
+  return userService
+    .ListGroupActiveeInactive_ListUsers(cookie)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Porfavor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+      console.log(error, "erro in Listado grupo y usuarios");
+      return null;
+    });
 };
 
 export const queryListUserAll = (cookie) => {
@@ -120,7 +121,6 @@ export const queryListUserAll = (cookie) => {
     return null;
   });
 };
-
 
 export const QueryGroupList = (cookie, estado) => {
   return userService.ListGroup(cookie, estado).catch((error) => {
@@ -328,20 +328,34 @@ export const queryInfoEditResult = (cookie, idResult) => {
   });
 };
 
-export const QueryCloseCaseSample = (id,observacionCaso,Estado) => {
-  return userService.CloseCaseSample(id,observacionCaso,Estado).catch((error) => {
-    // if (error == "401: Token incorrecto o vencido") {
-    //   Swal.showValidationMessage(`Request failed: ${error}`);
-    // } else {
-    //   Swal.fire({
-    //     title: "¡Ha ocurrido un error!",
-    //     text: "Porfavor comunicarse con soporte técnico",
-    //     icon: "error",
-    //     confirmButtonText: "Cerrar",
-    //   });
-    // }
+export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
+  return userService
+    .CloseCaseSample(id, observacionCaso, Estado)
+    .catch((error) => {
 
-    console.log(error, "erro in editar resultado");
-    return Swal.showValidationMessage(`Request failed: ${error}`);
+      console.log(error, "erro in editar resultado");
+      return Swal.showValidationMessage(`Request failed: ${error}`);
+    });
+};
+
+export const QueryObserva = (cookie) => {
+  return userService.lstObservall(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado observaciones");
+    return null;
   });
 };

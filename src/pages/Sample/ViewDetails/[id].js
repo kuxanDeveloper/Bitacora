@@ -9,10 +9,18 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { useContextBitacora } from "../../../context/BitacoraContext";
 function ViewDetails({ cookie, id, Options }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
   useEffect(() => {
-    SampleDetailsEdit(cookie, id, setLInforSampleDetails);
+    SampleDetailsEdit(
+      cookie,
+      id,
+      setLInforSampleDetails,
+      setLstObservacionesPrede
+    );
   }, []);
 
   return (
@@ -71,6 +79,7 @@ function ViewDetails({ cookie, id, Options }) {
       <StickerInfo
         Options={Options}
         InforSampleDetails={InforSampleDetails}
+        LstObservacionesPrede={LstObservacionesPrede}
         id={id}
       ></StickerInfo>
     </>
