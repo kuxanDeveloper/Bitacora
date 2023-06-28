@@ -377,6 +377,33 @@ export const onclickPlantillaTarget = (setValue) => {
 //   }
 // };
 
+export const setCheckindividual = (setValue) => {
+  var checbox1 = document.getElementById("EstadoGrupo");
+
+    if (
+      checbox1.checked == null ||
+      checbox1.checked == undefined ||
+      checbox1.checked == false
+    ) {
+      setValue("EstadoGrupo", "0");
+    } else {
+      setValue("EstadoGrupo", "1");
+    }
+
+    var checbox2 = document.getElementById("AdmiteSufijo");
+
+    if (
+      checbox2.checked == null ||
+      checbox2.checked == undefined ||
+      checbox2.checked == false
+    ) {
+      setValue("AdmiteSufijo", "0");
+    } else {
+      setValue("AdmiteSufijo", "1");
+    }
+
+};
+
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
   setValue("file", ValueImagesrc);
   setValue("file2", ValueImagesrc2);
