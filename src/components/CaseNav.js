@@ -1,5 +1,5 @@
 import React from "react";
-import CaseNavStyles from "../styles/CaseNav.module.css";
+import CaseNavStyles from "../styles/CaseNav.module.scss";
 import Link from "next/link";
 export default function CaseNav({
   ListadoGrupo,
@@ -30,6 +30,33 @@ export default function CaseNav({
 
     return newObje;
   }
+  function Retorno() {
+    try {
+      return ListadoGrupo.map((data, index) => (
+        <li
+          key={index}
+          className={`${CaseNavStyles.nav_li} ${
+            data.Id_grupo == idGruop ? CaseNavStyles.selected : ""
+          }`}
+        >
+          <Link
+            href={{
+              pathname: "/[id]",
+              query: QueryReturnNew(HrefArmado.query, data.Id_grupo),
+              hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+                isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+              }`,
+            }}
+            className={CaseNavStyles.nav_link}
+          >
+            {data.NOMBRE_GRUPO}
+          </Link>
+        </li>
+      ));
+    } catch (error) {
+      return console.log(error);
+    }
+  }
 
   return (
     <>
@@ -49,27 +76,7 @@ export default function CaseNav({
                 Inicio
               </Link>
             </li>
-            {ListadoGrupo.map((data, index) => (
-              <li
-                key={index}
-                className={`${CaseNavStyles.nav_li} ${
-                  data.Id_grupo == idGruop ? CaseNavStyles.selected : ""
-                }`}
-              >
-                <Link
-                  href={{
-                    pathname: "/[id]",
-                    query: QueryReturnNew(HrefArmado.query, data.Id_grupo),
-                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
-                      isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
-                    }`,
-                  }}
-                  className={CaseNavStyles.nav_link}
-                >
-                  {data.NOMBRE_GRUPO}
-                </Link>
-              </li>
-            ))}
+            {ListadoGrupo != null && ListadoGrupo != undefined ? Retorno() : ""}
           </nav>
         </div>
       </section>

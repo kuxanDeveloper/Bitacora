@@ -1,3 +1,4 @@
+import { elementAt } from "rxjs";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
@@ -146,39 +147,76 @@ const fechaformatActualGeneralUrgencia = (Fecha, DaysMore) => {
 //   return ListadoNewRetorno;
 // };
 
-export const UserActiveGenerales = (query) => {
+export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
   let ListadoNewRetorno = [];
   let fechaActual = new Date();
 
   if (query != null && query != undefined) {
     query.forEach((element) => {
-      ListadoNewRetorno.push(element);
+      let FechaOrden = new Date(element.FECHA_ORIGINAL_CREADO_BITACORA);
+      const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
+      let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
+      if (
+        element.ID_GRUPO_ASIGNADO == 6 ||
+        element.ID_GRUPO_ASIGNADO == 9 ||
+        element.ID_GRUPO_ASIGNADO == 11 ||
+        element.ID_GRUPO_ASIGNADO == 12
+      ) {
+        if (horasdiferencia <= 960) {
+          ListadoNewRetorno.push(element);
+        }
+      } else {
+        if (horasdiferencia <= 120) {
+          ListadoNewRetorno.push(element);
+        }
+      }
     });
   }
   return ListadoNewRetorno;
 };
 
-export const UserActiveUrgencias = (query) => {
+export const UserActiveUrgencias = (query, ListadoResultadoxMuestra) => {
   let ListadoNewRetorno = [];
-  // let fechaActual = new Date();
+  let fechaActual = new Date();
+  if (query != null && query != undefined) {
+    query.forEach((element) => {
+      let FechaOrden = new Date(element.FECHA_ORIGINAL_CREADO_BITACORA);
+      const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
 
-  // if (query != null && query != undefined) {
-  //   query.forEach((element) => {
-  //     let FechaRegistro = fechaformatActualGeneralUrgencia(
-  //       element.FECHA_ORIGINAL_CREADO_BITACORA,
-  //       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-  //         element.DIAS_PARA_ALERTA_GRUPO == null
-  //         ? 0
-  //         : element.DIAS_PARA_ALERTA_GRUPO
-  //     );
-  //     let diferencia = fechaActual.getTime() - FechaRegistro;
-  //     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-  //     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-  //     if (diasDeDiferencia >= 0) {
-  //       ListadoNewRetorno.push(element);
-  //     }
-  //   });
-  // }
+      let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
+
+      if (
+        element.ID_GRUPO_ASIGNADO == 6 ||
+        element.ID_GRUPO_ASIGNADO == 9 ||
+        element.ID_GRUPO_ASIGNADO == 11 ||
+        element.ID_GRUPO_ASIGNADO == 12
+      ) {
+        if (horasdiferencia > 960) {
+          ListadoNewRetorno.push(element);
+        }
+      } else {
+        if (horasdiferencia > 120) {
+          ListadoNewRetorno.push(element);
+        }
+      }
+    });
+
+    // query.forEach((element) => {
+    //   let FechaRegistro = fechaformatActualGeneralUrgencia(
+    //     element.FECHA_ORIGINAL_CREADO_BITACORA,
+    //     element.DIAS_PARA_ALERTA_GRUPO == undefined &&
+    //       element.DIAS_PARA_ALERTA_GRUPO == null
+    //       ? 0
+    //       : element.DIAS_PARA_ALERTA_GRUPO
+    //   );
+    //   let diferencia = ;
+    //   let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
+    //   ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
+    //   if (diasDeDiferencia >= 0) {
+    //     ListadoNewRetorno.push(element);
+    //   }
+    // });
+  }
 
   return ListadoNewRetorno;
 };
@@ -533,8 +571,6 @@ export const LocationUrl = (router, value) => {
 
   return aciteMenuClass;
 };
-
-
 
 export const AperturaandCierre = (data) => {
   Swal.fire({

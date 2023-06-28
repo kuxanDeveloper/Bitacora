@@ -16,7 +16,6 @@ export default function Pop_up({
   ValueImagesrcExterna,
   ValueImagesrcExterna2,
 }) {
-
   return (
     <>
       <div className={styles.img_upload}>
@@ -43,8 +42,7 @@ export default function Pop_up({
           </span>
 
           <div className={styles.container_body}>
-            {
-            ishabiliteBtn ? (
+            {ishabiliteBtn ? (
               <div className={styles.options}>
                 <div className={styles.option_group}>
                   <p className={styles.option_title}>Tomar fotografia</p>
@@ -150,7 +148,7 @@ export default function Pop_up({
                 ) : (
                   ""
                 )}
-                {ValueImagesrc2 != null || ValueImagesrcExterna2!==null ? (
+                {ValueImagesrc2 != null || ValueImagesrcExterna2 !== null ? (
                   <div className={styles.prevew}>
                     <ImageOptimize
                       Values={{
@@ -171,7 +169,7 @@ export default function Pop_up({
                 )}
               </>
             ) : isImagenOne ? (
-              ValueImagesrc !== null || ValueImagesrcExterna!==null ? (
+              ValueImagesrc !== null || ValueImagesrcExterna !== null ? (
                 <div className={styles.prevew}>
                   <ImageOptimize
                     Values={{
@@ -190,7 +188,7 @@ export default function Pop_up({
               ) : (
                 ""
               )
-            ) : ValueImagesrc2 !== null || ValueImagesrcExterna2 !==null ? (
+            ) : ValueImagesrc2 !== null || ValueImagesrcExterna2 !== null ? (
               <div className={styles.prevew}>
                 <ImageOptimize
                   Values={{

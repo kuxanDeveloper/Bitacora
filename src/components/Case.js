@@ -3,7 +3,7 @@ import CaseNav from "./CaseNav";
 import CasesStatusUser from "./Body/CasesStatusUser";
 import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
-import caseStyles from "../styles/case.module.css";
+import caseStyles from "../styles/case.module.scss";
 import Link from "next/link";
 export default function Case({
   ListadoGrupo,
@@ -15,11 +15,17 @@ export default function Case({
   isSampleGeneral,
   HrefArmado,
   Options,
+  ListadoResultadoxMuestra,
 }) {
-  const ListadoMuestraActiveGenerals =
-    UserActiveGenerales(ListadoMuestraActivo);
-  const ListadoMuestrasActivePendiente =
-    UserActiveUrgencias(ListadoMuestraActivo);
+  const ListadoMuestraActiveGenerals = UserActiveGenerales(
+    ListadoMuestraActivo,
+    ListadoResultadoxMuestra
+  );
+  const ListadoMuestrasActivePendiente = UserActiveUrgencias(
+    ListadoMuestraActivo,
+    ListadoResultadoxMuestra
+  );
+  console.log(ListadoMuestraInactivo)
 
   // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
   //   ListadoMuestraInactivo
@@ -117,6 +123,7 @@ export default function Case({
                     data={data}
                     isActive={true}
                     Options={Options}
+                    isSampleGeneral={isSampleGeneral}
                   ></CaseComponent>
                 ))
               : ListadoMuestrasActivePendiente.map((data, index) => (

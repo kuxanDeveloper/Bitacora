@@ -27,8 +27,8 @@ function HomeMuestraxGrupo({
   const [ListadoGrupo, setListadoGrupo] = useState([]);
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
+  const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
   const router = useRouter();
-
   useEffect(() => {
     ApiQueryGeneralSample(
       cookie,
@@ -41,7 +41,8 @@ function HomeMuestraxGrupo({
       setGrupoNombre,
       setListadoGrupo,
       setListadoMuestraActivo,
-      setListadoMuestraInactivo
+      setListadoMuestraInactivo,
+      setListadoResultadoxMuestra
     );
   }, []);
 
@@ -254,6 +255,7 @@ function HomeMuestraxGrupo({
         ListadoGrupo={ListadoGrupo}
         ListadoMuestraActivo={ListadoMuestraActivo}
         ListadoMuestraInactivo={ListadoMuestraInactivo}
+        ListadoResultadoxMuestra={ListadoResultadoxMuestra}
         isTrueActive={isTrueActive}
         idGruop={query.id}
         // isUserInterno={isUserInterno}

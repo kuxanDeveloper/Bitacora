@@ -244,15 +244,20 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                         {errors.GrupoSticker?.message}
                       </div>
                     </div>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setshowModalScanner(true);
-                      }}
-                    >
-                      escanear codigo de barras
-                    </button>
+                    <div className={styles.input_group}>
+                      <button
+                        className={styles.btn_barcode}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setshowModalScanner(true);
+                        }}
+                      >
+                        leer codigo de barras
+                      </button>
+                    </div>
                   </div>
+
+                  
 
                   {/*-------------------------------Grupo------------------------------------------- */}
 
