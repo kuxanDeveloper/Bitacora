@@ -71,7 +71,7 @@ function ComponentCreateResult({
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Prueba</label>
+                      <label className={styles.group_title}>Estatus</label>
 
                       <select
                         {...register("Codigo_prueba")}

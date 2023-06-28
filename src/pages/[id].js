@@ -12,6 +12,7 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../components/Tools/OpcitionHabilite";
+import { useContextBitacora } from "../context/BitacoraContext";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
 function HomeMuestraxGrupo({
@@ -20,6 +21,8 @@ function HomeMuestraxGrupo({
   ListadoUsuariosRegistrados,
   Options,
 }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
   const [isTrueActive, setisTrueActive] = useState(false);
   // const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
@@ -28,6 +31,8 @@ function HomeMuestraxGrupo({
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
   const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
+
+   
   const router = useRouter();
   useEffect(() => {
     ApiQueryGeneralSample(
@@ -42,7 +47,8 @@ function HomeMuestraxGrupo({
       setListadoGrupo,
       setListadoMuestraActivo,
       setListadoMuestraInactivo,
-      setListadoResultadoxMuestra
+      setListadoResultadoxMuestra,
+      setLstObservacionesPrede
     );
   }, []);
 
@@ -261,6 +267,7 @@ function HomeMuestraxGrupo({
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
         Options={Options}
+        LstObservacionesPrede={LstObservacionesPrede}
       ></Case>
     </>
   );

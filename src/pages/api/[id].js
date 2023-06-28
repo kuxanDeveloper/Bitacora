@@ -3,6 +3,7 @@
 import {
   QueryGroupList,
   QueryMueForGroup,
+  QueryObserva,
 } from "../../components/Tools/Security";
 import { userService } from "../../services/UserService";
 
@@ -18,7 +19,8 @@ export const ApiQueryGeneralSample = async (
   setListadoGrupo,
   setListadoMuestraActivo,
   setListadoMuestraInactivo,
-  setListadoResultadoxMuestra
+  setListadoResultadoxMuestra,
+  setLstObservacionesPrede
 ) => {
   let Lisgrupo = await QueryGroupList(cookie);
   setListadoGrupo(Lisgrupo);
@@ -57,10 +59,13 @@ export const ApiQueryGeneralSample = async (
     }
   }
 
+  let lstObsevraPredeter = await QueryObserva(cookie);
+  setLstObservacionesPrede(lstObsevraPredeter);
   if (
     Lisgrupo == "401: Token incorrecto o vencido" ||
     listActivoMue == "401: Token incorrecto o vencido" ||
-    listInactimue == "401: Token incorrecto o vencido"
+    listInactimue == "401: Token incorrecto o vencido" ||
+    lstObsevraPredeter == "401: Token incorrecto o vencido"
   ) {
     userService.logout();
     return "";

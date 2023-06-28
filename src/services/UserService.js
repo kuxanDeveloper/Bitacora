@@ -33,12 +33,16 @@ export const userService = {
   CrearNote,
   EditSticker,
   InfoSampleNote,
+  CreatGroup,
+  EditGroup,
+  InfoGroup,
   UpdateNote,
   InfoSampleResult,
   EditResult,
   CloseCaseSample,
   listUserGetAll,
   ListGroupActive,
+  lstObservall,
 };
 
 async function login(username, password) {
@@ -333,6 +337,51 @@ function InfoSampleNote(cookie, idNote) {
   );
 }
 
+function CreatGroup(
+  NombreGrupo,
+  EstadoGrupo,
+  AdmiteSufijo
+) {
+  const formData = new FormData();
+debugger;
+  formData.append("nombre_Grupo", NombreGrupo);
+  formData.append("estado_Grupo", EstadoGrupo);
+  formData.append("admite_sufijo", AdmiteSufijo);
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Grupos/GuardGrupos`,
+    null,
+    formData
+  );
+}
+
+function EditGroup(
+  IdGrupo,
+  NombreGrupo,
+  EstadoGrupo,
+  AdmiteSufijo
+) {
+  const formData = new FormData();
+
+  formData.append("Id_Grupo", IdGrupo);
+  formData.append("nombre_Grupo", NombreGrupo);
+  formData.append("estado_Grupo", EstadoGrupo);
+  formData.append("admite_sufijo", AdmiteSufijo);
+  
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Grupos/EditarGrupos`,
+    null,
+    formData
+  );
+}
+
+function InfoGroup(estado, idGrupo,cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
+    cookie
+  );
+}
+
 function UpdateNote(
   codigo_detalle_bitacora,
   Cod_Imagen1,
@@ -367,5 +416,12 @@ function CloseCaseSample(id, observacionCaso, Estado) {
     `${baseUrl}/Stickers/CambioEstadoBitacora`,
     null,
     formData
+  );
+}
+
+function lstObservall(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=`,
+    cookie
   );
 }
