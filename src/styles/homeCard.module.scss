@@ -165,6 +165,8 @@
       .card_body {
         .body_container {
           .card_name {
+            text-align: center;
+
             .arrow_icon {
             }
           }
@@ -195,7 +197,6 @@
         .body_container {
           .card_name {
             top: calc(74% - 10px);
-            text-align: center;
             .arrow_icon {
             }
           }
