@@ -57,7 +57,8 @@ export default function Pop_up({
                       }
                       id="filePhoto"
                       type="file"
-                      capture="camera"
+                      accept="image/*"
+                      capture="environment"
                       className={styles.hide_input}
                     ></input>
 
