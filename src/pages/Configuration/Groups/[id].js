@@ -2,6 +2,13 @@ import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import EditGroup from "../../../components/Body/GroupCrud/Edit";
 import { SampleDetailsGroup } from "../ViewDetailsParameters/[id]";
+import {
+  OptionAdministrator,
+  OptionAsiste,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage({cookie,id}) {
 
@@ -62,11 +69,35 @@ export default CreatePage;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
-  debugger;
-  if (cookie) {
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
+  if (cookie && RolUser) {
+
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
     if (
       ctx.query.id == undefined ||
-      ctx.query.id == null
+      ctx.query.id == null ||
+      !Options.BtnEditStickerAndUrl
     ) {
       return { notFound: true };
     }

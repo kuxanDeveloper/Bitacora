@@ -352,6 +352,18 @@ export const setCheckindividual = (setValue) => {
       setValue("EstadoGrupo", "1");
     }
 
+    var checbox2 = document.getElementById("AdmiteSufijo");
+
+    if (
+      checbox2.checked == null ||
+      checbox2.checked == undefined ||
+      checbox2.checked == false
+    ) {
+      setValue("AdmiteSufijo", "0");
+    } else {
+      setValue("AdmiteSufijo", "1");
+    }
+
 };
 
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {

@@ -1,24 +1,22 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../styles/CreateNotes.module.scss";
+import styleTable from "../../../styles/TableStyles.module.scss";
 
-function ComponentGroupIndex(InforSampleDetails)
-{
+function ComponentGroupIndex(InforSampleDetails) {
   useEffect(() => {
-
     console.log(InforSampleDetails);
     debugger;
   });
 
-
-    return (
+  return (
     <>
-<section className={styles.create_note}>
+      <section className={styles.create_note}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Sample/FullDetails/[id]",
+                pathname: "/[id]",
                 hash: "Normal",
               }}
               className={styles.back_btn}
@@ -27,56 +25,59 @@ function ComponentGroupIndex(InforSampleDetails)
             </Link>
 
             <Link
-                      href={{
-                        pathname: "/[id]",
-                        hash: "Normal",
-                      }}
-                      className={styles.btn_cancel}
-                    >
-                      Crear Grupo
-                    </Link>
+              href={{
+                pathname: "/Configuration/Groups/CreateGroup",
+              }}
+              className={styles.btn_create}
+            >
+              <span>&#10010; </span>
+              Crear Grupo
+            </Link>
           </div>
-
-         
 
           <p className={styles.title}>Listado de Grupos</p>
           <br />
           <div className={styles.card}>
-
-          {InforSampleDetails.InforSampleDetails != null &&
-            InforSampleDetails.InforSampleDetails != undefined
-              ? InforSampleDetails.InforSampleDetails.map((data, index) => (
-            <>            
-                              <p>Codigo Grupo</p>
-                              <p>{data.Id_grupo}</p>
-                              <p>Nombre Grupo</p>
-                              <p>{data.NOMBRE_GRUPO}</p>
-                              <p>Estado Grupo</p>
-                              <p>{data.ESTADO == true ? "Activo" : "Inactivo"}</p>
-                              <p>Usuario Creador</p>
-                              <p>{data.Email}</p>
-                              <p>Fecha Creacion</p>
-                              <p>{data.FECHA_CREADO}</p>
-                              <div><Link
-                    title="Agregar nota"
-                    className={styles.add_icon}
-                    href={{
-                      pathname: "/parameters/Groups/[id]",
-                      query: { id: data.Id_grupo },
-                    }}
-                  >
-                    Editar Grupo
-                  </Link></div>
-                  <hr></hr>
-            </> ))
-          : ""  
-          }
+            <table className={styleTable.tableStyle}>
+              <thead>
+              <tr>
+                <th style={{ width: "50%" }}>Nombre Grupo</th>
+                <th style={{ width: "15%" }}>Estado</th>
+                <th style={{ width: "15%" }}>Admite Sufijo</th>
+                <th style={{ width: "20%" }}>Opciones</th>
+              </tr>
+              </thead>
+              <tbody>
+              {InforSampleDetails.InforSampleDetails != null &&
+              InforSampleDetails.InforSampleDetails != undefined
+                ? InforSampleDetails.InforSampleDetails.map((data, index) => (
+                    <>
+                    <tr>
+                      <td>{data.NOMBRE_GRUPO}</td>
+                      <td className={styleTable.textCenterColumn}>{data.ESTADO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
+                      <td className={styleTable.textCenterColumn}>{data.ADMITE_SUFIJO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
+                      <td className={styleTable.textCenterColumn}><Link
+                          title="Agregar nota"
+                          className={styles.add_icon}
+                          href={{
+                            pathname: "/Configuration/Groups/[id]",
+                            query: { id: data.Id_grupo },
+                          }}
+                        >
+                          <span>&#x270E; </span>
+                          Editar Grupo
+                        </Link></td>
+                    </tr>                      
+                    </>
+                  ))
+                : ""}
+                </tbody>
+            </table>
           </div>
         </div>
       </section>
-    </>    
-    );
-
+    </>
+  );
 }
 
 export default ComponentGroupIndex;

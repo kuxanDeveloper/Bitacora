@@ -1,34 +1,35 @@
 import React from "react";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
 import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
-import {
-    setCheckindividual
-  } from "../../Tools/functiones";
+import { setCheckindividual } from "../../Tools/functiones";
 
-function ComponentGroup()
-{
+function ComponentGroup() {
+  const validarEsquemaGrupo = Yup.object().shape({
+    NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
+    EstadoGrupo: Yup.string().required(
+      "Campo de estado del grupo es obligatorio"
+    ),
+    AdmiteSufijo: Yup.string().required(
+      "Campo de admite sufijo es obligatorio"
+    ),
+  });
 
-    const validarEsquemaGrupo = Yup.object().shape({
-        NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
-        EstadoGrupo: Yup.string().required("Campo de estado del grupo es obligatorio")
-    });
-    
-    const formOptions = {resolver: yupResolver(validarEsquemaGrupo)};
-    const { register, handleSubmit, formState, setValue } = useForm(formOptions);
-    const { errors } = formState;
-    
-    return (
+  const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
+  const { register, handleSubmit, formState, setValue } = useForm(formOptions);
+  const { errors } = formState;
+
+  return (
     <>
-<section className={styles.create_note}>
+      <section className={styles.create_note}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/parameters/Groups/IndexGroup",
+                pathname: "/Configuration/Groups/IndexGroup",
                 hash: "Normal",
               }}
               className={styles.back_btn}
@@ -42,14 +43,12 @@ function ComponentGroup()
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitCreateGroup)}>
               <div className={styles.stickers_container}>
-                <div className={styles.card_sticker}>                  
+                <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>
-                        Nombre Grupo
-                      </label>
+                      <label className={styles.group_title}>Nombre Grupo</label>
                       <input
                         {...register("NombreGrupo")}
                         name="NombreGrupo"
@@ -62,14 +61,21 @@ function ComponentGroup()
                         {errors.NombreGrupo?.message}
                       </div>
                     </div>
+                  </div>
+
+                  <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title_check}>
-                        Estado
+                      <label className={styles.group_title}>Estado del grupo</label>
+                      <input id="EstadoGrupo" type="checkbox" />
+
+                      {/* <!-- ---- --> */}
+                    </div>
+
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Admite Sufijo
                       </label>
-                      <input
-                        id="EstadoGrupo"
-                        type="checkbox"
-                      />
+                      <input id="AdmiteSufijo" type="checkbox" />
 
                       {/* <!-- ---- --> */}
                     </div>
@@ -77,25 +83,17 @@ function ComponentGroup()
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
-                      <button   
-                      onClick={() => {
-                        setCheckindividual(setValue);                        
-                      }}                     
+                      <button
+                        onClick={() => {
+                          setCheckindividual(setValue);
+                        }}
                         className={styles.btn_send}
                       >
                         Guardar Grupo
                       </button>
                     )}
+
                     
-                    <Link
-                      href={{
-                        pathname: "/[id]",
-                        hash: "Normal",
-                      }}
-                      className={styles.btn_cancel}
-                    >
-                      Cancelar
-                    </Link>
                   </div>
                 </div>
               </div>
@@ -103,9 +101,8 @@ function ComponentGroup()
           </div>
         </div>
       </section>
-    </>    
-    );
-
+    </>
+  );
 }
 
 export default ComponentGroup;

@@ -4,16 +4,24 @@ import Router from "next/router";
 
 export const onSubmitCreateGroup = ({
     NombreGrupo,
-    EstadoGrupo
+    EstadoGrupo,
+    AdmiteSufijo
 }) => {  
     return userService.CreatGroup(
         NombreGrupo,
-        EstadoGrupo
+        EstadoGrupo,
+        AdmiteSufijo
     ).then(() =>
     {
+      Swal.fire({
+        title: "¡Correcto!",
+        text: "El grupo se creo correctamente",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+
 Router.push({
-        pathname: "/parameters/Groups/IndexGroup",
-        hash: "#Creado",
+        pathname: "/Configuration/Groups/IndexGroup"
 });
     }    
     ).catch((error) => {
@@ -46,20 +54,29 @@ Router.push({
 export const onSubmitUpdateGroup = ({
     IdGrupo,
     NombreGrupo,
-    EstadoGrupo
+    EstadoGrupo,
+    AdmiteSufijo
 }) => {
+  debugger;
     return userService.EditGroup(
         IdGrupo,
         NombreGrupo,
-        EstadoGrupo
+        EstadoGrupo,
+        AdmiteSufijo
     ).then(() =>
     {
+      Swal.fire({
+        title: "¡Correcto!",
+        text: "El grupo se edito correctamente",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+
 Router.push({
-        pathname: "/parameters/Groups/IndexGroup",
-        hash: "#Editado",
+        pathname: "/Configuration/Groups/IndexGroup"
 });
     }    
-    ).catch(() => {
+    ).catch((error) => {
 
         if (
             error == "Límite de tiempo excedido" ||

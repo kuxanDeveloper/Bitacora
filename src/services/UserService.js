@@ -338,12 +338,14 @@ function InfoSampleNote(cookie, idNote) {
 
 function CreatGroup(
   NombreGrupo,
-  EstadoGrupo
+  EstadoGrupo,
+  AdmiteSufijo
 ) {
   const formData = new FormData();
 debugger;
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
+  formData.append("admite_sufijo", AdmiteSufijo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -355,13 +357,15 @@ debugger;
 function EditGroup(
   IdGrupo,
   NombreGrupo,
-  EstadoGrupo
+  EstadoGrupo,
+  AdmiteSufijo
 ) {
   const formData = new FormData();
 
   formData.append("Id_Grupo", IdGrupo);
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
+  formData.append("admite_sufijo", AdmiteSufijo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,

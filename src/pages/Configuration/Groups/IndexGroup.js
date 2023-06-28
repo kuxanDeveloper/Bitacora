@@ -89,17 +89,13 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null ||
-      ctx.query.group == null ||
-      ctx.query.group == undefined ||
-      ctx.query.isHabilteGroup == undefined ||
-      ctx.query.isHabilteGroup == null ||
+    if (     
       !Options.BtnEditStickerAndUrl
     ) {
       return { notFound: true };
     }
+    
+    return {props:{mensaje:null}};
 
   } else {
     return {
