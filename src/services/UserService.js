@@ -42,6 +42,7 @@ export const userService = {
   CloseCaseSample,
   listUserGetAll,
   ListGroupActive,
+  InfoSampleUsers,
 };
 
 async function login(username, password) {
@@ -415,5 +416,12 @@ function CloseCaseSample(id, observacionCaso, Estado) {
     `${baseUrl}/Stickers/CambioEstadoBitacora`,
     null,
     formData
+  );
+}
+
+function InfoSampleUsers(cookie, IdUser) {
+  return fetchWrapper.get(
+    `${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`,
+    cookie
   );
 }
