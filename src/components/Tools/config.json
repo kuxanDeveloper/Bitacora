@@ -2,17 +2,24 @@
   "inputStream": {
     "type": "LiveStream",
     "constraints": {
-      "width": { "min": 450 },
-      "height": { "min": 300 },
+      "size":{"x":640,"y":480},
+      "width": 640,
+      "height": 480,
       "facingMode": "environment"
     }
   },
+  "area": {
+    "top": "0%",
+    "right": "0%",
+    "left": "0%",
+    "bottom": "0%"
+  },
   "locator": {
-    "patchSize": "medium",
+    "patchSize": "small",
     "halfSample": true
   },
   "numOfWorkers": 8,
-  "frequency": 5,
+  "frequency": 10,
   "decoder": {
     "readers": ["code_128_reader"]
   },

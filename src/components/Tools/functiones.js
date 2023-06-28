@@ -1,4 +1,4 @@
-import { elementAt } from "rxjs";
+import style from "../../styles/filters.module.scss";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
@@ -156,20 +156,24 @@ export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
       let FechaOrden = new Date(element.FECHA_ORIGINAL_CREADO_BITACORA);
       const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
       let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
-      if (
-        element.ID_GRUPO_ASIGNADO == 6 ||
-        element.ID_GRUPO_ASIGNADO == 9 ||
-        element.ID_GRUPO_ASIGNADO == 11 ||
-        element.ID_GRUPO_ASIGNADO == 12
-      ) {
-        if (horasdiferencia <= 960) {
-          ListadoNewRetorno.push(element);
-        }
-      } else {
-        if (horasdiferencia <= 120) {
-          ListadoNewRetorno.push(element);
-        }
+      if (horasdiferencia <= element.ALARMA_HORAS) {
+        ListadoNewRetorno.push(element);
       }
+
+      // if (
+      //   element.ID_GRUPO_ASIGNADO == 6 ||
+      //   element.ID_GRUPO_ASIGNADO == 9 ||
+      //   element.ID_GRUPO_ASIGNADO == 11 ||
+      //   element.ID_GRUPO_ASIGNADO == 12
+      // ) {
+      //   if (horasdiferencia <= 960) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // } else {
+      //   if (horasdiferencia <= 120) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // }
     });
   }
   return ListadoNewRetorno;
@@ -184,21 +188,21 @@ export const UserActiveUrgencias = (query, ListadoResultadoxMuestra) => {
       const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
 
       let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
-
-      if (
-        element.ID_GRUPO_ASIGNADO == 6 ||
-        element.ID_GRUPO_ASIGNADO == 9 ||
-        element.ID_GRUPO_ASIGNADO == 11 ||
-        element.ID_GRUPO_ASIGNADO == 12
-      ) {
-        if (horasdiferencia > 960) {
-          ListadoNewRetorno.push(element);
-        }
-      } else {
-        if (horasdiferencia > 120) {
-          ListadoNewRetorno.push(element);
-        }
+      if (horasdiferencia > element.ALARMA_HORAS) {
+        ListadoNewRetorno.push(element);
       }
+      // if (
+      //   element.ID_GRUPO_ASIGNADO == 6 ||
+      //   element.ID_GRUPO_ASIGNADO == 9 ||
+      //   element.ID_GRUPO_ASIGNADO == 11 ||
+      //   element.ID_GRUPO_ASIGNADO == 12
+      // ) {
+
+      // } else {
+      //   if (horasdiferencia > 120) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // }
     });
 
     // query.forEach((element) => {
@@ -380,28 +384,27 @@ export const onclickPlantillaTarget = (setValue) => {
 export const setCheckindividual = (setValue) => {
   var checbox1 = document.getElementById("EstadoGrupo");
 
-    if (
-      checbox1.checked == null ||
-      checbox1.checked == undefined ||
-      checbox1.checked == false
-    ) {
-      setValue("EstadoGrupo", "0");
-    } else {
-      setValue("EstadoGrupo", "1");
-    }
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("EstadoGrupo", "0");
+  } else {
+    setValue("EstadoGrupo", "1");
+  }
 
-    var checbox2 = document.getElementById("AdmiteSufijo");
+  var checbox2 = document.getElementById("AdmiteSufijo");
 
-    if (
-      checbox2.checked == null ||
-      checbox2.checked == undefined ||
-      checbox2.checked == false
-    ) {
-      setValue("AdmiteSufijo", "0");
-    } else {
-      setValue("AdmiteSufijo", "1");
-    }
-
+  if (
+    checbox2.checked == null ||
+    checbox2.checked == undefined ||
+    checbox2.checked == false
+  ) {
+    setValue("AdmiteSufijo", "0");
+  } else {
+    setValue("AdmiteSufijo", "1");
+  }
 };
 
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
@@ -572,7 +575,21 @@ export const LocationUrl = (router, value) => {
   return aciteMenuClass;
 };
 
-export const AperturaandCierre = (data) => {
+export const AperturaandCierre = (data, LstObservacionesPrede) => {
+  console.log(LstObservacionesPrede);
+
+  window.OnchangeValueSelect = function (value) {
+    let valueGetId = document.getElementById("Observacionother");
+
+    if (valueGetId != undefined && valueGetId != null) {
+      if (value == "5") {
+        valueGetId.style.display = "";
+      } else {
+        valueGetId.style.display = "none";
+      }
+    }
+  };
+
   Swal.fire({
     title: data.ESTADO_STICKER
       ? `Cerrar orden ${data.NUMERO_STICKER}-${data.SUFIJO}`
@@ -590,17 +607,33 @@ export const AperturaandCierre = (data) => {
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
-        input: "textarea",
-        inputPlaceholder: data.ESTADO_STICKER
-          ? "Deje una observación para el cierre de la orden..."
-          : "Deje una observación del porqué abre la orden...",
-        inputAttributes: {
-          maxlength: 1000,
-          autocapitalize: "off",
-          "aria-label": data.ESTADO_STICKER
-            ? "Deje una observación para el cierre de la orden..."
-            : "Deje una observación del porqué abre la orden...",
-        },
+        title: data.ESTADO_STICKER
+          ? "Observación de cierre"
+          : "Observación de apertura",
+        html:
+          `<select id='sltObservcaciones' onclick="window.OnchangeValueSelect(
+          this.value)" class="swal2-input">
+          <option disabled selected value="">Seleccione una observación</option>
+         ${LstObservacionesPrede.map((info) => {
+           if (data.ESTADO_STICKER) {
+             if (info.Observacion_cierre) {
+               return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+             }
+           } else {
+             if (info.Observacion_reapertura) {
+               return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+             }
+           }
+         })}
+          </select>` +
+          `<textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+          placeholder="${
+            data.ESTADO_STICKER
+              ? "Deje una observación para el cierre de la orden..."
+              : "Deje una observación del porqué abre la orden..."
+          }"                         cols="30"
+          rows="10"></textarea>`,
+
         customClass: {
           cancelButton: "HidenLoaderCancel",
         },
@@ -608,24 +641,44 @@ export const AperturaandCierre = (data) => {
         confirmButtonText: "OK",
         cancelButtonColor: "#d33",
         showLoaderOnConfirm: true,
-        inputValidator: (value) => {
-          let classCancel =
-            document.getElementsByClassName("HidenLoaderCancel")[0];
+        // inputValidator: (value) => {
+        //   let classCancel =
+        //     document.getElementsByClassName("HidenLoaderCancel")[0];
 
-          classCancel.style.display = "none";
+        //   classCancel.style.display = "none";
 
-          if (!value) {
-            return data.ESTADO_STICKER
-              ? "Es obligatorio la observación de la orden de cierre"
-              : "Es obligatorio la observación del porqué abre la orden";
+        //   if (!value) {
+        //     return data.ESTADO_STICKER
+        //       ? "Es obligatorio la observación de la orden de cierre"
+        //       : "Es obligatorio la observación del porqué abre la orden";
+        //   }
+        // },
+        preConfirm: () => {
+          let selectObserva = document.getElementById("sltObservcaciones");
+          let TextAreaObservacion = document.getElementById("Observacionother");
+          // Validate input
+          if (
+            selectObserva.value == "" ||
+            (selectObserva.value == "5" && TextAreaObservacion.value == "")
+          ) {
+            Swal.showValidationMessage(
+              data.ESTADO_STICKER
+                ? "Es obligatorio la observación de la orden de cierre"
+                : "Es obligatorio la observación del porqué abre la orden"
+            );
+            Swal.hideLoading();
+            Swal.enableButtons();
+          } else {
+            Swal.resetValidationMessage();
+
+            return CloseCaseSample(
+              data.CODIGO_BITACORA,
+              selectObserva.value == "5"
+                ? TextAreaObservacion.value
+                : selectObserva.options[selectObserva.selectedIndex].text,
+              data.ESTADO_STICKER ? "0" : "1"
+            );
           }
-        },
-        preConfirm: (ValueObservacion) => {
-          return CloseCaseSample(
-            data.CODIGO_BITACORA,
-            ValueObservacion,
-            data.ESTADO_STICKER ? "0" : "1"
-          );
         },
         allowOutsideClick: () => !Swal.isLoading(),
       }).then((result) => {
@@ -635,7 +688,7 @@ export const AperturaandCierre = (data) => {
                 icon: "success",
                 title: "Orden cerrada",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 4000,
                 timerProgressBar: true,
                 allowOutsideClick: false,
               }).then((result) => {
@@ -648,7 +701,7 @@ export const AperturaandCierre = (data) => {
                 icon: "success",
                 title: "Orden abierta",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 4000,
                 timerProgressBar: true,
                 allowOutsideClick: false,
               }).then((result) => {
@@ -661,4 +714,8 @@ export const AperturaandCierre = (data) => {
       });
     }
   });
+};
+
+export const onChangeSelectObserva = (value) => {
+  console.log(value);
 };

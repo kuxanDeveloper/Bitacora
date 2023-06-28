@@ -41,7 +41,7 @@ function Results({ data, Options, group, name_group, sticker }) {
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Prueba</span>
+          <span className={styles.info_title}>Estatus</span>
           <p className={styles.info_text}>
             {data.NOMBRE_PRUEBA !== null && data.NOMBRE_PRUEBA !== undefined
               ? data.NOMBRE_PRUEBA
@@ -72,6 +72,16 @@ function Results({ data, Options, group, name_group, sticker }) {
         ) : (
           <></>
         )}
+
+        <div className={styles.info_group}>
+          <span className={styles.info_title}>Fecha de creación resultado</span>
+          <p className={styles.info_text}>
+            {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
+            data.FECHA_CREACION_RESULTADO_FORMAT !== undefined
+              ? data.FECHA_CREACION_RESULTADO_FORMAT
+              : ""}
+          </p>
+        </div>
       </div>
       <hr />
     </div>

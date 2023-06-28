@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../../../styles/Header.module.css";
+import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
 import { userService } from "../../../services/UserService";
 function HRbuttonCloseSession() {

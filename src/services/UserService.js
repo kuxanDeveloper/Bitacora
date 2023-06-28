@@ -42,6 +42,7 @@ export const userService = {
   CloseCaseSample,
   listUserGetAll,
   ListGroupActive,
+  lstObservall,
   InfoSampleUsers,
 };
 
@@ -416,6 +417,13 @@ function CloseCaseSample(id, observacionCaso, Estado) {
     `${baseUrl}/Stickers/CambioEstadoBitacora`,
     null,
     formData
+  );
+}
+
+function lstObservall(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=`,
+    cookie
   );
 }
 

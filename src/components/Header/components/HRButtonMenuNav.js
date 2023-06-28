@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../../../styles/Header.module.css";
+import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
 import { OnclickNAvToggle } from "../../Tools/functiones";
 import { useContextBitacora } from "../../../context/BitacoraContext";

@@ -10,13 +10,20 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { useContextBitacora } from "../../../context/BitacoraContext";
 function FullDetailsPage({ cookie, query, Options }) {
   const router = useRouter();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [Pruebas, setPruebas] = useState(false);
-
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
   useEffect(() => {
-    SampleDetailsEdit(cookie, query.id, setLInforSampleDetails);
+    SampleDetailsEdit(
+      cookie,
+      query.id,
+      setLInforSampleDetails,
+      setLstObservacionesPrede
+    );
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "../../styles/Header.module.css";
+import Styles from "../../styles/Header.module.scss";
 import HRButtonMenuNav from "./components/HRButtonMenuNav";
 import HRbuttonCloseSession from "./components/HRbuttonCloseSession";
 import HRLogoNav from "./components/HRLogoNav";

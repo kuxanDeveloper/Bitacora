@@ -9,6 +9,7 @@ export default function CaseComponent({
   isActive,
   Options,
   isSampleGeneral,
+  LstObservacionesPrede,
 }) {
   const {
     setShowModal,
@@ -107,7 +108,7 @@ export default function CaseComponent({
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    AperturaandCierre(data);
+                    AperturaandCierre(data, LstObservacionesPrede);
                   }}
                   className={caseStyles.btn_sticker}
                 >
@@ -120,7 +121,7 @@ export default function CaseComponent({
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  AperturaandCierre(data);
+                  AperturaandCierre(data, LstObservacionesPrede);
                 }}
                 className={caseStyles.btn_sticker}
               >
@@ -145,7 +146,8 @@ export default function CaseComponent({
       </div>
       {!isSampleGeneral ? (
         <p className={caseStyles.card_info}>
-          Los casos de esta orden superaron el tiempo máximo permitido de su procesamiento.
+          Los casos de esta orden superaron el tiempo máximo permitido de su
+          procesamiento.
         </p>
       ) : (
         ""
