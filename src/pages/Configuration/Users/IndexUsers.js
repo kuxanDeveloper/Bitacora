@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import IndexUsers from "../../../components/Body/Users/Index";
-import { SampleDetailsUsers } from "../ViewDetailsParameters/[id]";
+import { SampleDetailsUsers } from "../../api/Sample/ViewDetailsUser/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -14,7 +14,6 @@ function CreatePage(cookie) {
 
     const [InforSampleDetails, setLInforSampleDetails] = useState([]);
     useEffect(() => {
-      debugger;
       SampleDetailsUsers(setLInforSampleDetails,cookie,"");
     }, []);
 

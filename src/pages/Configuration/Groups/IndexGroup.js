@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import IndexGroup from "../../../components/Body/GroupCrud/Index";
-import { SampleDetailsGroup } from "../ViewDetailsParameters/[id]";
+import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
