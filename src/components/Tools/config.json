@@ -19,7 +19,7 @@
     "halfSample": false
   },
   "numOfWorkers": 8,
-  "frequency": 5,
+  "frequency": 10,
   "decoder": {
     "readers": ["code_128_reader"]
   },
