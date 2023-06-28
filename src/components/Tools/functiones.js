@@ -156,20 +156,24 @@ export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
       let FechaOrden = new Date(element.FECHA_ORIGINAL_CREADO_BITACORA);
       const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
       let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
-      if (
-        element.ID_GRUPO_ASIGNADO == 6 ||
-        element.ID_GRUPO_ASIGNADO == 9 ||
-        element.ID_GRUPO_ASIGNADO == 11 ||
-        element.ID_GRUPO_ASIGNADO == 12
-      ) {
-        if (horasdiferencia <= 960) {
-          ListadoNewRetorno.push(element);
-        }
-      } else {
-        if (horasdiferencia <= 120) {
-          ListadoNewRetorno.push(element);
-        }
+      if (horasdiferencia <= element.ALARMA_HORAS) {
+        ListadoNewRetorno.push(element);
       }
+
+      // if (
+      //   element.ID_GRUPO_ASIGNADO == 6 ||
+      //   element.ID_GRUPO_ASIGNADO == 9 ||
+      //   element.ID_GRUPO_ASIGNADO == 11 ||
+      //   element.ID_GRUPO_ASIGNADO == 12
+      // ) {
+      //   if (horasdiferencia <= 960) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // } else {
+      //   if (horasdiferencia <= 120) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // }
     });
   }
   return ListadoNewRetorno;
@@ -184,21 +188,21 @@ export const UserActiveUrgencias = (query, ListadoResultadoxMuestra) => {
       const hoursDifferent = fechaActual.getTime() - FechaOrden.getTime();
 
       let horasdiferencia = Math.round(hoursDifferent / 1000 / (60 * 60));
-
-      if (
-        element.ID_GRUPO_ASIGNADO == 6 ||
-        element.ID_GRUPO_ASIGNADO == 9 ||
-        element.ID_GRUPO_ASIGNADO == 11 ||
-        element.ID_GRUPO_ASIGNADO == 12
-      ) {
-        if (horasdiferencia > 960) {
-          ListadoNewRetorno.push(element);
-        }
-      } else {
-        if (horasdiferencia > 120) {
-          ListadoNewRetorno.push(element);
-        }
+      if (horasdiferencia > element.ALARMA_HORAS) {
+        ListadoNewRetorno.push(element);
       }
+      // if (
+      //   element.ID_GRUPO_ASIGNADO == 6 ||
+      //   element.ID_GRUPO_ASIGNADO == 9 ||
+      //   element.ID_GRUPO_ASIGNADO == 11 ||
+      //   element.ID_GRUPO_ASIGNADO == 12
+      // ) {
+
+      // } else {
+      //   if (horasdiferencia > 120) {
+      //     ListadoNewRetorno.push(element);
+      //   }
+      // }
     });
 
     // query.forEach((element) => {
@@ -380,28 +384,27 @@ export const onclickPlantillaTarget = (setValue) => {
 export const setCheckindividual = (setValue) => {
   var checbox1 = document.getElementById("EstadoGrupo");
 
-    if (
-      checbox1.checked == null ||
-      checbox1.checked == undefined ||
-      checbox1.checked == false
-    ) {
-      setValue("EstadoGrupo", "0");
-    } else {
-      setValue("EstadoGrupo", "1");
-    }
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("EstadoGrupo", "0");
+  } else {
+    setValue("EstadoGrupo", "1");
+  }
 
-    var checbox2 = document.getElementById("AdmiteSufijo");
+  var checbox2 = document.getElementById("AdmiteSufijo");
 
-    if (
-      checbox2.checked == null ||
-      checbox2.checked == undefined ||
-      checbox2.checked == false
-    ) {
-      setValue("AdmiteSufijo", "0");
-    } else {
-      setValue("AdmiteSufijo", "1");
-    }
-
+  if (
+    checbox2.checked == null ||
+    checbox2.checked == undefined ||
+    checbox2.checked == false
+  ) {
+    setValue("AdmiteSufijo", "0");
+  } else {
+    setValue("AdmiteSufijo", "1");
+  }
 };
 
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
