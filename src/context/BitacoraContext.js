@@ -82,6 +82,8 @@ export const BicatoraContexProvider = ({ children }) => {
         authorized,
         Urlauthorized,
         showModal,
+        setAuthorized,
+        setUrlauthorized,
         setShowModal,
         setMenuShow,
         MenuShow,

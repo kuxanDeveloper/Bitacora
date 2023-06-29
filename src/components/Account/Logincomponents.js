@@ -88,8 +88,6 @@ function Logincomponents() {
                     formState.isSubmitting && styleLogin.disabled
                   }`}
                 >
-                  {" "}
-                  {/*${styleLogin.disabled}*/}
                   Ingresar
                 </button>
               )}

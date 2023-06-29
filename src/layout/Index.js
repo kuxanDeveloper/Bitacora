@@ -38,7 +38,6 @@ function Index({ children }) {
     setisImagenOne(false);
     setdobleImagen(false);
   };
-  // useEffect(() => initLogInactive(), []);
 
   return (
     <>
@@ -80,7 +79,7 @@ function Index({ children }) {
           ) : (
             ""
           )}
-          <main>{children}</main>
+          <main onLoad={initLogInactive}>{children}</main>
         </>
       ) : (
         <main>{children}</main>

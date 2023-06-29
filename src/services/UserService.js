@@ -81,8 +81,9 @@ async function login(username, password) {
         path: "/",
         maxAge: 60 * 60 * 8,
       });
-
+      let dateNow = new Date();
       localStorage.setItem("tokenUserLS", UserLogin.token);
+      localStorage.setItem("dateLogin", dateNow);
       userSubject.next(UserLogin.token);
     }
 
@@ -107,6 +108,7 @@ function logout() {
   cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
+  localStorage.removeItem("dateLogin");
   userSubject.next(null);
   Router.push("/account/Login");
 }
@@ -116,6 +118,7 @@ function logoutLogin() {
   cookies.remove("RolUserCookie", { path: "/" });
   localStorage.removeItem("tokenUserLS");
   localStorage.removeItem("RolUser");
+  localStorage.removeItem("dateLogin");
   userSubject.next(null);
 }
 
@@ -223,8 +226,6 @@ function CreatSticker(
   NumSticker,
   GrupoSticker,
   ObservaInici,
-  // UserCheckinter,
-  // UserCheckexter,
   file,
   file2,
   Sufijo
@@ -233,8 +234,6 @@ function CreatSticker(
 
   formData.append("Numero_Stickers", NumSticker);
   formData.append("Grupo_sticker", GrupoSticker);
-  // formData.append("Usuario_interno", UserCheckinter);
-  // formData.append("Usuario_externo", UserCheckexter);
   formData.append("Observaciones_iniciales", ObservaInici);
   formData.append("file", file);
   formData.append("file2", file2);
@@ -348,7 +347,7 @@ function CreatGroup(
   AlertaHoras
 ) {
   const formData = new FormData();
-debugger;
+  debugger;
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
@@ -383,7 +382,7 @@ function EditGroup(
   );
 }
 
-function InfoGroup(estado, idGrupo,cookie) {
+function InfoGroup(estado, idGrupo, cookie) {
   return fetchWrapper.get(
     `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
     cookie
