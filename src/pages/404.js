@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import stylesNotFound from "../styles/NoFound.module.css"
 function NotFound() {
   const Page404 = dynamic(() => import("../components/Tools/Page404"), {
     loading: () => <p>Loading...</p>,
@@ -16,7 +15,7 @@ function NotFound() {
         />
         <meta property="og:type" content="website" />
       </Head>
-      <Page404 stylesNotFound={stylesNotFound} />
+      <Page404 />
     </>
   );
 }
