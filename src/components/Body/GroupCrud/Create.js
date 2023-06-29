@@ -10,6 +10,7 @@ import { setCheckindividual } from "../../Tools/functiones";
 function ComponentGroup() {
   const validarEsquemaGrupo = Yup.object().shape({
     NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
+    AlertaHoras: Yup.string().required("Campo de Alerta por horas es obligatorio"),
     EstadoGrupo: Yup.string().required(
       "Campo de estado del grupo es obligatorio"
     ),
@@ -21,6 +22,18 @@ function ComponentGroup() {
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
+
+  function restrictNumber(id) {
+    debugger;
+    var valor = document.getElementById(id);
+    if(valor != null)
+    {
+      var v= valor.value.replace(new RegExp(/[^\d]/, 'ig'), "");
+
+      document.getElementById("id").value = valor;
+    }
+    
+  }
 
   return (
     <>
@@ -59,6 +72,21 @@ function ComponentGroup() {
                       />
                       <div className={styles.invalid_feedback}>
                         {errors.NombreGrupo?.message}
+                      </div>
+                    </div>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>Alerta por horas</label>
+                      <input
+                        {...register("AlertaHoras")}
+                        name="AlertaHoras"
+                        maxLength="2"
+                        max="99"
+                        type="number"
+                        min="0"
+                        className={styles.group_input}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.AlertaHoras?.message}
                       </div>
                     </div>
                   </div>

@@ -17,6 +17,9 @@ function ComponentGroup(InforGroup, id) {
     AdmiteSufijo: Yup.string().required(
       "Campo de admite sufijo es obligatorio"
     ),
+    AlertaHoras: Yup.string().required(
+      "Campo de Alerta por horas es obligatorio"
+    ),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -35,8 +38,8 @@ function ComponentGroup(InforGroup, id) {
           ? null
           : InforGroup.InforGroup[0].ESTADO;
 
-          var checkbox2 = document.getElementById("AdmiteSufijo");
-          checkbox2.checked =
+      var checkbox2 = document.getElementById("AdmiteSufijo");
+      checkbox2.checked =
         InforGroup.InforGroup[0].ADMITE_SUFIJO == false
           ? null
           : InforGroup.InforGroup[0].ADMITE_SUFIJO;
@@ -89,7 +92,24 @@ function ComponentGroup(InforGroup, id) {
                                 {errors.NombreGrupo?.message}
                               </div>
                             </div>
-                            
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Alerta por horas
+                              </label>
+                              <input
+                                {...register("AlertaHoras")}
+                                name="AlertaHoras"
+                                maxLength="2"
+                                max="99"
+                                type="number"
+                                min="0"
+                                defaultValue={data.ALARMA_HORAS}
+                                className={styles.group_input}
+                              />
+                              <div className={styles.invalid_feedback}>
+                                {errors.AlertaHoras?.message}
+                              </div>
+                            </div>
                           </div>
 
                           <div className={styles.form_group}>
@@ -117,7 +137,10 @@ function ComponentGroup(InforGroup, id) {
                               <button
                                 onClick={() => {
                                   setCheckindividual(setValue);
-                                  setValue("IdGrupo", InforGroup.InforGroup[0].Id_grupo);
+                                  setValue(
+                                    "IdGrupo",
+                                    InforGroup.InforGroup[0].Id_grupo
+                                  );
                                 }}
                                 className={styles.btn_send}
                               >

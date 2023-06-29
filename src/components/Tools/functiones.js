@@ -407,6 +407,21 @@ export const setCheckindividual = (setValue) => {
   }
 };
 
+export const setCheckUsuEstado = (setValue) => {
+  var checbox1 = document.getElementById("EstadoUsu");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("EstadoUsuario", "0");
+  } else {
+    setValue("EstadoUsuario", "1");
+  }
+
+};
+
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
   setValue("file", ValueImagesrc);
   setValue("file2", ValueImagesrc2);

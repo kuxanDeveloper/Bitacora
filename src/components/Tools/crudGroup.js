@@ -5,12 +5,14 @@ import Router from "next/router";
 export const onSubmitCreateGroup = ({
     NombreGrupo,
     EstadoGrupo,
-    AdmiteSufijo
+    AdmiteSufijo,
+    AlertaHoras
 }) => {  
     return userService.CreatGroup(
         NombreGrupo,
         EstadoGrupo,
-        AdmiteSufijo
+        AdmiteSufijo,
+        AlertaHoras
     ).then(() =>
     {
       Swal.fire({
@@ -55,14 +57,16 @@ export const onSubmitUpdateGroup = ({
     IdGrupo,
     NombreGrupo,
     EstadoGrupo,
-    AdmiteSufijo
+    AdmiteSufijo,
+    AlertaHoras
 }) => {
   debugger;
     return userService.EditGroup(
         IdGrupo,
         NombreGrupo,
         EstadoGrupo,
-        AdmiteSufijo
+        AdmiteSufijo,
+        AlertaHoras
     ).then(() =>
     {
       Swal.fire({

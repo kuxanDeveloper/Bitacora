@@ -44,6 +44,9 @@ export const userService = {
   ListGroupActive,
   lstObservall,
   InfoSampleUsers,
+  CreateUser,
+  InfoSampleRoles,
+  InfoSampleTips,
 };
 
 async function login(username, password) {
@@ -341,13 +344,15 @@ function InfoSampleNote(cookie, idNote) {
 function CreatGroup(
   NombreGrupo,
   EstadoGrupo,
-  AdmiteSufijo
+  AdmiteSufijo,
+  AlertaHoras
 ) {
   const formData = new FormData();
 debugger;
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
+  formData.append("alerta_horas", AlertaHoras);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -360,7 +365,8 @@ function EditGroup(
   IdGrupo,
   NombreGrupo,
   EstadoGrupo,
-  AdmiteSufijo
+  AdmiteSufijo,
+  AlertaHoras
 ) {
   const formData = new FormData();
 
@@ -368,6 +374,7 @@ function EditGroup(
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
+  formData.append("alerta_horas", AlertaHoras);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,
@@ -433,3 +440,50 @@ function InfoSampleUsers(cookie, IdUser) {
     cookie
   );
 }
+
+function CreateUser(
+  Email,
+  NumIdentidad,
+  TipoIdentidad,
+  Nombres,
+  Apellidos,
+  Password,
+  Celular,
+  Rol,
+  Telefono,
+  Extencion,
+  EstadoUsuario
+  ) {
+    const formData = new FormData();
+    formData.append("email", Email);
+    formData.append("Num_Identidad", NumIdentidad);
+    formData.append("Tipo_documento", TipoIdentidad);
+    formData.append("nombres", Nombres);
+    formData.append("apellidos", Apellidos);
+    formData.append("password", Password);
+    formData.append("telf", Celular);
+    formData.append("roles", Rol);
+    formData.append("Telefono_fijo", Telefono);
+    formData.append("EXTENCION", Extencion);
+    formData.append("estado_usuario", EstadoUsuario);
+    
+    return fetchWrapper.postHeader(
+      `${baseUrl}/Usus/GuardUsuario`,
+      null,
+      formData
+    );
+  }
+
+  function InfoSampleRoles(cookie) {
+    return fetchWrapper.get(
+      `${baseUrl}/Usus/GetInfoRol`,
+      cookie
+    );
+  }
+
+  function InfoSampleTips(cookie) {
+    return fetchWrapper.get(
+      `${baseUrl}/Usus/GetTiposIdentificacion`,
+      cookie
+    );
+  }
