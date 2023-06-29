@@ -9,7 +9,6 @@
   position: absolute;
   .upload_container {
     position: relative;
-    max-height: 80vh;
     width: 90vw;
     background-color: #fff;
     border-radius: 10px;
@@ -72,7 +71,7 @@
     .img_upload {
       height: calc(100% - 64px);
         .upload_container {
-          height: 80vh;
+          height: unset;
           width: 80vw;
           max-width: 1100px;
           .close_btn {
