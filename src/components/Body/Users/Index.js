@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "../../../styles/CreateNotes.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 
-function ComponentGroupIndex(InforSampleDetails) {
+function ComponentUsersIndex(InforSampleDetails) {
 
   return (
     <>
@@ -22,24 +22,26 @@ function ComponentGroupIndex(InforSampleDetails) {
 
             <Link
               href={{
-                pathname: "/Configuration/Groups/CreateGroup",
+                pathname: "/Configuration/Users/CreateUser",
               }}
               className={styles.btn_create}
             >
               <span>&#10010; </span>
-              Crear Grupo
+              Crear Usuario
             </Link>
           </div>
 
-          <p className={styles.title}>Listado de Grupos</p>
+          <p className={styles.title}>Listado de Usuarios</p>
           <br />
           <div className={styles.card}>
             <table className={styleTable.tableStyle}>
               <thead>
               <tr>
-                <th style={{ width: "50%" }}>Nombre Grupo</th>
-                <th style={{ width: "15%" }}>Estado</th>
-                <th style={{ width: "15%" }}>Admite Sufijo</th>
+                <th style={{ width: "20%" }}>Usuario</th>
+                <th style={{ width: "20%" }}># de identidad</th>
+                <th style={{ width: "15%" }}>Nombres</th>
+                <th style={{ width: "15%" }}>Apellidos</th>
+                <th style={{ width: "10%" }}>Estado</th>
                 <th style={{ width: "20%" }}>Opciones</th>
               </tr>
               </thead>
@@ -49,19 +51,21 @@ function ComponentGroupIndex(InforSampleDetails) {
                 ? InforSampleDetails.InforSampleDetails.map((data, index) => (
                     <>
                     <tr>
-                      <td>{data.NOMBRE_GRUPO}</td>
-                      <td className={styleTable.textCenterColumn}>{data.ESTADO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
-                      <td className={styleTable.textCenterColumn}>{data.ADMITE_SUFIJO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
+                      <td>{data.Email}</td>
+                      <td>{data.Numero_de_Identidad}</td>
+                      <td>{data.Nombres}</td>
+                      <td>{data.Apellidos}</td>
+                      <td className={styleTable.textCenterColumn}>{data.LockoutEnabled == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
                       <td className={styleTable.textCenterColumn}><Link
-                          title="Editar Grupo"
+                          title="Editar Usuario"
                           className={styles.add_icon}
                           href={{
-                            pathname: "/Configuration/Groups/[id]",
-                            query: { id: data.Id_grupo },
+                            pathname: "/Configuration/Users/[id]",
+                            query: { id: data.Id },
                           }}
                         >
                           <span>&#x270E; </span>
-                          Editar Grupo
+                          Editar Usuario
                         </Link></td>
                     </tr>                      
                     </>
@@ -76,4 +80,4 @@ function ComponentGroupIndex(InforSampleDetails) {
   );
 }
 
-export default ComponentGroupIndex;
+export default ComponentUsersIndex;

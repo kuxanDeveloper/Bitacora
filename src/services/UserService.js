@@ -43,6 +43,7 @@ export const userService = {
   listUserGetAll,
   ListGroupActive,
   lstObservall,
+  InfoSampleUsers,
 };
 
 async function login(username, password) {
@@ -422,6 +423,13 @@ function CloseCaseSample(id, observacionCaso, Estado) {
 function lstObservall(cookie) {
   return fetchWrapper.get(
     `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=`,
+    cookie
+  );
+}
+
+function InfoSampleUsers(cookie, IdUser) {
+  return fetchWrapper.get(
+    `${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`,
     cookie
   );
 }
