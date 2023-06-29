@@ -2,21 +2,21 @@ import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 let t = null;
 export const initLogInactive = () => {
-  document.onkeypress = reiniciarTiempo();
-  window.onload = reiniciarTiempo();
+  document.onkeypress = reiniciarTiempo;
+  window.onload = reiniciarTiempo;
   // document.onmousemove = reiniciarTiempo;
   // document.onmousedown = reiniciarTiempo; // aplica para una pantalla touch
-  document.ontouchstart = reiniciarTiempo();
-  document.onclick = reiniciarTiempo(); // aplica para un clic del touchpad
-  document.onscroll = reiniciarTiempo(); // navegando con flechas del teclado
-  document.ondblclick = reiniciarTiempo();
-  document.onresize = reiniciarTiempo();
+  document.ontouchstart = reiniciarTiempo;
+  document.onclick = reiniciarTiempo; // aplica para un clic del touchpad
+  document.onscroll = reiniciarTiempo; // navegando con flechas del teclado
+  document.ondblclick = reiniciarTiempo;
+  document.onresize = reiniciarTiempo;
   // document.onmouseup = reiniciarTiempo;
-  document.onchange = reiniciarTiempo();
-  document.onsubmit = reiniciarTiempo();
+  document.onchange = reiniciarTiempo;
+  document.onsubmit = reiniciarTiempo;
 };
 
-function tiempoExcedido() {
+function tiempoExcedido(interval) {
   let timerInterval = null;
   Swal.fire({
     showConfirmButton: true,
@@ -36,20 +36,21 @@ function tiempoExcedido() {
       }, 1000);
     },
     willClose: () => {
-      clearInterval(timerInterval);
-      clearTimeout(t);
       t = null;
+      clearInterval(interval);
+      let dateNowRegisterLocals = new Date();
+      localStorage.setItem("dateLogin", dateNowRegisterLocals);
       reiniciarTiempo;
     },
   }).then((result) => {
     if (result.isConfirmed) {
-      clearInterval(timerInterval);
-      clearTimeout(t);
+      clearInterval(interval);
       t = null;
+      let dateNowRegisterLocals = new Date();
+      localStorage.setItem("dateLogin", dateNowRegisterLocals);
       reiniciarTiempo;
     } else if (result.dismiss === Swal.DismissReason.timer) {
-      clearInterval(timerInterval);
-      clearTimeout(t);
+      clearInterval(interval);
       t = null;
       document.onkeypress = "";
       document.onload = "";
@@ -68,8 +69,33 @@ function tiempoExcedido() {
 }
 
 function reiniciarTiempo() {
-  clearTimeout(t);
-  t = null;
-  t = setTimeout(tiempoExcedido, 15 * 60 * 1000);
+  let interval = null;
+  let dateLogin = localStorage.getItem("dateLogin");
+  let TpExce = false;
+  if (dateLogin != null && dateLogin != undefined) {
+    let dateNowRegisterLocals = new Date();
+    localStorage.setItem("dateLogin", dateNowRegisterLocals);
+    interval = setInterval(() => {
+      let dateNow = new Date();
+      dateLogin = localStorage.getItem("dateLogin");
+      if (dateLogin != undefined && dateLogin != null) {
+        let dateCast = new Date(dateLogin);
+        const hoursDifferent = dateNow.getTime() - dateCast.getTime();
+
+        let Minutodiferencia = Math.round(hoursDifferent / 1000 / 60);
+
+        if (Minutodiferencia > 20 && !TpExce) {
+          tiempoExcedido(interval);
+          TpExce = true;
+        }
+      } else {
+        clearInterval(interval);
+      }
+    }, 60000);
+  } else {
+    clearInterval(t);
+    t = null;
+  }
+
   // 1000 milisegundos = 1 segundo
 }

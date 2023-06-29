@@ -2,8 +2,12 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import Logincomponents from "../../components/Account/Logincomponents";
 import { userService } from "../../services/UserService";
+import { useContextBitacora } from "../../context/BitacoraContext";
 function Login({ cookie }) {
+  const { setUrlauthorized, setAuthorized } = useContextBitacora();
   useEffect(() => {
+    setUrlauthorized(false);
+    setAuthorized(false);
     if (cookie) {
       userService.logoutLogin();
     }
