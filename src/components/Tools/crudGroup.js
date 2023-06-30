@@ -60,7 +60,6 @@ export const onSubmitUpdateGroup = ({
     AdmiteSufijo,
     AlertaHoras
 }) => {
-  debugger;
     return userService.EditGroup(
         IdGrupo,
         NombreGrupo,
