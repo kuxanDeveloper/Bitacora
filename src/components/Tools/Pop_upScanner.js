@@ -30,8 +30,8 @@ const Pop_UpScanner = ({
           drawingCtx.clearRect(
             0,
             0,
-            Number(drawingCanvas.getAttribute("width")),
-            Number(drawingCanvas.getAttribute("height"))
+            parseInt(drawingCanvas.getAttribute("width")),
+            parseInt(drawingCanvas.getAttribute("height"))
           );
           result.boxes
             .filter(function (box) {
