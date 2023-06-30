@@ -21,11 +21,11 @@ const Pop_UpScanner = ({
     });
 
     //detecting boxes on stream
-    Quagga.onProcessed((result) => {
+    Quagga.onProcessed(function (result) {
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
-
       if (result) {
+        debugger;
         if (result.boxes) {
           drawingCtx.clearRect(
             0,
