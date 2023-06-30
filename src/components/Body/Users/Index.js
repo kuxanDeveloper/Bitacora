@@ -49,8 +49,7 @@ function ComponentUsersIndex(InforSampleDetails) {
               {InforSampleDetails.InforSampleDetails != null &&
               InforSampleDetails.InforSampleDetails != undefined
                 ? InforSampleDetails.InforSampleDetails.map((data, index) => (
-                    <>
-                    <tr>
+                    <tr key={index}>
                       <td>{data.Email}</td>
                       <td>{data.Numero_de_Identidad}</td>
                       <td>{data.Nombres}</td>
@@ -61,14 +60,13 @@ function ComponentUsersIndex(InforSampleDetails) {
                           className={styles.add_icon}
                           href={{
                             pathname: "/Configuration/Users/[id]",
-                            query: { id: data.Id },
+                            query: { id: data.Id_usuario },
                           }}
                         >
                           <span>&#x270E; </span>
                           Editar Usuario
                         </Link></td>
                     </tr>                      
-                    </>
                   ))
                 : ""}
                 </tbody>
