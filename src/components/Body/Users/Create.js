@@ -357,6 +357,14 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                         Guardar Usuario
                       </button>
                     )}
+                    <Link
+                      className={styles.btn_cancel}
+                      href={{
+                        pathname: "/Configuration/Users/IndexUsers"
+                      }}
+                    >
+                      Cancelar
+                    </Link>
                   </div>
                 </div>
               </div>

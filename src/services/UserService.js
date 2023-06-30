@@ -47,6 +47,7 @@ export const userService = {
   CreateUser,
   InfoSampleRoles,
   InfoSampleTips,
+  EditUser,
 };
 
 async function login(username, password) {
@@ -472,6 +473,39 @@ function CreateUser(
       formData
     );
   }
+
+  function EditUser(
+    Id_Usuario,
+    Email,
+    NumIdentidad,
+    TipoIdentidad,
+    Nombres,
+    Apellidos,
+    Celular,
+    Rol,
+    Telefono,
+    Extencion,
+    EstadoUsuario
+    ) {
+      const formData = new FormData();
+      formData.append("Id", Id_Usuario);
+      formData.append("email", Email);
+      formData.append("Num_Identidad", NumIdentidad);
+      formData.append("Tipo_documento", TipoIdentidad);
+      formData.append("nombres", Nombres);
+      formData.append("apellidos", Apellidos);
+      formData.append("telf", Celular);
+      formData.append("roles", Rol);
+      formData.append("Telefono_fijo", Telefono);
+      formData.append("EXTENCION", Extencion);
+      formData.append("estado_usuario", EstadoUsuario);
+      
+      return fetchWrapper.postHeader(
+        `${baseUrl}/Usus/EditarUsuario`,
+        null,
+        formData
+      );
+    }
 
   function InfoSampleRoles(cookie) {
     return fetchWrapper.get(
