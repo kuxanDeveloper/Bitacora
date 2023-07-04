@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexUsers from "../../../components/Body/Users/Index";
 import { SampleDetailsUsers } from "../../api/Sample/ViewDetailsUser/[id]";
@@ -10,12 +10,11 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-      SampleDetailsUsers(setLInforSampleDetails,cookie,"");
-    }, []);
+function CreatePage({ cookie }) {
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsUsers(setLInforSampleDetails, cookie, "");
+  }, []);
 
   return (
     <>
@@ -52,9 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexUsers
-      InforSampleDetails={InforSampleDetails}>        
-      </IndexUsers>
+      <IndexUsers InforSampleDetails={InforSampleDetails}></IndexUsers>
     </>
   );
 }
@@ -66,13 +63,12 @@ export async function getServerSideProps(ctx) {
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
-  debugger;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -88,14 +84,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.UserConfigCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { cookie: cookie } };
   } else {
     return {
       redirect: {

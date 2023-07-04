@@ -10,6 +10,14 @@ export const OptionAsiste = {
   OrdersInactive: false,
   Cerrarorden: false,
   ActivarOrden: false,
+  UserConfigCreateAndUrl: false,
+  UserConfigEditAnUrl: false,
+  GroupConfigCreateAndUrl: true,
+  GroupConfigEditAndUrl: true,
+  ObservacionPredeCreateAndUrl: true,
+  ObservacionPredeEditAndUrl: true,
+  OptionCreateAndUrl: false,
+  OptionEditAndUrl: false,
 };
 
 export const OptionTecnichal = {
@@ -24,6 +32,14 @@ export const OptionTecnichal = {
   OrdersInactive: true,
   Cerrarorden: true,
   ActivarOrden: true,
+  UserConfigCreateAndUrl: true,
+  UserConfigEditAnUrl: true,
+  GroupConfigCreateAndUrl: true,
+  GroupConfigEditAndUrl: true,
+  ObservacionPredeCreateAndUrl: true,
+  ObservacionPredeEditAndUrl: true,
+  OptionCreateAndUrl: true,
+  OptionEditAndUrl: true,
 };
 
 export const OptionConsult = {
@@ -38,6 +54,14 @@ export const OptionConsult = {
   OrdersInactive: false,
   Cerrarorden: false,
   ActivarOrden: false,
+  UserConfigCreateAndUrl: false,
+  UserConfigEditAnUrl: false,
+  GroupConfigCreateAndUrl: false,
+  GroupConfigEditAndUrl: false,
+  ObservacionPredeCreateAndUrl: false,
+  ObservacionPredeEditAndUrl: false,
+  OptionCreateAndUrl: false,
+  OptionEditAndUrl: false,
 };
 
 export const OptionAdministrator = {
@@ -52,6 +76,14 @@ export const OptionAdministrator = {
   OrdersInactive: true,
   Cerrarorden: true,
   ActivarOrden: true,
+  UserConfigCreateAndUrl: true,
+  UserConfigEditAnUrl: true,
+  GroupConfigCreateAndUrl: true,
+  GroupConfigEditAndUrl: true,
+  ObservacionPredeCreateAndUrl: true,
+  ObservacionPredeEditAndUrl: true,
+  OptionCreateAndUrl: true,
+  OptionEditAndUrl: true,
 };
 
 export const OptionDefault = {
@@ -66,4 +98,12 @@ export const OptionDefault = {
   OrdersInactive: false,
   Cerrarorden: false,
   ActivarOrden: false,
+  UserConfigCreateAndUrl: false,
+  UserConfigEditAnUrl: false,
+  GroupConfigCreateAndUrl: false,
+  GroupConfigEditAndUrl: false,
+  ObservacionPredeCreateAndUrl: false,
+  ObservacionPredeEditAndUrl: false,
+  OptionCreateAndUrl: false,
+  OptionEditAndUrl: false,
 };

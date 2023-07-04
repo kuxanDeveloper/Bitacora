@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexGroup from "../../../components/Body/GroupCrud/Index";
 import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
@@ -11,11 +11,10 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage(cookie) {
-
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-      SampleDetailsGroup(setLInforSampleDetails,cookie,"");
-    }, []);
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsGroup(setLInforSampleDetails, cookie, "");
+  }, []);
 
   return (
     <>
@@ -40,10 +39,7 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde se listan los grupos de el sistema`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Listado de grupos - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Listado de grupos - Bitácora BD`} />
         <meta
           property="og:description"
           content={`Lugar donde se listan los grupos de el sistema`}
@@ -52,9 +48,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexGroup
-      InforSampleDetails={InforSampleDetails}>        
-      </IndexGroup>
+      <IndexGroup InforSampleDetails={InforSampleDetails}></IndexGroup>
     </>
   );
 }
@@ -72,7 +66,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -88,14 +82,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.GroupConfigCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { mensaje: null } };
   } else {
     return {
       redirect: {

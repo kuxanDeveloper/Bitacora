@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexObser from "../../../components/Body/Observations/Index";
 import { SampleDetailsObservations } from "../../api/Sample/ViewDetailsObservations/[id]";
@@ -10,12 +10,11 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-        SampleDetailsObservations(setLInforSampleDetails,cookie,"");
-    }, []);
+function CreatePage({ cookie }) {
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsObservations(setLInforSampleDetails, cookie, "");
+  }, []);
 
   return (
     <>
@@ -52,9 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexObser
-      InforSampleDetails={InforSampleDetails}>        
-      </IndexObser>
+      <IndexObser InforSampleDetails={InforSampleDetails}></IndexObser>
     </>
   );
 }
@@ -72,7 +69,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -88,14 +85,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.ObservacionPredeCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { cookie: cookie } };
   } else {
     return {
       redirect: {

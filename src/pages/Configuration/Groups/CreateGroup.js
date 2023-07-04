@@ -33,10 +33,7 @@ function CreatePage() {
           name="twitter:description"
           content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Creación de grupo - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Creación de grupo - Bitácora BD`} />
         <meta
           property="og:description"
           content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
@@ -45,9 +42,7 @@ function CreatePage() {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateGroup>
-        
-      </CreateGroup>
+      <CreateGroup></CreateGroup>
     </>
   );
 }
@@ -65,7 +60,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -81,14 +76,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.GroupConfigCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { mensaje: null } };
   } else {
     return {
       redirect: {

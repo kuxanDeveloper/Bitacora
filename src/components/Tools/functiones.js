@@ -602,13 +602,22 @@ export const UploadImageSticker = (
 
 export const LocationUrl = (router, value) => {
   let aciteMenuClass = false;
-
-  if (router.pathname.toLowerCase().includes(value)) {
+  if (router.pathname.toLowerCase().includes(value.toLowerCase())) {
     aciteMenuClass = true;
   }
 
   return aciteMenuClass;
 };
+
+// export const LocationSubMenuUrl = (router, value) => {
+//   let aciteMenuClass = false;
+
+//   if (router.pathname.toLowerCase().includes(value)) {
+//     aciteMenuClass = true;
+//   }
+
+//   return aciteMenuClass;
+// };
 
 export const AperturaandCierre = (data, LstObservacionesPrede) => {
   window.OnchangeValueSelect = function (value) {

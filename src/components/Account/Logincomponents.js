@@ -65,12 +65,12 @@ function Logincomponents() {
               </div>
             </div>
 
-            <Link
+            {/* <Link
               href={"/account/ForgotPassword"}
               className={styleLogin.recovery_password}
             >
               ¿Olvidaste tu contraseña?
-            </Link>
+            </Link> */}
 
             <Link
               href={"/Privacypolicy"}

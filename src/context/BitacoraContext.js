@@ -23,6 +23,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const [DobleImagen, setdobleImagen] = useState(false);
   const [isImagenExterna, setisImagenExterna] = useState(false);
   const [ResultScanner, setResultScanner] = useState("");
+  const [SelectMenuConfigracion, setSelectMenuConfigracion] = useState(false);
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
@@ -109,6 +110,8 @@ export const BicatoraContexProvider = ({ children }) => {
         setResultScanner,
         LstObservacionesPrede,
         setLstObservacionesPrede,
+        SelectMenuConfigracion,
+        setSelectMenuConfigracion,
       }}
     >
       {children}

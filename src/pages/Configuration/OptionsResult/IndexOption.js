@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexGroup from "../../../components/Body/GroupCrud/Index";
 import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
@@ -10,12 +10,11 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-      SampleDetailsGroup(setLInforSampleDetails,cookie,"");
-    }, []);
+function CreatePage({ cookie }) {
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsGroup(setLInforSampleDetails, cookie, "");
+  }, []);
 
   return (
     <>
@@ -52,9 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexGroup
-      InforSampleDetails={InforSampleDetails}>        
-      </IndexGroup>
+      <IndexGroup InforSampleDetails={InforSampleDetails}></IndexGroup>
     </>
   );
 }
@@ -72,7 +69,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -88,14 +85,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.OptionCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { cookie: cookie } };
   } else {
     return {
       redirect: {
