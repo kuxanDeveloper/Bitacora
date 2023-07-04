@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/StickerDetails.module.css";
+import styles from "../../../styles/StickerDetails.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
@@ -34,17 +34,23 @@ function Details({ data, Options, name_group, sticker }) {
           setValueImagesrcExterna2(null);
         }}
         className={styles.img_icon}
-      > 
-        <ImageOptimize
-          Values={{
-            src: "/img/Camera@2x.png",
-            alt: "Logo de camara",
-            title: "Imagen de seguimiento",
-            classValue: styles.img_camera,
-            width: 35,
-            height: 35,
-          }}
-        ></ImageOptimize>
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-camera"
+          width="25"
+          height="25"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="#fff"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+          <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+        </svg>
       </button>
 
       {Options.BtnEditNotaAndUrl ? (

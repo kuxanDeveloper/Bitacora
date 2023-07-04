@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/StickerDetails.module.css";
+import styles from "../../../styles/StickerDetails.module.scss";
 import Link from "next/link";
 
 function Results({ data, Options, group, name_group, sticker }) {

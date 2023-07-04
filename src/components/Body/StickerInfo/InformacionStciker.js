@@ -87,8 +87,8 @@ function InformacionStciker({
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className=""
-                    width="50"
-                    height="50"
+                    width="40"
+                    height="40"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="#fff"
@@ -116,8 +116,8 @@ function InformacionStciker({
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className=""
-                  width="50"
-                  height="50"
+                  width="25"
+                  height="25"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="#ffffff"
