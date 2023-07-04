@@ -766,3 +766,13 @@ export const RegisterStickerObservaciones = (setvalue) => {
     }
   }
 };
+
+export const RegisterEditNoteObservaciones = (setvalue) => {
+  let slt = document.getElementById("sltObservaIni");
+
+  if (slt.value != "") {
+    if (slt.value != "5") {
+      setvalue("Observaciones_detalle", slt.options[slt.selectedIndex].text);
+    }
+  }
+};

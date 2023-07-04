@@ -4,7 +4,6 @@ import EditStickerComponents from "../../../components/Body/EditStiker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
 import {
   SampleDetailsEdit,
-  ListObservacion,
 } from "../../api/Sample/ViewDetails/[id]";
 import {
   OptionAdministrator,

@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  setCheckinvalue,
-  uncheckUserInterExterno,
   setImagenFile,
   OnchangeObservaCrearEdit,
   RegisterStickerObservaciones,
@@ -297,7 +295,7 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                        Obsevraciones predeterminada
+                        Observaciones predeterminada
                       </label>
                       <select
                         defaultValue={""}
