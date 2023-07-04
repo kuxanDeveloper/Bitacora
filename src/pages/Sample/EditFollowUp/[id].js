@@ -8,11 +8,16 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { useContextBitacora } from "../../../context/BitacoraContext";
+
 function PageEditFollowup({ cookie, id, sticker, name_group }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
   const [InfoNote, setInfoNote] = useState([]);
   useEffect(() => {
-    InfoteNoteEditApi(cookie, id, setInfoNote);
+    InfoteNoteEditApi(cookie, id, setInfoNote, setLstObservacionesPrede);
   }, []);
+
   return (
     <>
       <Head>
@@ -53,6 +58,7 @@ function PageEditFollowup({ cookie, id, sticker, name_group }) {
         id={id}
         sticker={sticker}
         name_group={name_group}
+        LstObservacionesPrede={LstObservacionesPrede}
       />
     </>
   );

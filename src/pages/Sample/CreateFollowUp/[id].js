@@ -7,7 +7,18 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-function PageCreateFollowup({ id, sticker, name_group }) {
+import { ListObservacion } from "../../api/Note/Crud";
+import { useContextBitacora } from "../../../context/BitacoraContext";
+import { useEffect } from "react";
+
+function PageCreateFollowup({ id, sticker, name_group, cookie }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
+
+  useEffect(() => {
+    ListObservacion(cookie, setLstObservacionesPrede);
+  }, []);
+
   return (
     <>
       <Head>
@@ -43,7 +54,12 @@ function PageCreateFollowup({ id, sticker, name_group }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <ComponentsCreateNote id={id} sticker={sticker} name_group={name_group} />
+      <ComponentsCreateNote
+        id={id}
+        sticker={sticker}
+        name_group={name_group}
+        LstObservacionesPrede={LstObservacionesPrede}
+      />
     </>
   );
 }
