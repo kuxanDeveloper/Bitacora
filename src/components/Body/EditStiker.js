@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/CreateSticker.module.scss";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../context/BitacoraContext";
-import { setImagenFileUpdate } from "../Tools/functiones";
+import {
+  setImagenFileUpdate,
+  OnchangeObservaCrearEdit,
+  RegisterStickerObservaciones,
+} from "../Tools/functiones";
 
 import { onSubmitUpdate } from "../Tools/CRUD";
 
@@ -16,6 +20,7 @@ function EditStickerComponents({
   group,
   id,
   isHabilteGroup,
+  LstObservacionesPrede,
 }) {
   const {
     setShowModal,
@@ -36,13 +41,10 @@ function EditStickerComponents({
     Cod_Imagen2: Yup.string(),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     ObservaInici: Yup.string().notRequired(),
-    // UserCheckinter: Yup.string().required("Campo obligatorio"),
-    // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
   });
-
   useEffect(() => {
     setisImagenExterna(true);
 
@@ -50,27 +52,38 @@ function EditStickerComponents({
       InforSampleDetails.infoBitacora != null &&
       InforSampleDetails.infoBitacora != undefined
     ) {
-      // var checkbox1 = document.getElementById("UserCheckinter");
-      // var checkbox2 = document.getElementById("UserCheckexter");
-
-      // checkbox1.checked =
-      //   InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO == false
-      //     ? null
-      //     : InforSampleDetails.infoBitacora[0].CLIENTE_INTERNO;
-
-      // checkbox2.checked =
-      //   InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO == false
-      //     ? null
-      //     : InforSampleDetails.infoBitacora[0].CLIENTE_EXTERNO;
-
       var grupoSticker = document.getElementById("GrupoSticker");
+
       if (isHabilteGroup == "true") {
         grupoSticker.setAttribute("disabled", "");
       } else {
         grupoSticker.disabled = false;
       }
+
+      if (LstObservacionesPrede != null && LstObservacionesPrede != undefined) {
+        let retornoValor = LstObservacionesPrede.find(
+          (e) =>
+            e.Descripcion_Observacion.toLowerCase() ==
+            InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES.toLowerCase()
+        );
+
+        if (retornoValor != undefined && retornoValor != null) {
+          document.getElementById("sltObservaIni").value =
+            retornoValor.Codigo_observacion;
+        } else if (
+          InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES != "" &&
+          InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES.toLowerCase() !=
+            null
+        ) {
+          setShowobservaTextare(true);
+        } else {
+          document.getElementById("sltObservaIni").value = "";
+        }
+      }
     }
   }, [InforSampleDetails.infoBitacora]);
+
+  const [ShowobservaTextare, setShowobservaTextare] = useState(false);
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
@@ -325,21 +338,62 @@ function EditStickerComponents({
                       <div className={styles.form_group}>
                         <div className={styles.input_group}>
                           <label className={styles.group_title}>
-                            Observaciones iniciales
+                            Obsevraciones predeterminada
                           </label>
-                          <textarea
-                            {...register("ObservaInici")}
-                            name="ObservaInici"
-                            id="ObservaInici"
-                            cols="70"
-                            rows="5"
-                            maxLength={1500}
-                            defaultValue={data.OBSERVACIONES_INICIALES}
-                          ></textarea>
-                          <div className={styles.invalid_feedback}>
-                            {errors.ObservaInici?.message}
-                          </div>
+                          <select
+                            name="sltObservaIni"
+                            id="sltObservaIni"
+                            onChange={(e) => {
+                              OnchangeObservaCrearEdit(
+                                e.target.value,
+                                setShowobservaTextare
+                              );
+                            }}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {LstObservacionesPrede != null &&
+                            LstObservacionesPrede != undefined
+                              ? LstObservacionesPrede.length > 0
+                                ? LstObservacionesPrede.map((data, index) => {
+                                    if (data.Observacion_Bitacora) {
+                                      return (
+                                        <option
+                                          key={index}
+                                          value={data.Codigo_observacion}
+                                        >
+                                          {data.Descripcion_Observacion}
+                                        </option>
+                                      );
+                                    }
+                                  })
+                                : ""
+                              : ""}
+                          </select>
                         </div>
+
+                        {ShowobservaTextare ? (
+                          <div className={styles.input_group}>
+                            <label className={styles.group_title}>
+                              Observaciones iniciales
+                            </label>
+                            <textarea
+                              {...register("ObservaInici")}
+                              name="ObservaInici"
+                              id="ObservaInici"
+                              cols="70"
+                              rows="5"
+                              maxLength={1500}
+                              defaultValue={data.OBSERVACIONES_INICIALES}
+                            ></textarea>
+                            <div className={styles.invalid_feedback}>
+                              {errors.ObservaInici?.message}
+                            </div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       <div className={styles.btn_container_send}>
@@ -360,6 +414,7 @@ function EditStickerComponents({
                               setValue("NumSticker", data.NUMERO_STICKER);
                               setValue("COD_BITACORA", data.CODIGO_BITACORA);
                               setValue("Sufijo", data.SUFIJO);
+                              RegisterStickerObservaciones(setValue);
                             }}
                             className={styles.btn_send}
                           >

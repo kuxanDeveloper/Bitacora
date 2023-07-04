@@ -2,26 +2,23 @@
   "inputStream": {
     "type": "LiveStream",
     "constraints": {
-      "size":{"x":640,"y":480},
+      "size": { "x": 640, "y": 480 },
       "width": 640,
       "height": 480,
       "facingMode": "environment"
     }
   },
-  "area": {
-    "top": "0%",
-    "right": "0%",
-    "left": "0%",
-    "bottom": "0%"
-  },
   "locator": {
     "patchSize": "small",
     "halfSample": true
   },
-  "numOfWorkers": 8,
-  "frequency": 10,
+  "numOfWorkers": 4,
+  "frequency": 5,
   "decoder": {
-    "readers": ["code_128_reader"]
+    "readers": ["code_128_reader"],
+    "drawBoundingBox": true,
+    "drawScanline": true
   },
-  "locate": true
+  "locate": true,
+  "debug": true
 }

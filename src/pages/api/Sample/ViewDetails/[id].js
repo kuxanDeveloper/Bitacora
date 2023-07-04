@@ -17,6 +17,8 @@ export const SampleDetailsEdit = async (
   setLstObservacionesPrede(lstObervsa);
 };
 
+
+
 export const InfoteNoteEditApi = async (cookie, id, setInfoNote) => {
   let infoNote = await QueryNoteEdit(cookie, id);
   setInfoNote(infoNote);

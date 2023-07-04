@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 function Result({ data }) {
-  console.log(data);
   return (
     <div className={styles.result_body}>
       <div className={styles.card_group}>

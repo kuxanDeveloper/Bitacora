@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/CreateSticker.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
@@ -8,11 +8,13 @@ import {
   setCheckinvalue,
   uncheckUserInterExterno,
   setImagenFile,
+  OnchangeObservaCrearEdit,
+  RegisterStickerObservaciones,
 } from "../Tools/functiones";
 import { onSubmitCreate } from "../Tools/CRUD";
 import * as Yup from "yup";
 import { useContextBitacora } from "../../context/BitacoraContext";
-function CreateSticker({ ListadoGrupoActivo, id }) {
+function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -28,12 +30,13 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
     setshowModalScanner,
     setResultScanner,
   } = useContextBitacora();
+
+  const [ShowobservaTextare, setShowobservaTextare] = useState(false);
+
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
     ObservaInici: Yup.string(),
-    // UserCheckinter: Yup.string().required("Campo obligatorio"),
-    // UserCheckexter: Yup.string().required("Campo obligatorio"),
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
@@ -54,10 +57,14 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
         if (SplitScanner.length > 1) {
           document.getElementById("NumSticker").value = SplitScanner[0];
           document.getElementById("Sufijo").value = SplitScanner[1];
+          setValue("NumSticker", SplitScanner[0]);
+          setValue("Sufijo", SplitScanner[1]);
         } else {
           document.getElementById("NumSticker").value = SplitScanner[0];
+          setValue("NumSticker", SplitScanner[0]);
         }
       } else {
+        setValue("NumSticker", ResultScanner);
         document.getElementById("NumSticker").value = ResultScanner;
       }
     }
@@ -257,8 +264,6 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
                     </div>
                   </div>
 
-                  
-
                   {/*-------------------------------Grupo------------------------------------------- */}
 
                   <div className={styles.form_group}>
@@ -288,63 +293,73 @@ function CreateSticker({ ListadoGrupoActivo, id }) {
 
                   {/* <!-- form group --> */}
 
-                  {/* <div className={styles.form_group}>
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title_check}>
-                        Usuario interno
-                      </label>
-                      <input
-                        // name="UserCheckinter"
-                        id="UserCheckinter"
-                        type="checkbox"
-                        onClick={() => uncheckUserInterExterno()}
-                      />
-
-                    </div>
-
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title_check}>
-                        Usuario externo
-                      </label>
-                      <input
-                        // name="UserCheckexter"
-                        id="UserCheckexter"
-                        type="checkbox"
-                        onClick={() => uncheckUserInterExterno()}
-                      />
-                    </div>
-                  </div> */}
-
-                  {/* <div className={styles.invalid_feedback}>
-                    {errors.UserCheckexter?.message != ""
-                      ? errors.UserCheckexter?.message
-                      : errors.UserCheckinter?.message}
-                  </div> */}
-
                   {/* <!-- form group --> */}
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                        Observaciones iniciales
+                        Obsevraciones predeterminada
                       </label>
-                      <textarea
-                        {...register("ObservaInici")}
-                        name="ObservaInici"
-                        id="ObservaInici"
-                        cols="70"
-                        rows="5"
-                        maxLength={1500}
-                      ></textarea>
-                      {/* <div className={styles.invalid_feedback}>
+                      <select
+                        defaultValue={""}
+                        name="sltObservaIni"
+                        id="sltObservaIni"
+                        onChange={(e) => {
+                          OnchangeObservaCrearEdit(
+                            e.target.value,
+                            setShowobservaTextare
+                          );
+                        }}
+                      >
+                        <option disabled value="">
+                          Seleccione una opción
+                        </option>
+                        {LstObservacionesPrede != null &&
+                        LstObservacionesPrede != undefined
+                          ? LstObservacionesPrede.length > 0
+                            ? LstObservacionesPrede.map((data, index) => {
+                                if (data.Observacion_Bitacora) {
+                                  return (
+                                    <option
+                                      key={index}
+                                      value={data.Codigo_observacion}
+                                    >
+                                      {data.Descripcion_Observacion}
+                                    </option>
+                                  );
+                                }
+                              })
+                            : ""
+                          : ""}
+                      </select>
+                    </div>
+
+                    {ShowobservaTextare ? (
+                      <div className={styles.input_group}>
+                        <label className={styles.group_title}>
+                          Observaciones iniciales
+                        </label>
+                        <textarea
+                          {...register("ObservaInici")}
+                          name="ObservaInici"
+                          id="ObservaInici"
+                          cols="70"
+                          rows="5"
+                          maxLength={1500}
+                        ></textarea>
+                        {/* <div className={styles.invalid_feedback}>
                         {errors.ObservaInici?.message}
                       </div> */}
-                    </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
+                          RegisterStickerObservaciones(setValue);
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,

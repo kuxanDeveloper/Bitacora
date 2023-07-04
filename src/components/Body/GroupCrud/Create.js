@@ -26,7 +26,6 @@ function ComponentGroup() {
   const { errors } = formState;
 
   function restrictNumber(id) {
-    debugger;
     var valor = document.getElementById(id);
     if (valor != null) {
       var v = valor.value.replace(new RegExp(/[^\d]/, "ig"), "");
