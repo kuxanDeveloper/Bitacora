@@ -48,6 +48,9 @@ export const userService = {
   InfoSampleRoles,
   InfoSampleTips,
   EditUser,
+  CreatObservations,
+  EditObservations,
+  InfoObservations
 };
 
 async function login(username, password) {
@@ -517,6 +520,58 @@ function CreateUser(
   function InfoSampleTips(cookie) {
     return fetchWrapper.get(
       `${baseUrl}/Usus/GetTiposIdentificacion`,
+      cookie
+    );
+  }
+
+  function CreatObservations(
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
+  ) {
+    const formData = new FormData();
+    formData.append("DescripcionObservacion", DescripcionObservacion);
+    formData.append("obs_cierre", obs_cierre);
+    formData.append("obs_reapertura", obs_reapertura);
+    formData.append("obs_bitacora", obs_bitacora);
+    formData.append("estado_observacion", Estado_observacion);
+    
+    return fetchWrapper.postHeader(
+      `${baseUrl}/Observacion/GuardarObservacionPredeterminada`,
+      null,
+      formData
+    );
+  }
+  
+  function EditObservations(
+    Cod_Observacion,
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
+  ) {
+    const formData = new FormData();
+  
+    formData.append("Cod_Observacion", Cod_Observacion);
+    formData.append("DescripcionObservacion", DescripcionObservacion);
+    formData.append("obs_cierre", obs_cierre);
+    formData.append("obs_reapertura", obs_reapertura);
+    formData.append("obs_bitacora", obs_bitacora);
+    formData.append("estado_observacion", Estado_observacion);
+    
+    return fetchWrapper.postHeader(
+      `${baseUrl}/Observacion/EditadaObservacionBitacora`,
+      null,
+      formData
+    );
+  }
+  
+  function InfoObservations(Cod_Observacion, cookie) {
+    return fetchWrapper.get(
+      `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=`,
       cookie
     );
   }

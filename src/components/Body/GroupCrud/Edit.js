@@ -147,6 +147,14 @@ function ComponentGroup(InforGroup, id) {
                                 Editar Grupo
                               </button>
                             )}
+                            <Link
+                              className={styles.btn_cancel}
+                              href={{
+                                pathname: "/Configuration/Groups/IndexGroup",
+                              }}
+                            >
+                              Cancelar
+                            </Link>
                           </div>
                         </div>
                       ))

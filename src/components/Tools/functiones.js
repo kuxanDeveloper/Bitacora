@@ -394,6 +394,56 @@ export const setCheckUsuEstado = (setValue) => {
 
 };
 
+export const setCheckObservations = (setValue) => {
+  var checbox1 = document.getElementById("ObsCierre");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("obs_cierre", "0");
+  } else {
+    setValue("obs_cierre", "1");
+  }
+
+  var checbox2 = document.getElementById("ObsReapertura");
+
+  if (
+    checbox2.checked == null ||
+    checbox2.checked == undefined ||
+    checbox2.checked == false
+  ) {
+    setValue("obs_reapertura", "0");
+  } else {
+    setValue("obs_reapertura", "1");
+  }
+
+  var checbox3 = document.getElementById("ObsBitacora");
+
+  if (
+    checbox3.checked == null ||
+    checbox3.checked == undefined ||
+    checbox3.checked == false
+  ) {
+    setValue("obs_bitacora", "0");
+  } else {
+    setValue("obs_bitacora", "1");
+  }
+
+  var checbox4 = document.getElementById("EstadoObs");
+
+  if (
+    checbox4.checked == null ||
+    checbox4.checked == undefined ||
+    checbox4.checked == false
+  ) {
+    setValue("Estado_observacion", "0");
+  } else {
+    setValue("Estado_observacion", "1");
+  }
+};
+
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
   setValue("file", ValueImagesrc);
   setValue("file2", ValueImagesrc2);

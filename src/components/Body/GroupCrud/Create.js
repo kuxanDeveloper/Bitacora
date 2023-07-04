@@ -10,7 +10,9 @@ import { setCheckindividual } from "../../Tools/functiones";
 function ComponentGroup() {
   const validarEsquemaGrupo = Yup.object().shape({
     NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
-    AlertaHoras: Yup.string().required("Campo de Alerta por horas es obligatorio"),
+    AlertaHoras: Yup.string().required(
+      "Campo de Alerta por horas es obligatorio"
+    ),
     EstadoGrupo: Yup.string().required(
       "Campo de estado del grupo es obligatorio"
     ),
@@ -26,13 +28,11 @@ function ComponentGroup() {
   function restrictNumber(id) {
     debugger;
     var valor = document.getElementById(id);
-    if(valor != null)
-    {
-      var v= valor.value.replace(new RegExp(/[^\d]/, 'ig'), "");
+    if (valor != null) {
+      var v = valor.value.replace(new RegExp(/[^\d]/, "ig"), "");
 
       document.getElementById("id").value = valor;
     }
-    
   }
 
   return (
@@ -75,7 +75,9 @@ function ComponentGroup() {
                       </div>
                     </div>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Alerta por horas</label>
+                      <label className={styles.group_title}>
+                        Alerta por horas
+                      </label>
                       <input
                         {...register("AlertaHoras")}
                         name="AlertaHoras"
@@ -93,7 +95,9 @@ function ComponentGroup() {
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Estado del grupo</label>
+                      <label className={styles.group_title}>
+                        Estado del grupo
+                      </label>
                       <input id="EstadoGrupo" type="checkbox" />
 
                       {/* <!-- ---- --> */}
@@ -120,8 +124,14 @@ function ComponentGroup() {
                         Guardar Grupo
                       </button>
                     )}
-
-                    
+                    <Link
+                      className={styles.btn_cancel}
+                      href={{
+                        pathname: "/Configuration/Groups/IndexGroup",
+                      }}
+                    >
+                      Cancelar
+                    </Link>
                   </div>
                 </div>
               </div>
