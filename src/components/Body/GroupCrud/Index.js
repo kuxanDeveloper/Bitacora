@@ -21,25 +21,24 @@ function ComponentGroupIndex(InforSampleDetails) {
           </div>
 
           <p className={styles.title}>Listado de Grupos</p>
-          <br />
+          <Link
+            href={{
+              pathname: "/Configuration/Groups/CreateGroup",
+            }}
+            className={styles.btn_create}
+          >
+            <span>&#10010; </span>
+            Crear Grupo
+          </Link>
           <div className={styles.card}>
-            <Link
-              href={{
-                pathname: "/Configuration/Groups/CreateGroup",
-              }}
-              className={styles.btn_create}
-            >
-              <span>&#10010; </span>
-              Crear Grupo
-            </Link>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th style={{ width: "35%" }}>Nombre Grupo</th>
-                  <th style={{ width: "15%" }}>Estado</th>
-                  <th style={{ width: "15%" }}>Admite Sufijo</th>
-                  <th style={{ width: "15%" }}>Orden del grupo</th>
-                  <th style={{ width: "20%" }}>Opciones</th>
+                  <th>Nombre Grupo</th>
+                  <th>Estado</th>
+                  <th>Admite Sufijo</th>
+                  <th>Orden del grupo</th>
+                  <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
@@ -57,7 +56,7 @@ function ComponentGroupIndex(InforSampleDetails) {
                         </td>
                         <td className={styleTable.textCenterColumn}>
                           {data.ADMITE_SUFIJO == true ? (
-                            <span>&#x2705;</span>
+                            <p>&#x2705;</p>
                           ) : (
                             <span>&#10060;</span>
                           )}
