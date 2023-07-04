@@ -6,19 +6,21 @@ import Link from "next/link";
 import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
+import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 
 function ComponentGroup() {
   const validarEsquemaGrupo = Yup.object().shape({
-    NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
+    NombreGrupo: Yup.string().required("El campo nombre del grupo es obligatorio"),
     AlertaHoras: Yup.string().required(
-      "Campo de Alerta por horas es obligatorio"
+      "El campo de Alerta por horas es obligatorio"
     ),
     EstadoGrupo: Yup.string().required(
-      "Campo de estado del grupo es obligatorio"
+      "El campo de estado del grupo es obligatorio"
     ),
     AdmiteSufijo: Yup.string().required(
-      "Campo de admite sufijo es obligatorio"
+      "El campo de admite sufijo es obligatorio"
     ),
+    OrdenGrupo: Yup.string().required("El campo de orden de grupo es obligatorio")
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -58,7 +60,7 @@ function ComponentGroup() {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  <div className={styles.form_group}>
+                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Nombre Grupo</label>
                       <input
@@ -71,6 +73,23 @@ function ComponentGroup() {
                       />
                       <div className={styles.invalid_feedback}>
                         {errors.NombreGrupo?.message}
+                      </div>
+                    </div>                    
+                  </div>
+
+                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>Orden Grupo</label>
+                      <input
+                        {...register("OrdenGrupo")}
+                        name="OrdenGrupo"
+                        maxLength="100"
+                        type="number"
+                        min="0"
+                        className={styles.group_input}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.OrdenGrupo?.message}
                       </div>
                     </div>
                     <div className={styles.input_group}>
