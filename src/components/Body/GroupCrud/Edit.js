@@ -6,6 +6,7 @@ import Link from "next/link";
 import { onSubmitUpdateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
+import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 
 function ComponentGroup(InforGroup, id) {
   const validarEsquemaGrupo = Yup.object().shape({
@@ -20,6 +21,7 @@ function ComponentGroup(InforGroup, id) {
     AlertaHoras: Yup.string().required(
       "Campo de Alerta por horas es obligatorio"
     ),
+    OrdenGrupo: Yup.string().required("El campo de orden de grupo es obligatorio")
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -74,7 +76,9 @@ function ComponentGroup(InforGroup, id) {
                   InforGroup.InforGroup != undefined
                     ? InforGroup.InforGroup.map((data, index) => (
                         <div key={index}>
-                          <div className={styles.form_group}>
+                          <div
+                            className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                          >
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
                                 Nombre Grupo
@@ -92,6 +96,28 @@ function ComponentGroup(InforGroup, id) {
                                 {errors.NombreGrupo?.message}
                               </div>
                             </div>
+                          </div>
+
+                          <div
+                            className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                          >
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Orden Grupo
+                              </label>
+                              <input
+                                {...register("OrdenGrupo")}
+                                name="OrdenGrupo"
+                                maxLength="100"
+                                type="number"
+                                min="0"
+                                className={styles.group_input}
+                                defaultValue={data.ORDEN_GRUPO}
+                              />
+                              <div className={styles.invalid_feedback}>
+                                {errors.OrdenGrupo?.message}
+                              </div>
+                            </div>
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
                                 Alerta por horas
@@ -103,8 +129,8 @@ function ComponentGroup(InforGroup, id) {
                                 max="99"
                                 type="number"
                                 min="0"
-                                defaultValue={data.ALARMA_HORAS}
                                 className={styles.group_input}
+                                defaultValue={data.ALARMA_HORAS}
                               />
                               <div className={styles.invalid_feedback}>
                                 {errors.AlertaHoras?.message}
@@ -147,6 +173,14 @@ function ComponentGroup(InforGroup, id) {
                                 Editar Grupo
                               </button>
                             )}
+                            <Link
+                              className={styles.btn_cancel}
+                              href={{
+                                pathname: "/Configuration/Groups/IndexGroup",
+                              }}
+                            >
+                              Cancelar
+                            </Link>
                           </div>
                         </div>
                       ))

@@ -6,17 +6,21 @@ import Link from "next/link";
 import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
+import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 
 function ComponentGroup() {
   const validarEsquemaGrupo = Yup.object().shape({
-    NombreGrupo: Yup.string().required("Campo nombre del grupo es obligatorio"),
-    AlertaHoras: Yup.string().required("Campo de Alerta por horas es obligatorio"),
+    NombreGrupo: Yup.string().required("El campo nombre del grupo es obligatorio"),
+    AlertaHoras: Yup.string().required(
+      "El campo de Alerta por horas es obligatorio"
+    ),
     EstadoGrupo: Yup.string().required(
-      "Campo de estado del grupo es obligatorio"
+      "El campo de estado del grupo es obligatorio"
     ),
     AdmiteSufijo: Yup.string().required(
-      "Campo de admite sufijo es obligatorio"
+      "El campo de admite sufijo es obligatorio"
     ),
+    OrdenGrupo: Yup.string().required("El campo de orden de grupo es obligatorio")
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -24,15 +28,12 @@ function ComponentGroup() {
   const { errors } = formState;
 
   function restrictNumber(id) {
-    debugger;
     var valor = document.getElementById(id);
-    if(valor != null)
-    {
-      var v= valor.value.replace(new RegExp(/[^\d]/, 'ig'), "");
+    if (valor != null) {
+      var v = valor.value.replace(new RegExp(/[^\d]/, "ig"), "");
 
       document.getElementById("id").value = valor;
     }
-    
   }
 
   return (
@@ -59,7 +60,7 @@ function ComponentGroup() {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  <div className={styles.form_group}>
+                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Nombre Grupo</label>
                       <input
@@ -73,9 +74,28 @@ function ComponentGroup() {
                       <div className={styles.invalid_feedback}>
                         {errors.NombreGrupo?.message}
                       </div>
+                    </div>                    
+                  </div>
+
+                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>Orden Grupo</label>
+                      <input
+                        {...register("OrdenGrupo")}
+                        name="OrdenGrupo"
+                        maxLength="100"
+                        type="number"
+                        min="0"
+                        className={styles.group_input}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.OrdenGrupo?.message}
+                      </div>
                     </div>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Alerta por horas</label>
+                      <label className={styles.group_title}>
+                        Alerta por horas
+                      </label>
                       <input
                         {...register("AlertaHoras")}
                         name="AlertaHoras"
@@ -93,7 +113,9 @@ function ComponentGroup() {
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Estado del grupo</label>
+                      <label className={styles.group_title}>
+                        Estado del grupo
+                      </label>
                       <input id="EstadoGrupo" type="checkbox" />
 
                       {/* <!-- ---- --> */}
@@ -120,8 +142,14 @@ function ComponentGroup() {
                         Guardar Grupo
                       </button>
                     )}
-
-                    
+                    <Link
+                      className={styles.btn_cancel}
+                      href={{
+                        pathname: "/Configuration/Groups/IndexGroup",
+                      }}
+                    >
+                      Cancelar
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -14,6 +14,7 @@ function ViewDetails({ cookie, id, Options }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
+
   useEffect(() => {
     SampleDetailsEdit(
       cookie,

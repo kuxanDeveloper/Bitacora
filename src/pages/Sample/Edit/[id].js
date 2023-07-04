@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditStickerComponents from "../../../components/Body/EditStiker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
-import { SampleDetailsEdit } from "../../api/Sample/ViewDetails/[id]";
+import {
+  SampleDetailsEdit,
+} from "../../api/Sample/ViewDetails/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,11 +12,14 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { useContextBitacora } from "../../../context/BitacoraContext";
 
 function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede } =
+    useContextBitacora();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsEdit(cookie, id, setLInforSampleDetails);
+    SampleDetailsEdit(cookie, id, setLInforSampleDetails,setLstObservacionesPrede);
   }, []);
 
   return (
@@ -76,6 +81,7 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
         group={group}
         id={id}
         isHabilteGroup={isHabilteGroup}
+        LstObservacionesPrede={LstObservacionesPrede}
       ></EditStickerComponents>
     </>
   );

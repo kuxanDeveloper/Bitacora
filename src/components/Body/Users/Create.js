@@ -43,7 +43,6 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
   const { errors } = formState;
 
   useEffect(() => {
-    console.log(InforSampleDetails);
     var estdUsuario = document.getElementById("EstadoUsu");
 
     estdUsuario.checked = true;

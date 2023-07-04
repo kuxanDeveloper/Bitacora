@@ -192,7 +192,6 @@ export const UserActiveUrgencias = (query, ListadoResultadoxMuestra) => {
         ListadoNewRetorno.push(element);
       }
     });
-
   }
 
   return ListadoNewRetorno;
@@ -209,7 +208,7 @@ export const FilterQuerySearch = (
   Numstiker,
   DateAdmission,
   result,
-  URS,
+  URS
 ) => {
   event.preventDefault();
 
@@ -391,7 +390,56 @@ export const setCheckUsuEstado = (setValue) => {
   } else {
     setValue("EstadoUsuario", "1");
   }
+};
 
+export const setCheckObservations = (setValue) => {
+  var checbox1 = document.getElementById("ObsCierre");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("obs_cierre", "0");
+  } else {
+    setValue("obs_cierre", "1");
+  }
+
+  var checbox2 = document.getElementById("ObsReapertura");
+
+  if (
+    checbox2.checked == null ||
+    checbox2.checked == undefined ||
+    checbox2.checked == false
+  ) {
+    setValue("obs_reapertura", "0");
+  } else {
+    setValue("obs_reapertura", "1");
+  }
+
+  var checbox3 = document.getElementById("ObsBitacora");
+
+  if (
+    checbox3.checked == null ||
+    checbox3.checked == undefined ||
+    checbox3.checked == false
+  ) {
+    setValue("obs_bitacora", "0");
+  } else {
+    setValue("obs_bitacora", "1");
+  }
+
+  var checbox4 = document.getElementById("EstadoObs");
+
+  if (
+    checbox4.checked == null ||
+    checbox4.checked == undefined ||
+    checbox4.checked == false
+  ) {
+    setValue("Estado_observacion", "0");
+  } else {
+    setValue("Estado_observacion", "1");
+  }
 };
 
 export const setImagenFile = (ValueImagesrc, ValueImagesrc2, setValue) => {
@@ -478,10 +526,10 @@ export const UploadImageSticker = (
   switch (ext) {
     case "jpg":
       var sizebyte = parseInt(event.target.files[0].size / 1024);
-      if (sizebyte > 3001) {
+      if (sizebyte > 5001) {
         Swal.fire({
           title: "Tamaño",
-          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          text: `la imagen que intentas agregar supero el límite máximo de 5 MB`,
           icon: "warning",
           confirmButtonText: "Cerrar",
         });
@@ -492,10 +540,10 @@ export const UploadImageSticker = (
       break;
     case "jpeg":
       var sizebyte = parseInt(event.target.files[0].size / 1024);
-      if (sizebyte > 3001) {
+      if (sizebyte > 5001) {
         Swal.fire({
           title: "Tamaño",
-          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          text: `la imagen que intentas agregar supero el límite máximo de 5 MB`,
           icon: "warning",
           confirmButtonText: "Cerrar",
         });
@@ -506,10 +554,10 @@ export const UploadImageSticker = (
       break;
     case "png":
       var sizebyte = parseInt(event.target.files[0].size / 1024);
-      if (sizebyte > 3001) {
+      if (sizebyte > 5001) {
         Swal.fire({
           title: "Tamaño",
-          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          text: `la imagen que intentas agregar supero el límite máximo de 5 MB`,
           icon: "warning",
           confirmButtonText: "Cerrar",
         });
@@ -520,10 +568,10 @@ export const UploadImageSticker = (
       break;
     case "bmp":
       var sizebyte = parseInt(event.target.files[0].size / 1024);
-      if (sizebyte > 3001) {
+      if (sizebyte > 5001) {
         Swal.fire({
           title: "Tamaño",
-          text: `la imagen que intentas agregar supero el límite máximo de 3 MB`,
+          text: `la imagen que intentas agregar supero el límite máximo de 5 MB`,
           icon: "warning",
           confirmButtonText: "Cerrar",
         });
@@ -563,8 +611,6 @@ export const LocationUrl = (router, value) => {
 };
 
 export const AperturaandCierre = (data, LstObservacionesPrede) => {
-  console.log(LstObservacionesPrede);
-
   window.OnchangeValueSelect = function (value) {
     let valueGetId = document.getElementById("Observacionother");
 
@@ -598,7 +644,7 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
           ? "Observación de cierre"
           : "Observación de apertura",
         html:
-          `<select id='sltObservcaciones' onclick="window.OnchangeValueSelect(
+          `<select id='sltObservcaciones' onchange="window.OnchangeValueSelect(
           this.value)" class="swal2-input">
           <option disabled selected value="">Seleccione una observación</option>
          ${LstObservacionesPrede.map((info) => {
@@ -703,3 +749,30 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
   });
 };
 
+export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
+  if (value == "5") {
+    setShowobservaTextare(true);
+  } else {
+    setShowobservaTextare(false);
+  }
+};
+
+export const RegisterStickerObservaciones = (setvalue) => {
+  let slt = document.getElementById("sltObservaIni");
+
+  if (slt.value != "") {
+    if (slt.value != "5") {
+      setvalue("ObservaInici", slt.options[slt.selectedIndex].text);
+    }
+  }
+};
+
+export const RegisterEditNoteObservaciones = (setvalue) => {
+  let slt = document.getElementById("sltObservaIni");
+
+  if (slt.value != "") {
+    if (slt.value != "5") {
+      setvalue("Observaciones_detalle", slt.options[slt.selectedIndex].text);
+    }
+  }
+};

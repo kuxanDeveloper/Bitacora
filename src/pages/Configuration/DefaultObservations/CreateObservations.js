@@ -1,31 +1,22 @@
 import React from "react";
 import Head from "next/head";
-import ComponentsCreateNote from "../../../components/Body/NoteCrud/Create";
+import CreateObservation from "../../../components/Body/Observations/Create";
 import {
   OptionAdministrator,
+  OptionAsiste,
   OptionTecnichal,
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { ListObservacion } from "../../api/Note/Crud";
-import { useContextBitacora } from "../../../context/BitacoraContext";
-import { useEffect } from "react";
 
-function PageCreateFollowup({ id, sticker, name_group, cookie }) {
-  const { LstObservacionesPrede, setLstObservacionesPrede } =
-    useContextBitacora();
-
-  useEffect(() => {
-    ListObservacion(cookie, setLstObservacionesPrede);
-  }, []);
-
+function CreatePage() {
   return (
     <>
       <Head>
-        <title>{`Agregar nota al sticker N° ${sticker} | Bitácora BD`}</title>
+        <title>{`Creación de Observacion | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Agrega una nota de seguimiento al sticker con su grupo perteneciente`}
+          content={`Lugar donde crea la observacion predeterminada que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -36,46 +27,45 @@ function PageCreateFollowup({ id, sticker, name_group, cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Agregar nota al sticker N° ${sticker} | Bitácora BD`}
+          content={`Creación de Observacion - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Agrega una nota de seguimiento al sticker con su grupo perteneciente`}
+          content={`Lugar donde crea la observacion predeterminada que seleccionaran despues las bitacoras`}
         ></meta>
         <meta
           property="og:title"
-          content={`Agregar nota al sticker N° ${sticker} | Bitácora BD`}
+          content={`Creación de Observacion - Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Agrega una nota de seguimiento al sticker con su grupo perteneciente`}
+          content={`Lugar donde crea la observacion predeterminada que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <ComponentsCreateNote
-        id={id}
-        sticker={sticker}
-        name_group={name_group}
-        LstObservacionesPrede={LstObservacionesPrede}
-      />
+      <CreateObservation>
+        
+      </CreateObservation>
     </>
   );
 }
 
-export default PageCreateFollowup;
+export default CreatePage;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
-  if (cookie) {
+  debugger;
+  if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
+      
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -91,26 +81,14 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null ||
-      ctx.query.name_group == undefined ||
-      ctx.query.name_group == null ||
-      ctx.query.sticker == null ||
-      ctx.query.sticker == null ||
-      !Options.BtnCrearNotaAndUrl
+    if (     
+      !Options.BtnEditStickerAndUrl
     ) {
       return { notFound: true };
     }
+    
+    return {props:{mensaje:null}};
 
-    return {
-      props: {
-        cookie: cookie,
-        id: ctx.query.id,
-        sticker: ctx.query.sticker,
-        name_group: ctx.query.name_group,
-      },
-    };
   } else {
     return {
       redirect: {

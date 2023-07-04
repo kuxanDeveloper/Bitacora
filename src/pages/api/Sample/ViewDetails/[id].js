@@ -17,13 +17,19 @@ export const SampleDetailsEdit = async (
   setLstObservacionesPrede(lstObervsa);
 };
 
-export const InfoteNoteEditApi = async (cookie, id, setInfoNote) => {
+export const InfoteNoteEditApi = async (
+  cookie,
+  id,
+  setInfoNote,
+  setLstObservacionesPrede
+) => {
   let infoNote = await QueryNoteEdit(cookie, id);
+  let lstObervsa = await QueryObserva(cookie);
   setInfoNote(infoNote);
+  setLstObservacionesPrede(lstObervsa);
 };
 
 export const CloseCaseSample = async (id, observacionCaso, Estado) => {
-
   let infoNote = await QueryCloseCaseSample(id, observacionCaso, Estado);
   return infoNote;
 };

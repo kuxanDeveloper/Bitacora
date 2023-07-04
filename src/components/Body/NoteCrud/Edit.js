@@ -1,14 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import styles from "../../../styles/CreateNotes.module.scss";
-import { setImagenfileUpdateNote } from "../../Tools/functiones";
+import {
+  setImagenfileUpdateNote,
+  OnchangeObservaCrearEdit,
+  RegisterEditNoteObservaciones,
+} from "../../Tools/functiones";
 import { UpdateNote } from "../../../pages/api/Note/Crud";
-function ComponentEditNote({ InfoNote, sticker, name_group }) {
+function ComponentEditNote({
+  InfoNote,
+  sticker,
+  name_group,
+  LstObservacionesPrede,
+}) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -18,6 +27,8 @@ function ComponentEditNote({ InfoNote, sticker, name_group }) {
     setisImagenExterna,
     setValueImagesrcExterna,
   } = useContextBitacora();
+
+  const [ShowobservaTextare, setShowobservaTextare] = useState(false);
 
   const validationSchema = Yup.object().shape({
     CODIGO_BITACORA: Yup.number(),
@@ -37,6 +48,36 @@ function ComponentEditNote({ InfoNote, sticker, name_group }) {
     setisImagenExterna(true);
     setValueImagesrc(null);
   }, []);
+
+  useEffect(() => {
+    if (InfoNote != null && InfoNote != undefined) {
+      if (InfoNote.length > 0) {
+        if (
+          LstObservacionesPrede != null &&
+          LstObservacionesPrede != undefined
+        ) {
+          let retornoValor = LstObservacionesPrede.find(
+            (e) =>
+              e.Descripcion_Observacion.toLowerCase() ==
+              InfoNote[0].OBSERVACIONES_DETALLE.toLowerCase()
+          );
+
+          if (retornoValor != undefined && retornoValor != null) {
+            document.getElementById("sltObservaIni").value =
+              retornoValor.Codigo_observacion;
+          } else if (
+            InfoNote[0].OBSERVACIONES_DETALLE != "" &&
+            InfoNote[0].OBSERVACIONES_DETALLE.toLowerCase() != null
+          ) {
+            setShowobservaTextare(true);
+          } else {
+            document.getElementById("sltObservaIni").value = "";
+          }
+        }
+      }
+    }
+  }, [InfoNote]);
+
   return (
     <section className={styles.create_note}>
       <div className={styles.sticker_container}>
@@ -162,19 +203,59 @@ function ComponentEditNote({ InfoNote, sticker, name_group }) {
                       <div className={styles.form_group}>
                         <div className={styles.input_group}>
                           <label className={styles.group_title}>
-                            Observación
+                            Obsevraciones predeterminada
                           </label>
-                          <textarea
-                            rows="5"
-                            cols="50"
-                            name="Observaciones_detalle"
-                            className={styles.input_group}
-                            maxLength={1500}
-                            {...register("Observaciones_detalle")}
-                            defaultValue={data.OBSERVACIONES_DETALLE}
-                          ></textarea>
-                          <div>{errors.Observaciones_detalle?.message}</div>
+                          <select
+                            name="sltObservaIni"
+                            id="sltObservaIni"
+                            onChange={(e) => {
+                              OnchangeObservaCrearEdit(
+                                e.target.value,
+                                setShowobservaTextare
+                              );
+                            }}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {LstObservacionesPrede != null &&
+                            LstObservacionesPrede != undefined
+                              ? LstObservacionesPrede.length > 0
+                                ? LstObservacionesPrede.map((data, index) => {
+                                    if (data.Observacion_Bitacora) {
+                                      return (
+                                        <option
+                                          key={index}
+                                          value={data.Codigo_observacion}
+                                        >
+                                          {data.Descripcion_Observacion}
+                                        </option>
+                                      );
+                                    }
+                                  })
+                                : ""
+                              : ""}
+                          </select>
                         </div>
+                        {ShowobservaTextare ? (
+                          <div className={styles.input_group}>
+                            <label className={styles.group_title}>
+                              Observación
+                            </label>
+                            <textarea
+                              rows="5"
+                              cols="50"
+                              name="Observaciones_detalle"
+                              className={styles.input_group}
+                              maxLength={1500}
+                              {...register("Observaciones_detalle")}
+                              defaultValue={data.OBSERVACIONES_DETALLE}
+                            ></textarea>
+                            <div>{errors.Observaciones_detalle?.message}</div>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       <div className={styles.btn_container_send}>
@@ -186,6 +267,7 @@ function ComponentEditNote({ InfoNote, sticker, name_group }) {
                                 "codigo_detalle_bitacora",
                                 data.COD_DETALLE_BITACORA
                               );
+                              RegisterEditNoteObservaciones(setValue);
                               setValue("CODIGO_BITACORA", data.CODIGO_BITACORA);
                               setImagenfileUpdateNote(
                                 ValueImagesrc,

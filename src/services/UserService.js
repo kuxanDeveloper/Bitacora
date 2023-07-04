@@ -48,6 +48,9 @@ export const userService = {
   InfoSampleRoles,
   InfoSampleTips,
   EditUser,
+  CreatObservations,
+  EditObservations,
+  InfoObservations
 };
 
 async function login(username, password) {
@@ -345,7 +348,8 @@ function CreatGroup(
   NombreGrupo,
   EstadoGrupo,
   AdmiteSufijo,
-  AlertaHoras
+  AlertaHoras,
+  OrdenGrupo
 ) {
   const formData = new FormData();
   debugger;
@@ -353,6 +357,7 @@ function CreatGroup(
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
+  formData.append("Orden_Grupo", OrdenGrupo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -366,7 +371,8 @@ function EditGroup(
   NombreGrupo,
   EstadoGrupo,
   AdmiteSufijo,
-  AlertaHoras
+  AlertaHoras,
+  OrdenGrupo
 ) {
   const formData = new FormData();
 
@@ -375,6 +381,7 @@ function EditGroup(
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
+  formData.append("Orden_Grupo", OrdenGrupo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,
@@ -517,6 +524,58 @@ function CreateUser(
   function InfoSampleTips(cookie) {
     return fetchWrapper.get(
       `${baseUrl}/Usus/GetTiposIdentificacion`,
+      cookie
+    );
+  }
+
+  function CreatObservations(
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
+  ) {
+    const formData = new FormData();
+    formData.append("DescripcionObservacion", DescripcionObservacion);
+    formData.append("obs_cierre", obs_cierre);
+    formData.append("obs_reapertura", obs_reapertura);
+    formData.append("obs_bitacora", obs_bitacora);
+    formData.append("estado_observacion", Estado_observacion);
+    
+    return fetchWrapper.postHeader(
+      `${baseUrl}/Observacion/GuardarObservacionPredeterminada`,
+      null,
+      formData
+    );
+  }
+  
+  function EditObservations(
+    Cod_Observacion,
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
+  ) {
+    const formData = new FormData();
+  
+    formData.append("Cod_Observacion", Cod_Observacion);
+    formData.append("DescripcionObservacion", DescripcionObservacion);
+    formData.append("obs_cierre", obs_cierre);
+    formData.append("obs_reapertura", obs_reapertura);
+    formData.append("obs_bitacora", obs_bitacora);
+    formData.append("estado_observacion", Estado_observacion);
+    
+    return fetchWrapper.postHeader(
+      `${baseUrl}/Observacion/EditadaObservacionBitacora`,
+      null,
+      formData
+    );
+  }
+  
+  function InfoObservations(Cod_Observacion, cookie) {
+    return fetchWrapper.get(
+      `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=`,
       cookie
     );
   }

@@ -72,7 +72,6 @@ export const onSubmitUpdate = ({
   Sufijo,
 }) => {
   const StickerRetorno = COD_BITACORA;
-  debugger;
   return userService
     .EditSticker(
       NumSticker,

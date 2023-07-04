@@ -2,38 +2,37 @@ import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export const onSubmitCreateGroup = ({
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo
+export const onSubmitCreateObservations = ({
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
 }) => {  
-    return userService.CreatGroup(
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo
+    return userService.CreatObservations(
+        DescripcionObservacion,
+        obs_cierre,
+        obs_reapertura,
+        obs_bitacora,
+        Estado_observacion
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El grupo se creo correctamente",
+        text: "La observacion predeterminada se creo correctamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
+        pathname: "/Configuration/DefaultObservations/IndexObservations"
 });
     }    
     ).catch((error) => {
 
         if (
             error == "Límite de tiempo excedido" ||
-            error == "Usuario o clave incorrectos" ||
-            error == "No se pudo hacer el login, revise los datos enviados"
+            error == "Usuario o clave incorrectos"
           ) {
             Swal.fire({
               title: "¡Advertencia!",
@@ -50,37 +49,38 @@ Router.push({
             });
           }
     
-          console.log(error, "error al crear grupo");
+          console.log(error, "error al crear observacion predeterminada");
     });
 
 };
 
-export const onSubmitUpdateGroup = ({
-    IdGrupo,
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo
+export const onSubmitUpdateObservations = ({
+    Cod_Observacion,
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
 }) => {
-    return userService.EditGroup(
-        IdGrupo,
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo
+  debugger;
+    return userService.EditObservations(
+        Cod_Observacion,
+    DescripcionObservacion,
+    obs_cierre,
+    obs_reapertura,
+    obs_bitacora,
+    Estado_observacion
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El grupo se edito correctamente",
+        text: "La observacion predeterminada se edito correctamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
+    pathname: "/Configuration/DefaultObservations/IndexObservations"
 });
     }    
     ).catch((error) => {
@@ -105,15 +105,14 @@ Router.push({
             });
           }
     
-          console.log(error, "error al editar grupo");
+          console.log(error, "error al editar observacion predeterminada");
     });
 
 };
 
-export const getListGroup = (estado, idGrupo, cookie) => {
-    return userService.InfoGroup(
-        (estado == null ? "" : estado), 
-        (idGrupo == null ? "" : idGrupo),
+export const getListObservations = (Cod_Observacion, cookie) => {
+    return userService.InfoObservations(
+        (Cod_Observacion == null ? "" : Cod_Observacion),
         cookie
     ).catch((error) => {
 
@@ -137,7 +136,7 @@ export const getListGroup = (estado, idGrupo, cookie) => {
             });
           }
     
-          console.log(error, "error al editar grupo");
+          console.log(error, "error al traer informacion observaciobes predeterminadas");
     });
 
 };

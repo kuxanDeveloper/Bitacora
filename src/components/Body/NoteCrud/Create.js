@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -7,7 +7,17 @@ import { onSubmitCreateNote } from "../../Tools/CRUD";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentsCreateNote({ id, sticker, name_group }) {
+import {
+  OnchangeObservaCrearEdit,
+  RegisterEditNoteObservaciones,
+} from "../../Tools/functiones";
+
+function ComponentsCreateNote({
+  id,
+  sticker,
+  name_group,
+  LstObservacionesPrede,
+}) {
   const {
     setValueImagesrc,
     setValueImagesrc2,
@@ -19,6 +29,8 @@ function ComponentsCreateNote({ id, sticker, name_group }) {
     setValueImagesrcExterna2,
     setisImagenExterna,
   } = useContextBitacora();
+
+  const [ShowobservaTextare, setShowobservaTextare] = useState(false);
 
   const validationSchema = Yup.object().shape({
     Observaciones_detalle: Yup.string().required(
@@ -141,17 +153,60 @@ function ComponentsCreateNote({ id, sticker, name_group }) {
                   {/* <!-- form group --> */}
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Observación</label>
-                      <textarea
-                        rows="5"
-                        cols="50"
-                        name="Observaciones_detalle"
-                        className={styles.input_group}
-                        maxLength={1500}
-                        {...register("Observaciones_detalle")}
-                      ></textarea>
-                      <div>{errors.Observaciones_detalle?.message}</div>
+                      <label className={styles.group_title}>
+                        Observaciones predeterminada
+                      </label>
+                      <select
+                        defaultValue={""}
+                        name="sltObservaIni"
+                        id="sltObservaIni"
+                        onChange={(e) => {
+                          OnchangeObservaCrearEdit(
+                            e.target.value,
+                            setShowobservaTextare
+                          );
+                        }}
+                      >
+                        <option disabled value="">
+                          Seleccione una opción
+                        </option>
+                        {LstObservacionesPrede != null &&
+                        LstObservacionesPrede != undefined
+                          ? LstObservacionesPrede.length > 0
+                            ? LstObservacionesPrede.map((data, index) => {
+                                if (data.Observacion_Bitacora) {
+                                  return (
+                                    <option
+                                      key={index}
+                                      value={data.Codigo_observacion}
+                                    >
+                                      {data.Descripcion_Observacion}
+                                    </option>
+                                  );
+                                }
+                              })
+                            : ""
+                          : ""}
+                      </select>
                     </div>
+                    {ShowobservaTextare ? (
+                      <div className={styles.input_group}>
+                        <label className={styles.group_title}>
+                          Observación
+                        </label>
+                        <textarea
+                          rows="5"
+                          cols="50"
+                          name="Observaciones_detalle"
+                          className={styles.input_group}
+                          maxLength={1500}
+                          {...register("Observaciones_detalle")}
+                        ></textarea>
+                        <div>{errors.Observaciones_detalle?.message}</div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   <div className={styles.btn_container_send}>
@@ -161,6 +216,7 @@ function ComponentsCreateNote({ id, sticker, name_group }) {
                         onClick={() => {
                           setValue("COD_BITACORA", id);
                           setValue("file", ValueImagesrc);
+                          RegisterEditNoteObservaciones(setValue);
                         }}
                       >
                         Guardar cambios
