@@ -90,31 +90,26 @@ function HRMenu() {
                           : ""
                       } `}
                     >
-                      Configuración
+                      Parametrización
                     </Link>
                     <div className={Styles.submenu}>
                       <ul className={Styles.sub_ul}>
                         <li className={Styles.sub_li}>
                           <a
-                            href=""
+                            href="/Configuration/Users/IndexUsers"
                             className={`${Styles.sub_link} ${Styles.active}`}
                           >
                             Usuarios
                           </a>
                         </li>
                         <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Permisos
+                          <a href="/Configuration/Groups/IndexGroup" className={Styles.sub_link}>
+                            Grupos
                           </a>
                         </li>
                         <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Parametrizacion
-                          </a>
-                        </li>
-                        <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Core
+                          <a href="/Configuration/DefaultObservations/IndexObservations" className={Styles.sub_link}>
+                            Observaciones Predeterminadas
                           </a>
                         </li>
                       </ul>
