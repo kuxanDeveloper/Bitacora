@@ -6,13 +6,15 @@ export const onSubmitCreateGroup = ({
     NombreGrupo,
     EstadoGrupo,
     AdmiteSufijo,
-    AlertaHoras
+    AlertaHoras,
+    OrdenGrupo
 }) => {  
     return userService.CreatGroup(
         NombreGrupo,
         EstadoGrupo,
         AdmiteSufijo,
-        AlertaHoras
+        AlertaHoras,
+        OrdenGrupo
     ).then(() =>
     {
       Swal.fire({
@@ -58,14 +60,16 @@ export const onSubmitUpdateGroup = ({
     NombreGrupo,
     EstadoGrupo,
     AdmiteSufijo,
-    AlertaHoras
+    AlertaHoras,
+    OrdenGrupo
 }) => {
     return userService.EditGroup(
         IdGrupo,
         NombreGrupo,
         EstadoGrupo,
         AdmiteSufijo,
-        AlertaHoras
+        AlertaHoras,
+        OrdenGrupo
     ).then(() =>
     {
       Swal.fire({

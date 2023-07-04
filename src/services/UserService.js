@@ -348,7 +348,8 @@ function CreatGroup(
   NombreGrupo,
   EstadoGrupo,
   AdmiteSufijo,
-  AlertaHoras
+  AlertaHoras,
+  OrdenGrupo
 ) {
   const formData = new FormData();
   debugger;
@@ -356,6 +357,7 @@ function CreatGroup(
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
+  formData.append("Orden_Grupo", OrdenGrupo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -369,7 +371,8 @@ function EditGroup(
   NombreGrupo,
   EstadoGrupo,
   AdmiteSufijo,
-  AlertaHoras
+  AlertaHoras,
+  OrdenGrupo
 ) {
   const formData = new FormData();
 
@@ -378,6 +381,7 @@ function EditGroup(
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
+  formData.append("Orden_Grupo", OrdenGrupo);
   
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,

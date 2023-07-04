@@ -37,9 +37,10 @@ function ComponentGroupIndex(InforSampleDetails) {
             <table className={styleTable.tableStyle}>
               <thead>
               <tr>
-                <th style={{ width: "50%" }}>Nombre Grupo</th>
+                <th style={{ width: "35%" }}>Nombre Grupo</th>
                 <th style={{ width: "15%" }}>Estado</th>
                 <th style={{ width: "15%" }}>Admite Sufijo</th>
+                <th style={{ width: "15%" }}>Orden del grupo</th>
                 <th style={{ width: "20%" }}>Opciones</th>
               </tr>
               </thead>
@@ -47,11 +48,11 @@ function ComponentGroupIndex(InforSampleDetails) {
               {InforSampleDetails.InforSampleDetails != null &&
               InforSampleDetails.InforSampleDetails != undefined
                 ? InforSampleDetails.InforSampleDetails.map((data, index) => (
-                    <>
-                    <tr>
+                    <tr key={index}>
                       <td>{data.NOMBRE_GRUPO}</td>
                       <td className={styleTable.textCenterColumn}>{data.ESTADO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
                       <td className={styleTable.textCenterColumn}>{data.ADMITE_SUFIJO == true ? <span>&#x2705;</span> : <span>&#10060;</span>}</td>
+                      <td className={styleTable.textCenterColumn}>{data.ORDEN_GRUPO}</td>
                       <td className={styleTable.textCenterColumn}><Link
                           title="Editar Grupo"
                           className={styles.add_icon}
@@ -64,7 +65,6 @@ function ComponentGroupIndex(InforSampleDetails) {
                           Editar Grupo
                         </Link></td>
                     </tr>                      
-                    </>
                   ))
                 : ""}
                 </tbody>
