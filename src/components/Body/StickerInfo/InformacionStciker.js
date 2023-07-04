@@ -19,6 +19,8 @@ function InformacionStciker({
     setisImagenExterna,
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
+    setValueImagesrc2,
+    setValueImagesrc,
   } = useContextBitacora();
 
   return (
@@ -39,6 +41,8 @@ function InformacionStciker({
                 setdobleImagen(true);
                 setishabiliteBtn(false);
                 setisImagenExterna(true);
+                setValueImagesrc2(null);
+                setValueImagesrc(null);
                 setValueImagesrcExterna(
                   data.URL_PRIMERA_IMAGEN != null &&
                     data.URL_PRIMERA_IMAGEN != undefined &&
