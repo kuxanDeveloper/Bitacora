@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/StickerDetails.module.css";
+import styles from "../../styles/StickerDetails.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import { EstadoFunction } from "../Tools/functiones";
 import { useContextBitacora } from "../../context/BitacoraContext";
