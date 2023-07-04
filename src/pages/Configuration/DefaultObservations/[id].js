@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditObservation from "../../../components/Body/Observations/Edit";
 import { SampleDetailsObservations } from "../../api/Sample/ViewDetailsObservations/[id]";
@@ -10,11 +10,10 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({cookie,id}) {
-
+function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-      SampleDetailsObservations(setLInforSampleDetails,cookie,id);
+    SampleDetailsObservations(setLInforSampleDetails, cookie, id);
   }, []);
 
   return (
@@ -53,11 +52,9 @@ function CreatePage({cookie,id}) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <EditObservation
-      InforObservations={InforSampleDetails}       
-      idObservation={id}
-      >
-        
-      </EditObservation>
+        InforObservations={InforSampleDetails}
+        idObservation={id}
+      ></EditObservation>
     </>
   );
 }
@@ -65,52 +62,50 @@ function CreatePage({cookie,id}) {
 export default CreatePage;
 
 export async function getServerSideProps(ctx) {
-    const cookie = ctx.req.cookies["tokenUserCookie"];
-    const RolUser = ctx.req.cookies["RolUserCookie"];
-    let Roles = null;
-    let Options = null;
-    if (cookie && RolUser) {
-  
-      if (RolUser != null && RolUser != undefined && RolUser != "") {
-        // RolUser.map((data)=>()){
-        // }
-        Roles = JSON.parse(RolUser);
-        
-        Roles.map((data) => {
-          if (data == 1) {
-            Options = OptionAdministrator;
-          } else if (data == 2) {
-            Options = OptionTecnichal;
-          } else if (data == 3) {
-            Options = OptionAsiste;
-          } else if (data == 4) {
-            Options = OptionConsult;
-          } else {
-            Options = OptionDefault;
-          }
-        });
-      }
-  
-      if (
-        ctx.query.id == undefined ||
-        ctx.query.id == null ||
-        !Options.BtnEditStickerAndUrl
-      ) {
-        return { notFound: true };
-      }
-  
-  
-      return {
-        props: {
-          cookie: cookie,
-          id: ctx.query.id,        
-        },
-      };
-    } else {
-      return {
-        redirect: {
-          destination: "/account/Login",
-        },
-      };
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
+  if (cookie && RolUser) {
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
     }
+
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.ObservacionPredeEditAndUrl
+    ) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/account/Login",
+      },
+    };
   }
+}

@@ -3,7 +3,7 @@ import Styles from "../../../styles/Header.module.scss";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { LocationUrl } from "../../Tools/functiones";
+import { LocationUrl, OnclickNAvToggle } from "../../Tools/functiones";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -12,7 +12,12 @@ import {
   OptionDefault,
 } from "../../Tools/OpcitionHabilite";
 function HRMenu() {
-  const { MenuShow, setMenuShow } = useContextBitacora();
+  const {
+    MenuShow,
+    setMenuShow,
+    SelectMenuConfigracion,
+    setSelectMenuConfigracion,
+  } = useContextBitacora();
   const [Roles, setRoles] = useState(null);
   const router = useRouter();
 
@@ -33,6 +38,8 @@ function HRMenu() {
         }
       });
     }
+
+    setSelectMenuConfigracion(LocationUrl(router, "configuration"));
   }, []);
 
   return (
@@ -46,6 +53,10 @@ function HRMenu() {
               <li className={Styles.nav_li}>
                 <Link
                   href="/"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    OnclickNAvToggle(MenuShow, setMenuShow);
+                  }}
                   className={`${Styles.nav_link} ${
                     !LocationUrl(router, "configuration") ? Styles.active : ""
                   }`}
@@ -61,8 +72,20 @@ function HRMenu() {
               </li> */}
               {Roles != null ? (
                 Roles.MenuSetting ? (
-                  <li className={`${Styles.nav_li} ${Styles.selected}`}>
-                    <button className={Styles.open_icon}>
+                  <li
+                    className={`${Styles.nav_li}  ${
+                      SelectMenuConfigracion ? Styles.selected : ""
+                    }`}
+                  >
+                    <button
+                      className={Styles.open_icon}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuConfigracion)
+                          setSelectMenuConfigracion(false);
+                        else setSelectMenuConfigracion(true);
+                      }}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="28"
@@ -83,40 +106,81 @@ function HRMenu() {
                       </svg>
                     </button>
                     <Link
-                      href="/Configuration/Group"
+                      href={"#"}
                       className={`${Styles.nav_link} ${
                         LocationUrl(router, "configuration")
                           ? Styles.active
                           : ""
                       } `}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuConfigracion)
+                          setSelectMenuConfigracion(false);
+                        else setSelectMenuConfigracion(true);
+                      }}
                     >
-                      Configuración
+                      Parametrización
                     </Link>
                     <div className={Styles.submenu}>
                       <ul className={Styles.sub_ul}>
-                        <li className={Styles.sub_li}>
-                          <a
-                            href=""
-                            className={`${Styles.sub_link} ${Styles.active}`}
-                          >
-                            Usuarios
-                          </a>
-                        </li>
-                        <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Permisos
-                          </a>
-                        </li>
-                        <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Parametrizacion
-                          </a>
-                        </li>
-                        <li className={Styles.sub_li}>
-                          <a href="" className={Styles.sub_link}>
-                            Core
-                          </a>
-                        </li>
+                        {Roles.UserConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/Users/IndexUsers"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexUsers")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Usuarios
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/Groups/IndexGroup"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Grupos
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        {Roles.ObservacionPredeCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/DefaultObservations/IndexObservations"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexObservations")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Observaciones Predeterminadas
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
                       </ul>
                     </div>
                   </li>

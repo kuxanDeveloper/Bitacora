@@ -19,7 +19,10 @@ export default function StickerDetails({
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
     setishabiliteBtn,
+    setValueImagesrc2,
+    setValueImagesrc,
   } = useContextBitacora();
+
   return (
     <>
       <div className={styles.sticker_details}>
@@ -57,6 +60,8 @@ export default function StickerDetails({
                     setShowModal(true);
                     setdobleImagen(true);
                     setisImagenExterna(true);
+                    setValueImagesrc(null);
+                    setValueImagesrc2(null);
                     setishabiliteBtn(false);
                     setValueImagesrcExterna(
                       InforSampleDetails.infoBitacora != undefined &&

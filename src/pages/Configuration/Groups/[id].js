@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditGroup from "../../../components/Body/GroupCrud/Edit";
 import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
@@ -10,15 +10,12 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({cookie,id}) {
-
+function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    if(id != null && id != undefined)
-    {
-      SampleDetailsGroup(setLInforSampleDetails,cookie,id);
+    if (id != null && id != undefined) {
+      SampleDetailsGroup(setLInforSampleDetails, cookie, id);
     }
-    
   }, []);
 
   return (
@@ -36,18 +33,12 @@ function CreatePage({cookie,id}) {
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta
-          name="twitter:title"
-          content={`Edición de grupo - Bitácora BD`}
-        />
+        <meta name="twitter:title" content={`Edición de grupo - Bitácora BD`} />
         <meta
           name="twitter:description"
           content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Edición de grupo - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Edición de grupo - Bitácora BD`} />
         <meta
           property="og:description"
           content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
@@ -56,11 +47,7 @@ function CreatePage({cookie,id}) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditGroup 
-      InforGroup={InforSampleDetails}
-      >
-        
-      </EditGroup>
+      <EditGroup InforGroup={InforSampleDetails}></EditGroup>
     </>
   );
 }
@@ -73,12 +60,11 @@ export async function getServerSideProps(ctx) {
   let Roles = null;
   let Options = null;
   if (cookie && RolUser) {
-
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -97,16 +83,15 @@ export async function getServerSideProps(ctx) {
     if (
       ctx.query.id == undefined ||
       ctx.query.id == null ||
-      !Options.BtnEditStickerAndUrl
+      !Options.GroupConfigEditAndUrl
     ) {
       return { notFound: true };
     }
 
-
     return {
       props: {
         cookie: cookie,
-        id: ctx.query.id,        
+        id: ctx.query.id,
       },
     };
   } else {

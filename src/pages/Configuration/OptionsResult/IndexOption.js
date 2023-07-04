@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexObser from "../../../components/Body/Observations/Index";
-import { SampleDetailsObservations } from "../../api/Sample/ViewDetailsObservations/[id]";
+import IndexGroup from "../../../components/Body/GroupCrud/Index";
+import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -13,16 +13,16 @@ import {
 function CreatePage({ cookie }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsObservations(setLInforSampleDetails, cookie, "");
+    SampleDetailsGroup(setLInforSampleDetails, cookie, "");
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Listado de observaciones | Bitácora BD`}</title>
+        <title>{`Listado de opciones | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan las observaciones predeterminadas del sistema`}
+          content={`Lugar donde se listan las opciones para los resultados del sistema`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,25 +33,25 @@ function CreatePage({ cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de observaciones - Bitácora BD`}
+          content={`Listado de opciones - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan las observaciones predeterminadas del sistema`}
+          content={`Lugar donde se listan las opciones para los resultados del sistema`}
         ></meta>
         <meta
           property="og:title"
-          content={`Listado de observaciones - Bitácora BD`}
+          content={`Listado de opciones - Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Lugar donde se listan las observaciones predeterminadas del sistema`}
+          content={`Lugar donde se listan las opciones para los resultados del sistema`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexObser InforSampleDetails={InforSampleDetails}></IndexObser>
+      <IndexGroup InforSampleDetails={InforSampleDetails}></IndexGroup>
     </>
   );
 }
@@ -85,7 +85,7 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.ObservacionPredeCreateAndUrl) {
+    if (!Options.OptionCreateAndUrl) {
       return { notFound: true };
     }
 
