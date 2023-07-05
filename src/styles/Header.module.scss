@@ -183,6 +183,9 @@
                 text-transform: capitalize;
                 text-align: center;
                 &.active {
+                  background: white;
+                  color: #111;
+                  position: relative;
                   border-bottom: solid 2px #ff6e00;
                 }
                 &:hover {
