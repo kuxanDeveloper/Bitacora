@@ -77,7 +77,6 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
             <Link
               href={{
                 pathname: "/Configuration/Users/IndexUsers",
-                hash: "Normal",
               }}
               className={styles.back_btn}
             >

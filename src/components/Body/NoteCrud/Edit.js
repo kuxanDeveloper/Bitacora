@@ -27,7 +27,6 @@ function ComponentEditNote({
     setisImagenExterna,
     setValueImagesrcExterna,
   } = useContextBitacora();
-  console.log(InfoNote);
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
 
   const validationSchema = Yup.object().shape({

@@ -1,5 +1,5 @@
 import React from "react";
-import Recovery from "../../components/Account/Recovery";
+import Recovery from "../../../components/Account/Recovery";
 import Head from "next/head";
 function ForgotPassword() {
   return (
