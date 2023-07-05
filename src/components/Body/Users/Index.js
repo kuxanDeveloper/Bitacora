@@ -23,27 +23,42 @@ function ComponentUsersIndex(InforSampleDetails) {
           </div>
 
           <p className={styles.title}>Listado de Usuarios</p>
-          <br />
+          <Link
+            href={{
+              pathname: "/Configuration/Users/CreateUser",
+            }}
+            className={styles.btn_create}
+          >
+            <span>&#10010; </span>
+            Crear Usuario
+          </Link>
           <div className={styles.card}>
-            <Link
-              href={{
-                pathname: "/Configuration/Users/CreateUser",
-              }}
-              className={styles.btn_create}
-            >
-              <span>&#10010; </span>
-              Crear Usuario
-            </Link>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th style={{ width: "20%" }}>Usuario</th>
-                  <th style={{ width: "20%" }}># de identidad</th>
-                  <th style={{ width: "15%" }}>Nombres</th>
-                  <th style={{ width: "15%" }}>Apellidos</th>
-                  <th style={{ width: "10%" }}>Estado</th>
-                  <th colSpan={2} style={{ width: "20%" }}>
-                    Opciones
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p>Usuario</p>{" "}
+                  </th>
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p># de identidad</p>{" "}
+                  </th>
+                  <th style={{ width: "15%" }}>
+                    {" "}
+                    <p>Nombres</p>{" "}
+                  </th>
+                  <th style={{ width: "15%" }}>
+                    {" "}
+                    <p>Apellidos</p>{" "}
+                  </th>
+                  <th style={{ width: "10%" }}>
+                    {" "}
+                    <p>Estado</p>{" "}
+                  </th>
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p>Opciones</p>{" "}
                   </th>
                 </tr>
               </thead>
@@ -79,11 +94,11 @@ function ComponentUsersIndex(InforSampleDetails) {
                                 width="18"
                                 height="18"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokelinecap="round"
+                                strokelinejoin="round"
                               >
                                 <path
                                   stroke="none"
@@ -113,11 +128,11 @@ function ComponentUsersIndex(InforSampleDetails) {
                                 width="18"
                                 height="18"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokelinecap="round"
+                                strokelinejoin="round"
                               >
                                 <path
                                   stroke="none"
