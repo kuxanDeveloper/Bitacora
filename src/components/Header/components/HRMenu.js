@@ -118,7 +118,7 @@ function HRMenu() {
                         else setSelectMenuConfigracion(true);
                       }}
                     >
-                      Parametrización
+                      configuración
                     </Link>
                     <div className={Styles.submenu}>
                       <ul className={Styles.sub_ul}>

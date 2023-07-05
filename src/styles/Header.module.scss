@@ -8,9 +8,47 @@
     align-items: center;
     min-height: 2.5rem;
     .close_session {
+
+      &.active .span .submenu {
+        display: block;
+      }
+
       position: absolute;
       right: 5%;
       top: calc(50% - 14px);
+
+      .span {
+        position: relative;
+
+        .submenu {
+
+
+          display: none;
+          background-color: #dbdbdb;
+          position: absolute;
+          right: 0;
+          bottom: -120px;
+        
+          .sub_ul {
+            padding: 0 10px;
+
+            .sub_li {
+              list-style: none;
+            
+              .sub_link {
+                text-decoration: none;
+                color: #ff6e00;
+                display: block;
+              }
+            
+            }
+
+          }
+        
+        }
+
+      }
+
     }
 
     .expand_nav {
@@ -141,6 +179,39 @@
         right: 5%;
         top: calc(50% - 14px);
         cursor: pointer;
+
+        .span {
+        position: relative;
+
+        .submenu {
+
+
+          display: none;
+          background-color: #dbdbdb;
+          position: absolute;
+          right: 0;
+          bottom: -120px;
+          z-index: 1;
+        
+          .sub_ul {
+            padding: 0 10px;
+
+            .sub_li {
+              list-style: none;
+            
+              .sub_link {
+                text-decoration: none;
+                color: #ff6e00;
+                display: block;
+              }
+            
+            }
+
+          }
+        
+        }
+
+      }
       }
 
       .header_logo {

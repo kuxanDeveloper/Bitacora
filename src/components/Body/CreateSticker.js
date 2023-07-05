@@ -84,7 +84,7 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
             </Link>
           </div>
 
-          <p className={styles.title}>Crear sticker</p>
+          <p className={styles.title}>Leer sticker</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitCreate)}>
