@@ -143,7 +143,7 @@ export default function Case({
                   data={data}
                   isActive={false}
                   Options={Options}
-                  isSampleGeneral={isSampleGeneral}
+                  isSampleGeneral={true}
                   LstObservacionesPrede={LstObservacionesPrede}
                 ></CaseComponent>
               ))

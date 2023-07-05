@@ -54,7 +54,6 @@ function HRMenu() {
                 <Link
                   href="/"
                   onClick={(e) => {
-                    e.preventDefault();
                     OnclickNAvToggle(MenuShow, setMenuShow);
                   }}
                   className={`${Styles.nav_link} ${
