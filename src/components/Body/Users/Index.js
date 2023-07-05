@@ -112,12 +112,13 @@ function ComponentUsersIndex(InforSampleDetails) {
                             </span>
                           </Link>
                         </td>
-                        {/* <td className={styleTable.textCenterColumn}>
+                        <td className={styleTable.textCenterColumn}>
                           <Link
                             title="Cambiar contraseña"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/Users/[id]",
+                              pathname:
+                                "/Configuration/Users/ForgotPasswordAdmin/[id]",
                               query: { id: data.Id_usuario },
                             }}
                           >
@@ -145,7 +146,7 @@ function ComponentUsersIndex(InforSampleDetails) {
                               </svg>
                             </span>
                           </Link>
-                        </td> */}
+                        </td>
                       </tr>
                     ))
                   : ""}

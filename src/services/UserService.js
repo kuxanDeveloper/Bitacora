@@ -52,6 +52,7 @@ export const userService = {
   EditObservations,
   InfoObservations,
   ChangePasswordUser,
+  ChangePasswordAdmin,
 };
 
 async function login(username, password) {
@@ -580,11 +581,27 @@ function ChangePasswordUser(CurrentPassword, NewPassword) {
   const CurrentPasswordHas = "0x" + hashBuffer.toString(CryptoJS.enc.Hex);
   const NewPasswordHas =
     "0x" + hashBufferNewPassword.toString(CryptoJS.enc.Hex);
-    debugger;
+  debugger;
   formData.append("Newpassword", NewPasswordHas);
   formData.append("Oldpassword", CurrentPasswordHas);
   return fetchWrapper.postHeader(
     `${baseUrl}/Usus/CambiarContraseniaUsuario`,
+    null,
+    formData
+  );
+}
+
+function ChangePasswordAdmin(CurrentPassword, NewPassword, Iduser) {
+  const formData = new FormData();
+
+  // let hashBufferNewPassword = CryptoJS.SHA256(NewPassword);
+  // const NewPasswordHas =
+  //   "0x" + hashBufferNewPassword.toString(CryptoJS.enc.Hex);
+
+  formData.append("Newpassword", NewPassword);
+  formData.append("IdUsuario", Iduser);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Usus/CambiarContraseniaAdmin`,
     null,
     formData
   );

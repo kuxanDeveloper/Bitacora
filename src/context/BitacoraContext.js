@@ -9,6 +9,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const router = useRouter();
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const [showModal, setShowModal] = useState(false);
+  const [showUser, setshowUser] = useState(false);
   const [showModalScanner, setshowModalScanner] = useState(false);
   const [authorized, setAuthorized] = useState(false);
   const [Urlauthorized, setUrlauthorized] = useState(false);
@@ -24,6 +25,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const [isImagenExterna, setisImagenExterna] = useState(false);
   const [ResultScanner, setResultScanner] = useState("");
   const [SelectMenuConfigracion, setSelectMenuConfigracion] = useState(false);
+
   const origin =
     typeof window !== "undefined" && window.location.origin
       ? window.location.origin
@@ -112,6 +114,8 @@ export const BicatoraContexProvider = ({ children }) => {
         setLstObservacionesPrede,
         SelectMenuConfigracion,
         setSelectMenuConfigracion,
+        showUser,
+        setshowUser,
       }}
     >
       {children}

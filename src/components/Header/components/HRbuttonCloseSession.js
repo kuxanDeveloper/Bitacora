@@ -1,19 +1,27 @@
 import React from "react";
 import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
+import { useContextBitacora } from "../../../context/BitacoraContext";
 import { userService } from "../../../services/UserService";
 function HRbuttonCloseSession() {
+  const { showUser, setshowUser } = useContextBitacora();
   return (
     <>
       <Link
         href={""}
-        title="Cerrar sesión"
         onClick={(e) => {
           e.preventDefault();
-          userService.logout();
+          if (showUser) {
+            setshowUser(false);
+          } else {
+            setshowUser(true);
+          }
         }}
+        title="Usuario"
       >
-        <div className={`${Styles.close_session} ${Styles.active}`}>
+        <div
+          className={`${Styles.close_session} ${showUser ? Styles.active : ""}`}
+        >
           <span className={Styles.span}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,12 +44,28 @@ function HRbuttonCloseSession() {
             <div className={Styles.submenu}>
               <ul className={Styles.sub_ul}>
                 <li className={Styles.sub_li}>
-                  <Link className={Styles.sub_link} rel="stylesheet" href="#">
+                  <Link
+                    className={Styles.sub_link}
+                    rel="stylesheet"
+                    onClick={() => {
+                      setshowUser(false);
+                    }}
+                    href="/Configuration/Users/ForgotPasswordUser"
+                  >
                     Cambiar Contraseña
                   </Link>
                 </li>
                 <li className={Styles.sub_li}>
-                  <Link className={Styles.sub_link} rel="stylesheet" href="#">
+                  <Link
+                    className={Styles.sub_link}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      userService.logout();
+                      setshowUser(false);
+                    }}
+                    rel="stylesheet"
+                    href=""
+                  >
                     Cerrar sesion
                   </Link>
                 </li>
