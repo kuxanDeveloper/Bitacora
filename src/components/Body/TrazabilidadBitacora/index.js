@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 
-function ComponentGroupIndex(InforSampleDetails) {
+function ComponentTrazaBitIndex({ InforSampleDetails }) {
   return (
     <>
       <section className={styles.Index_users}>
@@ -20,86 +20,50 @@ function ComponentGroupIndex(InforSampleDetails) {
             </Link>
           </div>
 
-          <p className={styles.title}>Listado de Trazabilidad de stickers</p>
+          <p className={styles.title}>
+            Listado de Trazabilidad en la lectura de stickers
+          </p>
           <br />
           <div className={styles.card}>
-            <Link
-              href={{
-                pathname: "/Configuration/Groups/CreateGroup",
-              }}
-              className={styles.btn_create}
-            >
-              <span>&#10010; </span>
-              Crear Grupo
-            </Link>
             <table className={styleTable.tableStyle}>
-              <thead>
-                <tr>
-                  <th style={{ width: "35%" }}>Nombre Grupo</th>
-                  <th style={{ width: "15%" }}>Estado</th>
-                  <th style={{ width: "15%" }}>Admite Sufijo</th>
-                  <th style={{ width: "15%" }}>Orden del grupo</th>
-                  <th style={{ width: "20%" }}>Opciones</th>
-                </tr>
-              </thead>
               <tbody>
-                {InforSampleDetails.InforSampleDetails != null &&
-                InforSampleDetails.InforSampleDetails != undefined
-                  ? InforSampleDetails.InforSampleDetails.map((data, index) => (
-                      <tr key={index}>
-                        <td>{data.NOMBRE_GRUPO}</td>
-                        <td className={styleTable.textCenterColumn}>
-                          {data.ESTADO == true ? (
-                            <span>&#x2705;</span>
-                          ) : (
-                            <span>&#10060;</span>
-                          )}
-                        </td>
-                        <td className={styleTable.textCenterColumn}>
-                          {data.ADMITE_SUFIJO == true ? (
-                            <span>&#x2705;</span>
-                          ) : (
-                            <span>&#10060;</span>
-                          )}
-                        </td>
-                        <td className={styleTable.textCenterColumn}>
-                          {data.ORDEN_GRUPO}
-                        </td>
-                        <td className={styleTable.textCenterColumn}>
-                          <Link
-                            title="Editar Grupo"
-                            className={styles.add_icon}
-                            href={{
-                              pathname: "/Configuration/Groups/[id]",
-                              query: { id: data.Id_grupo },
-                            }}
-                          >
-                            Editar
-                            <span className={styleTable.edit_icon}>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="#fff"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              >
-                                <path
-                                  stroke="none"
-                                  d="M0 0h24v24H0z"
-                                  fill="none"
-                                />
-                                <path d="M8 20l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4h4z" />
-                                <path d="M13.5 6.5l4 4" />
-                                <path d="M16 18h4" />
-                              </svg>
-                            </span>
-                          </Link>
-                        </td>
-                      </tr>
+                {InforSampleDetails != null && InforSampleDetails != undefined
+                  ? InforSampleDetails.map((data, index) => (
+                      <div key={index}>
+                        <tr key={index}>
+                          <th>Número de sticker</th>
+                          <th>Sufijo</th>
+                          <th>Usuario</th>
+                        </tr>
+                        <tr key={index}>
+                          <td>{data.NUMERO_STICKER}</td>
+                          <td>{data.SUFIJO_STICKER}</td>
+                          <td>{data.USU_CREADOR_AUD_BITACORA}</td>
+                        </tr>
+
+                        <tr key={index}>
+                          <th>Accion de la trazabilidad</th>
+                          <th>Descripcion de la trazabilidad</th>
+                        </tr>
+                        <tr key={index}>
+                          <td>{data.ACCION_BITACORA}</td>
+                          <td>{data.DESCRIPCION_BITACORA}</td>
+                        </tr>
+
+                        <tr key={index}>
+                          <th>Fecha trazabilidad</th>
+                          {data.TIPO_TRAZA == "3" ?
+                          <th>Calculo del resultado</th>
+                        :""}
+                        </tr>
+
+                        <tr key={index}>
+                          <td>{data.FECHA_CREACION_AUD_BITACORA}</td>
+                          {data.TIPO_TRAZA == "3" ?
+                          <td>{data.CALCULO_TIEMPO_RESULTADO}</td>
+                        :""}
+                        </tr>
+                      </div>
                     ))
                   : ""}
               </tbody>
@@ -111,4 +75,4 @@ function ComponentGroupIndex(InforSampleDetails) {
   );
 }
 
-export default ComponentGroupIndex;
+export default ComponentTrazaBitIndex;

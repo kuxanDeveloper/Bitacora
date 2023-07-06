@@ -1,20 +1,20 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
-import IndexUsers from "../../../components/Body/Users/Index";
-import { SampleDetailsUsers } from "../../api/Sample/ViewDetailsUser/[id]";
+import IndexTrazaBit from "../../components/Body/TrazabilidadBitacora/index";
+import { SampleDetailsTrazaBit } from "../api/Sample/ViewDetailsTrazabilidad/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
   OptionTecnichal,
   OptionConsult,
   OptionDefault,
-} from "../../../components/Tools/OpcitionHabilite";
+} from "../../components/Tools/OpcitionHabilite";
 
 function CreatePage(cookie) {
 
     const [InforSampleDetails, setLInforSampleDetails] = useState([]);
     useEffect(() => {
-      SampleDetailsUsers(setLInforSampleDetails,cookie,"");
+      SampleDetailsTrazaBit(setLInforSampleDetails,cookie,"","","","","","1");
     }, []);
 
   return (
@@ -52,9 +52,9 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexUsers
+      <IndexTrazaBit
       InforSampleDetails={InforSampleDetails}>        
-      </IndexUsers>
+      </IndexTrazaBit>
     </>
   );
 }
