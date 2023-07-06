@@ -216,9 +216,7 @@ export const onSubmitChangePassword = (CurrentPassword, NewPassword) => {
         confirmButtonText: "Ok",
       });
 
-      Router.push({
-        pathname: "/#Cactive",
-      });
+      Router.push("/#Cactive");
     })
     .catch((error) => {
       if (
