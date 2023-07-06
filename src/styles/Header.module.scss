@@ -22,16 +22,23 @@
 
         .submenu {
 
-
           display: none;
-          background-color: #dbdbdb;
+          background-color: #eeeeee;
           position: absolute;
           right: 0;
-          bottom: -120px;
-        
+          bottom: -110px;
+          width: 200px;
+          border-radius: 5px;
+          -webkit-box-shadow:  0px 6px 12px 1px rgb(94, 94, 94);
+          -moz-box-shadow:  0px 6px 12px 1px rgb(94, 94, 94);
+          box-shadow: 0px 6px 12px 1px rgb(94, 94, 94);
+
+
           .sub_ul {
             padding: 0 10px;
-
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             .sub_li {
               list-style: none;
             
@@ -39,7 +46,16 @@
                 text-decoration: none;
                 color: #ff6e00;
                 display: block;
+                padding: 5px 2px;
+                display: block;
+                border-bottom: 1px #cfcfcf solid;
+              
+                &:hover {
+                  background-color: #cfcfcf;
+                }
+              
               }
+
             
             }
 
@@ -153,6 +169,7 @@
                     }
                     &:hover {
                       color: #1b1b1b;
+                      background-color: #dbdbdb;
                     }
                   }
                 }
@@ -192,6 +209,7 @@
           right: 0;
           bottom: -120px;
           z-index: 1;
+          width: 200px;
         
           .sub_ul {
             padding: 0 10px;
