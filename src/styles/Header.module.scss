@@ -7,6 +7,12 @@
     justify-content: center;
     align-items: center;
     min-height: 2.5rem;
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
+
     .close_session {
 
       &.active .span .submenu {
