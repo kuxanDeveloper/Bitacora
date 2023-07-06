@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CaseNav from "./CaseNav";
-import CasesStatusUser from "./Body/CasesStatusUser";
 import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
@@ -18,6 +17,7 @@ export default function Case({
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
 }) {
+  const [urlImagenDinamyc, seturlImagenDinamyc] = useState("");
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
@@ -26,48 +26,41 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
-  // const ListadoMuestrasInactiveUserInter = UserInternosInactive(
-  //   ListadoMuestraInactivo
-  // );
-  // const ListadoMuestrasInactiveUserExterno = UserExternosInactive(
-  //   ListadoMuestraInactivo
-  // );
 
-  // const ListadoUsuariosInternosActivesGenerales = UserInternosActiveGenerales(
-  //   ListadoMuestrasActiveUserInter
-  // );
+  useEffect(() => {
+    debugger;
+    let objGroup = ListadoGrupo.find((e) => e.Id_grupo == idGruop);
 
-  // const ListadoUsuariosInternosActivesUrgencias = UserInternosActiveUrgencias(
-  //   ListadoMuestrasActiveUserInter
-  // );
-
-  // const ListadoUsuariosExternosActivesGenerales = UserExternosActiveGenerales(
-  //   ListadoMuestrasActiveUserExterno
-  // );
-
-  // const ListadoUsuariosExternosActivesUrgencias = UserExternosActiveUrgencias(
-  //   ListadoMuestrasActiveUserExterno
-  // );
+    if (objGroup != undefined && objGroup != null) {
+      if (
+        objGroup.URL_IMAGEN != null &&
+        objGroup.URL_IMAGEN != undefined &&
+        objGroup.URL_IMAGEN != ""
+      ) {
+        seturlImagenDinamyc(objGroup.URL_IMAGEN);
+        return;
+      } else {
+        seturlImagenDinamyc(
+          "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=925&q=80"
+        );
+      }
+    }
+  }, [ListadoGrupo]);
 
   return (
     <>
-      {/* usuario externo o interno... <CasesStatusUser
-        HrefArmado={HrefArmado}
-        isTrueActive={isTrueActive}
-        isUserInterno={isUserInterno}
-        idGruop={idGruop}
-        isSampleGeneral={isSampleGeneral}
-      ></CasesStatusUser> */}
       {/* grupos */}
       <CaseNav
         HrefArmado={HrefArmado}
         ListadoGrupo={ListadoGrupo}
         idGruop={idGruop}
         isTrueActive={isTrueActive}
-        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-      <section className={caseStyles.cases}>
+      <section
+        className={caseStyles.cases}
+        style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
+      >
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
             <div className={caseStyles.state}>
