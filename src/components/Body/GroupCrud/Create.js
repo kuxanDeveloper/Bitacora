@@ -100,7 +100,7 @@ function ComponentGroup() {
                         {...register("AlertaHoras")}
                         name="AlertaHoras"
                         maxLength="2"
-                        max="99"
+                        max="5000"
                         type="number"
                         min="0"
                         className={styles.group_input}
