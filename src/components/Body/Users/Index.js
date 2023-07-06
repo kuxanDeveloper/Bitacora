@@ -97,8 +97,8 @@ function ComponentUsersIndex(InforSampleDetails) {
                                 strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                strokelinecap="round"
-                                strokelinejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               >
                                 <path
                                   stroke="none"
@@ -132,8 +132,8 @@ function ComponentUsersIndex(InforSampleDetails) {
                                 strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                strokelinecap="round"
-                                strokelinejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               >
                                 <path
                                   stroke="none"

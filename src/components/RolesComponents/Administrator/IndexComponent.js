@@ -18,8 +18,13 @@ function IndexComponentAdmin({
                   <figure className={CardStyles.card_figure}>
                     <ImageOptimize
                       Values={{
-                        src: "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
-                        alt: "imagen de grupo",
+                        src:
+                          data.URL_IMAGEN != null &&
+                          data.URL_IMAGEN != "" &&
+                          data.URL_IMAGEN != undefined
+                            ? data.URL_IMAGEN
+                            : "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
+                        alt: data.NOMBRE_GRUPO,
                         title: data.NOMBRE_GRUPO,
                         classValue: CardStyles.card_img,
                         width: 1920,
@@ -74,8 +79,13 @@ function IndexComponentAdmin({
                 <figure className={CardStyles.card_figure}>
                   <ImageOptimize
                     Values={{
-                      src: "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
-                      alt: "imagen de grupo",
+                      src:
+                        da.URL_IMAGEN != null &&
+                        da.URL_IMAGEN != "" &&
+                        da.URL_IMAGEN != undefined
+                          ? da.URL_IMAGEN
+                          : "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
+                      alt: da.NOMBRE_GRUPO,
                       title: da.NOMBRE_GRUPO,
                       classValue: CardStyles.card_img,
                       width: 1920,

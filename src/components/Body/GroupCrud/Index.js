@@ -85,8 +85,8 @@ function ComponentGroupIndex(InforSampleDetails) {
                                 strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                strokelinecap="round"
-                                strokelinejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               >
                                 <path
                                   stroke="none"

@@ -40,7 +40,7 @@ function Details({ data, Options, name_group, sticker }) {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-camera"
+          className="icon icon-tabler icon-tabler-camera"
           width="25"
           height="25"
           viewBox="0 0 24 24"
