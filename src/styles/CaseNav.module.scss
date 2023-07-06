@@ -12,24 +12,41 @@
     .navegation_bar {
       padding: 0;
       display: flex;
-      gap: 5px;
       position: relative;
       .nav_li {
         list-style: none;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-align: center;
+        padding: 15px 25px;
+        border: 1px solid #ddd;
+        border-bottom: 0;
+        background: #eeeeee;
+        color: #444;
 
         &.selected {
+          background: white;
+          color: #111;
+          position: relative;
           border-bottom: solid 3px #e57d00;
         }
         &:first-child {
           padding-left: 15px;
           max-width: 100px;
-          text-align: left;
+          text-align: center;
+          min-width: unset;
+
+          .nav_link {
+            
+            min-width: unset;
+          }
+
           &::before {
             content: "<";
             position: absolute;
-            left: 0;
+            left: 3%;
+            text-align: center;
             color: #e57d00;
             font-weight: 800;
           }
@@ -53,17 +70,25 @@
       .navegation_bar {
         padding: 0;
         display: flex;
-        gap: 5px;
-        max-width: 425px;
         margin: 0 auto;
         .nav_li {
           position: relative;
           list-style: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          padding: 15px 25px;
+          border: 1px solid #ddd;
+          border-bottom: 0;
+          background: #eeeeee;
+          color: #444;
+
           &.selected {
             border-bottom: solid 3px #e57d00;
           }
           &:first-child {
-            padding-left: 15px;
+            padding-left: 0px;
             &::before {
               content: "<";
               position: absolute;
@@ -100,25 +125,31 @@
       background: #e6e6e6;
     }
 
-
-
     .nav_container {
       overflow-x: visible;
       padding: 0.5rem 0;
-      
 
       .navegation_bar {
         padding: 0;
         display: flex;
-        gap: 5px;
         position: relative;
         max-width: unset;
         .nav_li {
           list-style: none;
-          display: block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           text-align: center;
+          padding: 15px 25px;
+          border: 1px solid #ddd;
+          border-bottom: 0;
+          background: #eeeeee;
+          color: #444;
 
           &.selected {
+            background: white;
+            color: #111;
+            position: relative;
             border-bottom: solid 3px #e57d00;
           }
           &:first-child {

@@ -188,6 +188,7 @@ function ComponentsCreateNote({
                             : ""
                           : ""}
                       </select>
+                      <div>{errors.Observaciones_detalle?.message}</div>
                     </div>
                     {ShowobservaTextare ? (
                       <div className={styles.input_group}>

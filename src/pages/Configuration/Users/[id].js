@@ -108,15 +108,18 @@ export async function getServerSideProps(ctx) {
 
     if (
       ctx.query.id == undefined ||
-      ctx.query.id == null || 
-      !Options.BtnEditStickerAndUrl
-      ) {
+      ctx.query.id == null ||
+      !Options.UserConfigEditAnUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { 
-      cookie: cookie,
-      id: ctx.query.id,    } };
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
   } else {
     return {
       redirect: {

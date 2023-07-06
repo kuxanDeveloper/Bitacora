@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../../styles/StickerDetails.module.scss";
-import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 function Details({ data, Options, name_group, sticker }) {
@@ -12,6 +11,8 @@ function Details({ data, Options, name_group, sticker }) {
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
     setisImagenOne,
+    setValueImagesrc2,
+    setValueImagesrc,
   } = useContextBitacora();
   return (
     <div className={styles.followup}>
@@ -32,12 +33,14 @@ function Details({ data, Options, name_group, sticker }) {
               : null
           );
           setValueImagesrcExterna2(null);
+          setValueImagesrc2(null);
+          setValueImagesrc(null);
         }}
         className={styles.img_icon}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-camera"
+          className="icon icon-tabler icon-tabler-camera"
           width="25"
           height="25"
           viewBox="0 0 24 24"

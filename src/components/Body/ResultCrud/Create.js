@@ -49,7 +49,7 @@ function ComponentCreateResult({
             </Link>
           </div>
 
-          <p className={styles.title}>Crear prueba</p>
+          <p className={styles.title}>Actualizar estado</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitCreateResult)}>

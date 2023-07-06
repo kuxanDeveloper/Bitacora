@@ -1,6 +1,9 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { SampleDetailsRoles,SampleDetailsTiposIDE } from "../../api/Sample/ViewDetailsUser/[id]";
+import {
+  SampleDetailsRoles,
+  SampleDetailsTiposIDE,
+} from "../../api/Sample/ViewDetailsUser/[id]";
 import CreateUser from "../../../components/Body/Users/Create";
 import {
   OptionAdministrator,
@@ -10,17 +13,16 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-
+function CreatePage({ cookie }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-      SampleDetailsRoles(setLInforSampleDetails,cookie);
-    }, []);
+  useEffect(() => {
+    SampleDetailsRoles(setLInforSampleDetails, cookie);
+  }, []);
 
-    const [InforSampleTips, setLInforSampleTips] = useState([]);
-    useEffect(() => {
-      SampleDetailsTiposIDE(setLInforSampleTips,cookie);
-    }, []);
+  const [InforSampleTips, setLInforSampleTips] = useState([]);
+  useEffect(() => {
+    SampleDetailsTiposIDE(setLInforSampleTips, cookie);
+  }, []);
 
   return (
     <>
@@ -57,9 +59,10 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateUser InforSampleDetails={InforSampleDetails} 
-      InforSampleTips={InforSampleTips}>
-      </CreateUser>
+      <CreateUser
+        InforSampleDetails={InforSampleDetails}
+        InforSampleTips={InforSampleTips}
+      ></CreateUser>
     </>
   );
 }
@@ -77,7 +80,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -93,14 +96,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.UserConfigCreateAndUrl) {
       return { notFound: true };
     }
-    
-    return {props:{mensaje:null}};
 
+    return { props: { cookie: cookie } };
   } else {
     return {
       redirect: {

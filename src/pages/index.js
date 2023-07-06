@@ -119,34 +119,6 @@ export default function Home({
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
 
-      {/* {Roles.map((data, index) => {
-        let ValorRetorno = null;
-        switch (data) {
-          case 1:
-            ValorRetorno =
-              ListadoGrupoActivo != undefined &&
-              ListadoGrupoActivo != null &&
-              ListadoGrupoInactivo != undefined &&
-              ListadoGrupoInactivo != null ? (
-                <Filters
-                  key={index}
-                  ListadoGrupoActivo={ListadoGrupoActivo}
-                  isActiveGroup={true}
-                  isActiveCase={false}
-                  ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
-                  CasosActivo_Inactivos={isTrueActive}
-                ></Filters>
-              ) : (
-                ""
-              );
-            break;
-
-          default:
-            ValorRetorno = "";
-            break;
-        }
-        return ValorRetorno;
-      })} */}
 
       {ListadoGrupoActivo != undefined &&
       ListadoGrupoActivo != null &&

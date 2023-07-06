@@ -253,7 +253,7 @@ export default function Filters({
                     pathname: "/Sample/Create/[id]",
                     query: { id: GruopValue == "" ? 6 : GruopValue },
                   }}
-                  title="Crear sticker"
+                  title="Leer sticker"
                   className={filterStyles.add_followup}
                 >
                   <svg

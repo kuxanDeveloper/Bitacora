@@ -602,13 +602,22 @@ export const UploadImageSticker = (
 
 export const LocationUrl = (router, value) => {
   let aciteMenuClass = false;
-
-  if (router.pathname.toLowerCase().includes(value)) {
+  if (router.pathname.toLowerCase().includes(value.toLowerCase())) {
     aciteMenuClass = true;
   }
 
   return aciteMenuClass;
 };
+
+// export const LocationSubMenuUrl = (router, value) => {
+//   let aciteMenuClass = false;
+
+//   if (router.pathname.toLowerCase().includes(value)) {
+//     aciteMenuClass = true;
+//   }
+
+//   return aciteMenuClass;
+// };
 
 export const AperturaandCierre = (data, LstObservacionesPrede) => {
   window.OnchangeValueSelect = function (value) {
@@ -632,8 +641,8 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
       : "¿Estás seguro de que deseas abrir el caso de esta orden?",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
+    confirmButtonColor: "#e57d00",
+    cancelButtonColor: "#767676",
     confirmButtonText: data.ESTADO_STICKER
       ? "Si,cerrar orden"
       : "Si,abrir orden",
@@ -672,7 +681,8 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
         },
         showCancelButton: true,
         confirmButtonText: "OK",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#e57d00",
+        cancelButtonColor: "#767676",
         showLoaderOnConfirm: true,
         // inputValidator: (value) => {
         //   let classCancel =

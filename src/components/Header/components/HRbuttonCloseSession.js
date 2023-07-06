@@ -1,37 +1,78 @@
 import React from "react";
 import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
+import { useContextBitacora } from "../../../context/BitacoraContext";
 import { userService } from "../../../services/UserService";
 function HRbuttonCloseSession() {
+  const { showUser, setshowUser } = useContextBitacora();
   return (
     <>
-      <Link
-        href={""}
-        title="Cerrar sesión"
+      <button
         onClick={(e) => {
           e.preventDefault();
-          userService.logout();
+          if (showUser) {
+            setshowUser(false);
+          } else {
+            setshowUser(true);
+          }
         }}
+        title="Usuario"
       >
-        <span className={Styles.close_session}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#2f2f2f"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5" />
-            <line x1="10" y1="14" x2="20" y2="4" />
-            <polyline points="15 4 20 4 20 9" />
-          </svg>
-        </span>
-      </Link>
+        <div
+          className={`${Styles.close_session} ${showUser ? Styles.active : ""}`}
+        >
+          <span className={Styles.span}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-user-circle"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#000000"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+              <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+              <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+            </svg>
+
+            <div className={Styles.submenu}>
+              <ul className={Styles.sub_ul}>
+                <li className={Styles.sub_li}>
+                  <Link
+                    className={Styles.sub_link}
+                    rel="stylesheet"
+                    onClick={() => {
+                      setshowUser(false);
+                    }}
+                    href="/Configuration/Users/ForgotPasswordUser"
+                  >
+                    Cambiar Contraseña
+                  </Link>
+                </li>
+                <li className={Styles.sub_li}>
+                  <Link
+                    className={Styles.sub_link}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      userService.logout();
+                      setshowUser(false);
+                    }}
+                    rel="stylesheet"
+                    href=""
+                  >
+                    Cerrar sesion
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </span>
+        </div>
+      </button>
     </>
   );
 }

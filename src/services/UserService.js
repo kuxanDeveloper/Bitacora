@@ -50,7 +50,9 @@ export const userService = {
   EditUser,
   CreatObservations,
   EditObservations,
-  InfoObservations
+  InfoObservations,
+  ChangePasswordUser,
+  ChangePasswordAdmin,
 };
 
 async function login(username, password) {
@@ -358,7 +360,7 @@ function CreatGroup(
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
   formData.append("Orden_Grupo", OrdenGrupo);
-  
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
     null,
@@ -382,7 +384,7 @@ function EditGroup(
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
   formData.append("Orden_Grupo", OrdenGrupo);
-  
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,
     null,
@@ -436,16 +438,13 @@ function CloseCaseSample(id, observacionCaso, Estado) {
 
 function lstObservall(cookie) {
   return fetchWrapper.get(
-    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=`,
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=&EstadoObservacion=1`,
     cookie
   );
 }
 
 function InfoSampleUsers(cookie, IdUser) {
-  return fetchWrapper.get(
-    `${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`, cookie);
 }
 
 function CreateUser(
@@ -460,122 +459,150 @@ function CreateUser(
   Telefono,
   Extencion,
   EstadoUsuario
-  ) {
-    const formData = new FormData();
-    formData.append("email", Email);
-    formData.append("Num_Identidad", NumIdentidad);
-    formData.append("Tipo_documento", TipoIdentidad);
-    formData.append("nombres", Nombres);
-    formData.append("apellidos", Apellidos);
-    formData.append("password", Password);
-    formData.append("telf", Celular);
-    formData.append("roles", Rol);
-    formData.append("Telefono_fijo", Telefono);
-    formData.append("EXTENCION", Extencion);
-    formData.append("estado_usuario", EstadoUsuario);
-    
-    return fetchWrapper.postHeader(
-      `${baseUrl}/Usus/GuardUsuario`,
-      null,
-      formData
-    );
-  }
+) {
+  const formData = new FormData();
+  formData.append("email", Email);
+  formData.append("Num_Identidad", NumIdentidad);
+  formData.append("Tipo_documento", TipoIdentidad);
+  formData.append("nombres", Nombres);
+  formData.append("apellidos", Apellidos);
+  formData.append("password", Password);
+  formData.append("telf", Celular);
+  formData.append("roles", Rol);
+  formData.append("Telefono_fijo", Telefono);
+  formData.append("EXTENCION", Extencion);
+  formData.append("estado_usuario", EstadoUsuario);
 
-  function EditUser(
-    Id_Usuario,
-    Email,
-    NumIdentidad,
-    TipoIdentidad,
-    Nombres,
-    Apellidos,
-    Celular,
-    Rol,
-    Telefono,
-    Extencion,
-    EstadoUsuario
-    ) {
-      const formData = new FormData();
-      formData.append("Id", Id_Usuario);
-      formData.append("email", Email);
-      formData.append("Num_Identidad", NumIdentidad);
-      formData.append("Tipo_documento", TipoIdentidad);
-      formData.append("nombres", Nombres);
-      formData.append("apellidos", Apellidos);
-      formData.append("telf", Celular);
-      formData.append("roles", Rol);
-      formData.append("Telefono_fijo", Telefono);
-      formData.append("EXTENCION", Extencion);
-      formData.append("estado_usuario", EstadoUsuario);
-      
-      return fetchWrapper.postHeader(
-        `${baseUrl}/Usus/EditarUsuario`,
-        null,
-        formData
-      );
-    }
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Usus/GuardUsuario`,
+    null,
+    formData
+  );
+}
 
-  function InfoSampleRoles(cookie) {
-    return fetchWrapper.get(
-      `${baseUrl}/Usus/GetInfoRol`,
-      cookie
-    );
-  }
+function EditUser(
+  Id_Usuario,
+  Email,
+  NumIdentidad,
+  TipoIdentidad,
+  Nombres,
+  Apellidos,
+  Celular,
+  Rol,
+  Telefono,
+  Extencion,
+  EstadoUsuario
+) {
+  const formData = new FormData();
+  formData.append("Id", Id_Usuario);
+  formData.append("email", Email);
+  formData.append("Num_Identidad", NumIdentidad);
+  formData.append("Tipo_documento", TipoIdentidad);
+  formData.append("nombres", Nombres);
+  formData.append("apellidos", Apellidos);
+  formData.append("telf", Celular);
+  formData.append("roles", Rol);
+  formData.append("Telefono_fijo", Telefono);
+  formData.append("EXTENCION", Extencion);
+  formData.append("estado_usuario", EstadoUsuario);
 
-  function InfoSampleTips(cookie) {
-    return fetchWrapper.get(
-      `${baseUrl}/Usus/GetTiposIdentificacion`,
-      cookie
-    );
-  }
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Usus/EditarUsuario`,
+    null,
+    formData
+  );
+}
 
-  function CreatObservations(
-    DescripcionObservacion,
-    obs_cierre,
-    obs_reapertura,
-    obs_bitacora,
-    Estado_observacion
-  ) {
-    const formData = new FormData();
-    formData.append("DescripcionObservacion", DescripcionObservacion);
-    formData.append("obs_cierre", obs_cierre);
-    formData.append("obs_reapertura", obs_reapertura);
-    formData.append("obs_bitacora", obs_bitacora);
-    formData.append("estado_observacion", Estado_observacion);
-    
-    return fetchWrapper.postHeader(
-      `${baseUrl}/Observacion/GuardarObservacionPredeterminada`,
-      null,
-      formData
-    );
-  }
-  
-  function EditObservations(
-    Cod_Observacion,
-    DescripcionObservacion,
-    obs_cierre,
-    obs_reapertura,
-    obs_bitacora,
-    Estado_observacion
-  ) {
-    const formData = new FormData();
-  
-    formData.append("Cod_Observacion", Cod_Observacion);
-    formData.append("DescripcionObservacion", DescripcionObservacion);
-    formData.append("obs_cierre", obs_cierre);
-    formData.append("obs_reapertura", obs_reapertura);
-    formData.append("obs_bitacora", obs_bitacora);
-    formData.append("estado_observacion", Estado_observacion);
-    
-    return fetchWrapper.postHeader(
-      `${baseUrl}/Observacion/EditadaObservacionBitacora`,
-      null,
-      formData
-    );
-  }
-  
-  function InfoObservations(Cod_Observacion, cookie) {
-    return fetchWrapper.get(
-      `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=`,
-      cookie
-    );
-  }
+function InfoSampleRoles(cookie) {
+  return fetchWrapper.get(`${baseUrl}/Usus/GetInfoRol`, cookie);
+}
+
+function InfoSampleTips(cookie) {
+  return fetchWrapper.get(`${baseUrl}/Usus/GetTiposIdentificacion`, cookie);
+}
+
+function CreatObservations(
+  DescripcionObservacion,
+  obs_cierre,
+  obs_reapertura,
+  obs_bitacora,
+  Estado_observacion
+) {
+  const formData = new FormData();
+  formData.append("DescripcionObservacion", DescripcionObservacion);
+  formData.append("obs_cierre", obs_cierre);
+  formData.append("obs_reapertura", obs_reapertura);
+  formData.append("obs_bitacora", obs_bitacora);
+  formData.append("estado_observacion", Estado_observacion);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Observacion/GuardarObservacionPredeterminada`,
+    null,
+    formData
+  );
+}
+
+function EditObservations(
+  Cod_Observacion,
+  DescripcionObservacion,
+  obs_cierre,
+  obs_reapertura,
+  obs_bitacora,
+  Estado_observacion
+) {
+  const formData = new FormData();
+
+  formData.append("Cod_Observacion", Cod_Observacion);
+  formData.append("DescripcionObservacion", DescripcionObservacion);
+  formData.append("obs_cierre", obs_cierre);
+  formData.append("obs_reapertura", obs_reapertura);
+  formData.append("obs_bitacora", obs_bitacora);
+  formData.append("estado_observacion", Estado_observacion);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Observacion/EditadaObservacionBitacora`,
+    null,
+    formData
+  );
+}
+
+function InfoObservations(Cod_Observacion, cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=`,
+    cookie
+  );
+}
+
+function ChangePasswordUser(CurrentPassword, NewPassword) {
+  const formData = new FormData();
+
+  let hashBuffer = CryptoJS.SHA256(CurrentPassword);
+  let hashBufferNewPassword = CryptoJS.SHA256(NewPassword);
+  const CurrentPasswordHas = "0x" + hashBuffer.toString(CryptoJS.enc.Hex);
+  const NewPasswordHas =
+    "0x" + hashBufferNewPassword.toString(CryptoJS.enc.Hex);
+  debugger;
+  formData.append("Newpassword", NewPasswordHas);
+  formData.append("Oldpassword", CurrentPasswordHas);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Usus/CambiarContraseniaUsuario`,
+    null,
+    formData
+  );
+}
+
+function ChangePasswordAdmin(CurrentPassword, NewPassword, Iduser) {
+  const formData = new FormData();
+
+  // let hashBufferNewPassword = CryptoJS.SHA256(NewPassword);
+  // const NewPasswordHas =
+  //   "0x" + hashBufferNewPassword.toString(CryptoJS.enc.Hex);
+
+  formData.append("Newpassword", NewPassword);
+  formData.append("IdUsuario", Iduser);
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Usus/CambiarContraseniaAdmin`,
+    null,
+    formData
+  );
+}

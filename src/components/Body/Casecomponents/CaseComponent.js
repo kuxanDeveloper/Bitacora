@@ -18,6 +18,8 @@ export default function CaseComponent({
     setisImagenExterna,
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
+    setValueImagesrc2,
+    setValueImagesrc,
   } = useContextBitacora();
 
   return (
@@ -33,6 +35,8 @@ export default function CaseComponent({
               setishabiliteBtn(false);
               setdobleImagen(true);
               setisImagenExterna(true);
+              setValueImagesrc2(null);
+              setValueImagesrc(null);
               setValueImagesrcExterna(
                 data.URL_PRIMERA_IMAGEN != null &&
                   data.URL_PRIMERA_IMAGEN != undefined &&

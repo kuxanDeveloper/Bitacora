@@ -11,8 +11,10 @@ function ComponentUsersIndex(InforSampleDetails) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/index",
-                hash: "Normal",
+                pathname: "/[id]",
+                query: {
+                  id: 6,
+                },
               }}
               className={styles.back_btn}
             >
@@ -21,26 +23,43 @@ function ComponentUsersIndex(InforSampleDetails) {
           </div>
 
           <p className={styles.title}>Listado de Usuarios</p>
-          <br />
+          <Link
+            href={{
+              pathname: "/Configuration/Users/CreateUser",
+            }}
+            className={styles.btn_create}
+          >
+            <span>&#10010; </span>
+            Crear Usuario
+          </Link>
           <div className={styles.card}>
-            <Link
-              href={{
-                pathname: "/Configuration/Users/CreateUser",
-              }}
-              className={styles.btn_create}
-            >
-              <span>&#10010; </span>
-              Crear Usuario
-            </Link>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th style={{ width: "20%" }}>Usuario</th>
-                  <th style={{ width: "20%" }}># de identidad</th>
-                  <th style={{ width: "15%" }}>Nombres</th>
-                  <th style={{ width: "15%" }}>Apellidos</th>
-                  <th style={{ width: "10%" }}>Estado</th>
-                  <th style={{ width: "20%" }}>Opciones</th>
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p>Usuario</p>{" "}
+                  </th>
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p># de identidad</p>{" "}
+                  </th>
+                  <th style={{ width: "15%" }}>
+                    {" "}
+                    <p>Nombres</p>{" "}
+                  </th>
+                  <th style={{ width: "15%" }}>
+                    {" "}
+                    <p>Apellidos</p>{" "}
+                  </th>
+                  <th style={{ width: "10%" }}>
+                    {" "}
+                    <p>Estado</p>{" "}
+                  </th>
+                  <th style={{ width: "20%" }}>
+                    {" "}
+                    <p>Opciones</p>{" "}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -75,11 +94,46 @@ function ComponentUsersIndex(InforSampleDetails) {
                                 width="18"
                                 height="18"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="#fff"
                                 fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M8 20l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4h4z" />
+                                <path d="M13.5 6.5l4 4" />
+                                <path d="M16 18h4" />
+                              </svg>
+                            </span>
+                          </Link>
+                        </td>
+                        <td className={styleTable.textCenterColumn}>
+                          <Link
+                            title="Cambiar contraseña"
+                            className={styles.add_icon}
+                            href={{
+                              pathname:
+                                "/Configuration/Users/ForgotPasswordAdmin/[id]",
+                              query: { id: data.Id_usuario },
+                            }}
+                          >
+                            Cambiar contraseña
+                            <span className={styleTable.edit_icon}>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="#fff"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                               >
                                 <path
                                   stroke="none"
