@@ -9,7 +9,6 @@ function IndexComponentTechni({
 }) {
   return (
     <>
-      Rol del tecnico
       {HabilitarActive
         ? ListadoGrupoActivo != undefined && ListadoGrupoActivo != null
           ? ListadoGrupoActivo.map((data, index) => (

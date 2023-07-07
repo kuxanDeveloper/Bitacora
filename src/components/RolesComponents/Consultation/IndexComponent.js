@@ -9,7 +9,6 @@ function IndexComponentConsul({
 }) {
   return (
     <>
-      Rol de consultor
       {HabilitarActive
         ? ListadoGrupoActivo != undefined && ListadoGrupoActivo != null
           ? ListadoGrupoActivo.map((data, index) => (

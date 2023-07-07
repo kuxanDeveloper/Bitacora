@@ -9,7 +9,6 @@ function IndexComponentAssis({
 }) {
   return (
     <>
-      Rol de auxiliar
       {HabilitarActive
         ? ListadoGrupoActivo != undefined && ListadoGrupoActivo != null
           ? ListadoGrupoActivo.map((data, index) => (
