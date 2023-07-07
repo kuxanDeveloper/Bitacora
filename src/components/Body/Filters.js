@@ -19,7 +19,6 @@ export default function Filters({
   dateAdmision,
   result,
   URS,
-  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
   Options,

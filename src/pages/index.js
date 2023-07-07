@@ -79,6 +79,11 @@ export default function Home({
     };
   }, [router.events]);
 
+  useEffect(()=>{
+
+    
+  },[]);
+
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
     ListadoGrupoInactivo == "401: Token incorrecto o vencido"
