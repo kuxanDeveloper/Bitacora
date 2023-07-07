@@ -3,10 +3,39 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   .filters_container {
-    padding: 0 0.5rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 5px;
+
+    padding: 0 0.5rem;
+
+    .add_followup_container {
+      border: none;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .add_followup {
+        width: 100%;
+        display: block;
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #e57d00;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        text-align: center;
+        font-weight: 600;
+        color: #fff;
+        position: relative;
+
+        svg {
+          left: 20%;
+          top: calc(50% - 12px);
+          position: absolute;
+        }
+      }
+    }
 
     .inputs_container {
       display: flex;
@@ -57,16 +86,6 @@
         justify-content: center;
         align-items: center;
       }
-
-      .add_followup {
-        padding: 5px;
-        border-radius: 10px;
-        background-color: #e57d00;
-        border: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
     }
   }
 }
@@ -98,6 +117,16 @@
       display: flex;
       justify-content: center;
       gap: 5px;
+
+      .add_followup_container {
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #e57d00;
+        border: none;
+        .add_followup {
+        }
+      }
+
       .inputs_container {
         display: flex;
         justify-content: center;
@@ -142,13 +171,6 @@
           background-color: #e57d00;
           border: none;
         }
-
-        .add_followup {
-          padding: 5px;
-          border-radius: 10px;
-          background-color: #e57d00;
-          border: none;
-        }
       }
     }
   }
@@ -170,6 +192,14 @@
     }
 
     .filters_container {
+      .add_followup_container {
+        padding: 5px;
+        border-radius: 10px;
+        background-color: #e57d00;
+        border: none;
+        .add_followup {
+        }
+      }
       .inputs_container {
         .filter_input {
           &:focus {
@@ -185,9 +215,6 @@
       }
       .buttons_container {
         .search {
-        }
-
-        .add_followup {
         }
       }
     }

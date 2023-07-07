@@ -36,6 +36,31 @@ function ComponentCreateResult({
     <>
       <section className={styles.Create_Result}>
         <div className={styles.sticker_container}>
+          <div className={styles.home_btn_container}>
+            <Link
+              href={`/${id}#Cactive#OverallSample`}
+              className={styles.home_btn}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class={styles.icon}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#fff"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                <path d="M10 12h4v4h-4z" />
+              </svg>
+            </Link>
+          </div>
+
           <div className={styles.back_btn_container}>
             <Link
               href={{
@@ -45,7 +70,23 @@ function ComponentCreateResult({
               }}
               className={styles.back_btn}
             >
-              Volver{" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.icon}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="4"
+                stroke="#e57d00"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l6 6" />
+                <path d="M5 12l6 -6" />
+              </svg>
+              Volver
             </Link>
           </div>
 
@@ -58,14 +99,24 @@ function ComponentCreateResult({
                   {/* <!-- estado --> */}
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>
+                      <label
+                        className={`${styles.group_title} ${styles.inline}`}
+                      >
                         Número de sticker :
                       </label>
-                      <p>{sticker}</p>
+                      <p className={styles.inline}>{sticker}</p>
                     </div>
+                  </div>
+                  <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Grupo :</label>
-                      <p>{name_group}</p>
+                      <div className={`${styles.input_group}`}>
+                        <label
+                          className={`${styles.group_title} ${styles.inline}`}
+                        >
+                          Grupo :
+                        </label>
+                        <p className={styles.inline}>{name_group}</p>
+                      </div>
                     </div>
                   </div>
 
