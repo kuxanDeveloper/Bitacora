@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import IndexTrazaBit from "../../components/Body/TrazabilidadBitacora/index";
+import FilterTrazaBit from "../../components/Body/TrazabilidadBitacora/FilterBitacora";
 import { SampleDetailsTrazaBit } from "../api/Sample/ViewDetailsTrazabilidad/[id]";
 import {
   OptionAdministrator,
@@ -9,12 +10,13 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../components/Tools/OpcitionHabilite";
+import { queryListUserAll } from "../../components/Tools//Security";
 
-function CreatePage(cookie) {
+function CreatePage({cookie,ListadoUsuariosRegistrados,query}) {
 
     const [InforSampleDetails, setLInforSampleDetails] = useState([]);
     useEffect(() => {
-      SampleDetailsTrazaBit(setLInforSampleDetails,cookie,"","","","","","1");
+      SampleDetailsTrazaBit(setLInforSampleDetails,cookie,query.dateAdmision,query.dateFinal,query.NumSticker,query.Sufijo,query.URS,"1");
     }, []);
 
   return (
@@ -52,6 +54,14 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
+      <FilterTrazaBit
+      ListadoUsuariosRegistrados={ListadoUsuariosRegistrados} 
+      NumSticker={query.NumSticker} 
+      dateAdmision={query.dateAdmision} 
+      dateFinal={query.dateFinal} 
+      URS={query.URS} 
+      Sufij={query.Sufijo} 
+      ></FilterTrazaBit>
       <IndexTrazaBit
       InforSampleDetails={InforSampleDetails}>        
       </IndexTrazaBit>
@@ -94,7 +104,14 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
     
-    return {props:{mensaje:null}};
+    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
+    return {
+      props: {
+        cookie: cookie,
+        query: ctx.query,
+        ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
+      },
+    };
 
   } else {
     return {

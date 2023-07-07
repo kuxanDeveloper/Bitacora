@@ -180,6 +180,26 @@ function HRMenu() {
                         ) : (
                           ""
                         )}
+
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Trazabilidad/IndexBitacora"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexBitacora")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Trazabilidad Stickers
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
                       </ul>
                     </div>
                   </li>
