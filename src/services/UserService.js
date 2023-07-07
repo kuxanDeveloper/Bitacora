@@ -53,6 +53,8 @@ export const userService = {
   InfoObservations,
   ChangePasswordUser,
   ChangePasswordAdmin,
+  InfoTrazabilidadBitacora,
+  InfoTrazabilidadTablas,
 };
 
 async function login(username, password) {
@@ -604,5 +606,19 @@ function ChangePasswordAdmin(CurrentPassword, NewPassword, Iduser) {
     `${baseUrl}/Usus/CambiarContraseniaAdmin`,
     null,
     formData
+  );
+}
+
+function InfoTrazabilidadBitacora(cookie,Fecha_inicial, Fecha_final,Numero_sticker,Sufijo,usuario_Traza,page) {
+  return fetchWrapper.get(
+    `${baseUrl}/TrazaBit/LstBitacoraTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&Sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&page=${page}`,
+    cookie
+  );
+}
+
+function InfoTrazabilidadTablas(cookie,Fecha_inicial, Fecha_final,Tipo_tabla,usuario_Traza,page) {
+  return fetchWrapper.get(
+    `${baseUrl}/TrazaTabla/LstTablasTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Tipo_tabla=${Tipo_tabla}&usuario_Traza=${usuario_Traza}&page=${page}`,
+    cookie
   );
 }

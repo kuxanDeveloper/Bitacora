@@ -87,6 +87,65 @@ export const FilterQuerySearch = (
   });
 };
 
+export const FilterSearchTrazaBitacora = (
+  event,
+  router,
+  Numstiker,
+  Sufijo,
+  DateAdmission,
+  FechaIngresoFinal,
+  URS
+) => {
+  event.preventDefault();
+
+  if (Numstiker == "" && DateAdmission == "" && FechaIngresoFinal == "" && Sufijo == "" && URS == "") {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar algun filtro para iniciar la busqueda",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+
+  if(DateAdmission != "" || FechaIngresoFinal != "")
+  {
+    if(DateAdmission == "" && FechaIngresoFinal != "")
+    {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha inicial si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+
+    if(DateAdmission != "" && FechaIngresoFinal == "")
+    {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha final si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+   
+  }
+debugger;
+  router.push({
+    pathname: `/Trazabilidad/IndexBitacora`,
+    query: {
+      NumSticker: Numstiker,
+      dateAdmision: DateAdmission,
+      dateFinal: FechaIngresoFinal,
+      URS: URS,
+      Sufijo: Sufijo
+    },
+  });
+};
+
 export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
   let urlHref = window.location.href;
@@ -103,6 +162,19 @@ export const ClearFilter = (e, router, idGrupo) => {
     });
   }
 };
+
+export const ClearFilterTrazaBitacora = (e, router) => {
+  e.preventDefault();
+  let urlHref = window.location.href;
+  if (router.pathname === "/") {
+    router.push({ pathname: router.pathname });
+  } else {
+    router.push({
+      pathname: router.pathname,
+    });
+  }
+};
+
 
 export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
   if (MenuShow) {
