@@ -6,9 +6,10 @@ export const onSubmit = ({ username, pass }) => {
   return userService
     .login(username, pass)
     .then(() => {
-      Router.push({ pathname: "/", hash: "Cactive" }, undefined, {
-        unstable_skipClientCache: true,
-      });
+      window.location.href= "/#Cactive";
+      // Router.push({ pathname: "/", hash: "Cactive" }, undefined, {
+      //   unstable_skipClientCache: true,
+      // });
     })
     .catch((error) => {
       if (
