@@ -722,7 +722,6 @@ export const SwitchUseStateRol = (
   Roles,
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
-  ListadoUsuariosRegistrados,
   isTrueActive
 ) => {
   Roles.map((data, index) => {

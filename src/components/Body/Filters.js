@@ -28,6 +28,10 @@ export default function Filters({
     id != undefined && id != null ? id : ""
   );
 
+  const [Option, setOption] = useState(
+    Options
+  );
+
   const [NumeroSticker, setNumeroSticker] = useState(
     NumSticker != undefined && NumSticker != null ? NumSticker : ""
   );
@@ -42,7 +46,7 @@ export default function Filters({
   );
   const [isTrueActive, setisTrueActive] = useState(false);
   useEffect(() => {
-    if (Options.OrdersInactive) {
+    if (Option.OrdersInactive) {
       if (
         window.performance.navigation.type ==
           window.performance.navigation.TYPE_RELOAD ||
@@ -66,7 +70,7 @@ export default function Filters({
     }
 
     const onHashChangeStart = (url) => {
-      if (Options.OrdersInactive) {
+      if (Option.OrdersInactive) {
         let hash = url.split("#")[1];
 
         if (
@@ -99,10 +103,10 @@ export default function Filters({
             : filterStyles.filters
         }
       >
-        {Options.OrdersInactive ? (
+        {Option.OrdersInactive ? (
           isActiveGroup ? (
             <CaseStatus
-              Options={Options}
+              Options={Option}
               HrefArmado={{ pathname: "/" }}
               isTrueActive={isTrueActive}
               isActiveCase={true}
@@ -138,7 +142,7 @@ export default function Filters({
                 ""
               )}
 
-              {Options.OrdersInactive ? (
+              {Option.OrdersInactive ? (
                 isActiveCase ? (
                   <select
                     value={CasosActivo_Inactivos}
@@ -245,7 +249,7 @@ export default function Filters({
                   <line x1="21" y1="21" x2="15" y2="15" />
                 </svg>
               </Link>
-              {Options.BtnCrearStickerAndUrl ? (
+              {Option.BtnCrearStickerAndUrl ? (
                 <Link
                   href={{
                     pathname: "/Sample/Create/[id]",

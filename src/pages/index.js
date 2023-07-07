@@ -79,7 +79,6 @@ export default function Home({
       Roles,
       ListadoGrupoActivo,
       ListadoGrupoInactivo,
-      ListadoUsuariosRegistrados,
       isTrueActive
     );
   }, []);
