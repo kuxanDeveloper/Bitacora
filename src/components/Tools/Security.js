@@ -1,4 +1,3 @@
-
 import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
@@ -7,7 +6,9 @@ export const onSubmit = ({ username, pass }) => {
   return userService
     .login(username, pass)
     .then(() => {
-      Router.push({ pathname: "/", hash: "Cactive" });
+      Router.push({ pathname: "/", hash: "Cactive" }, undefined, {
+        unstable_skipClientCache: true,
+      });
     })
     .catch((error) => {
       if (
@@ -43,7 +44,6 @@ export const OnSubmitForward = ({ username }) => {
   });
 
   return Router.push({ pathname: "/account/Login" });
-
 };
 
 export const QueryActiveInactivegroup_GetUsers = (cookie) => {
@@ -302,7 +302,6 @@ export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
   return userService
     .CloseCaseSample(id, observacionCaso, Estado)
     .catch((error) => {
-
       console.log(error, "erro in editar resultado");
       return Swal.showValidationMessage(`Request failed: ${error}`);
     });
