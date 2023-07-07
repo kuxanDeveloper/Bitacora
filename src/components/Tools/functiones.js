@@ -1,5 +1,12 @@
 import style from "../../styles/filters.module.scss";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
+import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
+import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
+
+import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
+
+import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
+
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -11,7 +18,6 @@ const fechaformatActualGeneralUrgencia = (Fecha, DaysMore) => {
 
   return d.getTime();
 };
-
 
 export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
   let ListadoNewRetorno = [];
@@ -25,8 +31,6 @@ export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
       if (horasdiferencia <= element.ALARMA_HORAS) {
         ListadoNewRetorno.push(element);
       }
-
-      
     });
   }
   return ListadoNewRetorno;
@@ -98,7 +102,13 @@ export const FilterSearchTrazaBitacora = (
 ) => {
   event.preventDefault();
 
-  if (Numstiker == "" && DateAdmission == "" && FechaIngresoFinal == "" && Sufijo == "" && URS == "") {
+  if (
+    Numstiker == "" &&
+    DateAdmission == "" &&
+    FechaIngresoFinal == "" &&
+    Sufijo == "" &&
+    URS == ""
+  ) {
     Swal.fire({
       title: "¡Advertencia!",
       text: "Debe seleccionar algun filtro para iniciar la busqueda",
@@ -108,10 +118,8 @@ export const FilterSearchTrazaBitacora = (
     return;
   }
 
-  if(DateAdmission != "" || FechaIngresoFinal != "")
-  {
-    if(DateAdmission == "" && FechaIngresoFinal != "")
-    {
+  if (DateAdmission != "" || FechaIngresoFinal != "") {
+    if (DateAdmission == "" && FechaIngresoFinal != "") {
       Swal.fire({
         title: "¡Advertencia!",
         text: "Debe seleccionar la fecha inicial si desea realizar la busqueda de fechas en bloque",
@@ -121,8 +129,7 @@ export const FilterSearchTrazaBitacora = (
       return;
     }
 
-    if(DateAdmission != "" && FechaIngresoFinal == "")
-    {
+    if (DateAdmission != "" && FechaIngresoFinal == "") {
       Swal.fire({
         title: "¡Advertencia!",
         text: "Debe seleccionar la fecha final si desea realizar la busqueda de fechas en bloque",
@@ -131,9 +138,8 @@ export const FilterSearchTrazaBitacora = (
       });
       return;
     }
-   
   }
-debugger;
+  debugger;
   router.push({
     pathname: `/Trazabilidad/IndexBitacora`,
     query: {
@@ -141,7 +147,7 @@ debugger;
       dateAdmision: DateAdmission,
       dateFinal: FechaIngresoFinal,
       URS: URS,
-      Sufijo: Sufijo
+      Sufijo: Sufijo,
     },
   });
 };
@@ -174,7 +180,6 @@ export const ClearFilterTrazaBitacora = (e, router) => {
     });
   }
 };
-
 
 export const OnclickNAvToggle = (MenuShow, setMenuShow) => {
   if (MenuShow) {
@@ -710,4 +715,63 @@ export const RegisterEditNoteObservaciones = (setvalue) => {
       setvalue("Observaciones_detalle", slt.options[slt.selectedIndex].text);
     }
   }
+};
+
+export const SwitchUseStateRol = (
+  setReturncomponent,
+  Roles,
+  ListadoGrupoActivo,
+  ListadoGrupoInactivo,
+  ListadoUsuariosRegistrados,
+  isTrueActive
+) => {
+  Roles.map((data, index) => {
+    switch (data) {
+      case 1:
+        setReturncomponent(
+          <IndexComponentAdmin
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAdmin>
+        );
+        break;
+      case 2:
+        setReturncomponent(
+          <IndexComponentTechni
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentTechni>
+        );
+        break;
+      case 3:
+        setReturncomponent(
+          <IndexComponentAssis
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAssis>
+        );
+        break;
+      case 4:
+        setReturncomponent(
+          <IndexComponentConsul
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentConsul>
+        );
+        break;
+      default:
+        setReturncomponent(
+          "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros"
+        );
+        break;
+    }
+  });
 };

@@ -41,7 +41,6 @@ export default function Filters({
     URS != undefined && URS != null ? URS : ""
   );
   const [isTrueActive, setisTrueActive] = useState(false);
-
   useEffect(() => {
     if (Options.OrdersInactive) {
       if (
