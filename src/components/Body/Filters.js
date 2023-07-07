@@ -19,7 +19,6 @@ export default function Filters({
   dateAdmision,
   result,
   URS,
-  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
   Options,
@@ -27,6 +26,10 @@ export default function Filters({
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
     id != undefined && id != null ? id : ""
+  );
+
+  const [Option, setOption] = useState(
+    Options
   );
 
   const [NumeroSticker, setNumeroSticker] = useState(
@@ -42,9 +45,8 @@ export default function Filters({
     URS != undefined && URS != null ? URS : ""
   );
   const [isTrueActive, setisTrueActive] = useState(false);
-
   useEffect(() => {
-    if (Options.OrdersInactive) {
+    if (Option.OrdersInactive) {
       if (
         window.performance.navigation.type ==
           window.performance.navigation.TYPE_RELOAD ||
@@ -68,7 +70,7 @@ export default function Filters({
     }
 
     const onHashChangeStart = (url) => {
-      if (Options.OrdersInactive) {
+      if (Option.OrdersInactive) {
         let hash = url.split("#")[1];
 
         if (
@@ -101,10 +103,10 @@ export default function Filters({
             : filterStyles.filters
         }
       >
-        {Options.OrdersInactive ? (
+        {Option.OrdersInactive ? (
           isActiveGroup ? (
             <CaseStatus
-              Options={Options}
+              Options={Option}
               HrefArmado={{ pathname: "/" }}
               isTrueActive={isTrueActive}
               isActiveCase={true}
@@ -177,7 +179,7 @@ export default function Filters({
                 ""
               )}
 
-              {Options.OrdersInactive ? (
+              {Option.OrdersInactive ? (
                 isActiveCase ? (
                   <select
                     value={CasosActivo_Inactivos}

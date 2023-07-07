@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { QueryActiveInactivegroup_GetUsers } from "../components/Tools//Security";
+import { QueryActiveInactivegroup_GetUsers } from "../components/Tools/Security";
 import { userService } from "../services/UserService";
 import Filters from "../components/Body/Filters";
 import Head from "next/head";
-import CaseStatus from "../components/CaseStatus";
 import { useRouter } from "next/router";
-import Skeleton from "@/components/Tools/Skeleton";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -14,12 +12,7 @@ import {
   OptionDefault,
 } from "../components/Tools/OpcitionHabilite";
 
-import IndexComponentAdmin from "../components/RolesComponents/Administrator/IndexComponent";
-import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
-
-import IndexComponentAssis from "../components/RolesComponents/Assistant/IndexComponent";
-
-import IndexComponentConsul from "../components/RolesComponents/Consultation/IndexComponent";
+import { SwitchUseStateRol } from "../components/Tools/functiones";
 
 export default function Home({
   ListadoGrupoActivo,
@@ -29,6 +22,7 @@ export default function Home({
   Roles,
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
+  const [Returncomponent, setReturncomponent] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -79,6 +73,16 @@ export default function Home({
     };
   }, [router.events]);
 
+  useEffect(() => {
+    SwitchUseStateRol(
+      setReturncomponent,
+      Roles,
+      ListadoGrupoActivo,
+      ListadoGrupoInactivo,
+      isTrueActive
+    );
+  }, []);
+
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
     ListadoGrupoInactivo == "401: Token incorrecto o vencido"
@@ -119,7 +123,6 @@ export default function Home({
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
 
-
       {ListadoGrupoActivo != undefined &&
       ListadoGrupoActivo != null &&
       ListadoGrupoInactivo != undefined &&
@@ -136,58 +139,7 @@ export default function Home({
         ""
       )}
 
-      <div className="cases_container">
-        {Roles.map((data, index) => {
-          let ValorRetorno = null;
-          switch (data) {
-            case 1:
-              ValorRetorno = (
-                <IndexComponentAdmin
-                  key={index}
-                  HabilitarActive={isTrueActive}
-                  ListadoGrupoActivo={ListadoGrupoActivo}
-                  ListadoGrupoInactivo={ListadoGrupoInactivo}
-                ></IndexComponentAdmin>
-              );
-              break;
-            case 2:
-              ValorRetorno = (
-                <IndexComponentTechni
-                  key={index}
-                  HabilitarActive={isTrueActive}
-                  ListadoGrupoActivo={ListadoGrupoActivo}
-                  ListadoGrupoInactivo={ListadoGrupoInactivo}
-                ></IndexComponentTechni>
-              );
-              break;
-            case 3:
-              ValorRetorno = (
-                <IndexComponentAssis
-                  key={index}
-                  HabilitarActive={isTrueActive}
-                  ListadoGrupoActivo={ListadoGrupoActivo}
-                  ListadoGrupoInactivo={ListadoGrupoInactivo}
-                ></IndexComponentAssis>
-              );
-              break;
-            case 4:
-              ValorRetorno = (
-                <IndexComponentConsul
-                  key={index}
-                  HabilitarActive={isTrueActive}
-                  ListadoGrupoActivo={ListadoGrupoActivo}
-                  ListadoGrupoInactivo={ListadoGrupoInactivo}
-                ></IndexComponentConsul>
-              );
-              break;
-            default:
-              ValorRetorno =
-                "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros";
-              break;
-          }
-          return ValorRetorno;
-        })}
-      </div>
+      <div className="cases_container">{Returncomponent}</div>
 
       {/* <Skeleton></Skeleton> */}
     </>

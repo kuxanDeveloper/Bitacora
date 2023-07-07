@@ -1,5 +1,12 @@
 import style from "../../styles/filters.module.scss";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
+import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
+import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
+
+import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
+
+import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
+
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -11,141 +18,6 @@ const fechaformatActualGeneralUrgencia = (Fecha, DaysMore) => {
 
   return d.getTime();
 };
-
-// export const UserInternosActive = (query) => {
-//   let RetornoQuery = [];
-//   if (query != null && query != undefined) {
-//     RetornoQuery = query.filter(
-//       (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
-//     );
-//   }
-//   return RetornoQuery;
-// };
-
-// export const UserExternosActive = (query) => {
-//   let RetornoQuery = [];
-//   if (query != null && query != undefined) {
-//     RetornoQuery = query.filter(
-//       (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
-//     );
-//   }
-//   return RetornoQuery;
-// };
-
-// export const UserInternosInactive = (query) => {
-//   let RetornoQuery = [];
-//   if (query != null && query != undefined) {
-//     RetornoQuery = query.filter(
-//       (data) => data.CLIENTE_INTERNO == true && data.CLIENTE_EXTERNO == false
-//     );
-//   }
-//   return RetornoQuery;
-// };
-
-// export const UserExternosInactive = (query) => {
-//   let RetornoQuery = [];
-//   if (query != null && query != undefined) {
-//     RetornoQuery = query.filter(
-//       (data) => data.CLIENTE_EXTERNO == true && data.CLIENTE_INTERNO == false
-//     );
-//   }
-//   return RetornoQuery;
-// };
-
-//Muestras generales y Urgencias
-// export const UserInternosActiveGenerales = (query) => {
-//   let ListadoNewRetorno = [];
-//   let fechaActual = new Date();
-//   query.forEach((element) => {
-//     let FechaRegistro = fechaformatActualGeneralUrgencia(
-//       element.FECHA_ORIGINAL_CREADO_BITACORA,
-//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-//         element.DIAS_PARA_ALERTA_GRUPO == null
-//         ? 0
-//         : element.DIAS_PARA_ALERTA_GRUPO
-//     );
-//     let diferencia = fechaActual.getTime() - FechaRegistro;
-//     let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-//     ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-//     if (diasDeDiferencia < 0) {
-//       ListadoNewRetorno.push(element);
-//     }
-//     // if ()
-//     // ListadoNewRetorno.push
-//   });
-//   return ListadoNewRetorno;
-// };
-
-// export const UserInternosActiveUrgencias = (query) => {
-//   let fechaActual = new Date();
-//   let ListadoNewRetorno = [];
-//   query.forEach((element) => {
-//     let FechaRegistro = fechaformatActualGeneralUrgencia(
-//       element.FECHA_ORIGINAL_CREADO_BITACORA,
-//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-//         element.DIAS_PARA_ALERTA_GRUPO == null
-//         ? 0
-//         : element.DIAS_PARA_ALERTA_GRUPO
-//     );
-//     let diferencia = fechaActual.getTime() - FechaRegistro;
-//     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-//     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-//     if (diasDeDiferencia >= 0) {
-//       ListadoNewRetorno.push(element);
-//     }
-
-//     // if ()
-//     // ListadoNewRetorno.push
-//   });
-//   return ListadoNewRetorno;
-// };
-
-// export const UserExternosActiveGenerales = (query) => {
-//   let ListadoNewRetorno = [];
-//   let fechaActual = new Date();
-//   query.forEach((element) => {
-//     let FechaRegistro = fechaformatActualGeneralUrgencia(
-//       element.FECHA_ORIGINAL_CREADO_BITACORA,
-//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-//         element.DIAS_PARA_ALERTA_GRUPO == null
-//         ? 0
-//         : element.DIAS_PARA_ALERTA_GRUPO
-//     );
-//     let diferencia = fechaActual.getTime() - FechaRegistro;
-//     let diasDeDiferencia = diferencia / 1000 / 60 / 60 / 24;
-//     ////todavia no ha superado los dias permitidos por ende los diferencias de dias debe ser negativo
-//     if (diasDeDiferencia < 0) {
-//       ListadoNewRetorno.push(element);
-//     }
-//     // if ()
-//     // ListadoNewRetorno.push
-//   });
-//   return ListadoNewRetorno;
-// };
-
-// export const UserExternosActiveUrgencias = (query) => {
-//   let fechaActual = new Date();
-//   let ListadoNewRetorno = [];
-//   query.forEach((element) => {
-//     let FechaRegistro = fechaformatActualGeneralUrgencia(
-//       element.FECHA_ORIGINAL_CREADO_BITACORA,
-//       element.DIAS_PARA_ALERTA_GRUPO == undefined &&
-//         element.DIAS_PARA_ALERTA_GRUPO == null
-//         ? 0
-//         : element.DIAS_PARA_ALERTA_GRUPO
-//     );
-//     let diferencia = fechaActual.getTime() - FechaRegistro;
-//     let diasDeDiferencia = Math.round(diferencia / 1000 / 60 / 60 / 24);
-//     ////ya supero los dias para colocar en orden de urgencia y los dias que de son los dias que va sumando y pasando en urgencia
-//     if (diasDeDiferencia >= 0) {
-//       ListadoNewRetorno.push(element);
-//     }
-
-//     // if ()
-//     // ListadoNewRetorno.push
-//   });
-//   return ListadoNewRetorno;
-// };
 
 export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
   let ListadoNewRetorno = [];
@@ -159,21 +31,6 @@ export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
       if (horasdiferencia <= element.ALARMA_HORAS) {
         ListadoNewRetorno.push(element);
       }
-
-      // if (
-      //   element.ID_GRUPO_ASIGNADO == 6 ||
-      //   element.ID_GRUPO_ASIGNADO == 9 ||
-      //   element.ID_GRUPO_ASIGNADO == 11 ||
-      //   element.ID_GRUPO_ASIGNADO == 12
-      // ) {
-      //   if (horasdiferencia <= 960) {
-      //     ListadoNewRetorno.push(element);
-      //   }
-      // } else {
-      //   if (horasdiferencia <= 120) {
-      //     ListadoNewRetorno.push(element);
-      //   }
-      // }
     });
   }
   return ListadoNewRetorno;
@@ -234,6 +91,67 @@ export const FilterQuerySearch = (
   });
 };
 
+export const FilterSearchTrazaBitacora = (
+  event,
+  router,
+  Numstiker,
+  Sufijo,
+  DateAdmission,
+  FechaIngresoFinal,
+  URS
+) => {
+  event.preventDefault();
+
+  if (
+    Numstiker == "" &&
+    DateAdmission == "" &&
+    FechaIngresoFinal == "" &&
+    Sufijo == "" &&
+    URS == ""
+  ) {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar algun filtro para iniciar la busqueda",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+
+  if (DateAdmission != "" || FechaIngresoFinal != "") {
+    if (DateAdmission == "" && FechaIngresoFinal != "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha inicial si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+
+    if (DateAdmission != "" && FechaIngresoFinal == "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha final si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+  }
+  debugger;
+  router.push({
+    pathname: `/Trazabilidad/IndexBitacora`,
+    query: {
+      NumSticker: Numstiker,
+      dateAdmision: DateAdmission,
+      dateFinal: FechaIngresoFinal,
+      URS: URS,
+      Sufijo: Sufijo,
+    },
+  });
+};
+
 export const ClearFilter = (e, router, idGrupo) => {
   e.preventDefault();
   let urlHref = window.location.href;
@@ -247,6 +165,18 @@ export const ClearFilter = (e, router, idGrupo) => {
       pathname: router.pathname,
       query: { id: idGrupo },
       hash: `${hashs2}#${hashs4}`,
+    });
+  }
+};
+
+export const ClearFilterTrazaBitacora = (e, router) => {
+  e.preventDefault();
+  let urlHref = window.location.href;
+  if (router.pathname === "/") {
+    router.push({ pathname: router.pathname });
+  } else {
+    router.push({
+      pathname: router.pathname,
     });
   }
 };
@@ -785,4 +715,62 @@ export const RegisterEditNoteObservaciones = (setvalue) => {
       setvalue("Observaciones_detalle", slt.options[slt.selectedIndex].text);
     }
   }
+};
+
+export const SwitchUseStateRol = (
+  setReturncomponent,
+  Roles,
+  ListadoGrupoActivo,
+  ListadoGrupoInactivo,
+  isTrueActive
+) => {
+  Roles.map((data, index) => {
+    switch (data) {
+      case 1:
+        setReturncomponent(
+          <IndexComponentAdmin
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAdmin>
+        );
+        break;
+      case 2:
+        setReturncomponent(
+          <IndexComponentTechni
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentTechni>
+        );
+        break;
+      case 3:
+        setReturncomponent(
+          <IndexComponentAssis
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAssis>
+        );
+        break;
+      case 4:
+        setReturncomponent(
+          <IndexComponentConsul
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentConsul>
+        );
+        break;
+      default:
+        setReturncomponent(
+          "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros"
+        );
+        break;
+    }
+  });
 };

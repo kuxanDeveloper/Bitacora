@@ -54,3 +54,78 @@
     }
   }
 }
+
+
+.tableStyleTraza {
+  max-width: 100%;
+  background-color: #fff;
+
+  thead {
+    
+    th {
+      background-color: #e57d00;
+      color: white;
+      margin-top: 5px;
+      margin-left: 5px;
+      margin-bottom: 5px;
+      margin-right: 5px;
+      p {
+        min-width: 120px;
+      }
+    }
+  }
+
+  tbody {
+
+    tr {
+      &:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+
+      &:last-of-type {
+        border-bottom: 2px solid #009879;
+      }
+
+      border-bottom: 2px solid #dddddd;
+      td {
+        margin: 15px 15px;
+        p{
+          text-align: left;
+          margin-left: 3px;
+          margin-right: 3px;
+        }
+        a {
+          width: 120px;
+          padding: 0.5rem 1rem;
+          background-color: #6ba1fa;
+          border: none;
+          color: white;
+          letter-spacing: 1px;
+          border-radius: 5px;
+          font-size: 14.5px;
+          display: block;
+          text-decoration: none;
+          text-align: center;
+          float: right;
+          margin-top: 8px;
+          position: relative;
+
+          .edit_icon {
+            position: absolute;
+            right: 5px;
+            top: calc(50% - 8px);
+          }
+        }
+       
+      }
+
+      .textCenterColumn {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.max_width_card{
+  max-width: 81% !important;
+}
