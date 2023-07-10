@@ -81,7 +81,7 @@ export default function Home({
       ListadoGrupoInactivo,
       isTrueActive
     );
-  }, []);
+  }, [isTrueActive]);
 
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||

@@ -1,4 +1,3 @@
-import style from "../../styles/filters.module.scss";
 import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
 import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
 import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
@@ -6,6 +5,7 @@ import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
 import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
 
 import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
+import Router from "next/router";
 
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
@@ -63,13 +63,21 @@ export const FilterQuerySearch = (
   router,
   id,
   Numstiker,
-  DateAdmission,
-  result,
-  URS
+  DateAdmission
 ) => {
   event.preventDefault();
 
-  if (Numstiker == "" && DateAdmission == "" && result == "" && URS == "") {
+  if (id == "") {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debes seleccionar un grupo para poder realizar la búsqueda...",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+
+  if (Numstiker == "" && DateAdmission == "") {
     Swal.fire({
       title: "¡Advertencia!",
       text: "Debe indicar el valor de algunos de los filtros disponible para realizar la búsqueda avanzada",
@@ -79,14 +87,12 @@ export const FilterQuerySearch = (
     return;
   }
 
-  router.push({
-    pathname: `/[id]`,
+  Router.push({
+    pathname: "/[id]",
     query: {
       id: id,
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
-      result: result,
-      URS: URS,
     },
   });
 };
@@ -773,4 +779,26 @@ export const SwitchUseStateRol = (
         break;
     }
   });
+};
+
+export const OnkeyDowNumberOneCharater = (e) => {
+  let tecla = document.all ? e.keyCode : e.which;
+  let patron = /[0-9-]/;
+  let teclaFinal = String.fromCharCode(tecla);
+  return !patron.test(teclaFinal)
+    ? e.preventDefault()
+    : patron.test(teclaFinal);
+};
+
+export const OnPasteNumberOneCharater = (e, id, SetValue) => {
+  setTimeout(() => {
+    console.log("aqui");
+    let tecla =
+      e.target.value ||
+      (e.originalEvent.clipboardData || window.clipboardData).getData("text");
+    let patron = /[0-9-]/;
+    tecla = tecla.replace(/[^0-9-]/g, "");
+    SetValue(tecla);
+    return patron.test(tecla);
+  }, 4);
 };

@@ -91,13 +91,17 @@ function Details({ data, Options, name_group, sticker }) {
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Creado por:</span>
-          <p className={styles.info_text}>{data.EMAIL_CREADOR_DETALLE}</p>
+          <span className={`${styles.info_title} ${styles.inline}`}>Creado por:</span>
+          <p className={`${styles.info_text} ${styles.inline}`}>{data.EMAIL_CREADOR_DETALLE}</p>
         </div>
 
+     
+      </div>
+
+      <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Fecha de creación</span>
-          <p className={styles.info_text}>{data.FECHA_CREADO_DETALLE_FORMAT}</p>
+          <span className={`${styles.info_title} ${styles.inline}`}>Fecha de creación</span>
+          <p className={`${styles.info_text} ${styles.inline}`}>{data.FECHA_CREADO_DETALLE_FORMAT}</p>
         </div>
       </div>
 

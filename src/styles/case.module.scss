@@ -26,7 +26,6 @@
         &.active {
           border-bottom: 4px solid #e57d00;
         }
-
         .status_link {
           text-decoration: none;
           color: #e7e7e7;
@@ -46,8 +45,8 @@
       background-color: #fff;
       padding: 0.5rem;
       border-radius: 15px;
-      min-width: 240px;
-      max-width: 240px;
+      min-width: 260px;
+      max-width: 260px;
       .card_container {
         display: grid;
         grid-template-columns: 2fr 3fr;
@@ -126,7 +125,8 @@
             text-align: right;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            margin-top: 10px;
+            gap: 10px;
             .btn_sticker {
               background-color: rgb(229, 125, 0);
               font-size: 0.7rem;
@@ -159,8 +159,9 @@
     min-height: 100vh;
     .cases_container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       align-items: center;
+      justify-items: center;
       gap: 10px;
       border-radius: 5px;
 
@@ -203,7 +204,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .cases {
     .cases_container {
       grid-template-columns: repeat(4, 1fr);
@@ -217,7 +218,6 @@
               text-align: right;
               display: flex;
               flex-direction: column;
-              gap: 5px;
               .btn_sticker {
                 background-color: rgb(229, 125, 0);
                 font-size: 0.7em;

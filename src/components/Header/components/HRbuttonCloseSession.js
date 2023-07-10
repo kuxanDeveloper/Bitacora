@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
-import { useContextBitacora } from "../../../context/BitacoraContext";
 import { userService } from "../../../services/UserService";
 
-function HRbuttonCloseSession() {
+function HRbuttonCloseSession({ DescriptionRol }) {
   const [showUser, setshowUser] = useState(false);
 
   function ShowUserCont() {
@@ -40,6 +39,11 @@ function HRbuttonCloseSession() {
 
           <div className={Styles.submenu}>
             <ul className={Styles.sub_ul}>
+              <li className={Styles.sub_li}>
+                <span rel="stylesheet">
+                  {DescriptionRol}
+                </span>
+              </li>
               <li className={Styles.sub_li}>
                 <Link
                   className={Styles.sub_link}

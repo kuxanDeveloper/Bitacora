@@ -4,40 +4,16 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { LocationUrl, OnclickNAvToggle } from "../../Tools/functiones";
-import {
-  OptionAdministrator,
-  OptionAsiste,
-  OptionTecnichal,
-  OptionConsult,
-  OptionDefault,
-} from "../../Tools/OpcitionHabilite";
-function HRMenu() {
+function HRMenu({Roles}) {
   const {
     MenuShow,
     setMenuShow,
     SelectMenuConfigracion,
     setSelectMenuConfigracion,
   } = useContextBitacora();
-  const [Roles, setRoles] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("RolUser") != null) {
-      const ArrayRoles = JSON.parse(localStorage.getItem("RolUser"));
-      ArrayRoles.map((data) => {
-        if (data == 1) {
-          setRoles(OptionAdministrator);
-        } else if (data == 2) {
-          setRoles(OptionTecnichal);
-        } else if (data == 3) {
-          setRoles(OptionAsiste);
-        } else if (data == 4) {
-          setRoles(OptionConsult);
-        } else {
-          setRoles(OptionDefault);
-        }
-      });
-    }
 
     setSelectMenuConfigracion(LocationUrl(router, "configuration"));
   }, []);
