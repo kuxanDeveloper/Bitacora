@@ -42,7 +42,7 @@ function Results({ data, Options, group, name_group, sticker }) {
       <div className={styles.form_group}>
         <div className={styles.info_group}>
           <span className={styles.info_title}>Estatus</span>
-          <p className={styles.info_text}>
+          <p className={`${styles.info_text} ${styles.inline}`}>
             {data.NOMBRE_PRUEBA !== null && data.NOMBRE_PRUEBA !== undefined
               ? data.NOMBRE_PRUEBA
               : ""}
@@ -50,7 +50,7 @@ function Results({ data, Options, group, name_group, sticker }) {
         </div>
 
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Resultado</span>
+          <span className={`${styles.info_title} ${styles.inline}`}>Resultado</span>
           <p className={styles.info_text}>
             {" "}
             {data.PLANTILLA_RESULTADO !== null &&
@@ -61,8 +61,8 @@ function Results({ data, Options, group, name_group, sticker }) {
         </div>
         {data.OPCION_DESCRIPCION != null ? (
           <div className={styles.info_group}>
-            <span className={styles.info_title}>Opciones</span>
-            <p className={styles.info_text}>
+            <span className={ styles.info_title}>Opciones</span>
+            <p className={`${styles.info_title} ${styles.inline}` }>
               {data.OPCION_DESCRIPCION !== null &&
               data.OPCION_DESCRIPCION !== undefined
                 ? data.OPCION_DESCRIPCION

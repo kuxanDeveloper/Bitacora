@@ -24,11 +24,37 @@ export default function StickerDetails({
   } = useContextBitacora();
 
   return (
-    <>
+    <> 
       <div className={styles.sticker_details}>
         <div className={styles.details_container}>
-          <div className={styles.back_btn_container}>
+        <div className={styles.home_btn_container}>
             <Link
+              href={`/`}
+              className={styles.home_btn}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class={styles.icon}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#fff"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                <path d="M10 12h4v4h-4z" />
+              </svg>
+            </Link>
+          </div>
+
+     
+          <div className={styles.back_btn_container}>
+          <Link
               href={{
                 pathname: "/Sample/ViewDetails/[id]",
                 query: {
@@ -37,8 +63,26 @@ export default function StickerDetails({
               }}
               className={styles.back_btn}
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.icon}
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                strokeWidth="4"
+                stroke="#e57d00"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l6 6" />
+                <path d="M5 12l6 -6" />
+              </svg>
               Volver
             </Link>
+
+         
           </div>
 
           <p className={styles.title}>Detalle de sticker</p>
@@ -264,24 +308,24 @@ export default function StickerDetails({
                         <div className={styles.form_group}>
                           {/* <!-- info sticker --> */}
                           <div className={styles.info_group}>
-                            <span className={styles.info_title}>
+                            <span className={`${styles.info_title} ${styles.inline}`}>
                               N° Sticker
                             </span>
-                            <p className={styles.info_text}>
+                            <p className={`${styles.info_text} ${styles.inline}`}>
                               {`${data.NUMERO_STICKER}-${data.SUFIJO}`}
                             </p>
                           </div>
 
                           <div className={styles.info_group}>
-                            <span className={styles.info_title}>
+                            <span className={`${styles.info_title} ${styles.inline}`}>
                               Fecha del sticker
                             </span>
-                            <p className={styles.info_text}>
+                            <p className={`${styles.info_text} ${styles.inline}`}>
                               {data.FECHA_FORMAT_CREADO_COMPLETA}
                             </p>
                           </div>
                         </div>
-                        <div className={styles.form_group}>
+                        <div className={`${styles.form_group} ${styles.mt}`}>
                           {/* <!-- info sticker --> */}
                           <div className={styles.info_group}>
                             <span className={styles.info_title}>Grupo</span>
