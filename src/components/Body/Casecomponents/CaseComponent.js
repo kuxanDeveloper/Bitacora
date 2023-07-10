@@ -14,7 +14,7 @@ export default function CaseComponent({
   const {
     setShowModal,
     setishabiliteBtn,
-    setdobleImagen,
+    setdobleImagen, 
     setisImagenExterna,
     setValueImagesrcExterna2,
     setValueImagesrcExterna,

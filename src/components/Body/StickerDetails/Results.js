@@ -39,9 +39,10 @@ function Results({ data, Options, group, name_group, sticker }) {
         ""
       )}
 
+      {/* status y fecha */}
       <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Estatus</span>
+          <span className={`${styles.info_title} ${styles.inline}`}>Estatus</span>
           <p className={`${styles.info_text} ${styles.inline}`}>
             {data.NOMBRE_PRUEBA !== null && data.NOMBRE_PRUEBA !== undefined
               ? data.NOMBRE_PRUEBA
@@ -50,19 +51,21 @@ function Results({ data, Options, group, name_group, sticker }) {
         </div>
 
         <div className={styles.info_group}>
-          <span className={`${styles.info_title} ${styles.inline}`}>Resultado</span>
-          <p className={styles.info_text}>
-            {" "}
-            {data.PLANTILLA_RESULTADO !== null &&
-            data.PLANTILLA_RESULTADO !== undefined
-              ? data.PLANTILLA_RESULTADO
+          <span className={`${styles.info_title} ${styles.inline}`}>Fecha de creación</span>
+          <p className={`${styles.info_text} ${styles.inline}`}>
+            {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
+            data.FECHA_CREACION_RESULTADO_FORMAT !== undefined
+              ? data.FECHA_CREACION_RESULTADO_FORMAT
               : ""}
           </p>
         </div>
+      </div>
+
+      <div className={styles.form_group}>
         {data.OPCION_DESCRIPCION != null ? (
           <div className={styles.info_group}>
-            <span className={ styles.info_title}>Opciones</span>
-            <p className={`${styles.info_title} ${styles.inline}` }>
+            <span className={`${styles.info_title} ${styles.inline}`}>Opciones</span>
+            <p className={`${styles.info_text} ${styles.inline}`}>
               {data.OPCION_DESCRIPCION !== null &&
               data.OPCION_DESCRIPCION !== undefined
                 ? data.OPCION_DESCRIPCION
@@ -72,13 +75,19 @@ function Results({ data, Options, group, name_group, sticker }) {
         ) : (
           <></>
         )}
+      </div>
 
+      {/* resultado */}
+      <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Fecha de creación resultado</span>
+          <span className={`${styles.info_title} `}>
+            Resultado
+          </span>
           <p className={styles.info_text}>
-            {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
-            data.FECHA_CREACION_RESULTADO_FORMAT !== undefined
-              ? data.FECHA_CREACION_RESULTADO_FORMAT
+            {" "}
+            {data.PLANTILLA_RESULTADO !== null &&
+            data.PLANTILLA_RESULTADO !== undefined
+              ? data.PLANTILLA_RESULTADO
               : ""}
           </p>
         </div>
