@@ -65,9 +65,9 @@
 
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .sticker_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
-    color: #4b73bd;
-    text-transform: capitalize;
-    font-weight: 700;
+  color: #4b73bd;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .images_container .sticker_number {
@@ -135,9 +135,9 @@
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
-    color: #4b73bd;
-    text-transform: capitalize;
-    font-weight: 700;
+  color: #4b73bd;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status {
@@ -165,9 +165,9 @@
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .date_group .date_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
-    color: #4b73bd;
-    text-transform: capitalize;
-    font-weight: 700;
+  color: #4b73bd;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .date_group .group_date {
@@ -210,7 +210,24 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 20px;
+  position: relative;
 }
+
+.sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body .create_followUp {
+  background-color: #e57d00;
+  position: absolute;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  bottom: 10px;
+}
+
+
 
 .sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body .card_group .group_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
@@ -247,13 +264,29 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 20px;
+  position: relative;
 }
+
+.sticker_info .info_container .card .stickers_container .card_content .result .result_body .create_followUp {
+  background-color: #e57d00;
+  position: absolute;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  top: calc(50% - 12px);
+}
+
 
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body .card_group .group_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
-    color: #4b73bd;
-    text-transform: capitalize;
-    font-weight: 700;
+  color: #4b73bd;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body .card_group .group_result {
@@ -389,6 +422,7 @@
 
   .sticker_info .info_container .card .stickers_container .card_content .card_sticker .images_container .sticker_number .photo {
     display: flex;
+    justify-content: center;
     align-items: center;
     cursor: pointer;
   }
