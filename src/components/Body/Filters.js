@@ -16,7 +16,7 @@ export default function Filters({
   CasosActivo_Inactivos,
   isActiveGroup,
   id,
-  ListadoUsuariosRegistrados,
+  ListadoSufijosxGroupAll,
   isActiveCase,
   ListadoGrupoActivo,
   NumSticker,
@@ -99,11 +99,27 @@ export default function Filters({
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {
-      setNumeroSticker(ResultScanner);
-      let clickSearch = document.getElementById("clickFilter");
-      if (clickSearch != null && clickSearch != undefined) {
-        clickSearch.click();
+      const SplitScanner = ResultScanner.split("-");
+      if (SplitScanner != null && SplitScanner != undefined) {
+        if (SplitScanner.length > 1) {
+          let SearchGroupSufij = ListadoSufijosxGroupAll.find(
+            (data) => data.SUFIJO_GRUPO == SplitScanner[1]
+          );
+
+          if (SearchGroupSufij != undefined && SearchGroupSufij != null) {
+            setGruopValue(SearchGroupSufij.Id_grupo);
+          }
+        }
       }
+
+      setNumeroSticker(ResultScanner);
+
+      let clickSearch = document.getElementById("clickFilter");
+      setTimeout(() => {
+        if (clickSearch != null && clickSearch != undefined) {
+          clickSearch.click();
+        }
+      }, 100);
     }
   }, [ResultScanner]);
 
@@ -297,7 +313,7 @@ export default function Filters({
                       router,
                       GruopValue,
                       NumeroSticker,
-                      FechaIngreso,
+                      FechaIngreso
                     );
                   }}
                   className={filterStyles.search}
