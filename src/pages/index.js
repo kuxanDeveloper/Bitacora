@@ -17,7 +17,7 @@ import { SwitchUseStateRol } from "../components/Tools/functiones";
 export default function Home({
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
-  ListadoUsuariosRegistrados,
+  ListadoSufijosxGroupAll,
   Options,
   Roles,
 }) {
@@ -131,7 +131,7 @@ export default function Home({
           ListadoGrupoActivo={ListadoGrupoActivo}
           isActiveGroup={true}
           isActiveCase={false}
-          ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
+          ListadoSufijosxGroupAll={ListadoSufijosxGroupAll}
           CasosActivo_Inactivos={isTrueActive}
           Options={Options}
         ></Filters>
@@ -174,18 +174,15 @@ export async function getServerSideProps(ctx) {
 
     const ListadoGrupoActivo = await consultataGeneral.lstGroupActive;
     const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
-    const ListadoUsuariosRegistrados = consultataGeneral.ListaUsuario;
-
+    const ListadoSufijosxGroupAll = await consultataGeneral.ListaSufijoGetAll;
     return {
       props: {
         ListadoGrupoActivo:
           ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
         ListadoGrupoInactivo:
           ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
-        ListadoUsuariosRegistrados:
-          ListadoUsuariosRegistrados == undefined
-            ? null
-            : ListadoUsuariosRegistrados,
+        ListadoSufijosxGroupAll:
+          ListadoSufijosxGroupAll == undefined ? null : ListadoSufijosxGroupAll,
         Options,
         Roles,
       },
