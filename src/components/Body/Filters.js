@@ -29,7 +29,8 @@ export default function Filters({
   const [GruopValue, setGruopValue] = useState(
     id != undefined && id != null ? id : ""
   );
-  const { ResultScanner, setshowModalScanner } = useContextBitacora();
+  const { ResultScanner, setResultScanner, setshowModalScanner } =
+    useContextBitacora();
 
   const [Option, setOption] = useState(Options);
 
@@ -39,7 +40,7 @@ export default function Filters({
   const [FechaIngreso, setFechaIngreso] = useState(
     dateAdmision != undefined && dateAdmision != null ? dateAdmision : ""
   );
-
+  console.log(ListadoSufijosxGroupAll);
   // const [Resultado, setResultado] = useState(
   //   result != undefined && result != null ? result : ""
   // );
@@ -113,7 +114,7 @@ export default function Filters({
       }
 
       setNumeroSticker(ResultScanner);
-
+      setResultScanner(null);
       let clickSearch = document.getElementById("clickFilter");
       setTimeout(() => {
         if (clickSearch != null && clickSearch != undefined) {

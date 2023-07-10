@@ -24,7 +24,6 @@ export default function Home({
   const [isTrueActive, setisTrueActive] = useState(false);
   const [Returncomponent, setReturncomponent] = useState("");
   const router = useRouter();
-
   useEffect(() => {
     if (Options.OrdersInactive) {
       if (
@@ -171,7 +170,6 @@ export async function getServerSideProps(ctx) {
       });
     }
     const consultataGeneral = await QueryActiveInactivegroup_GetUsers(cookie);
-
     const ListadoGrupoActivo = await consultataGeneral.lstGroupActive;
     const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
     const ListadoSufijosxGroupAll = await consultataGeneral.ListaSufijoGetAll;

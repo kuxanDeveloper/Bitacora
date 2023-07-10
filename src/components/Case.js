@@ -28,7 +28,6 @@ export default function Case({
   );
 
   useEffect(() => {
-    debugger;
     let objGroup = ListadoGrupo.find((e) => e.Id_grupo == idGruop);
 
     if (objGroup != undefined && objGroup != null) {

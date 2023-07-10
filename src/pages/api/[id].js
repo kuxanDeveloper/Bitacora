@@ -4,6 +4,7 @@ import {
   QueryGroupList,
   QueryMueForGroup,
   QueryObserva,
+  QuerySufijoGetAll,
 } from "../../components/Tools/Security";
 import { userService } from "../../services/UserService";
 
@@ -18,7 +19,8 @@ export const ApiQueryGeneralSample = async (
   setListadoMuestraActivo,
   setListadoMuestraInactivo,
   setListadoResultadoxMuestra,
-  setLstObservacionesPrede
+  setLstObservacionesPrede,
+  setListadoGetFullSufijo
 ) => {
   let Lisgrupo = await QueryGroupList(cookie);
   setListadoGrupo(Lisgrupo);
@@ -41,6 +43,7 @@ export const ApiQueryGeneralSample = async (
     DateAdmission,
     Cod_sticker
   );
+
   setListadoMuestraInactivo(listInactimue.LstBitacora);
   setListadoResultadoxMuestra(listInactimue.ListResultxBitacora);
   if (Lisgrupo != null && Lisgrupo != undefined) {
@@ -64,4 +67,8 @@ export const ApiQueryGeneralSample = async (
     userService.logout();
     return "";
   }
+
+  let lstSufijosxGroupall = await QuerySufijoGetAll(cookie);
+
+  setListadoGetFullSufijo(lstSufijosxGroupall);
 };
