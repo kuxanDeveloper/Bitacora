@@ -40,8 +40,6 @@ function HomeMuestraxGrupo({
       query.id,
       query.Numstiker,
       query.DateAdmission,
-      query.result,
-      query.URS,
       "",
       setGrupoNombre,
       setListadoGrupo,
@@ -86,7 +84,6 @@ function HomeMuestraxGrupo({
       }
       //#endregion
 
-      //#region Usuario Interno o externo
       // if (
       //   hashs3 == "UserInter" ||
       //   hashs3 == "" ||
@@ -242,8 +239,6 @@ function HomeMuestraxGrupo({
         ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
         NumSticker={query.Numstiker}
         dateAdmision={query.DateAdmission}
-        result={query.result}
-        URS={query.URS}
         HrefArmado={{ pathname: "/[id]", query: query }}
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}

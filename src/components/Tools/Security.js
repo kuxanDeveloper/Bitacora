@@ -122,8 +122,6 @@ export const QueryMueForGroup = (
   idGroup,
   Numstiker,
   DateAdmission,
-  result,
-  URS,
   Cod_sticker
 ) => {
   return userService
@@ -133,8 +131,6 @@ export const QueryMueForGroup = (
       idGroup,
       Numstiker,
       DateAdmission,
-      result,
-      URS,
       Cod_sticker
     )
     .catch((error) => {

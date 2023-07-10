@@ -159,8 +159,6 @@ function ListGroupForMue(
   idGroup,
   NumeroSticker,
   FechaINgreso,
-  ResultadoFinal,
-  UserLoginSticker,
   Cod_sticker
 ) {
   const formData = new FormData();
@@ -170,24 +168,14 @@ function ListGroupForMue(
     "Numero_Stickers",
     NumeroSticker !== null && NumeroSticker !== undefined ? NumeroSticker : ""
   );
-  formData.append(
-    "Resultado_Final",
-    ResultadoFinal !== null && ResultadoFinal !== undefined
-      ? ResultadoFinal
-      : ""
-  );
+  formData.append("Resultado_Final", "");
 
   formData.append(
     "Fecha_Sticker",
     FechaINgreso !== null && FechaINgreso !== undefined ? FechaINgreso : ""
   );
 
-  formData.append(
-    "Usuario_Sticker",
-    UserLoginSticker !== null && UserLoginSticker !== undefined
-      ? UserLoginSticker
-      : ""
-  );
+  formData.append("Usuario_Sticker", "");
 
   formData.append("COD_BITACORA", Cod_sticker);
 
@@ -609,14 +597,29 @@ function ChangePasswordAdmin(CurrentPassword, NewPassword, Iduser) {
   );
 }
 
-function InfoTrazabilidadBitacora(cookie,Fecha_inicial, Fecha_final,Numero_sticker,Sufijo,usuario_Traza,page) {
+function InfoTrazabilidadBitacora(
+  cookie,
+  Fecha_inicial,
+  Fecha_final,
+  Numero_sticker,
+  Sufijo,
+  usuario_Traza,
+  page
+) {
   return fetchWrapper.get(
     `${baseUrl}/TrazaBit/LstBitacoraTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&Sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&page=${page}`,
     cookie
   );
 }
 
-function InfoTrazabilidadTablas(cookie,Fecha_inicial, Fecha_final,Tipo_tabla,usuario_Traza,page) {
+function InfoTrazabilidadTablas(
+  cookie,
+  Fecha_inicial,
+  Fecha_final,
+  Tipo_tabla,
+  usuario_Traza,
+  page
+) {
   return fetchWrapper.get(
     `${baseUrl}/TrazaTabla/LstTablasTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Tipo_tabla=${Tipo_tabla}&usuario_Traza=${usuario_Traza}&page=${page}`,
     cookie

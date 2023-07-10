@@ -12,8 +12,6 @@ export const ApiQueryGeneralSample = async (
   id,
   Numstiker,
   DateAdmission,
-  result,
-  URS,
   Cod_sticker,
   setGrupoNombre,
   setListadoGrupo,
@@ -30,8 +28,6 @@ export const ApiQueryGeneralSample = async (
     id,
     Numstiker,
     DateAdmission,
-    result,
-    URS,
     Cod_sticker
   );
   setListadoMuestraActivo(listActivoMue.LstBitacora);
@@ -43,8 +39,6 @@ export const ApiQueryGeneralSample = async (
     id,
     Numstiker,
     DateAdmission,
-    result,
-    URS,
     Cod_sticker
   );
   setListadoMuestraInactivo(listInactimue.LstBitacora);

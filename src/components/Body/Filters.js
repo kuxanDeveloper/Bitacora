@@ -3,11 +3,15 @@ import {
   FilterQuerySearch,
   ClearFilter,
   OnclickComboEstadoCase,
+  OnkeyDowNumberOneCharater,
+  OnPasteNumberOneCharater,
 } from "../Tools/functiones";
 import filterStyles from "../../styles/filters.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CaseStatus from "../CaseStatus";
+import { useContextBitacora } from "../../context/BitacoraContext";
+
 export default function Filters({
   CasosActivo_Inactivos,
   isActiveGroup,
@@ -17,8 +21,6 @@ export default function Filters({
   ListadoGrupoActivo,
   NumSticker,
   dateAdmision,
-  result,
-  URS,
   isSampleGeneral,
   HrefArmado,
   Options,
@@ -27,6 +29,7 @@ export default function Filters({
   const [GruopValue, setGruopValue] = useState(
     id != undefined && id != null ? id : ""
   );
+  const { ResultScanner, setshowModalScanner } = useContextBitacora();
 
   const [Option, setOption] = useState(Options);
 
@@ -36,12 +39,14 @@ export default function Filters({
   const [FechaIngreso, setFechaIngreso] = useState(
     dateAdmision != undefined && dateAdmision != null ? dateAdmision : ""
   );
-  const [Resultado, setResultado] = useState(
-    result != undefined && result != null ? result : ""
-  );
-  const [UserRegisterStiker, setUserRegisterStiker] = useState(
-    URS != undefined && URS != null ? URS : ""
-  );
+
+  // const [Resultado, setResultado] = useState(
+  //   result != undefined && result != null ? result : ""
+  // );
+  // const [UserRegisterStiker, setUserRegisterStiker] = useState(
+  //   URS != undefined && URS != null ? URS : ""
+  // );
+
   const [isTrueActive, setisTrueActive] = useState(false);
   useEffect(() => {
     if (Option.OrdersInactive) {
@@ -92,6 +97,23 @@ export default function Filters({
     };
   }, [router.events]);
 
+  useEffect(() => {
+    if (ResultScanner != "" && ResultScanner != null) {
+      setNumeroSticker(ResultScanner);
+      let clickSearch = document.getElementById("clickFilter");
+      if (clickSearch != null && clickSearch != undefined) {
+        clickSearch.click();
+      }
+    }
+  }, [ResultScanner]);
+
+  // useEffect(() => {
+  //   let numStickerpaste = document.getElementById("numStickerText");
+  //   if (numStickerpaste != undefined && numStickerpaste != null) {
+  //     OnPasteNumberOneCharater(numStickerpaste, setNumeroSticker);
+  //   }
+  // }, []);
+
   return (
     <>
       <div
@@ -132,7 +154,7 @@ export default function Filters({
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-square-plus"
+                        className="icon icon-tabler icon-tabler-square-plus"
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
@@ -203,11 +225,12 @@ export default function Filters({
 
                 <div className={filterStyles.search_sticker}>
                   <Link
-                    href={{
-                      pathname: "/Sample/Create/[id]",
-                      query: { id: GruopValue == "" ? 6 : GruopValue },
-                    }}
+                    href={""}
                     title="Leer sticker"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setshowModalScanner(true);
+                    }}
                     className={filterStyles.add_followup}
                   >
                     <svg
@@ -233,11 +256,21 @@ export default function Filters({
 
                   <input
                     type="text"
+                    id="numStickerText"
                     className={filterStyles.filter_input}
                     placeholder="N° de sticker"
                     onChange={(e) => {
                       setNumeroSticker(e.target.value);
                     }}
+                    autoComplete="off"
+                    onKeyPress={(e) => OnkeyDowNumberOneCharater(e)}
+                    onPaste={(e) =>
+                      OnPasteNumberOneCharater(
+                        e,
+                        document.getElementById("numStickerText"),
+                        setNumeroSticker
+                      )
+                    }
                     value={NumeroSticker}
                   />
                 </div>
@@ -256,6 +289,7 @@ export default function Filters({
               <div className={filterStyles.buttons_container}>
                 <Link
                   href={""}
+                  id="clickFilter"
                   onClick={(e) => {
                     e.preventDefault();
                     FilterQuerySearch(
@@ -264,9 +298,6 @@ export default function Filters({
                       GruopValue,
                       NumeroSticker,
                       FechaIngreso,
-                      Resultado,
-                      UserRegisterStiker,
-                      CasosActivo_Inactivos
                     );
                   }}
                   className={filterStyles.search}
