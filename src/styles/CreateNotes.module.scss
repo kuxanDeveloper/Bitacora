@@ -12,24 +12,34 @@
     background-color: rgba(20, 20, 20, 0.664);
     border-radius: 10px;
     padding: 0 1.2rem;
+    position: relative;
+
+    .home_btn_container {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      .home_btn {
+        background-color: #e57d00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 2px;
+        .icon {
+        }
+      }
+    }
 
     .back_btn_container {
       margin-bottom: 0.3rem;
-
+      position: absolute;
       .back_btn {
         color: #fff;
         font-size: clamp(14px, 1.1rem, 1.3rem);
         text-decoration: none;
         position: relative;
-        margin-left: -0.8rem;
-        &::before {
-          content: "<";
-          font-size: 2.8rem;
-          left: 0;
-          top: 0;
-          color: #e57d00;
-          font-weight: bold;
-        }
+        display: flex;
+        margin-top: 10px;
       }
     }
 
@@ -189,29 +199,22 @@
           text-decoration: none;
           position: relative;
           margin-left: -0.8rem;
-          &::before {
-            content: "<";
-            left: 0;
-            top: 0;
-            color: #e57d00;
-            font-weight: bold;
-          }
         }
 
-        .btn_create{
+        .btn_create {
           width: 190px;
-              padding: 0.5rem 1rem;
-              background-color: #e57d00;
-              border: none;
-              color: white;
-              letter-spacing: 1px;
-              border-radius: 5px;
-              font-size: 14.5px;
-              display: block;
-              text-decoration: none;
-              text-align: center;
-              float: right;
-              margin-top: 8px;
+          padding: 0.5rem 1rem;
+          background-color: #e57d00;
+          border: none;
+          color: white;
+          letter-spacing: 1px;
+          border-radius: 5px;
+          font-size: 14.5px;
+          display: block;
+          text-decoration: none;
+          text-align: center;
+          float: right;
+          margin-top: 8px;
         }
       }
 
@@ -326,17 +329,6 @@
         margin-bottom: 0.3rem;
 
         .back_btn {
-          color: #fff;
-          text-decoration: none;
-          position: relative;
-          margin-left: -0.8rem;
-          &::before {
-            font-size: 1.8rem;
-            left: 0;
-            top: 0;
-            color: #e57d00;
-            font-weight: bold;
-          }
         }
       }
 
@@ -441,17 +433,6 @@
         margin-bottom: 0.3rem;
 
         .back_btn {
-          color: #fff;
-          font-size: clamp(14px, 1.3rem, 1.5rem);
-          text-decoration: none;
-          position: relative;
-          margin-left: -0.8rem;
-          &::before {
-            left: 0;
-            top: 0;
-            color: #e57d00;
-            font-weight: bold;
-          }
         }
       }
 
@@ -466,7 +447,7 @@
         height: unset;
         background-color: white;
         max-width: 1000px;
-        min-width: 400px;
+        min-width: 550px;
         margin: auto;
         padding: 0.7rem 0.7rem;
         bottom: 10px;
@@ -486,6 +467,8 @@
               display: flex;
               .sticker_figure {
                 margin: 0;
+                width: 220px;
+
                 .img_sticker {
                   width: 120px;
                   height: 60px;
@@ -509,12 +492,22 @@
               display: flex;
               flex-direction: row;
               gap: 10px;
+
+              .inline {
+                display: inline;
+              }
+
               .input_group {
                 .group_title {
                   font-size: clamp(13px, 0.6rem, 1.2rem);
                   color: #4b73bd;
                   text-transform: capitalize;
                   font-weight: 700;
+
+                  &.inline {
+                    display: inline;
+                    margin-right: 10px;
+                  }
                 }
                 .group_input {
                   padding: 0.2rem 0.2rem 0.2rem 0.6rem;

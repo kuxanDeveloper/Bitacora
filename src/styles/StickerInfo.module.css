@@ -64,9 +64,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .sticker_title {
-  font-size: clamp(14px, 1rem, 1.2rem);
-  color: #4b73bd;
-  margin: 0.3rem 0;
+  font-size: clamp(13px, 0.6rem, 1.2rem);
+    color: #4b73bd;
+    text-transform: capitalize;
+    font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .images_container .sticker_number {
@@ -133,9 +134,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status_title {
-  color: #4b73bd;
-  font-size: clamp(14px, 1rem, 1.2rem);
-  text-transform: capitalize;
+  font-size: clamp(13px, 0.6rem, 1.2rem);
+    color: #4b73bd;
+    text-transform: capitalize;
+    font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status {
@@ -162,9 +164,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .date_group .date_title {
-  font-size: clamp(14px, 1rem, 1.2rem);
-  color: #4b73bd;
-  margin: 0;
+  font-size: clamp(13px, 0.6rem, 1.2rem);
+    color: #4b73bd;
+    text-transform: capitalize;
+    font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .date_group .group_date {
@@ -173,9 +176,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .card_group .group_title {
-  font-size: clamp(14px, 1rem, 1.2rem);
+  font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  margin: 0;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .card_group .group_result {
@@ -209,9 +213,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body .card_group .group_title {
-  font-size: clamp(14px, 1rem, 1.2rem);
+  font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  margin: 0;
+  text-transform: capitalize;
+  font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body .card_group .group_result {
@@ -245,9 +250,10 @@
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body .card_group .group_title {
-  font-size: clamp(14px, 1rem, 1.2rem);
-  color: #4b73bd;
-  margin: 0;
+  font-size: clamp(13px, 0.6rem, 1.2rem);
+    color: #4b73bd;
+    text-transform: capitalize;
+    font-weight: 700;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body .card_group .group_result {
