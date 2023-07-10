@@ -145,7 +145,7 @@ export const FilterSearchTrazaBitacora = (
       return;
     }
   }
-  debugger;
+  
   router.push({
     pathname: `/Trazabilidad/IndexBitacora`,
     query: {
@@ -154,6 +154,64 @@ export const FilterSearchTrazaBitacora = (
       dateFinal: FechaIngresoFinal,
       URS: URS,
       Sufijo: Sufijo,
+    },
+  });
+};
+
+export const FilterSearchTrazaTables = (
+  event,
+  router,
+  DateAdmission,
+  FechaIngresoFinal,
+  URS,
+  TipoTable
+) => {
+  event.preventDefault();
+
+  if (
+    DateAdmission == "" &&
+    FechaIngresoFinal == "" &&
+    TipoTable == "" &&
+    URS == ""
+  ) {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar algun filtro para iniciar la busqueda",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+
+  if (DateAdmission != "" || FechaIngresoFinal != "") {
+    if (DateAdmission == "" && FechaIngresoFinal != "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha inicial si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+
+    if (DateAdmission != "" && FechaIngresoFinal == "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha final si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+  }
+
+  router.push({
+    pathname: `/Trazabilidad/IndexSistema`,
+    query: {
+      dateAdmision: DateAdmission,
+      dateFinal: FechaIngresoFinal,
+      URS: URS,
+      Tipo_tabla: TipoTable,
     },
   });
 };

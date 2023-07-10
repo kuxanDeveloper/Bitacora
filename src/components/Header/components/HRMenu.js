@@ -10,12 +10,19 @@ function HRMenu({Roles}) {
     setMenuShow,
     SelectMenuConfigracion,
     setSelectMenuConfigracion,
+    SelectMenuTrazabilidad,
+    setSelectMenuTrazabilidad,
   } = useContextBitacora();
   const router = useRouter();
 
   useEffect(() => {
 
     setSelectMenuConfigracion(LocationUrl(router, "configuration"));
+  }, []);
+
+  useEffect(() => {
+
+    setSelectMenuTrazabilidad(LocationUrl(router, "trazabilidad"));
   }, []);
 
   return (
@@ -157,7 +164,75 @@ function HRMenu({Roles}) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        
+                      </ul>
+                    </div>
+                  </li>
+
+                  
+                  
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
+
+
+              {Roles != null ? (
+                Roles.MenuSetting ? (
+                  <li
+                    className={`${Styles.nav_li}  ${
+                      SelectMenuTrazabilidad ? Styles.selected : ""
+                    }`}
+                  >
+                    <button
+                      className={Styles.open_icon}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuTrazabilidad)
+                          setSelectMenuTrazabilidad(false);
+                        else setSelectMenuTrazabilidad(true);
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#ff6e00"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
+                          strokeWidth="0"
+                          fill="#ff6e00"
+                        />
+                      </svg>
+                    </button>
+                    <Link
+                      href={"#"}
+                      className={`${Styles.nav_link} ${
+                        LocationUrl(router, "trazabilidad")
+                          ? Styles.active
+                          : ""
+                      } `}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuTrazabilidad)
+                          setSelectMenuTrazabilidad(false);
+                        else setSelectMenuTrazabilidad(true);
+                      }}
+                    >
+                      Trazabilidad
+                    </Link>
+                    <div className={Styles.submenu}>
+                      <ul className={Styles.sub_ul}>
+                        {Roles.UserConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Trazabilidad/IndexBitacora"
@@ -165,20 +240,44 @@ function HRMenu({Roles}) {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexBitacora")
+                                LocationUrl(router, "IndexUsers")
                                   ? Styles.active
                                   : ""
                               }`}
                             >
-                              Trazabilidad Stickers
+                              Sticker
                             </Link>
                           </li>
                         ) : (
                           ""
                         )}
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Trazabilidad/IndexSistema"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Sistema
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        
                       </ul>
                     </div>
                   </li>
+
+                  
+                  
                 ) : (
                   ""
                 )

@@ -25,6 +25,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const [isImagenExterna, setisImagenExterna] = useState(false);
   const [ResultScanner, setResultScanner] = useState("");
   const [SelectMenuConfigracion, setSelectMenuConfigracion] = useState(false);
+  const [SelectMenuTrazabilidad, setSelectMenuTrazabilidad] = useState(false);
 
   const origin =
     typeof window !== "undefined" && window.location.origin
@@ -116,6 +117,8 @@ export const BicatoraContexProvider = ({ children }) => {
         setSelectMenuConfigracion,
         showUser,
         setshowUser,
+        SelectMenuTrazabilidad,
+        setSelectMenuTrazabilidad
       }}
     >
       {children}
