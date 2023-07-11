@@ -55,6 +55,7 @@ export const userService = {
   ChangePasswordAdmin,
   InfoTrazabilidadBitacora,
   InfoTrazabilidadTablas,
+  lstSufijoGetall,
 };
 
 async function login(username, password) {
@@ -431,6 +432,10 @@ function lstObservall(cookie) {
     `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=&EstadoObservacion=1`,
     cookie
   );
+}
+
+function lstSufijoGetall(cookie) {
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/LstGetallSufijo`, cookie);
 }
 
 function InfoSampleUsers(cookie, IdUser) {

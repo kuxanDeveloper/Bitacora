@@ -31,8 +31,8 @@ function HomeMuestraxGrupo({
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
   const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
+  const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
 
-   
   const router = useRouter();
   useEffect(() => {
     ApiQueryGeneralSample(
@@ -46,7 +46,8 @@ function HomeMuestraxGrupo({
       setListadoMuestraActivo,
       setListadoMuestraInactivo,
       setListadoResultadoxMuestra,
-      setLstObservacionesPrede
+      setLstObservacionesPrede,
+      setListadoGetFullSufijo
     );
   }, []);
 
@@ -82,26 +83,6 @@ function HomeMuestraxGrupo({
       } else {
         setisTrueActive(false);
       }
-      //#endregion
-
-      // if (
-      //   hashs3 == "UserInter" ||
-      //   hashs3 == "" ||
-      //   hashs3 == null ||
-      //   hashs3 == undefined
-      // ) {
-      //   if (hashs3 == undefined) {
-      //     window.history.pushState(
-      //       { path: `${urlHref}#UserInter` },
-      //       "",
-      //       `${urlHref}#UserInter`
-      //     );
-      //     urlHref = window.location.href;
-      //   }
-      //   setisUserInterno(true);
-      // } else {
-      //   setisUserInterno(false);
-      // }
       //#endregion
 
       //#region Muestras generales o de urgencia
@@ -143,28 +124,6 @@ function HomeMuestraxGrupo({
       } else {
         setisTrueActive(false);
       }
-      //#endregion
-
-      //#region usuario interno/usuario externo
-
-      // if (
-      //   hashs3 == "UserInter" ||
-      //   hashs3 == "" ||
-      //   hashs3 == null ||
-      //   hashs3 == undefined
-      // ) {
-      //   if (hashs3 == undefined) {
-      //     window.history.pushState(
-      //       { path: `${urlHref}#UserInter` },
-      //       "",
-      //       `${urlHref}#UserInter`
-      //     );
-      //     urlHref = window.location.href;
-      //   }
-      //   setisUserInterno(true);
-      // } else {
-      //   setisUserInterno(false);
-      // }
       //#endregion
 
       //#region Muestras generales /urgencias
@@ -243,6 +202,7 @@ function HomeMuestraxGrupo({
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
         Options={Options}
+        ListadoSufijosxGroupAll={ListadoGetFullSufijo}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
