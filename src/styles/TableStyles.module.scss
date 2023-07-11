@@ -1,6 +1,6 @@
 .tableStyle {
   background-color: #fff;
-
+  width: 100%;
   thead {
     
     th {
@@ -8,6 +8,10 @@
         min-width: 120px;
       }
     }
+  }
+
+  .colorrojoBoton{
+    background-color: #e57d00 !important;
   }
 
   tbody {
@@ -116,6 +120,7 @@
             top: calc(50% - 8px);
           }
         }
+        
        
       }
 
@@ -128,4 +133,9 @@
 
 .max_width_card{
   max-width: 81% !important;
+}
+
+.width_max_group
+{
+  width: 90%;
 }

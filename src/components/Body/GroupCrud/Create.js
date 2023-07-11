@@ -7,10 +7,13 @@ import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
+import ListSufij from "../GroupCrud/ListSufijos"
 
 function ComponentGroup() {
   const validarEsquemaGrupo = Yup.object().shape({
-    NombreGrupo: Yup.string().required("El campo nombre del grupo es obligatorio"),
+    NombreGrupo: Yup.string().required(
+      "El campo nombre del grupo es obligatorio"
+    ),
     AlertaHoras: Yup.string().required(
       "El campo de Alerta por horas es obligatorio"
     ),
@@ -20,7 +23,9 @@ function ComponentGroup() {
     AdmiteSufijo: Yup.string().required(
       "El campo de admite sufijo es obligatorio"
     ),
-    OrdenGrupo: Yup.string().required("El campo de orden de grupo es obligatorio")
+    OrdenGrupo: Yup.string().required(
+      "El campo de orden de grupo es obligatorio"
+    ),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -60,7 +65,9 @@ function ComponentGroup() {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                  <div
+                    className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                  >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Nombre Grupo</label>
                       <input
@@ -74,10 +81,12 @@ function ComponentGroup() {
                       <div className={styles.invalid_feedback}>
                         {errors.NombreGrupo?.message}
                       </div>
-                    </div>                    
+                    </div>
                   </div>
 
-                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                  <div
+                    className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                  >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Orden Grupo</label>
                       <input
@@ -130,6 +139,10 @@ function ComponentGroup() {
                       {/* <!-- ---- --> */}
                     </div>
                   </div>
+
+                  <ListSufij>
+                    
+                  </ListSufij>
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
