@@ -12,7 +12,12 @@ import {
 import { onSubmitCreate } from "../Tools/CRUD";
 import * as Yup from "yup";
 import { useContextBitacora } from "../../context/BitacoraContext";
-function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
+function CreateSticker({
+  ListadoGrupoActivo,
+  id,
+  LstObservacionesPrede,
+  ListadoGetFullSufijo,
+}) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -30,7 +35,7 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
   } = useContextBitacora();
 
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
-
+  const [ValueGroup, setValueGroup] = useState(false);
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
@@ -53,6 +58,14 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
       const SplitScanner = ResultScanner.split("-");
       if (SplitScanner != null && SplitScanner != undefined) {
         if (SplitScanner.length > 1) {
+          debugger;
+          let SearchGroupSufij = ListadoGetFullSufijo.find(
+            (data) => data.SUFIJO_GRUPO == SplitScanner[1]
+          );
+          if (SearchGroupSufij != undefined && SearchGroupSufij != null) {
+            setValueGroup(SearchGroupSufij.Id_grupo);
+            setValue("GrupoSticker", SearchGroupSufij.Id_grupo);
+          }
           document.getElementById("NumSticker").value = SplitScanner[0];
           document.getElementById("Sufijo").value = SplitScanner[1];
           setValue("NumSticker", SplitScanner[0]);
@@ -66,7 +79,12 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
         document.getElementById("NumSticker").value = ResultScanner;
       }
     }
+    setResultScanner(null);
   }, [ResultScanner]);
+
+  useEffect(() => {
+    setValueGroup(id);
+  }, []);
 
   //The class name can vary
 
@@ -79,7 +97,7 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
       <section className={styles.Create_sticker}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
-            <Link href={`/${id}`} className={styles.back_btn}>
+            <Link href={`/${ValueGroup}`} className={styles.back_btn}>
               Volver{" "}
             </Link>
           </div>
@@ -90,7 +108,57 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
             <form onSubmit={handleSubmit(onSubmitCreate)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
-                  <p className={styles.sticker_title}>Sticker</p>
+                  {/* <!-- form group --> */}
+
+                  <div className={styles.form_group}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        N° de Sticker
+                      </label>
+                      <input
+                        {...register("NumSticker")}
+                        name="NumSticker"
+                        maxLength="100"
+                        type="number"
+                        min="0"
+                        id="NumSticker"
+                        className={styles.group_input}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.NumSticker?.message}
+                      </div>
+                    </div>
+
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>N° sufijo</label>
+                      <input
+                        {...register("Sufijo")}
+                        name="Sufijo"
+                        id="Sufijo"
+                        maxLength="10"
+                        type="number"
+                        min="0"
+                        className={styles.group_input}
+                      />
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.GrupoSticker?.message}
+                      </div>
+                    </div>
+                    <div className={styles.input_group}>
+                      <button
+                        className={styles.btn_barcode}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setshowModalScanner(true);
+                        }}
+                      >
+                        leer codigo de barras
+                      </button>
+                    </div>
+                  </div>
+
+                  <p className={styles.sticker_title}>Imagenes de sticker</p>
                   {/* <!-- imagenes --> */}
                   <div className={styles.images_container}>
                     {ValueImagesrc != null ? (
@@ -212,66 +280,17 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
 
                   {/* <!-- estado --> */}
 
-                  {/* <!-- form group --> */}
-
-                  <div className={styles.form_group}>
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>
-                        N° de Sticker
-                      </label>
-                      <input
-                        {...register("NumSticker")}
-                        name="NumSticker"
-                        maxLength="100"
-                        type="number"
-                        min="0"
-                        id="NumSticker"
-                        className={styles.group_input}
-                      />
-                      <div className={styles.invalid_feedback}>
-                        {errors.NumSticker?.message}
-                      </div>
-                    </div>
-
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>N° sufijo</label>
-                      <input
-                        {...register("Sufijo")}
-                        name="Sufijo"
-                        id="Sufijo"
-                        maxLength="10"
-                        type="number"
-                        min="0"
-                        className={styles.group_input}
-                      />
-
-                      <div className={styles.invalid_feedback}>
-                        {errors.GrupoSticker?.message}
-                      </div>
-                    </div>
-                    <div className={styles.input_group}>
-                      <button
-                        className={styles.btn_barcode}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setshowModalScanner(true);
-                        }}
-                      >
-                        leer codigo de barras
-                      </button>
-                    </div>
-                  </div>
-
                   {/*-------------------------------Grupo------------------------------------------- */}
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Grupo</label>
                       <select
-                        defaultValue={id}
                         {...register("GrupoSticker")}
                         name="GrupoSticker"
                         id="GrupoSticker"
+                        value={ValueGroup}
+                        onChange={(e) => setValueGroup(e.target.value)}
                       >
                         <option disabled value="">
                           Seleccione una opción
@@ -378,7 +397,7 @@ function CreateSticker({ ListadoGrupoActivo, id, LstObservacionesPrede }) {
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: id },
+                        query: { id: ValueGroup },
                         hash: "Cactive#OverallSample",
                       }}
                       className={styles.btn_cancel}

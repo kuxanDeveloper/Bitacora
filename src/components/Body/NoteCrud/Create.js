@@ -16,6 +16,7 @@ function ComponentsCreateNote({
   id,
   sticker,
   name_group,
+  group,
   LstObservacionesPrede,
 }) {
   const {
@@ -58,7 +59,7 @@ function ComponentsCreateNote({
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
-              href={`/${id}#Cactive#OverallSample`}
+              href={`/${group}#Cactive#OverallSample`}
               className={styles.home_btn}
             >
               <svg
@@ -180,13 +181,19 @@ function ComponentsCreateNote({
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <label className={`${styles.group_title} ${styles.inline}`}>
+                      <label
+                        className={`${styles.group_title} ${styles.inline}`}
+                      >
                         Número de sticker :
                       </label>
                       <p className={styles.inline}>{sticker}</p>
                     </div>
                     <div className={styles.input_group}>
-                      <label className={`${styles.group_title} ${styles.inline}`}>Grupo :</label>
+                      <label
+                        className={`${styles.group_title} ${styles.inline}`}
+                      >
+                        Grupo :
+                      </label>
                       <p className={styles.inline}>{name_group}</p>
                     </div>
                   </div>

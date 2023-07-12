@@ -107,7 +107,45 @@ function EditStickerComponents({
               ? InforSampleDetails.infoBitacora.map((data, index) => (
                   <div key={index} className={styles.stickers_container}>
                     <div className={styles.card_sticker}>
-                      <p className={styles.sticker_title}>Sticker</p>
+                      {/* <!-- estado --> */}
+
+                      {/* <!-- form group --> */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            N° de Sticker
+                          </label>
+                          <label>{`${data.NUMERO_STICKER}-${data.SUFIJO}`}</label>
+                        </div>
+
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>Grupo</label>
+                          <select
+                            defaultValue={group}
+                            {...register("GrupoSticker")}
+                            name="GrupoSticker"
+                            id="GrupoSticker"
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {ListadoGrupoActivo.map((data, index) => (
+                              <option key={index} value={data.Id_grupo}>
+                                {data.NOMBRE_GRUPO}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div className={styles.invalid_feedback}>
+                            {errors.GrupoSticker?.message}
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className={styles.sticker_title}>
+                        Imagenes de sticker
+                      </p>
                       {/* <!-- imagenes --> */}
                       <div className={styles.images_container}>
                         {ValueImagesrc != null ||
@@ -266,73 +304,7 @@ function EditStickerComponents({
                         )}
                       </div>
 
-                      {/* <!-- estado --> */}
-
                       {/* <!-- form group --> */}
-
-                      <div className={styles.form_group}>
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title}>
-                            N° de Sticker
-                          </label>
-                          <label>{`${data.NUMERO_STICKER}-${data.SUFIJO}`}</label>
-                        </div>
-
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title}>Grupo</label>
-                          <select
-                            defaultValue={group}
-                            {...register("GrupoSticker")}
-                            name="GrupoSticker"
-                            id="GrupoSticker"
-                          >
-                            <option disabled value="">
-                              Seleccione una opción
-                            </option>
-                            {ListadoGrupoActivo.map((data, index) => (
-                              <option key={index} value={data.Id_grupo}>
-                                {data.NOMBRE_GRUPO}
-                              </option>
-                            ))}
-                          </select>
-
-                          <div className={styles.invalid_feedback}>
-                            {errors.GrupoSticker?.message}
-                          </div>
-                        </div>
-                      </div>
-                      {/* <!-- form group --> */}
-
-                      {/* <div className={styles.form_group}>
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title_check}>
-                            Usuario interno
-                          </label>
-                          <input
-                            // name="UserCheckinter"
-                            id="UserCheckinter"
-                            type="checkbox"
-                            onChange={() => uncheckUserInterExterno()}
-                          />
-                        </div>
-
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title_check}>
-                            Usuario externo
-                          </label>
-                          <input
-                            // name="UserCheckexter"
-                            id="UserCheckexter"
-                            type="checkbox"
-                            onChange={() => uncheckUserInterExterno()}
-                          />
-                        </div>
-                      </div>
-                      <div className={styles.invalid_feedback}>
-                        {errors.UserCheckexter?.message != ""
-                          ? errors.UserCheckexter?.message
-                          : errors.UserCheckinter?.message}
-                      </div> */}
 
                       {/* <!-- form group --> */}
                       <div className={styles.form_group}>

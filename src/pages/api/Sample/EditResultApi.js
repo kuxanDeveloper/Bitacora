@@ -2,7 +2,7 @@ import {
   queryTestListxGroup,
   queryResultListxTests,
   queryOptionesListxPlantilla,
-  queryInfoEditResult
+  queryInfoEditResult,
 } from "../../../components/Tools/Security";
 
 export const InfoResultEdiApi = async (cookie, id, setInfoResul) => {
@@ -29,6 +29,7 @@ export const ListOptionesxPlantilla = async (
   setListOptiones,
   idPlantilla
 ) => {
+
   let ListOptiones = await queryOptionesListxPlantilla(cookie, idPlantilla);
   setListOptiones(ListOptiones);
 };

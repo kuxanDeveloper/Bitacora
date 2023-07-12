@@ -145,7 +145,7 @@ export const FilterSearchTrazaBitacora = (
       return;
     }
   }
-  
+
   router.push({
     pathname: `/Trazabilidad/IndexBitacora`,
     query: {
@@ -294,7 +294,10 @@ export const OnclickComboEstadoCase = (
   }
 };
 
-export const onclickPruebaTarget = (setvaluePlantillachange, setValue) => {
+export const onclickPruebaTargetCreate = (
+  setvaluePlantillachange,
+  setValue,
+) => {
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
   setvaluePlantillachange([]);
   setValue("Codigo_opcion", "");
@@ -304,12 +307,38 @@ export const onclickPruebaTarget = (setvaluePlantillachange, setValue) => {
   }
 };
 
-export const onclickPlantillaTarget = (setValue) => {
+export const onclickPlantillaTargetCreate = (setValue) => {
   let option = document.getElementById("Codigo_opcion");
   setValue("Codigo_opcion", "");
   if (option != null && option != undefined) {
     document.getElementById("Codigo_opcion").value = "";
   }
+};
+
+export const onclickPruebaTargetEdit = (
+  setvaluePlantillachange,
+  setValue,
+  setcodSeguimiento,
+  setcodOpciones
+) => {
+  // document.getElementById("Codigo_resultado_preliminar_1").value = "";
+  setcodSeguimiento("");
+  setcodOpciones("");
+  setvaluePlantillachange([]);
+  setValue("Codigo_opcion", "");
+  // let option = document.getElementById("Codigo_opcion");
+  // if (option != null && option != undefined) {
+  //   document.getElementById("Codigo_opcion").value = "";
+  // }
+};
+
+export const onclickPlantillaTargetEdit = (setValue, setcodOpciones) => {
+  // let option = document.getElementById("Codigo_opcion");
+  setValue("Codigo_opcion", "");
+  // if (option != null && option != undefined) {
+  //   document.getElementById("Codigo_opcion").value = "";
+  // }
+  setcodOpciones("");
 };
 
 // export const setCheckinvalue = (setValue) => {

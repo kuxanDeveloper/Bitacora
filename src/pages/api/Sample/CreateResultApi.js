@@ -3,6 +3,7 @@ import {
   queryResultListxTests,
   queryOptionesListxPlantilla,
   QueryObserva,
+  QuerySufijoGetAll,
 } from "../../../components/Tools/Security";
 
 export const ListPruebaxGroupApi = async (
@@ -18,6 +19,11 @@ export const ListPruebaxGroupApi = async (
 export const ListObservacion = async (cookie, setLstObservacionesPrede) => {
   let lstObservaPrete = await QueryObserva(cookie);
   setLstObservacionesPrede(lstObservaPrete);
+};
+
+export const ListSufijoUser = async (cookie, setListadoGetFullSufijo) => {
+  let lstGetallSufijo = await QuerySufijoGetAll(cookie);
+  setListadoGetFullSufijo(lstGetallSufijo);
 };
 
 export const ListPlanResultadosxPru = async (
@@ -36,10 +42,12 @@ export const ListOptionesxPlantilla = async (
   idPlantilla,
   idBitacora
 ) => {
+  debugger;
   let ListOptiones = await queryOptionesListxPlantilla(
     cookie,
     idPlantilla,
     idBitacora
   );
+  
   setListOptiones(ListOptiones);
 };

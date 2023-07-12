@@ -24,12 +24,18 @@ export default function StickerDetails({
   } = useContextBitacora();
 
   return (
-    <> 
+    <>
       <div className={styles.sticker_details}>
         <div className={styles.details_container}>
-        <div className={styles.home_btn_container}>
+          <div className={styles.home_btn_container}>
             <Link
-              href={`/`}
+              title="Inicio"
+              href={`/${
+                InforSampleDetails.infoBitacora != undefined &&
+                InforSampleDetails.infoBitacora != null
+                  ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
+                  : ""
+              }`}
               className={styles.home_btn}
             >
               <svg
@@ -52,9 +58,8 @@ export default function StickerDetails({
             </Link>
           </div>
 
-     
           <div className={styles.back_btn_container}>
-          <Link
+            <Link
               href={{
                 pathname: "/Sample/ViewDetails/[id]",
                 query: {
@@ -81,8 +86,6 @@ export default function StickerDetails({
               </svg>
               Volver
             </Link>
-
-         
           </div>
 
           <p className={styles.title}>Detalle de sticker</p>
@@ -223,6 +226,12 @@ export default function StickerDetails({
                                 ? InforSampleDetails.infoBitacora[0]
                                     .NOMBRE_GRUPO_ASIGNADO
                                 : "",
+                            group:
+                              InforSampleDetails.infoBitacora != undefined &&
+                              InforSampleDetails.infoBitacora != null
+                                ? InforSampleDetails.infoBitacora[0]
+                                    .ID_GRUPO_ASIGNADO
+                                : "",
                             sticker:
                               InforSampleDetails.infoBitacora != undefined &&
                               InforSampleDetails.infoBitacora != null
@@ -308,19 +317,27 @@ export default function StickerDetails({
                         <div className={styles.form_group}>
                           {/* <!-- info sticker --> */}
                           <div className={styles.info_group}>
-                            <span className={`${styles.info_title} ${styles.inline}`}>
+                            <span
+                              className={`${styles.info_title} ${styles.inline}`}
+                            >
                               N° Sticker
                             </span>
-                            <p className={`${styles.info_text} ${styles.inline}`}>
+                            <p
+                              className={`${styles.info_text} ${styles.inline}`}
+                            >
                               {`${data.NUMERO_STICKER}-${data.SUFIJO}`}
                             </p>
                           </div>
 
                           <div className={styles.info_group}>
-                            <span className={`${styles.info_title} ${styles.inline}`}>
+                            <span
+                              className={`${styles.info_title} ${styles.inline}`}
+                            >
                               Fecha del sticker
                             </span>
-                            <p className={`${styles.info_text} ${styles.inline}`}>
+                            <p
+                              className={`${styles.info_text} ${styles.inline}`}
+                            >
                               {data.FECHA_FORMAT_CREADO_COMPLETA}
                             </p>
                           </div>

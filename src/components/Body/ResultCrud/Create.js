@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  onclickPruebaTarget,
-  onclickPlantillaTarget,
+  onclickPruebaTargetCreate,
+  onclickPlantillaTargetCreate,
 } from "../../Tools/functiones";
 import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,7 @@ function ComponentCreateResult({
   sticker,
   setvaluePlantillachange,
   ListOptiones,
+  group,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().required("Campo prueba obligatorio"),
@@ -27,6 +28,7 @@ function ComponentCreateResult({
     Codigo_opcion: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
   });
+
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
@@ -38,7 +40,7 @@ function ComponentCreateResult({
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
-              href={`/${id}#Cactive#OverallSample`}
+              href={`/${group}#Cactive#OverallSample`}
               className={styles.home_btn}
             >
               <svg
@@ -132,7 +134,7 @@ function ComponentCreateResult({
                         className={styles.group_input}
                         onChange={(e) => {
                           setvaluePruebachange(e.target.value);
-                          onclickPruebaTarget(
+                          onclickPruebaTargetCreate(
                             setvaluePlantillachange,
                             setValue
                           );
@@ -165,7 +167,7 @@ function ComponentCreateResult({
                         defaultValue={""}
                         onChange={(e) => {
                           setvaluePlantillachange(e.target.value);
-                          onclickPlantillaTarget(setValue);
+                          onclickPlantillaTargetCreate(setValue);
                         }}
                       >
                         <option disabled value="">
