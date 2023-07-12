@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import React, { useState } from "react";
 import { OnkeyDowNumber, OnPasteNumber } from "../../Tools/functiones";
 
-function listSufijos({ListSufijo, setListSufijo}) {
+function ListSufijos({ListSufijo, setListSufijo}) {
   
   const [valorsufijo, setvalorsufijo] = useState("");
 
@@ -115,4 +115,4 @@ function listSufijos({ListSufijo, setListSufijo}) {
     </div>
   );
 }
-export default listSufijos;
+export default ListSufijos;
