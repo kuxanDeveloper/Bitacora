@@ -7,14 +7,16 @@ export const onSubmitCreateGroup = ({
     EstadoGrupo,
     AdmiteSufijo,
     AlertaHoras,
-    OrdenGrupo
+    OrdenGrupo,
+    ListSufijo
 }) => {  
     return userService.CreatGroup(
         NombreGrupo,
         EstadoGrupo,
         AdmiteSufijo,
         AlertaHoras,
-        OrdenGrupo
+        OrdenGrupo,
+        ListSufijo
     ).then(() =>
     {
       Swal.fire({

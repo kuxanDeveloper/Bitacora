@@ -3,9 +3,11 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import React, { useState } from "react";
+import { OnkeyDowNumber, OnPasteNumber } from "../../Tools/functiones";
 
-function listSufijos() {
-  const [ListSufijo, setListSufijo] = useState([]);
+function listSufijos({ListSufijo, setListSufijo}) {
+  
+  const [valorsufijo, setvalorsufijo] = useState("");
 
   function AgregarSufijolist() {
     let txtSufijo = document.getElementById("SufijoGroup");
@@ -19,18 +21,30 @@ function listSufijos() {
       });
       return;
     } else {
-
-        
-
         let sufij = txtSufijo.value;
-        setListSufijo(prevArray => [...prevArray, sufij])
-        console.log(ListSufijo);
+        if(ListSufijo.filter((item) => item === sufij).length > 0)
+        {
+
+            Swal.fire({
+                title: "¡Advertencia!",
+                text: "El número de sufijo que intenta guardar ya se encuentra agregado en el listado",
+                icon: "warning",
+                confirmButtonText: "Cerrar",
+              });
+              setvalorsufijo("");
+              return;
+              
+        }
+
+      
+      setListSufijo((prevArray) => [...prevArray, sufij]);
+      setvalorsufijo("");
+      
     }
   }
 
-  function DeleteRowSufijo(idRow)
-  {  
-    setListSufijo(ListSufijo.filter(item => item !== idRow))
+  function DeleteRowSufijo(idRow) {
+    setListSufijo(ListSufijo.filter((item) => item !== idRow));
   }
 
   return (
@@ -40,16 +54,18 @@ function listSufijos() {
         <input
           name="SufijoGroup"
           id="SufijoGroup"
-          maxLength="2"
-          max="5000"
-          type="number"
-          min="0"
+          maxLength="5"
+          type="text"
+          onChange={(e) => setvalorsufijo(e.target.value)}
+          onKeyPress={(e) => OnkeyDowNumber(e)}
+          onPaste={(e) => OnPasteNumber(e, null, setvalorsufijo)}
+          value={valorsufijo}
           className={styles.group_input}
         />
         <div
           className={`${styles.btn_container_send} ${styles.btn_blue} ${styleTable.width_max_group}`}
         >
-          <button 
+          <button
             title="Agregar Sufijo"
             className={styles.btn_send}
             onClick={(e) => {
@@ -68,32 +84,31 @@ function listSufijos() {
           <thead>
             <tr>
               <th>Número de sufijo</th>
-              <th>Opciones</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
             {ListSufijo.map((data, index) => (
-                  <tr key={index} id={data}>
-                    <td className={styleTable.textCenterColumn}>
-                      <p>{data}</p>
-                    </td>
-                    <td>
-                      <Link
-                        title="Eliminar Sufijo"
-                        className={styleTable.colorrojoBoton}
-                        type="button"
-                        href={""}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            DeleteRowSufijo(data);
-                          }}
-                      >
-                        <span>&#128942; </span>
-                        Eliminar Sufijo
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+              <tr key={index} id={data}>
+                <td className={styleTable.textCenterColumn}>
+                  <p>{data}</p>
+                </td>
+                <td>
+                  <Link
+                    title="Eliminar Sufijo"
+                    className={styleTable.colorrojoBoton}
+                    type="button"
+                    href={""}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      DeleteRowSufijo(data);
+                    }}
+                  >
+                    <span>&#128941;</span>
+                  </Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

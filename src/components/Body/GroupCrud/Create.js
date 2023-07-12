@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -7,9 +7,11 @@ import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import ListSufij from "../GroupCrud/ListSufijos"
+import ListSufij from "../GroupCrud/ListSufijos";
 
 function ComponentGroup() {
+  const [ListSufijo, setListSufijo] = useState([]);
+
   const validarEsquemaGrupo = Yup.object().shape({
     NombreGrupo: Yup.string().required(
       "El campo nombre del grupo es obligatorio"
@@ -26,20 +28,19 @@ function ComponentGroup() {
     OrdenGrupo: Yup.string().required(
       "El campo de orden de grupo es obligatorio"
     ),
+    ListSufijo: Yup.array()
+      .min(1, "Es obligatorio digitar por lo menos un sufijo para el grupo")
+      .required("Es obligatorio digitar por lo menos un sufijo para el grupo"),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
 
-  function restrictNumber(id) {
-    var valor = document.getElementById(id);
-    if (valor != null) {
-      var v = valor.value.replace(new RegExp(/[^\d]/, "ig"), "");
-
-      document.getElementById("id").value = valor;
-    }
-  }
+  useEffect(() => {
+    var checkbox1 = document.getElementById("EstadoGrupo");
+    checkbox1.checked = true;
+  }, []);
 
   return (
     <>
@@ -82,6 +83,13 @@ function ComponentGroup() {
                         {errors.NombreGrupo?.message}
                       </div>
                     </div>
+
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Estado del grupo
+                      </label>
+                      <input id="EstadoGrupo" type="checkbox" />
+                    </div>
                   </div>
 
                   <div
@@ -120,35 +128,19 @@ function ComponentGroup() {
                     </div>
                   </div>
 
-                  <div className={styles.form_group}>
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>
-                        Estado del grupo
-                      </label>
-                      <input id="EstadoGrupo" type="checkbox" />
-
-                      {/* <!-- ---- --> */}
-                    </div>
-
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>
-                        Admite Sufijo
-                      </label>
-                      <input id="AdmiteSufijo" type="checkbox" />
-
-                      {/* <!-- ---- --> */}
-                    </div>
+                  <ListSufij
+                    ListSufijo={ListSufijo}
+                    setListSufijo={setListSufijo}
+                  ></ListSufij>
+                  <div className={styles.invalid_feedback}>
+                    {errors.ListSufijo?.message}
                   </div>
-
-                  <ListSufij>
-                    
-                  </ListSufij>
-
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
                           setCheckindividual(setValue);
+                          setValue("ListSufijo",ListSufijo);
                         }}
                         className={styles.btn_send}
                       >
