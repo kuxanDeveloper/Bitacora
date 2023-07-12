@@ -57,13 +57,18 @@ export default function StickerInfo({
 
                   <section className={styles.follow_up}>
                     <h3 className={styles.follow_up_title}>
-                      Ultimo Seguimiento
+                      Último seguimiento
                     </h3>
                     {InforSampleDetails.infoDetalle.length > 0 ? (
                       InforSampleDetails.infoDetalle
                         .slice(0, 1)
                         .map((data, index) => (
-                          <Lastfollow_up data={data} key={index} />
+                          <Lastfollow_up
+                            data={data}
+                            infoBitacora={InforSampleDetails.infoBitacora}
+                            key={index}
+                            Options={Options}
+                          />
                         ))
                     ) : (
                       <h2>Sin seguimiento registrado</h2>
@@ -74,13 +79,18 @@ export default function StickerInfo({
 
                   {/* <!-- resultado --> */}
                   <section className={styles.result}>
-                    <h3 className={styles.result_title}>Ultimo resultado</h3>
+                    <h3 className={styles.result_title}>Último resultado</h3>
 
                     {InforSampleDetails.infoResultado.length > 0 ? (
                       InforSampleDetails.infoResultado
                         .slice(0, 1)
                         .map((data, index) => (
-                          <Result data={data} key={index}></Result>
+                          <Result
+                            data={data}
+                            key={index}
+                            infoBitacora={InforSampleDetails.infoBitacora}
+                            Options={Options}
+                          ></Result>
                         ))
                     ) : (
                       <h2>Sin resultado registrado</h2>

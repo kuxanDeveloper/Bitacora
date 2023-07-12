@@ -66,7 +66,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .card_sticker .sticker_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -136,7 +135,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -146,7 +144,6 @@
   position: relative;
   color: #a8a8a8;
   padding-left: 20px;
-  text-transform: capitalize;
 }
 
 .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status .status_icon {
@@ -166,7 +163,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .card_body .date_group .date_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -178,7 +174,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .card_body .card_group .group_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -232,7 +227,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body .card_group .group_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -285,7 +279,6 @@
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body .card_group .group_title {
   font-size: clamp(13px, 0.6rem, 1.2rem);
   color: #4b73bd;
-  text-transform: capitalize;
   font-weight: 700;
 }
 
@@ -436,7 +429,7 @@
   .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status_title {
     color: #4b73bd;
     font-size: clamp(14px, 1rem, 1.2rem);
-    text-transform: capitalize;
+
   }
 
   .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status {
@@ -445,7 +438,6 @@
     position: relative;
     color: #a8a8a8;
     padding-left: 20px;
-    text-transform: capitalize;
   }
 
   .sticker_info .info_container .card .stickers_container .card_content .card_body .sticker_status .status .status_icon {

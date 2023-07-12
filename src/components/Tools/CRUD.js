@@ -13,6 +13,7 @@ export const onSubmitCreate = ({
   file2,
   Sufijo,
 }) => {
+  debugger;
   const StickerRetorno = NumSticker;
   return userService
     .CreatSticker(
@@ -201,7 +202,7 @@ export const onSubmitEditResult = ({
       Codigo_prueba,
       Codigo_resultado_preliminar_1,
       Codigo_opcion,
-      Codigo_resultado_bitacora,
+      Codigo_resultado_bitacora
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";

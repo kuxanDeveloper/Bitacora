@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
-import ImageOptimize from "../../Tools/ImageOptimize";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import { AperturaandCierre } from "../../Tools/functiones";
 import Link from "next/link";
@@ -28,7 +27,7 @@ function InformacionStciker({
       <div className={styles.card_sticker}>
         {/* <!-- imagenes --> */}
         <div className={styles.images_container}>
-          <p className={styles.sticker_title}>Sticker</p>
+          <p className={styles.sticker_title}>N° sticker</p>
 
           <div className={styles.sticker_number}>
             <p

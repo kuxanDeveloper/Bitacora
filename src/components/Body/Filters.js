@@ -40,7 +40,7 @@ export default function Filters({
   const [FechaIngreso, setFechaIngreso] = useState(
     dateAdmision != undefined && dateAdmision != null ? dateAdmision : ""
   );
-  console.log(ListadoSufijosxGroupAll);
+
   // const [Resultado, setResultado] = useState(
   //   result != undefined && result != null ? result : ""
   // );

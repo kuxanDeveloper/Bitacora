@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import CreateSticker from "../../../components/Body/CreateSticker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
@@ -9,7 +9,10 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { ListObservacion } from "../../api/Sample/CreateResultApi";
+import {
+  ListObservacion,
+  ListSufijoUser,
+} from "../../api/Sample/CreateResultApi";
 
 import { useContextBitacora } from "../../../context/BitacoraContext";
 
@@ -17,8 +20,11 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
 
+  const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
+
   useEffect(() => {
     ListObservacion(cookie, setLstObservacionesPrede);
+    ListSufijoUser(cookie, setListadoGetFullSufijo);
   }, []);
 
   return (
@@ -60,6 +66,7 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
         ListadoGrupoActivo={ListadoGrupoActivo}
         id={id}
         LstObservacionesPrede={LstObservacionesPrede}
+        ListadoGetFullSufijo={ListadoGetFullSufijo}
       ></CreateSticker>
     </>
   );

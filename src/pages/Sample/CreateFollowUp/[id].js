@@ -11,7 +11,7 @@ import { ListObservacion } from "../../api/Note/Crud";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import { useEffect } from "react";
 
-function PageCreateFollowup({ id, sticker, name_group, cookie }) {
+function PageCreateFollowup({ id, sticker, name_group, cookie, group }) {
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
 
@@ -58,6 +58,7 @@ function PageCreateFollowup({ id, sticker, name_group, cookie }) {
         id={id}
         sticker={sticker}
         name_group={name_group}
+        group={group}
         LstObservacionesPrede={LstObservacionesPrede}
       />
     </>
@@ -96,6 +97,8 @@ export async function getServerSideProps(ctx) {
       ctx.query.id == null ||
       ctx.query.name_group == undefined ||
       ctx.query.name_group == null ||
+      ctx.query.group == undefined ||
+      ctx.query.group == null ||
       ctx.query.sticker == null ||
       ctx.query.sticker == null ||
       !Options.BtnCrearNotaAndUrl
@@ -109,6 +112,7 @@ export async function getServerSideProps(ctx) {
         id: ctx.query.id,
         sticker: ctx.query.sticker,
         name_group: ctx.query.name_group,
+        group: ctx.query.group,
       },
     };
   } else {
