@@ -118,6 +118,19 @@ export default function AdvancedSearch({
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
+              
+              <select
+                name="ListAncestro"
+                onClick={(e) => setGruopValue(e.target.value)}
+                className={filterStyles.filter_input_w100}
+              >
+                <option value="" disabled>
+                  Seleccione un Grupo Principal
+                </option>
+
+                <option value={1}>Todos</option>
+              </select>
+
               {isActiveGroup ? (
                 <select
                   defaultValue={GruopValue}

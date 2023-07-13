@@ -11,18 +11,29 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../components/Tools/OpcitionHabilite";
+import {SampleDetailsWhitAncestro} from "./api/Ancestro/[id]"
+import { SwitchUseStateRol,VerSwalCargando } from "../components/Tools/functiones";
+import IndexComponentAdmin from "../components/RolesComponents/Administrator/IndexComponent";
+import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
 
-import { SwitchUseStateRol } from "../components/Tools/functiones";
+import IndexComponentAssis from "../components/RolesComponents/Assistant/IndexComponent";
+
+import IndexComponentConsul from "../components/RolesComponents/Consultation/IndexComponent";
 
 export default function Home({
-  ListadoGrupoActivo,
-  ListadoGrupoInactivo,
+  ListadoGrupoActivossr,
+  ListadoGrupoInactivossr,
   ListadoSufijosxGroupAll,
+  ListaAncestros,
   Options,
   Roles,
+  cookie
 }) {
   const [isTrueActive, setisTrueActive] = useState(false);
   const [Returncomponent, setReturncomponent] = useState("");
+  const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
+  const [ListadoGrupoInactivo, setListadoGrupoInactivo] = useState([]);
+  const [idAncestro, setidAncestro] = useState('');
   const router = useRouter();
   useEffect(() => {
     if (Options.OrdersInactive) {
@@ -72,15 +83,15 @@ export default function Home({
     };
   }, [router.events]);
 
-  useEffect(() => {
-    SwitchUseStateRol(
-      setReturncomponent,
-      Roles,
-      ListadoGrupoActivo,
-      ListadoGrupoInactivo,
-      isTrueActive
-    );
-  }, [isTrueActive]);
+  // useEffect(() => {
+  //   SwitchUseStateRol(
+  //     setReturncomponent,
+  //     Roles,
+  //     ListadoGrupoActivo,
+  //     ListadoGrupoInactivo,
+  //     isTrueActive
+  //   );
+  // }, [isTrueActive,idAncestro]);
 
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
@@ -89,6 +100,21 @@ export default function Home({
     userService.logout();
     return "";
   }
+
+
+
+  useEffect(() => {
+    if(idAncestro != null && idAncestro != "" && idAncestro != undefined)
+    {    
+      VerSwalCargando();  
+      SampleDetailsWhitAncestro(setListadoGrupoActivo,setListadoGrupoInactivo, cookie, idAncestro);      
+    }
+  },[idAncestro]);
+
+  useEffect(() => {
+    setListadoGrupoActivo(ListadoGrupoActivossr);
+    setListadoGrupoInactivo(ListadoGrupoInactivossr);
+  }, []);
 
   return (
     <>
@@ -122,23 +148,72 @@ export default function Home({
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
 
-      {ListadoGrupoActivo != undefined &&
-      ListadoGrupoActivo != null &&
+      {ListadoGrupoActivo != undefined && ListadoGrupoActivo.length > 0 &&
       ListadoGrupoInactivo != undefined &&
-      ListadoGrupoInactivo != null ? (
+      ListadoGrupoInactivo.length > 0 ? (
         <Filters
           ListadoGrupoActivo={ListadoGrupoActivo}
           isActiveGroup={true}
           isActiveCase={false}
           ListadoSufijosxGroupAll={ListadoSufijosxGroupAll}
+          ListaAncestros={ListaAncestros}
           CasosActivo_Inactivos={isTrueActive}
           Options={Options}
+          setidAncestro={setidAncestro}
         ></Filters>
       ) : (
         ""
       )}
 
-      <div className="cases_container">{Returncomponent}</div>
+      <div className="cases_container">{  Roles.map((data, index) => {
+    switch (data) {
+      case 1:
+return(
+          <IndexComponentAdmin
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAdmin>)
+
+        break;
+      case 2:
+        return(
+          <IndexComponentTechni
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentTechni>
+        );
+        break;
+      case 3:
+        return(
+          <IndexComponentAssis
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentAssis>
+        );
+        break;
+      case 4:
+        return(
+          <IndexComponentConsul
+            key={index}
+            HabilitarActive={isTrueActive}
+            ListadoGrupoActivo={ListadoGrupoActivo}
+            ListadoGrupoInactivo={ListadoGrupoInactivo}
+          ></IndexComponentConsul>
+        );
+        break;
+      default:
+        return(
+          "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros"
+        );
+        break;
+    }
+  })}</div>
 
       {/* <Skeleton></Skeleton> */}
     </>
@@ -147,6 +222,7 @@ export default function Home({
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
+  debugger;
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
@@ -169,20 +245,26 @@ export async function getServerSideProps(ctx) {
         }
       });
     }
-    const consultataGeneral = await QueryActiveInactivegroup_GetUsers(cookie);
+    const consultataGeneral = await QueryActiveInactivegroup_GetUsers(cookie, null);
     const ListadoGrupoActivo = await consultataGeneral.lstGroupActive;
     const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
     const ListadoSufijosxGroupAll = await consultataGeneral.ListaSufijoGetAll;
+    const ListaAncestros = await consultataGeneral.ListaAncestros;
+
+debugger;
     return {
       props: {
-        ListadoGrupoActivo:
+        ListadoGrupoActivossr:
           ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
-        ListadoGrupoInactivo:
+        ListadoGrupoInactivossr:
           ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
         ListadoSufijosxGroupAll:
           ListadoSufijosxGroupAll == undefined ? null : ListadoSufijosxGroupAll,
+          ListaAncestros:
+          ListaAncestros == undefined ? null : ListaAncestros,
         Options,
         Roles,
+        cookie: cookie
       },
     };
   } else {

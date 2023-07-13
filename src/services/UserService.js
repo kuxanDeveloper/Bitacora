@@ -131,9 +131,9 @@ function logoutLogin() {
   userSubject.next(null);
 }
 
-function ListGroupActiveeInactive_ListUsers(cookie) {
+function ListGroupActiveeInactive_ListUsers(cookie,idAncestro) {
   return fetchWrapper.get(
-    `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser`,
+    `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser?COD_ANCESTRO=${idAncestro}`,
     cookie
   );
 }

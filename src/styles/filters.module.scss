@@ -86,6 +86,29 @@
         }
       }
 
+      .filter_input_w45 {
+        color: #777777;
+        border: #a8a8a8 solid 1px;
+        outline: none;
+        width: 100%;
+        margin-right: 5px;
+        padding: 10px 5px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        margin-left: 5px;
+        max-height: 42px;
+
+        &:focus {
+          outline: solid 1px #5c5c5c;
+        }
+      }
+
+      .sinmarginleft
+      {
+        margin-left: 0px !important;
+        margin-right: 3px !important;
+      }
+
       .filter_input_w100 {
         color: #777777;
         border: #a8a8a8 solid 1px;
@@ -118,6 +141,12 @@
       }
     }
   }
+}
+
+.divFiltro
+{
+  display: flex;
+  width: 91.5%;
 }
 
 @media (min-width: 768px) {

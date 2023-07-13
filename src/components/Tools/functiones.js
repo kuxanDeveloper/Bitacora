@@ -58,6 +58,8 @@ export const backhistory = () => {
   window.history.back();
 };
 
+
+
 export const FilterQuerySearch = (
   event,
   router,
@@ -94,6 +96,21 @@ export const FilterQuerySearch = (
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
     },
+  });
+};
+
+export const Recharge_home_ancestro = (
+  event,
+  router,
+  idAncestro
+) => {
+  event.preventDefault();  
+  router.push({
+    pathname: `/`,
+    query: {
+      idAncestro : idAncestro,
+    },
+    
   });
 };
 
@@ -900,3 +917,17 @@ export const OnPasteNumber = (e, id, SetValue) => {
     return patron.test(tecla);
   }, 4);
 };
+
+export const VerSwalCargando = () => {
+  Swal.fire({
+    icon: "success",
+    title: "Cargando la informacion",
+    showConfirmButton: false,
+    timer: 1250,
+    timerProgressBar: true,
+    allowOutsideClick: false,
+  }).then((result) => {
+   
+  })
+};
+
