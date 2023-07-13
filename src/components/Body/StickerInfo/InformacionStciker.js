@@ -222,7 +222,11 @@ function InformacionStciker({
           <p className={styles.group_title}>Observaciones iniciales</p>
 
           <span className={styles.group_result}>
-            {data.OBSERVACIONES_INICIALES}
+            {data.OBSERVACIONES_INICIALES != undefined &&
+            data.OBSERVACIONES_INICIALES != null &&
+            data.OBSERVACIONES_INICIALES != "undefined"
+              ? data.OBSERVACIONES_INICIALES
+              : ""}
           </span>
         </div>
       </div>

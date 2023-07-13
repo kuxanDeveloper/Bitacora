@@ -41,7 +41,7 @@ function Result({ data, infoBitacora, Options }) {
       )}
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Usuario que creo el resultado</p>
+        <p className={styles.group_title}>Usuario que creo el estatus</p>
 
         <span className={styles.group_result}>
           {data.USUARIO_CREADOR_RESULTADO}
@@ -54,7 +54,7 @@ function Result({ data, infoBitacora, Options }) {
       </div>
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Resultado</p>
+        <p className={styles.group_title}>Seguimiento</p>
 
         <span className={styles.group_result}>
           {data.PLANTILLA_RESULTADO !== null &&
@@ -80,7 +80,7 @@ function Result({ data, infoBitacora, Options }) {
       )}
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Fecha de último resultado</p>
+        <p className={styles.group_title}>Fecha de último estatus</p>
         <span className={styles.group_result}>
           {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
           data.FECHA_CREACION_RESULTADO_FORMAT !== undefined

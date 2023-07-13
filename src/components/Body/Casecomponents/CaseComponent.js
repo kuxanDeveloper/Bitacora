@@ -103,7 +103,7 @@ export default function CaseComponent({
           </p>
           <span className={caseStyles.body_title}> Fecha de Ingreso</span>
           <p className={caseStyles.card_date}>
-            {data.FECHA_FORMAT_CREADO_BITACORA}
+            {data.FECHA_FORMAT_CREADO_COMPLETA}
           </p>
 
           <div className={caseStyles.card_btn_container}>
