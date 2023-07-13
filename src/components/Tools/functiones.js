@@ -296,7 +296,7 @@ export const OnclickComboEstadoCase = (
 
 export const onclickPruebaTargetCreate = (
   setvaluePlantillachange,
-  setValue,
+  setValue
 ) => {
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
   setvaluePlantillachange([]);
@@ -388,8 +388,7 @@ export const setCheckindividual = (setValue) => {
     setValue("EstadoGrupo", "1");
   }
 
-    setValue("AdmiteSufijo", "1");
-  
+  setValue("AdmiteSufijo", "1");
 };
 
 export const setCheckUsuEstado = (setValue) => {
@@ -783,11 +782,12 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
 
 export const RegisterStickerObservaciones = (setvalue) => {
   let slt = document.getElementById("sltObservaIni");
-
   if (slt.value != "") {
     if (slt.value != "5") {
       setvalue("ObservaInici", slt.options[slt.selectedIndex].text);
     }
+  } else {
+    setvalue("ObservaInici", slt.value);
   }
 };
 

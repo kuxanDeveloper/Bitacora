@@ -91,7 +91,7 @@ function ComponentEditResult({
             </Link>
           </div>
 
-          <p className={styles.title}>Editar prueba</p>
+          <p className={styles.title}>Actualizar estatus</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitEditResult)}>
@@ -138,7 +138,7 @@ function ComponentEditResult({
                                   value={codPrueba}
                                 >
                                   <option disabled value="">
-                                    Seleccione una opción
+                                    Seleccione un estatus
                                   </option>
                                   {ListPruebas != null &&
                                   ListPruebas != undefined

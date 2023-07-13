@@ -40,7 +40,7 @@ export default function StickerDetails({
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class={styles.icon}
+                className={styles.icon}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -159,7 +159,7 @@ export default function StickerDetails({
                   <>
                     {Options.BtnCrearResultAndUrl ? (
                       <Link
-                        title="Agregar prueba"
+                        title="Agregar estatus"
                         className={styles.add_icon}
                         href={{
                           pathname: "/Sample/CreateResult/[id]",
@@ -367,7 +367,7 @@ export default function StickerDetails({
                       Pruebas ? styles.selected : ""
                     }`}
                   >
-                    Pruebas
+                    Estatus
                   </Link>
                   <Link
                     href={{
@@ -411,7 +411,7 @@ export default function StickerDetails({
                         ></Results>
                       ))
                     ) : (
-                      <h2>Sin Pruebas registradas</h2>
+                      <h2>Sin estatus registrado</h2>
                     )
                   ) : (
                     "cargando..."
@@ -436,7 +436,7 @@ export default function StickerDetails({
                       ></Details>
                     ))
                   ) : (
-                    <h2>Sin Notas registrados</h2>
+                    <h2>Sin notas registradas</h2>
                   )
                 ) : (
                   "cargando..."

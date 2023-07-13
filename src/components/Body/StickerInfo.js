@@ -57,7 +57,7 @@ export default function StickerInfo({
 
                   <section className={styles.follow_up}>
                     <h3 className={styles.follow_up_title}>
-                      Último seguimiento
+                      Última nota
                     </h3>
                     {InforSampleDetails.infoDetalle.length > 0 ? (
                       InforSampleDetails.infoDetalle
@@ -71,7 +71,7 @@ export default function StickerInfo({
                           />
                         ))
                     ) : (
-                      <h2>Sin seguimiento registrado</h2>
+                      <h2>Sin nota registrada</h2>
                     )}
                   </section>
 
@@ -79,7 +79,7 @@ export default function StickerInfo({
 
                   {/* <!-- resultado --> */}
                   <section className={styles.result}>
-                    <h3 className={styles.result_title}>Último resultado</h3>
+                    <h3 className={styles.result_title}>Último estatus</h3>
 
                     {InforSampleDetails.infoResultado.length > 0 ? (
                       InforSampleDetails.infoResultado
@@ -93,7 +93,7 @@ export default function StickerInfo({
                           ></Result>
                         ))
                     ) : (
-                      <h2>Sin resultado registrado</h2>
+                      <h2>Sin estatus registrado</h2>
                     )}
                   </section>
                   <br></br>

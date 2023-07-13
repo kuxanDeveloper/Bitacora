@@ -43,14 +43,14 @@ function Lastfollow_up({ data, Options, infoBitacora }) {
       )}
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Observaciones seguimiento</p>
+        <p className={styles.group_title}>Observaciones de nota</p>
 
         <span className={styles.group_result}>
           {data.OBSERVACIONES_DETALLE}
         </span>
       </div>
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Usuario que creó el seguimiento</p>
+        <p className={styles.group_title}>Usuario que creó la nota</p>
 
         <span className={styles.group_result}>
           {data.EMAIL_CREADOR_DETALLE}
