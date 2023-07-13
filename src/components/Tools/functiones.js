@@ -388,17 +388,8 @@ export const setCheckindividual = (setValue) => {
     setValue("EstadoGrupo", "1");
   }
 
-  var checbox2 = document.getElementById("AdmiteSufijo");
-
-  if (
-    checbox2.checked == null ||
-    checbox2.checked == undefined ||
-    checbox2.checked == false
-  ) {
-    setValue("AdmiteSufijo", "0");
-  } else {
     setValue("AdmiteSufijo", "1");
-  }
+  
 };
 
 export const setCheckUsuEstado = (setValue) => {
@@ -879,12 +870,32 @@ export const OnkeyDowNumberOneCharater = (e) => {
 
 export const OnPasteNumberOneCharater = (e, id, SetValue) => {
   setTimeout(() => {
-    console.log("aqui");
     let tecla =
       e.target.value ||
       (e.originalEvent.clipboardData || window.clipboardData).getData("text");
     let patron = /[0-9-]/;
     tecla = tecla.replace(/[^0-9-]/g, "");
+    SetValue(tecla);
+    return patron.test(tecla);
+  }, 4);
+};
+
+export const OnkeyDowNumber = (e) => {
+  let tecla = document.all ? e.keyCode : e.which;
+  let patron = /[0-9]/;
+  let teclaFinal = String.fromCharCode(tecla);
+  return !patron.test(teclaFinal)
+    ? e.preventDefault()
+    : patron.test(teclaFinal);
+};
+
+export const OnPasteNumber = (e, id, SetValue) => {
+  setTimeout(() => {
+    let tecla =
+      e.target.value ||
+      (e.originalEvent.clipboardData || window.clipboardData).getData("text");
+    let patron = /[0-9]/;
+    tecla = tecla.replace(/[^0-9]/g, "");
     SetValue(tecla);
     return patron.test(tecla);
   }, 4);
