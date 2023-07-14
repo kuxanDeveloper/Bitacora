@@ -8,7 +8,7 @@ function NotFound() {
   return (
     <>
       <Head>
-        <title>{"Página no encontrada | Bitácora"}</title>
+        <title>{"Página no encontrada | Bitácora BD"}</title>
         <meta
           name="description"
           content={"No se puede acceder a este sitio web"}

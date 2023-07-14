@@ -93,7 +93,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>{"Inicio | Bitácora"}</title>
+        <title>{"Inicio | Bitácora BD"}</title>
         <meta
           name="description"
           content={
@@ -107,17 +107,17 @@ export default function Home({
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta name="twitter:title" content="Inicio - Bitácora" />
+        <meta name="twitter:title" content="Inicio - Bitácora BD" />
         <meta
           name="twitter:description"
           content="Inicio donde se muestra los cultivos y demas grupos que utilizan en los laboratorio de la bitácora"
         ></meta>
-        <meta property="og:title" content="Inicio - Bitácora" />
+        <meta property="og:title" content="Inicio - Bitácora BD" />
         <meta
           property="og:description"
           content="Inicio donde se muestra los cultivos y demas grupos que utilizan en los laboratorio de la bitácora"
         />
-        <meta property="og:site_name" content="Bitácora" />
+        <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
