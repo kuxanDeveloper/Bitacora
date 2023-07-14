@@ -16,21 +16,18 @@ import {
 
 function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-  useEffect(() => {
-    SampleDetailsRoles(setLInforSampleDetails, cookie);
-  }, []);
-
   const [InforSampleTips, setLInforSampleTips] = useState([]);
-  useEffect(() => {
-    SampleDetailsTiposIDE(setLInforSampleTips, cookie);
-  }, []);
-
   const [InforSampleInfoUser, setLInforSampleInfoUser] = useState([]);
   useEffect(() => {
+    SampleDetailsRoles(setLInforSampleDetails, cookie);
+    SampleDetailsTiposIDE(setLInforSampleTips, cookie);
+
     if (id != null && id != undefined) {
       SampleDetailsUsers(setLInforSampleInfoUser, cookie, id);
     }
   }, []);
+
+
 
   return (
     <>

@@ -56,6 +56,7 @@ export const userService = {
   InfoTrazabilidadBitacora,
   InfoTrazabilidadTablas,
   lstSufijoGetall,
+  InfoGroupAndUserxGroup,
 };
 
 async function login(username, password) {
@@ -131,7 +132,7 @@ function logoutLogin() {
   userSubject.next(null);
 }
 
-function ListGroupActiveeInactive_ListUsers(cookie,idAncestro) {
+function ListGroupActiveeInactive_ListUsers(cookie, idAncestro) {
   return fetchWrapper.get(
     `${baseUrl}/IndexBitacora/ListGroupTrueeFalse_ListGetAllUser?COD_ANCESTRO=${idAncestro}`,
     cookie
@@ -443,6 +444,12 @@ function lstSufijoGetall(cookie) {
 function InfoSampleUsers(cookie, IdUser) {
   return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`, cookie);
 }
+function InfoGroupAndUserxGroup(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Usus/GetGroupListAndListRegisterValue`,
+    cookie
+  );
+}
 
 function CreateUser(
   Email,
@@ -455,7 +462,8 @@ function CreateUser(
   Rol,
   Telefono,
   Extencion,
-  EstadoUsuario
+  EstadoUsuario,
+  ListGroupArray
 ) {
   const formData = new FormData();
   formData.append("email", Email);
@@ -469,6 +477,7 @@ function CreateUser(
   formData.append("Telefono_fijo", Telefono);
   formData.append("EXTENCION", Extencion);
   formData.append("estado_usuario", EstadoUsuario);
+  formData.append("ListGroupxUser", ListGroupArray);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Usus/GuardUsuario`,

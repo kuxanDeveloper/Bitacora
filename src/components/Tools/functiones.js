@@ -8,6 +8,7 @@ import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent
 import Router from "next/router";
 
 import Swal from "sweetalert2";
+import { array } from "yup";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
   return this;
@@ -58,8 +59,6 @@ export const backhistory = () => {
   window.history.back();
 };
 
-
-
 export const FilterQuerySearch = (
   event,
   router,
@@ -99,18 +98,13 @@ export const FilterQuerySearch = (
   });
 };
 
-export const Recharge_home_ancestro = (
-  event,
-  router,
-  idAncestro
-) => {
-  event.preventDefault();  
+export const Recharge_home_ancestro = (event, router, idAncestro) => {
+  event.preventDefault();
   router.push({
     pathname: `/`,
     query: {
-      idAncestro : idAncestro,
+      idAncestro: idAncestro,
     },
-    
   });
 };
 
@@ -926,8 +920,39 @@ export const VerSwalCargando = () => {
     timer: 1250,
     timerProgressBar: true,
     allowOutsideClick: false,
-  }).then((result) => {
-   
-  })
+  });
 };
 
+export const SelectAllCheck = (idMaster, nameInput) => {
+  let checkMaster = document.getElementById(idMaster);
+
+  if (checkMaster != undefined && checkMaster != null) {
+    const element = document.getElementsByName(nameInput);
+
+    if (checkMaster.checked) {
+      element.forEach((data) => {
+        data.checked = true;
+      });
+    } else {
+      element.forEach((data) => {
+        data.checked = false;
+      });
+    }
+  }
+};
+
+export const AddListSetValue = (setValue, nameInput) => {
+  let arrayList = [];
+  const element = document.getElementsByName(nameInput);
+
+  if (element != null && element != undefined) {
+    element.forEach((data) => {
+      if (data.checked) {
+        arrayList.push(data.value);
+      }
+    });
+  }
+  if (arrayList.length > 0) {
+    setValue("ListGroupArray", arrayList);
+  }
+};

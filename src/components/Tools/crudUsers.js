@@ -14,7 +14,9 @@ export const onSubmitCreateUser = ({
   Telefono,
   Extencion,
   EstadoUsuario,
+  ListGroupArray,
 }) => {
+
   return userService
     .CreateUser(
       Email,
@@ -27,7 +29,8 @@ export const onSubmitCreateUser = ({
       Rol,
       Telefono == null ? "" : Telefono,
       Extencion == null ? "" : Extencion,
-      EstadoUsuario
+      EstadoUsuario,
+      ListGroupArray
     )
     .then(() => {
       Swal.fire({
@@ -283,4 +286,29 @@ export const onSubmitChangePasswordAdmin = (
 
       console.log(error, "error al cambiar contraseña administrador");
     });
+};
+
+export const getListGroupAndUserxGroup = (cookie) => {
+  return userService.InfoGroupAndUserxGroup(cookie).catch((error) => {
+    if (
+      error == "Límite de tiempo excedido" ||
+      error == "Usuario o clave incorrectos"
+    ) {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: error,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "error al traer Listado grupo y grupos por usuarios");
+  });
 };

@@ -3,13 +3,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
-import {setCheckUsuEstado} from "../../Tools/functiones"
+import {
+  setCheckUsuEstado,
+  SelectAllCheck,
+  AddListSetValue,
+} from "../../Tools/functiones";
 import { onSubmitCreateUser } from "../../Tools/crudUsers";
 import styles from "../../../styles/CreateNotes.module.scss";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
+import styleTable from "../../../styles/TableStyles.module.scss";
 import Swal from "sweetalert2";
 
-function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
+function ComponentGroup({
+  InforSampleDetails,
+  InforSampleTips,
+  GroupxUserandList,
+}) {
   const validarEsquemaGrupo = Yup.object().shape({
     Email: Yup.string().required("El campo Email del usuario es obligatorio"),
     NumIdentidad: Yup.string().required(
@@ -36,6 +45,12 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
     EstadoUsuario: Yup.string().required(
       "Es obligatorio seleccionar el estado del usuario"
     ),
+    ListGroupArray: Yup.array()
+      .min(
+        1,
+        "Debe seleccionar uno o varios grupo perteneciente al usuario por favor"
+      )
+      .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -52,20 +67,16 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
     var pass = document.getElementById("Password");
     var pass2 = document.getElementById("ComprobarPassword");
 
-    if(pass.value != pass2.value)
-    {
-        Swal.fire({
-            title: "¡Advertencia!",
-            text: "Las contraseñas no coinciden, por favor verifique la informacion",
-            icon: "warning",
-            confirmButtonText: "Cerrar",
-          });
-          set("Password","");
-
-    }
-    else
-    {
-        set("Password",pass.value);
+    if (pass.value != pass2.value) {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Las contraseñas no coinciden, por favor verifique la informacion",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      set("Password", "");
+    } else {
+      set("Password", pass.value);
     }
   }
 
@@ -131,12 +142,13 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                         Tipo de Identificacion{" "}
                         <span className={stylesCrud.asteriscoRojo}>*</span>
                       </label>
-                      <select defaultValue={''}
+                      <select
+                        defaultValue={""}
                         {...register("TipoIdentidad")}
                         name="TipoIdentidad"
                         className={styles.group_input}
                       >
-                        <option value={''}>
+                        <option value={""}>
                           Seleccione un tipo de identificacion
                         </option>
                         {InforSampleTips != null && InforSampleTips != undefined
@@ -223,12 +235,13 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                         Rol del usuario{" "}
                         <span className={stylesCrud.asteriscoRojo}>*</span>
                       </label>
-                      <select defaultValue={''}
+                      <select
+                        defaultValue={""}
                         {...register("Rol")}
                         name="Rol"
                         className={styles.group_input}
                       >
-                        <option value={''}>Seleccione un rol</option>
+                        <option value={""}>Seleccione un rol</option>
                         {InforSampleDetails != null &&
                         InforSampleDetails != undefined
                           ? InforSampleDetails.map((data, index) => (
@@ -253,7 +266,6 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                         <span className={stylesCrud.asteriscoRojo}>*</span>
                       </label>
                       <input
-
                         name="Password"
                         id="Password"
                         maxLength="100"
@@ -330,24 +342,74 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                     </div>
                   </div>
 
-                  {/* <div className={styles.btn_container_send}>
-                    <Link
-                    href="#"
-                      onClick={() => {
-                        
-                      }}
-                      className={styles.btn_send}
-                    >
-                      Guardar Usuario
-                    </Link>
-                  </div> */}
-
+                  <div className={styles.form_group}>
+                    <table className={styleTable.tableStyle}>
+                      <thead>
+                        <tr>
+                          <th colSpan={2}>
+                            <input
+                              id={`allCheckbox`}
+                              type="checkbox"
+                              onClick={() =>
+                                SelectAllCheck(
+                                  "allCheckbox",
+                                  "inputCheckoutCrearUser"
+                                )
+                              }
+                            />{" "}
+                            Selec. Todos
+                          </th>
+                        </tr>
+                      </thead>
+                      <thead>
+                        <tr>
+                          <th
+                            style={{ width: "25%" }}
+                            className={styles.group_title}
+                          >
+                            Seleccionable
+                          </th>
+                          <th style={{ width: "75%" }}>Grupo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {GroupxUserandList.ListadoinfoGrupo != undefined &&
+                        GroupxUserandList.ListadoinfoGrupo != null ? (
+                          GroupxUserandList.ListadoinfoGrupo.map(
+                            (data, index) => (
+                              <tr key={index}>
+                                <td className={styleTable.textCenterColumn}>
+                                  <input
+                                    id={`IdGroup_${data.Id_grupo}`}
+                                    type="checkbox"
+                                    name="inputCheckoutCrearUser"
+                                    value={data.Id_grupo}
+                                  />
+                                </td>
+                                <td className={styleTable.textCenterColumn}>
+                                  {data.NOMBRE_GRUPO}
+                                </td>
+                              </tr>
+                            )
+                          )
+                        ) : (
+                          <tr>
+                            <td colSpan={2}>Cargando...</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className={styles.invalid_feedback}>
+                    {errors.ListGroupArray?.message}
+                  </div>
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckUsuEstado(setValue);
-                            VerificarDatos(setValue);
+                          setCheckUsuEstado(setValue);
+                          VerificarDatos(setValue);
+                          AddListSetValue(setValue, "inputCheckoutCrearUser");
                         }}
                         className={styles.btn_send}
                         id="botonGuardar"
@@ -358,7 +420,7 @@ function ComponentGroup({ InforSampleDetails, InforSampleTips }) {
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/Users/IndexUsers"
+                        pathname: "/Configuration/Users/IndexUsers",
                       }}
                     >
                       Cancelar

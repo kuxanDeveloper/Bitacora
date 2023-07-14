@@ -3,6 +3,7 @@ import Head from "next/head";
 import {
   SampleDetailsRoles,
   SampleDetailsTiposIDE,
+  GetListGroupAndUserxGroup,
 } from "../../api/Sample/ViewDetailsUser/[id]";
 import CreateUser from "../../../components/Body/Users/Create";
 import {
@@ -15,13 +16,12 @@ import {
 
 function CreatePage({ cookie }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [InforSampleTips, setLInforSampleTips] = useState([]);
+  const [GroupxUserandList, setGroupxUserandList] = useState({});
   useEffect(() => {
     SampleDetailsRoles(setLInforSampleDetails, cookie);
-  }, []);
-
-  const [InforSampleTips, setLInforSampleTips] = useState([]);
-  useEffect(() => {
     SampleDetailsTiposIDE(setLInforSampleTips, cookie);
+    GetListGroupAndUserxGroup(setGroupxUserandList, cookie);
   }, []);
 
   return (
@@ -62,6 +62,7 @@ function CreatePage({ cookie }) {
       <CreateUser
         InforSampleDetails={InforSampleDetails}
         InforSampleTips={InforSampleTips}
+        GroupxUserandList={GroupxUserandList}
       ></CreateUser>
     </>
   );
