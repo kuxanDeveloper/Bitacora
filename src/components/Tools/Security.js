@@ -47,9 +47,16 @@ export const OnSubmitForward = ({ username }) => {
   return Router.push({ pathname: "/account/Login" });
 };
 
-export const QueryActiveInactivegroup_GetUsers = (cookie) => {
+export const QueryActiveInactivegroup_GetUsers = (cookie,idAncestro) => {
   return userService
-    .ListGroupActiveeInactive_ListUsers(cookie)
+    .ListGroupActiveeInactive_ListUsers(cookie,
+      (idAncestro == null || idAncestro == undefined ? "1" : idAncestro)).then(
+        (e) => {
+
+          return e;
+
+        }
+      )
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {
         Swal.fire({

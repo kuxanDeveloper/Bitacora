@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  Recharge_home_ancestro,
   FilterQuerySearch,
   ClearFilter,
   OnclickComboEstadoCase,
@@ -24,6 +25,8 @@ export default function Filters({
   isSampleGeneral,
   HrefArmado,
   Options,
+  ListaAncestros,
+  setidAncestro
 }) {
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
@@ -192,27 +195,47 @@ export default function Filters({
                 ) : (
                   ""
                 )}
-                {isActiveGroup ? (
+
+                <div className={filterStyles.divFiltro}>
                   <select
-                    defaultValue={GruopValue}
-                    name="ListGroup"
-                    onClick={(e) => setGruopValue(e.target.value)}
-                    className={filterStyles.filter_input_w100}
+                    name="ListAncestro"
+                    onClick={(e) => setidAncestro(e.target.value)}                    
+                    className={filterStyles.filter_input_w45}
                   >
-                    <option value="" disabled>
-                      Seleccione un Grupo (Obligatorio)
+                    <option value="" selected disabled>
+                      Seleccione un Grupo Principal
                     </option>
-                    {ListadoGrupoActivo != null
-                      ? ListadoGrupoActivo.map((data, index) => (
-                          <option key={index} value={data.Id_grupo}>
-                            {`${data.NOMBRE_GRUPO}`}
+                    {ListaAncestros != null
+                      ? ListaAncestros.map((data, index) => (
+                          <option key={index} value={data.COD_ANCESTRO}>
+                            {data.NOMBRE_ANCESTRO}
                           </option>
                         ))
                       : ""}
                   </select>
-                ) : (
-                  ""
-                )}
+
+                  {isActiveGroup ? (
+                    <select
+                      defaultValue={GruopValue}
+                      name="ListGroup"
+                      onClick={(e) => setGruopValue(e.target.value)}
+                      className={`${filterStyles.filter_input_w45} ${filterStyles.sinmarginleft}`}
+                    >
+                      <option value="" disabled>
+                        Seleccione un Grupo (Obligatorio)
+                      </option>
+                      {ListadoGrupoActivo != null
+                        ? ListadoGrupoActivo.map((data, index) => (
+                            <option key={index} value={data.Id_grupo}>
+                              {`${data.NOMBRE_GRUPO}`}
+                            </option>
+                          ))
+                        : ""}
+                    </select>
+                  ) : (
+                    ""
+                  )}
+                </div>
 
                 {Option.OrdersInactive ? (
                   isActiveCase ? (
