@@ -797,6 +797,10 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
 
 export const RegisterStickerObservaciones = (setvalue) => {
   let slt = document.getElementById("sltObservaIni");
+  var cmbgrupo = document.getElementById("GrupoSticker");
+  setvalue("GrupoSticker", cmbgrupo.value);
+  debugger;
+
   if (slt.value != "") {
     if (slt.value != "5") {
       setvalue("ObservaInici", slt.options[slt.selectedIndex].text);

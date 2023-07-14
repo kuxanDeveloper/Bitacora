@@ -120,8 +120,8 @@ export const onSubmitUpdate = ({
     });
 };
 
-export const QueryActivegroup = (cookie) => {
-  return userService.ListGroupActive(cookie).catch((error) => {
+export const QueryActivegroup = (cookie,idAncestro) => {
+  return userService.ListGroupActive(cookie,idAncestro).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
