@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { queryListUserAll } from "../components/Tools//Security";
+import { VerSwalCargando } from "../components/Tools/functiones";
 import Case from "../components/Case";
 import Head from "next/head";
 import CaseStatus from "../components/CaseStatus";
@@ -15,24 +16,31 @@ import {
 import { useContextBitacora } from "../context/BitacoraContext";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
+import {SampleDetailsWhitAncestroTabs} from "./api/Ancestro/[id]"
+
 function HomeMuestraxGrupo({
   cookie,
   query,
   ListadoUsuariosRegistrados,
-  Options,
+  Options
 }) {
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
   const [isTrueActive, setisTrueActive] = useState(false);
   // const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
+  const [IdGrupAncest, setIdGrupAncest] = useState(false);
   const [GrupoNombre, setGrupoNombre] = useState("");
   const [ListadoGrupo, setListadoGrupo] = useState([]);
   const [ListadoMuestraActivo, setListadoMuestraActivo] = useState([]);
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
   const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
   const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
-
+  const [idAncestro, setidAncestro] = useState('');
+  const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
+  const [ListaAncestros, setListaAncestros] = useState([]);
+  // const [idAncestroSelc, setidAncestroSelc] = useState('');
+  
   const router = useRouter();
   useEffect(() => {
     ApiQueryGeneralSample(
@@ -47,9 +55,64 @@ function HomeMuestraxGrupo({
       setListadoMuestraInactivo,
       setListadoResultadoxMuestra,
       setLstObservacionesPrede,
-      setListadoGetFullSufijo
+      setListadoGetFullSufijo,
+      (query.idAncestro == "" || query.idAncestro == null || query.idAncestro == 0 ? 1 :query.idAncestro),
+      setListaAncestros
     );
+    setidAncestro(query.idAncestro);
   }, []);
+
+  function QueryReturnNew(obj, idNEw) {
+    let newObje = {};
+    newObje.id = idNEw;
+    newObje.idAncestro = idAncestro;
+    if (
+      (obj.Numstiker !== undefined &&
+        obj.Numstiker !== null &&
+        obj.Numstiker !== "") ||
+      (obj.DateAdmission !== "" &&
+        obj.DateAdmission !== undefined &&
+        obj.DateAdmission !== null) ||
+      (obj.result !== "" && obj.result !== null && obj.result !== undefined) ||
+      (obj.URS !== "" && obj.URS !== null && obj.URS !== undefined)
+    ) {
+      
+      newObje.Numstiker = obj.Numstiker;
+      newObje.DateAdmission = obj.DateAdmission;
+      newObje.result = obj.result;
+      newObje.URS = obj.URS;
+      
+    }
+
+    return newObje;
+  }
+
+  useEffect(() => {
+    if(idAncestro != null && idAncestro != "" && idAncestro != 0 && idAncestro != undefined)
+    {    
+      VerSwalCargando();  
+      SampleDetailsWhitAncestroTabs(
+        cookie,
+        idAncestro,
+        setIdGrupAncest); 
+    }
+  },[cmbFiltroCambio]);
+
+  useEffect(() => {
+
+    if(IdGrupAncest != null && IdGrupAncest != "" && IdGrupAncest != undefined)
+    {
+      router.push({
+        pathname: "/[id]",
+        query: QueryReturnNew(query, IdGrupAncest),
+        hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+          isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+        }`,
+      });
+      setIdGrupAncest("");
+    }
+
+  },[IdGrupAncest]);
 
   useEffect(() => {
     if (
@@ -155,6 +218,7 @@ function HomeMuestraxGrupo({
     };
   }, [router.events]);
 
+
   return (
     <>
       <Head>
@@ -202,7 +266,11 @@ function HomeMuestraxGrupo({
         // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
         Options={Options}
+        ListaAncestros={ListaAncestros}
         ListadoSufijosxGroupAll={ListadoGetFullSufijo}
+        idAncestro={idAncestro}
+        setidAncestro={setidAncestro}
+        setcmbFiltroCambio={setcmbFiltroCambio}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}

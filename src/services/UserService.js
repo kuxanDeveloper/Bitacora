@@ -56,6 +56,7 @@ export const userService = {
   InfoTrazabilidadBitacora,
   InfoTrazabilidadTablas,
   lstSufijoGetall,
+  lstAncestros
 };
 
 async function login(username, password) {
@@ -142,13 +143,13 @@ function ListGroupActive(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
 }
 
-function ListGroup(cookie, estado) {
+function ListGroup(cookie,idAncestro, estado) {
   const formData = new FormData();
 
   formData.append("ESTADO", estado);
 
   return fetchWrapper.postHeader(
-    `${baseUrl}/IndexBitacora/ListGroupViewOrdenes`,
+    `${baseUrl}/IndexBitacora/ListGroupViewOrdenes?COD_ANCESTRO=${idAncestro}`,
     cookie,
     formData
   );
@@ -629,6 +630,13 @@ function InfoTrazabilidadTablas(
 ) {
   return fetchWrapper.get(
     `${baseUrl}/TrazaTabla/LstTablasTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Tipo_tabla=${Tipo_tabla}&usuario_Traza=${usuario_Traza}&page=${page}`,
+    cookie
+  );
+}
+
+function lstAncestros(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/IndexBitacora/GetListAncestros`,
     cookie
   );
 }

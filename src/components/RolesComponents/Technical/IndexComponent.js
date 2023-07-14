@@ -6,6 +6,7 @@ function IndexComponentTechni({
   ListadoGrupoActivo,
   ListadoGrupoInactivo,
   HabilitarActive,
+  idAncestro
 }) {
   return (
     <>
@@ -38,8 +39,8 @@ function IndexComponentTechni({
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: data.Id_grupo },
-                        hash: "Cactive#OverallSample",
+                        query: { id: data.Id_grupo, idAncestro: idAncestro },
+                        hash: "Cactive#OverallSample"
                       }}
                       className={CardStyles.body_container}
                     >
@@ -99,8 +100,8 @@ function IndexComponentTechni({
                   <Link
                     href={{
                       pathname: "/[id]",
-                      query: { id: da.Id_grupo },
-                      hash: "Cinactvie#OverallSample",
+                      query: { id: da.Id_grupo, idAncestro: idAncestro },
+                      hash: "Cinactvie#OverallSample"
                     }}
                     className={CardStyles.body_container}
                   >

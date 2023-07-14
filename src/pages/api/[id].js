@@ -5,6 +5,7 @@ import {
   QueryMueForGroup,
   QueryObserva,
   QuerySufijoGetAll,
+  QueryAncestro
 } from "../../components/Tools/Security";
 import { userService } from "../../services/UserService";
 
@@ -20,9 +21,11 @@ export const ApiQueryGeneralSample = async (
   setListadoMuestraInactivo,
   setListadoResultadoxMuestra,
   setLstObservacionesPrede,
-  setListadoGetFullSufijo
+  setListadoGetFullSufijo,
+  idAncestro,
+  setListaAncestros
 ) => {
-  let Lisgrupo = await QueryGroupList(cookie);
+  let Lisgrupo = await QueryGroupList(cookie,idAncestro);
   setListadoGrupo(Lisgrupo);
   let listActivoMue = await QueryMueForGroup(
     cookie,
@@ -71,4 +74,8 @@ export const ApiQueryGeneralSample = async (
   let lstSufijosxGroupall = await QuerySufijoGetAll(cookie);
 
   setListadoGetFullSufijo(lstSufijosxGroupall);
+
+  let lstAncestros = await QueryAncestro(cookie);
+  
+  setListaAncestros(lstAncestros.ListaAncestros);
 };

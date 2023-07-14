@@ -34,6 +34,7 @@ export default function Home({
   const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [ListadoGrupoInactivo, setListadoGrupoInactivo] = useState([]);
   const [idAncestro, setidAncestro] = useState('');
+  const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
   const router = useRouter();
   useEffect(() => {
     if (Options.OrdersInactive) {
@@ -160,6 +161,7 @@ export default function Home({
           CasosActivo_Inactivos={isTrueActive}
           Options={Options}
           setidAncestro={setidAncestro}
+          setcmbFiltroCambio={setcmbFiltroCambio}
         ></Filters>
       ) : (
         ""
@@ -174,6 +176,7 @@ return(
             HabilitarActive={isTrueActive}
             ListadoGrupoActivo={ListadoGrupoActivo}
             ListadoGrupoInactivo={ListadoGrupoInactivo}
+            idAncestro={(idAncestro == "" || idAncestro == null ? 0 :idAncestro)}
           ></IndexComponentAdmin>)
 
         break;
@@ -184,6 +187,7 @@ return(
             HabilitarActive={isTrueActive}
             ListadoGrupoActivo={ListadoGrupoActivo}
             ListadoGrupoInactivo={ListadoGrupoInactivo}
+            idAncestro={(idAncestro == "" || idAncestro == null ? 0 :idAncestro)}
           ></IndexComponentTechni>
         );
         break;
@@ -194,6 +198,7 @@ return(
             HabilitarActive={isTrueActive}
             ListadoGrupoActivo={ListadoGrupoActivo}
             ListadoGrupoInactivo={ListadoGrupoInactivo}
+            idAncestro={(idAncestro == "" || idAncestro == null ? 0 :idAncestro)}
           ></IndexComponentAssis>
         );
         break;
@@ -204,6 +209,7 @@ return(
             HabilitarActive={isTrueActive}
             ListadoGrupoActivo={ListadoGrupoActivo}
             ListadoGrupoInactivo={ListadoGrupoInactivo}
+            idAncestro={(idAncestro == "" || idAncestro == null ? 0 :idAncestro)}
           ></IndexComponentConsul>
         );
         break;
