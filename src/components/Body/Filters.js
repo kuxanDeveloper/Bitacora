@@ -26,7 +26,9 @@ export default function Filters({
   HrefArmado,
   Options,
   ListaAncestros,
-  setidAncestro
+  setidAncestro,
+  idAncestro,
+  setcmbFiltroCambio,
 }) {
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
@@ -50,6 +52,13 @@ export default function Filters({
   // const [UserRegisterStiker, setUserRegisterStiker] = useState(
   //   URS != undefined && URS != null ? URS : ""
   // );
+
+  useEffect(() => {
+    const AncestroLst = document.getElementById("ListAncestro");
+    if (idAncestro != "" && idAncestro != undefined) {
+      AncestroLst.value = idAncestro;
+    }
+  }, [ListaAncestros]);
 
   const [isTrueActive, setisTrueActive] = useState(false);
   useEffect(() => {
@@ -199,13 +208,18 @@ export default function Filters({
                 <div className={filterStyles.divFiltro}>
                   <select
                     name="ListAncestro"
-                    onClick={(e) => setidAncestro(e.target.value)}                    
+                    id="ListAncestro"
+                    onChange={(e) => {
+                      setidAncestro(e.target.value);
+                      setcmbFiltroCambio(e.target.value);
+                    }}
                     className={filterStyles.filter_input_w45}
+                    defaultValue={0}
                   >
-                    <option value="" selected disabled>
+                    <option value={0} disabled>
                       Seleccione un Grupo Principal
                     </option>
-                    {ListaAncestros != null
+                    {ListaAncestros != null && ListaAncestros.length > 0
                       ? ListaAncestros.map((data, index) => (
                           <option key={index} value={data.COD_ANCESTRO}>
                             {data.NOMBRE_ANCESTRO}
@@ -337,7 +351,8 @@ export default function Filters({
                       router,
                       GruopValue,
                       NumeroSticker,
-                      FechaIngreso
+                      FechaIngreso,
+                      document.getElementById("ListAncestro").value
                     );
                   }}
                   className={filterStyles.search}

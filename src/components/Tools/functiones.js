@@ -64,7 +64,8 @@ export const FilterQuerySearch = (
   router,
   id,
   Numstiker,
-  DateAdmission
+  DateAdmission,
+  idAncest
 ) => {
   event.preventDefault();
 
@@ -88,12 +89,15 @@ export const FilterQuerySearch = (
     return;
   }
 
+  idAncest = (idAncest == 0 || idAncest == undefined || idAncest == ""? 1 :idAncest)
+
   Router.push({
     pathname: "/[id]",
     query: {
       id: id,
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
+      idAncestro: idAncest
     },
   });
 };
@@ -915,9 +919,9 @@ export const OnPasteNumber = (e, id, SetValue) => {
 export const VerSwalCargando = () => {
   Swal.fire({
     icon: "success",
-    title: "Cargando la informacion",
+    title: "Filtrando la informacion",
     showConfirmButton: false,
-    timer: 1250,
+    timer: 1000,
     timerProgressBar: true,
     allowOutsideClick: false,
   });

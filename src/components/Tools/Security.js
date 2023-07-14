@@ -100,8 +100,8 @@ export const queryListUserAll = (cookie) => {
   });
 };
 
-export const QueryGroupList = (cookie, estado) => {
-  return userService.ListGroup(cookie, estado).catch((error) => {
+export const QueryGroupList = (cookie,idAncestro, estado) => {
+  return userService.ListGroup(cookie,idAncestro, estado).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -332,6 +332,29 @@ export const QueryObserva = (cookie) => {
     return null;
   });
 };
+
+export const QueryAncestro = (cookie) => {
+  return userService.lstAncestros(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado ancestro");
+    return null;
+  });
+};
+
 
 
 export const QuerySufijoGetAll = (cookie) => {

@@ -12,6 +12,7 @@ export default function CaseNav({
   function QueryReturnNew(obj, idNEw) {
     let newObje = {};
     newObje.id = idNEw;
+    newObje.idAncestro = obj.idAncestro;
     if (
       (obj.Numstiker !== undefined &&
         obj.Numstiker !== null &&
@@ -22,10 +23,12 @@ export default function CaseNav({
       (obj.result !== "" && obj.result !== null && obj.result !== undefined) ||
       (obj.URS !== "" && obj.URS !== null && obj.URS !== undefined)
     ) {
+      
       newObje.Numstiker = obj.Numstiker;
       newObje.DateAdmission = obj.DateAdmission;
       newObje.result = obj.result;
       newObje.URS = obj.URS;
+      
     }
 
     return newObje;
