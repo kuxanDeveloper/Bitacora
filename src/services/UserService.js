@@ -56,7 +56,7 @@ export const userService = {
   InfoTrazabilidadBitacora,
   InfoTrazabilidadTablas,
   lstSufijoGetall,
-  lstAncestros
+  lstAncestros,
   InfoGroupAndUserxGroup,
 };
 
