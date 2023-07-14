@@ -127,7 +127,7 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie);
+    const ListadoGrupoActivo = await QueryActivegroup(cookie,"1");
 
     return {
       props: {

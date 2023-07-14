@@ -139,8 +139,8 @@ function ListGroupActiveeInactive_ListUsers(cookie,idAncestro) {
   );
 }
 
-function ListGroupActive(cookie) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue`, cookie);
+function ListGroupActive(cookie,idAncestro) {
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue?COD_ANCESTRO=${idAncestro}`, cookie);
 }
 
 function ListGroup(cookie,idAncestro, estado) {
