@@ -179,7 +179,6 @@ export default function Home({
                 ></IndexComponentAdmin>
               );
 
-              break;
             case 2:
               return (
                 <IndexComponentTechni
@@ -192,7 +191,7 @@ export default function Home({
                   }
                 ></IndexComponentTechni>
               );
-              break;
+
             case 3:
               return (
                 <IndexComponentAssis
@@ -205,7 +204,7 @@ export default function Home({
                   }
                 ></IndexComponentAssis>
               );
-              break;
+
             case 4:
               return (
                 <IndexComponentConsul
@@ -218,10 +217,9 @@ export default function Home({
                   }
                 ></IndexComponentConsul>
               );
-              break;
+
             default:
               return "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros";
-              break;
           }
         })}
       </div>
