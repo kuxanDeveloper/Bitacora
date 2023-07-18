@@ -11,10 +11,8 @@ function ComponentGroupIndex(InforSampleDetails) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/[id]",
-                query: {
-                  id: 6,
-                },
+                pathname: "/",
+                hash: "Cactive",
               }}
               className={styles.back_btn}
             >

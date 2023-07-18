@@ -369,7 +369,8 @@ function EditGroup(
   EstadoGrupo,
   AdmiteSufijo,
   AlertaHoras,
-  OrdenGrupo
+  OrdenGrupo,
+  ListSufijo
 ) {
   const formData = new FormData();
 
@@ -379,6 +380,7 @@ function EditGroup(
   formData.append("admite_sufijo", AdmiteSufijo);
   formData.append("alerta_horas", AlertaHoras);
   formData.append("Orden_Grupo", OrdenGrupo);
+  formData.append("Lst_Sufijos", ListSufijo);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,

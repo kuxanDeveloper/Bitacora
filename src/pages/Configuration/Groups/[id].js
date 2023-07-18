@@ -12,9 +12,10 @@ import {
 
 function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [InforSufijos, setInforSufijos] = useState([]);
   useEffect(() => {
     if (id != null && id != undefined) {
-      SampleDetailsGroup(setLInforSampleDetails, cookie, id);
+      SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, id);
     }
   }, []);
 
@@ -47,7 +48,8 @@ function CreatePage({ cookie, id }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditGroup InforGroup={InforSampleDetails}></EditGroup>
+      <EditGroup InforGroup={InforSampleDetails} 
+      InforSufijos={InforSufijos}></EditGroup>
     </>
   );
 }

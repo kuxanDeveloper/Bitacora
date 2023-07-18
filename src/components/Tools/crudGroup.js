@@ -63,7 +63,8 @@ export const onSubmitUpdateGroup = ({
     EstadoGrupo,
     AdmiteSufijo,
     AlertaHoras,
-    OrdenGrupo
+    OrdenGrupo,
+    ListSufijo
 }) => {
     return userService.EditGroup(
         IdGrupo,
@@ -71,7 +72,8 @@ export const onSubmitUpdateGroup = ({
         EstadoGrupo,
         AdmiteSufijo,
         AlertaHoras,
-        OrdenGrupo
+        OrdenGrupo,
+        ListSufijo
     ).then(() =>
     {
       Swal.fire({
@@ -139,7 +141,7 @@ export const getListGroup = (estado, idGrupo, cookie) => {
             });
           }
     
-          console.log(error, "error al editar grupo");
+          console.log(error, "error al obterner la inforamcion del grupo");
     });
 
 };
