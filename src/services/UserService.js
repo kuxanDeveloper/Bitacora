@@ -140,11 +140,14 @@ function ListGroupActiveeInactive_ListUsers(cookie, idAncestro) {
   );
 }
 
-function ListGroupActive(cookie,idAncestro) {
-  return fetchWrapper.get(`${baseUrl}/IndexBitacora/ListGroupTrue?COD_ANCESTRO=${idAncestro}`, cookie);
+function ListGroupActive(cookie, idAncestro) {
+  return fetchWrapper.get(
+    `${baseUrl}/IndexBitacora/ListGroupTrue?COD_ANCESTRO=${idAncestro}`,
+    cookie
+  );
 }
 
-function ListGroup(cookie,idAncestro, estado) {
+function ListGroup(cookie, idAncestro, estado) {
   const formData = new FormData();
 
   formData.append("ESTADO", estado);
@@ -348,7 +351,6 @@ function CreatGroup(
   ListSufijo
 ) {
   const formData = new FormData();
-  debugger;
   formData.append("nombre_Grupo", NombreGrupo);
   formData.append("estado_Grupo", EstadoGrupo);
   formData.append("admite_sufijo", AdmiteSufijo);
@@ -445,9 +447,9 @@ function lstSufijoGetall(cookie) {
 function InfoSampleUsers(cookie, IdUser) {
   return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`, cookie);
 }
-function InfoGroupAndUserxGroup(cookie) {
+function InfoGroupAndUserxGroup(cookie, idUser) {
   return fetchWrapper.get(
-    `${baseUrl}/Usus/GetGroupListAndListRegisterValue`,
+    `${baseUrl}/Usus/GetGroupListAndListRegisterValue?IdUSer=`+idUser,
     cookie
   );
 }
@@ -498,7 +500,8 @@ function EditUser(
   Rol,
   Telefono,
   Extencion,
-  EstadoUsuario
+  EstadoUsuario,
+  ListGroupArray
 ) {
   const formData = new FormData();
   formData.append("Id", Id_Usuario);
@@ -512,6 +515,7 @@ function EditUser(
   formData.append("Telefono_fijo", Telefono);
   formData.append("EXTENCION", Extencion);
   formData.append("estado_usuario", EstadoUsuario);
+  formData.append("ListGroupxUser", ListGroupArray)
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Usus/EditarUsuario`,
@@ -588,7 +592,6 @@ function ChangePasswordUser(CurrentPassword, NewPassword) {
   const CurrentPasswordHas = "0x" + hashBuffer.toString(CryptoJS.enc.Hex);
   const NewPasswordHas =
     "0x" + hashBufferNewPassword.toString(CryptoJS.enc.Hex);
-  debugger;
   formData.append("Newpassword", NewPasswordHas);
   formData.append("Oldpassword", CurrentPasswordHas);
   return fetchWrapper.postHeader(
@@ -644,8 +647,5 @@ function InfoTrazabilidadTablas(
 }
 
 function lstAncestros(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/IndexBitacora/GetListAncestros`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/IndexBitacora/GetListAncestros`, cookie);
 }

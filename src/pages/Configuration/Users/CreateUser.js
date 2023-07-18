@@ -21,7 +21,7 @@ function CreatePage({ cookie }) {
   useEffect(() => {
     SampleDetailsRoles(setLInforSampleDetails, cookie);
     SampleDetailsTiposIDE(setLInforSampleTips, cookie);
-    GetListGroupAndUserxGroup(setGroupxUserandList, cookie);
+    GetListGroupAndUserxGroup(setGroupxUserandList, cookie, "");
   }, []);
 
   return (

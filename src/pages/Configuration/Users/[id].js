@@ -5,6 +5,7 @@ import {
   SampleDetailsRoles,
   SampleDetailsTiposIDE,
   SampleDetailsUsers,
+  GetListGroupAndUserxGroup,
 } from "../../api/Sample/ViewDetailsUser/[id]";
 import {
   OptionAdministrator,
@@ -18,16 +19,16 @@ function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [InforSampleTips, setLInforSampleTips] = useState([]);
   const [InforSampleInfoUser, setLInforSampleInfoUser] = useState([]);
+  const [GroupxUserandList, setGroupxUserandList] = useState({});
   useEffect(() => {
     SampleDetailsRoles(setLInforSampleDetails, cookie);
     SampleDetailsTiposIDE(setLInforSampleTips, cookie);
 
     if (id != null && id != undefined) {
       SampleDetailsUsers(setLInforSampleInfoUser, cookie, id);
+      GetListGroupAndUserxGroup(setGroupxUserandList, cookie, id);
     }
   }, []);
-
-
 
   return (
     <>
@@ -69,6 +70,7 @@ function CreatePage({ cookie, id }) {
         InforSampleTips={InforSampleTips}
         InforSampleInfoUser={InforSampleInfoUser}
         id_usu={id}
+        GroupxUserandList={GroupxUserandList}
       ></EditUser>
     </>
   );

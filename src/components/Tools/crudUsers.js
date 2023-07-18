@@ -80,6 +80,7 @@ export const onSubmitCreateEdit = ({
   Telefono,
   Extencion,
   EstadoUsuario,
+  ListGroupArray
 }) => {
   return userService
     .EditUser(
@@ -93,7 +94,8 @@ export const onSubmitCreateEdit = ({
       Rol,
       Telefono == null ? "" : Telefono,
       Extencion == null ? "" : Extencion,
-      EstadoUsuario
+      EstadoUsuario, 
+      ListGroupArray
     )
     .then(() => {
       Swal.fire({
@@ -288,8 +290,8 @@ export const onSubmitChangePasswordAdmin = (
     });
 };
 
-export const getListGroupAndUserxGroup = (cookie) => {
-  return userService.InfoGroupAndUserxGroup(cookie).catch((error) => {
+export const getListGroupAndUserxGroup = (cookie, IdUser) => {
+  return userService.InfoGroupAndUserxGroup(cookie, IdUser).catch((error) => {
     if (
       error == "Límite de tiempo excedido" ||
       error == "Usuario o clave incorrectos"

@@ -3,16 +3,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
-import { setCheckUsuEstado } from "../../Tools/functiones";
+import {
+  setCheckUsuEstado,
+  SearchValueArrayListGroupCheck,
+  AddListSetValue,
+  SelectAllCheck,
+} from "../../Tools/functiones";
 import { onSubmitCreateEdit } from "../../Tools/crudUsers";
 import styles from "../../../styles/CreateNotes.module.scss";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import styleTable from "../../../styles/TableStyles.module.scss";
 function ComponentGroup({
   InforSampleDetails,
   InforSampleTips,
   InforSampleInfoUser,
-  id_usu
+  id_usu,
+  GroupxUserandList,
 }) {
   const validarEsquemaGrupo = Yup.object().shape({
     Id_Usuario: Yup.string().required(
@@ -40,13 +46,19 @@ function ComponentGroup({
     EstadoUsuario: Yup.string().required(
       "Es obligatorio seleccionar el estado del usuario"
     ),
-  });
 
+    ListGroupArray: Yup.array()
+      .min(
+        1,
+        "Debe seleccionar uno o varios grupo perteneciente al usuario por favor"
+      )
+      .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
+  });
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
 
-  useEffect(() => {    
+  useEffect(() => {
     if (
       InforSampleInfoUser != null &&
       InforSampleInfoUser != undefined &&
@@ -61,27 +73,44 @@ function ComponentGroup({
   }, [InforSampleInfoUser]);
 
   useEffect(() => {
-    if(InforSampleInfoUser != null &&
-        InforSampleInfoUser != undefined && 
-        InforSampleInfoUser.length > 0)
-    {
-        var select = document.getElementById("Rol");
-        select.value = InforSampleInfoUser[0].Id_rol;
-        setValue("Rol",InforSampleInfoUser[0].Id_rol);
+    if (
+      InforSampleInfoUser != null &&
+      InforSampleInfoUser != undefined &&
+      InforSampleInfoUser.length > 0
+    ) {
+      var select = document.getElementById("Rol");
+      select.value = InforSampleInfoUser[0].Id_rol;
+      setValue("Rol", InforSampleInfoUser[0].Id_rol);
     }
 
-    if(InforSampleInfoUser != null &&
-        InforSampleInfoUser != undefined && 
-        InforSampleInfoUser.length > 0)
-    {
-        var select = document.getElementById("TipoIdentidad");
-        select.value = InforSampleInfoUser[0].Id_tipo_documento;
-        setValue("TipoIdentidad",InforSampleInfoUser[0].Id_tipo_documento);
+    if (
+      InforSampleInfoUser != null &&
+      InforSampleInfoUser != undefined &&
+      InforSampleInfoUser.length > 0
+    ) {
+      var select = document.getElementById("TipoIdentidad");
+      select.value = InforSampleInfoUser[0].Id_tipo_documento;
+      setValue("TipoIdentidad", InforSampleInfoUser[0].Id_tipo_documento);
     }
-    
-  },[InforSampleTips,InforSampleDetails,InforSampleInfoUser]);
+  }, [InforSampleTips, InforSampleDetails, InforSampleInfoUser]);
 
-  
+  useEffect(() => {
+    if (
+      GroupxUserandList.ListGrupoxUser != undefined &&
+      GroupxUserandList.ListGrupoxUser != null
+    ) {
+      GroupxUserandList.ListadoinfoGrupo.map((data) => {
+        let ValorSearch = GroupxUserandList.ListGrupoxUser.some(
+          (a) => a.Id_grupo == data.Id_grupo
+        );
+        if (ValorSearch) {
+          let idValue = document.getElementById(`IdGroup_${data.Id_grupo}`);
+          idValue.checked = ValorSearch;
+        }
+      });
+    }
+  }, [GroupxUserandList]);
+
   return (
     <>
       <section className={styles.create_note}>
@@ -155,17 +184,17 @@ function ComponentGroup({
                                   *
                                 </span>
                               </label>
-                              <select                                
+                              <select
                                 {...register("TipoIdentidad")}
                                 name="TipoIdentidad"
-                                Id="TipoIdentidad"
+                                id="TipoIdentidad"
                                 className={styles.group_input}
                               >
                                 <option value={""}>
                                   Seleccione un tipo de identificacion
                                 </option>
                                 {InforSampleTips != null &&
-                                 InforSampleTips != undefined
+                                InforSampleTips != undefined
                                   ? InforSampleTips.map((data, index) => (
                                       <option
                                         value={data.Id_Tipo_Identificacion}
@@ -264,7 +293,7 @@ function ComponentGroup({
                                 {...register("Rol")}
                                 name="Rol"
                                 id="Rol"
-                                className={styles.group_input}                                
+                                className={styles.group_input}
                               >
                                 <option value={""}>Seleccione un rol</option>
                                 {InforSampleDetails != null &&
@@ -294,7 +323,7 @@ function ComponentGroup({
                                 type="text"
                                 min="0"
                                 className={styles.group_input}
-                                defaultValue={data.PhoneNumber} 
+                                defaultValue={data.PhoneNumber}
                               />
                               <div className={styles.invalid_feedback}>
                                 {errors.Celular?.message}
@@ -337,27 +366,87 @@ function ComponentGroup({
                             </div>
                           </div>
 
-                          {/* <div className={styles.btn_container_send}>
-                    <Link
-                    href="#"
-                      onClick={() => {
-                        
-                      }}
-                      className={styles.btn_send}
-                    >
-                      Guardar Usuario
-                    </Link>
-                  </div> */}
+                          <div className={styles.form_group}>
+                            <table className={styleTable.tableStyle}>
+                              <thead>
+                                <tr>
+                                  <th colSpan={2}>
+                                    <input
+                                      id={`allCheckbox`}
+                                      type="checkbox"
+                                      onClick={() =>
+                                        SelectAllCheck(
+                                          "allCheckbox",
+                                          "inputCheckoutCrearUser"
+                                        )
+                                      }
+                                    />{" "}
+                                    Selec. Todos
+                                  </th>
+                                </tr>
+                              </thead>
+                              <thead>
+                                <tr>
+                                  <th
+                                    style={{ width: "25%" }}
+                                    className={styles.group_title}
+                                  >
+                                    Seleccionable
+                                  </th>
+                                  <th style={{ width: "75%" }}>Grupo</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {GroupxUserandList.ListadoinfoGrupo !=
+                                  undefined &&
+                                GroupxUserandList.ListadoinfoGrupo != null ? (
+                                  GroupxUserandList.ListadoinfoGrupo.map(
+                                    (data, index) => (
+                                      <tr key={index}>
+                                        <td
+                                          className={
+                                            styleTable.textCenterColumn
+                                          }
+                                        >
+                                          <input
+                                            id={`IdGroup_${data.Id_grupo}`}
+                                            type="checkbox"
+                                            name="inputCheckoutCrearUser"
+                                            value={data.Id_grupo}
+                                          />
+                                        </td>
+                                        <td
+                                          className={
+                                            styleTable.textCenterColumn
+                                          }
+                                        >
+                                          {data.NOMBRE_GRUPO}
+                                        </td>
+                                      </tr>
+                                    )
+                                  )
+                                ) : (
+                                  <tr>
+                                    <td colSpan={2}>Cargando...</td>
+                                  </tr>
+                                )}
+                              </tbody>
+                            </table>
+                          </div>
+                          <div className={styles.invalid_feedback}>
+                            {errors.ListGroupArray?.message}
+                          </div>
 
                           <div className={styles.btn_container_send}>
                             {!formState.isSubmitting && (
                               <button
                                 onClick={() => {
-                                  setCheckUsuEstado(setValue);
-                                  setValue(
-                                    "Id_Usuario",
-                                    id_usu
+                                  AddListSetValue(
+                                    setValue,
+                                    "inputCheckoutCrearUser"
                                   );
+                                  setCheckUsuEstado(setValue);
+                                  setValue("Id_Usuario", id_usu);
                                 }}
                                 className={styles.btn_send}
                                 id="botonGuardar"
