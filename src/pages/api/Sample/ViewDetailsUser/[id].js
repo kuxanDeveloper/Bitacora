@@ -24,7 +24,7 @@ export const SampleDetailsTiposIDE = async (setLInforSampleTips, cookie) => {
   setLInforSampleTips(inforSample);
 };
 
-export const GetListGroupAndUserxGroup = async (setGroupxUserandList, cookie) => {
-  let List = await getListGroupAndUserxGroup(cookie);
+export const GetListGroupAndUserxGroup = async (setGroupxUserandList, cookie, idUser) => {
+  let List = await getListGroupAndUserxGroup(cookie, idUser);
   setGroupxUserandList(List);
 };

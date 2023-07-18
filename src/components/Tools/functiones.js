@@ -89,7 +89,8 @@ export const FilterQuerySearch = (
     return;
   }
 
-  idAncest = (idAncest == 0 || idAncest == undefined || idAncest == ""? 1 :idAncest)
+  idAncest =
+    idAncest == 0 || idAncest == undefined || idAncest == "" ? 1 : idAncest;
 
   Router.push({
     pathname: "/[id]",
@@ -97,7 +98,7 @@ export const FilterQuerySearch = (
       id: id,
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
-      idAncestro: idAncest
+      idAncestro: idAncest,
     },
   });
 };
@@ -963,4 +964,10 @@ export const AddListSetValue = (setValue, nameInput) => {
   if (arrayList.length > 0) {
     setValue("ListGroupArray", arrayList);
   }
+};
+
+export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
+  let valorRetorno = ListArray.some((a) => a.Id_grupo == Value);
+
+  return valorRetorno;
 };
