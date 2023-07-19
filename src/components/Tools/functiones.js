@@ -421,6 +421,20 @@ export const setCheckUsuEstado = (setValue) => {
   }
 };
 
+export const setCheckOptionReslt = (setValue) => {
+  var checbox1 = document.getElementById("EstadoOpc");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("Estado_opcion", "0");
+  } else {
+    setValue("Estado_opcion", "1");
+  }
+};
+
 export const setCheckObservations = (setValue) => {
   var checbox1 = document.getElementById("ObsCierre");
 

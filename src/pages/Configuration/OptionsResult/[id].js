@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexOption from "../../../components/Body/OptionResult/index";
+import EditOption from "../../../components/Body/OptionResult/Edit";
 import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsOption/[id]";
 import {
   OptionAdministrator,
@@ -10,19 +10,19 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie }) {
+function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforSampleDetails, cookie, "");
+    SampleDetailsOptionResult(setLInforSampleDetails, cookie, id);
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Listado de opciones | Bitácora BD`}</title>
+        <title>{`Edicion de Opcion | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,25 +33,28 @@ function CreatePage({ cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Edicion de Opcion - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         ></meta>
         <meta
           property="og:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Edicion de Opcion - Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexOption InforSampleDetails={InforSampleDetails}></IndexOption>
+      <EditOption
+        InforOption={InforSampleDetails}
+        idOption={id}
+      ></EditOption>
     </>
   );
 }
@@ -63,7 +66,6 @@ export async function getServerSideProps(ctx) {
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
-  debugger;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
@@ -85,11 +87,20 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.OptionCreateAndUrl) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.ObservacionPredeEditAndUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie } };
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
   } else {
     return {
       redirect: {
