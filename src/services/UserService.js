@@ -694,3 +694,42 @@ function InfoOptionsResult(
     cookie
   );
 }
+
+function CreatePlantillaResult(Opcion_descripcion, Estado_opcion, Orden_opcion) {
+  const formData = new FormData();
+
+  formData.append("Opcion_descripcion", Opcion_descripcion);
+  formData.append("Estado_opcion", Estado_opcion);
+  formData.append("Orden_opcion", Orden_opcion);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarOpcionesResultado`,
+    null,
+    formData
+  );
+}
+
+function EditPlantillaResult(Codigo_Opciones,Opcion_descripcion, Estado_opcion, Orden_opcion) {
+  const formData = new FormData();
+
+  formData.append("Codigo_Opciones", Codigo_Opciones);
+  formData.append("Opcion_descripcion", Opcion_descripcion);
+  formData.append("Estado_opcion", Estado_opcion);
+  formData.append("Orden_opcion", Orden_opcion);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditadaOpcionBitacoras`,
+    null,
+    formData
+  );
+}
+
+function InfoPlantillaResult(
+  cookie,
+  IdOpcion,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistOpcion?IdOpcion=${IdOpcion}&estado_opcion=`,
+    cookie
+  );
+}

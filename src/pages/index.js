@@ -37,7 +37,7 @@ export default function Home({
   const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [ListadoGrupoInactivo, setListadoGrupoInactivo] = useState([]);
   const [idAncestro, setidAncestro] = useState("");
-  // const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
+  const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
   const router = useRouter();
   useEffect(() => {
     if (Options.OrdersInactive) {
@@ -87,14 +87,6 @@ export default function Home({
     };
   }, [router.events]);
 
-  if (
-    ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
-    ListadoGrupoInactivo == "401: Token incorrecto o vencido"
-  ) {
-    userService.logout();
-    return "";
-  }
-
   useEffect(() => {
     if (idAncestro != null && idAncestro != "" && idAncestro != undefined) {
       VerSwalCargando();
@@ -111,6 +103,14 @@ export default function Home({
     setListadoGrupoActivo(ListadoGrupoActivossr);
     setListadoGrupoInactivo(ListadoGrupoInactivossr);
   }, []);
+
+  if (
+    ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
+    ListadoGrupoInactivo == "401: Token incorrecto o vencido"
+  ) {
+    userService.logout();
+    return "";
+  }
 
   return (
     <>
