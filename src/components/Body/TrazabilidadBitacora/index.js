@@ -30,8 +30,8 @@ function ComponentTrazaBitIndex({
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/index",
-                hash: "Normal",
+                pathname: "/",
+                hash: "Cactive",
               }}
               className={styles.back_btn}
             >

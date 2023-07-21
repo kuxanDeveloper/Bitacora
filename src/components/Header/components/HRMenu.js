@@ -4,7 +4,7 @@ import { useContextBitacora } from "../../../context/BitacoraContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { LocationUrl, OnclickNAvToggle } from "../../Tools/functiones";
-function HRMenu({Roles}) {
+function HRMenu({ Roles }) {
   const {
     MenuShow,
     setMenuShow,
@@ -16,12 +16,10 @@ function HRMenu({Roles}) {
   const router = useRouter();
 
   useEffect(() => {
-
     setSelectMenuConfigracion(LocationUrl(router, "configuration"));
   }, []);
 
   useEffect(() => {
-
     setSelectMenuTrazabilidad(LocationUrl(router, "trazabilidad"));
   }, []);
 
@@ -144,6 +142,26 @@ function HRMenu({Roles}) {
                           ""
                         )}
 
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/OptionsResult/IndexOption"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Opciones
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
                         {Roles.ObservacionPredeCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
@@ -163,21 +181,15 @@ function HRMenu({Roles}) {
                         ) : (
                           ""
                         )}
-
-                        
                       </ul>
                     </div>
                   </li>
-
-                  
-                  
                 ) : (
                   ""
                 )
               ) : (
                 ""
               )}
-
 
               {Roles != null ? (
                 Roles.MenuSetting ? (
@@ -217,9 +229,7 @@ function HRMenu({Roles}) {
                     <Link
                       href={"#"}
                       className={`${Styles.nav_link} ${
-                        LocationUrl(router, "trazabilidad")
-                          ? Styles.active
-                          : ""
+                        LocationUrl(router, "trazabilidad") ? Styles.active : ""
                       } `}
                       onClick={(e) => {
                         e.preventDefault();
@@ -270,14 +280,9 @@ function HRMenu({Roles}) {
                         ) : (
                           ""
                         )}
-
-                        
                       </ul>
                     </div>
                   </li>
-
-                  
-                  
                 ) : (
                   ""
                 )

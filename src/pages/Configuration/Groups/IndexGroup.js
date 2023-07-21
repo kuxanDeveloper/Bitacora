@@ -12,8 +12,9 @@ import {
 
 function CreatePage(cookie) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [InforSufijos, setInforSufijos] = useState([]);
   useEffect(() => {
-    SampleDetailsGroup(setLInforSampleDetails, cookie, "");
+    SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, "");
   }, []);
 
   return (

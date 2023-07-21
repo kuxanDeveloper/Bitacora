@@ -10,7 +10,7 @@ import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 
 function ComponentObservationEdit({ InforObservations, idObservation }) {
   const validarEsquemaobservation = Yup.object().shape({
-    Cod_Observacion: Yup.string().required("Eñ codigo de la observacion es obligatorio"),
+    Cod_Observacion: Yup.string().required("El codigo de la observacion es obligatorio"),
     DescripcionObservacion: Yup.string().required(
       "El campo descripcion de la observacion es obligatorio"
     ),

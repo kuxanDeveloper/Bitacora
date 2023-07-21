@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import EditGroup from "../../../components/Body/GroupCrud/Edit";
+import IndexGroup from "../../../components/Body/GroupCrud/Index";
 import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
 import {
   OptionAdministrator,
@@ -10,22 +10,20 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie, id }) {
+function CreatePage(cookie) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [InforSufijos, setInforSufijos] = useState([]);
   useEffect(() => {
-    if (id != null && id != undefined) {
-      SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, id);
-    }
+    SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, "");
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Edición de grupo | Bitácora BD`}</title>
+        <title>{`Listado de seguimientos | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde se listan los seguimientos de las pruebas de el sistema`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -34,22 +32,24 @@ function CreatePage({ cookie, id }) {
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta name="twitter:title" content={`Edición de grupo - Bitácora BD`} />
+        <meta
+          name="twitter:title"
+          content={`Listado de seguimientos - Bitácora BD`}
+        />
         <meta
           name="twitter:description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde se listan los seguimientos de las pruebas de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Edición de grupo - Bitácora BD`} />
+        <meta property="og:title" content={`Listado de seguimientos - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde se listan los seguimientos de las pruebas de el sistema`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditGroup InforGroup={InforSampleDetails} 
-      InforSufijos={InforSufijos}></EditGroup>
+      <IndexGroup InforSampleDetails={InforSampleDetails}></IndexGroup>
     </>
   );
 }
@@ -61,6 +61,7 @@ export async function getServerSideProps(ctx) {
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
+  debugger;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
@@ -82,20 +83,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (
-      ctx.query.id == undefined ||
-      ctx.query.id == null ||
-      !Options.GroupConfigEditAndUrl
-    ) {
+    if (!Options.GroupConfigCreateAndUrl) {
       return { notFound: true };
     }
 
-    return {
-      props: {
-        cookie: cookie,
-        id: ctx.query.id,
-      },
-    };
+    return { props: { mensaje: null } };
   } else {
     return {
       redirect: {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import EditGroup from "../../../components/Body/GroupCrud/Edit";
-import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
+import EditOption from "../../../components/Body/OptionResult/Edit";
+import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsOption/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -12,20 +12,17 @@ import {
 
 function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-  const [InforSufijos, setInforSufijos] = useState([]);
   useEffect(() => {
-    if (id != null && id != undefined) {
-      SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, id);
-    }
+    SampleDetailsOptionResult(setLInforSampleDetails, cookie, id);
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Edición de grupo | Bitácora BD`}</title>
+        <title>{`Edicion de Opcion | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -34,22 +31,30 @@ function CreatePage({ cookie, id }) {
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta name="twitter:title" content={`Edición de grupo - Bitácora BD`} />
+        <meta
+          name="twitter:title"
+          content={`Edicion de Opcion - Bitácora BD`}
+        />
         <meta
           name="twitter:description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta property="og:title" content={`Edición de grupo - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Edicion de Opcion - Bitácora BD`}
+        />
         <meta
           property="og:description"
-          content={`Lugar donde edita el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde edita la Opcion de resultado que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditGroup InforGroup={InforSampleDetails} 
-      InforSufijos={InforSufijos}></EditGroup>
+      <EditOption
+        InforOption={InforSampleDetails}
+        idOption={id}
+      ></EditOption>
     </>
   );
 }
@@ -85,7 +90,7 @@ export async function getServerSideProps(ctx) {
     if (
       ctx.query.id == undefined ||
       ctx.query.id == null ||
-      !Options.GroupConfigEditAndUrl
+      !Options.ObservacionPredeEditAndUrl
     ) {
       return { notFound: true };
     }

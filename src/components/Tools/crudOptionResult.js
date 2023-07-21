@@ -2,32 +2,22 @@ import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export const onSubmitCreateGroup = ({
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo,
-    ListSufijo
+export const onSubmitCreateOption = ({
+    Opcion_descripcion, Estado_opcion, Orden_opcion
 }) => {  
-    return userService.CreatGroup(
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo,
-        ListSufijo
+    return userService.CreateOptionsResult(
+        Opcion_descripcion, Estado_opcion, Orden_opcion
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El grupo se creo correctamente",
+        text: "La opcion de resultado se creo correctamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
+        pathname: "/Configuration/OptionsResult/IndexOption"
 });
     }    
     ).catch((error) => {
@@ -52,39 +42,27 @@ Router.push({
             });
           }
     
-          console.log(error, "error al crear grupo");
+          console.log(error, "error al crear la opcion de resultado");
     });
 
 };
 
-export const onSubmitUpdateGroup = ({
-    IdGrupo,
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo,
-    ListSufijo
+export const onSubmitUpdateOption = ({
+    Codigo_Opciones,Opcion_descripcion, Estado_opcion, Orden_opcion
 }) => {
-    return userService.EditGroup(
-        IdGrupo,
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo,
-        ListSufijo
+    return userService.EditOptionsResult(
+        Codigo_Opciones,Opcion_descripcion, Estado_opcion, Orden_opcion
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El grupo se edito correctamente",
+        text: "La opcion de resultado se edito correctamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
+    pathname: "/Configuration/OptionsResult/IndexOption"
 });
     }    
     ).catch((error) => {
@@ -109,16 +87,15 @@ Router.push({
             });
           }
     
-          console.log(error, "error al editar grupo");
+          console.log(error, "error al editar la opcion de resultado");
     });
 
 };
 
-export const getListGroup = (estado, idGrupo, cookie) => {
-    return userService.InfoGroup(
-        (estado == null ? "" : estado), 
-        (idGrupo == null ? "" : idGrupo),
-        cookie
+export const getListOption = (cookie,IdOpcion) => {
+    return userService.InfoOptionsResult(
+        cookie,
+        (IdOpcion == null ? "" : IdOpcion)
     ).catch((error) => {
 
         if (
@@ -141,7 +118,7 @@ export const getListGroup = (estado, idGrupo, cookie) => {
             });
           }
     
-          console.log(error, "error al obterner la inforamcion del grupo");
+          console.log(error, "error al obterner la inforamcion de las opciones de resultado");
     });
 
 };

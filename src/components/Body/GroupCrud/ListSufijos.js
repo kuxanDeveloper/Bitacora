@@ -47,6 +47,8 @@ function ListSufijos({ListSufijo, setListSufijo}) {
     setListSufijo(ListSufijo.filter((item) => item !== idRow));
   }
 
+console.log(ListSufijo);
+
   return (
     <div className={styles.form_group}>
       <div className={styles.input_group}>
@@ -88,7 +90,8 @@ function ListSufijos({ListSufijo, setListSufijo}) {
             </tr>
           </thead>
           <tbody>
-            {ListSufijo.map((data, index) => (
+            {ListSufijo != null && ListSufijo != undefined ?
+            ListSufijo.map((data, index) => (
               <tr key={index} id={data}>
                 <td className={styleTable.textCenterColumn}>
                   <p>{data}</p>
@@ -108,7 +111,7 @@ function ListSufijos({ListSufijo, setListSufijo}) {
                   </Link>
                 </td>
               </tr>
-            ))}
+            )): ""}
           </tbody>
         </table>
       </div>

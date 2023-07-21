@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexGroup from "../../../components/Body/GroupCrud/Index";
-import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsGroup/[id]";
+import IndexOption from "../../../components/Body/OptionResult/index";
+import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsOption/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -13,7 +13,7 @@ import {
 function CreatePage({ cookie }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsGroup(setLInforSampleDetails, cookie, "");
+    SampleDetailsOptionResult(setLInforSampleDetails, cookie, "");
   }, []);
 
   return (
@@ -51,7 +51,7 @@ function CreatePage({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexGroup InforSampleDetails={InforSampleDetails}></IndexGroup>
+      <IndexOption InforSampleDetails={InforSampleDetails}></IndexOption>
     </>
   );
 }
