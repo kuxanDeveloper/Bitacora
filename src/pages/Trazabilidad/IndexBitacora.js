@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexTrazaBit from "../../components/Body/TrazabilidadBitacora/index";
 import FilterTrazaBit from "../../components/Body/TrazabilidadBitacora/FilterBitacora";
@@ -12,12 +12,46 @@ import {
 } from "../../components/Tools/OpcitionHabilite";
 import { queryListUserAll } from "../../components/Tools//Security";
 
-function CreatePage({cookie,ListadoUsuariosRegistrados,query}) {
+function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsTrazaBit(
+      setLInforSampleDetails,
+      cookie,
+      query.dateAdmision,
+      query.dateFinal,
+      query.NumSticker,
+      query.Sufijo,
+      query.URS,
+      "1"
+    );
+  }, []);
 
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-      SampleDetailsTrazaBit(setLInforSampleDetails,cookie,query.dateAdmision,query.dateFinal,query.NumSticker,query.Sufijo,query.URS,"1");
-    }, []);
+  const [NumeroSticker, setNumeroSticker] = useState(
+    query.NumSticker != undefined && query.NumSticker != null
+      ? query.NumSticker
+      : ""
+  );
+
+  const [FechaIngreso, setFechaIngreso] = useState(
+    query.dateAdmision != undefined && query.dateAdmision != null
+      ? query.dateAdmision
+      : ""
+  );
+
+  const [FechaIngresoFinal, setFechaFinal] = useState(
+    query.dateFinal != undefined && query.dateFinal != null
+      ? query.dateFinal
+      : ""
+  );
+
+  const [UserRegisterStiker, setUserRegisterStiker] = useState(
+    query.URS != undefined && query.URS != null ? query.URS : ""
+  );
+
+  const [Sufijo, setSufijo] = useState(
+    query.Sufij != undefined && query.Sufij != null ? query.Sufij : ""
+  );
 
   return (
     <>
@@ -55,15 +89,27 @@ function CreatePage({cookie,ListadoUsuariosRegistrados,query}) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <FilterTrazaBit
-      ListadoUsuariosRegistrados={ListadoUsuariosRegistrados} 
-      NumSticker={query.NumSticker} 
-      dateAdmision={query.dateAdmision} 
-      dateFinal={query.dateFinal} 
-      URS={query.URS} 
-      Sufij={query.Sufijo} 
+        ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
+        NumeroSticker={NumeroSticker}
+        setNumeroSticker={setNumeroSticker}
+        FechaIngreso={FechaIngreso}
+        setFechaIngreso={setFechaIngreso}
+        FechaIngresoFinal={FechaIngresoFinal}
+        setFechaFinal={setFechaFinal}
+        UserRegisterStiker={UserRegisterStiker}
+        setUserRegisterStiker={setUserRegisterStiker}
+        Sufijo={Sufijo}
+        setSufijo={setSufijo}
       ></FilterTrazaBit>
-      <IndexTrazaBit
-      InforSampleDetails={InforSampleDetails}>        
+      <IndexTrazaBit 
+      InforSampleDetails={InforSampleDetails}
+      NumeroSticker={NumeroSticker}
+      FechaIngreso={FechaIngreso}
+      FechaIngresoFinal={FechaIngresoFinal}
+      UserRegisterStiker={UserRegisterStiker}
+      Sufijo={Sufijo}
+      >
+     
       </IndexTrazaBit>
     </>
   );
@@ -82,7 +128,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -98,12 +144,10 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.BtnEditStickerAndUrl) {
       return { notFound: true };
     }
-    
+
     const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
@@ -112,7 +156,6 @@ export async function getServerSideProps(ctx) {
         ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
       },
     };
-
   } else {
     return {
       redirect: {
