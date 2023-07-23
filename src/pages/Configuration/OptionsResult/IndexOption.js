@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexOption from "../../../components/Body/OptionResult/index";
-import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsOption/[id]";
+import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,

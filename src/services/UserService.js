@@ -61,6 +61,14 @@ export const userService = {
   CreateOptionsResult,
   EditOptionsResult,
   InfoOptionsResult,
+  CreatePlantillaResult,
+  EditPlantillaResult,
+  InfoPlantillaResult,
+  CreatePruebaResult,
+  EditPruebaResult,
+  GetlistPruebas,
+  InfoOpcionesXPlantilla,
+  InfoPlantillasXPrueba
 };
 
 async function login(username, password) {
@@ -695,30 +703,32 @@ function InfoOptionsResult(
   );
 }
 
-function CreatePlantillaResult(Opcion_descripcion, Estado_opcion, Orden_opcion) {
+function CreatePlantillaResult(Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones) {
   const formData = new FormData();
 
-  formData.append("Opcion_descripcion", Opcion_descripcion);
-  formData.append("Estado_opcion", Estado_opcion);
-  formData.append("Orden_opcion", Orden_opcion);
+  formData.append("Plantilla_resultado", Plantilla_resultado);
+  formData.append("Estado_plantilla", Estado_plantilla);
+  formData.append("Orden_plantilla", Orden_plantilla);
+  formData.append("Lst_Opciones", Lista_opciones);
 
   return fetchWrapper.postHeader(
-    `${baseUrl}/Stickers/GuardarOpcionesResultado`,
+    `${baseUrl}/Stickers/GuardarPlantillasBitacoras`,
     null,
     formData
   );
 }
 
-function EditPlantillaResult(Codigo_Opciones,Opcion_descripcion, Estado_opcion, Orden_opcion) {
+function EditPlantillaResult(Codigo_Plantilla,Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones) {
   const formData = new FormData();
 
-  formData.append("Codigo_Opciones", Codigo_Opciones);
-  formData.append("Opcion_descripcion", Opcion_descripcion);
-  formData.append("Estado_opcion", Estado_opcion);
-  formData.append("Orden_opcion", Orden_opcion);
+  formData.append("Codigo_Plantilla", Codigo_Plantilla);
+  formData.append("Plantilla_resultado", Plantilla_resultado);
+  formData.append("Estado_plantilla", Estado_plantilla);
+  formData.append("Orden_plantilla", Orden_plantilla);
+  formData.append("Lst_Opciones", Lista_opciones);
 
   return fetchWrapper.postHeader(
-    `${baseUrl}/Stickers/EditadaOpcionBitacoras`,
+    `${baseUrl}/Stickers/EditadaPlantillasBitacoras`,
     null,
     formData
   );
@@ -726,10 +736,73 @@ function EditPlantillaResult(Codigo_Opciones,Opcion_descripcion, Estado_opcion, 
 
 function InfoPlantillaResult(
   cookie,
-  IdOpcion,
+  Idplantilla,
 ) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistOpcion?IdOpcion=${IdOpcion}&estado_opcion=`,
+    `${baseUrl}/Stickers/GetlistPlantillas?Idplantilla=${Idplantilla}&estado_plantilla=`,
+    cookie
+  );
+}
+
+function InfoOpcionesXPlantilla(
+  cookie,
+  Id_Plantilla,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistOpcionesXPlantilla?Id_Plantilla=${Id_Plantilla}`,
+    cookie
+  );
+}
+
+function CreatePruebaResult(Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas) {
+  const formData = new FormData();
+
+  formData.append("Nombre_prueba", Nombre_prueba);
+  formData.append("Codigo_visible", "");
+  formData.append("Estado_prueba", Estado_prueba);
+  formData.append("Orden_prueba", Orden_prueba);
+  formData.append("Lst_plantillas", Lst_plantillas);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarPruebasBitacoras`,
+    null,
+    formData
+  );
+}
+
+function EditPruebaResult(Codigo_prueba,Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas) {
+  const formData = new FormData();
+
+  formData.append("Codigo_prueba", Codigo_prueba);
+  formData.append("Nombre_prueba", Nombre_prueba);
+  formData.append("Codigo_visible", "");
+  formData.append("Estado_prueba", Estado_prueba);
+  formData.append("Orden_prueba", Orden_prueba);
+  formData.append("Lst_plantillas", Lst_plantillas);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarPruebasBitacoras`,
+    null,
+    formData
+  );
+}
+
+function GetlistPruebas(
+  cookie,
+  Codprueba,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistPruebas?Codprueba=${Codprueba}&EstadoPrueba=`,
+    cookie
+  );
+}
+
+function InfoPlantillasXPrueba(
+  cookie,
+  Id_prueba,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistPlantillasXPrueba?Id_prueba=${Id_prueba}`,
     cookie
   );
 }
