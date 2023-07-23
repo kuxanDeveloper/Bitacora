@@ -58,6 +58,7 @@ export const userService = {
   lstSufijoGetall,
   lstAncestros,
   InfoGroupAndUserxGroup,
+  ExportcsvTrazabilidadBitacora,
   CreateOptionsResult,
   EditOptionsResult,
   InfoOptionsResult,
@@ -462,7 +463,7 @@ function InfoSampleUsers(cookie, IdUser) {
 }
 function InfoGroupAndUserxGroup(cookie, idUser) {
   return fetchWrapper.get(
-    `${baseUrl}/Usus/GetGroupListAndListRegisterValue?IdUSer=`+idUser,
+    `${baseUrl}/Usus/GetGroupListAndListRegisterValue?IdUSer=` + idUser,
     cookie
   );
 }
@@ -528,7 +529,7 @@ function EditUser(
   formData.append("Telefono_fijo", Telefono);
   formData.append("EXTENCION", Extencion);
   formData.append("estado_usuario", EstadoUsuario);
-  formData.append("ListGroupxUser", ListGroupArray)
+  formData.append("ListGroupxUser", ListGroupArray);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Usus/EditarUsuario`,
@@ -642,6 +643,21 @@ function InfoTrazabilidadBitacora(
   return fetchWrapper.get(
     `${baseUrl}/TrazaBit/LstBitacoraTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&Sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&page=${page}`,
     cookie
+  );
+}
+
+function ExportcsvTrazabilidadBitacora(
+  typeTraza,
+  Fecha_inicial,
+  Fecha_final,
+  Numero_sticker,
+  Sufijo,
+  usuario_Traza,
+  tipo_tabla
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}`,
+    null
   );
 }
 

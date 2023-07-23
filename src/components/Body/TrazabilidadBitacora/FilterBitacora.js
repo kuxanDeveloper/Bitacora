@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   FilterSearchTrazaBitacora,
   ClearFilterTrazaBitacora
@@ -9,33 +9,20 @@ import { useRouter } from "next/router";
 
 export default function Filters({
   ListadoUsuariosRegistrados,
-  NumSticker,
-  dateAdmision,
-  dateFinal,
-  URS,
-  Sufij
+  NumeroSticker,
+  setNumeroSticker,
+  FechaIngreso,
+  setFechaIngreso,
+  FechaIngresoFinal,
+  setFechaFinal,
+  UserRegisterStiker,
+  setUserRegisterStiker,
+  Sufijo,
+  setSufijo
 }) {
   const router = useRouter();
 
-  const [NumeroSticker, setNumeroSticker] = useState(
-    NumSticker != undefined && NumSticker != null ? NumSticker : ""
-  );
 
-  const [FechaIngreso, setFechaIngreso] = useState(
-    dateAdmision != undefined && dateAdmision != null ? dateAdmision : ""
-  );
-
-  const [FechaIngresoFinal, setFechaFinal] = useState(
-    dateFinal != undefined && dateFinal != null ? dateFinal : ""
-  );
-  
-  const [UserRegisterStiker, setUserRegisterStiker] = useState(
-    URS != undefined && URS != null ? URS : ""
-  );
-
-  const [Sufijo, setSufijo] = useState(
-    Sufij != undefined && Sufij != null ? Sufij : ""
-  );
   
   return (
     <>
@@ -67,7 +54,7 @@ export default function Filters({
               />
               <input
                 type="date"
-                title="Fecha Inicial de busqueda"
+                title="Fecha inicial de búsqueda"
                 className={filterStyles.filter_input}
                 placeholder="Seleccione una fecha inicial"
                 onChange={(e) => {
@@ -77,7 +64,7 @@ export default function Filters({
               />
               <input
                 type="date"
-                title="Fecha Final de busqueda"
+                title="Fecha final de búsqueda"
                 className={filterStyles.filter_input}
                 placeholder="Seleccione una fecha final"
                 onChange={(e) => {
