@@ -9,6 +9,7 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { SampleDetailsPruebasGrupResult,SampleDetailsPruebasXGrupoResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 
 function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
@@ -17,6 +18,16 @@ function CreatePage({ cookie, id }) {
     if (id != null && id != undefined) {
       SampleDetailsGroup(setLInforSampleDetails,setInforSufijos, cookie, id);
     }
+  }, []);
+
+  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+  useEffect(() => {
+    SampleDetailsPruebasGrupResult(setInforOptionsSelc, cookie, "");
+  }, []);
+
+  const [InforPruebasXGrupo, setInforPruebasXGrupo] = useState([]);
+  useEffect(() => {
+    SampleDetailsPruebasXGrupoResult(setInforPruebasXGrupo, cookie, id);
   }, []);
 
   return (
@@ -49,7 +60,9 @@ function CreatePage({ cookie, id }) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <EditGroup InforGroup={InforSampleDetails} 
-      InforSufijos={InforSufijos}></EditGroup>
+      InforSufijos={InforSufijos}
+      InforOptionsSelc={InforOptionsSelc}
+      InforPruebaXGrupo={InforPruebasXGrupo}></EditGroup>      
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import CreateGroup from "../../../components/Body/GroupCrud/Create";
 import {
@@ -8,8 +8,15 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { SampleDetailsPruebasResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 
-function CreatePage() {
+function CreatePage(cookie) {
+
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsPruebasResult(setLInforSampleDetails, cookie, "");
+  }, []);
+
   return (
     <>
       <Head>
@@ -42,7 +49,7 @@ function CreatePage() {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateGroup></CreateGroup>
+      <CreateGroup InforOptionsSelc={InforSampleDetails}></CreateGroup>
     </>
   );
 }

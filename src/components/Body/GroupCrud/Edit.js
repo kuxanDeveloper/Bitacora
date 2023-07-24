@@ -8,9 +8,11 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListSufij from "./ListSufijos";
+import ListPrueba from "./ListPruebas";
 
-function ComponentGroup({InforGroup,InforSufijos}) {
+function ComponentGroup({InforGroup,InforSufijos,InforOptionsSelc,InforPruebaXGrupo}) {
   const [ListSufijo, setListSufijo] = useState([]);
+  const [ListPruebas, setListPruebas] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
     IdGrupo: Yup.string().required("Campo id es obligatorio"),
@@ -28,6 +30,7 @@ function ComponentGroup({InforGroup,InforSufijos}) {
     ListSufijo: Yup.array()
       .min(1, "Es obligatorio digitar por lo menos un sufijo para el grupo")
       .required("Es obligatorio digitar por lo menos un sufijo para el grupo"),
+      Lst_Pruebas: Yup.array().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -174,6 +177,13 @@ function ComponentGroup({InforGroup,InforSufijos}) {
                     {errors.ListSufijo?.message}
                   </div>
 
+                  <ListPrueba
+                    ListPruebas={ListPruebas}
+                    setListPruebas={setListPruebas}
+                    InforOptionsSelc={InforOptionsSelc}
+                    InforPruebaXGrupo={InforPruebaXGrupo}
+                  ></ListPrueba>
+
                           <div className={styles.btn_container_send}>
                             {!formState.isSubmitting && (
                               <button
@@ -184,6 +194,7 @@ function ComponentGroup({InforGroup,InforSufijos}) {
                                     "IdGrupo",
                                     InforGroup[0].Id_grupo
                                   );
+                                  setValue("Lst_Pruebas", ListPruebas);
                                 }}
                                 className={styles.btn_send}
                               >
