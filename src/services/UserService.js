@@ -69,7 +69,7 @@ export const userService = {
   EditPruebaResult,
   GetlistPruebas,
   InfoOpcionesXPlantilla,
-  InfoPlantillasXPrueba
+  InfoPlantillasXPrueba,
   ExportcsvTrazabilidadSistema
 };
 
