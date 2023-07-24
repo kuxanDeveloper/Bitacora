@@ -47,7 +47,6 @@ function ListSufijos({ListSufijo, setListSufijo}) {
     setListSufijo(ListSufijo.filter((item) => item !== idRow));
   }
 
-console.log(ListSufijo);
 
   return (
     <div className={styles.form_group}>

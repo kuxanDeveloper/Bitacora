@@ -45,7 +45,6 @@ export default PageForgotPasswordAdmin;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
-  debugger;
   if (cookie) {
     if (ctx.query.id == undefined || ctx.query.id == null) {
       return { notFound: true };

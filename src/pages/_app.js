@@ -10,9 +10,6 @@ import { usePageLoading } from "../components/Tools/usePageloading";
 
 function MyApp({ Component, pageProps }) {
   const { isPageLoading } = usePageLoading();
-  // urlIsauthorized = urlAuthorized();
-
-  // debugger;
   return (
     <ErrorBoundary>
       <BicatoraContexProvider>

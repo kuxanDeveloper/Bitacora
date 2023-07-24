@@ -58,7 +58,6 @@ function CreateSticker({
       const SplitScanner = ResultScanner.split("-");
       if (SplitScanner != null && SplitScanner != undefined) {
         if (SplitScanner.length > 1) {
-          debugger;
           let SearchGroupSufij = ListadoGetFullSufijo.find(
             (data) => data.SUFIJO_GRUPO == SplitScanner[1]
           );

@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import Link from "next/link";
 function Lastfollow_up({ data, Options, infoBitacora }) {
-  console.log(infoBitacora);
   return (
     <div className={styles.follow_up_body}>
       {Options.BtnCrearNotaAndUrl ? (

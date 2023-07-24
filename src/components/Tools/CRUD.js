@@ -13,7 +13,6 @@ export const onSubmitCreate = ({
   file2,
   Sufijo,
 }) => {
-  debugger;
   const StickerRetorno = NumSticker;
   return userService
     .CreatSticker(
