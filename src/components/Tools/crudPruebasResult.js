@@ -2,22 +2,22 @@ import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
-export const onSubmitCreatePlantilla = ({
-  Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones
+export const onSubmitCreatePrueba = ({
+    Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas
 }) => {  
-    return userService.CreatePlantillaResult(
-      Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones
+    return userService.CreatePruebaResult(
+        Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El seguimiento se creo satisfactoriamente",
+        text: "El estatus se creo satisfactoriamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-        pathname: "/Configuration/PlantillaResultado/IndexPlantilla"
+        pathname: "/Configuration/PruebaResultado/IndexPrueba"
 });
     }    
     ).catch((error) => {
@@ -42,27 +42,27 @@ Router.push({
             });
           }
     
-          console.log(error, "error al crear el seguimiento de resultado");
+          console.log(error, "error al crear el estatus de resultado");
     });
 
 };
 
-export const onSubmitUpdatePlantilla = ({
-  Codigo_Plantilla,Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones
+export const onSubmitUpdatePrueba = ({
+    Codigo_prueba,Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas
 }) => {
-    return userService.EditPlantillaResult(
-      Codigo_Plantilla,Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones
+    return userService.EditPruebaResult(
+        Codigo_prueba,Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas
     ).then(() =>
     {
       Swal.fire({
         title: "¡Correcto!",
-        text: "El seguimiento se edito satisfactoriamente",
+        text: "El estatus se edito satisfactoriamente",
         icon: "success",
         confirmButtonText: "Ok",
       });
 
 Router.push({
-  pathname: "/Configuration/PlantillaResultado/IndexPlantilla"
+    pathname: "/Configuration/PruebaResultado/IndexPrueba"
 });
     }    
     ).catch((error) => {
@@ -87,15 +87,16 @@ Router.push({
             });
           }
     
-          console.log(error, "error al editar el seguimiento de resultado");
+          console.log(error, "error al editar el estatus de resultado");
     });
 
 };
 
-export const getListPlantilla = (cookie,Idplantilla) => {
-    return userService.InfoPlantillaResult(
+export const getListPrueba = (cookie,
+    Codprueba) => {
+    return userService.GetlistPruebas(
         cookie,
-        (Idplantilla == null ? "" : Idplantilla)
+        (Codprueba == null ? "" : Codprueba)
     ).catch((error) => {
 
         if (
@@ -118,15 +119,15 @@ export const getListPlantilla = (cookie,Idplantilla) => {
             });
           }
     
-          console.log(error, "error al obterner la inforamcion de los seguimientos de resultado");
+          console.log(error, "error al obterner la inforamcion de los estatus de resultado");
     });
 
 };
 
-export const getInfoOpcionesXPlantilla = (cookie,Id_Plantilla) => {
-  return userService.InfoOpcionesXPlantilla(
+export const getInfoPlantillasXPrueba = (cookie,Id_prueba) => {
+  return userService.InfoPlantillasXPrueba(
       cookie,
-      (Id_Plantilla == null ? "" : Id_Plantilla)
+      (Id_prueba == null ? "" : Id_prueba)
   ).catch((error) => {
 
       if (
@@ -149,7 +150,7 @@ export const getInfoOpcionesXPlantilla = (cookie,Id_Plantilla) => {
           });
         }
   
-        console.log(error, "error al obtener la inforamcion de opciones X plantilla");
+        console.log(error, "error al obtener la inforamcion de plantillas X prueba");
   });
 
 };

@@ -4,41 +4,41 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import Link from "next/link";
 import Swal from "sweetalert2";
 
-function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOptionsXpruebas}) {
+function ListPlantillas({ListPlantillas, setListPlantillas,InforOptionsSelc,InforPlantillasXPrueba}) {
   
-  const [valoropcion, setvaloropcion] = useState("");
-  const [ListOpcionesNombre, setListOpcionesNombre] = useState([]);
+  const [valorplantilla, setvalorplantilla] = useState("");
+  const [ListPlantillasNombre, setListPlantillasNombre] = useState([]);
 
   useEffect(() => {
 
-    if(InforOptionsXpruebas != null &&
-      InforOptionsXpruebas != undefined &&
-      InforOptionsXpruebas.length > 0)
+    if(InforPlantillasXPrueba != null &&
+        InforPlantillasXPrueba != undefined &&
+        InforPlantillasXPrueba.length > 0)
     {
 
-      InforOptionsXpruebas.map((data,index) => {
+        InforPlantillasXPrueba.map((data,index) => {
 
         const objetomodelo = {
-          nombre:data.OPCION_DESCRIPCION,
-          codigo:data.COD_OPCIONES.toString()
+          nombre:data.RESULTADO_PLANTILLA,
+          codigo:data.COD_PLANTILLA.toString()
         };
 
-        setListOpcionesNombre((prevArray) => [...prevArray, objetomodelo]);
-        setListOpciones((prevArray) => [...prevArray, data.COD_OPCIONES.toString()]);
+        setListPlantillasNombre((prevArray) => [...prevArray, objetomodelo]);
+        setListPlantillas((prevArray) => [...prevArray, data.COD_PLANTILLA.toString()]);
 
       });
 
     }
 
-  },[InforOptionsXpruebas]);
+  },[InforPlantillasXPrueba]);
 
-  function Agregaropcionlist() {
-    let txtopcion = document.getElementById("opcionResult");
+  function Agregarplantillalist() {
+    let txtopcion = document.getElementById("plantillaResult");
 
     if (txtopcion.value == "" || txtopcion.value == undefined) {
       Swal.fire({
         title: "¡Advertencia!",
-        text: "Debe seleccionar la opcion que desea agregar",
+        text: "Debe seleccionar el seguimiento que desea agregar",
         icon: "warning",
         confirmButtonText: "Cerrar",
       });
@@ -46,16 +46,16 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
     } else {
         let opc = txtopcion.value;
         let textopc = txtopcion.options[txtopcion.selectedIndex].text;;
-        if(ListOpcionesNombre.filter((item) => item.codigo === opc).length > 0)
+        if(ListPlantillasNombre.filter((item) => item.codigo === opc).length > 0)
         {
 
             Swal.fire({
                 title: "¡Advertencia!",
-                text: "La opcion que intenta guardar ya se encuentra agregado en el listado",
+                text: "El seguimiento que intenta guardar ya se encuentra agregado en el listado",
                 icon: "error",
                 confirmButtonText: "Cerrar",
               });
-              setvaloropcion("");
+              setvalorplantilla("");
               return;
               
         }
@@ -65,36 +65,36 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
             codigo:opc
           };
 
-          setListOpcionesNombre((prevArray) => [...prevArray, objetomodelo]);
-        setListOpciones((prevArray) => [...prevArray, opc]);
-        setvaloropcion("");
+          setListPlantillasNombre((prevArray) => [...prevArray, objetomodelo]);
+        setListPlantillas((prevArray) => [...prevArray, opc]);
+        setvalorplantilla("");
       
     }
   }
 
-  function DeleteRowOpcion(idRow) {
-    setListOpcionesNombre(ListOpcionesNombre.filter((item) => item.codigo !== idRow));
-    setListOpciones(ListOpciones.filter((item) => item !== idRow));
+  function DeleteRowPlantilla(idRow) {
+    setListPlantillasNombre(ListPlantillasNombre.filter((item) => item.codigo !== idRow));
+    setListPlantillas(ListPlantillas.filter((item) => item !== idRow));
   }
 
   return (
     <div className={styles.form_group}>
       <div className={styles.input_group}>
-        <label className={styles.group_title}>Opciones</label>
+        <label className={styles.group_title}>Seguimientos</label>
 
         <select 
-        name="opcionResult"
-        id="opcionResult"
-        onChange={(e) => setvaloropcion(e.target.value)}
-        value={valoropcion}
+        name="plantillaResult"
+        id="plantillaResult"
+        onChange={(e) => setvalorplantilla(e.target.value)}
+        value={valorplantilla}
         className={styles.group_input}
         >
-            <option value={""} selected>Seleccione una opcion</option>
+            <option value={""} selected>Seleccione un seguimiento</option>
         {InforOptionsSelc != null &&
                 InforOptionsSelc != undefined
                   ? InforOptionsSelc.map((data, index) => (
 
-                        <option key={index} value={data.COD_OPCIONES}>{data.OPCION_DESCRIPCION}</option>
+                        <option key={index} value={data.COD_PLANTILLA}>{data.RESULTADO_PLANTILLA}</option>
 
                   )) : ""}
         </select>
@@ -109,39 +109,39 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
             className={styles.btn_send}
             onClick={(e) => {
               e.preventDefault();
-              Agregaropcionlist();
+              Agregarplantillalist();
             }}
           >
             <span>&#10010; </span>
-            Agregar Opcion
+            Agregar Seguimiento
           </button>
         </div>
       </div>
 
       <div className={styles.input_group}>
-        <table className={styleTable.tableStyle} id="Tablaopciones">
+        <table className={styleTable.tableStyle} id="TablaSeguimiento">
           <thead>
             <tr>
-              <th>Descripcion Opcion</th>
+              <th>Descripcion Seguimiento</th>
               <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
-            {ListOpcionesNombre != null && ListOpcionesNombre != undefined ?
-            ListOpcionesNombre.map((data, index) => (
+            {ListPlantillasNombre != null && ListPlantillasNombre != undefined ?
+            ListPlantillasNombre.map((data, index) => (
               <tr key={index} id={data.codigo}>
                 <td className={styleTable.textCenterColumn}>
                   <p>{data.nombre}</p>
                 </td>
                 <td>
                   <Link
-                    title="Eliminar Opcion"
+                    title="Eliminar Plantilla"
                     className={styleTable.colorrojoBoton}
                     type="button"
                     href={""}
                     onClick={(e) => {
                       e.preventDefault();
-                      DeleteRowOpcion(data.codigo);
+                      DeleteRowPlantilla(data.codigo);
                     }}
                   >
                     <span>&#128941;</span>
@@ -155,4 +155,4 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
     </div>
   );
 }
-export default ListOptions;
+export default ListPlantillas;

@@ -3,29 +3,29 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
-import { onSubmitUpdatePlantilla } from "../../Tools/crudPlantillaResult";
+import { onSubmitUpdatePrueba } from "../../Tools/crudPruebasResult";
 import styles from "../../../styles/CreateNotes.module.scss";
-import { setCheckPlantillaReslt } from "../../Tools/functiones";
+import { setCheckPruebaReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import ListOption from "./ListOptions";
+import ListPlantilla from "./ListPlantilla";
 
-function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, idPlantilla }) {
-  const [ListOpciones, setListOpciones] = useState([]);
+function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, idPrueba }) {
+    const [ListPlantillas, setListPlantillas] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
-    Codigo_Plantilla: Yup.string().required(
-      "El codigo de la plantilla es obligatorio"
+    Codigo_prueba: Yup.string().required(
+      "El codigo del estatus es obligatorio"
     ),
-    Plantilla_resultado: Yup.string().required(
-      "El campo nombre del seguimiento es obligatorio"
-    ),
-    Estado_plantilla: Yup.string().required(
-      "El campo de estado del seguimiento es obligatorio"
-    ),
-    Orden_plantilla: Yup.string().required(
-      "El campo de orden del seguimiento es obligatorio"
-    ),
-    Lista_opciones: Yup.array().notRequired(),
+    Nombre_prueba: Yup.string().required(
+        "El campo nombre del estatus es obligatorio"
+      ),
+      Estado_prueba: Yup.string().required(
+        "El campo de estado del estatus es obligatorio"
+      ),
+      Orden_prueba: Yup.string().required(
+        "El campo de orden del estatus es obligatorio"
+      ),
+      Lst_plantillas: Yup.array().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -39,7 +39,7 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/PlantillaResultado/IndexPlantilla",
+                pathname: "/Configuration/PruebaResultado/IndexPrueba"
               }}
               className={styles.back_btn}
             >
@@ -47,33 +47,33 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
             </Link>
           </div>
 
-          <p className={styles.title}>Editar Seguimiento de resultado</p>
+          <p className={styles.title}>Editar Estatus de resultado</p>
           <br />
           <div className={styles.card}>
-            <form onSubmit={handleSubmit(onSubmitUpdatePlantilla)}>
+            <form onSubmit={handleSubmit(onSubmitUpdatePrueba)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
-                  {InfoPlantilla != null && InfoPlantilla != undefined
-                    ? InfoPlantilla.map((data, index) => (
+                  {InfoPrueba != null && InfoPrueba != undefined
+                    ? InfoPrueba.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                           >
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
-                                Nombre Seguimiento
+                                Nombre Estatus
                               </label>
                               <input
-                                {...register("Plantilla_resultado")}
-                                name="Plantilla_resultado"
+                                {...register("Nombre_prueba")}
+                                name="Nombre_prueba"
                                 maxLength="100"
                                 type="text"
                                 min="0"
                                 className={styles.group_input} 
-                                defaultValue={data.RESULTADO_PLANTILLA}
+                                defaultValue={data.NOMBRE_PRUEBA}
                               />
                               <div className={styles.invalid_feedback}>
-                                {errors.Plantilla_resultado?.message}
+                                {errors.Nombre_prueba?.message}
                               </div>
                             </div>
                           </div>
@@ -83,17 +83,17 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                           >
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
-                                Estado del seguimiento
+                                Estado del Estatus
                               </label>
-                              <input id="EstadoPlantilla" defaultChecked={data.ESTADO_PLANTILLA} type="checkbox" />
+                              <input id="EstadoPrueba" defaultChecked={data.ESTADO_PRUEBA} type="checkbox" />
                             </div>
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
-                                N° Orden Seguimiento
+                                N° Orden Estatus
                               </label>
                               <input
-                                {...register("Orden_plantilla")}
-                                name="Orden_plantilla"
+                                {...register("Orden_prueba")}
+                                name="Orden_prueba"
                                 maxLength="100"
                                 type="number"
                                 min="0"
@@ -101,36 +101,35 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                                 defaultValue={data.ORDEN}
                               />
                               <div className={styles.invalid_feedback}>
-                                {errors.Orden_plantilla?.message}
+                                {errors.Orden_prueba?.message}
                               </div>
                             </div>
                           </div>
 
-                          <ListOption
-                            ListOpciones={ListOpciones}
-                            setListOpciones={setListOpciones}
+                          <ListPlantilla
+                            ListPlantillas={ListPlantillas}
+                            setListPlantillas={setListPlantillas}
                             InforOptionsSelc={InforOptionsSelc}
-                            InforOptionsXpruebas={InforOptionsXpruebas}
-                          ></ListOption>
+                            InforPlantillasXPrueba={InforPlantillasXPrueba}
+                          ></ListPlantilla>
 
                           <div className={styles.btn_container_send}>
                             {!formState.isSubmitting && (
                               <button
                                 onClick={() => {
-                                  setCheckPlantillaReslt(setValue);
-                                  setValue("Lista_opciones", ListOpciones);
-                                  setValue("Codigo_Plantilla", idPlantilla);
+                                    setCheckPruebaReslt(setValue);
+                                    setValue("Lst_plantillas",ListPlantillas);
+                                  setValue("Codigo_prueba", idPrueba);
                                 }}
                                 className={styles.btn_send}
                               >
-                                Editar Seguimiento
+                                Editar Estatus
                               </button>
                             )}
                             <Link
                               className={styles.btn_cancel}
                               href={{
-                                pathname:
-                                  "/Configuration/PlantillaResultado/IndexPlantilla",
+                                pathname: "/Configuration/PruebaResultado/IndexPrueba"
                               }}
                             >
                               Cancelar
