@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexOption from "../../../components/Body/OptionResult/index";
-import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import IndexPrueba from "../../../components/Body/PruebaResult/index";
+import { SampleDetailsPruebasResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,19 +10,19 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie }) {
+function CreatePage(cookie) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforSampleDetails, cookie, "");
+    SampleDetailsPruebasResult(setLInforSampleDetails, cookie, "");
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Listado de opciones | Bitácora BD`}</title>
+        <title>{`Listado de estatus | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde se listan los estatus de las pruebas de el sistema`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,25 +33,22 @@ function CreatePage({ cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Listado de estatus - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde se listan los estatus de las pruebas de el sistema`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Listado de opciones - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Listado de estatus - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde se listan los estatus de las pruebas de el sistema`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexOption InforSampleDetails={InforSampleDetails}></IndexOption>
+      <IndexPrueba InforSampleDetails={InforSampleDetails}></IndexPrueba>
     </>
   );
 }
@@ -85,11 +82,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.OptionCreateAndUrl) {
+    if (!Options.GroupConfigCreateAndUrl) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie } };
+    return { props: { mensaje: null } };
   } else {
     return {
       redirect: {

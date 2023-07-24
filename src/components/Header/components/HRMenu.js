@@ -145,6 +145,46 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
+                              href="/Configuration/PruebaResultado/IndexPrueba"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Estatus
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/PlantillaResultado/IndexPlantilla"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Seguimientos
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
                               href="/Configuration/OptionsResult/IndexOption"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);

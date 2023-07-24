@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import Head from "next/head";
-import IndexOption from "../../../components/Body/OptionResult/index";
-import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import CreatePrueba from "../../../components/Body/PruebaResult/Create";
+import { SampleDetailsPlantillaResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,19 +10,21 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie }) {
-  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+function CreatePage(cookie) {
+
+    const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforSampleDetails, cookie, "");
+    SampleDetailsPlantillaResult(setInforOptionsSelc, cookie, "");   
   }, []);
 
+  
   return (
     <>
       <Head>
-        <title>{`Listado de opciones | Bitácora BD`}</title>
+        <title>{`Creación de Estatus | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde crean los Estatus de resultado que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,25 +35,22 @@ function CreatePage({ cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Creación de Estatus - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde crean los Estatus de resultado que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Listado de opciones - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Creación de Estatus - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde crean los Estatus de resultado que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexOption InforSampleDetails={InforSampleDetails}></IndexOption>
+      <CreatePrueba InforOptionsSelc={InforOptionsSelc}></CreatePrueba>
     </>
   );
 }
@@ -85,11 +84,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.OptionCreateAndUrl) {
+    if (!Options.GroupConfigCreateAndUrl) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie } };
+    return { props: { mensaje: null } };
   } else {
     return {
       redirect: {

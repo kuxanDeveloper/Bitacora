@@ -82,10 +82,10 @@ function Page404() {
   return (
     <>
       <div className={`${Styles.body}`}>
-        <div className={Styles.moon}></div>
-        <div className={`${Styles.moon__crater} ${Styles.moon__crater1}`}></div>
-        <div className={`${Styles.moon__crater} ${Styles.moon__crater2}`}></div>
-        <div className={`${Styles.moon__crater} ${Styles.moon__crater3}`}></div>
+        <div className={ `${Styles.moon} ${Styles.d_sm_none}` }></div>
+        <div className={`${Styles.moon__crater} ${Styles.moon__crater1} ${Styles.d_sm_none}` }></div>
+        <div className={`${Styles.moon__crater} ${Styles.d_sm_none} ${Styles.moon__crater1}`}></div>
+        <div className={`${Styles.moon__crater} ${Styles.moon__crater3} ${Styles.d_sm_none}`}></div>
 
         <div className={`${Styles.star} ${Styles.star1}`}></div>
         <div className={`${Styles.star} ${Styles.star2}`}></div>
@@ -107,7 +107,7 @@ function Page404() {
           <button className={`${Styles.error__button}`}>Contacto</button>
         </div>
 
-        <div className={Styles.astronaut}>
+        <div className={`${Styles.astronaut} ${Styles.d_sm_none}`}>
           <div className={Styles.astronaut__backpack}></div>
           <div className={Styles.astronaut__body}></div>
           <div className={Styles.astronaut__body__chest}></div>
@@ -125,7 +125,7 @@ function Page404() {
           <div className={Styles.astronaut__wrist_right}></div>
 
           <div className={Styles.astronaut__cord}>
-            <canvas id="cord" height="300px" width="300px"></canvas>
+            <canvas className={Styles.canvas} id="cord" height="300px" width="300px"></canvas>
           </div>
 
           <div className={Styles.astronaut__head}>

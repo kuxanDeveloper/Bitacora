@@ -435,6 +435,34 @@ export const setCheckOptionReslt = (setValue) => {
   }
 };
 
+export const setCheckPlantillaReslt = (setValue) => {
+  var checbox1 = document.getElementById("EstadoPlantilla");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("Estado_plantilla", "0");
+  } else {
+    setValue("Estado_plantilla", "1");
+  }
+};
+
+export const setCheckPruebaReslt = (setValue) => {
+  var checbox1 = document.getElementById("EstadoPrueba");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("Estado_prueba", "0");
+  } else {
+    setValue("Estado_prueba", "1");
+  }
+};
+
 export const setCheckObservations = (setValue) => {
   var checbox1 = document.getElementById("ObsCierre");
 

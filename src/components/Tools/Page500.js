@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { useEffecScroll } from "./useEffecScroll";
 import { randomIntFromInterval } from "./parameters";
 
-
-function Page500() {
+export default function Page500() {
   useEffecScroll();
 
   useEffect(() => {
@@ -91,7 +90,7 @@ function Page500() {
           <a href="/" class="bg-gradient-to-r from-green-fedegan to-green-600 hover:from-red-fedega-hover hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-md mr-6">Inicio</a>
           <a href="" onclick="window.location.reload(true)" class="bg-gradient-to-r from-green-fedegan to-green-600 hover:from-red-fedega-hover hover:to-orange-600 text-white font-semibold px-6 py-3 rounded-md mr-6">Volver a intentarlo</a>
       </div>
-      <div class="stack-container">
+      <div class="stack-container d-sm-none">
           <div class="card-container">
               <div class="perspec" style="--spreaddist: 125px; --scaledist: .75; --vertdist: -25px;">
                   <div class="card">
@@ -201,5 +200,3 @@ function Page500() {
     ></div>
   );
 }
-
-export default Page500;

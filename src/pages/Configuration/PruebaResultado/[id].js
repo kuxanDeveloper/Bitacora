@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexOption from "../../../components/Body/OptionResult/index";
-import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import EditPrueba from "../../../components/Body/PruebaResult/Edit";
+import { SampleDetailsPruebasResult,SampleDetailsPlantillasXPruebaResult, SampleDetailsPlantillaResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,19 +10,29 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie }) {
+function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforSampleDetails, cookie, "");
+    SampleDetailsPruebasResult(setLInforSampleDetails, cookie, id);
+  }, []);
+
+  const [InforPlantillasXPrueba, setInforPlantillasXPrueba] = useState([]);
+  useEffect(() => {
+    SampleDetailsPlantillasXPruebaResult(setInforPlantillasXPrueba, cookie, id);
+  }, []);
+
+  const [InforOptionsSelc, setLInforOptionsSelc] = useState([]);
+  useEffect(() => {
+    SampleDetailsPlantillaResult(setLInforOptionsSelc, cookie, "");   
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Listado de opciones | Bitácora BD`}</title>
+        <title>{`Edicion de Seguimiento | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde editan los seguimientos de resultado que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,25 +43,30 @@ function CreatePage({ cookie }) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Edicion de Seguimiento - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde editan los seguimientos de resultado que seleccionaran despues las bitacoras`}
         ></meta>
         <meta
           property="og:title"
-          content={`Listado de opciones - Bitácora BD`}
+          content={`Edicion de Opcion - Bitácora BD`}
         />
         <meta
           property="og:description"
-          content={`Lugar donde se listan las opciones para los resultados del sistema`}
+          content={`Lugar donde editan los seguimientos de resultado que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexOption InforSampleDetails={InforSampleDetails}></IndexOption>
+      <EditPrueba
+        InfoPrueba={InforSampleDetails}
+        InforOptionsSelc={InforOptionsSelc}
+        InforPlantillasXPrueba={InforPlantillasXPrueba}
+        idPrueba={id}
+      ></EditPrueba>
     </>
   );
 }
@@ -63,7 +78,6 @@ export async function getServerSideProps(ctx) {
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
-  debugger;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
@@ -85,11 +99,20 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.OptionCreateAndUrl) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.ObservacionPredeEditAndUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie } };
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
   } else {
     return {
       redirect: {
