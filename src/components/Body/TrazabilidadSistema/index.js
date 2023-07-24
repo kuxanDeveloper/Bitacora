@@ -2,13 +2,21 @@ import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
+import { ExportToExcelcsvTrazaSistema } from "../../../pages/api/Sample/ViewDetailsTrazabilidad/[id]";
 
-function ComponentTrazaSisIndex({ InforSampleDetails }) {
+function ComponentTrazaSisIndex({
+  InforSampleDetails,
+  FechaIngreso,
+  FechaIngresoFinal,
+  UserRegisterStiker,
+  Tipotabla,
+}) {
   return (
     <>
       <section className={styles.Index_users}>
-        <div className={`${styles.sticker_container} ${styleTable.max_width_card}`}>
-
+        <div
+          className={`${styles.sticker_container} ${styleTable.max_width_card}`}
+        >
           <div className={styles.back_btn_container}>
             <Link
               href={{
@@ -26,36 +34,78 @@ function ComponentTrazaSisIndex({ InforSampleDetails }) {
           </p>
           <br />
           <div className={styles.card}>
+            <Link
+              href={""}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                ExportToExcelcsvTrazaSistema(
+                  "system",
+                  "",
+                  FechaIngreso,
+                  FechaIngresoFinal,
+                  UserRegisterStiker,
+                  "",
+                  Tipotabla
+                );
+              }}
+            >
+              Exportar csv
+            </Link>
             <table className={styleTable.tableStyleTraza}>
               <thead>
                 <tr>
-                <th style={{ width: "20%" }}><p>Tipo de configuracion</p></th>
-                <th style={{ width: "25%" }}><p>Información de la trazabilidad</p></th>
-                <th style={{ width: "20%" }}><p>Accion de la trazabilidad</p></th>
-                <th style={{ width: "35%" }}><p>Descripcion de la trazabilidad</p></th>
-                </tr>                
+                  <th style={{ width: "20%" }}>
+                    <p>Tipo de configuracion</p>
+                  </th>
+                  <th style={{ width: "25%" }}>
+                    <p>Información de la trazabilidad</p>
+                  </th>
+                  <th style={{ width: "20%" }}>
+                    <p>Accion de la trazabilidad</p>
+                  </th>
+                  <th style={{ width: "35%" }}>
+                    <p>Descripcion de la trazabilidad</p>
+                  </th>
+                </tr>
               </thead>
               <tbody>
                 {InforSampleDetails != null && InforSampleDetails != undefined
                   ? InforSampleDetails.map((data, index) => (
                       <tr key={index}>
                         <td style={{ width: "20%" }}>
-                            <p><b>Configuración:</b> {data.TABLA}</p>
-                        </td>
-                        <td style={{ width: "25%" }}><p>
-                        <b>Responsable:</b> {data.USUARIO_ACCION}
-                          <br></br>
-                          <b>Fecha Trazabilidad:</b> {data.FECHA_ACCION_FORMAT}
+                          <p>
+                            <b>Configuración:</b> {data.TABLA}
                           </p>
                         </td>
-                        <td style={{ width: "20%" }}><p>{data.ACCION_TABLA}</p></td>
-                        <td style={{ width: "35%" }}><p>
-                          {data.DESCRIPCION_TABLA}
+                        <td style={{ width: "25%" }}>
+                          <p>
+                            <b>Responsable:</b> {data.USUARIO_ACCION}
+                            <br></br>
+                            <b>Fecha Trazabilidad:</b>{" "}
+                            {data.FECHA_ACCION_FORMAT}
+                          </p>
+                        </td>
+                        <td style={{ width: "20%" }}>
+                          <p>{data.ACCION_TABLA}</p>
+                        </td>
+                        <td style={{ width: "35%" }}>
+                          <p>
+                            {data.DESCRIPCION_TABLA}
 
-                          {data.TIPO_TRAZA == "4"
-                            ? 
-                            <p><b>{data.EXITO_LOGIN == true ? "El login se realizo exitosamente" : "El intento de login fallo"}</b> </p>
-                            : ""}</p>
+                            {data.TIPO_TRAZA == "4" ? (
+                              <p>
+                                <b>
+                                  {data.EXITO_LOGIN == true
+                                    ? "El login se realizo exitosamente"
+                                    : "El intento de login fallo"}
+                                </b>{" "}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </p>
                         </td>
                       </tr>
                     ))

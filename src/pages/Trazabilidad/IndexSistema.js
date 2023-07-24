@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexTrazaSis from "../../components/Body/TrazabilidadSistema/index";
 import FilterTrazaSis from "../../components/Body/TrazabilidadSistema/FilterSistema";
@@ -12,12 +12,41 @@ import {
 } from "../../components/Tools/OpcitionHabilite";
 import { queryListUserAll } from "../../components/Tools//Security";
 
-function CreatePage({cookie,ListadoUsuariosRegistrados,query}) {
+function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
+  const [FechaIngreso, setFechaIngreso] = useState(
+    query.dateAdmision != undefined && query.dateAdmision != null
+      ? query.dateAdmision
+      : ""
+  );
 
-    const [InforSampleDetails, setLInforSampleDetails] = useState([]);
-    useEffect(() => {
-        SampleDetailsTrazaTabl(setLInforSampleDetails,cookie,query.dateAdmision,query.dateFinal,query.Tipo_tabla,query.URS,"1");
-    }, []);
+  const [FechaIngresoFinal, setFechaFinal] = useState(
+    query.dateFinal != undefined && query.dateFinal != null
+      ? query.dateFinal
+      : ""
+  );
+
+  const [UserRegisterStiker, setUserRegisterStiker] = useState(
+    query.URS != undefined && query.URS != null ? query.URS : ""
+  );
+
+  const [Tipotabla, setTipo_tabla] = useState(
+    query.Tipo_tabla != undefined && query.Tipo_tabla != null
+      ? query.Tipo_tabla
+      : ""
+  );
+
+  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  useEffect(() => {
+    SampleDetailsTrazaTabl(
+      setLInforSampleDetails,
+      cookie,
+      query.dateAdmision,
+      query.dateFinal,
+      query.Tipo_tabla,
+      query.URS,
+      "1"
+    );
+  }, []);
 
   return (
     <>
@@ -55,15 +84,23 @@ function CreatePage({cookie,ListadoUsuariosRegistrados,query}) {
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
       <FilterTrazaSis
-      ListadoUsuariosRegistrados={ListadoUsuariosRegistrados} 
-      dateAdmision={query.dateAdmision} 
-      dateFinal={query.dateFinal} 
-      URS={query.URS} 
-      Tipo_tabla={query.Tipo_tabla} 
+        ListadoUsuariosRegistrados={ListadoUsuariosRegistrados}
+        FechaIngreso={FechaIngreso}
+        FechaIngresoFinal={FechaIngresoFinal}
+        UserRegisterStiker={UserRegisterStiker}
+        Tipotabla={Tipotabla}
+        setFechaIngreso={setFechaIngreso}
+        setFechaFinal={setFechaFinal}
+        setUserRegisterStiker={setUserRegisterStiker}
+        setTipo_tabla={setTipo_tabla}
       ></FilterTrazaSis>
       <IndexTrazaSis
-      InforSampleDetails={InforSampleDetails}>        
-      </IndexTrazaSis>
+        InforSampleDetails={InforSampleDetails}
+        FechaIngreso={FechaIngreso}
+        FechaIngresoFinal={FechaIngresoFinal}
+        UserRegisterStiker={UserRegisterStiker}
+        Tipotabla={Tipotabla}
+      ></IndexTrazaSis>
     </>
   );
 }
@@ -81,7 +118,7 @@ export async function getServerSideProps(ctx) {
       // RolUser.map((data)=>()){
       // }
       Roles = JSON.parse(RolUser);
-      
+
       Roles.map((data) => {
         if (data == 1) {
           Options = OptionAdministrator;
@@ -97,12 +134,10 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (     
-      !Options.BtnEditStickerAndUrl
-    ) {
+    if (!Options.BtnEditStickerAndUrl) {
       return { notFound: true };
     }
-    
+
     const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
@@ -111,7 +146,6 @@ export async function getServerSideProps(ctx) {
         ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
       },
     };
-
   } else {
     return {
       redirect: {

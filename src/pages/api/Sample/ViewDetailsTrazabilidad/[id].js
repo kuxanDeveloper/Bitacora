@@ -1,7 +1,8 @@
 import {
   getListTrazaBitacora,
   getListTrazaTablas,
-  getExportToExcelBitacora
+  getExportToExcelBitacora,
+  getExportToExcelSistema,
 } from "../../../../components/Tools/DetailsTrazabilidad";
 
 export const SampleDetailsTrazaBit = async (
@@ -56,6 +57,27 @@ export const ExportToExcelcsvTrazaBitacora = async (
   tipo_tabla
 ) => {
   let Result = await getExportToExcelBitacora(
+    typeTraza,
+    FechaIngreso,
+    FechaIngresoFinal,
+    NumeroSticker,
+    sufijo,
+    UserRegisterStiker,
+    tipo_tabla
+  );
+  return Result;
+};
+
+export const ExportToExcelcsvTrazaSistema = async (
+  typeTraza,
+  NumeroSticker,
+  FechaIngreso,
+  FechaIngresoFinal,
+  UserRegisterStiker,
+  sufijo,
+  tipo_tabla
+) => {
+  let Result = await getExportToExcelSistema(
     typeTraza,
     FechaIngreso,
     FechaIngresoFinal,
