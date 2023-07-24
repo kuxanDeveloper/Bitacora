@@ -35,6 +35,7 @@ function ComponentTrazaSisIndex({
           <br />
           <div className={styles.card}>
             <Link
+              className={styles.export_btn}
               href={""}
               target="_blank"
               rel="noopener noreferrer"
@@ -53,7 +54,7 @@ function ComponentTrazaSisIndex({
             >
               Exportar csv
             </Link>
-            <table className={styleTable.tableStyleTraza}>
+            <table style={{marginTop: "10px"}} className={styleTable.tableStyleTraza}>
               <thead>
                 <tr>
                   <th style={{ width: "20%" }}>
