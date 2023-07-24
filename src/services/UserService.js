@@ -70,6 +70,7 @@ export const userService = {
   GetlistPruebas,
   InfoOpcionesXPlantilla,
   InfoPlantillasXPrueba,
+  InfoPruebasXGrupo,
   ExportcsvTrazabilidadSistema
 };
 
@@ -361,7 +362,8 @@ function CreatGroup(
   AdmiteSufijo,
   AlertaHoras,
   OrdenGrupo,
-  ListSufijo
+  ListSufijo,
+  Lst_Pruebas
 ) {
   const formData = new FormData();
   formData.append("nombre_Grupo", NombreGrupo);
@@ -370,6 +372,8 @@ function CreatGroup(
   formData.append("alerta_horas", AlertaHoras);
   formData.append("Orden_Grupo", OrdenGrupo);
   formData.append("Lst_Sufijos", ListSufijo);
+  formData.append("Lst_Pruebas", Lst_Pruebas);
+  
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -385,7 +389,8 @@ function EditGroup(
   AdmiteSufijo,
   AlertaHoras,
   OrdenGrupo,
-  ListSufijo
+  ListSufijo,
+  Lst_Pruebas
 ) {
   const formData = new FormData();
 
@@ -396,6 +401,7 @@ function EditGroup(
   formData.append("alerta_horas", AlertaHoras);
   formData.append("Orden_Grupo", OrdenGrupo);
   formData.append("Lst_Sufijos", ListSufijo);
+  formData.append("Lst_Pruebas", Lst_Pruebas);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,
@@ -835,6 +841,16 @@ function InfoPlantillasXPrueba(
 ) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistPlantillasXPrueba?Id_prueba=${Id_prueba}`,
+    cookie
+  );
+}
+
+function InfoPruebasXGrupo(
+  cookie,
+  Id_grupo,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Grupos/GetlistPruebasXGrupo?Id_grupo=${Id_grupo}`,
     cookie
   );
 }

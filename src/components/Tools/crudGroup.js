@@ -3,22 +3,25 @@ import Swal from "sweetalert2";
 import Router from "next/router";
 
 export const onSubmitCreateGroup = ({
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo,
-    ListSufijo
-}) => {  
-    return userService.CreatGroup(
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo,
-        ListSufijo
-    ).then(() =>
-    {
+  NombreGrupo,
+  EstadoGrupo,
+  AdmiteSufijo,
+  AlertaHoras,
+  OrdenGrupo,
+  ListSufijo,
+  Lst_Pruebas
+}) => {
+  return userService
+    .CreatGroup(
+      NombreGrupo,
+      EstadoGrupo,
+      AdmiteSufijo,
+      AlertaHoras,
+      OrdenGrupo,
+      ListSufijo,
+      Lst_Pruebas
+    )
+    .then(() => {
       Swal.fire({
         title: "¡Correcto!",
         text: "El grupo se creo correctamente",
@@ -26,56 +29,57 @@ export const onSubmitCreateGroup = ({
         confirmButtonText: "Ok",
       });
 
-Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
-});
-    }    
-    ).catch((error) => {
+      Router.push({
+        pathname: "/Configuration/Groups/IndexGroup",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-        if (
-            error == "Límite de tiempo excedido" ||
-            error == "Usuario o clave incorrectos" ||
-            error == "No se pudo hacer el login, revise los datos enviados"
-          ) {
-            Swal.fire({
-              title: "¡Advertencia!",
-              text: error,
-              icon: "warning",
-              confirmButtonText: "Cerrar",
-            });
-          } else {
-            Swal.fire({
-              title: "¡Ha ocurrido un error!",
-              text: error,
-              icon: "error",
-              confirmButtonText: "Cerrar",
-            });
-          }
-    
-          console.log(error, "error al crear grupo");
+      console.log(error, "error al crear grupo");
     });
-
 };
 
 export const onSubmitUpdateGroup = ({
-    IdGrupo,
-    NombreGrupo,
-    EstadoGrupo,
-    AdmiteSufijo,
-    AlertaHoras,
-    OrdenGrupo,
-    ListSufijo
+  IdGrupo,
+  NombreGrupo,
+  EstadoGrupo,
+  AdmiteSufijo,
+  AlertaHoras,
+  OrdenGrupo,
+  ListSufijo,
+  Lst_Pruebas
 }) => {
-    return userService.EditGroup(
-        IdGrupo,
-        NombreGrupo,
-        EstadoGrupo,
-        AdmiteSufijo,
-        AlertaHoras,
-        OrdenGrupo,
-        ListSufijo
-    ).then(() =>
-    {
+  return userService
+    .EditGroup(
+      IdGrupo,
+      NombreGrupo,
+      EstadoGrupo,
+      AdmiteSufijo,
+      AlertaHoras,
+      OrdenGrupo,
+      ListSufijo,
+      Lst_Pruebas
+    )
+    .then(() => {
       Swal.fire({
         title: "¡Correcto!",
         text: "El grupo se edito correctamente",
@@ -83,65 +87,91 @@ export const onSubmitUpdateGroup = ({
         confirmButtonText: "Ok",
       });
 
-Router.push({
-        pathname: "/Configuration/Groups/IndexGroup"
-});
-    }    
-    ).catch((error) => {
+      Router.push({
+        pathname: "/Configuration/Groups/IndexGroup",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-        if (
-            error == "Límite de tiempo excedido" ||
-            error == "Usuario o clave incorrectos" ||
-            error == "No se pudo hacer el login, revise los datos enviados"
-          ) {
-            Swal.fire({
-              title: "¡Advertencia!",
-              text: error,
-              icon: "warning",
-              confirmButtonText: "Cerrar",
-            });
-          } else {
-            Swal.fire({
-              title: "¡Ha ocurrido un error!",
-              text: error,
-              icon: "error",
-              confirmButtonText: "Cerrar",
-            });
-          }
-    
-          console.log(error, "error al editar grupo");
+      console.log(error, "error al editar grupo");
     });
-
 };
 
 export const getListGroup = (estado, idGrupo, cookie) => {
-    return userService.InfoGroup(
-        (estado == null ? "" : estado), 
-        (idGrupo == null ? "" : idGrupo),
-        cookie
-    ).catch((error) => {
+  return userService
+    .InfoGroup(
+      estado == null ? "" : estado,
+      idGrupo == null ? "" : idGrupo,
+      cookie
+    )
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-        if (
-            error == "Límite de tiempo excedido" ||
-            error == "Usuario o clave incorrectos" ||
-            error == "No se pudo hacer el login, revise los datos enviados"
-          ) {
-            Swal.fire({
-              title: "¡Advertencia!",
-              text: error,
-              icon: "warning",
-              confirmButtonText: "Cerrar",
-            });
-          } else {
-            Swal.fire({
-              title: "¡Ha ocurrido un error!",
-              text: error,
-              icon: "error",
-              confirmButtonText: "Cerrar",
-            });
-          }
-    
-          console.log(error, "error al obterner la inforamcion del grupo");
+      console.log(error, "error al obterner la inforamcion del grupo");
     });
+};
 
+export const getInfoPruebasXGrupo = (cookie, Id_grupo) => {
+  return userService
+    .InfoPruebasXGrupo(cookie, Id_grupo == null ? "" : Id_grupo)
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error al obterner la inforamcion del grupo");
+    });
 };

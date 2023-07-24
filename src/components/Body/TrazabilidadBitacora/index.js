@@ -36,6 +36,7 @@ function ComponentTrazaBitIndex({
           <br />
           <div className={styles.card}>
             <Link
+            className={styles.export_btn}
               href={""}
               target="_blank"
               rel="noopener noreferrer"

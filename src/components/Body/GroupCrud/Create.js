@@ -7,10 +7,13 @@ import { onSubmitCreateGroup } from "../../Tools/crudGroup";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import ListSufij from "../GroupCrud/ListSufijos";
+import ListPrueba from "./ListPruebas";
+import ListSufij from "./ListSufijos";
 
-function ComponentGroup() {
+function ComponentGroup({InforOptionsSelc}) {
   const [ListSufijo, setListSufijo] = useState([]);
+
+  const [ListPruebas, setListPruebas] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
     NombreGrupo: Yup.string().required(
@@ -31,6 +34,7 @@ function ComponentGroup() {
     ListSufijo: Yup.array()
       .min(1, "Es obligatorio digitar por lo menos un sufijo para el grupo")
       .required("Es obligatorio digitar por lo menos un sufijo para el grupo"),
+    Lst_Pruebas: Yup.array().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -135,12 +139,23 @@ function ComponentGroup() {
                   <div className={styles.invalid_feedback}>
                     {errors.ListSufijo?.message}
                   </div>
+
+                  <ListPrueba
+                    ListPruebas={ListPruebas}
+                    setListPruebas={setListPruebas}
+                    InforOptionsSelc={InforOptionsSelc}
+                  ></ListPrueba>
+
+                  <div className={styles.invalid_feedback}>
+                    {errors.ListSufijo?.message}
+                  </div>
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
                           setCheckindividual(setValue);
-                          setValue("ListSufijo",ListSufijo);
+                          setValue("ListSufijo", ListSufijo);
+                          setValue("Lst_Pruebas", ListPruebas);
                         }}
                         className={styles.btn_send}
                       >

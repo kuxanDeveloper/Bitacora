@@ -187,6 +187,16 @@
       }
     }
   }
+
+  .export_btn {
+    text-decoration: none;
+    color: #fff;
+    padding: 1px 15px;
+    background-color: #e57d00;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+  }
+
 }
 
 @media (min-width: 425px) {
