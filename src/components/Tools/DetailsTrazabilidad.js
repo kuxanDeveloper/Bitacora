@@ -1,6 +1,5 @@
 import { userService } from "../../services/UserService";
 import Swal from "sweetalert2";
-import Router from "next/router";
 
 export const getListTrazaBitacora = (
   cookie,
@@ -111,6 +110,14 @@ export const getExportToExcelBitacora = (
       usuario_Traza == null ? "" : usuario_Traza,
       tipo_tabla
     )
+    .then((response) => {
+      Swal.fire({
+        title: "Archivo csv guardado",
+        text: "Se encuntra en la ruta: " + response,
+        icon: "success",
+        confirmButtonText: "Cerrar",
+      });
+    })
     .catch((error) => {
       if (
         error == "Límite de tiempo excedido" ||
@@ -131,9 +138,60 @@ export const getExportToExcelBitacora = (
         });
       }
 
-      console.log(
-        error,
-        "error al exportar archivo csv excel en bitacora"
-      );
+      console.log(error, "error al exportar archivo csv excel en bitacora");
+    });
+};
+
+
+
+
+export const getExportToExcelSistema = (
+  typeTraza,
+  Fecha_inicial,
+  Fecha_final,
+  Numero_sticker,
+  Sufijo,
+  usuario_Traza,
+  tipo_tabla
+) => {
+  return userService
+    .ExportcsvTrazabilidadSistema(
+      typeTraza,
+      Fecha_inicial == null ? "" : Fecha_inicial,
+      Fecha_final == null ? "" : Fecha_final,
+      Numero_sticker == null ? "" : Numero_sticker,
+      Sufijo == null ? "" : Sufijo,
+      usuario_Traza == null ? "" : usuario_Traza,
+      tipo_tabla
+    )
+    .then((response) => {
+      Swal.fire({
+        title: "Archivo csv guardado",
+        text: "Se encuntra en la ruta: " + response,
+        icon: "success",
+        confirmButtonText: "Cerrar",
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error al exportar archivo csv excel en sistema");
     });
 };

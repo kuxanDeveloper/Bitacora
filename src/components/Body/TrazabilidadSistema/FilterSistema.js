@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
-    FilterSearchTrazaTables,
-    ClearFilterTrazaBitacora
+  FilterSearchTrazaTables,
+  ClearFilterTrazaBitacora,
 } from "../../Tools/functiones";
 import filterStyles from "../../../styles/filters.module.scss";
 import Link from "next/link";
@@ -9,39 +9,23 @@ import { useRouter } from "next/router";
 
 export default function Filters({
   ListadoUsuariosRegistrados,
-  dateAdmision,
-  dateFinal,
-  URS,
-  Tipo_tabla
+  FechaIngreso,
+  FechaIngresoFinal,
+  UserRegisterStiker,
+  Tipotabla,
+  setFechaIngreso,
+  setFechaFinal,
+  setUserRegisterStiker,
+  setTipo_tabla,
 }) {
   const router = useRouter();
 
-  const [FechaIngreso, setFechaIngreso] = useState(
-    dateAdmision != undefined && dateAdmision != null ? dateAdmision : ""
-  );
-
-  const [FechaIngresoFinal, setFechaFinal] = useState(
-    dateFinal != undefined && dateFinal != null ? dateFinal : ""
-  );
-  
-  const [UserRegisterStiker, setUserRegisterStiker] = useState(
-    URS != undefined && URS != null ? URS : ""
-  );
-
-  const [Tipotabla, setTipo_tabla] = useState(
-    Tipo_tabla != undefined && Tipo_tabla != null ? Tipo_tabla : ""
-  );
-  
   return (
     <>
-      <div
-        className={filterStyles.filters}
-      >
-        
+      <div className={filterStyles.filters}>
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
-              
               <input
                 type="date"
                 title="Fecha Inicial de busqueda"
@@ -58,7 +42,7 @@ export default function Filters({
                 className={filterStyles.filter_input}
                 placeholder="Seleccione una fecha final"
                 onChange={(e) => {
-                    setFechaFinal(e.target.value);
+                  setFechaFinal(e.target.value);
                 }}
                 value={FechaIngresoFinal}
               />
@@ -68,9 +52,7 @@ export default function Filters({
                 onClick={(e) => setUserRegisterStiker(e.target.value)}
                 className={filterStyles.filter_input}
               >
-                <option value="">
-                  Seleccione un usuario
-                </option>
+                <option value="">Seleccione un usuario</option>
                 {ListadoUsuariosRegistrados != null
                   ? ListadoUsuariosRegistrados.map((data, index) => (
                       <option key={index} value={data.Id}>
@@ -85,24 +67,12 @@ export default function Filters({
                 onClick={(e) => setTipo_tabla(e.target.value)}
                 className={filterStyles.filter_input}
               >
-                <option value="">
-                  Seleccione un tipo
-                </option>
-                <option value="LOGIN USUARIOS">
-                LOGIN USUARIOS
-                </option>
-                <option value="GRUPO">
-                GRUPOS
-                </option>
-                <option value="ESTATUS">
-                ESTATUS
-                </option>
-                <option value="REPORTES">
-                REPORTES
-                </option>
-                <option value="OPCION">
-                OPCION
-                </option>
+                <option value="">Seleccione un tipo</option>
+                <option value="LOGIN USUARIOS">LOGIN USUARIOS</option>
+                <option value="GRUPO">GRUPOS</option>
+                <option value="ESTATUS">ESTATUS</option>
+                <option value="REPORTES">REPORTES</option>
+                <option value="OPCION">OPCION</option>
               </select>
             </div>
             <div className={filterStyles.buttons_container}>

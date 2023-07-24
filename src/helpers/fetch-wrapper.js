@@ -12,6 +12,7 @@ export const fetchWrapper = {
   put,
   delete: _delete,
   postHeader,
+  getnohandle,
 };
 
 function get(url, cookie) {
@@ -20,6 +21,15 @@ function get(url, cookie) {
     headers: authHeader(url, cookie),
   };
   return fetch(url, requestOptions).then(handleResponse);
+}
+
+function getnohandle(url, cookie) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(url, cookie),
+    responseType: 'blob'
+  };
+  return fetch(url, requestOptions);
 }
 
 function post(url, body) {

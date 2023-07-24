@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import { ExportToExcelcsvTrazaBitacora } from "../../../pages/api/Sample/ViewDetailsTrazabilidad/[id]";
+
 function ComponentTrazaBitIndex({
   InforSampleDetails,
   NumeroSticker,
@@ -14,16 +15,6 @@ function ComponentTrazaBitIndex({
   return (
     <>
       <section className={styles.Index_users}>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            ExportToExcelcsvTrazaBitacora("Sample",NumeroSticker,
-              FechaIngreso,
-              FechaIngresoFinal,
-              UserRegisterStiker,
-              Sufijo,"");
-          }}
-        >Exportar csv</button>
         <div
           className={`${styles.sticker_container} ${styleTable.max_width_card}`}
         >
@@ -44,6 +35,26 @@ function ComponentTrazaBitIndex({
           </p>
           <br />
           <div className={styles.card}>
+            <Link
+            className={styles.export_btn}
+              href={""}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                ExportToExcelcsvTrazaBitacora(
+                  "Sample",
+                  NumeroSticker,
+                  FechaIngreso,
+                  FechaIngresoFinal,
+                  UserRegisterStiker,
+                  Sufijo,
+                  ""
+                );
+              }}
+            >
+              Exportar csv
+            </Link>
             <table className={styleTable.tableStyleTraza}>
               <thead>
                 <tr>

@@ -70,7 +70,8 @@ export const userService = {
   GetlistPruebas,
   InfoOpcionesXPlantilla,
   InfoPlantillasXPrueba,
-  InfoPruebasXGrupo
+  InfoPruebasXGrupo,
+  ExportcsvTrazabilidadSistema
 };
 
 async function login(username, password) {
@@ -653,6 +654,21 @@ function InfoTrazabilidadBitacora(
 }
 
 function ExportcsvTrazabilidadBitacora(
+  typeTraza,
+  Fecha_inicial,
+  Fecha_final,
+  Numero_sticker,
+  Sufijo,
+  usuario_Traza,
+  tipo_tabla
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}`,
+    null
+  );
+}
+
+function ExportcsvTrazabilidadSistema(
   typeTraza,
   Fecha_inicial,
   Fecha_final,
