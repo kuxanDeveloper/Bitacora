@@ -9,7 +9,5 @@ import { QueryActiveInactivegroup_GetUsers,QueryGroupList } from "../../../compo
 
    export const SampleDetailsWhitAncestroTabs = async (cookie,idAncestro,setIdGrupAncest) => {
     let Lisgrupo = await QueryGroupList(cookie,idAncestro);
-debugger;
   setIdGrupAncest(Lisgrupo[0].Id_grupo);
-  console.log(Lisgrupo[0].Id_grupo);
   };

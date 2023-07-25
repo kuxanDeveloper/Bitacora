@@ -842,7 +842,6 @@ export const RegisterStickerObservaciones = (setvalue) => {
   let slt = document.getElementById("sltObservaIni");
   var cmbgrupo = document.getElementById("GrupoSticker");
   setvalue("GrupoSticker", cmbgrupo.value);
-  debugger;
 
   if (slt.value != "") {
     if (slt.value != "5") {

@@ -62,7 +62,6 @@ export const onSubmitUpdateObservations = ({
     obs_bitacora,
     Estado_observacion
 }) => {
-  debugger;
     return userService.EditObservations(
         Cod_Observacion,
     DescripcionObservacion,

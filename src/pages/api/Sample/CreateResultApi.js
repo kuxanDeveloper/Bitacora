@@ -42,7 +42,6 @@ export const ListOptionesxPlantilla = async (
   idPlantilla,
   idBitacora
 ) => {
-  debugger;
   let ListOptiones = await queryOptionesListxPlantilla(
     cookie,
     idPlantilla,

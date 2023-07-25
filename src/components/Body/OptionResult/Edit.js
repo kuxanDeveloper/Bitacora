@@ -27,7 +27,6 @@ function ComponentOptionEdit({ InforOption, idOption }) {
   const formOptions = { resolver: yupResolver(validarEsquemaobservation) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-  console.log(InforOption);
   return (
     <>
       <section className={styles.create_note}>

@@ -63,7 +63,6 @@ export async function getServerSideProps(ctx) {
   const RolUser = ctx.req.cookies["RolUserCookie"];
   let Roles = null;
   let Options = null;
-  debugger;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
       // RolUser.map((data)=>()){
