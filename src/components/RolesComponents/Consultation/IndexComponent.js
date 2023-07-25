@@ -39,7 +39,7 @@ function IndexComponentConsul({
                       <Link
                         href={{
                           pathname: "/[id]",
-                          query: { id: data.Id_grupo, idAncestro: idAncestro },
+                          query: { id: data.Id_grupo, idAncestro: idAncestro,  page:"1" },
                           hash: "Cactive#OverallSample",
                         }}
                         className={CardStyles.body_container}
@@ -102,7 +102,7 @@ function IndexComponentConsul({
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: da.Id_grupo, idAncestro: idAncestro },
+                        query: { id: da.Id_grupo, idAncestro: idAncestro,  page:"1" },
                         hash: "Cinactvie#OverallSample",
                       }}
                       className={CardStyles.body_container}

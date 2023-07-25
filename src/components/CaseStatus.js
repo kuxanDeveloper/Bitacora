@@ -9,7 +9,6 @@ export default function CaseStatus({
   isSampleGeneral,
   Options,
 }) {
-  
   return (
     <>
       {isActiveCase ? (

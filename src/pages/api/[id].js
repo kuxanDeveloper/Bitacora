@@ -23,7 +23,8 @@ export const ApiQueryGeneralSample = async (
   setLstObservacionesPrede,
   setListadoGetFullSufijo,
   idAncestro,
-  setListaAncestros
+  setListaAncestros,
+  page
 ) => {
   let Lisgrupo = await QueryGroupList(cookie,idAncestro);
   setListadoGrupo(Lisgrupo);

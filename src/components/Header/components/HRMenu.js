@@ -285,12 +285,12 @@ function HRMenu({ Roles }) {
                         {Roles.UserConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Trazabilidad/IndexBitacora"
+                              href="/Trazabilidad/IndexBitacora?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexUsers")
+                                LocationUrl(router, "IndexBitacora")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -304,12 +304,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Trazabilidad/IndexSistema"
+                              href="/Trazabilidad/IndexSistema?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexSistema")
                                   ? Styles.active
                                   : ""
                               }`}

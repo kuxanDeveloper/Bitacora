@@ -16,13 +16,13 @@ import {
 import { useContextBitacora } from "../context/BitacoraContext";
 
 import { ApiQueryGeneralSample } from "./api/[id]";
-import {SampleDetailsWhitAncestroTabs} from "./api/Ancestro/[id]"
+import { SampleDetailsWhitAncestroTabs } from "./api/Ancestro/[id]";
 
 function HomeMuestraxGrupo({
   cookie,
   query,
   ListadoUsuariosRegistrados,
-  Options
+  Options,
 }) {
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
@@ -36,11 +36,11 @@ function HomeMuestraxGrupo({
   const [ListadoMuestraInactivo, setListadoMuestraInactivo] = useState([]);
   const [ListadoResultadoxMuestra, setListadoResultadoxMuestra] = useState([]);
   const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
-  const [idAncestro, setidAncestro] = useState('');
-  const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
+  const [idAncestro, setidAncestro] = useState("");
+  const [cmbFiltroCambio, setcmbFiltroCambio] = useState("");
   const [ListaAncestros, setListaAncestros] = useState([]);
   // const [idAncestroSelc, setidAncestroSelc] = useState('');
-  
+
   const router = useRouter();
   useEffect(() => {
     ApiQueryGeneralSample(
@@ -56,16 +56,23 @@ function HomeMuestraxGrupo({
       setListadoResultadoxMuestra,
       setLstObservacionesPrede,
       setListadoGetFullSufijo,
-      (query.idAncestro == "" || query.idAncestro == null || query.idAncestro == 0 ? 1 :query.idAncestro),
-      setListaAncestros
+      query.idAncestro == "" ||
+        query.idAncestro == null ||
+        query.idAncestro == 0
+        ? 1
+        : query.idAncestro,
+      setListaAncestros,
+      query.page
     );
     setidAncestro(query.idAncestro);
+
   }, []);
 
   function QueryReturnNew(obj, idNEw) {
     let newObje = {};
     newObje.id = idNEw;
     newObje.idAncestro = idAncestro;
+    newObje.page = "1";
     if (
       (obj.Numstiker !== undefined &&
         obj.Numstiker !== null &&
@@ -76,32 +83,33 @@ function HomeMuestraxGrupo({
       (obj.result !== "" && obj.result !== null && obj.result !== undefined) ||
       (obj.URS !== "" && obj.URS !== null && obj.URS !== undefined)
     ) {
-      
       newObje.Numstiker = obj.Numstiker;
       newObje.DateAdmission = obj.DateAdmission;
       newObje.result = obj.result;
       newObje.URS = obj.URS;
-      
     }
 
     return newObje;
   }
 
   useEffect(() => {
-    if(idAncestro != null && idAncestro != "" && idAncestro != 0 && idAncestro != undefined)
-    {    
-      VerSwalCargando();  
-      SampleDetailsWhitAncestroTabs(
-        cookie,
-        idAncestro,
-        setIdGrupAncest); 
+    if (
+      idAncestro != null &&
+      idAncestro != "" &&
+      idAncestro != 0 &&
+      idAncestro != undefined
+    ) {
+      VerSwalCargando();
+      SampleDetailsWhitAncestroTabs(cookie, idAncestro, setIdGrupAncest);
     }
-  },[cmbFiltroCambio]);
+  }, [cmbFiltroCambio]);
 
   useEffect(() => {
-
-    if(IdGrupAncest != null && IdGrupAncest != "" && IdGrupAncest != undefined)
-    {
+    if (
+      IdGrupAncest != null &&
+      IdGrupAncest != "" &&
+      IdGrupAncest != undefined
+    ) {
       router.push({
         pathname: "/[id]",
         query: QueryReturnNew(query, IdGrupAncest),
@@ -111,8 +119,7 @@ function HomeMuestraxGrupo({
       });
       setIdGrupAncest("");
     }
-
-  },[IdGrupAncest]);
+  }, [IdGrupAncest]);
 
   useEffect(() => {
     if (
@@ -218,7 +225,6 @@ function HomeMuestraxGrupo({
     };
   }, [router.events]);
 
-
   return (
     <>
       <Head>
@@ -302,7 +308,11 @@ export async function getServerSideProps(ctx) {
   let Roles = null;
   let Options = null;
   if (cookie) {
-    if (ctx.query.id == undefined || ctx.query.id == null) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      (ctx.query.page == null && ctx.query.page == undefined)
+    ) {
       return { notFound: true };
     }
 

@@ -396,7 +396,7 @@ function CreateSticker({
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: ValueGroup },
+                        query: { id: ValueGroup, page:"1" },
                         hash: "Cactive#OverallSample",
                       }}
                       className={styles.btn_cancel}

@@ -40,7 +40,7 @@ function ComponentCreateResult({
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
-              href={`/${group}#Cactive#OverallSample`}
+              href={`/${group}?page=1#Cactive#OverallSample`}
               className={styles.home_btn}
             >
               <svg
