@@ -122,6 +122,27 @@ function HRMenu({ Roles }) {
                         ) : (
                           ""
                         )}
+
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/Ancestros/IndexAncestros"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Grupos Principales
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
