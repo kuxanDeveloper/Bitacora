@@ -141,7 +141,7 @@ export default function Case({
               ))
             : "Cargando..."}
         </div>
-      </section>{" "}
+      </section>
       {/* */}
     </>
   );

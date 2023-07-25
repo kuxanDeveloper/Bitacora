@@ -179,7 +179,8 @@ function ListGroupForMue(
   idGroup,
   NumeroSticker,
   FechaINgreso,
-  Cod_sticker
+  Cod_sticker,
+  page
 ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
@@ -198,6 +199,8 @@ function ListGroupForMue(
   formData.append("Usuario_Sticker", "");
 
   formData.append("COD_BITACORA", Cod_sticker);
+
+  formData.append("page", page);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,

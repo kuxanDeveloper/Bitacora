@@ -6,7 +6,7 @@ export const onSubmit = ({ username, pass }) => {
   return userService
     .login(username, pass)
     .then(() => {
-      window.location.href= "/#Cactive";
+      window.location.href = "/#Cactive";
       // Router.push({ pathname: "/", hash: "Cactive" }, undefined, {
       //   unstable_skipClientCache: true,
       // });
@@ -47,16 +47,15 @@ export const OnSubmitForward = ({ username }) => {
   return Router.push({ pathname: "/account/Login" });
 };
 
-export const QueryActiveInactivegroup_GetUsers = (cookie,idAncestro) => {
+export const QueryActiveInactivegroup_GetUsers = (cookie, idAncestro) => {
   return userService
-    .ListGroupActiveeInactive_ListUsers(cookie,
-      (idAncestro == null || idAncestro == undefined ? "1" : idAncestro)).then(
-        (e) => {
-
-          return e;
-
-        }
-      )
+    .ListGroupActiveeInactive_ListUsers(
+      cookie,
+      idAncestro == null || idAncestro == undefined ? "1" : idAncestro
+    )
+    .then((e) => {
+      return e;
+    })
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {
         Swal.fire({
@@ -100,8 +99,8 @@ export const queryListUserAll = (cookie) => {
   });
 };
 
-export const QueryGroupList = (cookie,idAncestro, estado) => {
-  return userService.ListGroup(cookie,idAncestro, estado).catch((error) => {
+export const QueryGroupList = (cookie, idAncestro, estado) => {
+  return userService.ListGroup(cookie, idAncestro, estado).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -129,7 +128,8 @@ export const QueryMueForGroup = (
   idGroup,
   Numstiker,
   DateAdmission,
-  Cod_sticker
+  Cod_sticker,
+  page
 ) => {
   return userService
     .ListGroupForMue(
@@ -138,7 +138,8 @@ export const QueryMueForGroup = (
       idGroup,
       Numstiker,
       DateAdmission,
-      Cod_sticker
+      Cod_sticker,
+      page
     )
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {
@@ -354,8 +355,6 @@ export const QueryAncestro = (cookie) => {
     return null;
   });
 };
-
-
 
 export const QuerySufijoGetAll = (cookie) => {
   return userService.lstSufijoGetall(cookie).catch((error) => {
