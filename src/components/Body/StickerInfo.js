@@ -56,9 +56,7 @@ export default function StickerInfo({
                   <hr />
 
                   <section className={styles.follow_up}>
-                    <h3 className={styles.follow_up_title}>
-                      Última nota
-                    </h3>
+                    <h3 className={styles.follow_up_title}>Última nota</h3>
                     {InforSampleDetails.infoDetalle.length > 0 ? (
                       InforSampleDetails.infoDetalle
                         .slice(0, 1)
@@ -71,7 +69,50 @@ export default function StickerInfo({
                           />
                         ))
                     ) : (
-                      <h2>Sin nota registrada</h2>
+                      <>
+                        <Link
+                          title="Agregar nota"
+                          href={{
+                            pathname: "/Sample/CreateFollowUp/[id]",
+                            query: {
+                              id: InforSampleDetails.infoBitacora[0]
+                                .CODIGO_BITACORA,
+                              group:
+                                InforSampleDetails.infoBitacora[0]
+                                  .ID_GRUPO_ASIGNADO,
+                              name_group:
+                                InforSampleDetails.infoBitacora[0]
+                                  .NOMBRE_GRUPO_ASIGNADO,
+                              sticker:
+                                InforSampleDetails.infoBitacora[0]
+                                  .NUMERO_STICKER +
+                                "-" +
+                                InforSampleDetails.infoBitacora[0].SUFIJO,
+                            },
+                          }}
+                          className={styles.create_followUp}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-circle-plus"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            strokeWidth="2"
+                            stroke="#fff"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                            <path d="M9 12l6 0" />
+                            <path d="M12 9l0 6" />
+                          </svg>
+                        </Link>
+
+                        <h2>Sin nota registrada</h2>
+                      </>
                     )}
                   </section>
 
@@ -93,7 +134,50 @@ export default function StickerInfo({
                           ></Result>
                         ))
                     ) : (
-                      <h2>Sin estatus registrado</h2>
+                      <>
+                        <Link
+                          title="Agregar nota"
+                          href={{
+                            pathname: "/Sample/CreateResult/[id]",
+                            query: {
+                              id: InforSampleDetails.infoBitacora[0]
+                                .CODIGO_BITACORA,
+                              group:
+                                InforSampleDetails.infoBitacora[0]
+                                  .ID_GRUPO_ASIGNADO,
+                              name_group:
+                                InforSampleDetails.infoBitacora[0]
+                                  .NOMBRE_GRUPO_ASIGNADO,
+                              sticker:
+                                InforSampleDetails.infoBitacora[0]
+                                  .NUMERO_STICKER +
+                                "-" +
+                                InforSampleDetails.infoBitacora[0].SUFIJO,
+                            },
+                          }}
+                          className={styles.create_followUp}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-circle-plus"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            strokeWidth="2"
+                            stroke="#fff"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                            <path d="M9 12l6 0" />
+                            <path d="M12 9l0 6" />
+                          </svg>
+                        </Link>
+
+                        <h2>Sin estatus registrado</h2>
+                      </>
                     )}
                   </section>
                   <br></br>

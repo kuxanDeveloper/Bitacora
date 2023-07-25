@@ -200,6 +200,20 @@
   color: #e57d00;
 }
 
+
+.sticker_info .info_container .card .stickers_container .card_content .follow_up .create_followUp {
+  background-color: #e57d00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  border-radius: 50%;
+ 
+}
+
+
+
 .sticker_info .info_container .card .stickers_container .card_content .follow_up .follow_up_body {
   display: flex;
   flex-wrap: wrap;
@@ -252,6 +266,19 @@
 .sticker_info .info_container .card .stickers_container .card_content .result .result_title {
   color: #e57d00;
 }
+
+
+.sticker_info .info_container .card .stickers_container .card_content .result .create_followUp {
+  background-color: #e57d00;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+}
+
 
 .sticker_info .info_container .card .stickers_container .card_content .result .result_body {
   display: flex;
