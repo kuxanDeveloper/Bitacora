@@ -24,6 +24,7 @@ export default function StickerInfo({
                     InforSampleDetails.infoBitacora != undefined
                       ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
                       : "",
+                      page:"1"
                 },
               }}
               className={styles.back_btn}

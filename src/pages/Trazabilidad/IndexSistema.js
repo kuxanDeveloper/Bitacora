@@ -44,7 +44,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.dateFinal,
       query.Tipo_tabla,
       query.URS,
-      "1"
+      query.page,
     );
   }, []);
 
@@ -100,6 +100,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         FechaIngresoFinal={FechaIngresoFinal}
         UserRegisterStiker={UserRegisterStiker}
         Tipotabla={Tipotabla}
+        query={query}
       ></IndexTrazaSis>
     </>
   );
@@ -133,7 +134,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.BtnEditStickerAndUrl) {
+    if (
+      !Options.BtnEditStickerAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 

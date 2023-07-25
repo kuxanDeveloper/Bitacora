@@ -14,6 +14,7 @@ function ComponentUsersIndex(InforSampleDetails) {
                 pathname: "/[id]",
                 query: {
                   id: 6,
+                  page:"1"
                 },
               }}
               className={styles.back_btn}

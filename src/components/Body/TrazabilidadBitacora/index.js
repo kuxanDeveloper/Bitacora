@@ -3,7 +3,8 @@ import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import { ExportToExcelcsvTrazaBitacora } from "../../../pages/api/Sample/ViewDetailsTrazabilidad/[id]";
-
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
 function ComponentTrazaBitIndex({
   InforSampleDetails,
   NumeroSticker,
@@ -11,7 +12,35 @@ function ComponentTrazaBitIndex({
   FechaIngresoFinal,
   UserRegisterStiker,
   Sufijo,
+  query,
 }) {
+  const router = useRouter();
+
+  const Addobjnew = () => {
+    let newObje = {};
+
+    newObje.page = query.page;
+
+    if (NumeroSticker != null && NumeroSticker != "") {
+      newObje.NumSticker = NumeroSticker;
+    }
+    if (FechaIngreso != null && FechaIngreso != "") {
+      newObje.dateAdmision = FechaIngreso;
+    }
+    if (FechaIngresoFinal != null && FechaIngresoFinal != "") {
+      newObje.dateFinal = FechaIngresoFinal;
+    }
+    if (UserRegisterStiker != null && UserRegisterStiker != "") {
+      newObje.URS = UserRegisterStiker;
+    }
+
+    if (Sufijo != null && Sufijo != "") {
+      newObje.Sufijo = Sufijo;
+    }
+
+    return newObje;
+  };
+
   return (
     <>
       <section className={styles.Index_users}>
@@ -36,7 +65,7 @@ function ComponentTrazaBitIndex({
           <br />
           <div className={styles.card}>
             <Link
-            className={styles.export_btn}
+              className={styles.export_btn}
               href={""}
               target="_blank"
               rel="noopener noreferrer"
@@ -73,46 +102,66 @@ function ComponentTrazaBitIndex({
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null && InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
-                      <tr key={index}>
-                        <td style={{ width: "20%" }}>
-                          <p>
-                            <b>Numero de Sticker:</b> {data.NUMERO_STICKER}
-                            <br></br>
-                            <b>Sufijo:</b> {data.SUFIJO_STICKER}
-                          </p>
-                        </td>
-                        <td style={{ width: "25%" }}>
-                          <p>
-                            <b>Responsable:</b> {data.USU_CREADOR_AUD_BITACORA}
-                            <br></br>
-                            <b>Fecha Trazabilidad:</b>{" "}
-                            {data.FECHA_AUDITORIA_FORMAT}
-                          </p>
-                        </td>
-                        <td style={{ width: "20%" }}>
-                          <p>{data.ACCION_BITACORA}</p>
-                        </td>
-                        <td style={{ width: "35%" }}>
-                          <p>
-                            {data.DESCRIPCION_BITACORA}
+                {InforSampleDetails.ListadotrazabilidadBitacora != null &&
+                InforSampleDetails.ListadotrazabilidadBitacora != undefined
+                  ? InforSampleDetails.ListadotrazabilidadBitacora.map(
+                      (data, index) => (
+                        <tr key={index}>
+                          <td style={{ width: "20%" }}>
+                            <p>
+                              <b>Numero de Sticker:</b> {data.NUMERO_STICKER}
+                              <br></br>
+                              <b>Sufijo:</b> {data.SUFIJO_STICKER}
+                            </p>
+                          </td>
+                          <td style={{ width: "25%" }}>
+                            <p>
+                              <b>Responsable:</b>{" "}
+                              {data.USU_CREADOR_AUD_BITACORA}
+                              <br></br>
+                              <b>Fecha Trazabilidad:</b>{" "}
+                              {data.FECHA_AUDITORIA_FORMAT}
+                            </p>
+                          </td>
+                          <td style={{ width: "20%" }}>
+                            <p>{data.ACCION_BITACORA}</p>
+                          </td>
+                          <td style={{ width: "35%" }}>
+                            <p>
+                              {data.DESCRIPCION_BITACORA}
 
-                            {data.TIPO_TRAZA == "3" ? (
-                              <p>
-                                <b>Calculo del resultado:</b>{" "}
-                                {data.CALCULO_TIEMPO_RESULTADO}
-                              </p>
-                            ) : (
-                              ""
-                            )}
-                          </p>
-                        </td>
-                      </tr>
-                    ))
+                              {data.TIPO_TRAZA == "3" ? (
+                                <p>
+                                  <b>Calculo del resultado:</b>{" "}
+                                  {data.CALCULO_TIEMPO_RESULTADO}
+                                </p>
+                              ) : (
+                                ""
+                              )}
+                            </p>
+                          </td>
+                        </tr>
+                      )
+                    )
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails.ListadotrazabilidadBitacora != null &&
+            InforSampleDetails.ListadotrazabilidadBitacora != undefined ? (
+              <>
+                <br></br>
+                <Pagination
+                  TotalPage={InforSampleDetails.TotalPage}
+                  page={query.page}
+                  pathname={router.pathname}
+                  queryArme={Addobjnew()}
+                  hash={null}
+                  CountPage={InforSampleDetails.Per_PAge}
+                ></Pagination>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

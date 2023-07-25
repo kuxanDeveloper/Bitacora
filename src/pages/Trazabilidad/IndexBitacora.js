@@ -23,7 +23,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.NumSticker,
       query.Sufijo,
       query.URS,
-      "1"
+      query.page,
     );
   }, []);
 
@@ -101,16 +101,15 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         Sufijo={Sufijo}
         setSufijo={setSufijo}
       ></FilterTrazaBit>
-      <IndexTrazaBit 
-      InforSampleDetails={InforSampleDetails}
-      NumeroSticker={NumeroSticker}
-      FechaIngreso={FechaIngreso}
-      FechaIngresoFinal={FechaIngresoFinal}
-      UserRegisterStiker={UserRegisterStiker}
-      Sufijo={Sufijo}
-      >
-     
-      </IndexTrazaBit>
+      <IndexTrazaBit
+        InforSampleDetails={InforSampleDetails}
+        NumeroSticker={NumeroSticker}
+        FechaIngreso={FechaIngreso}
+        FechaIngresoFinal={FechaIngresoFinal}
+        UserRegisterStiker={UserRegisterStiker}
+        Sufijo={Sufijo}
+        query={query}
+      ></IndexTrazaBit>
     </>
   );
 }
@@ -143,7 +142,11 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.BtnEditStickerAndUrl) {
+    if (
+      !Options.BtnEditStickerAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 

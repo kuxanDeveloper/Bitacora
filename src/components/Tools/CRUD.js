@@ -29,7 +29,7 @@ export const onSubmitCreate = ({
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
         pathname: "/[id]",
-        query: { id: GrupoSticker },
+        query: { id: GrupoSticker, page:"1" },
         hash: "Cactive#OverallSample",
       });
     })
