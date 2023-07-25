@@ -20,30 +20,30 @@ function ComponentancestroIndex({InfoAncestro}) {
             </Link>
           </div>
 
-          <p className={styles.title}>Listado de Estatus de resultado</p>
+          <p className={styles.title}>Listado de Grupos principales</p>
           <Link
             href={{
-              pathname: "/Configuration/PruebaResultado/CreatePrueba",
+              pathname: "/Configuration/Ancestros/CreateAncestros",
             }}
             className={styles.btn_create}
           >
             <span>&#10010; </span>
-            Crear Estatus
+            Crear grupo principal
           </Link>
           <div className={styles.card}>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th>Descripcion Estatus</th>
+                  <th>Nombre grupo principal</th>
                   <th>Estado</th>
-                  <th>Orden del Estatus</th>
+                  <th>N° Orden</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null &&
-                InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
+                {InfoAncestro != null &&
+                InfoAncestro != undefined
+                  ? InfoAncestro.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_PRUEBA}</td>
                         <td className={styleTable.textCenterColumn}>

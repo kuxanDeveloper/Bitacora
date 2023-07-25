@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexPrueba from "../../../components/Body/PruebaResult/index";
+import IndexAncestro from "../../../components/Body/Ancestro/index";
 import { SampleDetailsAncestro } from "../../api/Sample/ViewDetailsAncestro/[id]";
 import {
   OptionAdministrator,
@@ -11,9 +11,9 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage(cookie) {
-  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setLInforSampleDetails, cookie, "");
+    SampleDetailsAncestro(setInfoAncestro, cookie, "");
   }, []);
 
   return (
@@ -48,7 +48,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexPrueba InforSampleDetails={InforSampleDetails}></IndexPrueba>
+      <IndexAncestro InfoAncestro={InfoAncestro}></IndexAncestro>
     </>
   );
 }
