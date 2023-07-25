@@ -71,7 +71,11 @@ export const userService = {
   InfoOpcionesXPlantilla,
   InfoPlantillasXPrueba,
   InfoPruebasXGrupo,
-  ExportcsvTrazabilidadSistema
+  ExportcsvTrazabilidadSistema,
+  CreateAncestro,
+  EditAncestro,
+  GetlistAncestro,
+  GetlistGruposXAncestro
 };
 
 async function login(username, password) {
@@ -854,6 +858,57 @@ function InfoPruebasXGrupo(
 ) {
   return fetchWrapper.get(
     `${baseUrl}/Grupos/GetlistPruebasXGrupo?Id_grupo=${Id_grupo}`,
+    cookie
+  );
+}
+
+function CreateAncestro(nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
+  const formData = new FormData();
+
+  formData.append("nombre_Ancestro", nombre_Ancestro);
+  formData.append("Estado_Ancestro", Estado_Ancestro);
+  formData.append("Orden_ancestro", Orden_ancestro);
+  formData.append("Lst_grupos", Lst_grupos);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarAncestro`,
+    null,
+    formData
+  );
+}
+
+function EditAncestro(COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
+  const formData = new FormData();
+
+  formData.append("COD_ANCESTRO", COD_ANCESTRO);
+  formData.append("nombre_Ancestro", nombre_Ancestro);
+  formData.append("Estado_Ancestro", Estado_Ancestro);
+  formData.append("Orden_ancestro", Orden_ancestro);
+  formData.append("Lst_grupos", Lst_grupos);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditadoAncestro`,
+    null,
+    formData
+  );
+}
+
+function GetlistAncestro(
+  cookie,
+  COD_ANCESTRO,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=`,
+    cookie
+  );
+}
+
+function GetlistGruposXAncestro(
+  cookie,
+  COD_ANCESTRO,
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistGruposXAncestro?COD_ANCESTRO=${COD_ANCESTRO}`,
     cookie
   );
 }
