@@ -10,6 +10,12 @@ function HRbuttonCloseSession({ DescriptionRol }) {
     showUser ? setshowUser(false) : setshowUser(true);
   }
 
+  const baseUrl = `${
+    process.env.NEXT_PUBLIC_NODE_ENV == "development"
+      ? process.env.NEXT_PUBLIC_API_URL_DEVELOPMENT
+      : process.env.NEXT_PUBLIC_API_URL_PRODUCTION
+  }`;
+
   // const { showUser, setshowUser } = useContextBitacora();
   return (
     <>

@@ -114,7 +114,7 @@
           width: 100%;
           .card_name {
             position: absolute;
-            top: calc(70% - 10px);
+            top: calc(66% - 10px);
             width: 100%;
             color: #fff;
             font-size: 22px;
@@ -122,6 +122,7 @@
             align-items: center;
             justify-content: center;
             margin: 0;
+            text-align: center;
             .arrow_icon {
             }
           }

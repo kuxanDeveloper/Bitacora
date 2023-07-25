@@ -99,6 +99,7 @@ export const FilterQuerySearch = (
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
       idAncestro: idAncest,
+      page:"1"
     },
   });
 };
@@ -170,6 +171,7 @@ export const FilterSearchTrazaBitacora = (
       dateFinal: FechaIngresoFinal,
       URS: URS,
       Sufijo: Sufijo,
+      page: "1",
     },
   });
 };
@@ -228,6 +230,7 @@ export const FilterSearchTrazaTables = (
       dateFinal: FechaIngresoFinal,
       URS: URS,
       Tipo_tabla: TipoTable,
+      page: "1",
     },
   });
 };
@@ -243,7 +246,7 @@ export const ClearFilter = (e, router, idGrupo) => {
   } else {
     router.push({
       pathname: router.pathname,
-      query: { id: idGrupo },
+      query: { id: idGrupo, page:"1" },
       hash: `${hashs2}#${hashs4}`,
     });
   }
@@ -253,10 +256,11 @@ export const ClearFilterTrazaBitacora = (e, router) => {
   e.preventDefault();
   let urlHref = window.location.href;
   if (router.pathname === "/") {
-    router.push({ pathname: router.pathname });
+    router.push({ pathname: router.pathname, query: { page: "1" } });
   } else {
     router.push({
       pathname: router.pathname,
+      query: { page: "1" },
     });
   }
 };
@@ -1011,4 +1015,67 @@ export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
   let valorRetorno = ListArray.some((a) => a.Id_grupo == Value);
 
   return valorRetorno;
+};
+
+export const FormatPage = (totalStory, id, countPage) => {
+  debugger;
+  let cantidadPage = totalStory / countPage;
+  let isInteger = false;
+  if (cantidadPage % 1 !== 0 && cantidadPage >= 1 && cantidadPage < 1.5) {
+    isInteger = true;
+  }
+
+  let valorEntero = Math.round(cantidadPage);
+  let Arraypage = [];
+  let contador = 0;
+  let idInt = parseInt(id);
+
+  let index = idInt <= 5 || idInt == valorEntero ? 1 : idInt;
+
+  if (valorEntero == 0) {
+    Arraypage.push(1);
+    valorEntero = 1;
+  } else {
+    if (isInteger) valorEntero += 1;
+    for (index; index <= valorEntero; index++) {
+      if (contador === 5) {
+        Arraypage.push("...");
+      } else if (contador === 6) {
+        if (valorEntero == idInt) {
+          Arraypage.push(valorEntero);
+        } else {
+          if (index + countPage > valorEntero) {
+            Arraypage.push(valorEntero);
+          } else {
+            Arraypage.push(index + countPage);
+          }
+        }
+        break;
+      } else {
+        Arraypage.push(index);
+      }
+
+      contador++;
+    }
+  }
+
+  return { array: Arraypage, final: valorEntero };
+};
+
+export const UpdateObject = (obj, valueInput) => {
+  debugger;
+  let objeNew = {};
+  Object.entries(obj).forEach((e) => {
+    const [key, value] = e;
+    if (key == "page") {
+      objeNew[key] = valueInput;
+    } else {
+      objeNew[key] = value;
+    }
+  });
+  return objeNew;
+  // Object.entries(obj);
+  // objeNew = obj;
+  // objeNew["page"] = value;
+  // return objeNew;
 };

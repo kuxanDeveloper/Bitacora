@@ -33,7 +33,7 @@ export default function HomeCard({
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: data.Id_grupo },
+                        query: { id: data.Id_grupo, page:"1" },
                         hash: "Cactive#OverallSample",
                       }}
                       className={CardStyles.body_container}
@@ -89,7 +89,7 @@ export default function HomeCard({
                   <Link
                     href={{
                       pathname: "/[id]",
-                      query: { id: da.Id_grupo },
+                      query: { id: da.Id_grupo, page:"1" },
                       hash: "Cinactvie#OverallSample",
                     }}
                     className={CardStyles.body_container}
