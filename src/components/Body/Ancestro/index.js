@@ -45,9 +45,9 @@ function ComponentancestroIndex({InfoAncestro}) {
                 InfoAncestro != undefined
                   ? InfoAncestro.map((data, index) => (
                       <tr key={index}>
-                        <td>{data.NOMBRE_PRUEBA}</td>
+                        <td>{data.NOMBRE_ANCESTRO}</td>
                         <td className={styleTable.textCenterColumn}>
-                          {data.ESTADO_PRUEBA == true ? (
+                          {data.ESTADO_ANCESTRO == true ? (
                             <span>&#x2705;</span>
                           ) : (
                             <span>&#10060;</span>
@@ -58,11 +58,11 @@ function ComponentancestroIndex({InfoAncestro}) {
                         </td>
                         <td className={styleTable.textCenterColumn}>
                           <Link
-                            title="Editar Opcion"
+                            title="Editar grupo principal"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/PruebaResultado/[id]",
-                              query: { id: data.COD_PRUEBA },
+                              pathname: "/Configuration/Ancestros/[id]",
+                              query: { id: data.COD_ANCESTRO },
                             }}
                           >
                             Editar

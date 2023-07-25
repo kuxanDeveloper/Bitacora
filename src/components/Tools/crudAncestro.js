@@ -3,10 +3,10 @@ import Swal from "sweetalert2";
 import Router from "next/router";
 
 export const onSubmitCreateAncestro = ({
-  nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas
+  nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos
 }) => {  
     return userService.CreateAncestro(
-      nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas
+      nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos
     ).then(() =>
     {
       Swal.fire({
@@ -48,10 +48,10 @@ Router.push({
 };
 
 export const onSubmitUpdateAncestro = ({
-  COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas
+  COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos
 }) => {
     return userService.EditAncestro(
-      COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas
+      COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos
     ).then(() =>
     {
       Swal.fire({

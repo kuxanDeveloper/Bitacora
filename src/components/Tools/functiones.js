@@ -449,17 +449,17 @@ export const setCheckPlantillaReslt = (setValue) => {
   }
 };
 
-export const setCheckPruebaReslt = (setValue) => {
-  var checbox1 = document.getElementById("EstadoPrueba");
+export const setCheckAncestro = (setValue) => {
+  var checbox1 = document.getElementById("EstadoAncestro");
 
   if (
     checbox1.checked == null ||
     checbox1.checked == undefined ||
     checbox1.checked == false
   ) {
-    setValue("Estado_prueba", "0");
+    setValue("Estado_Ancestro", "0");
   } else {
-    setValue("Estado_prueba", "1");
+    setValue("Estado_Ancestro", "1");
   }
 };
 

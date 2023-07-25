@@ -859,29 +859,29 @@ function InfoPruebasXGrupo(
   );
 }
 
-function CreateAncestro(nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas) {
+function CreateAncestro(nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
   const formData = new FormData();
 
   formData.append("nombre_Ancestro", nombre_Ancestro);
   formData.append("Estado_Ancestro", Estado_Ancestro);
   formData.append("Orden_ancestro", Orden_ancestro);
-  formData.append("Lst_pruebas", Lst_pruebas);
+  formData.append("Lst_grupos", Lst_grupos);
 
   return fetchWrapper.postHeader(
-    `${baseUrl}/Stickers/GuarAncestro`,
+    `${baseUrl}/Stickers/GuardarAncestro`,
     null,
     formData
   );
 }
 
-function EditAncestro(COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_pruebas) {
+function EditAncestro(COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
   const formData = new FormData();
 
   formData.append("COD_ANCESTRO", COD_ANCESTRO);
   formData.append("nombre_Ancestro", nombre_Ancestro);
   formData.append("Estado_Ancestro", Estado_Ancestro);
   formData.append("Orden_ancestro", Orden_ancestro);
-  formData.append("Lst_pruebas", Lst_pruebas);
+  formData.append("Lst_grupos", Lst_grupos);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditadoAncestro`,
