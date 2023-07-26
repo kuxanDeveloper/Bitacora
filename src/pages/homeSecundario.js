@@ -14,7 +14,6 @@ import {
 import { SampleDetailsWhitAncestro } from "./api/Ancestro/[id]";
 import {
   SwitchUseStateRol,
-  VerSwalCargando,
 } from "../components/Tools/functiones";
 import IndexComponentAdmin from "../components/RolesComponents/Administrator/IndexComponent";
 import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
@@ -95,8 +94,7 @@ export default function Home({
   }, [router.events]);
 
   useEffect(() => {
-    if (idAncestro != null && idAncestro != "" && idAncestro != undefined) {
-      VerSwalCargando();
+    if (idAncestro != null && idAncestro != "" && idAncestro != undefined) {      
       SampleDetailsWhitAncestro(
         setListadoGrupoActivo,
         setListadoGrupoInactivo,

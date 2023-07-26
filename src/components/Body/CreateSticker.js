@@ -110,7 +110,13 @@ function CreateSticker({
       <section className={styles.Create_sticker}>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
-            <Link href={`/${ValueGroup}`} className={styles.back_btn}>
+            <Link 
+            href={{
+              pathname: "/[id]",
+              query: { id: ValueGroup, idAncestro: "1", page:"1" },
+              hash: "Cactive#OverallSample",
+            }}
+            className={styles.back_btn}>
               Volver{" "}
             </Link>
           </div>

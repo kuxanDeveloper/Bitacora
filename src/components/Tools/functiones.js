@@ -672,6 +672,9 @@ export const UploadImageSticker = (
     setValueImagesrc(event.target.files[0]);
     photo.value = "";
     photo2.value = "";
+
+    const btncierre = document.getElementById("botonCierreModal");
+    btncierre.click();
   }
 };
 
