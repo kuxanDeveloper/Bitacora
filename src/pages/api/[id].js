@@ -34,7 +34,8 @@ export const ApiQueryGeneralSample = async (
     id,
     Numstiker,
     DateAdmission,
-    Cod_sticker
+    Cod_sticker,
+    page
   );
   setListadoMuestraActivo(listActivoMue.LstBitacora);
   setListadoResultadoxMuestra(listActivoMue.ListResultxBitacora);
@@ -45,7 +46,8 @@ export const ApiQueryGeneralSample = async (
     id,
     Numstiker,
     DateAdmission,
-    Cod_sticker
+    Cod_sticker,
+    page
   );
 
   setListadoMuestraInactivo(listInactimue.LstBitacora);

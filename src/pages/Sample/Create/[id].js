@@ -12,6 +12,9 @@ import {
 import {
   ListObservacion,
   ListSufijoUser,
+  ListSitioAnatomico,
+  ListJefeLaboratorio,
+  ListTipoMuestra,
 } from "../../api/Sample/CreateResultApi";
 
 import { useContextBitacora } from "../../../context/BitacoraContext";
@@ -21,11 +24,23 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
     useContextBitacora();
 
   const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
-
+  const [ListadoSitioAna, setListadoSitioAna] = useState([]);
+  const [ListadoJefeLaboratorio, setListadoJefeLaboratorio] = useState([]);
+  const [ListadoTipoMuestra, setListadoTipoMuestra] = useState([]);
+  const [valueGrupochange, setvalueGrupochange] = useState(
+    id !== null && id !== undefined && id !== "" ? id : "6"
+  );
   useEffect(() => {
     ListObservacion(cookie, setLstObservacionesPrede);
+    ListSitioAnatomico(cookie, setListadoSitioAna);
+    ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
+
     ListSufijoUser(cookie, setListadoGetFullSufijo);
   }, []);
+
+  useEffect(() => {
+    ListTipoMuestra(cookie, setListadoTipoMuestra);
+  }, [valueGrupochange]);
 
   return (
     <>
@@ -67,6 +82,10 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
         id={id}
         LstObservacionesPrede={LstObservacionesPrede}
         ListadoGetFullSufijo={ListadoGetFullSufijo}
+        setvalueGrupochange={setvalueGrupochange}
+        ListadoSitioAna={ListadoSitioAna}
+        ListadoJefeLaboratorio={ListadoJefeLaboratorio}
+        ListadoTipoMuestra={ListadoTipoMuestra}
       ></CreateSticker>
     </>
   );
@@ -104,7 +123,7 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie,"1");
+    const ListadoGrupoActivo = await QueryActivegroup(cookie, "1");
 
     return {
       props: {
