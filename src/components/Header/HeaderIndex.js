@@ -15,6 +15,7 @@ import {
 function HeaderIndex() {
   const [Roles, setRoles] = useState(null);
   const [DescriptionRol, setDescriptionRol] = useState("");
+  const [DescriptionUser, setDescriptionUser] = useState("");
   useEffect(() => {
     if (localStorage.getItem("RolUser") != null) {
       const ArrayRoles = JSON.parse(localStorage.getItem("RolUser"));
@@ -37,6 +38,12 @@ function HeaderIndex() {
         }
       });
     }
+
+    if(localStorage.getItem("UserEmail") != null)
+    {
+      const user = localStorage.getItem("UserEmail").toString();
+      setDescriptionUser(user);
+    }
   }, []);
 
   return (
@@ -44,7 +51,8 @@ function HeaderIndex() {
       <header className={Styles.header}>
         <div className={Styles.header_conent}>
           <HRButtonMenuNav />
-          <HRbuttonCloseSession DescriptionRol={DescriptionRol} />
+          <HRbuttonCloseSession DescriptionRol={DescriptionRol} 
+          DescriptionUser={DescriptionUser}/>
           <HRLogoNav />
         </div>
 

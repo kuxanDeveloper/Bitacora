@@ -26,7 +26,7 @@ export const onSubmit = ({ username, pass }) => {
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico" + error,
+          text: "Por favor comunicarse con soporte técnico" + error,
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -67,7 +67,7 @@ export const QueryActiveInactivegroup_GetUsers = (cookie, idAncestro) => {
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico",
+          text: "Por favor comunicarse con soporte técnico",
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -89,7 +89,7 @@ export const queryListUserAll = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -111,7 +111,7 @@ export const QueryGroupList = (cookie, idAncestro, estado) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -152,7 +152,7 @@ export const QueryMueForGroup = (
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico",
+          text: "Por favor comunicarse con soporte técnico",
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -175,7 +175,7 @@ export const QueryMuestraEdit = (cookie, idSticker) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -198,7 +198,7 @@ export const queryTestListxGroup = (cookie, idGroup, idBitacora) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -223,7 +223,7 @@ export const queryResultListxTests = (cookie, idPrueba, idBitacora) => {
       } else {
         Swal.fire({
           title: "¡Ha ocurrido un error!",
-          text: "Porfavor comunicarse con soporte técnico",
+          text: "Por favor comunicarse con soporte técnico",
           icon: "error",
           confirmButtonText: "Cerrar",
         });
@@ -246,7 +246,7 @@ export const queryOptionesListxPlantilla = (cookie, idPlantilla) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -292,7 +292,7 @@ export const queryInfoEditResult = (cookie, idResult) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -324,7 +324,7 @@ export const QueryObserva = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -346,7 +346,7 @@ export const QuerySitioAnatomico = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -368,7 +368,7 @@ export const QueryJefeLaboratorio = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -390,7 +390,7 @@ export const QueryTipoMuestra = (cookie, idGrupo ) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -412,7 +412,7 @@ export const QueryAncestro = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -434,7 +434,7 @@ export const QuerySufijoGetAll = (cookie) => {
     } else {
       Swal.fire({
         title: "¡Ha ocurrido un error!",
-        text: "Porfavor comunicarse con soporte técnico",
+        text: "Por favor comunicarse con soporte técnico",
         icon: "error",
         confirmButtonText: "Cerrar",
       });
