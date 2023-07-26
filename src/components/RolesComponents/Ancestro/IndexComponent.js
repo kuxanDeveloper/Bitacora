@@ -13,7 +13,12 @@ function IndexComponentAncestr({ InfoAncestro }) {
                 <figure className={CardStyles.card_figure}>
                   <ImageOptimize
                     Values={{
-                      src: "/8?idAncestro=0&page=1#Cactive#OverallSample",
+                      src: 
+                      data.URL_IMAGEN != null &&
+                      data.URL_IMAGEN != "" &&
+                      data.URL_IMAGEN != undefined
+                        ? data.URL_IMAGEN
+                        : "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
                       alt: data.NOMBRE_ANCESTRO,
                       title: data.NOMBRE_ANCESTRO,
                       classValue: CardStyles.card_img,
