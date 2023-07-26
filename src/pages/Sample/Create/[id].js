@@ -39,7 +39,7 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
   }, []);
 
   useEffect(() => {
-    ListTipoMuestra(cookie, setListadoTipoMuestra);
+    ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
 
   return (
