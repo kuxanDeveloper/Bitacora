@@ -17,6 +17,10 @@ function CreateSticker({
   id,
   LstObservacionesPrede,
   ListadoGetFullSufijo,
+  ListadoTipoMuestra,
+  ListadoJefeLaboratorio,
+  ListadoSitioAna,
+  setvalueGrupochange,
 }) {
   const {
     setShowModal,
@@ -43,6 +47,12 @@ function CreateSticker({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
+    SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    jefelaboratorio: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
+    FechaHoraRecogida: Yup.string().required(
+      "Campo fecha recogida obligatorio"
+    ),
   });
 
   useEffect(() => {
@@ -289,7 +299,10 @@ function CreateSticker({
                         name="GrupoSticker"
                         id="GrupoSticker"
                         value={ValueGroup}
-                        onChange={(e) => setValueGroup(e.target.value)}
+                        onChange={(e) => {
+                          setValueGroup(e.target.value);
+                          setvalueGrupochange(e.target.value);
+                        }}
                       >
                         <option disabled value="">
                           Seleccione una opción
@@ -307,7 +320,92 @@ function CreateSticker({
                     </div>
                   </div>
 
-                  {/* <!-- form group --> */}
+                  {/*-------------------------------Sitio Anatomico------------------------------------------- */}
+
+                  <div className={styles.form_group}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Sitio anatómico
+                      </label>
+                      <select
+                        {...register("SitioAnatomico")}
+                        name="SitioAnatomico"
+                        id="SitioAnatomico"
+                        defaultValue={""}
+                      >
+                        <option disabled value="">
+                          Seleccione una opción
+                        </option>
+                        {ListadoSitioAna.map((data, index) => (
+                          <option key={index} value={data.ID}>
+                            {data.DESCRIPCION}
+                          </option>
+                        ))}
+                      </select>
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.SitioAnatomico?.message}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/*-------------------------------Jefe  Laboratorio------------------------------------------- */}
+
+                  <div className={styles.form_group}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Jefe de laboratorio
+                      </label>
+                      <select
+                        {...register("jefelaboratorio")}
+                        name="jefelaboratorio"
+                        id="jefelaboratorio"
+                        defaultValue={""}
+                      >
+                        <option disabled value="">
+                          Seleccione una opción
+                        </option>
+                        {ListadoJefeLaboratorio.map((data, index) => (
+                          <option key={index} value={data.ID}>
+                            {data.DESCRIPCION}
+                          </option>
+                        ))}
+                      </select>
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.jefelaboratorio?.message}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/*-------------------------------Tipo de muestra------------------------------------------- */}
+
+                  <div className={styles.form_group}>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Tipo de muestra
+                      </label>
+                      <select
+                        {...register("tipoMuestra")}
+                        name="tipoMuestra"
+                        id="tipoMuestra"
+                        defaultValue={""}
+                      >
+                        <option disabled value="">
+                          Seleccione una opción
+                        </option>
+                        {ListadoTipoMuestra.map((data, index) => (
+                          <option key={index} value={data.ID}>
+                            {data.NOMBRE_TIPO_MUESTRA}
+                          </option>
+                        ))}
+                      </select>
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.tipoMuestra?.message}
+                      </div>
+                    </div>
+                  </div>
 
                   {/* <!-- form group --> */}
                   <div className={styles.form_group}>
@@ -396,7 +494,7 @@ function CreateSticker({
                     <Link
                       href={{
                         pathname: "/[id]",
-                        query: { id: ValueGroup, page:"1" },
+                        query: { id: ValueGroup, page: "1" },
                         hash: "Cactive#OverallSample",
                       }}
                       className={styles.btn_cancel}

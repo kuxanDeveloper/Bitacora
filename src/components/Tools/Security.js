@@ -334,6 +334,72 @@ export const QueryObserva = (cookie) => {
   });
 };
 
+export const QuerySitioAnatomico = (cookie) => {
+  return userService.lstSitioAnatomico(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado observaciones");
+    return null;
+  });
+};
+
+export const QueryJefeLaboratorio = (cookie) => {
+  return userService.lstLaboratorio(cookie).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado observaciones");
+    return null;
+  });
+};
+
+export const QueryTipoMuestra = (cookie, idGrupo ) => {
+  return userService.lstTipoMuestra(cookie,idGrupo).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Porfavor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+    console.log(error, "erro in Listado observaciones");
+    return null;
+  });
+};
+
 export const QueryAncestro = (cookie) => {
   return userService.lstAncestros(cookie).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {

@@ -75,7 +75,10 @@ export const userService = {
   CreateAncestro,
   EditAncestro,
   GetlistAncestro,
-  GetlistGruposXAncestro
+  GetlistGruposXAncestro,
+  lstTipoMuestra,
+  lstLaboratorio,
+  lstSitioAnatomico,
 };
 
 async function login(username, password) {
@@ -380,7 +383,6 @@ function CreatGroup(
   formData.append("Orden_Grupo", OrdenGrupo);
   formData.append("Lst_Sufijos", ListSufijo);
   formData.append("Lst_Pruebas", Lst_Pruebas);
-  
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -464,6 +466,27 @@ function CloseCaseSample(id, observacionCaso, Estado) {
 function lstObservall(cookie) {
   return fetchWrapper.get(
     `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=&EstadoObservacion=1`,
+    cookie
+  );
+}
+
+function lstSitioAnatomico(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboSitioAnatomico`,
+    cookie
+  );
+}
+
+function lstLaboratorio(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboJefeLaboratorio`,
+    cookie
+  );
+}
+
+function lstTipoMuestra(cookie, idGrupo) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboTipoMuestra?Id_Grupo=${idGrupo}`,
     cookie
   );
 }
@@ -708,7 +731,6 @@ function lstAncestros(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/GetListAncestros`, cookie);
 }
 
-
 function CreateOptionsResult(Opcion_descripcion, Estado_opcion, Orden_opcion) {
   const formData = new FormData();
 
@@ -723,7 +745,12 @@ function CreateOptionsResult(Opcion_descripcion, Estado_opcion, Orden_opcion) {
   );
 }
 
-function EditOptionsResult(Codigo_Opciones,Opcion_descripcion, Estado_opcion, Orden_opcion) {
+function EditOptionsResult(
+  Codigo_Opciones,
+  Opcion_descripcion,
+  Estado_opcion,
+  Orden_opcion
+) {
   const formData = new FormData();
 
   formData.append("Codigo_Opciones", Codigo_Opciones);
@@ -738,17 +765,19 @@ function EditOptionsResult(Codigo_Opciones,Opcion_descripcion, Estado_opcion, Or
   );
 }
 
-function InfoOptionsResult(
-  cookie,
-  IdOpcion,
-) {
+function InfoOptionsResult(cookie, IdOpcion) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistOpcion?IdOpcion=${IdOpcion}&estado_opcion=`,
     cookie
   );
 }
 
-function CreatePlantillaResult(Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones) {
+function CreatePlantillaResult(
+  Plantilla_resultado,
+  Estado_plantilla,
+  Orden_plantilla,
+  Lista_opciones
+) {
   const formData = new FormData();
 
   formData.append("Plantilla_resultado", Plantilla_resultado);
@@ -763,7 +792,13 @@ function CreatePlantillaResult(Plantilla_resultado, Estado_plantilla, Orden_plan
   );
 }
 
-function EditPlantillaResult(Codigo_Plantilla,Plantilla_resultado, Estado_plantilla, Orden_plantilla,Lista_opciones) {
+function EditPlantillaResult(
+  Codigo_Plantilla,
+  Plantilla_resultado,
+  Estado_plantilla,
+  Orden_plantilla,
+  Lista_opciones
+) {
   const formData = new FormData();
 
   formData.append("Codigo_Plantilla", Codigo_Plantilla);
@@ -779,27 +814,26 @@ function EditPlantillaResult(Codigo_Plantilla,Plantilla_resultado, Estado_planti
   );
 }
 
-function InfoPlantillaResult(
-  cookie,
-  Idplantilla,
-) {
+function InfoPlantillaResult(cookie, Idplantilla) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistPlantillas?Idplantilla=${Idplantilla}&estado_plantilla=`,
     cookie
   );
 }
 
-function InfoOpcionesXPlantilla(
-  cookie,
-  Id_Plantilla,
-) {
+function InfoOpcionesXPlantilla(cookie, Id_Plantilla) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistOpcionesXPlantilla?Id_Plantilla=${Id_Plantilla}`,
     cookie
   );
 }
 
-function CreatePruebaResult(Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas) {
+function CreatePruebaResult(
+  Nombre_prueba,
+  Estado_prueba,
+  Orden_prueba,
+  Lst_plantillas
+) {
   const formData = new FormData();
 
   formData.append("Nombre_prueba", Nombre_prueba);
@@ -815,7 +849,13 @@ function CreatePruebaResult(Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plant
   );
 }
 
-function EditPruebaResult(Codigo_prueba,Nombre_prueba, Estado_prueba, Orden_prueba,Lst_plantillas) {
+function EditPruebaResult(
+  Codigo_prueba,
+  Nombre_prueba,
+  Estado_prueba,
+  Orden_prueba,
+  Lst_plantillas
+) {
   const formData = new FormData();
 
   formData.append("Codigo_prueba", Codigo_prueba);
@@ -832,37 +872,33 @@ function EditPruebaResult(Codigo_prueba,Nombre_prueba, Estado_prueba, Orden_prue
   );
 }
 
-function GetlistPruebas(
-  cookie,
-  Codprueba,
-) {
+function GetlistPruebas(cookie, Codprueba) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistPruebas?Codprueba=${Codprueba}&EstadoPrueba=`,
     cookie
   );
 }
 
-function InfoPlantillasXPrueba(
-  cookie,
-  Id_prueba,
-) {
+function InfoPlantillasXPrueba(cookie, Id_prueba) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistPlantillasXPrueba?Id_prueba=${Id_prueba}`,
     cookie
   );
 }
 
-function InfoPruebasXGrupo(
-  cookie,
-  Id_grupo,
-) {
+function InfoPruebasXGrupo(cookie, Id_grupo) {
   return fetchWrapper.get(
     `${baseUrl}/Grupos/GetlistPruebasXGrupo?Id_grupo=${Id_grupo}`,
     cookie
   );
 }
 
-function CreateAncestro(nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
+function CreateAncestro(
+  nombre_Ancestro,
+  Estado_Ancestro,
+  Orden_ancestro,
+  Lst_grupos
+) {
   const formData = new FormData();
 
   formData.append("nombre_Ancestro", nombre_Ancestro);
@@ -877,7 +913,13 @@ function CreateAncestro(nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_gru
   );
 }
 
-function EditAncestro(COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ancestro,Lst_grupos) {
+function EditAncestro(
+  COD_ANCESTRO,
+  nombre_Ancestro,
+  Estado_Ancestro,
+  Orden_ancestro,
+  Lst_grupos
+) {
   const formData = new FormData();
 
   formData.append("COD_ANCESTRO", COD_ANCESTRO);
@@ -893,20 +935,14 @@ function EditAncestro(COD_ANCESTRO,nombre_Ancestro, Estado_Ancestro, Orden_ances
   );
 }
 
-function GetlistAncestro(
-  cookie,
-  COD_ANCESTRO,
-) {
+function GetlistAncestro(cookie, COD_ANCESTRO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=`,
     cookie
   );
 }
 
-function GetlistGruposXAncestro(
-  cookie,
-  COD_ANCESTRO,
-) {
+function GetlistGruposXAncestro(cookie, COD_ANCESTRO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistGruposXAncestro?COD_ANCESTRO=${COD_ANCESTRO}`,
     cookie

@@ -4,6 +4,9 @@ import {
   queryOptionesListxPlantilla,
   QueryObserva,
   QuerySufijoGetAll,
+  QueryJefeLaboratorio,
+  QuerySitioAnatomico,
+  QueryTipoMuestra,
 } from "../../../components/Tools/Security";
 
 export const ListPruebaxGroupApi = async (
@@ -19,6 +22,28 @@ export const ListPruebaxGroupApi = async (
 export const ListObservacion = async (cookie, setLstObservacionesPrede) => {
   let lstObservaPrete = await QueryObserva(cookie);
   setLstObservacionesPrede(lstObservaPrete);
+};
+
+export const ListSitioAnatomico = async (cookie, setListadoSitioAna) => {
+  let lstSitioAnatomico = await QuerySitioAnatomico(cookie);
+  setListadoSitioAna(lstSitioAnatomico);
+};
+
+export const ListJefeLaboratorio = async (
+  cookie,
+  setListadoJefeLaboratorio
+) => {
+  let lstLabotario = await QueryJefeLaboratorio(cookie);
+  setListadoJefeLaboratorio(lstLabotario);
+};
+
+export const ListTipoMuestra = async (
+  cookie,
+  setListadoTipoMuestra,
+  idGroup
+) => {
+  let lstTipoMuestra = await QueryTipoMuestra(cookie, idGroup);
+  setListadoTipoMuestra(lstTipoMuestra);
 };
 
 export const ListSufijoUser = async (cookie, setListadoGetFullSufijo) => {
@@ -47,6 +72,6 @@ export const ListOptionesxPlantilla = async (
     idPlantilla,
     idBitacora
   );
-  
+
   setListOptiones(ListOptiones);
 };
