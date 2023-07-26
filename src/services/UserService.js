@@ -130,6 +130,14 @@ async function login(username, password) {
       });
       localStorage.setItem("RolUser", JSON.stringify(arrayObject));
     }
+
+    if(UserLogin.Emailusu != undefined && UserLogin.Emailusu != null)
+    {
+      const usu = UserLogin.Emailusu.toString();
+      debugger;
+      localStorage.setItem("UserEmail", usu);
+
+    }
   }
 
   //#endregion

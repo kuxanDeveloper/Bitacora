@@ -3,7 +3,7 @@ import Styles from "../../../styles/Header.module.scss";
 import Link from "next/link";
 import { userService } from "../../../services/UserService";
 
-function HRbuttonCloseSession({ DescriptionRol }) {
+function HRbuttonCloseSession({ DescriptionRol, DescriptionUser }) {
   const [showUser, setshowUser] = useState(false);
 
   function ShowUserCont() {
@@ -45,6 +45,11 @@ function HRbuttonCloseSession({ DescriptionRol }) {
 
           <div className={Styles.submenu}>
             <ul className={Styles.sub_ul}>
+            <li className={Styles.sub_li}>
+                <span rel="stylesheet">
+                  {DescriptionUser}
+                </span>
+              </li>
               <li className={Styles.sub_li}>
                 <span rel="stylesheet">
                   {DescriptionRol}
