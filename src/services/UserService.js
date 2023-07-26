@@ -133,7 +133,6 @@ async function login(username, password) {
 
     if (UserLogin.Emailusu != undefined && UserLogin.Emailusu != null) {
       const usu = UserLogin.Emailusu.toString();
-      debugger;
       localStorage.setItem("UserEmail", usu);
     }
   }

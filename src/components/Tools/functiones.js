@@ -1021,7 +1021,6 @@ export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
 };
 
 export const FormatPage = (totalStory, id, countPage) => {
-  debugger;
   let cantidadPage = totalStory / countPage;
   let isInteger = false;
   if (cantidadPage % 1 !== 0 && cantidadPage >= 1 && cantidadPage < 1.5) {
@@ -1066,7 +1065,6 @@ export const FormatPage = (totalStory, id, countPage) => {
 };
 
 export const UpdateObject = (obj, valueInput) => {
-  debugger;
   let objeNew = {};
   Object.entries(obj).forEach((e) => {
     const [key, value] = e;
