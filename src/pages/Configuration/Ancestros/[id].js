@@ -27,8 +27,6 @@ function CreatePage({cookie, id}) {
     SampleDetailsGruposXAncestro(setInfoGrupXAncs, cookie, id);
   }, []);
 
-  console.log(id);
-  
   return (
     <>
       <Head>
