@@ -20,7 +20,7 @@ export default function Pop_up({
     <>
       <div className={styles.img_upload}>
         <div className={styles.upload_container}>
-          <span onClick={onClose} className={styles.close_btn}>
+          <span onClick={onClose} id="botonCierreModal" className={styles.close_btn}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
