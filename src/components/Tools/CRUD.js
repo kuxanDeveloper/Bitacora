@@ -12,7 +12,12 @@ export const onSubmitCreate = ({
   file,
   file2,
   Sufijo,
+  SitioAnatomico,
+  jefelaboratorio,
+  tipoMuestra,
+  FechaHoraRecogida
 }) => {
+
   const StickerRetorno = NumSticker;
   return userService
     .CreatSticker(
@@ -23,7 +28,11 @@ export const onSubmitCreate = ({
       // UserCheckexter,
       file,
       file2,
-      Sufijo
+      Sufijo,
+      SitioAnatomico,
+      jefelaboratorio,
+      tipoMuestra,
+      FechaHoraRecogida
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";

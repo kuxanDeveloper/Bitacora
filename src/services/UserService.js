@@ -262,7 +262,11 @@ function CreatSticker(
   ObservaInici,
   file,
   file2,
-  Sufijo
+  Sufijo,
+  SitioAnatomico,
+  jefelaboratorio,
+  tipoMuestra,
+  FechaHoraRecogida
 ) {
   const formData = new FormData();
 
@@ -272,6 +276,11 @@ function CreatSticker(
   formData.append("file", file);
   formData.append("file2", file2);
   formData.append("Sufijo", Sufijo);
+
+  formData.append("SitioAnatomico", SitioAnatomico);
+  formData.append("jefelaboratorio", jefelaboratorio);
+  formData.append("tipoMuestra", tipoMuestra);
+  formData.append("FechaHoraRecogida", FechaHoraRecogida);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraMuestra`,
     null,
