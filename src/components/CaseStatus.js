@@ -8,6 +8,7 @@ export default function CaseStatus({
   // isUserInterno,
   isSampleGeneral,
   Options,
+  idAncestro
 }) {
   return (
     <>
@@ -37,6 +38,7 @@ export default function CaseStatus({
                   <Link
                     href={{
                       pathname: HrefArmado.pathname,
+                      query: { page:"1",idAncest:idAncestro },
                       hash: "Cactive",
                     }}
                     className={CaseStyles.status_link}
@@ -67,6 +69,7 @@ export default function CaseStatus({
                   <Link
                     href={{
                       pathname: HrefArmado.pathname,
+                      query: { page:"1",idAncest:idAncestro },
                       hash: "Cinactvie",
                     }}
                     className={CaseStyles.status_link}

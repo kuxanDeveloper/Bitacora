@@ -11,11 +11,7 @@ function ComponentUsersIndex(InforSampleDetails) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/[id]",
-                query: {
-                  id: 6,
-                  page:"1"
-                },
+                pathname: "/",
               }}
               className={styles.back_btn}
             >
