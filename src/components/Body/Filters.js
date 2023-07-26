@@ -5,6 +5,7 @@ import {
   OnclickComboEstadoCase,
   OnkeyDowNumberOneCharater,
   OnPasteNumberOneCharater,
+  VerSwalCargando,
 } from "../Tools/functiones";
 import filterStyles from "../../styles/filters.module.scss";
 import Link from "next/link";
@@ -213,6 +214,7 @@ export default function Filters({
                       onChange={(e) => {
                         setidAncestro(e.target.value);
                         setcmbFiltroCambio(e.target.value);
+                        VerSwalCargando();
                       }}
                       className={filterStyles.filter_input_w45}
                       defaultValue={0}
