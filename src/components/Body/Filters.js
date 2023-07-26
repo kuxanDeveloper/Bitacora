@@ -157,9 +157,10 @@ export default function Filters({
             isActiveGroup ? (
               <CaseStatus
                 Options={Option}
-                HrefArmado={{ pathname: "/" }}
+                HrefArmado={{ pathname: "/homeSecundario" }}
                 isTrueActive={isTrueActive}
-                isActiveCase={true}
+                isActiveCase={true} 
+                idAncestro={idAncestro}
               ></CaseStatus>
             ) : (
               <></>
@@ -381,7 +382,7 @@ export default function Filters({
                     href={""}
                     onClick={(e) => {
                       e.preventDefault();
-                      ClearFilter(e, router, GruopValue);
+                      ClearFilter(e, router, GruopValue,idAncestro);
                     }}
                     className={filterStyles.search}
                     title="Limpiar filtros de búsqueda"

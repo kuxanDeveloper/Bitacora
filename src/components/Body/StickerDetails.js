@@ -30,12 +30,15 @@ export default function StickerDetails({
           <div className={styles.home_btn_container}>
             <Link
               title="Inicio"
-              href={`/${
-                InforSampleDetails.infoBitacora != undefined &&
-                InforSampleDetails.infoBitacora != null
-                  ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
-                  : ""
-              }`}
+              href={{
+                pathname: "/[id]",
+                query: { id: InforSampleDetails.infoBitacora != undefined &&
+                  InforSampleDetails.infoBitacora != null
+                    ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
+                    : "1", idAncestro: "1", page:"1" },
+                hash: "Cactive#OverallSample",
+              }}
+
               className={styles.home_btn}
             >
               <svg

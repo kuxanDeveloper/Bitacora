@@ -235,7 +235,7 @@ export const FilterSearchTrazaTables = (
   });
 };
 
-export const ClearFilter = (e, router, idGrupo) => {
+export const ClearFilter = (e, router, idGrupo,idAncestro) => {
   e.preventDefault();
   let urlHref = window.location.href;
   let hashs2 = urlHref.split("#")[1];
@@ -246,7 +246,7 @@ export const ClearFilter = (e, router, idGrupo) => {
   } else {
     router.push({
       pathname: router.pathname,
-      query: { id: idGrupo, page:"1" },
+      query: { id: idGrupo, page:"1",idAncest:idAncestro },
       hash: `${hashs2}#${hashs4}`,
     });
   }
