@@ -54,8 +54,9 @@ export default function Filters({
 
   useEffect(() => {
     const AncestroLst = document.getElementById("ListAncestro");
+    console.log(idAncestro);
     if (idAncestro != "" && idAncestro != undefined) {
-      AncestroLst.value = idAncestro;
+      AncestroLst.value = idAncestro.toString();
     }
   }, [ListaAncestros]);
 
