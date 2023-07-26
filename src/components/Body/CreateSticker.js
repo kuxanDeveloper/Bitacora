@@ -14,7 +14,6 @@ import * as Yup from "yup";
 import { useContextBitacora } from "../../context/BitacoraContext";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import "dayjs/locale/en-gb";
 
@@ -43,7 +42,6 @@ function CreateSticker({
     setshowModalScanner,
     setResultScanner,
   } = useContextBitacora();
-  const [Date, setDate] = useState("");
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
   const [ValueGroup, setValueGroup] = useState(false);
   const validationSchema = Yup.object().shape({
@@ -100,13 +98,6 @@ function CreateSticker({
   useEffect(() => {
     setValueGroup(id);
   }, []);
-
-  const updateDate = (value) => {
-    let fieldValue = moment(value).isValid()
-      ? moment(value).format("dd/MM/yyyy HH:mm:ss")
-      : value;
-    setDate(fieldValue);
-  };
 
   //The class name can vary
 
@@ -428,20 +419,12 @@ function CreateSticker({
                         Fecha de recogida de la muestra
                       </label>
                       <LocalizationProvider
+                        orientation="landscape"
                         dateAdapter={AdapterDayjs}
                         adapterLocale={"en-gb"}
                       >
                         <MobileDateTimePicker className="FechaHoraRecogida" />
                       </LocalizationProvider>
-
-                      {/* <input
-                        {...register("FechaHoraRecogida")}
-                        name="FechaHoraRecogida"
-                        id="FechaHoraRecogida"
-                        type="datetime-local"
-                        data-date-format="dd-MM-yyy HH:mm:ss"
-                      /> */}
-
                       <div className={styles.invalid_feedback}>
                         {errors.FechaHoraRecogida?.message}
                       </div>

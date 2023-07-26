@@ -15,9 +15,8 @@ export const onSubmitCreate = ({
   SitioAnatomico,
   jefelaboratorio,
   tipoMuestra,
-  FechaHoraRecogida
+  FechaHoraRecogida,
 }) => {
-
   const StickerRetorno = NumSticker;
   return userService
     .CreatSticker(
@@ -38,7 +37,7 @@ export const onSubmitCreate = ({
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({
         pathname: "/[id]",
-        query: { id: GrupoSticker, page:"1" },
+        query: { id: GrupoSticker, page: "1" },
         hash: "Cactive#OverallSample",
       });
     })
@@ -79,6 +78,10 @@ export const onSubmitUpdate = ({
   Cod_Imagen2,
   COD_BITACORA,
   Sufijo,
+  SitioAnatomico,
+  jefelaboratorio,
+  tipoMuestra,
+  FechaHoraRecogida,
 }) => {
   const StickerRetorno = COD_BITACORA;
   return userService
@@ -93,7 +96,11 @@ export const onSubmitUpdate = ({
       Cod_Imagen1,
       Cod_Imagen2,
       COD_BITACORA,
-      Sufijo
+      Sufijo,
+      SitioAnatomico,
+      jefelaboratorio,
+      tipoMuestra,
+      FechaHoraRecogida
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
@@ -128,8 +135,8 @@ export const onSubmitUpdate = ({
     });
 };
 
-export const QueryActivegroup = (cookie,idAncestro) => {
-  return userService.ListGroupActive(cookie,idAncestro).catch((error) => {
+export const QueryActivegroup = (cookie, idAncestro) => {
+  return userService.ListGroupActive(cookie, idAncestro).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",

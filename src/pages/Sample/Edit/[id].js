@@ -4,6 +4,9 @@ import EditStickerComponents from "../../../components/Body/EditStiker";
 import { QueryActivegroup } from "../../../components/Tools/CRUD";
 import {
   SampleDetailsEdit,
+  ListSitioAnatomico,
+  ListJefeLaboratorio,
+  ListTipoMuestra,
 } from "../../api/Sample/ViewDetails/[id]";
 import {
   OptionAdministrator,
@@ -18,9 +21,26 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [ListadoSitioAna, setListadoSitioAna] = useState([]);
+  const [ListadoJefeLaboratorio, setListadoJefeLaboratorio] = useState([]);
+  const [ListadoTipoMuestra, setListadoTipoMuestra] = useState([]);
+  const [valueGrupochange, setvalueGrupochange] = useState(
+    group !== null && group !== undefined && group !== "" ? group : "6"
+  );
   useEffect(() => {
-    SampleDetailsEdit(cookie, id, setLInforSampleDetails,setLstObservacionesPrede);
+    SampleDetailsEdit(
+      cookie,
+      id,
+      setLInforSampleDetails,
+      setLstObservacionesPrede
+    );
+    ListSitioAnatomico(cookie, setListadoSitioAna);
+    ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
   }, []);
+
+  useEffect(() => {
+    ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
+  }, [valueGrupochange]);
 
   return (
     <>
@@ -82,6 +102,10 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
         id={id}
         isHabilteGroup={isHabilteGroup}
         LstObservacionesPrede={LstObservacionesPrede}
+        setvalueGrupochange={setvalueGrupochange}
+        ListadoSitioAna={ListadoSitioAna}
+        ListadoJefeLaboratorio={ListadoJefeLaboratorio}
+        ListadoTipoMuestra={ListadoTipoMuestra}
       ></EditStickerComponents>
     </>
   );
@@ -127,7 +151,7 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie,"1");
+    const ListadoGrupoActivo = await QueryActivegroup(cookie, "1");
 
     return {
       props: {

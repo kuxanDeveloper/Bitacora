@@ -11,7 +11,11 @@ import {
   OnchangeObservaCrearEdit,
   RegisterStickerObservaciones,
 } from "../Tools/functiones";
-
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import "dayjs/locale/en-gb";
+import dayjs from "dayjs";
 import { onSubmitUpdate } from "../Tools/CRUD";
 
 function EditStickerComponents({
@@ -21,6 +25,10 @@ function EditStickerComponents({
   id,
   isHabilteGroup,
   LstObservacionesPrede,
+  setvalueGrupochange,
+  ListadoSitioAna,
+  ListadoJefeLaboratorio,
+  ListadoTipoMuestra,
 }) {
   const {
     setShowModal,
@@ -44,7 +52,17 @@ function EditStickerComponents({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
+    SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    jefelaboratorio: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
+    FechaHoraRecogida: Yup.string().required(
+      "Campo fecha recogida de la muestra obligatorio"
+    ),
   });
+
+  const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
+  const [codJefeLab, setcodJefeLab] = useState("");
+  const [codTipoMuestra, setcodTipoMuestra] = useState("");
   useEffect(() => {
     setisImagenExterna(true);
 
@@ -80,6 +98,12 @@ function EditStickerComponents({
           document.getElementById("sltObservaIni").value = "";
         }
       }
+
+      setcodSitioAnatomico(
+        InforSampleDetails.infoBitacora[0].ID_SITIO_ANATOMICO
+      );
+      setcodJefeLab(InforSampleDetails.infoBitacora[0].ID_JEFE_LABORATORIO);
+      setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
     }
   }, [InforSampleDetails.infoBitacora]);
 
@@ -126,6 +150,9 @@ function EditStickerComponents({
                             {...register("GrupoSticker")}
                             name="GrupoSticker"
                             id="GrupoSticker"
+                            onChange={(e) =>
+                              setvalueGrupochange(e.target.value)
+                            }
                           >
                             <option disabled value="">
                               Seleccione una opción
@@ -304,7 +331,126 @@ function EditStickerComponents({
                         )}
                       </div>
 
-                      {/* <!-- form group --> */}
+                      {/*-------------------------------Sitio Anatomico------------------------------------------- */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Sitio anatómico
+                          </label>
+                          <select
+                            {...register("SitioAnatomico")}
+                            name="SitioAnatomico"
+                            id="SitioAnatomico"
+                            value={codSitioAnatomico}
+                            onChange={(e) =>
+                              setcodSitioAnatomico(e.target.value)
+                            }
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {ListadoSitioAna.map((data, index) => (
+                              <option key={index} value={data.ID}>
+                                {data.DESCRIPCION}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div className={styles.invalid_feedback}>
+                            {errors.SitioAnatomico?.message}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*-------------------------------Jefe  Laboratorio------------------------------------------- */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Jefe de laboratorio
+                          </label>
+                          <select
+                            {...register("jefelaboratorio")}
+                            name="jefelaboratorio"
+                            id="jefelaboratorio"
+                            value={codJefeLab}
+                            onChange={(e) => setcodJefeLab(e.target.value)}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {ListadoJefeLaboratorio.map((data, index) => (
+                              <option key={index} value={data.ID}>
+                                {data.DESCRIPCION}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div className={styles.invalid_feedback}>
+                            {errors.jefelaboratorio?.message}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*-------------------------------Tipo de muestra------------------------------------------- */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Tipo de muestra
+                          </label>
+                          <select
+                            {...register("tipoMuestra")}
+                            name="tipoMuestra"
+                            id="tipoMuestra"
+                            value={codTipoMuestra}
+                            onChange={(e) => setcodTipoMuestra(e.target.value)}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {ListadoTipoMuestra.map((data, index) => (
+                              <option key={index} value={data.ID}>
+                                {data.NOMBRE_TIPO_MUESTRA}
+                              </option>
+                            ))}
+                          </select>
+
+                          <div className={styles.invalid_feedback}>
+                            {errors.tipoMuestra?.message}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*-------------------------------Fecha de recodigo muestra------------------------------------------- */}
+
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Fecha de recogida de la muestra
+                          </label>
+                          <LocalizationProvider
+                            dateAdapter={AdapterDayjs}
+                            adapterLocale={"en-gb"}
+                          >
+                            <MobileDateTimePicker
+                              orientation="landscape"
+                              defaultValue={
+                                data.FECHA_RECOGIDA_DATETIME != null &&
+                                data.FECHA_RECOGIDA_DATETIME != null
+                                  ? dayjs(data.FECHA_RECOGIDA_DATETIME)
+                                  : dayjs()
+                              }
+                              className="FechaHoraRecogida"
+                            />
+                          </LocalizationProvider>
+
+                          <div className={styles.invalid_feedback}>
+                            {errors.FechaHoraRecogida?.message}
+                          </div>
+                        </div>
+                      </div>
 
                       {/* <!-- form group --> */}
                       <div className={styles.form_group}>
@@ -386,6 +532,15 @@ function EditStickerComponents({
                               setValue("NumSticker", data.NUMERO_STICKER);
                               setValue("COD_BITACORA", data.CODIGO_BITACORA);
                               setValue("Sufijo", data.SUFIJO);
+                              setValue(
+                                "FechaHoraRecogida",
+                                document.querySelector(
+                                  ".FechaHoraRecogida input"
+                                ).value
+                              );
+                              setValue("SitioAnatomico", codSitioAnatomico);
+                              setValue("jefelaboratorio", codJefeLab);
+                              setValue("tipoMuestra", codTipoMuestra);
                               RegisterStickerObservaciones(setValue);
                             }}
                             className={styles.btn_send}

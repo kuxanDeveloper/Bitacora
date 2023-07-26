@@ -131,12 +131,10 @@ async function login(username, password) {
       localStorage.setItem("RolUser", JSON.stringify(arrayObject));
     }
 
-    if(UserLogin.Emailusu != undefined && UserLogin.Emailusu != null)
-    {
+    if (UserLogin.Emailusu != undefined && UserLogin.Emailusu != null) {
       const usu = UserLogin.Emailusu.toString();
       debugger;
       localStorage.setItem("UserEmail", usu);
-
     }
   }
 
@@ -355,7 +353,11 @@ function EditSticker(
   Cod_Imagen1,
   Cod_Imagen2,
   COD_BITACORA,
-  Sufijo
+  Sufijo,
+  SitioAnatomico,
+  jefelaboratorio,
+  tipoMuestra,
+  FechaHoraRecogida
 ) {
   const formData = new FormData();
   formData.append("Numero_Stickers", NumSticker);
@@ -369,6 +371,12 @@ function EditSticker(
   formData.append("Cod_Imagen2", Cod_Imagen2);
   formData.append("COD_BITACORA", COD_BITACORA);
   formData.append("Sufijo", Sufijo);
+
+  formData.append("SitioAnatomico", SitioAnatomico);
+  formData.append("jefelaboratorio", jefelaboratorio);
+  formData.append("tipoMuestra", tipoMuestra);
+  formData.append("FechaHoraRecogida", FechaHoraRecogida);
+  
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditBitacoraMuestra`,
     null,
@@ -488,17 +496,11 @@ function lstObservall(cookie) {
 }
 
 function lstSitioAnatomico(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboSitioAnatomico`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboSitioAnatomico`, cookie);
 }
 
 function lstLaboratorio(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboJefeLaboratorio`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboJefeLaboratorio`, cookie);
 }
 
 function lstTipoMuestra(cookie, idGrupo) {
