@@ -52,7 +52,7 @@ function ComponentTipomueIndex({InfoTipoMue}) {
                           ) : (
                             <span>&#10060;</span>
                           )}
-                        </td>                        
+                        </td> 
                         
                         <td className={styleTable.textCenterColumn}>
                           <Link
