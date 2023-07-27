@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     z-index: 1;
+    position: relative;
     .state {
       max-width: 375px;
       padding: 0 1rem;
