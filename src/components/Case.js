@@ -49,7 +49,6 @@ export default function Case({
 
   return (
     <>
-      {console.log(isTrueActive)}
       {/* grupos */}
       <CaseNav
         HrefArmado={HrefArmado}
