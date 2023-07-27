@@ -49,6 +49,7 @@ export default function Case({
 
   return (
     <>
+      {console.log(isTrueActive)}
       {/* grupos */}
       <CaseNav
         HrefArmado={HrefArmado}
@@ -59,17 +60,10 @@ export default function Case({
       ></CaseNav>
       <section
         className={caseStyles.cases}
-        style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
+        // style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
       >
         <div>
           <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" />
-          {/* <Image
-            className={caseStyles.cases_bg}
-            width={100}
-            height={100}
-            quality={100}
-            src={urlImagenDinamyc}
-          ></Image> */}
         </div>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
