@@ -163,6 +163,66 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
+{Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/JefeLaboratorio/IndexJefe"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Jefes de laboratorio
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+{Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/SitioAnatomico/IndexSitio"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Sitio Anatomico
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+{Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/TiposMuestras/IndexTipo"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexGroup")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Tipos de muestra
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link

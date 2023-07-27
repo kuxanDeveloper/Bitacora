@@ -79,6 +79,9 @@ export const userService = {
   lstTipoMuestra,
   lstLaboratorio,
   lstSitioAnatomico,
+  GetlistJefeLaboratorio,
+  GetlistSitiosAnatomicos,
+  GetlistTiposMuestra
 };
 
 async function login(username, password) {
@@ -963,6 +966,27 @@ function GetlistAncestro(cookie, COD_ANCESTRO) {
 function GetlistGruposXAncestro(cookie, COD_ANCESTRO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistGruposXAncestro?COD_ANCESTRO=${COD_ANCESTRO}`,
+    cookie
+  );
+}
+
+function GetlistJefeLaboratorio(cookie, ID,ESTADO) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistJefesLaboratorio?ID=${ID}&ESTADO=${ESTADO}`,
+    cookie
+  );
+}
+
+function GetlistSitiosAnatomicos(cookie, ID,ESTADO) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistSitiosAnatomicos?ID=${ID}&ESTADO=${ESTADO}`,
+    cookie
+  );
+}
+
+function GetlistTiposMuestra(cookie, ID,ESTADO) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
   );
 }
