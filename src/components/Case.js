@@ -4,6 +4,7 @@ import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 export default function Case({
   ListadoGrupo,
   ListadoMuestraActivo,
@@ -60,6 +61,16 @@ export default function Case({
         className={caseStyles.cases}
         style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
       >
+        <div>
+          <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" />
+          {/* <Image
+            className={caseStyles.cases_bg}
+            width={100}
+            height={100}
+            quality={100}
+            src={urlImagenDinamyc}
+          ></Image> */}
+        </div>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
             <div className={caseStyles.state}>

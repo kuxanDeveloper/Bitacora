@@ -5,9 +5,21 @@
   background-size: cover;
   background-position: center;
   min-height: 100vh;
+  position: relative;
+
+  .cases_bg {
+    position: absolute;
+    inset: 0 0 0 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: optimizeQuality;
+  }
+
   .cases_nav {
     display: flex;
     justify-content: center;
+    z-index: 1;
     .state {
       max-width: 375px;
       padding: 0 1rem;
@@ -41,12 +53,14 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    position: relative;
     .card {
       background-color: #fff;
       padding: 0.5rem;
       border-radius: 15px;
       min-width: 260px;
       max-width: 260px;
+
       .card_container {
         display: grid;
         grid-template-columns: 2fr 3fr;
