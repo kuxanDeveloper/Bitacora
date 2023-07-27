@@ -5,6 +5,7 @@ import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import ImageOptimize from "./Tools/ImageOptimize";
 export default function Case({
   ListadoGrupo,
   ListadoMuestraActivo,
@@ -62,14 +63,18 @@ export default function Case({
         style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
       >
         <div>
-          <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" />
-          {/* <Image
-            className={caseStyles.cases_bg}
-            width={100}
-            height={100}
-            quality={100}
-            src={urlImagenDinamyc}
-          ></Image> */}
+          
+          {/* <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" /> */}
+          <ImageOptimize
+           Values={{
+            src: urlImagenDinamyc,
+            alt: "grupo",
+            title: "Imagen background",
+            classValue: caseStyles.cases_bg,
+            width: 1920,
+            height: 1080,
+          }}
+          ></ImageOptimize>
         </div>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>
