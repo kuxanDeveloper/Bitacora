@@ -4,7 +4,7 @@ import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
 import Link from "next/link";
-import Image from "next/image";
+import ImageOptimize from "./Tools/ImageOptimize";
 export default function Case({
   ListadoGrupo,
   ListadoMuestraActivo,
@@ -18,7 +18,7 @@ export default function Case({
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
 }) {
-  const [urlImagenDinamyc, seturlImagenDinamyc] = useState("");
+  const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
@@ -62,7 +62,22 @@ export default function Case({
         // style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
       >
         <div>
-          <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" />
+          {/* <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" /> */}
+
+          {urlImagenDinamyc != null ? (
+            <ImageOptimize
+              Values={{
+                src: urlImagenDinamyc,
+                alt: "grupo",
+                title: "Imagen background",
+                classValue: caseStyles.cases_bg,
+                width: 1920,
+                height: 1080,
+              }}
+            ></ImageOptimize>
+          ) : (
+            ""
+          )}
         </div>
         {isTrueActive ? (
           <div className={caseStyles.cases_nav}>

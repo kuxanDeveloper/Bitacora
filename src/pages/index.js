@@ -11,16 +11,11 @@ import {
 import { SampleDetailsAncestro } from "./api/Sample/ViewDetailsAncestro/[id]";
 import IndexComponentAdmin from "../components/RolesComponents/Ancestro/IndexComponent";
 
-
-export default function Home({  
-  cookie,
-}) {
+export default function Home({ cookie }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
     SampleDetailsAncestro(setInfoAncestro, cookie, "");
   }, []);
-  
-  const router = useRouter();
 
   return (
     <>
@@ -55,14 +50,8 @@ export default function Home({
       </Head>
 
       <div className="cases_container">
-
-      <IndexComponentAdmin
-                  InfoAncestro={InfoAncestro}>
-                </IndexComponentAdmin>
-
-        
+        <IndexComponentAdmin InfoAncestro={InfoAncestro}></IndexComponentAdmin>
       </div>
-
     </>
   );
 }
@@ -91,10 +80,9 @@ export async function getServerSideProps(ctx) {
         }
       });
     }
-    
 
     return {
-      props: {        
+      props: {
         cookie: cookie,
       },
     };
