@@ -7,7 +7,7 @@ import { onSubmitUpdateObservations } from "../../Tools/crudObservations";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckObservations } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import Image from "next/image";
 function ComponentObservationEdit({ InforObservations, idObservation }) {
   const validarEsquemaobservation = Yup.object().shape({
     Cod_Observacion: Yup.string().required("El codigo de la observacion es obligatorio"),
@@ -35,6 +35,13 @@ function ComponentObservationEdit({ InforObservations, idObservation }) {
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

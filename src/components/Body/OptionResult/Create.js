@@ -7,7 +7,7 @@ import { onSubmitCreateOption } from "../../Tools/crudOptionResult";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckOptionReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import Image from "next/image";
 function ComponentOptionCreate() {
   const validarEsquemaobservation = Yup.object().shape({
     Opcion_descripcion: Yup.string().required(
@@ -34,6 +34,13 @@ function ComponentOptionCreate() {
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

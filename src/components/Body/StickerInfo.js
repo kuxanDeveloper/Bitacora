@@ -4,6 +4,8 @@ import Link from "next/link";
 import InformacionStciker from "./StickerInfo/InformacionStciker";
 import Lastfollow_up from "./StickerInfo/Lastfollow_up";
 import Result from "./StickerInfo/Result";
+import Image from "next/image";
+
 export default function StickerInfo({
   InforSampleDetails,
   id,
@@ -13,6 +15,8 @@ export default function StickerInfo({
   return (
     <>
       <div className={styles.sticker_info}>
+      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+
         <div className={styles.info_container}>
           <div className={styles.back_btn_container}>
             <Link
