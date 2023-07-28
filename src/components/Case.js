@@ -210,7 +210,85 @@ export default function Case({
             </div>
           </div>
         ) : (
-          ""
+          <div className={caseStyles.cases_nav}>
+            <div className={caseStyles.state}>
+             
+              <p
+                className={`${caseStyles.status} `}
+              >
+                <button
+                  onClick={changeModeVew}
+                  href={"#"}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  title="Ver tabla"
+                  className={caseStyles.status_link}
+                >
+                  {List ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-id"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#ffffff"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+                      <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                      <path d="M15 8l2 0" />
+                      <path d="M15 12l2 0" />
+                      <path d="M7 16l10 0" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-table-filled"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#ffffff"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M4 11h4a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-2a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-6a1 1 0 0 1 1 -1z"
+                        strokeWidth="0"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M21 12v6a3 3 0 0 1 -2.824 2.995l-.176 .005h-6a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1z"
+                        strokeWidth="0"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v2a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h6z"
+                        strokeWidth="0"
+                        fill="currentColor"
+                      />
+                      <path
+                        d="M9 4v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a3 3 0 0 1 2.824 -2.995l.176 -.005h2a1 1 0 0 1 1 1z"
+                        strokeWidth="0"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </p>
+            </div>
+          </div>
         )}
 
         {List ? (
@@ -272,7 +350,7 @@ export default function Case({
                         LstObservacionesPrede={LstObservacionesPrede}
                       ></StickersTable>
                     ))
-                  : "Cargando..."}
+                  : "Sin Stickers inactivos"}
               </tbody>
             </table>
           </div>
