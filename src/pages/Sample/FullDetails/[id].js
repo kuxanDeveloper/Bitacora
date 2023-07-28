@@ -15,6 +15,8 @@ function FullDetailsPage({ cookie, query, Options }) {
   const router = useRouter();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [Pruebas, setPruebas] = useState(false);
+  const [HasValue, setHasValue] = useState("");
+
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
   useEffect(() => {
@@ -33,39 +35,37 @@ function FullDetailsPage({ cookie, query, Options }) {
       window.performance.navigation.type ==
         window.performance.navigation.TYPE_NAVIGATE
     ) {
-      let hashs2 = router.asPath.split("#")[1];
-      if (
-        hashs2 == "Pruebas" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        setPruebas(true);
+      if (HasValue == "") {
+        let hashs2 = router.asPath.split("#")[1];
+
+        if (
+          hashs2 == "Pruebas" ||
+          hashs2 == "" ||
+          hashs2 == null ||
+          hashs2 == undefined
+        ) {
+          setHasValue("Pruebas");
+          setPruebas(true);
+        } else {
+          setHasValue("Notas");
+          setPruebas(false);
+        }
       } else {
-        setPruebas(false);
+        if (
+          HasValue == "Pruebas" ||
+          HasValue == "" ||
+          HasValue == null ||
+          HasValue == undefined
+        ) {
+          setHasValue("Pruebas");
+          setPruebas(true);
+        } else {
+          setHasValue("Notas");
+          setPruebas(false);
+        }
       }
     }
-
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      if (
-        hash == "Pruebas" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setPruebas(true);
-      } else {
-        setPruebas(false);
-      }
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  }, [HasValue]);
 
   return (
     <>
@@ -128,6 +128,7 @@ function FullDetailsPage({ cookie, query, Options }) {
         query={query}
         Pruebas={Pruebas}
         Options={Options}
+        setHasValue={setHasValue}
       />
     </>
   );

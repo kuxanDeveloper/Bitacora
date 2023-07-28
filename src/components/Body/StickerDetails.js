@@ -11,6 +11,7 @@ export default function StickerDetails({
   query,
   Pruebas,
   Options,
+  setHasValue,
 }) {
   const {
     setShowModal,
@@ -32,13 +33,17 @@ export default function StickerDetails({
               title="Inicio"
               href={{
                 pathname: "/[id]",
-                query: { id: InforSampleDetails.infoBitacora != undefined &&
-                  InforSampleDetails.infoBitacora != null
-                    ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
-                    : "1", idAncestro: "1", page:"1" },
+                query: {
+                  id:
+                    InforSampleDetails.infoBitacora != undefined &&
+                    InforSampleDetails.infoBitacora != null
+                      ? InforSampleDetails.infoBitacora[0].ID_GRUPO_ASIGNADO
+                      : "1",
+                  idAncestro: "1",
+                  page: "1",
+                },
                 hash: "Cactive#OverallSample",
               }}
-
               className={styles.home_btn}
             >
               <svg
@@ -366,6 +371,9 @@ export default function StickerDetails({
                       query: query,
                       hash: "Pruebas",
                     }}
+                    onClick={() => {
+                      setHasValue("Pruebas");
+                    }}
                     className={`${styles.nav_items} ${
                       Pruebas ? styles.selected : ""
                     }`}
@@ -377,6 +385,9 @@ export default function StickerDetails({
                       pathname: "/Sample/FullDetails/[id]",
                       query: query,
                       hash: "Notas",
+                    }}
+                    onClick={() => {
+                      setHasValue("Notas");
                     }}
                     className={`${styles.nav_items} ${
                       !Pruebas ? styles.selected : ""

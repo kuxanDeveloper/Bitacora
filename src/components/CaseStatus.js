@@ -8,7 +8,8 @@ export default function CaseStatus({
   // isUserInterno,
   isSampleGeneral,
   Options,
-  idAncestro
+  idAncestro,
+  setHasValue,
 }) {
   return (
     <>
@@ -30,6 +31,7 @@ export default function CaseStatus({
                         isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                       }`,
                     }}
+                    onClick={() => setHasValue("Cactive")}
                     className={CaseStyles.status_link}
                   >
                     Casos activos
@@ -38,9 +40,10 @@ export default function CaseStatus({
                   <Link
                     href={{
                       pathname: HrefArmado.pathname,
-                      query: { page:"1",idAncest:idAncestro },
+                      query: { page: "1", idAncest: idAncestro },
                       hash: "Cactive",
                     }}
+                    onClick={() => setHasValue("Cactive")}
                     className={CaseStyles.status_link}
                   >
                     Casos activos
@@ -61,6 +64,7 @@ export default function CaseStatus({
                         isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
                       }`,
                     }}
+                    onClick={()=> setHasValue("Cinactvie")}
                     className={CaseStyles.status_link}
                   >
                     Casos inactivos
@@ -69,9 +73,10 @@ export default function CaseStatus({
                   <Link
                     href={{
                       pathname: HrefArmado.pathname,
-                      query: { page:"1",idAncest:idAncestro },
+                      query: { page: "1", idAncest: idAncestro },
                       hash: "Cinactvie",
                     }}
+                    onClick={()=> setHasValue("Cinactvie")}
                     className={CaseStyles.status_link}
                   >
                     Casos inactivos
