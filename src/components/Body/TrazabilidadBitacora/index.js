@@ -5,7 +5,7 @@ import styleTable from "../../../styles/TableStyles.module.scss";
 import { ExportToExcelcsvTrazaBitacora } from "../../../pages/api/Sample/ViewDetailsTrazabilidad/[id]";
 import Pagination from "../../Tools/Pagination";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentTrazaBitIndex({
   InforSampleDetails,
   NumeroSticker,
@@ -45,7 +45,16 @@ function ComponentTrazaBitIndex({
   return (
     <>
       <section className={styles.Index_users}>
-      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
 
         <div
           className={`${styles.sticker_container} ${styleTable.max_width_card}`}

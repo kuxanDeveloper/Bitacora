@@ -2,12 +2,21 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-import Image from "next/image";
-function ComponentpruebaIndex({InforSampleDetails}) {
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentpruebaIndex({ InforSampleDetails }) {
   return (
     <>
       <section className={styles.Index_users}>
-      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
 
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
@@ -43,8 +52,7 @@ function ComponentpruebaIndex({InforSampleDetails}) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null &&
-                InforSampleDetails != undefined
+                {InforSampleDetails != null && InforSampleDetails != undefined
                   ? InforSampleDetails.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_PRUEBA}</td>
