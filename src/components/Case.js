@@ -22,6 +22,7 @@ export default function Case({
   Options,
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
+  setHasValueSample,
 }) {
   const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
@@ -47,6 +48,7 @@ export default function Case({
         seturlImagenDinamyc(objGroup.URL_IMAGEN);
         return;
       } else {
+        seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
         seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
       }
     }
@@ -107,6 +109,7 @@ export default function Case({
                     }#OverallSample`,
                   }}
                   className={caseStyles.status_link}
+                  onClick={()=>{setHasValueSample("OverallSample")}}
                 >
                   Ordenes generales
                 </Link>
@@ -125,6 +128,7 @@ export default function Case({
                     }#UrgentSamples`,
                   }}
                   className={caseStyles.status_link}
+                  onClick={()=>{setHasValueSample("UrgentSamples")}}
                 >
                   Ordenes pendientes
                 </Link>

@@ -12,9 +12,7 @@ import {
   OptionDefault,
 } from "../components/Tools/OpcitionHabilite";
 import { SampleDetailsWhitAncestro } from "./api/Ancestro/[id]";
-import {
-  SwitchUseStateRol,
-} from "../components/Tools/functiones";
+
 import IndexComponentAdmin from "../components/RolesComponents/Administrator/IndexComponent";
 import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
 
@@ -30,20 +28,20 @@ export default function Home({
   Options,
   Roles,
   cookie,
-  idAncst
+  idAncst,
 }) {
+  const [HasValue, setHasValue] = useState("");
   const [isTrueActive, setisTrueActive] = useState(false);
   // const [Returncomponent, setReturncomponent] = useState("");
   const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [ListadoGrupoInactivo, setListadoGrupoInactivo] = useState([]);
   const [idAncestro, setidAncestro] = useState("");
-  const [cmbFiltroCambio, setcmbFiltroCambio] = useState('');
-  const router = useRouter();
+  const [cmbFiltroCambio, setcmbFiltroCambio] = useState("");
+  // const router = useRouter();
 
   useEffect(() => {
-
     setidAncestro(idAncst);
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (Options.OrdersInactive) {
@@ -53,48 +51,39 @@ export default function Home({
         window.performance.navigation.type ==
           window.performance.navigation.TYPE_NAVIGATE
       ) {
-        let hashs2 = router.asPath.split("#")[1];
-        if (
-          hashs2 == "Cactive" ||
-          hashs2 == "" ||
-          hashs2 == null ||
-          hashs2 == undefined
-        ) {
-          setisTrueActive(true);
+        if (HasValue == "") {
+          let hashs2 = window.location.hash.split("#")[1];
+
+          if (
+            hashs2 == "Cactive" ||
+            hashs2 == "" ||
+            hashs2 == null ||
+            hashs2 == undefined
+          ) {
+            setHasValue("Cactive");
+            setisTrueActive(true);
+          } else {
+            setisTrueActive(false);
+            setHasValue("Cinactvie");
+          }
         } else {
-          setisTrueActive(false);
+          if (HasValue == "Cactive") {
+            setHasValue("Cactive");
+            setisTrueActive(true);
+          } else {
+            setisTrueActive(false);
+            setHasValue("Cinactvie");
+          }
         }
       }
     } else {
       setisTrueActive(true);
+      setHasValue("Cactive");
     }
-
-    const onHashChangeStart = (url) => {
-      if (Options.OrdersInactive) {
-        let hash = url.split("#")[1];
-        if (
-          hash == "Cactive" ||
-          hash == "" ||
-          hash == null ||
-          hash == undefined
-        ) {
-          setisTrueActive(true);
-        } else {
-          setisTrueActive(false);
-        }
-      } else {
-        setisTrueActive(true);
-      }
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  }, [HasValue]);
 
   useEffect(() => {
-    if (idAncestro != null && idAncestro != "" && idAncestro != undefined) {      
+    if (idAncestro != null && idAncestro != "" && idAncestro != undefined) {
       SampleDetailsWhitAncestro(
         setListadoGrupoActivo,
         setListadoGrupoInactivo,
@@ -164,6 +153,8 @@ export default function Home({
           setidAncestro={setidAncestro}
           setcmbFiltroCambio={setcmbFiltroCambio}
           idAncestro={idAncst}
+          HasValue={HasValue}
+          setHasValue={setHasValue}
         ></Filters>
       ) : (
         ""
@@ -182,6 +173,8 @@ export default function Home({
                   idAncestro={
                     idAncestro == "" || idAncestro == null ? 0 : idAncestro
                   }
+                  HasValue={HasValue}
+                  setHasValue={setHasValue}
                 ></IndexComponentAdmin>
               );
 
@@ -195,6 +188,8 @@ export default function Home({
                   idAncestro={
                     idAncestro == "" || idAncestro == null ? 0 : idAncestro
                   }
+                  HasValue={HasValue}
+                  setHasValue={setHasValue}
                 ></IndexComponentTechni>
               );
 
@@ -208,6 +203,8 @@ export default function Home({
                   idAncestro={
                     idAncestro == "" || idAncestro == null ? 0 : idAncestro
                   }
+                  HasValue={HasValue}
+                  setHasValue={setHasValue}
                 ></IndexComponentAssis>
               );
 
@@ -221,6 +218,8 @@ export default function Home({
                   idAncestro={
                     idAncestro == "" || idAncestro == null ? 0 : idAncestro
                   }
+                  HasValue={HasValue}
+                  setHasValue={setHasValue}
                 ></IndexComponentConsul>
               );
 
@@ -269,7 +268,7 @@ export async function getServerSideProps(ctx) {
     const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
     const ListadoSufijosxGroupAll = await consultataGeneral.ListaSufijoGetAll;
     const ListaAncestros = await consultataGeneral.ListaAncestros;
-    
+
     return {
       props: {
         ListadoGrupoActivossr:
@@ -282,7 +281,7 @@ export async function getServerSideProps(ctx) {
         Options,
         Roles,
         cookie: cookie,
-        idAncst: idAnc
+        idAncst: idAnc,
       },
     };
   } else {

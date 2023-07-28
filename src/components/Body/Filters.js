@@ -29,6 +29,8 @@ export default function Filters({
   setidAncestro,
   idAncestro,
   setcmbFiltroCambio,
+  setHasValue,
+  HasValue,
 }) {
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
@@ -61,54 +63,46 @@ export default function Filters({
   }, [ListaAncestros]);
 
   const [isTrueActive, setisTrueActive] = useState(false);
+
   useEffect(() => {
-    if (Option.OrdersInactive) {
+    debugger;
+    if (Options.OrdersInactive) {
       if (
         window.performance.navigation.type ==
           window.performance.navigation.TYPE_RELOAD ||
         window.performance.navigation.type ==
           window.performance.navigation.TYPE_NAVIGATE
       ) {
-        let hashs2 = router.asPath.split("#")[1];
-        if (
-          hashs2 == "Cactive" ||
-          hashs2 == "" ||
-          hashs2 == null ||
-          hashs2 == undefined
-        ) {
-          setisTrueActive(true);
+        if (HasValue == "") {
+          let hashs2 = window.location.hash.split("#")[1];
+
+          if (
+            hashs2 == "Cactive" ||
+            hashs2 == "" ||
+            hashs2 == null ||
+            hashs2 == undefined
+          ) {
+            setHasValue("Cactive");
+            setisTrueActive(true);
+          } else {
+            setisTrueActive(false);
+            setHasValue("Cinactvie");
+          }
         } else {
-          setisTrueActive(false);
+          if (HasValue == "Cactive") {
+            setHasValue("Cactive");
+            setisTrueActive(true);
+          } else {
+            setisTrueActive(false);
+            setHasValue("Cinactvie");
+          }
         }
       }
     } else {
       setisTrueActive(true);
+      setHasValue("Cactive");
     }
-
-    const onHashChangeStart = (url) => {
-      if (Option.OrdersInactive) {
-        let hash = url.split("#")[1];
-
-        if (
-          hash == "Cactive" ||
-          hash == "" ||
-          hash == null ||
-          hash == undefined
-        ) {
-          setisTrueActive(true);
-        } else {
-          setisTrueActive(false);
-        }
-      } else {
-        setisTrueActive(true);
-      }
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+  }, [HasValue]);
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {
@@ -136,13 +130,6 @@ export default function Filters({
     }
   }, [ResultScanner]);
 
-  // useEffect(() => {
-  //   let numStickerpaste = document.getElementById("numStickerText");
-  //   if (numStickerpaste != undefined && numStickerpaste != null) {
-  //     OnPasteNumberOneCharater(numStickerpaste, setNumeroSticker);
-  //   }
-  // }, []);
-
   return (
     <>
       <div
@@ -159,8 +146,10 @@ export default function Filters({
                 Options={Option}
                 HrefArmado={{ pathname: "/homeSecundario" }}
                 isTrueActive={isTrueActive}
-                isActiveCase={true} 
+                isActiveCase={true}
                 idAncestro={idAncestro}
+                HasValue={HasValue}
+                setHasValue={setHasValue}
               ></CaseStatus>
             ) : (
               <></>
@@ -259,15 +248,21 @@ export default function Filters({
                       <select
                         value={CasosActivo_Inactivos}
                         name="ListCasos"
-                        onChange={(e) =>
+                        onChange={(e) => {
                           OnclickComboEstadoCase(
                             e.target.value,
                             router,
                             HrefArmado,
                             // isUserInterno,
                             isSampleGeneral
-                          )
-                        }
+                          );
+
+                          if (e.target.value =="true") {
+                            setHasValue("Cactive");
+                          } else {
+                            setHasValue("Cinactvie");
+                          }
+                        }}
                         className={filterStyles.filter_input_w100}
                       >
                         <option value={true}>Activo</option>
@@ -382,7 +377,7 @@ export default function Filters({
                     href={""}
                     onClick={(e) => {
                       e.preventDefault();
-                      ClearFilter(e, router, GruopValue,idAncestro);
+                      ClearFilter(e, router, GruopValue, idAncestro);
                     }}
                     className={filterStyles.search}
                     title="Limpiar filtros de búsqueda"

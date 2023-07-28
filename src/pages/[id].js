@@ -27,6 +27,8 @@ function HomeMuestraxGrupo({
   const { LstObservacionesPrede, setLstObservacionesPrede } =
     useContextBitacora();
   const [isTrueActive, setisTrueActive] = useState(false);
+  const [HasValue, setHasValue] = useState("");
+  const [HasValueSample, setHasValueSample] = useState("");
   // const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
   const [IdGrupAncest, setIdGrupAncest] = useState(false);
@@ -65,7 +67,6 @@ function HomeMuestraxGrupo({
       query.page
     );
     setidAncestro(query.idAncestro);
-
   }, []);
 
   function QueryReturnNew(obj, idNEw) {
@@ -122,6 +123,7 @@ function HomeMuestraxGrupo({
   }, [IdGrupAncest]);
 
   useEffect(() => {
+    debugger;
     if (
       window.performance.navigation.type ==
         window.performance.navigation.TYPE_RELOAD ||
@@ -130,100 +132,168 @@ function HomeMuestraxGrupo({
     ) {
       let urlHref = window.location.href;
       let hashs2 = router.asPath.split("#")[1];
-      // let hashs3 = router.asPath.split("#")[2];
       let hashs4 = router.asPath.split("#")[2];
 
       //#region Muestras Activas
-      if (
-        hashs2 == "Cactive" ||
-        hashs2 == "" ||
-        hashs2 == null ||
-        hashs2 == undefined
-      ) {
-        if (hashs2 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#Cactive` },
-            "",
-            `${urlHref}#Cactive`
-          );
-          urlHref = window.location.href;
-        }
 
-        setisTrueActive(true);
+      if (HasValue == "") {
+        if (
+          hashs2 == "Cactive" ||
+          hashs2 == "" ||
+          hashs2 == null ||
+          hashs2 == undefined
+        ) {
+          if (hashs2 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#Cactive` },
+              "",
+              `${urlHref}#Cactive`
+            );
+
+            urlHref = window.location.href;
+          }
+          setHasValue("Cactive");
+          setisTrueActive(true);
+        } else {
+          setHasValue("Cinactvie");
+          setisTrueActive(false);
+        }
       } else {
-        setisTrueActive(false);
+        if (
+          HasValue == "Cactive" ||
+          HasValue == "" ||
+          HasValue == null ||
+          HasValue == undefined
+        ) {
+          if (hashs2 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#Cactive` },
+              "",
+              `${urlHref}#Cactive`
+            );
+
+            urlHref = window.location.href;
+          }
+          setHasValue("Cactive");
+          setisTrueActive(true);
+        } else {
+          setHasValue("Cinactvie");
+          setisTrueActive(false);
+        }
       }
+
       //#endregion
 
-      //#region Muestras generales o de urgencia
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
+      if (HasValueSample == "") {
+        if (
+          hashs4 == "OverallSample" ||
+          hashs4 == "" ||
+          hashs4 == null ||
+          hashs4 == undefined
+        ) {
+          if (hashs4 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#OverallSample` },
+              "",
+              `${urlHref}#OverallSample`
+            );
+            urlHref = window.location.href;
+          }
+          setHasValueSample("OverallSample");
+
+          setisSampleGeneral(true);
+        } else {
+          setHasValueSample("UrgentSamples");
+          setisSampleGeneral(false);
         }
-        setisSampleGeneral(true);
       } else {
-        setisSampleGeneral(false);
+        if (
+          HasValueSample == "OverallSample" ||
+          HasValueSample == "" ||
+          HasValueSample == null ||
+          HasValueSample == undefined
+        ) {
+          if (hashs4 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#OverallSample` },
+              "",
+              `${urlHref}#OverallSample`
+            );
+            urlHref = window.location.href;
+          }
+          setHasValueSample("OverallSample");
+          setisSampleGeneral(true);
+        } else {
+          setHasValueSample("UrgentSamples");
+          setisSampleGeneral(false);
+        }
       }
+
       //#endregion
     }
+  }, [HasValue]);
 
-    const onHashChangeStart = (url) => {
-      let hash = url.split("#")[1];
-      // let hashs3 = url.split("#")[2];
-      let hashs4 = url.split("#")[2];
+  useEffect(() => {
+    debugger;
+    if (
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_RELOAD ||
+      window.performance.navigation.type ==
+        window.performance.navigation.TYPE_NAVIGATE
+    ) {
       let urlHref = window.location.href;
+      let hashs2 = router.asPath.split("#")[1];
+      let hashs4 = router.asPath.split("#")[2];
 
-      //#region Muestras activas/inactivas
-      if (
-        hash == "Cactive" ||
-        hash == "" ||
-        hash == null ||
-        hash == undefined
-      ) {
-        setisTrueActive(true);
-      } else {
-        setisTrueActive(false);
-      }
-      //#endregion
+      //#region Muestras generales o de urgencia
+      if (HasValueSample == "") {
+        if (
+          hashs4 == "OverallSample" ||
+          hashs4 == "" ||
+          hashs4 == null ||
+          hashs4 == undefined
+        ) {
+          if (hashs4 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#OverallSample` },
+              "",
+              `${urlHref}#OverallSample`
+            );
+            urlHref = window.location.href;
+          }
+          setHasValueSample("OverallSample");
 
-      //#region Muestras generales /urgencias
-      if (
-        hashs4 == "OverallSample" ||
-        hashs4 == "" ||
-        hashs4 == null ||
-        hashs4 == undefined
-      ) {
-        if (hashs4 == undefined) {
-          window.history.pushState(
-            { path: `${urlHref}#OverallSample` },
-            "",
-            `${urlHref}#OverallSample`
-          );
-          urlHref = window.location.href;
+          setisSampleGeneral(true);
+        } else {
+          setHasValueSample("UrgentSamples");
+          setisSampleGeneral(false);
         }
-        setisSampleGeneral(true);
       } else {
-        setisSampleGeneral(false);
+        if (
+          HasValueSample == "OverallSample" ||
+          HasValueSample == "" ||
+          HasValueSample == null ||
+          HasValueSample == undefined
+        ) {
+          if (hashs4 == undefined) {
+            window.history.pushState(
+              { path: `${urlHref}#OverallSample` },
+              "",
+              `${urlHref}#OverallSample`
+            );
+            urlHref = window.location.href;
+          }
+          setHasValueSample("OverallSample");
+          setisSampleGeneral(true);
+        } else {
+          setHasValueSample("UrgentSamples");
+          setisSampleGeneral(false);
+        }
       }
+
       //#endregion
-    };
-
-    router.events.on("hashChangeStart", onHashChangeStart);
-
-    return () => {
-      router.events.off("hashChangeStart", onHashChangeStart);
-    };
-  }, [router.events]);
+    }
+  }, [HasValueSample]);
 
   return (
     <>
@@ -277,6 +347,8 @@ function HomeMuestraxGrupo({
         idAncestro={idAncestro}
         setidAncestro={setidAncestro}
         setcmbFiltroCambio={setcmbFiltroCambio}
+        HasValue={HasValue}
+        setHasValue={setHasValue}
       ></Filters>
       <CaseStatus
         HrefArmado={{ pathname: "/[id]", query: query }}
@@ -297,6 +369,7 @@ function HomeMuestraxGrupo({
         isSampleGeneral={isSampleGeneral}
         Options={Options}
         LstObservacionesPrede={LstObservacionesPrede}
+        setHasValueSample={setHasValueSample}
       ></Case>
     </>
   );
