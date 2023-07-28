@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import Head from "next/head";
-import IndexAncestro from "../../../components/Body/Ancestro/index";
-import { SampleDetailsAncestro } from "../../api/Sample/ViewDetailsAncestro/[id]";
+import CreateJefe from "../../../components/Body/JefeLaboratorio/create";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,19 +9,16 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-  const [InfoAncestro, setInfoAncestro] = useState([]);
-  useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "");
-  }, []);
+function CreatePage() {
 
+  
   return (
     <>
       <Head>
-        <title>{`Listado de grupos Home | Bitácora BD`}</title>
+        <title>{`Creación de Jefe de laboratorio | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los jefes de laboratorios`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,22 +29,22 @@ function CreatePage(cookie) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de grupos Home - Bitácora BD`}
+          content={`Creación de Jefe de laboratorio - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los jefes de laboratorios`}
         ></meta>
-        <meta property="og:title" content={`Listado de grupos Home - Bitácora BD`} />
+        <meta property="og:title" content={`Creación de Jefe de laboratorio - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los jefes de laboratorios`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexAncestro InfoAncestro={InfoAncestro}></IndexAncestro>
+      <CreateJefe></CreateJefe>
     </>
   );
 }

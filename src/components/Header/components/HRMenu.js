@@ -136,7 +136,7 @@ function HRMenu({ Roles }) {
                                   : ""
                               }`}
                             >
-                              Grupos Principales
+                              Grupos Home
                             </Link>
                           </li>
                         ) : (

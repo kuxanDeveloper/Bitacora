@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
 import Head from "next/head";
-import IndexAncestro from "../../../components/Body/Ancestro/index";
-import { SampleDetailsAncestro } from "../../api/Sample/ViewDetailsAncestro/[id]";
+import CreateMuestra from "../../../components/Body/TiposMuestra/Create";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -9,20 +8,22 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
+import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsAncestro/[id]";
 
 function CreatePage(cookie) {
-  const [InfoAncestro, setInfoAncestro] = useState([]);
-  useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "");
-  }, []);
 
+    const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+    useEffect(() => {
+        SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+      }, []);
+  
   return (
     <>
       <Head>
-        <title>{`Listado de grupos Home | Bitácora BD`}</title>
+        <title>{`Creación de Tipo de muestra | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los Tipos de muestra`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,22 +34,22 @@ function CreatePage(cookie) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de grupos Home - Bitácora BD`}
+          content={`Creación de Tipo de muestra - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los Tipos de muestra`}
         ></meta>
-        <meta property="og:title" content={`Listado de grupos Home - Bitácora BD`} />
+        <meta property="og:title" content={`Creación de Tipo de muestra - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde crean los Tipos de muestra`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexAncestro InfoAncestro={InfoAncestro}></IndexAncestro>
+      <CreateMuestra InforOptionsSelc={InforOptionsSelc}></CreateMuestra>
     </>
   );
 }

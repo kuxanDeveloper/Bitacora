@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import IndexAncestro from "../../../components/Body/Ancestro/index";
-import { SampleDetailsAncestro } from "../../api/Sample/ViewDetailsAncestro/[id]";
+import EditJefe from "../../../components/Body/JefeLaboratorio/Edit";
+import { SampleDetailsJefeLab } from "../../api/Sample/ViewDetailsParameters/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,19 +10,19 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
-  const [InfoAncestro, setInfoAncestro] = useState([]);
+function CreatePage({ cookie, id }) {
+  const [InfoJefeLab, setInfoJefeLab] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "");
+    SampleDetailsJefeLab(setInfoJefeLab, cookie, id,"");
   }, []);
 
   return (
     <>
       <Head>
-        <title>{`Listado de grupos Home | Bitácora BD`}</title>
+        <title>{`Edicion de Jefe de laboratorio | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde editan los jefe de laboratorio`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,22 +33,28 @@ function CreatePage(cookie) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de grupos Home - Bitácora BD`}
+          content={`Edicion de Jefe de laboratorio - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde editan los jefe de laboratorio`}
         ></meta>
-        <meta property="og:title" content={`Listado de grupos Home - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Edicion de Jefe de laboratorio - Bitácora BD`}
+        />
         <meta
           property="og:description"
-          content={`Lugar donde se listan los grupos Home de el sistema`}
+          content={`Lugar donde editan los jefe de laboratorio`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexAncestro InfoAncestro={InfoAncestro}></IndexAncestro>
+      <EditJefe
+        InfoJefeLab={InfoJefeLab}
+        idJefe={id}
+      ></EditJefe>
     </>
   );
 }
@@ -81,11 +87,20 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.ObservacionPredeEditAndUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
   } else {
     return {
       redirect: {

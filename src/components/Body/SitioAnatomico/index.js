@@ -22,7 +22,7 @@ function ComponentSitioIndex({InfoSitioAnt}) {
           <p className={styles.title}>Listado de Sitios Anatomicos</p>
           <Link
             href={{
-              pathname: "/Configuration/SitioAnatomico/IndexSitio",
+              pathname: "/Configuration/SitioAnatomico/CreateSitio",
             }}
             className={styles.btn_create}
           >
@@ -56,7 +56,8 @@ function ComponentSitioIndex({InfoSitioAnt}) {
                             title="Editar Opcion"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/SitioAnatomico/IndexSitio",
+                              pathname: "/Configuration/SitioAnatomico/[id]",
+                              query: { id: data.ID },
                             }}
                           >
                             Editar

@@ -20,7 +20,7 @@ function ComponentancestroIndex({InfoAncestro}) {
             </Link>
           </div>
 
-          <p className={styles.title}>Listado de Grupos principales</p>
+          <p className={styles.title}>Listado de Grupos Home</p>
           <Link
             href={{
               pathname: "/Configuration/Ancestros/CreateAncestros",
@@ -28,13 +28,13 @@ function ComponentancestroIndex({InfoAncestro}) {
             className={styles.btn_create}
           >
             <span>&#10010; </span>
-            Crear grupo principal
+            Crear grupo Home
           </Link>
           <div className={styles.card}>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th>Nombre grupo principal</th>
+                  <th>Nombre grupo Home</th>
                   <th>Estado</th>
                   <th>N° Orden</th>
                   <th>Opciones</th>
