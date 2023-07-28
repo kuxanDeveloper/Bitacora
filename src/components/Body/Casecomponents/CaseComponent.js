@@ -14,7 +14,7 @@ export default function CaseComponent({
   const {
     setShowModal,
     setishabiliteBtn,
-    setdobleImagen, 
+    setdobleImagen,
     setisImagenExterna,
     setValueImagesrcExterna2,
     setValueImagesrcExterna,
@@ -27,7 +27,10 @@ export default function CaseComponent({
       <div className={caseStyles.card_container}>
         <div className={caseStyles.sticker}>
           <p className={caseStyles.sticker_title}>Sticker</p>
-
+          {console.log(
+            data.URL_PRIMERA_IMAGEN,
+            process.env.NEXT_PUBLIC_URL_API
+          )}
           <button
             type="button"
             onClick={() => {
@@ -56,17 +59,20 @@ export default function CaseComponent({
             {data.URL_PRIMERA_IMAGEN != undefined &&
             data.URL_PRIMERA_IMAGEN != null &&
             data.URL_PRIMERA_IMAGEN != "" ? (
-              <ImageOptimize
-                Values={{
-                  src:
-                    process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN,
-                  alt: "sticker",
-                  title: "imagen sticker",
-                  classValue: "",
-                  width: 55,
-                  height: 28,
-                }}
-              ></ImageOptimize>
+              <>
+              {/* <img  src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}/> */}
+                <ImageOptimize
+                  Values={{
+                    src:
+                      process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN,
+                    alt: "sticker",
+                    title: "imagen sticker",
+                    classValue: "",
+                    width: 55,
+                    height: 28,
+                  }}
+                ></ImageOptimize>
+              </>
             ) : (
               <img className={caseStyles._image}></img>
             )}

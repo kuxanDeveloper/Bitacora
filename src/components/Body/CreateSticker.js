@@ -16,6 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import "dayjs/locale/en-gb";
+import Image from "next/image";
 
 function CreateSticker({
   ListadoGrupoActivo,
@@ -108,6 +109,8 @@ function CreateSticker({
   return (
     <>
       <section className={styles.Create_sticker}>
+      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link 

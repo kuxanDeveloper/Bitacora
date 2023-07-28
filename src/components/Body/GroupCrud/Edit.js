@@ -9,7 +9,7 @@ import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListSufij from "./ListSufijos";
 import ListPrueba from "./ListPruebas";
-
+import Image from "next/image";
 function ComponentGroup({InforGroup,InforSufijos,InforOptionsSelc,InforPruebaXGrupo}) {
   const [ListSufijo, setListSufijo] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
@@ -79,6 +79,13 @@ function ComponentGroup({InforGroup,InforSufijos,InforOptionsSelc,InforPruebaXGr
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

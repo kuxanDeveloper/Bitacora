@@ -1,6 +1,6 @@
 .CasesSumary {
   height: calc(100vh - 40px);
-  background-image: url("https://images.unsplash.com/photo-1631824686833-deb5156dea8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=518&q=80");
+  background-image: url("http://192.168.0.100:8081/img/photo-1631824686833-deb5156dea8f.avif");
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -50,7 +50,7 @@
 @media (min-width: 768px) {
     .CasesSumary {
         height: calc(100vh - 64px);
-        background-image: url("https://images.unsplash.com/photo-1631824686833-deb5156dea8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=518&q=80");
+        background-image: url("/static/img/photo-1631824686833-deb5156dea8f.avif");
         background-repeat: no-repeat;
         background-size: cover;
         display: flex;

@@ -2,11 +2,22 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-
-function ComponentTipomueIndex({InfoTipoMue}) {
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentTipomueIndex({ InfoTipoMue }) {
   return (
     <>
       <section className={styles.Index_users}>
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
@@ -34,14 +45,13 @@ function ComponentTipomueIndex({InfoTipoMue}) {
               <thead>
                 <tr>
                   <th>Tipo de muestra</th>
-                  <th>Grupo</th>  
-                  <th>Estado</th> 
+                  <th>Grupo</th>
+                  <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                {InfoTipoMue != null &&
-                 InfoTipoMue != undefined
+                {InfoTipoMue != null && InfoTipoMue != undefined
                   ? InfoTipoMue.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_TIPO_MUESTRA}</td>
@@ -52,8 +62,8 @@ function ComponentTipomueIndex({InfoTipoMue}) {
                           ) : (
                             <span>&#10060;</span>
                           )}
-                        </td> 
-                        
+                        </td>
+
                         <td className={styleTable.textCenterColumn}>
                           <Link
                             title="Editar Opcion"

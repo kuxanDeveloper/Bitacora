@@ -2,11 +2,23 @@ import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-
-function ComponentancestroIndex({InfoAncestro}) {
+import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentancestroIndex({ InfoAncestro }) {
   return (
     <>
       <section className={styles.Index_users}>
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
@@ -41,8 +53,7 @@ function ComponentancestroIndex({InfoAncestro}) {
                 </tr>
               </thead>
               <tbody>
-                {InfoAncestro != null &&
-                InfoAncestro != undefined
+                {InfoAncestro != null && InfoAncestro != undefined
                   ? InfoAncestro.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_ANCESTRO}</td>

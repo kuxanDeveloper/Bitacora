@@ -8,7 +8,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckAncestro } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListGrupos from "./ListGrupos";
-
+import Image from "next/image";
 function ComponentGroup({InfoAncestro,InforOptionsSelc,InforGruposXAncest, idAncestro}) {
 
   const [ListGruposAnc, setListGruposAnc] = useState([]);
@@ -38,6 +38,13 @@ function ComponentGroup({InfoAncestro,InforOptionsSelc,InforGruposXAncest, idAnc
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

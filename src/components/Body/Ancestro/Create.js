@@ -8,9 +8,8 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckAncestro } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListGrupos from "./ListGrupos";
-
-function ComponentGroup({InforOptionsSelc}) {
-
+import Image from "next/image";
+function ComponentGroup({ InforOptionsSelc }) {
   const [ListGruposAnc, setListGruposAnc] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
@@ -35,16 +34,22 @@ function ComponentGroup({InforOptionsSelc}) {
     checkbox1.checked = true;
   }, []);
 
-  
-
   return (
     <>
       <section className={styles.create_note}>
+        <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/Ancestros/IndexAncestros"
+                pathname: "/Configuration/Ancestros/IndexAncestros",
               }}
               className={styles.back_btn}
             >
@@ -77,8 +82,6 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.nombre_Ancestro?.message}
                       </div>
                     </div>
-
-                    
                   </div>
 
                   <div
@@ -104,7 +107,6 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.Orden_ancestro?.message}
                       </div>
                     </div>
-                    
                   </div>
 
                   <ListGrupos
@@ -112,13 +114,13 @@ function ComponentGroup({InforOptionsSelc}) {
                     setListGruposAnc={setListGruposAnc}
                     InforOptionsSelc={InforOptionsSelc}
                   ></ListGrupos>
-                 
+
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckAncestro(setValue);
-                            setValue("Lst_grupos",ListGruposAnc);
+                          setCheckAncestro(setValue);
+                          setValue("Lst_grupos", ListGruposAnc);
                         }}
                         className={styles.btn_send}
                       >
@@ -128,7 +130,7 @@ function ComponentGroup({InforOptionsSelc}) {
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/Ancestros/IndexAncestros"
+                        pathname: "/Configuration/Ancestros/IndexAncestros",
                       }}
                     >
                       Cancelar

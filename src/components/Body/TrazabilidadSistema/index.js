@@ -5,7 +5,7 @@ import styleTable from "../../../styles/TableStyles.module.scss";
 import { ExportToExcelcsvTrazaSistema } from "../../../pages/api/Sample/ViewDetailsTrazabilidad/[id]";
 import { useRouter } from "next/router";
 import Pagination from "../../Tools/Pagination";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentTrazaSisIndex({
   InforSampleDetails,
   FechaIngreso,
@@ -41,6 +41,17 @@ function ComponentTrazaSisIndex({
   return (
     <>
       <section className={styles.Index_users}>
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div
           className={`${styles.sticker_container} ${styleTable.max_width_card}`}
         >

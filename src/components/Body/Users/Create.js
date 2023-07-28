@@ -13,7 +13,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import Swal from "sweetalert2";
-
+import Image from "next/image";
 function ComponentGroup({
   InforSampleDetails,
   InforSampleTips,
@@ -83,6 +83,13 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

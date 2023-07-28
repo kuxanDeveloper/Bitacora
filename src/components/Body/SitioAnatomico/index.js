@@ -2,11 +2,22 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-
-function ComponentSitioIndex({InfoSitioAnt}) {
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentSitioIndex({ InfoSitioAnt }) {
   return (
     <>
       <section className={styles.Index_users}>
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
@@ -34,13 +45,12 @@ function ComponentSitioIndex({InfoSitioAnt}) {
               <thead>
                 <tr>
                   <th>Sitio Anatomico</th>
-                  <th>Estado</th>                  
+                  <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                {InfoSitioAnt != null &&
-                InfoSitioAnt != undefined
+                {InfoSitioAnt != null && InfoSitioAnt != undefined
                   ? InfoSitioAnt.map((data, index) => (
                       <tr key={index}>
                         <td>{data.DESCRIPCION}</td>
@@ -50,7 +60,7 @@ function ComponentSitioIndex({InfoSitioAnt}) {
                           ) : (
                             <span>&#10060;</span>
                           )}
-                        </td>                        
+                        </td>
                         <td className={styleTable.textCenterColumn}>
                           <Link
                             title="Editar Opcion"
