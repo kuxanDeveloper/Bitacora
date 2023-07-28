@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-
+import Image from "next/image";
 function ComponentUsersIndex(InforSampleDetails) {
   return (
     <>
       <section className={styles.Index_users}>
+
+        <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

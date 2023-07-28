@@ -11,6 +11,7 @@ import {
   OnchangeObservaCrearEdit,
   RegisterEditNoteObservaciones,
 } from "../../Tools/functiones";
+import Image from "next/image";
 
 function ComponentsCreateNote({
   id,
@@ -56,6 +57,13 @@ function ComponentsCreateNote({
   return (
     <>
       <section className={styles.create_note}>
+      <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
