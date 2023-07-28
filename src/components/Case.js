@@ -134,9 +134,7 @@ export default function Case({
                 </Link>
               </p>
               <p
-                className={`${caseStyles.status} ${
-                  !isSampleGeneral ? caseStyles.active : ""
-                }`}
+                className={`${caseStyles.status} `}
               >
                 <button
                   onClick={changeModeVew}
