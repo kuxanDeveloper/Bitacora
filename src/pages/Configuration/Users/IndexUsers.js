@@ -10,6 +10,8 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
+
+
 function CreatePage({ cookie }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
