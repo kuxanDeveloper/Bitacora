@@ -60,7 +60,7 @@ export default function CaseComponent({
             data.URL_PRIMERA_IMAGEN != null &&
             data.URL_PRIMERA_IMAGEN != "" ? (
               <>
-              <img width={55} height={28} src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}> </img>
+              {/* <img  src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}/> */}
                 <ImageOptimize
                   Values={{
                     src:

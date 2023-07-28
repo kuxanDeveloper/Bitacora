@@ -41,7 +41,7 @@ export default function Case({
         return;
       } else {
         seturlImagenDinamyc(
-          "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=925&q=80"
+          "/img/photo-1614935151651-0bea6508db6b.avif"
         );
       }
     }
@@ -64,7 +64,9 @@ export default function Case({
         <div>
           {/* <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" /> */}
 
-          {urlImagenDinamyc != null ? (
+          {urlImagenDinamyc != null &&
+          urlImagenDinamyc != undefined &&
+          urlImagenDinamyc != "" ? (
             <ImageOptimize
               Values={{
                 src: urlImagenDinamyc,
