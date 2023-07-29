@@ -33,7 +33,7 @@ function ComponentTipomueIndex({ InfoTipoMue }) {
           <p className={styles.title}>Listado de Tipos de muestra</p>
           <Link
             href={{
-              pathname: "/Configuration/TiposMuestras/index",
+              pathname: "/Configuration/TiposMuestras/CreateTipo",
             }}
             className={styles.btn_create}
           >
@@ -69,7 +69,8 @@ function ComponentTipomueIndex({ InfoTipoMue }) {
                             title="Editar Opcion"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/TiposMuestras/index",
+                              pathname: "/Configuration/TiposMuestras/[id]",
+                              query: { id: data.ID },
                             }}
                           >
                             Editar

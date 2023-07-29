@@ -33,7 +33,7 @@ function ComponentjefeIndex({ InfoJefeLab }) {
           <p className={styles.title}>Listado de Jefes de laboratorio</p>
           <Link
             href={{
-              pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+              pathname: "/Configuration/JefeLaboratorio/CreateJefe",
             }}
             className={styles.btn_create}
           >
@@ -71,8 +71,8 @@ function ComponentjefeIndex({ InfoJefeLab }) {
                             title="Editar Opcion"
                             className={styles.add_icon}
                             href={{
-                              pathname:
-                                "/Configuration/JefeLaboratorio/IndexJefe",
+                              pathname: "/Configuration/JefeLaboratorio/[id]",
+                              query: { id: data.ID },
                             }}
                           >
                             Editar

@@ -396,6 +396,20 @@ export const setCheckOptionReslt = (setValue) => {
   }
 };
 
+export const setCheckEstadoCrud = (setValue) => {
+  var checbox1 = document.getElementById("Estado");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("ESTADO", "0");
+  } else {
+    setValue("ESTADO", "1");
+  }
+};
+
 export const setCheckPlantillaReslt = (setValue) => {
   var checbox1 = document.getElementById("EstadoPlantilla");
 

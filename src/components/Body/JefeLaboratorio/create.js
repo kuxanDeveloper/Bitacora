@@ -1,55 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
-import { onSubmitCreateAncestro } from "../../Tools/crudAncestro";
+import { onSubmitCreateJefeLab } from "../../Tools/crudJefeLaboratorio";
 import styles from "../../../styles/CreateNotes.module.scss";
-import { setCheckAncestro } from "../../Tools/functiones";
+import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import ListGrupos from "./ListGrupos";
-import Image from "next/image";
-function ComponentGroup({ InforOptionsSelc }) {
-  const [ListGruposAnc, setListGruposAnc] = useState([]);
 
-  const validarEsquemaGrupo = Yup.object().shape({
-    nombre_Ancestro: Yup.string().required(
-      "El campo nombre del grupo principal es obligatorio"
+function ComponentCreateJefeLab() {
+  const validarEsquemaobservation = Yup.object().shape({
+    DESCRIPCION: Yup.string().required(
+      "El campo nombre del jefe de laboratorio es obligatorio"
     ),
-    Estado_Ancestro: Yup.string().required(
-      "El campo de estado del grupo principal es obligatorio"
+    ESTADO: Yup.string().required(
+      "Es obligatorio seleccionar el estado del jefe de laboratorio"
     ),
-    Orden_ancestro: Yup.string().required(
-      "El campo de orden del grupo principal es obligatorio"
+    DOCUMENTO: Yup.string().required(
+      "El campo documento del jefe de laboratorio es obligatorio"
     ),
-    Lst_grupos: Yup.array().notRequired(),
+    INF_ADICIONAL: Yup.string().notRequired()
   });
 
-  const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
+  const formOptions = { resolver: yupResolver(validarEsquemaobservation) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
 
   useEffect(() => {
-    var checkbox1 = document.getElementById("EstadoAncestro");
-    checkbox1.checked = true;
+    var estdJefe = document.getElementById("Estado");
+
+    estdJefe.checked = true;
   }, []);
 
   return (
     <>
       <section className={styles.create_note}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
-
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/Ancestros/IndexAncestros",
+                pathname: "/Configuration/JefeLaboratorio/IndexJefe",
               }}
               className={styles.back_btn}
             >
@@ -57,10 +47,10 @@ function ComponentGroup({ InforOptionsSelc }) {
             </Link>
           </div>
 
-          <p className={styles.title}>Crear Grupo Home</p>
+          <p className={styles.title}>Crear Jefe de laboratorio</p>
           <br />
           <div className={styles.card}>
-            <form onSubmit={handleSubmit(onSubmitCreateAncestro)}>
+            <form onSubmit={handleSubmit(onSubmitCreateJefeLab)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
@@ -69,17 +59,27 @@ function ComponentGroup({ InforOptionsSelc }) {
                     className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                   >
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Nombre Grupo Home</label>
+                      <label className={styles.group_title}>
+                        Nombre del jefe de laboratorio
+                      </label>
                       <input
-                        {...register("nombre_Ancestro")}
-                        name="nombre_Ancestro"
-                        maxLength="100"
-                        type="text"
-                        min="0"
+                        {...register("DESCRIPCION")}
+                        name="DESCRIPCION"
+                        maxLength="150"
                         className={styles.group_input}
                       />
                       <div className={styles.invalid_feedback}>
-                        {errors.nombre_Ancestro?.message}
+                        {errors.DESCRIPCION?.message}
+                      </div>
+                    </div>
+
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Estado del jefe de laboratorio
+                      </label>
+                      <input id="Estado" type="checkbox" />
+                      <div className={styles.invalid_feedback}>
+                        {errors.ESTADO?.message}
                       </div>
                     </div>
                   </div>
@@ -89,48 +89,50 @@ function ComponentGroup({ InforOptionsSelc }) {
                   >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                        Estado del Grupo Home
+                        Documento del jefe de laboratorio
                       </label>
-                      <input id="EstadoAncestro" type="checkbox" />
-                    </div>
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>N° Orden del Grupo Home</label>
                       <input
-                        {...register("Orden_ancestro")}
-                        name="Orden_ancestro"
-                        maxLength="100"
-                        type="number"
-                        min="0"
+                        {...register("DOCUMENTO")}
+                        name="DOCUMENTO"
+                        maxLength="150"
                         className={styles.group_input}
                       />
                       <div className={styles.invalid_feedback}>
-                        {errors.Orden_ancestro?.message}
+                        {errors.DOCUMENTO?.message}
+                      </div>
+                    </div>
+
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Informacion adicional
+                      </label>
+                      <input
+                        {...register("INF_ADICIONAL")}
+                        name="INF_ADICIONAL"
+                        maxLength="150"
+                        className={styles.group_input}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.INF_ADICIONAL?.message}
                       </div>
                     </div>
                   </div>
-
-                  <ListGrupos
-                    ListGruposAnc={ListGruposAnc}
-                    setListGruposAnc={setListGruposAnc}
-                    InforOptionsSelc={InforOptionsSelc}
-                  ></ListGrupos>
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                          setCheckAncestro(setValue);
-                          setValue("Lst_grupos", ListGruposAnc);
+                            setCheckEstadoCrud(setValue);
                         }}
                         className={styles.btn_send}
                       >
-                        Guardar
+                        Guardar Jefe de laboratorio
                       </button>
                     )}
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/Ancestros/IndexAncestros",
+                        pathname: "/Configuration/JefeLaboratorio/IndexJefe",
                       }}
                     >
                       Cancelar
@@ -146,4 +148,4 @@ function ComponentGroup({ InforOptionsSelc }) {
   );
 }
 
-export default ComponentGroup;
+export default ComponentCreateJefeLab;
