@@ -6,6 +6,7 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
+import Image from "next/image";
 export default function StickerDetails({
   InforSampleDetails,
   query,
@@ -27,6 +28,7 @@ export default function StickerDetails({
   return (
     <>
       <div className={styles.sticker_details}>
+      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
         <div className={styles.details_container}>
           <div className={styles.home_btn_container}>
             <Link

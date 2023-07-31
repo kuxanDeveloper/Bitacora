@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
+import Image from "next/image";
 function ComponentCreateResult({
   ListPruebas,
   ListResultados,
@@ -29,7 +30,6 @@ function ComponentCreateResult({
     COD_BITACORA: Yup.number(),
   });
 
-
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
@@ -37,6 +37,13 @@ function ComponentCreateResult({
   return (
     <>
       <section className={styles.Create_Result}>
+        <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
@@ -181,7 +188,7 @@ function ComponentCreateResult({
                             ))
                           : ""}
                       </select>
-                      <div>{errors.Codigo_resultado_preliminar_1?.message}</div>
+                      <div className={styles.invalid_feedback}>{errors.Codigo_resultado_preliminar_1?.message}</div>
                     </div>
                   </div>
 
@@ -216,7 +223,7 @@ function ComponentCreateResult({
                                     ))
                                   : ""}
                               </select>
-                              <div>{errors.Codigo_opcion?.message}</div>
+                              <div className={styles.invalid_feedback}>{errors.Codigo_opcion?.message}</div>
                             </div>
                           </div>
                         ) : (
