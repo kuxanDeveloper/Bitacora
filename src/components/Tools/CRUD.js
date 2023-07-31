@@ -158,18 +158,14 @@ export const QueryActivegroup = (cookie, idAncestro) => {
 };
 
 export const onSubmitCreateResult = ({
-  Codigo_prueba,
-  Codigo_resultado_preliminar_1,
-  Codigo_opcion,
   COD_BITACORA,
+  ListResultMultiple
 }) => {
   const StickerRetorno = COD_BITACORA;
   return userService
     .CrearResult(
-      Codigo_prueba,
-      Codigo_resultado_preliminar_1,
-      Codigo_opcion,
-      COD_BITACORA
+      COD_BITACORA,
+      ListResultMultiple
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";

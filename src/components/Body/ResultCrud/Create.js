@@ -2,6 +2,7 @@ import React from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
+  AddResultToList,
 } from "../../Tools/functiones";
 import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -9,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
+import ListResulltAdd from "./ListResulltAdd";
+
 import Image from "next/image";
 function ComponentCreateResult({
   ListPruebas,
@@ -20,18 +23,22 @@ function ComponentCreateResult({
   setvaluePlantillachange,
   ListOptiones,
   group,
+  ListAddResultMultple,
+  setListAddResultMultple,
 }) {
   const validationSchema = Yup.object().shape({
-    Codigo_prueba: Yup.string().required("Campo prueba obligatorio"),
-    Codigo_resultado_preliminar_1: Yup.string().required(
-      "Campo seguimiento obligatorio"
-    ),
+    Codigo_prueba: Yup.string().notRequired(),
+    Codigo_resultado_preliminar_1: Yup.string().notRequired(),
     Codigo_opcion: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
+    ListResultMultiple: Yup.array()
+      .min(1,"Debe por lo menos tener un estatus agregado")
+      .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState, setValue } = useForm(formOptions);
+  const { register, handleSubmit, formState, setValue, clearErrors, setError } =
+    useForm(formOptions);
   const { errors } = formState;
 
   return (
@@ -145,6 +152,7 @@ function ComponentCreateResult({
                             setvaluePlantillachange,
                             setValue
                           );
+                          clearErrors("Codigo_prueba");
                         }}
                       >
                         <option disabled value="">
@@ -175,6 +183,7 @@ function ComponentCreateResult({
                         onChange={(e) => {
                           setvaluePlantillachange(e.target.value);
                           onclickPlantillaTargetCreate(setValue);
+                          clearErrors("Codigo_resultado_preliminar_1");
                         }}
                       >
                         <option disabled value="">
@@ -207,6 +216,7 @@ function ComponentCreateResult({
                                 id="Codigo_opcion"
                                 className={styles.input_group}
                                 defaultValue={""}
+                                onChange={() => clearErrors("Codigo_opcion")}
                               >
                                 <option disabled value="">
                                   Seleccione una opción
@@ -235,10 +245,64 @@ function ComponentCreateResult({
                   }
 
                   <div className={styles.btn_container_send}>
+                    <Link
+                      className={styles.create_followUp}
+                      href={""}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        AddResultToList(
+                          "Codigo_prueba",
+                          "Codigo_resultado_preliminar_1",
+                          "Codigo_opcion",
+                          setListAddResultMultple,
+                          ListAddResultMultple,
+                          setError,
+                          ListOptiones,
+                          setvaluePlantillachange
+                        );
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-circle-plus"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="#fff"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M9 12l6 0" />
+                        <path d="M12 9l0 6" />
+                      </svg>
+                    </Link>
+                  </div>
+
+                  {/*Listado de los resultados agregados */}
+
+                  <div className={styles.form_group}>
+                    <div className={styles.input_group}>
+                      <ListResulltAdd
+                        styles={styles}
+                        ListAddResultMultple={ListAddResultMultple}
+                        setListAddResultMultple={setListAddResultMultple}
+                      ></ListResulltAdd>
+                         <div>{errors.ListResultMultiple?.message}</div>
+                    </div>
+                  </div>
+
+                  <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         className={styles.btn_send}
-                        onClick={() => setValue("COD_BITACORA", id)}
+                        onClick={() => {
+                          setValue("COD_BITACORA", id);
+                          setValue("ListResultMultiple", ListAddResultMultple);
+                        }}
                       >
                         guardar cambios
                       </button>

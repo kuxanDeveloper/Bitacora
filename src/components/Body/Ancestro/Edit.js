@@ -57,7 +57,7 @@ function ComponentGroup({InfoAncestro,InforOptionsSelc,InforGruposXAncest, idAnc
             </Link>
           </div>
 
-          <p className={styles.title}>Editar Grupo Principal</p>
+          <p className={styles.title}>Editar Grupo Home</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitUpdateAncestro)}>
@@ -73,7 +73,7 @@ function ComponentGroup({InfoAncestro,InforOptionsSelc,InforGruposXAncest, idAnc
                     className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                   >
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Nombre Grupo Principal</label>
+                      <label className={styles.group_title}>Nombre Grupo Home</label>
                       <input
                         {...register("nombre_Ancestro")}
                         name="nombre_Ancestro"
@@ -96,12 +96,12 @@ function ComponentGroup({InfoAncestro,InforOptionsSelc,InforGruposXAncest, idAnc
                   >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                        Estado del Grupo Principal
+                        Estado del Grupo Home
                       </label>
                       <input defaultChecked={data.ESTADO_ANCESTRO} id="EstadoAncestro" type="checkbox" />
                     </div>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>N° Orden del Grupo Principal</label>
+                      <label className={styles.group_title}>N° Orden del Grupo Home</label>
                       <input
                         {...register("Orden_ancestro")}
                         name="Orden_ancestro"

@@ -56,6 +56,18 @@
       }
     }
 
+    .create_followUp {
+      background-color: #e57d00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 10px;
+      border-radius: 50%;
+     
+    }
+    
+
     .title {
       font-size: clamp(20px, 1.4rem, 1.5rem);
       color: #fff;

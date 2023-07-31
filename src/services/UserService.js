@@ -81,7 +81,13 @@ export const userService = {
   lstSitioAnatomico,
   GetlistJefeLaboratorio,
   GetlistSitiosAnatomicos,
-  GetlistTiposMuestra
+  GetlistTiposMuestra,
+  CreateJefeLaboratorio,
+  EditJefeLaboratorio,
+  CreateSitioAnatomico,
+  EditSitioAnatomico,
+  CreateTipoMuestra,
+  EditTipoMuestra
 };
 
 async function login(username, password) {
@@ -288,21 +294,12 @@ function CreatSticker(
   );
 }
 
-function CrearResult(
-  Codigo_prueba,
-  Codigo_resultado_preliminar_1,
-  Codigo_opcion,
-  COD_BITACORA
-) {
+function CrearResult(COD_BITACORA, ListResultMultiple) {
+  debugger;
+  let variable = JSON.stringify(ListResultMultiple);
   const formData = new FormData();
   formData.append("COD_BITACORA", COD_BITACORA);
-  formData.append("Codigo_prueba", Codigo_prueba);
-  formData.append(
-    "Codigo_resultado_preliminar_1",
-    Codigo_resultado_preliminar_1
-  );
-  formData.append("Codigo_opcion", Codigo_opcion);
-
+  formData.append("ListResultMultiple", JSON.stringify(ListResultMultiple));
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
     null,
@@ -378,7 +375,7 @@ function EditSticker(
   formData.append("jefelaboratorio", jefelaboratorio);
   formData.append("tipoMuestra", tipoMuestra);
   formData.append("FechaHoraRecogida", FechaHoraRecogida);
-  
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditBitacoraMuestra`,
     null,
@@ -970,21 +967,135 @@ function GetlistGruposXAncestro(cookie, COD_ANCESTRO) {
   );
 }
 
-function GetlistJefeLaboratorio(cookie, ID,ESTADO) {
+function CreateJefeLaboratorio(
+  DESCRIPCION,
+  ESTADO,
+  DOCUMENTO,
+  INF_ADICIONAL
+) {
+  const formData = new FormData();
+
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+  formData.append("DOCUMENTO", DOCUMENTO);
+  formData.append("INF_ADICIONAL", INF_ADICIONAL);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarJefeLaboratorio`,
+    null,
+    formData
+  );
+}
+
+function EditJefeLaboratorio(
+  ID,
+  DESCRIPCION,
+  ESTADO,
+  DOCUMENTO,
+  INF_ADICIONAL
+) {
+  const formData = new FormData();
+
+  formData.append("ID", ID);
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+  formData.append("DOCUMENTO", DOCUMENTO);
+  formData.append("INF_ADICIONAL", INF_ADICIONAL);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarJefeLaboratorio`,
+    null,
+    formData
+  );
+}
+
+function GetlistJefeLaboratorio(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistJefesLaboratorio?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
   );
 }
 
-function GetlistSitiosAnatomicos(cookie, ID,ESTADO) {
+function CreateSitioAnatomico(
+  DESCRIPCION,
+  ESTADO
+) {
+  const formData = new FormData();
+
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarSitioAnatomico`,
+    null,
+    formData
+  );
+}
+
+function EditSitioAnatomico(
+  ID,
+  DESCRIPCION,
+  ESTADO
+) {
+  const formData = new FormData();
+
+  formData.append("ID", ID);
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarSitioAnatomico`,
+    null,
+    formData
+  );
+}
+
+function GetlistSitiosAnatomicos(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistSitiosAnatomicos?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
   );
 }
 
-function GetlistTiposMuestra(cookie, ID,ESTADO) {
+function CreateTipoMuestra(
+  NOMBRE_TIPO_MUESTRA,
+  ESTADO,
+  ID_GRUPO
+) {
+  const formData = new FormData();
+
+  formData.append("NOMBRE_TIPO_MUESTRA", NOMBRE_TIPO_MUESTRA);
+  formData.append("ESTADO", ESTADO);  
+  formData.append("ID_GRUPO", ID_GRUPO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarTipoMuestra`,
+    null,
+    formData
+  );
+}
+
+function EditTipoMuestra(
+  ID,
+  NOMBRE_TIPO_MUESTRA,
+  ESTADO,
+  ID_GRUPO
+) {
+  const formData = new FormData();
+
+  formData.append("ID", ID);
+  formData.append("NOMBRE_TIPO_MUESTRA", NOMBRE_TIPO_MUESTRA);
+  formData.append("ESTADO", ESTADO);  
+  formData.append("ID_GRUPO", ID_GRUPO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarTipoMuestra`,
+    null,
+    formData
+  );
+}
+
+function GetlistTiposMuestra(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}`,
     cookie

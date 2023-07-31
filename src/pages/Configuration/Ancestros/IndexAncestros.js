@@ -19,10 +19,10 @@ function CreatePage(cookie) {
   return (
     <>
       <Head>
-        <title>{`Listado de grupos principales | Bitácora BD`}</title>
+        <title>{`Listado de grupos Home | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde se listan los grupos principales de el sistema`}
+          content={`Lugar donde se listan los grupos Home de el sistema`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,16 +33,16 @@ function CreatePage(cookie) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Listado de grupos principales - Bitácora BD`}
+          content={`Listado de grupos Home - Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde se listan los grupos principales de el sistema`}
+          content={`Lugar donde se listan los grupos Home de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Listado de grupos principales - Bitácora BD`} />
+        <meta property="og:title" content={`Listado de grupos Home - Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde se listan los grupos principales de el sistema`}
+          content={`Lugar donde se listan los grupos Home de el sistema`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />

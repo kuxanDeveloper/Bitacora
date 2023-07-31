@@ -19,12 +19,13 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
   const [ListPruebas, setListPruebas] = useState([]);
   const [valuePruebachange, setvaluePruebachange] = useState("");
   const [valuePlantillachange, setvaluePlantillachange] = useState("");
+  const [ListAddResultMultple, setListAddResultMultple] = useState([]);
   useEffect(() => {
-    ListPruebaxGroupApi(cookie, setListPruebas, group,id);
+    ListPruebaxGroupApi(cookie, setListPruebas, group, id);
   }, []);
 
   useEffect(() => {
-    ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange,id);
+    ListPlanResultadosxPru(cookie, setListResultados, valuePruebachange, id);
   }, [valuePruebachange]);
 
   useEffect(() => {
@@ -76,6 +77,8 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
         group={group}
         name_group={name_group}
         sticker={sticker}
+        ListAddResultMultple={ListAddResultMultple}
+        setListAddResultMultple={setListAddResultMultple}
       />
     </>
   );

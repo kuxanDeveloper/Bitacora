@@ -99,7 +99,7 @@ export const FilterQuerySearch = (
       Numstiker: Numstiker,
       DateAdmission: DateAdmission,
       idAncestro: idAncest,
-      page:"1"
+      page: "1",
     },
   });
 };
@@ -235,7 +235,7 @@ export const FilterSearchTrazaTables = (
   });
 };
 
-export const ClearFilter = (e, router, idGrupo,idAncestro) => {
+export const ClearFilter = (e, router, idGrupo, idAncestro) => {
   e.preventDefault();
   let urlHref = window.location.href;
   let hashs2 = urlHref.split("#")[1];
@@ -246,7 +246,7 @@ export const ClearFilter = (e, router, idGrupo,idAncestro) => {
   } else {
     router.push({
       pathname: router.pathname,
-      query: { id: idGrupo, page:"1",idAncest:idAncestro },
+      query: { id: idGrupo, page: "1", idAncest: idAncestro },
       hash: `${hashs2}#${hashs4}`,
     });
   }
@@ -329,7 +329,6 @@ export const onclickPruebaTargetCreate = (
 
 export const onclickPlantillaTargetCreate = (setValue) => {
   let option = document.getElementById("Codigo_opcion");
-  setValue("Codigo_opcion", "");
   if (option != null && option != undefined) {
     document.getElementById("Codigo_opcion").value = "";
   }
@@ -341,59 +340,17 @@ export const onclickPruebaTargetEdit = (
   setcodSeguimiento,
   setcodOpciones
 ) => {
-  // document.getElementById("Codigo_resultado_preliminar_1").value = "";
   setcodSeguimiento("");
   setcodOpciones("");
   setvaluePlantillachange([]);
   setValue("Codigo_opcion", "");
-  // let option = document.getElementById("Codigo_opcion");
-  // if (option != null && option != undefined) {
-  //   document.getElementById("Codigo_opcion").value = "";
-  // }
 };
 
 export const onclickPlantillaTargetEdit = (setValue, setcodOpciones) => {
-  // let option = document.getElementById("Codigo_opcion");
   setValue("Codigo_opcion", "");
-  // if (option != null && option != undefined) {
-  //   document.getElementById("Codigo_opcion").value = "";
-  // }
+
   setcodOpciones("");
 };
-
-// export const setCheckinvalue = (setValue) => {
-//   var checbox1 = document.getElementById("UserCheckinter");
-//   var checbox2 = document.getElementById("UserCheckexter");
-
-//   if (
-//     (checbox1.checked != null &&
-//       checbox1.checked != undefined &&
-//       checbox1.checked != false) ||
-//     (checbox2.checked != null &&
-//       checbox2.checked != undefined &&
-//       checbox2.checked != false)
-//   ) {
-//     if (
-//       checbox1.checked == null ||
-//       checbox1.checked == undefined ||
-//       checbox1.checked == false
-//     ) {
-//       setValue("UserCheckinter", "0");
-//     } else {
-//       setValue("UserCheckinter", "1");
-//     }
-
-//     if (
-//       checbox2.checked == null ||
-//       checbox2.checked == undefined ||
-//       checbox2.checked == false
-//     ) {
-//       setValue("UserCheckexter", "0");
-//     } else {
-//       setValue("UserCheckexter", "1");
-//     }
-//   }
-// };
 
 export const setCheckindividual = (setValue) => {
   var checbox1 = document.getElementById("EstadoGrupo");
@@ -436,6 +393,20 @@ export const setCheckOptionReslt = (setValue) => {
     setValue("Estado_opcion", "0");
   } else {
     setValue("Estado_opcion", "1");
+  }
+};
+
+export const setCheckEstadoCrud = (setValue) => {
+  var checbox1 = document.getElementById("Estado");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("ESTADO", "0");
+  } else {
+    setValue("ESTADO", "1");
   }
 };
 
@@ -571,23 +542,6 @@ export const setImagenfileUpdateNote = (
   }
 };
 
-// export const uncheckUserInterExterno = () => {
-//   var checkbox1 = document.getElementById("UserCheckinter");
-//   var checkbox2 = document.getElementById("UserCheckexter");
-
-//   checkbox1.onchange = function () {
-//     if (checkbox1.checked != false) {
-//       checkbox2.checked = null;
-//     }
-//   };
-
-//   checkbox2.onchange = function () {
-//     if (checkbox2.checked != false) {
-//       checkbox1.checked = null;
-//     }
-//   };
-// };
-
 export const UploadImageSticker = (
   event,
   setisImagenExterna,
@@ -687,16 +641,6 @@ export const LocationUrl = (router, value) => {
   return aciteMenuClass;
 };
 
-// export const LocationSubMenuUrl = (router, value) => {
-//   let aciteMenuClass = false;
-
-//   if (router.pathname.toLowerCase().includes(value)) {
-//     aciteMenuClass = true;
-//   }
-
-//   return aciteMenuClass;
-// };
-
 export const AperturaandCierre = (data, LstObservacionesPrede) => {
   window.OnchangeValueSelect = function (value) {
     let valueGetId = document.getElementById("Observacionother");
@@ -762,18 +706,6 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
         confirmButtonColor: "#e57d00",
         cancelButtonColor: "#767676",
         showLoaderOnConfirm: true,
-        // inputValidator: (value) => {
-        //   let classCancel =
-        //     document.getElementsByClassName("HidenLoaderCancel")[0];
-
-        //   classCancel.style.display = "none";
-
-        //   if (!value) {
-        //     return data.ESTADO_STICKER
-        //       ? "Es obligatorio la observación de la orden de cierre"
-        //       : "Es obligatorio la observación del porqué abre la orden";
-        //   }
-        // },
         preConfirm: () => {
           let selectObserva = document.getElementById("sltObservcaciones");
           let TextAreaObservacion = document.getElementById("Observacionother");
@@ -867,64 +799,6 @@ export const RegisterEditNoteObservaciones = (setvalue) => {
       setvalue("Observaciones_detalle", slt.options[slt.selectedIndex].text);
     }
   }
-};
-
-export const SwitchUseStateRol = (
-  setReturncomponent,
-  Roles,
-  ListadoGrupoActivo,
-  ListadoGrupoInactivo,
-  isTrueActive
-) => {
-  Roles.map((data, index) => {
-    switch (data) {
-      case 1:
-        setReturncomponent(
-          <IndexComponentAdmin
-            key={index}
-            HabilitarActive={isTrueActive}
-            ListadoGrupoActivo={ListadoGrupoActivo}
-            ListadoGrupoInactivo={ListadoGrupoInactivo}
-          ></IndexComponentAdmin>
-        );
-        break;
-      case 2:
-        setReturncomponent(
-          <IndexComponentTechni
-            key={index}
-            HabilitarActive={isTrueActive}
-            ListadoGrupoActivo={ListadoGrupoActivo}
-            ListadoGrupoInactivo={ListadoGrupoInactivo}
-          ></IndexComponentTechni>
-        );
-        break;
-      case 3:
-        setReturncomponent(
-          <IndexComponentAssis
-            key={index}
-            HabilitarActive={isTrueActive}
-            ListadoGrupoActivo={ListadoGrupoActivo}
-            ListadoGrupoInactivo={ListadoGrupoInactivo}
-          ></IndexComponentAssis>
-        );
-        break;
-      case 4:
-        setReturncomponent(
-          <IndexComponentConsul
-            key={index}
-            HabilitarActive={isTrueActive}
-            ListadoGrupoActivo={ListadoGrupoActivo}
-            ListadoGrupoInactivo={ListadoGrupoInactivo}
-          ></IndexComponentConsul>
-        );
-        break;
-      default:
-        setReturncomponent(
-          "El usuario no tiene un rol asignado o el rol que tiene asignado no existe en los registros"
-        );
-        break;
-    }
-  });
 };
 
 export const OnkeyDowNumberOneCharater = (e) => {
@@ -1079,4 +953,131 @@ export const UpdateObject = (obj, valueInput) => {
   // objeNew = obj;
   // objeNew["page"] = value;
   // return objeNew;
+};
+
+export const AddResultToList = (
+  idPrueba,
+  idSeguimiento,
+  idOptiones,
+  addListValue,
+  ListAddResultMultple,
+  setError,
+  ListOptiones,
+  setvaluePlantillachange
+) => {
+  let validadorError = false;
+  let OptionIsHabilite = false;
+  let valuePr = document.getElementById(idPrueba);
+  let ValueSegumiento = document.getElementById(idSeguimiento);
+  let optionesValue = document.getElementById(idOptiones);
+
+  if (valuePr !== null && valuePr !== undefined && valuePr !== "") {
+    if (
+      valuePr.value == null ||
+      valuePr.value == undefined ||
+      valuePr.value == ""
+    ) {
+      setError("Codigo_prueba", {
+        type: "custom",
+        message:
+          "Campo estatus obligatorio, para agregar un resultado al listado",
+      });
+      validadorError = true;
+    }
+  }
+
+  if (
+    ValueSegumiento !== null &&
+    ValueSegumiento !== undefined &&
+    ValueSegumiento !== ""
+  ) {
+    if (
+      ValueSegumiento.value == null ||
+      ValueSegumiento.value == undefined ||
+      ValueSegumiento.value == ""
+    ) {
+      setError("Codigo_resultado_preliminar_1", {
+        type: "custom",
+        message:
+          "Campo seguimiento obligatorio, para agregar un resultado al listado",
+      });
+      validadorError = true;
+    }
+  }
+
+  if (ListOptiones != null && ListOptiones != undefined && ListOptiones != "") {
+    OptionIsHabilite = true;
+    if (
+      optionesValue.value == null ||
+      optionesValue.value == undefined ||
+      optionesValue.value == ""
+    ) {
+      setError("Codigo_opcion", {
+        type: "custom",
+        message:
+          "Campo opciones obligatorio, para agregar un resultado al listado",
+      });
+      validadorError = true;
+    }
+  }
+
+  if (!validadorError) {
+    let obj = {};
+    obj.EstatusID = valuePr.value;
+    obj.SegumientoId = ValueSegumiento.value;
+    obj.OptionID = OptionIsHabilite ? optionesValue.value : null;
+
+    obj.TextoEstatus = valuePr.options[valuePr.selectedIndex].text;
+    obj.textoSeguimiento =
+      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
+    obj.textoOption = OptionIsHabilite
+      ? optionesValue.options[optionesValue.selectedIndex].text
+      : "";
+
+    if (
+      ListAddResultMultple.some(
+        (a) =>
+          a.EstatusID == obj.EstatusID &&
+          a.SegumientoId == obj.SegumientoId &&
+          a.OptionID == obj.OptionID
+      )
+    ) {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "La combinación que intentas agregar ya se encuentra registrada en el listado",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+
+      return;
+    } else {
+      addListValue((preventArray) => [...preventArray, obj]);
+      ValueSegumiento.value = "";
+      OptionIsHabilite ? (optionesValue.value = "") : "";
+      valuePr.value = "";
+      setvaluePlantillachange([]);
+    }
+  }
+};
+
+export const DeleteRowStatus = (
+  data,
+  setListAddResultMultple,
+  ListAddResultMultple
+) => {
+  let FilterSearch =
+    data.OptionID == null
+      ? ListAddResultMultple.filter(
+          (item) =>
+            item.EstatusID !== data.EstatusID &&
+            item.SegumientoId != data.SegumientoId
+        )
+      : ListAddResultMultple.filter(
+          (item) =>
+            item.EstatusID !== data.EstatusID &&
+            item.SegumientoId != data.SegumientoId &&
+            item.OptionID != data.OptionID
+        );
+
+  setListAddResultMultple(FilterSearch);
 };
