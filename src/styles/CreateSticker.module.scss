@@ -577,6 +577,19 @@
 }
 
 .invalid_feedback{
-
   color: red !important;
+}
+
+.photo {
+  margin-left: 10px;
+  margin-top: 5px;
+  display: initial;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  background-color: #e57d00;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0 5px;
 }

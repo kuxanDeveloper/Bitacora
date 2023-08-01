@@ -153,7 +153,7 @@ function ComponentEditResult({
                                     : ""}
                                 </select>
 
-                                <div>{errors.Codigo_prueba?.message}</div>
+                                <div className={styles.invalid_feedback}>{errors.Codigo_prueba?.message}</div>
                               </div>
                             </div>
 
@@ -192,7 +192,7 @@ function ComponentEditResult({
                                       ))
                                     : ""}
                                 </select>
-                                <div>
+                                <div className={styles.invalid_feedback}>
                                   {
                                     errors.Codigo_resultado_preliminar_1
                                       ?.message
@@ -237,7 +237,7 @@ function ComponentEditResult({
                                               )
                                             : ""}
                                         </select>
-                                        <div>
+                                        <div className={styles.invalid_feedback}>
                                           {errors.Codigo_opcion?.message}
                                         </div>
                                       </div>

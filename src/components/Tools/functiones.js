@@ -6,6 +6,8 @@ import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
 
 import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
 import Router from "next/router";
+import "dayjs/locale/en-gb";
+import dayjs from "dayjs";
 
 import Swal from "sweetalert2";
 import { array } from "yup";
@@ -1080,4 +1082,12 @@ export const DeleteRowStatus = (
         );
 
   setListAddResultMultple(FilterSearch);
+};
+
+export const setFechaActual = (idfecha) =>
+{
+  
+  document.querySelector("." + idfecha +" input")
+                            .value = dayjs().format('DD/MM/YYYY hh:mm');
+  
 };

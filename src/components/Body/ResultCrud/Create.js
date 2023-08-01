@@ -159,7 +159,7 @@ function ComponentCreateResult({
                           : ""}
                       </select>
 
-                      <div>{errors.Codigo_prueba?.message}</div>
+                      <div className={styles.invalid_feedback}>{errors.Codigo_prueba?.message}</div>
                     </div>
                   </div>
 
@@ -189,7 +189,7 @@ function ComponentCreateResult({
                             ))
                           : ""}
                       </select>
-                      <div>{errors.Codigo_resultado_preliminar_1?.message}</div>
+                      <div className={styles.invalid_feedback}>{errors.Codigo_resultado_preliminar_1?.message}</div>
                     </div>
                   </div>
 
@@ -225,7 +225,7 @@ function ComponentCreateResult({
                                     ))
                                   : ""}
                               </select>
-                              <div>{errors.Codigo_opcion?.message}</div>
+                              <div className={styles.invalid_feedback}>{errors.Codigo_opcion?.message}</div>
                             </div>
                           </div>
                         ) : (
@@ -283,7 +283,7 @@ function ComponentCreateResult({
                         ListAddResultMultple={ListAddResultMultple}
                         setListAddResultMultple={setListAddResultMultple}
                       ></ListResulltAdd>
-                         <div>{errors.ListResultMultiple?.message}</div>
+                         <div className={styles.invalid_feedback}>{errors.ListResultMultiple?.message}</div>
                     </div>
                   </div>
 
