@@ -295,21 +295,12 @@ function CreatSticker(
   );
 }
 
-function CrearResult(
-  Codigo_prueba,
-  Codigo_resultado_preliminar_1,
-  Codigo_opcion,
-  COD_BITACORA
-) {
+function CrearResult(COD_BITACORA, ListResultMultiple) {
+  debugger;
+  let variable = JSON.stringify(ListResultMultiple);
   const formData = new FormData();
   formData.append("COD_BITACORA", COD_BITACORA);
-  formData.append("Codigo_prueba", Codigo_prueba);
-  formData.append(
-    "Codigo_resultado_preliminar_1",
-    Codigo_resultado_preliminar_1
-  );
-  formData.append("Codigo_opcion", Codigo_opcion);
-
+  formData.append("ListResultMultiple", JSON.stringify(ListResultMultiple));
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
     null,
@@ -385,7 +376,7 @@ function EditSticker(
   formData.append("jefelaboratorio", jefelaboratorio);
   formData.append("tipoMuestra", tipoMuestra);
   formData.append("FechaHoraRecogida", FechaHoraRecogida);
-  
+
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditBitacoraMuestra`,
     null,
@@ -1019,7 +1010,7 @@ function EditJefeLaboratorio(
   );
 }
 
-function GetlistJefeLaboratorio(cookie, ID,ESTADO) {
+function GetlistJefeLaboratorio(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistJefesLaboratorio?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
@@ -1060,7 +1051,7 @@ function EditSitioAnatomico(
   );
 }
 
-function GetlistSitiosAnatomicos(cookie, ID,ESTADO) {
+function GetlistSitiosAnatomicos(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistSitiosAnatomicos?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
@@ -1105,7 +1096,7 @@ function EditTipoMuestra(
   );
 }
 
-function GetlistTiposMuestra(cookie, ID,ESTADO) {
+function GetlistTiposMuestra(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
