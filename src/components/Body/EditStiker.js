@@ -18,6 +18,7 @@ import "dayjs/locale/en-gb";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { onSubmitUpdate } from "../Tools/CRUD";
+import Select from "react-select";
 
 function EditStickerComponents({
   ListadoGrupoActivo,
@@ -54,7 +55,9 @@ function EditStickerComponents({
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
     SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
-    jefelaboratorio: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    jefelaboratorio: Yup.string().required(
+      "Campo Jefe De Laboratorio obligatorio"
+    ),
     tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
@@ -106,6 +109,7 @@ function EditStickerComponents({
       setcodJefeLab(InforSampleDetails.infoBitacora[0].ID_JEFE_LABORATORIO);
       setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
     }
+
   }, [InforSampleDetails.infoBitacora]);
 
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
@@ -113,10 +117,21 @@ function EditStickerComponents({
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-
+  const options = [];
+  ListadoJefeLaboratorio.map((data) => {
+    options.push({ value: data.ID, label: data.DESCRIPCION });
+  });
+  // console.log(codJefeLab, "codjefe")
+  
   return (
     <section className={styles.Create_sticker}>
-      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+      <Image
+        src="/img/bg_image.jpg"
+        width={1000}
+        height={1000}
+        alt="a"
+        className={styles.background_img}
+      />
       <div className={styles.sticker_container}>
         <div className={styles.back_btn_container}>
           <Link href={`/${group}?page=1`} className={styles.back_btn}>
@@ -372,7 +387,21 @@ function EditStickerComponents({
                           <label className={styles.group_title}>
                             Jefe de laboratorio
                           </label>
-                          <select
+
+                          <Select
+                            className="jefelaboratorio"
+                            // defaultInputValue={codJefeLab}
+                            value={options.filter(function(option) {
+                              return option.value === codJefeLab;
+                            })}
+                            onChange={(e) => {
+                              setcodJefeLab(e.value);
+                            }}
+                            
+                            placeholder="Seleccione el tipo de jefe"
+                            options={options}
+                          ></Select>
+                          {/* <select
                             {...register("jefelaboratorio")}
                             name="jefelaboratorio"
                             id="jefelaboratorio"
@@ -387,7 +416,7 @@ function EditStickerComponents({
                                 {data.DESCRIPCION}
                               </option>
                             ))}
-                          </select>
+                          </select> */}
 
                           <div className={styles.invalid_feedback}>
                             {errors.jefelaboratorio?.message}
@@ -540,8 +569,8 @@ function EditStickerComponents({
                                   ".FechaHoraRecogida input"
                                 ).value
                               );
-                              setValue("SitioAnatomico", codSitioAnatomico);
                               setValue("jefelaboratorio", codJefeLab);
+                              setValue("SitioAnatomico", codSitioAnatomico);
                               setValue("tipoMuestra", codTipoMuestra);
                               RegisterStickerObservaciones(setValue);
                             }}
