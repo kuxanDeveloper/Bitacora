@@ -87,7 +87,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Ingreso
+                            Fecha ingreso laboratorio
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -107,7 +107,7 @@ function Pop_up({
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Verificacion
+                            Fecha verificación
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -132,7 +132,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Ingreso de botella
+                            Fecha ingreso botella
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -152,7 +152,7 @@ function Pop_up({
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Suena Positivo
+                            Fecha suena positivo
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -177,7 +177,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de validacion de Hemocultivo positivo
+                            Fecha validación hemocultivo positivo
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -200,7 +200,7 @@ function Pop_up({
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Validacion de indentificacion de botella
+                            Validación indentificacion de botella
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -229,7 +229,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de validacion de indentificacion final
+                            Validación indentificacion final
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -253,7 +253,7 @@ function Pop_up({
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Validacion de Antibiograma
+                            Validación de antibiograma
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
