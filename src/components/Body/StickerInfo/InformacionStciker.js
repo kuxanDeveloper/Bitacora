@@ -20,6 +20,16 @@ function InformacionStciker({
     setValueImagesrcExterna2,
     setValueImagesrc2,
     setValueImagesrc,
+    setshowModalFechas,
+    setCOD_BITACORA,
+    setFECHA_HORA_INGRESO,
+    setFECHA_HORA_VERIFICACION, 
+    setFECHA_INGRESO_BOTELLA,
+    setFECHA_HORA_SUENA_POSITIVO,
+    setFECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
+    setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
+    setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
+    setFECHA_HORA_VALIDACION_ANTIBIOGRAMA
   } = useContextBitacora();
 
   return (
@@ -33,6 +43,42 @@ function InformacionStciker({
             <p
               className={styles.info_sticker}
             >{`${data.NUMERO_STICKER}-${data.SUFIJO}`}</p>
+            <button
+              type="button"
+              onClick={() => {
+                setshowModalFechas(true);
+                setCOD_BITACORA(data.CODIGO_BITACORA);
+                setFECHA_HORA_INGRESO(data.FECHA_HORA_INGRESO_DATETIME);
+                setFECHA_HORA_VERIFICACION(data.FECHA_HORA_VERIFICACION_DATETIME);
+                setFECHA_INGRESO_BOTELLA(data.FECHA_INGRESO_BOTELLA_DATETIME);
+                setFECHA_HORA_SUENA_POSITIVO(data.FECHA_HORA_SUENA_POSITIVO_DATETIME);
+                setFECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO(data.FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO_DATETIME);
+                setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA(data.FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA_DATETIME);
+                setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL(data.FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL_DATETIME);
+                setFECHA_HORA_VALIDACION_ANTIBIOGRAMA(data.FECHA_HORA_VALIDACION_ANTIBIOGRAMA_DATETIME);
+              }}
+              className={styles.photo}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="#ffffff"
+                class="icon icon-tabler icon-tabler-calendar-minus"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v8"></path>
+                <path d="M16 3v4"></path>
+                <path d="M8 3v4"></path>
+                <path d="M4 11h16"></path>
+                <path d="M16 19h6"></path>
+              </svg>
+            </button>
             <button
               type="button"
               onClick={() => {
