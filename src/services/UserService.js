@@ -87,7 +87,8 @@ export const userService = {
   CreateSitioAnatomico,
   EditSitioAnatomico,
   CreateTipoMuestra,
-  EditTipoMuestra
+  EditTipoMuestra,
+  guardFechasbitacora
 };
 
 async function login(username, password) {
@@ -1099,5 +1100,34 @@ function GetlistTiposMuestra(cookie, ID, ESTADO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}`,
     cookie
+  );
+}
+
+function guardFechasbitacora(
+    COD_BITACORAv,
+    FECHA_HORA_INGRESO,
+    FECHA_HORA_VERIFICACION,
+    FECHA_INGRESO_BOTELLA,
+    FECHA_HORA_SUENA_POSITIVO,
+    FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
+    FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
+    FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
+    FECHA_HORA_VALIDACION_ANTIBIOGRAMA
+) {
+  const formData = new FormData();
+  formData.append("COD_BITACORA", COD_BITACORAv);
+  formData.append("FECHA_HORA_INGRESO", FECHA_HORA_INGRESO);
+  formData.append("FECHA_HORA_VERIFICACION", FECHA_HORA_VERIFICACION);
+  formData.append("FECHA_INGRESO_BOTELLA", FECHA_INGRESO_BOTELLA);
+  formData.append("FECHA_HORA_SUENA_POSITIVO", FECHA_HORA_SUENA_POSITIVO);
+  formData.append("FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO", FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO);
+  formData.append("FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA", FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA);
+  formData.append("FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL", FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL);
+  formData.append("FECHA_HORA_VALIDACION_ANTIBIOGRAMA", FECHA_HORA_VALIDACION_ANTIBIOGRAMA);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditarFechasBitacoras`,
+    null,
+    formData
   );
 }
