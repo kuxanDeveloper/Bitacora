@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
   AddResultToList,
+  SeguimientoDinamycCombo,
 } from "../../Tools/functiones";
 import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -28,6 +29,7 @@ function ComponentCreateResult({
   ListMicroorganismo,
   ListNumber,
 }) {
+  console.log(ListResultados);
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
     Codigo_resultado_preliminar_1: Yup.string().notRequired(),
@@ -35,9 +37,11 @@ function ComponentCreateResult({
     COD_BITACORA: Yup.number(),
     ListResultMultiple: Yup.array()
       .min(1, "Debe por lo menos tener un estatus agregado")
-      .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
+      .required("Debe por lo menos tener un estatus agregado"),
   });
-
+  const [isHabiliteMicroOrganismo, setisHabiliteMicroOrganismo] =
+    useState(false);
+  const [isHabiliteNumber, setisHabiliteNumber] = useState(false);
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
@@ -187,6 +191,7 @@ function ComponentCreateResult({
                         onChange={(e) => {
                           setvaluePlantillachange(e.target.value);
                           onclickPlantillaTargetCreate(setValue);
+                          SeguimientoDinamycCombo(e.target.id);
                           clearErrors("Codigo_resultado_preliminar_1");
                         }}
                       >
@@ -251,6 +256,73 @@ function ComponentCreateResult({
                         ""
                       ))
                   }
+
+                  {isHabiliteMicroOrganismo || isHabiliteNumber ? (
+                    <div className={styles.form_group}>
+                      {isHabiliteMicroOrganismo ? (
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Microorganismo
+                          </label>
+                          <select
+                            name="microorganismo"
+                            id="microorganismoSelect"
+                            className={styles.group_input}
+                            defaultValue={""}
+                          >
+                            <option disabled value="">
+                              Seleccione un microorganismo
+                            </option>
+                            {ListMicroorganismo != null &&
+                            ListMicroorganismo != undefined
+                              ? ListMicroorganismo.map((data, index) => (
+                                  <option
+                                    key={index}
+                                    value={data.ID}
+                                  >
+                                    {`${data.DESCRIPCION}`}
+                                  </option>
+                                ))
+                              : ""}
+                          </select>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                      {isHabiliteNumber ? (
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Número
+                          </label>
+                          <select
+                            name="numberCount"
+                            id="numberCount"
+                            className={styles.group_input}
+                            defaultValue={""}
+                          >
+                            <option disabled value="">
+                              Seleccione un número
+                            </option>
+                            {ListNumber != null &&
+                            ListNumber != undefined
+                              ? ListNumber.map((data, index) => (
+                                  <option
+                                    key={index}
+                                    value={data.ID}
+                                  >
+                                    {`${data.DESCRIPCION}`}
+                                  </option>
+                                ))
+                              : ""}
+                          </select>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div className={styles.btn_container_send}>
                     <Link
