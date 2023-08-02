@@ -265,6 +265,54 @@ function InformacionStciker({
         </div>
 
         <div className={styles.card_group}>
+          <p className={styles.group_title}>Sitio anatomico</p>
+
+          <span className={styles.group_result}>
+            {data.DESCRIPCION_SITIO_ANATOMICO != undefined &&
+            data.DESCRIPCION_SITIO_ANATOMICO != null &&
+            data.DESCRIPCION_SITIO_ANATOMICO != "undefined"
+              ? data.DESCRIPCION_SITIO_ANATOMICO
+              : ""}
+          </span>
+        </div>
+
+        <div className={styles.card_group}>
+          <p className={styles.group_title}>Jefe de laboratorio</p>
+
+          <span className={styles.group_result}>
+            {data.DESCRIPCION_JEFE_LABORATORIO != undefined &&
+            data.DESCRIPCION_JEFE_LABORATORIO != null &&
+            data.DESCRIPCION_JEFE_LABORATORIO != "undefined"
+              ? data.DESCRIPCION_JEFE_LABORATORIO
+              : ""}
+          </span>
+        </div>
+
+        <div className={styles.card_group}>
+          <p className={styles.group_title}>Tipo de muestra</p>
+
+          <span className={styles.group_result}>
+            {data.NOMBRE_TIPO_MUESTRA != undefined &&
+            data.NOMBRE_TIPO_MUESTRA != null &&
+            data.NOMBRE_TIPO_MUESTRA != "undefined"
+              ? data.NOMBRE_TIPO_MUESTRA
+              : ""}
+          </span>
+        </div>
+
+        <div className={styles.card_group}>
+          <p className={styles.group_title}>Fecha de recogida de la muestra</p>
+
+          <span className={styles.group_result}>
+            {data.FECHA_FORMAT_RECOGIDA_MUESTRA != undefined &&
+            data.FECHA_FORMAT_RECOGIDA_MUESTRA != null &&
+            data.FECHA_FORMAT_RECOGIDA_MUESTRA != "undefined"
+              ? data.FECHA_FORMAT_RECOGIDA_MUESTRA
+              : ""}
+          </span>
+        </div>
+
+        <div className={styles.card_group}>
           <p className={styles.group_title}>Observaciones iniciales</p>
 
           <span className={styles.group_result}>
@@ -275,6 +323,8 @@ function InformacionStciker({
               : ""}
           </span>
         </div>
+
+        
       </div>
     </>
   );

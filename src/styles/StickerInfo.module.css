@@ -138,7 +138,7 @@
   background-color: #e57d00;
   border-radius: 50%;
   padding: .5rem;
-  right: 0;
+  right: -5px;
   top: calc(50% - 25px);
 }
 

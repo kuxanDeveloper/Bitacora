@@ -244,7 +244,7 @@ function ComponentsCreateNote({
                             : ""
                           : ""}
                       </select>
-                      <div>{errors.Observaciones_detalle?.message}</div>
+                      <div className={styles.invalid_feedback}>{errors.Observaciones_detalle?.message}</div>
                     </div>
                     {ShowobservaTextare ? (
                       <div className={styles.input_group}>
@@ -259,7 +259,7 @@ function ComponentsCreateNote({
                           maxLength={1500}
                           {...register("Observaciones_detalle")}
                         ></textarea>
-                        <div>{errors.Observaciones_detalle?.message}</div>
+                        <div className={styles.invalid_feedback}>{errors.Observaciones_detalle?.message}</div>
                       </div>
                     ) : (
                       ""

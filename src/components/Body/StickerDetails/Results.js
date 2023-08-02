@@ -75,6 +75,15 @@ function Results({ data, Options, group, name_group, sticker }) {
         ) : (
           <></>
         )}
+        <div className={styles.info_group}>
+          <span className={`${styles.info_title} ${styles.inline}`}>Estatus creado por</span>
+          <p className={`${styles.info_text} ${styles.inline}`}>
+            {data.USUARIO_CREADOR_RESULTADO !== null &&
+            data.USUARIO_CREADOR_RESULTADO !== undefined
+              ? data.USUARIO_CREADOR_RESULTADO
+              : ""}
+          </p>
+        </div>
       </div>
 
       {/* resultado */}

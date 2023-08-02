@@ -596,3 +596,42 @@
   font-size: 80%;
   color: #dc3545;
 }
+
+
+.is_invalid {
+  border-color: #dc3545 !important;
+  padding-right: calc(1.5em + 0.75rem)  !important;
+  background-image: url(/img/svgRequired.svg)  !important;
+  background-repeat: no-repeat  !important;
+  background-position: right calc(0.375em + 0.1875rem) center  !important;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem)  !important;
+  outline: #dc3545 !important;
+}
+
+
+.invalid_feedback {
+  margin-bottom: 2rem;
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.invalid_feedback{
+  color: red !important;
+}
+
+.photo {
+  margin-left: 10px;
+  margin-top: 5px;
+  display: initial;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  background-color: #e57d00;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  padding: 0 5px;
+}

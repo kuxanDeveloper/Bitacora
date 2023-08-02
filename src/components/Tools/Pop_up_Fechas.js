@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { guardFechasbitacora } from "../Tools/FechasBitacoras";
 import Link from "next/link";
+import {
+  setFechaActual
+} from "../Tools/functiones";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -87,7 +90,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Ingreso
+                            Fecha ingreso laboratorio
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -104,10 +107,43 @@ function Pop_up({
                               className="fech_hora_ingreso"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_hora_ingreso");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Verificacion
+                            Fecha verificación
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -124,6 +160,39 @@ function Pop_up({
                               className="fech_hora_verificacion"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_hora_verificacion");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                       </div>
 
@@ -132,7 +201,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Ingreso de botella
+                            Fecha ingreso botella
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -149,10 +218,43 @@ function Pop_up({
                               className="fech_ingreso_botella"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_ingreso_botella");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Suena Positivo
+                            Fecha suena positivo
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -169,6 +271,39 @@ function Pop_up({
                               className="fech_hora_suena_positiv"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_hora_suena_positiv");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                       </div>
 
@@ -177,7 +312,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de validacion de Hemocultivo positivo
+                            Fecha validación hemocultivo positivo
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -197,10 +332,43 @@ function Pop_up({
                               className="fech_valid_hemo_positivo"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_valid_hemo_positivo");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Validacion de indentificacion de botella
+                            Validación indentificacion de botella
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -221,6 +389,39 @@ function Pop_up({
                               className="fech_valid_identf_botella"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_valid_identf_botella");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                       </div>
 
@@ -229,7 +430,7 @@ function Pop_up({
                       >
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de validacion de indentificacion final
+                            Validación indentificacion final
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -250,10 +451,43 @@ function Pop_up({
                               className="fech_valid_identf_final"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_valid_identf_final");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
-                            Fecha de Validacion de Antibiograma
+                            Validación de antibiograma
                           </label>
                           <LocalizationProvider
                             orientation="landscape"
@@ -270,6 +504,39 @@ function Pop_up({
                               className="fech_valid_antibiograma"
                             />
                           </LocalizationProvider>
+                          <button
+                        type="button"
+                        title="Seleccionar la fecha de hoy"
+                        onClick={() => {
+                          setFechaActual("fech_valid_antibiograma");
+                        }}
+                        className={styles2.photo}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          stroke="#ffffff"
+                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                          <path d="M16 3v4"></path>
+                          <path d="M8 3v4"></path>
+                          <path d="M4 11h16"></path>
+                          <path d="M16 19h6"></path>
+                          <path d="M19 16v6"></path>
+                        </svg>
+                      </button>
                         </div>
                       </div>
 
