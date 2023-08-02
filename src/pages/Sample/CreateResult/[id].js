@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
-  ListPruebaxGroupApi,
+  ListMultipleMicroxTestxNumber,
   ListPlanResultadosxPru,
   ListOptionesxPlantilla,
 } from "../../api/Sample/CreateResultApi";

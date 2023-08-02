@@ -446,7 +446,7 @@ export const QuerySufijoGetAll = (cookie) => {
 
 
 export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
-  return userService.ListTests(cookie, idGroup).catch((error) => {
+  return userService.ListMultipleMixPruxNum(cookie, idGroup).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
