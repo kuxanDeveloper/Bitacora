@@ -17,11 +17,20 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
   const [ListResultados, setListResultados] = useState([]);
   const [ListOptiones, setListOptiones] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
+  const [ListMicroorganismo, setListMicroorganismo] = useState([]);
+  const [ListNumber, setListNumber] = useState([]);
   const [valuePruebachange, setvaluePruebachange] = useState("");
   const [valuePlantillachange, setvaluePlantillachange] = useState("");
   const [ListAddResultMultple, setListAddResultMultple] = useState([]);
   useEffect(() => {
-    ListPruebaxGroupApi(cookie, setListPruebas, group, id);
+    ListMultipleMicroxTestxNumber(
+      cookie,
+      group,
+      setListPruebas,
+      setListMicroorganismo,
+      setListNumber
+    );
+    // ListPruebaxGroupApi(cookie, setListPruebas, group, id);
   }, []);
 
   useEffect(() => {
@@ -79,6 +88,8 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
         sticker={sticker}
         ListAddResultMultple={ListAddResultMultple}
         setListAddResultMultple={setListAddResultMultple}
+        ListMicroorganismo={ListMicroorganismo}
+        ListNumber={ListNumber}
       />
     </>
   );

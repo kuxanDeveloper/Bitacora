@@ -9,8 +9,7 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import {
   setImagenFileUpdate,
   OnchangeObservaCrearEdit,
-  RegisterStickerObservaciones,
-  setFechaActual
+  RegisterStickerObservaciones
 } from "../Tools/functiones";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -56,9 +55,7 @@ function EditStickerComponents({
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
     SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
-    jefelaboratorio: Yup.string().required(
-      "Campo Jefe De Laboratorio obligatorio"
-    ),
+    jefelaboratorio: Yup.string().notRequired(),
     tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
@@ -68,6 +65,7 @@ function EditStickerComponents({
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codJefeLab, setcodJefeLab] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
+  const [fecha, Setfecha] = useState("");
   useEffect(() => {
     setisImagenExterna(true);
 
@@ -109,8 +107,15 @@ function EditStickerComponents({
       );
       setcodJefeLab(InforSampleDetails.infoBitacora[0].ID_JEFE_LABORATORIO);
       setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
-    }
 
+      debugger;
+      const fechabd =
+        InforSampleDetails.infoBitacora[0].FECHA_FORMAT_RECOGIDA_MUESTRA;
+
+      if (fechabd != null && fechabd != undefined) {
+        Setfecha(dayjs(fechabd));
+      }
+    }
   }, [InforSampleDetails.infoBitacora]);
 
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
@@ -123,7 +128,7 @@ function EditStickerComponents({
     options.push({ value: data.ID, label: data.DESCRIPCION });
   });
   // console.log(codJefeLab, "codjefe")
-  
+
   return (
     <section className={styles.Create_sticker}>
       <Image
@@ -392,13 +397,17 @@ function EditStickerComponents({
                           <Select
                             className="jefelaboratorio"
                             // defaultInputValue={codJefeLab}
-                            value={options.filter(function(option) {
-                              return option.value === codJefeLab;
+                            value={options.filter(function (option) {
+                              return (
+                                option.value ===
+                                (codJefeLab == null || codJefeLab == undefined
+                                  ? ""
+                                  : codJefeLab)
+                              );
                             })}
                             onChange={(e) => {
                               setcodJefeLab(e.value);
                             }}
-                            
                             placeholder="Seleccione el tipo de jefe"
                             options={options}
                           ></Select>
@@ -468,49 +477,44 @@ function EditStickerComponents({
                           >
                             <MobileDateTimePicker
                               orientation="landscape"
-                              defaultValue={
-                                data.FECHA_RECOGIDA_DATETIME != null &&
-                                data.FECHA_RECOGIDA_DATETIME != null
-                                  ? dayjs(data.FECHA_RECOGIDA_DATETIME)
-                                  : dayjs()
-                              }
+                              value={fecha}
                               className="FechaHoraRecogida"
                             />
                           </LocalizationProvider>
 
                           <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("FechaHoraRecogida");
-                        }}
-                        className={styles.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>
+                            type="button"
+                            title="Seleccionar la fecha de hoy"
+                            onClick={() => {
+                              Setfecha(dayjs());
+                            }}
+                            className={styles.photo}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              stroke="#ffffff"
+                              class="icon icon-tabler icon-tabler-calendar-plus"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              ></path>
+                              <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                              <path d="M16 3v4"></path>
+                              <path d="M8 3v4"></path>
+                              <path d="M4 11h16"></path>
+                              <path d="M16 19h6"></path>
+                              <path d="M19 16v6"></path>
+                            </svg>
+                          </button>
 
                           <div className={styles.invalid_feedback}>
                             {errors.FechaHoraRecogida?.message}
@@ -583,7 +587,7 @@ function EditStickerComponents({
                       <div className={styles.btn_container_send}>
                         {!formState.isSubmitting && (
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
                               isHabilteGroup == "true"
                                 ? setValue("GrupoSticker", group)
                                 : "";
@@ -604,10 +608,13 @@ function EditStickerComponents({
                                   ".FechaHoraRecogida input"
                                 ).value
                               );
-                              setValue("jefelaboratorio", codJefeLab);
                               setValue("SitioAnatomico", codSitioAnatomico);
                               setValue("tipoMuestra", codTipoMuestra);
-                              RegisterStickerObservaciones(setValue);
+                              RegisterStickerObservaciones(
+                                setValue,
+                                codJefeLab,
+                                e
+                              );
                             }}
                             className={styles.btn_send}
                           >

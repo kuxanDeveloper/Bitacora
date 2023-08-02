@@ -88,7 +88,8 @@ export const userService = {
   EditSitioAnatomico,
   CreateTipoMuestra,
   EditTipoMuestra,
-  guardFechasbitacora
+  guardFechasbitacora,
+  ListMultipleMixPruxNum,
 };
 
 async function login(username, password) {
@@ -244,6 +245,15 @@ function ListTests(cookie, idGroup, idBitacora) {
     cookie
   );
 }
+
+function ListMultipleMixPruxNum(cookie, idGroup) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InfoMultipleComboTestxMicroxNumber?Id_grupo=${idGroup}`,
+    cookie
+  );
+}
+
+
 
 function ListResults(cookie, idPrueba, idBitacora) {
   return fetchWrapper.get(

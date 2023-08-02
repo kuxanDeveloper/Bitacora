@@ -25,6 +25,8 @@ function ComponentCreateResult({
   group,
   ListAddResultMultple,
   setListAddResultMultple,
+  ListMicroorganismo,
+  ListNumber,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),

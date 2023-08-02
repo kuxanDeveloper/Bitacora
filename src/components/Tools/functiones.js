@@ -809,11 +809,26 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (setvalue) => {
+export const RegisterStickerObservaciones = (setvalue,selectValue,e) => {
   let slt = document.getElementById("sltObservaIni");
   var cmbgrupo = document.getElementById("GrupoSticker");
-  setvalue("GrupoSticker", cmbgrupo.value);
 
+  if(cmbgrupo.value == 8)
+  {
+    if(selectValue == null || selectValue == "")
+    {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo Hemocultivo`,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }
+  }
+  setvalue("jefelaboratorio", selectValue);
+  setvalue("GrupoSticker", cmbgrupo.value);
   if (slt.value != "") {
     if (slt.value != "5") {
       setvalue("ObservaInici", slt.options[slt.selectedIndex].text);
