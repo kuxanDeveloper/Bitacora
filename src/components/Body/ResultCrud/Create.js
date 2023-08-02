@@ -25,6 +25,8 @@ function ComponentCreateResult({
   group,
   ListAddResultMultple,
   setListAddResultMultple,
+  ListMicroorganismo,
+  ListNumber,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
@@ -32,7 +34,7 @@ function ComponentCreateResult({
     Codigo_opcion: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
     ListResultMultiple: Yup.array()
-      .min(1,"Debe por lo menos tener un estatus agregado")
+      .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
   });
 
@@ -167,7 +169,9 @@ function ComponentCreateResult({
                           : ""}
                       </select>
 
-                      <div className={styles.invalid_feedback}>{errors.Codigo_prueba?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.Codigo_prueba?.message}
+                      </div>
                     </div>
                   </div>
 
@@ -197,7 +201,9 @@ function ComponentCreateResult({
                             ))
                           : ""}
                       </select>
-                      <div className={styles.invalid_feedback}>{errors.Codigo_resultado_preliminar_1?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.Codigo_resultado_preliminar_1?.message}
+                      </div>
                     </div>
                   </div>
 
@@ -233,7 +239,9 @@ function ComponentCreateResult({
                                     ))
                                   : ""}
                               </select>
-                              <div className={styles.invalid_feedback}>{errors.Codigo_opcion?.message}</div>
+                              <div className={styles.invalid_feedback}>
+                                {errors.Codigo_opcion?.message}
+                              </div>
                             </div>
                           </div>
                         ) : (
@@ -291,7 +299,9 @@ function ComponentCreateResult({
                         ListAddResultMultple={ListAddResultMultple}
                         setListAddResultMultple={setListAddResultMultple}
                       ></ListResulltAdd>
-                         <div className={styles.invalid_feedback}>{errors.ListResultMultiple?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.ListResultMultiple?.message}
+                      </div>
                     </div>
                   </div>
 

@@ -7,6 +7,7 @@ import {
   QueryJefeLaboratorio,
   QuerySitioAnatomico,
   QueryTipoMuestra,
+  queryListMultipleMicroxTextxNumber,
 } from "../../../components/Tools/Security";
 
 export const ListPruebaxGroupApi = async (
@@ -74,4 +75,18 @@ export const ListOptionesxPlantilla = async (
   );
 
   setListOptiones(ListOptiones);
+};
+
+export const ListMultipleMicroxTestxNumber = async (
+  cookie,
+  idGroup,
+  setListPruebas,
+  setListMicroorganismo,
+  setListNumber
+) => {
+  let ReturnValue = await queryListMultipleMicroxTextxNumber(cookie, idGroup);
+
+  setListPruebas(ReturnValue.Listadopruebas);
+  setListMicroorganismo(ReturnValue.ListadoMicroorganismo);
+  setListNumber(ReturnValue.ListadoNumerosConteo);
 };

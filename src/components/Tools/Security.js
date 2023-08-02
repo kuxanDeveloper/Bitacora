@@ -443,3 +443,27 @@ export const QuerySufijoGetAll = (cookie) => {
     return null;
   });
 };
+
+
+export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
+  return userService.ListTests(cookie, idGroup).catch((error) => {
+    if (error == "401: Token incorrecto o vencido") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: "Por favor comunicarse con soporte técnico",
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
+
+    console.log(error, "erro in listado multiple de pruebas, microorganismo y numero");
+    return error;
+  });
+};
