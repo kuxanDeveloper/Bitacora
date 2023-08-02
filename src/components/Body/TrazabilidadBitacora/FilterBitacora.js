@@ -18,7 +18,9 @@ export default function Filters({
   UserRegisterStiker,
   setUserRegisterStiker,
   Sufijo,
-  setSufijo
+  setSufijo,
+  MesAnio,
+  setMesAnio
 }) {
   const router = useRouter();
 
@@ -73,6 +75,52 @@ export default function Filters({
                 value={FechaIngresoFinal}
               />
               <select
+                defaultValue={MesAnio}
+                name="MesAni"
+                onClick={(e) => setMesAnio(e.target.value)}
+                className={filterStyles.filter_input}
+              >
+                <option value="" disabled>
+                  Seleccione un mes para el filtro
+                </option>
+                <option value="1">
+                  Enero
+                </option>
+                <option value="2">
+                  Febrero
+                </option>
+                <option value="3">
+                  Marzo
+                </option>
+                <option value="4">
+                  Abril
+                </option>
+                <option value="5">
+                  Mayo
+                </option>
+                <option value="6">
+                  Junio
+                </option>
+                <option value="7">
+                  Julio
+                </option>
+                <option value="8">
+                  Agosto
+                </option>
+                <option value="9">
+                  Septiembre
+                </option>
+                <option value="10">
+                  Octubre
+                </option>
+                <option value="11">
+                  Noviembre
+                </option>
+                <option value="12">
+                  Diciembre
+                </option>
+              </select>
+              <select
                 defaultValue={UserRegisterStiker}
                 name="UserRegisterSticker"
                 onClick={(e) => setUserRegisterStiker(e.target.value)}
@@ -102,7 +150,8 @@ export default function Filters({
                     Sufijo,
                     FechaIngreso,
                     FechaIngresoFinal,
-                    UserRegisterStiker
+                    UserRegisterStiker,
+                    MesAnio
                   );
                 }}
                 className={filterStyles.search}

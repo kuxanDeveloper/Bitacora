@@ -41,7 +41,7 @@ function ComponentTrazaBitIndex({
 
     return newObje;
   };
-
+console.log(InforSampleDetails);
   return (
     <>
       <section className={styles.Index_users}>
@@ -114,7 +114,8 @@ function ComponentTrazaBitIndex({
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails.ListadotrazabilidadBitacora != null &&
+                {InforSampleDetails != null && InforSampleDetails != undefined ?
+                InforSampleDetails.ListadotrazabilidadBitacora != null &&
                 InforSampleDetails.ListadotrazabilidadBitacora != undefined
                   ? InforSampleDetails.ListadotrazabilidadBitacora.map(
                       (data, index) => (
@@ -155,10 +156,11 @@ function ComponentTrazaBitIndex({
                         </tr>
                       )
                     )
-                  : ""}
+                  : "" :""}
               </tbody>
             </table>
-            {InforSampleDetails.ListadotrazabilidadBitacora != null &&
+            {InforSampleDetails != null && InforSampleDetails != undefined ?
+            InforSampleDetails.ListadotrazabilidadBitacora != null &&
             InforSampleDetails.ListadotrazabilidadBitacora != undefined ? (
               <>
                 <br></br>
@@ -173,7 +175,7 @@ function ComponentTrazaBitIndex({
               </>
             ) : (
               ""
-            )}
+            ) :""}
           </div>
         </div>
       </section>

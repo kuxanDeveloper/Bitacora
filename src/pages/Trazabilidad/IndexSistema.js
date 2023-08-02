@@ -36,6 +36,11 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
   );
 
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+
+  const [MesAnio, setMesAnio] = useState(
+    query.Mes != undefined && query.Mes != null ? query.Mes : ""
+  );
+
   useEffect(() => {
     SampleDetailsTrazaTabl(
       setLInforSampleDetails,
@@ -45,6 +50,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.Tipo_tabla,
       query.URS,
       query.page,
+      query.Mes
     );
   }, []);
 
@@ -93,6 +99,8 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         setFechaFinal={setFechaFinal}
         setUserRegisterStiker={setUserRegisterStiker}
         setTipo_tabla={setTipo_tabla}
+        MesAnio={MesAnio}
+        setMesAnio={setMesAnio}
       ></FilterTrazaSis>
       <IndexTrazaSis
         InforSampleDetails={InforSampleDetails}

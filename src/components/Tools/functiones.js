@@ -123,7 +123,8 @@ export const FilterSearchTrazaBitacora = (
   Sufijo,
   DateAdmission,
   FechaIngresoFinal,
-  URS
+  URS,
+  MesAnio
 ) => {
   event.preventDefault();
 
@@ -132,7 +133,8 @@ export const FilterSearchTrazaBitacora = (
     DateAdmission == "" &&
     FechaIngresoFinal == "" &&
     Sufijo == "" &&
-    URS == ""
+    URS == "" && 
+    MesAnio == ""
   ) {
     Swal.fire({
       title: "¡Advertencia!",
@@ -144,6 +146,18 @@ export const FilterSearchTrazaBitacora = (
   }
 
   if (DateAdmission != "" || FechaIngresoFinal != "") {
+    if(MesAnio != "")
+    {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Recuerde seleccionar solo un tipo de filtro de fecha ya sea en bloque o por mes",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+
+    }
+
     if (DateAdmission == "" && FechaIngresoFinal != "") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -174,6 +188,7 @@ export const FilterSearchTrazaBitacora = (
       URS: URS,
       Sufijo: Sufijo,
       page: "1",
+      Mes: MesAnio
     },
   });
 };
@@ -184,7 +199,8 @@ export const FilterSearchTrazaTables = (
   DateAdmission,
   FechaIngresoFinal,
   URS,
-  TipoTable
+  TipoTable,
+  MesAnio
 ) => {
   event.preventDefault();
 
@@ -192,7 +208,8 @@ export const FilterSearchTrazaTables = (
     DateAdmission == "" &&
     FechaIngresoFinal == "" &&
     TipoTable == "" &&
-    URS == ""
+    URS == "" && 
+    MesAnio == ""
   ) {
     Swal.fire({
       title: "¡Advertencia!",
@@ -204,6 +221,18 @@ export const FilterSearchTrazaTables = (
   }
 
   if (DateAdmission != "" || FechaIngresoFinal != "") {
+    if(MesAnio != "")
+    {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Recuerde seleccionar solo un tipo de filtro de fecha ya sea en bloque o por mes",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+
+    }
+
     if (DateAdmission == "" && FechaIngresoFinal != "") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -233,6 +262,7 @@ export const FilterSearchTrazaTables = (
       URS: URS,
       Tipo_tabla: TipoTable,
       page: "1",
+      Mes: MesAnio
     },
   });
 };

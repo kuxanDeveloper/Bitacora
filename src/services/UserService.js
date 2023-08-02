@@ -694,10 +694,11 @@ function InfoTrazabilidadBitacora(
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) {
   return fetchWrapper.get(
-    `${baseUrl}/TrazaBit/LstBitacoraTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&Sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&page=${page}`,
+    `${baseUrl}/TrazaBit/LstBitacoraTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&Sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&page=${page}&MesAnio=${Mes}`,
     cookie
   );
 }
@@ -709,10 +710,11 @@ function ExportcsvTrazabilidadBitacora(
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}`,
+    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}&MesAnio=${Mes}`,
     null
   );
 }
@@ -724,10 +726,11 @@ function ExportcsvTrazabilidadSistema(
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}`,
+    `${baseUrl}/Stickers/ExportFileCsvExcel?typeTraza=${typeTraza}&FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Numero_sticker=${Numero_sticker}&sufijo=${Sufijo}&usuario_Traza=${usuario_Traza}&Tipo_tabla=${tipo_tabla}&MesAnio=${Mes}`,
     null
   );
 }
@@ -738,10 +741,11 @@ function InfoTrazabilidadTablas(
   Fecha_final,
   Tipo_tabla,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) {
   return fetchWrapper.get(
-    `${baseUrl}/TrazaTabla/LstTablasTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Tipo_tabla=${Tipo_tabla}&usuario_Traza=${usuario_Traza}&page=${page}`,
+    `${baseUrl}/TrazaTabla/LstTablasTraza?Fecha_inicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Tipo_tabla=${Tipo_tabla}&usuario_Traza=${usuario_Traza}&page=${page}&MesAnio=${Mes}`,
     cookie
   );
 }

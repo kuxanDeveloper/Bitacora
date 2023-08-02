@@ -8,7 +8,8 @@ export const getListTrazaBitacora = (
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) => {
   return userService
     .InfoTrazabilidadBitacora(
@@ -18,7 +19,8 @@ export const getListTrazaBitacora = (
       Numero_sticker == null ? "" : Numero_sticker,
       Sufijo == null ? "" : Sufijo,
       usuario_Traza == null ? "" : usuario_Traza,
-      page == null ? "" : page
+      page == null ? "" : page,
+      Mes== null ? "" : Mes
     )
     .catch((error) => {
       if (
@@ -53,7 +55,8 @@ export const getListTrazaTablas = (
   Fecha_final,
   Tipo_tabla,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) => {
   return userService
     .InfoTrazabilidadTablas(
@@ -62,7 +65,8 @@ export const getListTrazaTablas = (
       Fecha_final == null ? "" : Fecha_final,
       Tipo_tabla == null ? "" : Tipo_tabla,
       usuario_Traza == null ? "" : usuario_Traza,
-      page == null ? "" : page
+      page == null ? "" : page,
+      Mes== null ? "" : Mes
     )
     .catch((error) => {
       if (
@@ -98,7 +102,8 @@ export const getExportToExcelBitacora = (
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) => {
   return userService
     .ExportcsvTrazabilidadBitacora(
@@ -108,7 +113,8 @@ export const getExportToExcelBitacora = (
       Numero_sticker == null ? "" : Numero_sticker,
       Sufijo == null ? "" : Sufijo,
       usuario_Traza == null ? "" : usuario_Traza,
-      tipo_tabla
+      tipo_tabla,
+      Mes== null ? "" : Mes
     )
     .then((response) => {
       Swal.fire({
@@ -152,7 +158,8 @@ export const getExportToExcelSistema = (
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) => {
   return userService
     .ExportcsvTrazabilidadSistema(
@@ -162,7 +169,8 @@ export const getExportToExcelSistema = (
       Numero_sticker == null ? "" : Numero_sticker,
       Sufijo == null ? "" : Sufijo,
       usuario_Traza == null ? "" : usuario_Traza,
-      tipo_tabla
+      tipo_tabla,
+      Mes== null ? "" : Mes
     )
     .then((response) => {
       Swal.fire({

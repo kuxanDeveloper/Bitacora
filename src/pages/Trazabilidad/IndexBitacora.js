@@ -24,6 +24,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.Sufijo,
       query.URS,
       query.page,
+      query.Mes
     );
   }, []);
 
@@ -51,6 +52,10 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
 
   const [Sufijo, setSufijo] = useState(
     query.Sufij != undefined && query.Sufij != null ? query.Sufij : ""
+  );
+
+  const [MesAnio, setMesAnio] = useState(
+    query.Mes != undefined && query.Mes != null ? query.Mes : ""
   );
 
   return (
@@ -100,6 +105,8 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         setUserRegisterStiker={setUserRegisterStiker}
         Sufijo={Sufijo}
         setSufijo={setSufijo}
+        MesAnio={MesAnio}
+        setMesAnio={setMesAnio}
       ></FilterTrazaBit>
       <IndexTrazaBit
         InforSampleDetails={InforSampleDetails}

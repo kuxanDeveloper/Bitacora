@@ -113,7 +113,8 @@ function ComponentTrazaSisIndex({
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails.ListadotrazabilidadTablas != null &&
+                {InforSampleDetails != null && InforSampleDetails != undefined ?
+                InforSampleDetails.ListadotrazabilidadTablas != null &&
                 InforSampleDetails.ListadotrazabilidadTablas != undefined
                   ? InforSampleDetails.ListadotrazabilidadTablas.map(
                       (data, index) => (
@@ -154,10 +155,11 @@ function ComponentTrazaSisIndex({
                         </tr>
                       )
                     )
-                  : ""}
+                  : "":""}
               </tbody>
             </table>
-            {InforSampleDetails.ListadotrazabilidadTablas != null &&
+            {InforSampleDetails != null && InforSampleDetails != undefined ?
+            InforSampleDetails.ListadotrazabilidadTablas != null &&
             InforSampleDetails.ListadotrazabilidadTablas != undefined ? (
               <>
                 <br></br>
@@ -172,7 +174,7 @@ function ComponentTrazaSisIndex({
               </>
             ) : (
               ""
-            )}
+            ):""}
           </div>
         </div>
       </section>

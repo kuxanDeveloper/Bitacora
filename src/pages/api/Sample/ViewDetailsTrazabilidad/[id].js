@@ -13,7 +13,8 @@ export const SampleDetailsTrazaBit = async (
   Numero_sticker,
   Sufijo,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) => {
   let inforSample = await getListTrazaBitacora(
     cookie,
@@ -22,7 +23,8 @@ export const SampleDetailsTrazaBit = async (
     Numero_sticker,
     Sufijo,
     usuario_Traza,
-    page
+    page,
+    Mes
   );
   setLInforSampleDetails(inforSample);
 };
@@ -34,7 +36,8 @@ export const SampleDetailsTrazaTabl = async (
   Fecha_final,
   Tipo_tabla,
   usuario_Traza,
-  page
+  page,
+  Mes
 ) => {
   let inforSample = await getListTrazaTablas(
     cookie,
@@ -42,7 +45,8 @@ export const SampleDetailsTrazaTabl = async (
     Fecha_final,
     Tipo_tabla,
     usuario_Traza,
-    page
+    page,
+    Mes
   );
   setLInforSampleDetails(inforSample);
 };
@@ -54,7 +58,8 @@ export const ExportToExcelcsvTrazaBitacora = async (
   FechaIngresoFinal,
   UserRegisterStiker,
   sufijo,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) => {
   let Result = await getExportToExcelBitacora(
     typeTraza,
@@ -63,7 +68,8 @@ export const ExportToExcelcsvTrazaBitacora = async (
     NumeroSticker,
     sufijo,
     UserRegisterStiker,
-    tipo_tabla
+    tipo_tabla,
+    Mes
   );
   return Result;
 };
@@ -75,7 +81,8 @@ export const ExportToExcelcsvTrazaSistema = async (
   FechaIngresoFinal,
   UserRegisterStiker,
   sufijo,
-  tipo_tabla
+  tipo_tabla,
+  Mes
 ) => {
   let Result = await getExportToExcelSistema(
     typeTraza,
@@ -84,7 +91,8 @@ export const ExportToExcelcsvTrazaSistema = async (
     NumeroSticker,
     sufijo,
     UserRegisterStiker,
-    tipo_tabla
+    tipo_tabla,
+    Mes
   );
   return Result;
 };
