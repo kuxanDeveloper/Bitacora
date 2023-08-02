@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import styles from "../../styles/Paginacion.module.scss";
 import { FormatPage, UpdateObject } from "./functiones";
-import NumberPagination from "./NumberPagination"
+import NumberPagination from "./NumberPagination";
 function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
   let pageObject = [];
   if (page !== null && page !== "" && page != undefined) {
     pageObject = FormatPage(TotalPage, page, CountPage);
   }
+  useEffect(() => {
+    if(page == 1)
+    {
+      document.getElementById("Anterior").style.pointerEvents = "none";
+      document.getElementById("Inicio").style.pointerEvents = "none";
+    }
+
+    const maxpag = Math.max(...pageObject.array);
+    
+    if(maxpag == page)
+    {
+      document.getElementById("Siguiente").style.pointerEvents = "none";
+      document.getElementById("Ultima").style.pointerEvents = "none";      
+    }
+  },[pageObject]);
   return (
     <>
       {/* pagination */}
 
-      <div className="row">
-        <div className="row blogs-pagination">
-          <div className=" my-3 d-flex justify-content-center pagination-container">
+      <div className={styles.Centrarpag}>
+        <ul className={styles.pagination}>
+          <li>
             <Link
+              title="Inicio"
+              id="Inicio"
               className={`pagination-blog-btn-start ${
                 parseInt(page) === 1 ? "disabled" : ""
               }`}
@@ -24,9 +42,13 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
                 hash: hash != undefined && hash != null ? hash : "",
               }}
             >
-              Inicio
+              <b>{"<<"}</b>
             </Link>
+          </li>
+          <li>
             <Link
+              title="Anterior"
+              id="Anterior"              
               className={`pagination-blog-btn-before ${
                 parseInt(page) === 1 ? "disabled" : ""
               }`}
@@ -36,25 +58,27 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
                 hash: hash != undefined && hash != null ? hash : "",
               }}
             >
-              Anterior
+              <b>{"<"}</b>
             </Link>
-
-            {pageObject.array.map((data, index) => {
-              return (
-                <NumberPagination
-                  key={index}
-                  valorMap={data}
-                  page={page}
-                  index={index}
-                  pathname={pathname}
-                  hash={hash}
-                  CountPage={CountPage}
-                  queryArme={queryArme}
-                />
-              );
-            })}
-
+          </li>
+          {pageObject.array.map((data, index) => {
+            return (
+              <NumberPagination
+                key={index}
+                valorMap={data}
+                page={page}
+                index={index}
+                pathname={pathname}
+                hash={hash}
+                CountPage={CountPage}
+                queryArme={queryArme}
+              />
+            );
+          })}
+          <li>
             <Link
+            title="Siguiente"
+            id="Siguiente"
               className={`pagination-blog-btn ${
                 pageObject.final === parseInt(page) ? "disabled" : ""
               }`}
@@ -64,10 +88,13 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
                 hash: hash != undefined && hash != null ? hash : "",
               }}
             >
-              Siguiente
+              <b>{">"}</b>
             </Link>
-
+          </li>
+          <li>
             <Link
+            title="Última"
+            id="Ultima"
               className={`pagination-blog-btn-latest ${
                 pageObject.final === parseInt(page) ? "disabled" : ""
               }`}
@@ -77,11 +104,13 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
                 hash: hash != undefined && hash != null ? hash : "",
               }}
             >
-              Última
+              <b>{">>"}</b>
             </Link>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
+
+      
     </>
   );
 }
