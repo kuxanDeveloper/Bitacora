@@ -32,7 +32,7 @@ function ComponentCreateResult({
     Codigo_opcion: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
     ListResultMultiple: Yup.array()
-      .min(1,"Debe por lo menos tener un estatus agregado")
+      .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe seleccionar uno o varios grupo perteneciente al usuario"),
   });
 
@@ -167,7 +167,9 @@ function ComponentCreateResult({
                           : ""}
                       </select>
 
-                      <div className={styles.invalid_feedback}>{errors.Codigo_prueba?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.Codigo_prueba?.message}
+                      </div>
                     </div>
                   </div>
 
@@ -197,7 +199,9 @@ function ComponentCreateResult({
                             ))
                           : ""}
                       </select>
-                      <div className={styles.invalid_feedback}>{errors.Codigo_resultado_preliminar_1?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.Codigo_resultado_preliminar_1?.message}
+                      </div>
                     </div>
                   </div>
 
@@ -233,7 +237,9 @@ function ComponentCreateResult({
                                     ))
                                   : ""}
                               </select>
-                              <div className={styles.invalid_feedback}>{errors.Codigo_opcion?.message}</div>
+                              <div className={styles.invalid_feedback}>
+                                {errors.Codigo_opcion?.message}
+                              </div>
                             </div>
                           </div>
                         ) : (
@@ -286,12 +292,20 @@ function ComponentCreateResult({
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <ListResulltAdd
-                        styles={styles}
-                        ListAddResultMultple={ListAddResultMultple}
-                        setListAddResultMultple={setListAddResultMultple}
-                      ></ListResulltAdd>
-                         <div className={styles.invalid_feedback}>{errors.ListResultMultiple?.message}</div>
+                      <label className={styles.group_title}>
+                        Listado de estatus agregados
+                      </label>
+
+                      <div className={styles.list}>
+                        <ListResulltAdd
+                          ListAddResultMultple={ListAddResultMultple}
+                          setListAddResultMultple={setListAddResultMultple}
+                        ></ListResulltAdd>
+                      </div>
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.ListResultMultiple?.message}
+                      </div>
                     </div>
                   </div>
 
