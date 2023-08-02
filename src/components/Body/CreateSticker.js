@@ -7,8 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   setImagenFile,
   OnchangeObservaCrearEdit,
-  RegisterStickerObservaciones,
-  setFechaActual
+  RegisterStickerObservaciones
 } from "../Tools/functiones";
 import { onSubmitCreate } from "../Tools/CRUD";
 import * as Yup from "yup";
@@ -19,6 +18,7 @@ import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import "dayjs/locale/en-gb";
 import Image from "next/image";
 import Select from "react-select";
+import dayjs from "dayjs";
 
 function CreateSticker({
   ListadoGrupoActivo,
@@ -48,6 +48,7 @@ function CreateSticker({
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
   const [ValueGroup, setValueGroup] = useState(false);
   const [selectValue, SetSelectValue] = useState("");
+  const [fecha, Setfecha] = useState("");
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
@@ -56,9 +57,7 @@ function CreateSticker({
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
     SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
-    jefelaboratorio: Yup.string().required(
-      "Campo Jefe De Laboratorio obligatorio"
-    ),
+    jefelaboratorio: Yup.string().notRequired(),
     tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
@@ -396,7 +395,9 @@ function CreateSticker({
                           SetSelectValue(e.value);
                         }}
                         options={options}
-                      ></Select>
+                        placeholder="Seleccione el tipo de jefe"
+                      >                        
+                      </Select>
                       {/* <select
                         {...register("jefelaboratorio")}
                         name="jefelaboratorio"
@@ -481,19 +482,19 @@ function CreateSticker({
                       <label className={styles.group_title}>
                         Fecha de recogida de la muestra
                       </label>
-                      <LocalizationProvider
+                      <LocalizationProvider 
                         orientation="landscape"
                         dateAdapter={AdapterDayjs}
                         adapterLocale={"en-gb"}
                       >
-                        <MobileDateTimePicker className="FechaHoraRecogida" />
+                        <MobileDateTimePicker value={fecha} className="FechaHoraRecogida" />
                       </LocalizationProvider>
 
                       <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
                         onClick={() => {
-                          setFechaActual("FechaHoraRecogida");
+                          Setfecha(dayjs());
                         }}
                         className={styles.photo}
                       >
@@ -594,14 +595,13 @@ function CreateSticker({
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
-                        onClick={() => {
-                          RegisterStickerObservaciones(setValue);
+                        onClick={(e) => {
+                          RegisterStickerObservaciones(setValue,selectValue,e);
                           setValue(
                             "FechaHoraRecogida",
                             document.querySelector(".FechaHoraRecogida input")
                               .value
-                          );
-                          setValue("jefelaboratorio", selectValue);
+                          );                          
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,
