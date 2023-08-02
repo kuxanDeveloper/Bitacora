@@ -12,6 +12,7 @@ import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
 import ListResulltAdd from "./ListResulltAdd";
 
+import Image from "next/image";
 function ComponentCreateResult({
   ListPruebas,
   ListResultados,
@@ -43,6 +44,13 @@ function ComponentCreateResult({
   return (
     <>
       <section className={styles.Create_Result}>
+        <Image
+          src="/img/bg_image.jpg"
+          width={1000}
+          height={1000}
+          alt="a"
+          className={styles.background_img}
+        />
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link

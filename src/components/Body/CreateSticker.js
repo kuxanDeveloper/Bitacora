@@ -18,6 +18,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import "dayjs/locale/en-gb";
 import Image from "next/image";
+import Select from "react-select";
 
 function CreateSticker({
   ListadoGrupoActivo,
@@ -46,6 +47,7 @@ function CreateSticker({
   } = useContextBitacora();
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
   const [ValueGroup, setValueGroup] = useState(false);
+  const [selectValue, SetSelectValue] = useState("");
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
@@ -54,7 +56,9 @@ function CreateSticker({
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
     SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
-    jefelaboratorio: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    jefelaboratorio: Yup.string().required(
+      "Campo Jefe De Laboratorio obligatorio"
+    ),
     tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
@@ -106,6 +110,10 @@ function CreateSticker({
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
+  const options = [];
+  ListadoJefeLaboratorio.map((data) => {
+    options.push({ value: data.ID, label: data.DESCRIPCION });
+  });
 
   return (
     <>
@@ -372,12 +380,24 @@ function CreateSticker({
 
                   {/*-------------------------------Jefe  Laboratorio------------------------------------------- */}
 
-                  <div className={styles.form_group}>
+                  <div
+                    className={styles.form_group}
+                    style={{ position: "relative" }}
+                  >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
                         Jefe de laboratorio
                       </label>
-                      <select
+
+                      <Select
+                        className="jefelaboratorio"
+                        defaultValue={selectValue}
+                        onChange={(e) => {
+                          SetSelectValue(e.value);
+                        }}
+                        options={options}
+                      ></Select>
+                      {/* <select
                         {...register("jefelaboratorio")}
                         name="jefelaboratorio"
                         id="jefelaboratorio"
@@ -391,11 +411,37 @@ function CreateSticker({
                             {data.DESCRIPCION}
                           </option>
                         ))}
-                      </select>
+                      </select> */}
 
                       <div className={styles.invalid_feedback}>
                         {errors.jefelaboratorio?.message}
                       </div>
+                      {/* <div style={{position: "absolute", right: "0", top: "10px"}}>
+                        <div style={{backgroundColor: "#e57d00", borderRadius: "50px", display: "flex", justifyContent: "center", alignItems: "center", width: "30px", height: "30px"}}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-keyboard"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="#ffffff"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />
+                            <path d="M6 10l0 .01" />
+                            <path d="M10 10l0 .01" />
+                            <path d="M14 10l0 .01" />
+                            <path d="M18 10l0 .01" />
+                            <path d="M6 14l0 .01" />
+                            <path d="M18 14l0 .01" />
+                            <path d="M10 14l4 .01" />
+                          </svg>
+                        </div>
+                      </div> */}
                     </div>
                   </div>
 
@@ -555,6 +601,7 @@ function CreateSticker({
                             document.querySelector(".FechaHoraRecogida input")
                               .value
                           );
+                          setValue("jefelaboratorio", selectValue);
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,
