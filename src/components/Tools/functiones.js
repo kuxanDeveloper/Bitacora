@@ -1,4 +1,4 @@
-import { CloseCaseSample } from "../../pages/api/Sample/ViewDetails/[id]";
+import { CloseCaseSample,DeleteResultSegm } from "../../pages/api/Sample/ViewDetails/[id]";
 import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
 import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
 
@@ -1135,4 +1135,29 @@ export const setFechaActual = (idfecha) =>
   document.querySelector("." + idfecha +" input")
                             .value = dayjs().format('DD/MM/YYYY hh:mm');
   
+};
+
+export const DeleteRowStatusDataBase = (data,
+  IdPrub,
+  NombrePrub) => {
+
+  Swal.fire({
+    title:`Eliminar Estatus ${NombrePrub}`,
+    text: `¿Estás seguro de que desea Eliminar el estatus ${NombrePrub}, con el seguimiento "${data.PLANTILLA_RESULTADO}"?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#e57d00",
+    cancelButtonColor: "#767676",
+    confirmButtonText: "Si, eliminar estatus",
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      const rpt = DeleteResultSegm(
+        data.CODIGO_RESULTADO_BITACORA,
+        IdPrub,
+        data.CODIGO_RESULTADO_BITACORA
+      );
+      return;
+    }
+  });
 };

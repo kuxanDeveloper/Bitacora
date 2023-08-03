@@ -90,6 +90,7 @@ export const userService = {
   EditTipoMuestra,
   guardFechasbitacora,
   ListMultipleMixPruxNum,
+  DeleteResult
 };
 
 async function login(username, password) {
@@ -1141,6 +1142,17 @@ function guardFechasbitacora(
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditarFechasBitacoras`,
+    null,
+    formData
+  );
+}
+
+function DeleteResult(Codigo_resultado_bitacora) {
+  const formData = new FormData();
+  formData.append("Codigo_resultado_bitacora", Codigo_resultado_bitacora);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/DeleteResult`,
     null,
     formData
   );

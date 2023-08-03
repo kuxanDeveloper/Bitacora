@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/StickerDetails.module.scss";
-import Link from "next/link";
+import stylesLst from "../../../styles/ListSeguimientos.module.scss";
+import ListSegum from "./ListSeguimresult";
 
 function Results({ data, Options, group, name_group, sticker }) {
   return (
-    <div className={styles.restults}>
-      {Options.BtnEditResultAndUrl ? (
+    <div className={styles.restults} id={"Estatus" + data.COD_PRUEBA}>
+      {/* {Options.BtnEditResultAndUrl ? (
         <Link
           title="Editar prueba"
           href={{
@@ -73,7 +74,7 @@ function Results({ data, Options, group, name_group, sticker }) {
         // </Link>
       ) : (
         ""
-      )}
+      )} */}
 
       {/* status y fecha */}
       <div className={styles.form_group}>
@@ -89,71 +90,30 @@ function Results({ data, Options, group, name_group, sticker }) {
         </div>
 
         <div className={styles.info_group}>
-          <span className={`${styles.info_title}  `}>Fecha de creación:</span>
+          <span className={`${styles.info_title}  `}>
+            Fecha de creación de ultimo estatus:
+          </span>
           <p className={`${styles.info_text} ${styles.date}`}>
-            {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
-            data.FECHA_CREACION_RESULTADO_FORMAT !== undefined
-              ? data.FECHA_CREACION_RESULTADO_FORMAT
-              : ""}
-          </p>
-        </div>
-        <div className={styles.info_group}>
-          <span className={`${styles.info_title} ${styles.inline}`}>
-            Estatus creado por:
-          </span>
-          <p className={`${styles.info_text} ${styles.inline}`}>
-            {data.USUARIO_CREADOR_RESULTADO !== null &&
-            data.USUARIO_CREADOR_RESULTADO !== undefined
-              ? data.USUARIO_CREADOR_RESULTADO
+            {data.FECHA_CREACION !== null && data.FECHA_CREACION !== undefined
+              ? data.FECHA_CREACION
               : ""}
           </p>
         </div>
       </div>
 
-      <div className={styles.form_group}>
-        {data.OPCION_DESCRIPCION != null ? (
-          <div className={styles.info_group}>
-            <span className={`${styles.info_title} ${styles.inline}`}>
-              Opciones:
-            </span>
-            <p className={`${styles.info_text} ${styles.inline}`}>
-              {data.OPCION_DESCRIPCION !== null &&
-              data.OPCION_DESCRIPCION !== undefined
-                ? data.OPCION_DESCRIPCION
-                : ""}
-            </p>
+      <div className={stylesLst.form_group}>
+        <div className={stylesLst.input_group}>
+          <div className={stylesLst.list}>
+            <ListSegum
+              IdPrub={data.COD_PRUEBA}
+              NombrePrub={data.NOMBRE_PRUEBA}
+              ListadoSeguimientos={data.ListadoSeguimientos}
+              TipoTabla={true}
+            ></ListSegum>
           </div>
-        ) : (
-          <></>
-        )}
-
-        <div className={styles.info_group}>
-          <span className={`${styles.info_title}  ${styles.inline} `}>
-            Seguimiento:
-          </span>
-          <p className={`${styles.info_text} ${styles.inline}`}>
-            {" "}
-            {data.PLANTILLA_RESULTADO !== null &&
-            data.PLANTILLA_RESULTADO !== undefined
-              ? data.PLANTILLA_RESULTADO
-              : ""}
-          </p>
         </div>
       </div>
 
-      {/* resultado */}
-      {/* <div className={styles.form_group}>
-        <div className={styles.info_group}>
-          <span className={`${styles.info_title} `}>Seguimiento</span>
-          <p className={styles.info_text}>
-            {" "}
-            {data.PLANTILLA_RESULTADO !== null &&
-            data.PLANTILLA_RESULTADO !== undefined
-              ? data.PLANTILLA_RESULTADO
-              : ""}
-          </p>
-        </div>
-      </div> */}
       <hr />
     </div>
   );

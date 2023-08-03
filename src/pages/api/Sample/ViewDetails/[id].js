@@ -2,6 +2,7 @@ import {
   QueryMuestraEdit,
   QueryNoteEdit,
   QueryCloseCaseSample,
+  QueryDeleteResult,
   QueryObserva,
   QueryJefeLaboratorio,
   QuerySitioAnatomico,
@@ -31,6 +32,21 @@ export const InfoteNoteEditApi = async (
 
 export const CloseCaseSample = async (id, observacionCaso, Estado) => {
   let infoNote = await QueryCloseCaseSample(id, observacionCaso, Estado);
+  return infoNote;
+};
+
+export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresult) => {
+  let infoNote = await QueryDeleteResult(Codigo_resultado_bitacora);
+  console.log(infoNote);
+  if(infoNote == "Todo Eliminado")
+  {    
+    document.getElementById('Estatus' + IdPrub).remove();    
+  }
+  else if(infoNote == "El estatus se elimino correctamente")
+  {
+    document.getElementById('SeguRest' + codresult).remove();
+  }
+  
   return infoNote;
 };
 
