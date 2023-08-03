@@ -319,11 +319,17 @@ function ComponentCreateResult({
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
-                      <ListResulltAdd
-                        styles={styles}
-                        ListAddResultMultple={ListAddResultMultple}
-                        setListAddResultMultple={setListAddResultMultple}
-                      ></ListResulltAdd>
+                      <label className={styles.group_title}>
+                        Listado de estatus agregados
+                      </label>
+
+                      <div className={styles.list}>
+                        <ListResulltAdd
+                          ListAddResultMultple={ListAddResultMultple}
+                          setListAddResultMultple={setListAddResultMultple}
+                        ></ListResulltAdd>
+                      </div>
+
                       <div className={styles.invalid_feedback}>
                         {errors.ListResultMultiple?.message}
                       </div>

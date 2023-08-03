@@ -115,6 +115,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         FechaIngresoFinal={FechaIngresoFinal}
         UserRegisterStiker={UserRegisterStiker}
         Sufijo={Sufijo}
+        MesAnio={MesAnio}
         query={query}
       ></IndexTrazaBit>
     </>

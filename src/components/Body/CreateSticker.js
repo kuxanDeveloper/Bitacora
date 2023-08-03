@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   setImagenFile,
   OnchangeObservaCrearEdit,
-  RegisterStickerObservaciones
+  RegisterStickerObservaciones,
 } from "../Tools/functiones";
 import { onSubmitCreate } from "../Tools/CRUD";
 import * as Yup from "yup";
@@ -317,7 +317,7 @@ function CreateSticker({
 
                   {/* <!-- estado --> */}
 
-                  {/*-------------------------------Grupo------------------------------------------- */}
+                  {/*------------------------------- Grupo & Jefe de laboratorio ------------------------------------------- */}
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
@@ -346,9 +346,30 @@ function CreateSticker({
                         {errors.GrupoSticker?.message}
                       </div>
                     </div>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Jefe de laboratorio
+                      </label>
+
+                      <Select
+                        className="jefelaboratorio"
+                        defaultValue={selectValue}
+                        onChange={(e) => {
+                          SetSelectValue(e.value);
+                        }}
+                        options={options}
+                        placeholder="Seleccione un jefe de laboratorio"
+                      ></Select>
+               
+
+                      <div className={styles.invalid_feedback}>
+                        {errors.jefelaboratorio?.message}
+                      </div>
+                     
+                    </div>
                   </div>
 
-                  {/*-------------------------------Sitio Anatomico------------------------------------------- */}
+                  {/*-------------------------------Sitio Anatomico & Tipo de Muestra------------------------------------------- */}
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
@@ -375,80 +396,6 @@ function CreateSticker({
                         {errors.SitioAnatomico?.message}
                       </div>
                     </div>
-                  </div>
-
-                  {/*-------------------------------Jefe  Laboratorio------------------------------------------- */}
-
-                  <div
-                    className={styles.form_group}
-                    style={{ position: "relative" }}
-                  >
-                    <div className={styles.input_group}>
-                      <label className={styles.group_title}>
-                        Jefe de laboratorio
-                      </label>
-
-                      <Select
-                        className="jefelaboratorio"
-                        defaultValue={selectValue}
-                        onChange={(e) => {
-                          SetSelectValue(e.value);
-                        }}
-                        options={options}
-                        placeholder="Seleccione el tipo de jefe"
-                      >                        
-                      </Select>
-                      {/* <select
-                        {...register("jefelaboratorio")}
-                        name="jefelaboratorio"
-                        id="jefelaboratorio"
-                        defaultValue={""}
-                      >
-                        <option disabled value="">
-                          Seleccione una opción
-                        </option>
-                        {ListadoJefeLaboratorio.map((data, index) => (
-                          <option key={index} value={data.ID}>
-                            {data.DESCRIPCION}
-                          </option>
-                        ))}
-                      </select> */}
-
-                      <div className={styles.invalid_feedback}>
-                        {errors.jefelaboratorio?.message}
-                      </div>
-                      {/* <div style={{position: "absolute", right: "0", top: "10px"}}>
-                        <div style={{backgroundColor: "#e57d00", borderRadius: "50px", display: "flex", justifyContent: "center", alignItems: "center", width: "30px", height: "30px"}}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-keyboard"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="#ffffff"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />
-                            <path d="M6 10l0 .01" />
-                            <path d="M10 10l0 .01" />
-                            <path d="M14 10l0 .01" />
-                            <path d="M18 10l0 .01" />
-                            <path d="M6 14l0 .01" />
-                            <path d="M18 14l0 .01" />
-                            <path d="M10 14l4 .01" />
-                          </svg>
-                        </div>
-                      </div> */}
-                    </div>
-                  </div>
-
-                  {/*-------------------------------Tipo de muestra------------------------------------------- */}
-
-                  <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
                         Tipo de muestra
@@ -473,21 +420,27 @@ function CreateSticker({
                         {errors.tipoMuestra?.message}
                       </div>
                     </div>
+
+                    
                   </div>
 
-                  {/*-------------------------------Fecha de recodigo muestra------------------------------------------- */}
+
+                  {/*-------------------------------Fecha de recodigo & Observaciones predeterminada------------------------------------------- */}
 
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
                         Fecha de recogida de la muestra
                       </label>
-                      <LocalizationProvider 
+                      <LocalizationProvider
                         orientation="landscape"
                         dateAdapter={AdapterDayjs}
                         adapterLocale={"en-gb"}
                       >
-                        <MobileDateTimePicker value={fecha} className="FechaHoraRecogida" />
+                        <MobileDateTimePicker
+                          value={fecha}
+                          className="FechaHoraRecogida"
+                        />
                       </LocalizationProvider>
 
                       <button
@@ -528,10 +481,6 @@ function CreateSticker({
                         {errors.FechaHoraRecogida?.message}
                       </div>
                     </div>
-                  </div>
-
-                  {/* <!-- form group --> */}
-                  <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
                         Observaciones predeterminada
@@ -569,8 +518,12 @@ function CreateSticker({
                           : ""}
                       </select>
                     </div>
+                  </div>
 
-                    {ShowobservaTextare ? (
+                  {/* <!-- form group --> */}
+
+                  {ShowobservaTextare ? (
+                    <div className={styles.form_group}>
                       <div className={styles.input_group}>
                         <label className={styles.group_title}>
                           Observaciones iniciales
@@ -587,21 +540,25 @@ function CreateSticker({
                         {errors.ObservaInici?.message}
                       </div> */}
                       </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={(e) => {
-                          RegisterStickerObservaciones(setValue,selectValue,e);
+                          RegisterStickerObservaciones(
+                            setValue,
+                            selectValue,
+                            e
+                          );
                           setValue(
                             "FechaHoraRecogida",
                             document.querySelector(".FechaHoraRecogida input")
                               .value
-                          );                          
+                          );
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,

@@ -9,7 +9,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  
+
   .background_img {
     position: absolute;
     inset: 0 0 0 0;
@@ -18,10 +18,9 @@
     object-fit: cover;
   }
 
-
   .details_container {
     background-color: rgba(20, 20, 20, 0.664);
-    max-width: 700px;
+    max-width: 720px;
     border-radius: 10px;
     padding: 1rem 1.2rem;
     position: relative;
@@ -64,7 +63,7 @@
     .card {
       position: relative;
       background-color: white;
-      max-width: 90%;
+      max-width: 95%;
       min-width: 260px;
       margin: auto;
       padding: 1.8rem 0.7rem;
@@ -150,8 +149,11 @@
           .form_group {
             display: flex;
             flex-wrap: wrap;
-
+         
+            
             .info_group {
+          
+
               width: 100%;
               .info_title {
                 display: block;
@@ -169,6 +171,7 @@
                 object-fit: cover;
                 border-radius: 10px;
                 font-size: clamp(14px, 1rem, 1.2rem);
+           
               }
 
               .group_figure {
@@ -235,15 +238,18 @@
               top: calc(50% - 12.5px);
             }
           }
-
+          
+          
           .restults {
             position: relative;
+          
             .update_icon {
               position: absolute;
               right: 5px;
               top: calc(50% - 30px);
             }
           }
+          
         }
       }
     }
@@ -347,6 +353,7 @@
               .inline {
                 display: inline;
               }
+
               .info_group {
                 width: 100%;
                 flex: 1;
@@ -354,7 +361,7 @@
                   display: block;
                   font-size: clamp(14px, 1rem, 1.2rem);
                   color: #4b73bd;
-                  font-weight: 600;
+                  font-weight: 700;
                   margin: 0.3rem 0;
                   &.inline {
                     display: inline;
@@ -368,7 +375,10 @@
                   color: #636363;
                   object-fit: cover;
                   border-radius: 10px;
-                  font-size: clamp(14px, 1rem, 1.2rem);
+                  font-size: clamp(14px, 0.9rem, 1.2rem);
+                  &.date {
+                    padding: 0;
+                  }
                 }
 
                 .group_figure {

@@ -1,6 +1,8 @@
 import React from "react";
 import { UpdateObject } from "./functiones";
 import Link from "next/link";
+import styles from "../../styles/Paginacion.module.scss";
+
 function NumberPagination({
   valorMap,
   page,
@@ -12,25 +14,35 @@ function NumberPagination({
   let pageUnica = parseInt(page);
   if (parseInt(valorMap) === pageUnica) {
     return (
-      <a key={index} className="active">
-        {valorMap}
-      </a>
+      <li>
+        <a key={index} className={styles.active}>
+          {valorMap}
+        </a>
+      </li>
     );
   } else {
     if (valorMap === "...") {
-      return <a key={index}>{valorMap}</a>;
+      return (
+        <li>
+          <a key={index}>{valorMap}</a>
+        </li>
+      );
     } else {
       return (
-        <Link
-          key={index}
-          href={{
-            pathname: pathname,
-            query: UpdateObject(queryArme, valorMap),
-            hash: hash != null && hash != undefined ? hash : "",
-          }}
+        <li        
         >
-          {valorMap}
-        </Link>
+          <Link
+            key={index}
+            className={page == valorMap ? styles.active : ""}
+            href={{
+              pathname: pathname,
+              query: UpdateObject(queryArme, valorMap),
+              hash: hash != null && hash != undefined ? hash : "",
+            }}
+          >
+            {valorMap}
+          </Link>
+        </li>
       );
     }
   }

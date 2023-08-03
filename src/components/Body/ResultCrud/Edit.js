@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { onSubmitEditResult } from "../../Tools/CRUD";
+import Image from "next/image";
 import {
   onclickPruebaTargetEdit,
   onclickPlantillaTargetEdit,
@@ -70,6 +71,8 @@ function ComponentEditResult({
   return (
     <>
       <section className={styles.Create_Result}>
+      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
