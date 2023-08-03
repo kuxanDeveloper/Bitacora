@@ -108,6 +108,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
         FechaIngresoFinal={FechaIngresoFinal}
         UserRegisterStiker={UserRegisterStiker}
         Tipotabla={Tipotabla}
+        MesAnio={MesAnio}
         query={query}
       ></IndexTrazaSis>
     </>

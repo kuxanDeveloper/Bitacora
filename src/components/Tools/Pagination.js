@@ -16,7 +16,7 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
     }
 
     const maxpag = Math.max(...pageObject.array);
-    
+    debugger;
     if(maxpag == page)
     {
       document.getElementById("Siguiente").style.pointerEvents = "none";

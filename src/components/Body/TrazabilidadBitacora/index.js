@@ -13,6 +13,7 @@ function ComponentTrazaBitIndex({
   FechaIngresoFinal,
   UserRegisterStiker,
   Sufijo,
+  MesAnio,
   query,
 }) {
   const router = useRouter();
@@ -37,6 +38,10 @@ function ComponentTrazaBitIndex({
 
     if (Sufijo != null && Sufijo != "") {
       newObje.Sufijo = Sufijo;
+    }
+
+    if (MesAnio != null && MesAnio != "") {
+      newObje.Mes = MesAnio;
     }
 
     return newObje;

@@ -12,6 +12,7 @@ function ComponentTrazaSisIndex({
   FechaIngresoFinal,
   UserRegisterStiker,
   Tipotabla,
+  MesAnio,
   query,
 }) {
   const router = useRouter();
@@ -33,6 +34,10 @@ function ComponentTrazaSisIndex({
 
     if (Tipotabla != null && Tipotabla != "") {
       newObje.Tipo_tabla = Tipotabla;
+    }
+
+    if (MesAnio != null && MesAnio != "") {
+      newObje.Mes = MesAnio;
     }
 
     return newObje;
