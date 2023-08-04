@@ -51,10 +51,18 @@ function Result({ data, infoBitacora, Options }) {
         </div>
 
         <div className={styles.card_group}>
-          <p className={styles.group_title}>Fecha de último estatus</p>
+          <p className={styles.group_title}>Fecha de creacion del estatus</p>
           <span className={styles.group_result}>
-            {data.FECHA_CREACION !== null && data.FECHA_CREACION !== undefined
-              ? data.FECHA_CREACION
+            {data.FECHA_CREACION_MINIMO_FORMAT !== null && data.FECHA_CREACION_MINIMO_FORMAT !== undefined
+              ? data.FECHA_CREACION_MINIMO_FORMAT
+              : ""}
+          </span>
+        </div>
+        <div className={styles.card_group}>
+          <p className={styles.group_title}>Usuario que creo el estatus</p>
+          <span className={styles.group_result}>
+            {data.Email !== null && data.Email !== undefined
+              ? data.Email
               : ""}
           </span>
         </div>
@@ -67,6 +75,8 @@ function Result({ data, infoBitacora, Options }) {
               NombrePrub={data.NOMBRE_PRUEBA}
               ListadoSeguimientos={data.ListadoSeguimientos}
               TipoTabla={false}
+              UsuCreador={data.Email}
+              FechaCreacion={data.FECHA_CREACION_MINIMO}
             ></ListSegum>
           </div>
         </div>

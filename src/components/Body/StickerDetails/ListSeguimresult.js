@@ -10,6 +10,8 @@ function ListResulltAdd({
   NombrePrub,
   ListadoSeguimientos,
   TipoTabla,
+  UsuCreador,
+  FechaCreacion,
 }) {
   return (
     <>
@@ -81,23 +83,28 @@ function ListResulltAdd({
                 ""
               )}
 
-              <div className={styles.row}>
-                <span className={styles.list_title}>
-                  Usuario que creo el seguimiento:
-                </span>
-                <span className={styles.text}>
-                  {data.USUARIO_CREADOR_RESULTADO}
-                </span>
-              </div>
-
-              <div className={styles.row}>
-                <span className={styles.list_title}>
-                  Fecha de creacion de resultado:
-                </span>
-                <span className={styles.text}>
-                  {data.FECHA_CREACION_RESULTADO_FORMAT}
-                </span>
-              </div>
+              {UsuCreador != data.USUARIO_CREADOR_RESULTADO ? (
+                <div className={styles.BackColor}>
+                  <div className={styles.row}>
+                    <span className={styles.list_title}>
+                      Usuario que creo el seguimiento:
+                    </span>
+                    <span className={styles.text}>
+                      {data.USUARIO_CREADOR_RESULTADO}
+                    </span>
+                  </div>
+                  <div className={styles.row}>
+                    <span className={styles.list_title}>
+                      Fecha de creacion del seguimiento:
+                    </span>
+                    <span className={styles.text}>
+                      {data.FECHA_CREACION_RESULTADO_FORMAT}
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
 
               {/* <div className={styles.row}>
               <span className={styles.list_title}>Opciones:</span>

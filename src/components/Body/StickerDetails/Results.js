@@ -92,11 +92,22 @@ function Results({ data, Options, group, name_group, sticker }) {
 
         <div className={styles.info_group}>
           <span className={`${styles.info_title}  `}>
-            Fecha de creación de ultimo estatus:
+            Fecha de creación del estatus:
           </span>
           <p className={`${styles.info_text} ${styles.date}`}>
-            {data.FECHA_CREACION !== null && data.FECHA_CREACION !== undefined
-              ? data.FECHA_CREACION
+            {data.FECHA_CREACION_MINIMO_FORMAT !== null && data.FECHA_CREACION_MINIMO_FORMAT !== undefined
+              ? data.FECHA_CREACION_MINIMO_FORMAT
+              : ""}
+          </p>
+        </div>
+
+        <div className={styles.info_group}>
+          <span className={`${styles.info_title}  `}>
+          Usuario que creo el estatus:
+          </span>
+          <p className={`${styles.info_text} ${styles.date}`}>
+            {data.Email !== null && data.Email !== undefined
+              ? data.Email
               : ""}
           </p>
         </div>
@@ -110,6 +121,8 @@ function Results({ data, Options, group, name_group, sticker }) {
               NombrePrub={data.NOMBRE_PRUEBA}
               ListadoSeguimientos={data.ListadoSeguimientos}
               TipoTabla={true}
+              UsuCreador={data.Email}
+              FechaCreacion={data.FECHA_CREACION_MINIMO}
             ></ListSegum>
           </div>
         </div>
