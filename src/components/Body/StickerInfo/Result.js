@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "../../../styles/StickerInfo.module.css";
 import Link from "next/link";
+import stylesLst from "../../../styles/ListSeguimientos.module.scss";
+import ListSegum from "../StickerDetails/ListSeguimresult";
+
 function Result({ data, infoBitacora, Options }) {
   return (
-    <div className={styles.result_body}>
+    <div>
+<div className={styles.result_body}>
       {Options.BtnCrearResultAndUrl ? (
         <Link
           href={{
@@ -41,54 +45,36 @@ function Result({ data, infoBitacora, Options }) {
       )}
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Usuario que creo el estatus</p>
-
-        <span className={styles.group_result}>
-          {data.USUARIO_CREADOR_RESULTADO}
-        </span>
-      </div>
-      <div className={styles.card_group}>
         <p className={styles.group_title}>Estatus</p>
 
         <span className={styles.group_result}>{data.NOMBRE_PRUEBA}</span>
       </div>
 
       <div className={styles.card_group}>
-        <p className={styles.group_title}>Seguimiento</p>
-
-        <span className={styles.group_result}>
-          {data.PLANTILLA_RESULTADO !== null &&
-          data.PLANTILLA_RESULTADO !== undefined
-            ? data.PLANTILLA_RESULTADO
-            : ""}
-        </span>
-      </div>
-      {data.OPCION_DESCRIPCION != null &&
-      data.OPCION_DESCRIPCION != undefined ? (
-        <div className={styles.card_group}>
-          <p className={styles.group_title}>Opciones</p>
-
-          <span className={styles.group_result}>
-            {data.OPCION_DESCRIPCION !== null &&
-            data.OPCION_DESCRIPCION !== undefined
-              ? data.OPCION_DESCRIPCION
-              : ""}
-          </span>
-        </div>
-      ) : (
-        <></>
-      )}
-
-      <div className={styles.card_group}>
         <p className={styles.group_title}>Fecha de último estatus</p>
         <span className={styles.group_result}>
-          {data.FECHA_CREACION_RESULTADO_FORMAT !== null &&
-          data.FECHA_CREACION_RESULTADO_FORMAT !== undefined
-            ? data.FECHA_CREACION_RESULTADO_FORMAT
+          {data.FECHA_CREACION !== null &&
+          data.FECHA_CREACION !== undefined
+            ? data.FECHA_CREACION
             : ""}
         </span>
       </div>
+      
     </div>
+    <div className={stylesLst.form_group}>
+    <div className={stylesLst.input_group}>
+      <div className={stylesLst.list}>
+        <ListSegum
+          IdPrub={data.COD_PRUEBA}
+          NombrePrub={data.NOMBRE_PRUEBA}
+          ListadoSeguimientos={data.ListadoSeguimientos}
+          TipoTabla={false}
+        ></ListSegum>
+      </div>
+    </div>
+  </div>
+    </div>
+    
   );
 }
 
