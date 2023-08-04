@@ -3,7 +3,7 @@ import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
   AddResultToList,
-  SeguimientoDinamycCombo,
+  ComboDinamyc,
 } from "../../Tools/functiones";
 import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -29,19 +29,18 @@ function ComponentCreateResult({
   ListMicroorganismo,
   ListNumber,
 }) {
-  console.log(ListResultados);
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
     Codigo_resultado_preliminar_1: Yup.string().notRequired(),
     Codigo_opcion: Yup.string().notRequired(),
+    SelectDinamyc: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
     ListResultMultiple: Yup.array()
       .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe por lo menos tener un estatus agregado"),
   });
-  const [isHabiliteMicroOrganismo, setisHabiliteMicroOrganismo] =
-    useState(false);
-  const [isHabiliteNumber, setisHabiliteNumber] = useState(false);
+  const [ComboDynamic, setComboDynamic] = useState(false);
+  const [ListSelectDimanyc, setListSelectDimanyc] = useState([]);
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
@@ -156,8 +155,12 @@ function ComponentCreateResult({
                           setvaluePruebachange(e.target.value);
                           onclickPruebaTargetCreate(
                             setvaluePlantillachange,
-                            setValue
+                            setValue,
+                            setComboDynamic,
+                            setListSelectDimanyc
                           );
+                          setComboDynamic(false);
+                          setListSelectDimanyc(false);
                           clearErrors("Codigo_prueba");
                         }}
                       >
@@ -191,7 +194,14 @@ function ComponentCreateResult({
                         onChange={(e) => {
                           setvaluePlantillachange(e.target.value);
                           onclickPlantillaTargetCreate(setValue);
-                          SeguimientoDinamycCombo(e.target.id);
+                          ComboDinamyc(
+                            e.target.id,
+                            ListMicroorganismo,
+                            ListNumber,
+                            setListSelectDimanyc,
+                            setComboDynamic,
+                            clearErrors
+                          );
                           clearErrors("Codigo_resultado_preliminar_1");
                         }}
                       >
@@ -227,7 +237,17 @@ function ComponentCreateResult({
                                 id="Codigo_opcion"
                                 className={styles.input_group}
                                 defaultValue={""}
-                                onChange={() => clearErrors("Codigo_opcion")}
+                                onChange={(e) => {
+                                  clearErrors("Codigo_opcion");
+                                  ComboDinamyc(
+                                    e.target.id,
+                                    ListMicroorganismo,
+                                    ListNumber,
+                                    setListSelectDimanyc,
+                                    setComboDynamic,
+                                    clearErrors
+                                  );
+                                }}
                               >
                                 <option disabled value="">
                                   Seleccione una opción
@@ -257,69 +277,15 @@ function ComponentCreateResult({
                       ))
                   }
 
-                  {isHabiliteMicroOrganismo || isHabiliteNumber ? (
-                    <div className={styles.form_group}>
-                      {isHabiliteMicroOrganismo ? (
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title}>
-                            Microorganismo
-                          </label>
-                          <select
-                            name="microorganismo"
-                            id="microorganismoSelect"
-                            className={styles.group_input}
-                            defaultValue={""}
-                          >
-                            <option disabled value="">
-                              Seleccione un microorganismo
-                            </option>
-                            {ListMicroorganismo != null &&
-                            ListMicroorganismo != undefined
-                              ? ListMicroorganismo.map((data, index) => (
-                                  <option
-                                    key={index}
-                                    value={data.ID}
-                                  >
-                                    {`${data.DESCRIPCION}`}
-                                  </option>
-                                ))
-                              : ""}
-                          </select>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                      {isHabiliteNumber ? (
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title}>
-                            Número
-                          </label>
-                          <select
-                            name="numberCount"
-                            id="numberCount"
-                            className={styles.group_input}
-                            defaultValue={""}
-                          >
-                            <option disabled value="">
-                              Seleccione un número
-                            </option>
-                            {ListNumber != null &&
-                            ListNumber != undefined
-                              ? ListNumber.map((data, index) => (
-                                  <option
-                                    key={index}
-                                    value={data.ID}
-                                  >
-                                    {`${data.DESCRIPCION}`}
-                                  </option>
-                                ))
-                              : ""}
-                          </select>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                  {ComboDynamic ? (
+                    <>
+                      <div className={`${styles.form_group}`}>
+                        {ListSelectDimanyc.map((data) => data)}
+                      </div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.SelectDinamyc?.message}
+                      </div>
+                    </>
                   ) : (
                     ""
                   )}
@@ -328,6 +294,7 @@ function ComponentCreateResult({
                     <Link
                       className={styles.create_followUp}
                       href={""}
+                      title="agregar estatus"
                       onClick={(e) => {
                         e.preventDefault();
                         AddResultToList(
@@ -338,7 +305,10 @@ function ComponentCreateResult({
                           ListAddResultMultple,
                           setError,
                           ListOptiones,
-                          setvaluePlantillachange
+                          setvaluePlantillachange,
+                          ComboDynamic,
+                          setListSelectDimanyc,
+                          setComboDynamic,
                         );
                       }}
                     >

@@ -3,7 +3,10 @@ import styles from "../../../styles/StickerDetails.module.scss";
 import stylesLst from "../../../styles/ListSeguimientos.module.scss";
 import ListSegum from "./ListSeguimresult";
 
+import Link from "next/link";
+
 function Results({ data, Options, group, name_group, sticker }) {
+  console.log(data);
   return (
     <div className={styles.restults} id={"Estatus" + data.COD_PRUEBA}>
       {/* {Options.BtnEditResultAndUrl ? (
@@ -36,9 +39,8 @@ function Results({ data, Options, group, name_group, sticker }) {
             <path d="M13.5 6.5l4 4" />
           </svg>
         </Link>
-
-
-        // Descomente el siguiente código para habilitar el botón de borrar 
+      ) : (
+        // Descomente el siguiente código para habilitar el botón de borrar
 
         // <Link
         //   title="Editar prueba"
@@ -72,7 +74,6 @@ function Results({ data, Options, group, name_group, sticker }) {
         //     <path d="M10 12l4 4m0 -4l-4 4" />
         //   </svg>
         // </Link>
-      ) : (
         ""
       )} */}
 

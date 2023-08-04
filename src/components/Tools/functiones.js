@@ -1,16 +1,9 @@
 import { CloseCaseSample,DeleteResultSegm } from "../../pages/api/Sample/ViewDetails/[id]";
-import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
-import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
-
-import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
-
-import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
 import Router from "next/router";
 import "dayjs/locale/en-gb";
-import dayjs from "dayjs";
+import styles from "../../styles/Results.module.scss";
 
 import Swal from "sweetalert2";
-import { array } from "yup";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
   return this;
@@ -133,7 +126,7 @@ export const FilterSearchTrazaBitacora = (
     DateAdmission == "" &&
     FechaIngresoFinal == "" &&
     Sufijo == "" &&
-    URS == "" && 
+    URS == "" &&
     MesAnio == ""
   ) {
     Swal.fire({
@@ -146,8 +139,7 @@ export const FilterSearchTrazaBitacora = (
   }
 
   if (DateAdmission != "" || FechaIngresoFinal != "") {
-    if(MesAnio != "")
-    {
+    if (MesAnio != "") {
       Swal.fire({
         title: "¡Advertencia!",
         text: "Recuerde seleccionar solo un tipo de filtro de fecha ya sea en bloque o por mes",
@@ -155,7 +147,6 @@ export const FilterSearchTrazaBitacora = (
         confirmButtonText: "Cerrar",
       });
       return;
-
     }
 
     if (DateAdmission == "" && FechaIngresoFinal != "") {
@@ -188,7 +179,7 @@ export const FilterSearchTrazaBitacora = (
       URS: URS,
       Sufijo: Sufijo,
       page: "1",
-      Mes: MesAnio
+      Mes: MesAnio,
     },
   });
 };
@@ -208,7 +199,7 @@ export const FilterSearchTrazaTables = (
     DateAdmission == "" &&
     FechaIngresoFinal == "" &&
     TipoTable == "" &&
-    URS == "" && 
+    URS == "" &&
     MesAnio == ""
   ) {
     Swal.fire({
@@ -221,8 +212,7 @@ export const FilterSearchTrazaTables = (
   }
 
   if (DateAdmission != "" || FechaIngresoFinal != "") {
-    if(MesAnio != "")
-    {
+    if (MesAnio != "") {
       Swal.fire({
         title: "¡Advertencia!",
         text: "Recuerde seleccionar solo un tipo de filtro de fecha ya sea en bloque o por mes",
@@ -230,7 +220,6 @@ export const FilterSearchTrazaTables = (
         confirmButtonText: "Cerrar",
       });
       return;
-
     }
 
     if (DateAdmission == "" && FechaIngresoFinal != "") {
@@ -262,7 +251,7 @@ export const FilterSearchTrazaTables = (
       URS: URS,
       Tipo_tabla: TipoTable,
       page: "1",
-      Mes: MesAnio
+      Mes: MesAnio,
     },
   });
 };
@@ -809,14 +798,12 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (setvalue,selectValue,e) => {
+export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
   let slt = document.getElementById("sltObservaIni");
   var cmbgrupo = document.getElementById("GrupoSticker");
 
-  if(cmbgrupo.value == 8)
-  {
-    if(selectValue == null || selectValue == "")
-    {
+  if (cmbgrupo.value == 8) {
+    if (selectValue == null || selectValue == "") {
       Swal.fire({
         title: "Error",
         text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo Hemocultivo`,
@@ -1010,7 +997,10 @@ export const AddResultToList = (
   ListAddResultMultple,
   setError,
   ListOptiones,
-  setvaluePlantillachange
+  setvaluePlantillachange,
+  ComboDynamic,
+  setListSelectDimanyc,
+  setComboDynamic
 ) => {
   let validadorError = false;
   let OptionIsHabilite = false;
@@ -1068,20 +1058,96 @@ export const AddResultToList = (
     }
   }
 
+  if (ComboDynamic) {
+    let selectMultip = document.getElementsByClassName("selectMultiple");
+    if (selectMultip.length > 0) {
+      for (let index = 0; index < selectMultip.length; index++) {
+        if (selectMultip[index].value == "") {
+          setError("SelectDinamyc", {
+            type: "custom",
+            message:
+              "Debes seleccionar todos los combos dinamicos para poder agregar un estatus",
+          });
+          validadorError = true;
+          break;
+        }
+      }
+    }
+  }
+
   if (!validadorError) {
     let obj = {};
+    let seguimiento =
+      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
+    let opciones = OptionIsHabilite
+      ? optionesValue.options[optionesValue.selectedIndex].text
+      : "";
     obj.EstatusID = valuePr.value;
     obj.SegumientoId = ValueSegumiento.value;
     obj.OptionID = OptionIsHabilite ? optionesValue.value : null;
 
     obj.TextoEstatus = valuePr.options[valuePr.selectedIndex].text;
-    obj.textoSeguimiento =
-      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
-    obj.textoOption = OptionIsHabilite
-      ? optionesValue.options[optionesValue.selectedIndex].text
-      : "";
+    obj.textoSeguimiento = seguimiento;
+    obj.textoOption = opciones;
+
+    if (ComboDynamic) {
+      let countPosition = 0;
+      let textoPreArmado = "";
+      let textSplitArray = null;
+      let selectMultip = document.getElementsByClassName("selectMultiple");
+      if (seguimiento.split("@").length > 1) {
+        obj.Issegumiento = true;
+        textSplitArray = seguimiento.split("@");
+        for (let index = 0; index < textSplitArray.length; index++) {
+          let ValorSearch = textSplitArray[index].toLowerCase();
+          if (ValorSearch.search("#microbio") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#MICROBIO",
+              selectMultip[countPosition].value
+            );
+            countPosition++;
+          } else if (ValorSearch.search("#numero") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#NUMERO",
+              selectMultip[countPosition].value
+            );
+
+            countPosition++;
+          } else {
+            textoPreArmado += textSplitArray[index];
+          }
+        }
+      } else if (opciones.split("@").length > 1) {
+        textSplitArray = opciones.split("@");
+        obj.Issegumiento = false;
+        for (let index = 0; index < textSplitArray.length; index++) {
+          let ValorSearch = textSplitArray[index].toLowerCase();
+          if (ValorSearch.search("#microbio") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#MICROBIO",
+              selectMultip[countPosition].value
+            );
+            countPosition++;
+          } else if (ValorSearch.search("#numero") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#NUMERO",
+              selectMultip[countPosition].value
+            );
+
+            countPosition++;
+          } else {
+            textoPreArmado += textSplitArray[index];
+          }
+        }
+      }
+
+      obj.ResulDinamico = textoPreArmado;
+    } else {
+      obj.ResulDinamico = null;
+    }
 
     if (
+      !ComboDynamic &&
       ListAddResultMultple.some(
         (a) =>
           a.EstatusID == obj.EstatusID &&
@@ -1103,6 +1169,8 @@ export const AddResultToList = (
       OptionIsHabilite ? (optionesValue.value = "") : "";
       valuePr.value = "";
       setvaluePlantillachange([]);
+      setListSelectDimanyc([]);
+      setComboDynamic(false);
     }
   }
 };
@@ -1114,27 +1182,127 @@ export const DeleteRowStatus = (
 ) => {
   let FilterSearch =
     data.OptionID == null
-      ? ListAddResultMultple.filter(
-          (item) =>
-            item.EstatusID !== data.EstatusID &&
-            item.SegumientoId != data.SegumientoId
-        )
+      ? ListAddResultMultple.filter((item) => {
+          return (
+            item.EstatusID !== data.EstatusID ||
+            item.SegumientoId !== data.SegumientoId
+          );
+        })
       : ListAddResultMultple.filter(
           (item) =>
-            item.EstatusID !== data.EstatusID &&
-            item.SegumientoId != data.SegumientoId &&
-            item.OptionID != data.OptionID
+            item.EstatusID !== data.EstatusID ||
+            item.SegumientoId !== data.SegumientoId ||
+            item.OptionID !== data.OptionID
         );
 
   setListAddResultMultple(FilterSearch);
 };
 
-export const setFechaActual = (idfecha) =>
-{
-  
-  document.querySelector("." + idfecha +" input")
-                            .value = dayjs().format('DD/MM/YYYY hh:mm');
-  
+export const ComboDinamyc = (
+  idInput,
+  ListMicroorganismo,
+  ListNumber,
+  setListSelectDimanyc,
+  setComboDynamic,
+  clearErrors
+) => {
+  let valueRetorno = document.getElementById(idInput);
+  setListSelectDimanyc([]);
+  if (valueRetorno != undefined && valueRetorno != null) {
+    let textoSelect = valueRetorno.options[valueRetorno.selectedIndex].text;
+
+    let textSplitArra = textoSelect.split("@");
+
+    if (textSplitArra.length > 1) {
+      setComboDynamic(true);
+      for (let index = 0; index < textSplitArra.length; index++) {
+        let retorno = null;
+        let ValorSearch = textSplitArra[index].toLowerCase();
+        if (ValorSearch.search("#microbio") != -1) {
+          retorno = (
+            <div className={styles.input_group}>
+              <label className={styles.group_title}>Microorganismo</label>
+              <select
+                name={`microorganismo_${index}`}
+                id={`microorganismoSelect_${index}`}
+                className={`${styles.group_input} selectMultiple`}
+                defaultValue={""}
+                onChange={() => clearErrors("SelectDinamyc")}
+              >
+                <option disabled value="">
+                  Seleccione un microorganismo
+                </option>
+                {ListMicroorganismo != null && ListMicroorganismo != undefined
+                  ? ListMicroorganismo.map((data, index) => (
+                      <option key={index} value={data.DESCRIPCION}>
+                        {`${data.DESCRIPCION}`}
+                      </option>
+                    ))
+                  : ""}
+              </select>
+            </div>
+          );
+        } else if (ValorSearch.search("#numero") != -1) {
+          retorno = (
+            <div className={styles.input_group}>
+              <label className={styles.group_title}>Número</label>
+              <select
+                name={`numberCount_${index}`}
+                id={`numberCount_${index}`}
+                className={`${styles.group_input} selectMultiple`}
+                defaultValue={""}
+                onChange={() => clearErrors("SelectDinamyc")}
+              >
+                <option disabled value="">
+                  Seleccione un número
+                </option>
+                {ListNumber != null && ListNumber != undefined
+                  ? ListNumber.map((data, index) => (
+                      <option key={index} value={data.DESCRIPCION}>
+                        {`${data.DESCRIPCION}`}
+                      </option>
+                    ))
+                  : ""}
+              </select>
+            </div>
+          );
+        }
+
+        setListSelectDimanyc((preventArray) => [...preventArray, retorno]);
+      }
+    } else {
+      setComboDynamic(false);
+    }
+  }
+};
+
+export const validateResultArmadoIsSeguimiento = (
+  opcioneDescription,
+  ResultadoArmado
+) => {
+  let Validator = false;
+  if (opcioneDescription != null && ResultadoArmado != null) {
+    let textArray = opcioneDescription.split("@");
+    if (textArray.length > 0) {
+      Validator = true;
+    }
+  }
+  return Validator;
+};
+
+export const validateResultArmadoIsOpciones = (
+  PlantillaResultado,
+  ResultadoArmado
+) => {
+  let Validator = false;
+
+  if (ResultadoArmado != null && PlantillaResultado != null) {
+    let textArray = PlantillaResultado.split("@");
+    if (textArray.length > 0) {
+      Validator = true;
+    }
+  }
+  return Validator;
 };
 
 export const DeleteRowStatusDataBase = (data,
