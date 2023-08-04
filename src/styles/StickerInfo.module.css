@@ -376,9 +376,9 @@
 
   .sticker_info .info_container {
     background-color: rgba(20, 20, 20, 0.664);
-    max-width: 700px;
+    max-width: 800px;
     border-radius: 10px;
-    padding: 1rem 1.2rem;
+    padding: 1rem 1rem;
   }
 
   .sticker_info .info_container .back_btn_container {
@@ -413,9 +413,9 @@
   .sticker_info .info_container .card {
     position: relative;
     background-color: white;
-    max-width: 90%;
+    max-width: unset;
     min-width: 260px;
-    margin: auto;
+    margin: unset;
     padding: 1.5rem 0.7rem;
     bottom: 10px;
     border-radius: 10px;

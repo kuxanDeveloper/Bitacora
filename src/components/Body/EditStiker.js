@@ -9,7 +9,7 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import {
   setImagenFileUpdate,
   OnchangeObservaCrearEdit,
-  RegisterStickerObservaciones
+  RegisterStickerObservaciones,
 } from "../Tools/functiones";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -354,7 +354,8 @@ function EditStickerComponents({
                         )}
                       </div>
 
-                      {/*-------------------------------Sitio Anatomico------------------------------------------- */}
+                      {/*-------------------------------Sitio Anatomico %
+                      & Jefe  Laboratorio ------------------------------------------- */}
 
                       <div className={styles.form_group}>
                         <div className={styles.input_group}>
@@ -384,11 +385,7 @@ function EditStickerComponents({
                             {errors.SitioAnatomico?.message}
                           </div>
                         </div>
-                      </div>
 
-                      {/*-------------------------------Jefe  Laboratorio------------------------------------------- */}
-
-                      <div className={styles.form_group}>
                         <div className={styles.input_group}>
                           <label className={styles.group_title}>
                             Jefe de laboratorio
@@ -411,22 +408,6 @@ function EditStickerComponents({
                             placeholder="Seleccione el tipo de jefe"
                             options={options}
                           ></Select>
-                          {/* <select
-                            {...register("jefelaboratorio")}
-                            name="jefelaboratorio"
-                            id="jefelaboratorio"
-                            value={codJefeLab}
-                            onChange={(e) => setcodJefeLab(e.target.value)}
-                          >
-                            <option disabled value="">
-                              Seleccione una opción
-                            </option>
-                            {ListadoJefeLaboratorio.map((data, index) => (
-                              <option key={index} value={data.ID}>
-                                {data.DESCRIPCION}
-                              </option>
-                            ))}
-                          </select> */}
 
                           <div className={styles.invalid_feedback}>
                             {errors.jefelaboratorio?.message}
@@ -434,7 +415,7 @@ function EditStickerComponents({
                         </div>
                       </div>
 
-                      {/*-------------------------------Tipo de muestra------------------------------------------- */}
+                      {/*-------------------------------Tipo de muestra & observaciones predeterminadas------------------------------------------- */}
 
                       <div className={styles.form_group}>
                         <div className={styles.input_group}>
@@ -461,6 +442,43 @@ function EditStickerComponents({
                           <div className={styles.invalid_feedback}>
                             {errors.tipoMuestra?.message}
                           </div>
+                        </div>
+
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>
+                            Obsevraciones predeterminada
+                          </label>
+                          <select
+                            name="sltObservaIni"
+                            id="sltObservaIni"
+                            onChange={(e) => {
+                              OnchangeObservaCrearEdit(
+                                e.target.value,
+                                setShowobservaTextare
+                              );
+                            }}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {LstObservacionesPrede != null &&
+                            LstObservacionesPrede != undefined
+                              ? LstObservacionesPrede.length > 0
+                                ? LstObservacionesPrede.map((data, index) => {
+                                    if (data.Observacion_Bitacora) {
+                                      return (
+                                        <option
+                                          key={index}
+                                          value={data.Codigo_observacion}
+                                        >
+                                          {data.Descripcion_Observacion}
+                                        </option>
+                                      );
+                                    }
+                                  })
+                                : ""
+                              : ""}
+                          </select>
                         </div>
                       </div>
 
@@ -519,46 +537,6 @@ function EditStickerComponents({
                           <div className={styles.invalid_feedback}>
                             {errors.FechaHoraRecogida?.message}
                           </div>
-                        </div>
-                      </div>
-
-                      {/* <!-- form group --> */}
-                      <div className={styles.form_group}>
-                        <div className={styles.input_group}>
-                          <label className={styles.group_title}>
-                            Obsevraciones predeterminada
-                          </label>
-                          <select
-                            name="sltObservaIni"
-                            id="sltObservaIni"
-                            onChange={(e) => {
-                              OnchangeObservaCrearEdit(
-                                e.target.value,
-                                setShowobservaTextare
-                              );
-                            }}
-                          >
-                            <option disabled value="">
-                              Seleccione una opción
-                            </option>
-                            {LstObservacionesPrede != null &&
-                            LstObservacionesPrede != undefined
-                              ? LstObservacionesPrede.length > 0
-                                ? LstObservacionesPrede.map((data, index) => {
-                                    if (data.Observacion_Bitacora) {
-                                      return (
-                                        <option
-                                          key={index}
-                                          value={data.Codigo_observacion}
-                                        >
-                                          {data.Descripcion_Observacion}
-                                        </option>
-                                      );
-                                    }
-                                  })
-                                : ""
-                              : ""}
-                          </select>
                         </div>
 
                         {ShowobservaTextare ? (
@@ -622,10 +600,6 @@ function EditStickerComponents({
                           </button>
                         )}
 
-                        {/* <button
-                  id="buttonSubmitUnico"
-                  style={{ display: "none" }}
-                ></button> */}
                         <Link
                           href={{
                             pathname: "/Sample/FullDetails/[id]",
