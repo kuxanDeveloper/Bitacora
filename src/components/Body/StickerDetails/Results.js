@@ -4,10 +4,7 @@ import stylesLst from "../../../styles/ListSeguimientos.module.scss";
 import ListSegum from "./ListSeguimresult";
 
 import Link from "next/link";
-import {
-  validateResultArmadoIsOpciones,
-  validateResultArmadoIsSeguimiento,
-} from "../../Tools/functiones";
+
 function Results({ data, Options, group, name_group, sticker }) {
   console.log(data);
   return (

@@ -1,10 +1,4 @@
 import { CloseCaseSample,DeleteResultSegm } from "../../pages/api/Sample/ViewDetails/[id]";
-import IndexComponentAdmin from "../RolesComponents/Administrator/IndexComponent";
-import IndexComponentTechni from "../RolesComponents/Technical/IndexComponent";
-
-import IndexComponentAssis from "../RolesComponents/Assistant/IndexComponent";
-
-import IndexComponentConsul from "../RolesComponents/Consultation/IndexComponent";
 import Router from "next/router";
 import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
