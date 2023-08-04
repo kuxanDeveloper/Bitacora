@@ -6,7 +6,6 @@ import ListSegum from "./ListSeguimresult";
 import Link from "next/link";
 
 function Results({ data, Options, group, name_group, sticker }) {
-  console.log(data);
   return (
     <div className={styles.restults} id={"Estatus" + data.COD_PRUEBA}>
       {/* {Options.BtnEditResultAndUrl ? (

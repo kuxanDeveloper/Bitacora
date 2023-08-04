@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styles from "../../../styles/ListResultAdd.module.scss";
-import { DeleteRowStatusDataBase } from "../../Tools/functiones";
+import {
+  DeleteRowStatusDataBase,
+  calcularDiffdate,
+} from "../../Tools/functiones";
 import {
   validateResultArmadoIsOpciones,
   validateResultArmadoIsSeguimiento,
@@ -83,24 +86,37 @@ function ListResulltAdd({
                 ""
               )}
 
-              {UsuCreador != data.USUARIO_CREADOR_RESULTADO ? (
+              {UsuCreador != data.USUARIO_CREADOR_RESULTADO ||
+              calcularDiffdate(data.FECHA_CREACION_RESULTADO, FechaCreacion) ? (
                 <div className={styles.BackColor}>
-                  <div className={styles.row}>
-                    <span className={styles.list_title}>
-                      Usuario que creo el seguimiento:
-                    </span>
-                    <span className={styles.text}>
-                      {data.USUARIO_CREADOR_RESULTADO}
-                    </span>
-                  </div>
-                  <div className={styles.row}>
-                    <span className={styles.list_title}>
-                      Fecha de creacion del seguimiento:
-                    </span>
-                    <span className={styles.text}>
-                      {data.FECHA_CREACION_RESULTADO_FORMAT}
-                    </span>
-                  </div>
+                  {UsuCreador != data.USUARIO_CREADOR_RESULTADO ? (
+                    <div className={styles.row}>
+                      <span className={styles.list_title}>
+                        Usuario que creo el seguimiento:
+                      </span>
+                      <span className={styles.text}>
+                        {data.USUARIO_CREADOR_RESULTADO}
+                      </span>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {calcularDiffdate(
+                    data.FECHA_CREACION_RESULTADO,
+                    FechaCreacion
+                  ) ? (
+                    <div className={styles.row}>
+                      <span className={styles.list_title}>
+                        Fecha de creacion del seguimiento:
+                      </span>
+                      <span className={styles.text}>
+                        {data.FECHA_CREACION_RESULTADO_FORMAT}
+                      </span>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ) : (
                 ""
