@@ -997,7 +997,10 @@ export const AddResultToList = (
   ListAddResultMultple,
   setError,
   ListOptiones,
-  setvaluePlantillachange
+  setvaluePlantillachange,
+  ComboDynamic,
+  setListSelectDimanyc,
+  setComboDynamic
 ) => {
   let validadorError = false;
   let OptionIsHabilite = false;
@@ -1055,20 +1058,96 @@ export const AddResultToList = (
     }
   }
 
+  if (ComboDynamic) {
+    let selectMultip = document.getElementsByClassName("selectMultiple");
+    if (selectMultip.length > 0) {
+      for (let index = 0; index < selectMultip.length; index++) {
+        if (selectMultip[index].value == "") {
+          setError("SelectDinamyc", {
+            type: "custom",
+            message:
+              "Debes seleccionar todos los combos dinamicos para poder agregar un estatus",
+          });
+          validadorError = true;
+          break;
+        }
+      }
+    }
+  }
+
   if (!validadorError) {
     let obj = {};
+    let seguimiento =
+      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
+    let opciones = OptionIsHabilite
+      ? optionesValue.options[optionesValue.selectedIndex].text
+      : "";
     obj.EstatusID = valuePr.value;
     obj.SegumientoId = ValueSegumiento.value;
     obj.OptionID = OptionIsHabilite ? optionesValue.value : null;
 
     obj.TextoEstatus = valuePr.options[valuePr.selectedIndex].text;
-    obj.textoSeguimiento =
-      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
-    obj.textoOption = OptionIsHabilite
-      ? optionesValue.options[optionesValue.selectedIndex].text
-      : "";
+    obj.textoSeguimiento = seguimiento;
+    obj.textoOption = opciones;
+
+    if (ComboDynamic) {
+      let countPosition = 0;
+      let textoPreArmado = "";
+      let textSplitArray = null;
+      let selectMultip = document.getElementsByClassName("selectMultiple");
+      if (seguimiento.split("@").length > 1) {
+        obj.Issegumiento = true;
+        textSplitArray = seguimiento.split("@");
+        for (let index = 0; index < textSplitArray.length; index++) {
+          let ValorSearch = textSplitArray[index].toLowerCase();
+          if (ValorSearch.search("#microbio") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#MICROBIO",
+              selectMultip[countPosition].value
+            );
+            countPosition++;
+          } else if (ValorSearch.search("#numero") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#NUMERO",
+              selectMultip[countPosition].value
+            );
+
+            countPosition++;
+          } else {
+            textoPreArmado += textSplitArray[index];
+          }
+        }
+      } else if (opciones.split("@").length > 1) {
+        textSplitArray = opciones.split("@");
+        obj.Issegumiento = false;
+        for (let index = 0; index < textSplitArray.length; index++) {
+          let ValorSearch = textSplitArray[index].toLowerCase();
+          if (ValorSearch.search("#microbio") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#MICROBIO",
+              selectMultip[countPosition].value
+            );
+            countPosition++;
+          } else if (ValorSearch.search("#numero") != -1) {
+            textoPreArmado += textSplitArray[index].replace(
+              "#NUMERO",
+              selectMultip[countPosition].value
+            );
+
+            countPosition++;
+          } else {
+            textoPreArmado += textSplitArray[index];
+          }
+        }
+      }
+
+      obj.ResulDinamico = textoPreArmado;
+    } else {
+      obj.ResulDinamico = null;
+    }
 
     if (
+      !ComboDynamic &&
       ListAddResultMultple.some(
         (a) =>
           a.EstatusID == obj.EstatusID &&
@@ -1090,6 +1169,8 @@ export const AddResultToList = (
       OptionIsHabilite ? (optionesValue.value = "") : "";
       valuePr.value = "";
       setvaluePlantillachange([]);
+      setListSelectDimanyc([]);
+      setComboDynamic(false);
     }
   }
 };
@@ -1101,16 +1182,17 @@ export const DeleteRowStatus = (
 ) => {
   let FilterSearch =
     data.OptionID == null
-      ? ListAddResultMultple.filter(
-          (item) =>
-            item.EstatusID !== data.EstatusID &&
-            item.SegumientoId != data.SegumientoId
-        )
+      ? ListAddResultMultple.filter((item) => {
+          return (
+            item.EstatusID !== data.EstatusID ||
+            item.SegumientoId !== data.SegumientoId
+          );
+        })
       : ListAddResultMultple.filter(
           (item) =>
-            item.EstatusID !== data.EstatusID &&
-            item.SegumientoId != data.SegumientoId &&
-            item.OptionID != data.OptionID
+            item.EstatusID !== data.EstatusID ||
+            item.SegumientoId !== data.SegumientoId ||
+            item.OptionID !== data.OptionID
         );
 
   setListAddResultMultple(FilterSearch);
@@ -1120,34 +1202,39 @@ export const ComboDinamyc = (
   idInput,
   ListMicroorganismo,
   ListNumber,
-  setListSelectDimanyc
+  setListSelectDimanyc,
+  setComboDynamic,
+  clearErrors
 ) => {
   let valueRetorno = document.getElementById(idInput);
-
+  setListSelectDimanyc([]);
   if (valueRetorno != undefined && valueRetorno != null) {
-    let textoSelect = returnValue.options[returnValue.selectedIndex].text;
-    let textSplitArra = textoSelect.split("##");
+    let textoSelect = valueRetorno.options[valueRetorno.selectedIndex].text;
 
-    if (textSplitArra.length > 0) {
+    let textSplitArra = textoSelect.split("@");
+
+    if (textSplitArra.length > 1) {
+      setComboDynamic(true);
       for (let index = 0; index < textSplitArra.length; index++) {
         let retorno = null;
-
-        if (textSplitArra[index].toLowerCase() == "microbio") {
+        let ValorSearch = textSplitArra[index].toLowerCase();
+        if (ValorSearch.search("#microbio") != -1) {
           retorno = (
             <div className={styles.input_group}>
               <label className={styles.group_title}>Microorganismo</label>
               <select
                 name={`microorganismo_${index}`}
                 id={`microorganismoSelect_${index}`}
-                className={styles.group_input}
+                className={`${styles.group_input} selectMultiple`}
                 defaultValue={""}
+                onChange={() => clearErrors("SelectDinamyc")}
               >
                 <option disabled value="">
                   Seleccione un microorganismo
                 </option>
                 {ListMicroorganismo != null && ListMicroorganismo != undefined
                   ? ListMicroorganismo.map((data, index) => (
-                      <option key={index} value={data.ID}>
+                      <option key={index} value={data.DESCRIPCION}>
                         {`${data.DESCRIPCION}`}
                       </option>
                     ))
@@ -1155,22 +1242,23 @@ export const ComboDinamyc = (
               </select>
             </div>
           );
-        } else if (textSplitArra[index].toLowerCase() == "numero") {
+        } else if (ValorSearch.search("#numero") != -1) {
           retorno = (
             <div className={styles.input_group}>
               <label className={styles.group_title}>Número</label>
               <select
                 name={`numberCount_${index}`}
                 id={`numberCount_${index}`}
-                className={styles.group_input}
+                className={`${styles.group_input} selectMultiple`}
                 defaultValue={""}
+                onChange={() => clearErrors("SelectDinamyc")}
               >
                 <option disabled value="">
                   Seleccione un número
                 </option>
                 {ListNumber != null && ListNumber != undefined
                   ? ListNumber.map((data, index) => (
-                      <option key={index} value={data.ID}>
+                      <option key={index} value={data.DESCRIPCION}>
                         {`${data.DESCRIPCION}`}
                       </option>
                     ))
@@ -1182,6 +1270,37 @@ export const ComboDinamyc = (
 
         setListSelectDimanyc((preventArray) => [...preventArray, retorno]);
       }
+    } else {
+      setComboDynamic(false);
     }
   }
+};
+
+export const validateResultArmadoIsSeguimiento = (
+  opcioneDescription,
+  ResultadoArmado
+) => {
+  let Validator = false;
+  if (opcioneDescription != null && ResultadoArmado != null) {
+    let textArray = opcioneDescription.split("@");
+    if (textArray.length > 0) {
+      Validator = true;
+    }
+  }
+  return Validator;
+};
+
+export const validateResultArmadoIsOpciones = (
+  PlantillaResultado,
+  ResultadoArmado
+) => {
+  let Validator = false;
+
+  if (ResultadoArmado != null && PlantillaResultado != null) {
+    let textArray = PlantillaResultado.split("@");
+    if (textArray.length > 0) {
+      Validator = true;
+    }
+  }
+  return Validator;
 };

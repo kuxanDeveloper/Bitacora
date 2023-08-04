@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "../../../styles/StickerDetails.module.scss";
 import Link from "next/link";
-
+import {
+  validateResultArmadoIsOpciones,
+  validateResultArmadoIsSeguimiento,
+} from "../../Tools/functiones";
 function Results({ data, Options, group, name_group, sticker }) {
+  console.log(data);
   return (
     <div className={styles.restults}>
       {Options.BtnEditResultAndUrl ? (
@@ -35,9 +39,8 @@ function Results({ data, Options, group, name_group, sticker }) {
             <path d="M13.5 6.5l4 4" />
           </svg>
         </Link>
-
-
-        // Descomente el siguiente código para habilitar el botón de borrar 
+      ) : (
+        // Descomente el siguiente código para habilitar el botón de borrar
 
         // <Link
         //   title="Editar prueba"
@@ -71,7 +74,6 @@ function Results({ data, Options, group, name_group, sticker }) {
         //     <path d="M10 12l4 4m0 -4l-4 4" />
         //   </svg>
         // </Link>
-      ) : (
         ""
       )}
 
@@ -117,8 +119,13 @@ function Results({ data, Options, group, name_group, sticker }) {
               Opciones:
             </span>
             <p className={`${styles.info_text} ${styles.inline}`}>
-              {data.OPCION_DESCRIPCION !== null &&
-              data.OPCION_DESCRIPCION !== undefined
+              {validateResultArmadoIsSeguimiento(
+                data.OPCION_DESCRIPCION,
+                data.RESULTADO_ARMADO
+              )
+                ? data.RESULTADO_ARMADO
+                : data.OPCION_DESCRIPCION !== null &&
+                  data.OPCION_DESCRIPCION !== undefined
                 ? data.OPCION_DESCRIPCION
                 : ""}
             </p>
@@ -132,9 +139,13 @@ function Results({ data, Options, group, name_group, sticker }) {
             Seguimiento:
           </span>
           <p className={`${styles.info_text} ${styles.inline}`}>
-            {" "}
-            {data.PLANTILLA_RESULTADO !== null &&
-            data.PLANTILLA_RESULTADO !== undefined
+            {validateResultArmadoIsSeguimiento(
+              data.PLANTILLA_RESULTADO,
+              data.RESULTADO_ARMADO
+            )
+              ? data.RESULTADO_ARMADO
+              : data.PLANTILLA_RESULTADO !== null &&
+                data.PLANTILLA_RESULTADO !== undefined
               ? data.PLANTILLA_RESULTADO
               : ""}
           </p>

@@ -45,66 +45,32 @@ function ListResulltAdd({ ListAddResultMultple, setListAddResultMultple }) {
               </div>
               <div className={styles.row}>
                 <span className={styles.list_title}>Seguimiento:</span>
-                <span className={styles.text}>{data.textoSeguimiento}</span>
-              </div>
-
-              <div className={styles.row}>
-                <span className={styles.list_title}>Estatus:</span>
                 <span className={styles.text}>
-                  {data.OptionID != null ? data.textoOption : "N/A"}
+                  {data.Issegumiento
+                    ? data.ResulDinamico != null
+                      ? data.ResulDinamico
+                      : data.ResulDinamico
+                    : data.ResulDinamico}
                 </span>
               </div>
 
-              {/* <div className={styles.row}>
-              <span className={styles.list_title}>Opciones:</span>
-              <span className={styles.text}>
-                {"HEMOCULTIVO 1 ANAEROBIO INFORME FINAL"}
-              </span>
-            </div> */}
+              <div className={styles.row}>
+                <span className={styles.list_title}>opciones:</span>
+                <span className={styles.text}>
+                  {!data.Issegumiento
+                    ? data.ResulDinamico != null
+                      ? data.ResulDinamico
+                      : data.OptionID != null
+                      ? data.textoOption
+                      : "N/A"
+                    : data.OptionID != null
+                    ? data.textoOption
+                    : "N/A"}
+                </span>
+              </div>
             </div>
           ))
         : ""}
-
-      {/* <table> */}
-      {/* <thead>
-          <tr>
-            <th>Estatus</th>
-            <th>Seguimiento</th>
-            <th>Opciones</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead> */}
-      {/* <tbody> */}
-      {/* {ListAddResultMultple.length > 0 ? (
-            ListAddResultMultple.map((data, index) => (
-              <tr key={index}>
-                <td>{data.TextoEstatus}</td>
-                <td>{data.textoSeguimiento}</td>
-                <td>{data.OptionID != null ? data.textoOption : "N/A"}</td>
-                <td>
-                  <button
-                    title="Eliminar status"
-                    type="button"
-                    className={styleTable.colorrojoBoton}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      DeleteRowStatus(
-                        data,
-                        setListAddResultMultple,
-                        ListAddResultMultple
-                      );
-                    }}
-                  >
-                    <span>&#128941;</span>
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr></tr>
-          )} */}
-      {/* </tbody>
-      </table> */}
     </>
   );
 }

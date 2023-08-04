@@ -33,6 +33,7 @@ function ComponentCreateResult({
     Codigo_prueba: Yup.string().notRequired(),
     Codigo_resultado_preliminar_1: Yup.string().notRequired(),
     Codigo_opcion: Yup.string().notRequired(),
+    SelectDinamyc: Yup.string().notRequired(),
     COD_BITACORA: Yup.number(),
     ListResultMultiple: Yup.array()
       .min(1, "Debe por lo menos tener un estatus agregado")
@@ -154,8 +155,12 @@ function ComponentCreateResult({
                           setvaluePruebachange(e.target.value);
                           onclickPruebaTargetCreate(
                             setvaluePlantillachange,
-                            setValue
+                            setValue,
+                            setComboDynamic,
+                            setListSelectDimanyc
                           );
+                          setComboDynamic(false);
+                          setListSelectDimanyc(false);
                           clearErrors("Codigo_prueba");
                         }}
                       >
@@ -189,12 +194,13 @@ function ComponentCreateResult({
                         onChange={(e) => {
                           setvaluePlantillachange(e.target.value);
                           onclickPlantillaTargetCreate(setValue);
-
                           ComboDinamyc(
                             e.target.id,
                             ListMicroorganismo,
                             ListNumber,
-                            setListSelectDimanyc
+                            setListSelectDimanyc,
+                            setComboDynamic,
+                            clearErrors
                           );
                           clearErrors("Codigo_resultado_preliminar_1");
                         }}
@@ -231,13 +237,15 @@ function ComponentCreateResult({
                                 id="Codigo_opcion"
                                 className={styles.input_group}
                                 defaultValue={""}
-                                onChange={() => {
+                                onChange={(e) => {
                                   clearErrors("Codigo_opcion");
                                   ComboDinamyc(
                                     e.target.id,
                                     ListMicroorganismo,
                                     ListNumber,
-                                    setListSelectDimanyc
+                                    setListSelectDimanyc,
+                                    setComboDynamic,
+                                    clearErrors
                                   );
                                 }}
                               >
@@ -269,10 +277,15 @@ function ComponentCreateResult({
                       ))
                   }
 
-                  {setComboDynamic ? (
-                    <div className={styles.form_group}>
-                      {ListSelectDimanyc.map((data) => data)}
-                    </div>
+                  {ComboDynamic ? (
+                    <>
+                      <div className={`${styles.form_group}`}>
+                        {ListSelectDimanyc.map((data) => data)}
+                      </div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.SelectDinamyc?.message}
+                      </div>
+                    </>
                   ) : (
                     ""
                   )}
@@ -281,6 +294,7 @@ function ComponentCreateResult({
                     <Link
                       className={styles.create_followUp}
                       href={""}
+                      title="agregar estatus"
                       onClick={(e) => {
                         e.preventDefault();
                         AddResultToList(
@@ -291,7 +305,10 @@ function ComponentCreateResult({
                           ListAddResultMultple,
                           setError,
                           ListOptiones,
-                          setvaluePlantillachange
+                          setvaluePlantillachange,
+                          ComboDynamic,
+                          setListSelectDimanyc,
+                          setComboDynamic,
                         );
                       }}
                     >
