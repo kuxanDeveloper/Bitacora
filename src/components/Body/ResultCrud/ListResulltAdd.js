@@ -49,8 +49,8 @@ function ListResulltAdd({ ListAddResultMultple, setListAddResultMultple }) {
                   {data.Issegumiento
                     ? data.ResulDinamico != null
                       ? data.ResulDinamico
-                      : data.ResulDinamico
-                    : data.ResulDinamico}
+                      : data.textoSeguimiento
+                    : data.textoSeguimiento}
                 </span>
               </div>
 
