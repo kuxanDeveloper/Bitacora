@@ -90,7 +90,10 @@ export const userService = {
   EditTipoMuestra,
   guardFechasbitacora,
   ListMultipleMixPruxNum,
-  DeleteResult
+  DeleteResult,
+  CreateMicroorganismo,
+  EditMicroorganismo,
+  GetlistMicroorganismo
 };
 
 async function login(username, password) {
@@ -1155,5 +1158,46 @@ function DeleteResult(Codigo_resultado_bitacora) {
     `${baseUrl}/Stickers/DeleteResult`,
     null,
     formData
+  );
+}
+
+function CreateMicroorganismo(
+  DESCRIPCION,
+  ESTADO
+) {
+  const formData = new FormData();
+
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardarMiroOrganismo`,
+    null,
+    formData
+  );
+}
+
+function EditMicroorganismo(
+  ID,
+  DESCRIPCION,
+  ESTADO
+) {
+  const formData = new FormData();
+
+  formData.append("ID", ID);
+  formData.append("DESCRIPCION", DESCRIPCION);
+  formData.append("ESTADO", ESTADO);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/EditadoMiroOrganismo`,
+    null,
+    formData
+  );
+}
+
+function GetlistMicroorganismo(ID, ESTADO,cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/GetlistMiroOrganismo?ID=${ID}&ESTADO=${ESTADO}`,
+    cookie
   );
 }
