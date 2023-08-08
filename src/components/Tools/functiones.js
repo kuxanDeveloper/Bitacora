@@ -1337,7 +1337,6 @@ export const calcularDiffdate = (Fecheresult,FechaCreado) =>
   var first = moment(Fecheresult);
   var second = moment(FechaCreado);
   const minutes = first.diff(second, 'minutes');
-  debugger;
   if(minutes > 9)
   {
     return true;

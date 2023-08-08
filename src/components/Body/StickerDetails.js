@@ -6,7 +6,7 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import Link from "next/link";
 import Details from "./StickerDetails/Details";
 import Results from "./StickerDetails/Results";
-import Image from "next/image";
+import Image from "next/image"; 
 export default function StickerDetails({
   InforSampleDetails,
   query,
