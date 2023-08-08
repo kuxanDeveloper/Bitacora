@@ -40,7 +40,7 @@ function ListResulltAdd({ ListAddResultMultple, setListAddResultMultple }) {
                 </svg>
               </button>
               <div className={styles.row}>
-                <span className={styles.list_title}>Estatus:</span>
+                <span className={styles.list_title}>Estatus: </span>
                 <span className={styles.text}>{data.TextoEstatus}</span>
               </div>
               <div className={styles.row}>
@@ -55,7 +55,7 @@ function ListResulltAdd({ ListAddResultMultple, setListAddResultMultple }) {
               </div>
 
               <div className={styles.row}>
-                <span className={styles.list_title}>opciones:</span>
+                <span className={styles.list_title}>Opcion:</span>
                 <span className={styles.text}>
                   {!data.Issegumiento
                     ? data.ResulDinamico != null
