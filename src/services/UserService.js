@@ -528,8 +528,8 @@ function lstSufijoGetall(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/LstGetallSufijo`, cookie);
 }
 
-function InfoSampleUsers(cookie, IdUser) {
-  return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}`, cookie);
+function InfoSampleUsers(cookie, IdUser,page) {
+  return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}&page=${page}`, cookie);
 }
 function InfoGroupAndUserxGroup(cookie, idUser) {
   return fetchWrapper.get(

@@ -8,9 +8,10 @@ import {
 export const SampleDetailsUsers = async (
   setLInforSampleDetails,
   cookie,
-  Id
+  Id,
+  page
 ) => {
-  let inforSample = await getListUsers(cookie, Id);
+  let inforSample = await getListUsers(cookie, Id,page);
   setLInforSampleDetails(inforSample);
 };
 
