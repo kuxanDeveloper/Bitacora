@@ -303,6 +303,9 @@ export default function Case({
               <thead className={styleTable.thead}>
                 <tr className={styleTable.tr}>
                   <th>
+                    {""}
+                  </th>
+                  <th>
                     <span className={styleTable.th_title}>N° sticker</span>
                   </th>
                   <th>

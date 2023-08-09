@@ -3,6 +3,7 @@ import styles from "../../../src/styles/StickerTable.module.scss";
 import { AperturaandCierre } from "../Tools/functiones";
 
 import Link from "next/link";
+import { Checkbox } from "@mui/material";
 
 export default function StickersTable({
   data,
@@ -15,6 +16,7 @@ export default function StickersTable({
   return (
     <>
       <tr className={styles.table_body}>
+        <td><checkbox id={data.CODIGO_BITACORA}></checkbox></td>
         <td>{data.NUMERO_STICKER + `-` + data.SUFIJO}</td>
         <td>{data.FECHA_FORMAT_CREADO_COMPLETA}</td>
         <td>{isActive == true ? (

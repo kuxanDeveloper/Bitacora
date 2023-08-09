@@ -163,7 +163,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-{Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/JefeLaboratorio/IndexJefe"
@@ -183,7 +183,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-{Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/SitioAnatomico/IndexSitio"
@@ -203,7 +203,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-{Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/TiposMuestras/IndexTipo"
@@ -277,6 +277,26 @@ function HRMenu({ Roles }) {
                               }`}
                             >
                               Opciones
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        {Roles.ObservacionPredeCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/Microorganismos/IndexMicroorganismo"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexObservations")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Microorganismos
                             </Link>
                           </li>
                         ) : (
