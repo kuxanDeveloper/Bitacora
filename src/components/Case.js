@@ -25,6 +25,8 @@ export default function Case({
   setHasValueSample,
 }) {
   const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
+  
+  const [listMuestrasPendientes, setListMuestrasPendientes] = useState([]);
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
@@ -33,6 +35,31 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
+console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
+  const orderByAlphabeticalAsc = (array, getter, order = "asc") => {
+    array.sort((a, b) => {
+      const first = getter(a);
+      const second = getter(b);
+
+      const compare = first.localeCompare(second);
+      return order == "asc" ? compare : -compare;
+    });
+    return array;
+  };
+
+
+
+
+  function orderByAsc() {
+    let algo = orderByAlphabeticalAsc(
+      ListadoMuestrasActivePendiente,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasPendientes(algo);
+
+
+  }
 
   const [List, SetList] = useState(false);
 
@@ -53,6 +80,11 @@ export default function Case({
       }
     }
   }, [ListadoGrupo]);
+
+  useEffect (() => {
+    setListMuestrasPendientes(ListadoMuestrasActivePendiente)
+  },[ListadoMuestraActivo,
+    ListadoResultadoxMuestra])
 
   function changeModeVew() {
     List ? SetList(false) : SetList(true);
@@ -109,7 +141,9 @@ export default function Case({
                     }#OverallSample`,
                   }}
                   className={caseStyles.status_link}
-                  onClick={()=>{setHasValueSample("OverallSample")}}
+                  onClick={() => {
+                    setHasValueSample("OverallSample");
+                  }}
                 >
                   Ordenes generales
                 </Link>
@@ -128,14 +162,14 @@ export default function Case({
                     }#UrgentSamples`,
                   }}
                   className={caseStyles.status_link}
-                  onClick={()=>{setHasValueSample("UrgentSamples")}}
+                  onClick={() => {
+                    setHasValueSample("UrgentSamples");
+                  }}
                 >
                   Ordenes pendientes
                 </Link>
               </p>
-              <p
-                className={`${caseStyles.status} `}
-              >
+              <p className={`${caseStyles.status} `}>
                 <button
                   onClick={changeModeVew}
                   href={"#"}
@@ -212,10 +246,7 @@ export default function Case({
         ) : (
           <div className={caseStyles.cases_nav}>
             <div className={caseStyles.state}>
-             
-              <p
-                className={`${caseStyles.status} `}
-              >
+              <p className={`${caseStyles.status} `}>
                 <button
                   onClick={changeModeVew}
                   href={"#"}
@@ -306,7 +337,12 @@ export default function Case({
                     <span className={styleTable.th_title}>N° sticker</span>
                   </th>
                   <th>
-                    <span className={styleTable.th_title}>Fecha Ingreso</span>
+                    <span
+                      onClick={() => orderByAsc()}
+                      className={styleTable.th_title}
+                    >
+                      Fecha Ingreso
+                    </span>
                   </th>
                   <th>
                     <span className={styleTable.th_title}>Estado</span>
@@ -329,7 +365,7 @@ export default function Case({
                           LstObservacionesPrede={LstObservacionesPrede}
                         ></StickersTable>
                       ))
-                    : ListadoMuestrasActivePendiente.map((data, index) => (
+                    : listMuestrasPendientes.map((data, index) => (
                         <StickersTable
                           key={index}
                           data={data}
@@ -368,7 +404,7 @@ export default function Case({
                       LstObservacionesPrede={LstObservacionesPrede}
                     ></CaseComponent>
                   ))
-                : ListadoMuestrasActivePendiente.map((data, index) => (
+                : listMuestrasPendientes.map((data, index) => (
                     <CaseComponent
                       key={index}
                       data={data}
