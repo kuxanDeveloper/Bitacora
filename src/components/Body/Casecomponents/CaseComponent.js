@@ -150,6 +150,34 @@ export default function CaseComponent({
             >
               Ver Más
             </Link>
+            <Link
+              href={{
+                pathname: "/Sample/CreateResult/[id]",
+                query: {
+                  id: data.CODIGO_BITACORA,
+                  group:
+                    data.ID_GRUPO_ASIGNADO != undefined &&
+                    data.ID_GRUPO_ASIGNADO != null
+                      ? data.ID_GRUPO_ASIGNADO
+                      : "",
+                  name_group:
+                    data.NOMBRE_GRUPO_ASIGNADO != undefined &&
+                    data.NOMBRE_GRUPO_ASIGNADO != null
+                      ? data.NOMBRE_GRUPO_ASIGNADO
+                      : "",
+                  sticker:
+                  data.NUMERO_STICKER != undefined &&
+                  data.NUMERO_STICKER != null
+                      ? data.NUMERO_STICKER +
+                        "-" +
+                        data.SUFIJO
+                      : "",
+                },
+              }}
+              className={caseStyles.btn_sticker}
+            >
+              Agregar Estatus
+            </Link>
           </div>
         </div>
         {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}

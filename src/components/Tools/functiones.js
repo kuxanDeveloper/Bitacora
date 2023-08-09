@@ -1167,7 +1167,7 @@ export const AddResultToList = (
       addListValue((preventArray) => [...preventArray, obj]);
       ValueSegumiento.value = "";
       OptionIsHabilite ? (optionesValue.value = "") : "";
-      valuePr.value = "";
+      // valuePr.value = "";
       setvaluePlantillachange([]);
       setListSelectDimanyc([]);
       setComboDynamic(false);

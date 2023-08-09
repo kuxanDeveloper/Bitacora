@@ -11,12 +11,17 @@ export default function StickersTable({
   isSampleGeneral,
   LstObservacionesPrede,
 }) {
+  console.log(data);
   return (
     <>
       <tr className={styles.table_body}>
         <td>{data.NUMERO_STICKER + `-` + data.SUFIJO}</td>
         <td>{data.FECHA_FORMAT_CREADO_COMPLETA}</td>
-        <td>{isActive ? "Activo" : "Inactivo"}</td>
+        <td>{isActive == true ? (
+                            <span>&#x2705;</span>
+                          ) : (
+                            <span>&#10060;</span>
+                          )} </td>
         <td className={styles.btn_options}>
           {isActive ? (
             Options.Cerrarorden ? (
@@ -53,6 +58,34 @@ export default function StickersTable({
               className={styles.btn_sticker}
             >
               Ver Más
+            </Link>
+            <Link
+              href={{
+                pathname: "/Sample/CreateResult/[id]",
+                query: {
+                  id: data.CODIGO_BITACORA,
+                  group:
+                    data.ID_GRUPO_ASIGNADO != undefined &&
+                    data.ID_GRUPO_ASIGNADO != null
+                      ? data.ID_GRUPO_ASIGNADO
+                      : "",
+                  name_group:
+                    data.NOMBRE_GRUPO_ASIGNADO != undefined &&
+                    data.NOMBRE_GRUPO_ASIGNADO != null
+                      ? data.NOMBRE_GRUPO_ASIGNADO
+                      : "",
+                  sticker:
+                  data.NUMERO_STICKER != undefined &&
+                  data.NUMERO_STICKER != null
+                      ? data.NUMERO_STICKER +
+                        "-" +
+                        data.SUFIJO
+                      : "",
+                },
+              }}
+              className={styles.btn_sticker}
+            >
+              Agregar Estatus
             </Link>
         </td>
       </tr>
