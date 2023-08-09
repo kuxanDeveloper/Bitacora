@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-import Image from "next/image";
-function ComponentUsersIndex(InforSampleDetails) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentUsersIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -72,9 +74,9 @@ function ComponentUsersIndex(InforSampleDetails) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails.InforSampleDetails != null &&
-                InforSampleDetails.InforSampleDetails != undefined
-                  ? InforSampleDetails.InforSampleDetails.map((data, index) => (
+                {InforSampleDetails.InformacionUsuario != null &&
+                InforSampleDetails.InformacionUsuario != undefined
+                  ? InforSampleDetails.InformacionUsuario.map((data, index) => (
                       <tr key={index}>
                         <td>{data.Email}</td>
                         <td>{data.Numero_de_Identidad}</td>
@@ -161,6 +163,26 @@ function ComponentUsersIndex(InforSampleDetails) {
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.InformacionUsuario != null &&
+              InforSampleDetails.InformacionUsuario != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

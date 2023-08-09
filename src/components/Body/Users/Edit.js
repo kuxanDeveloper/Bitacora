@@ -58,7 +58,7 @@ function ComponentGroup({
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-
+  console.log(GroupxUserandList);
   useEffect(() => {
     if (
       InforSampleInfoUser != null &&
@@ -96,29 +96,34 @@ function ComponentGroup({
   }, [InforSampleTips, InforSampleDetails, InforSampleInfoUser]);
 
   useEffect(() => {
+    debugger;
     if (
-      GroupxUserandList.ListGrupoxUser != undefined &&
-      GroupxUserandList.ListGrupoxUser != null
+      GroupxUserandList.ListadoinfoGrupo != undefined &&
+      GroupxUserandList.ListadoinfoGrupo != null
     ) {
-      GroupxUserandList.ListadoinfoGrupo.map((data) => {
-        let ValorSearch = GroupxUserandList.ListGrupoxUser.some(
-          (a) => a.Id_grupo == data.Id_grupo
-        );
-        if (ValorSearch) {
-          let idValue = document.getElementById(`IdGroup_${data.Id_grupo}`);
-          idValue.checked = ValorSearch;
-        }
-      });
+      setTimeout(() => {
+        GroupxUserandList.ListadoinfoGrupo.map((data) => {
+          let ValorSearch = GroupxUserandList.ListGrupoxUser.some(
+            (a) => a.Id_grupo == data.Id_grupo
+          );
+          if (ValorSearch) {
+            let idValue = document.getElementById(`IdGroup_${data.Id_grupo}`);
+            if (idValue != null) {
+              idValue.checked = ValorSearch;
+            }
+          }
+        });
+      }, 500);
     }
-  }, [GroupxUserandList]);
+  }, [GroupxUserandList.ListadoinfoGrupo]);
 
   return (
     <>
       <section className={styles.create_note}>
-      <Image
+        <Image
           src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
+          width={1920}
+          height={1080}
           alt="a"
           className={styles.background_img}
         />
@@ -127,7 +132,7 @@ function ComponentGroup({
             <Link
               href={{
                 pathname: "/Configuration/Users/IndexUsers",
-                hash: "Normal",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -388,7 +393,7 @@ function ComponentGroup({
                                           "inputCheckoutCrearUser"
                                         )
                                       }
-                                    />{" "}
+                                    />
                                     Selec. Todos
                                   </th>
                                 </tr>
@@ -466,6 +471,7 @@ function ComponentGroup({
                               className={styles.btn_cancel}
                               href={{
                                 pathname: "/Configuration/Users/IndexUsers",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

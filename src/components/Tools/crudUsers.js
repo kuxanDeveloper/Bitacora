@@ -16,7 +16,6 @@ export const onSubmitCreateUser = ({
   EstadoUsuario,
   ListGroupArray,
 }) => {
-
   return userService
     .CreateUser(
       Email,
@@ -42,6 +41,7 @@ export const onSubmitCreateUser = ({
 
       Router.push({
         pathname: "/Configuration/Users/IndexUsers",
+        query: { page: "1" },
       });
     })
     .catch((error) => {
@@ -80,7 +80,7 @@ export const onSubmitCreateEdit = ({
   Telefono,
   Extencion,
   EstadoUsuario,
-  ListGroupArray
+  ListGroupArray,
 }) => {
   return userService
     .EditUser(
@@ -94,7 +94,7 @@ export const onSubmitCreateEdit = ({
       Rol,
       Telefono == null ? "" : Telefono,
       Extencion == null ? "" : Extencion,
-      EstadoUsuario, 
+      EstadoUsuario,
       ListGroupArray
     )
     .then(() => {
@@ -107,6 +107,7 @@ export const onSubmitCreateEdit = ({
 
       Router.push({
         pathname: "/Configuration/Users/IndexUsers",
+        query: { page: "1" },
       });
     })
     .catch((error) => {
@@ -133,9 +134,9 @@ export const onSubmitCreateEdit = ({
     });
 };
 
-export const getListUsers = (cookie, IdUser) => {
+export const getListUsers = (cookie, IdUser, page) => {
   return userService
-    .InfoSampleUsers(cookie, IdUser == null ? "" : IdUser)
+    .InfoSampleUsers(cookie, IdUser == null ? "" : IdUser, page)
     .catch((error) => {
       if (
         error == "Límite de tiempo excedido" ||

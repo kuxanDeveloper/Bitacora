@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CaseNav from "./CaseNav";
-import { UserActiveGenerales, UserActiveUrgencias } from "./Tools/functiones";
+import {
+  UserActiveGenerales,
+  UserActiveUrgencias,
+  SelectAllCheck,
+  AddListCodBitacora
+} from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
 import styleTable from "../styles/StickerTable.module.scss";
@@ -333,6 +338,22 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
             >
               <thead className={styleTable.thead}>
                 <tr className={styleTable.tr}>
+                  <th className={styleTable.alineadoIzq}>
+                    <span className={styleTable.th_title}>
+                      Seleccionar todos
+                    </span>
+                    {"  "}
+                    <input
+                      id="CheckMasivoResult"
+                      type="checkbox"
+                      onClick={() =>
+                        SelectAllCheck(
+                          "CheckMasivoResult",
+                          "inputCheckoutResult"
+                        )
+                      }
+                    />
+                  </th>
                   <th>
                     <span className={styleTable.th_title}>N° sticker</span>
                   </th>
@@ -387,6 +408,18 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
                       ></StickersTable>
                     ))
                   : "Sin Stickers inactivos"}
+                <tr className={`${styleTable.table_btn} checkListResult`}>
+                  <td colSpan={5} className={styleTable.btn_options}>
+                    <button 
+                    onClick={() => {
+                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO);
+                    }}
+                    className={styleTable.btn_sticker}>
+                    <span>&#10010; </span>
+                      Agregar estatus masivo
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

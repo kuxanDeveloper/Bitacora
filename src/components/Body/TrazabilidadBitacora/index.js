@@ -46,7 +46,6 @@ function ComponentTrazaBitIndex({
 
     return newObje;
   };
-  console.log(InforSampleDetails);
   return (
     <>
       <section className={styles.Index_users}>
@@ -101,7 +100,10 @@ function ComponentTrazaBitIndex({
             >
               Exportar csv
             </Link>
-            <table className={styleTable.tableStyleTraza}>
+            <table
+              style={{ marginTop: "10px" }}
+              className={styleTable.tableStyleTraza}
+            >
               <thead>
                 <tr>
                   <th style={{ width: "20%" }}>
