@@ -44,6 +44,19 @@ function HRMenu({ Roles }) {
                   Home
                 </Link>
               </li>
+              <li className={Styles.nav_li}>
+                <Link
+                  href="/Statistics/Index"
+                  onClick={(e) => {
+                    OnclickNAvToggle(MenuShow, setMenuShow);
+                  }}
+                  className={`${Styles.nav_link} ${
+                    !LocationUrl(router, "Statistics") ? Styles.active : ""
+                  }`}
+                >
+                  Estadísticas
+                </Link>
+              </li>
               {/* 
               <li className={Styles.nav_li}>
                 <a href="" className={`${Styles.nav_link} `}>
@@ -106,7 +119,7 @@ function HRMenu({ Roles }) {
                         {Roles.UserConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/Users/IndexUsers"
+                              href="/Configuration/Users/IndexUsers?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}

@@ -83,10 +83,10 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
-      <Image
+        <Image
           src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
+          width={1920}
+          height={1080}
           alt="a"
           className={styles.background_img}
         />
@@ -95,6 +95,7 @@ function ComponentGroup({
             <Link
               href={{
                 pathname: "/Configuration/Users/IndexUsers",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -428,6 +429,7 @@ function ComponentGroup({
                       className={styles.btn_cancel}
                       href={{
                         pathname: "/Configuration/Users/IndexUsers",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar

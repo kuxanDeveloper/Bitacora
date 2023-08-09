@@ -25,7 +25,7 @@ function CreatePage({ cookie, id }) {
     SampleDetailsTiposIDE(setLInforSampleTips, cookie);
 
     if (id != null && id != undefined) {
-      SampleDetailsUsers(setLInforSampleInfoUser, cookie, id);
+      SampleDetailsUsers(setLInforSampleInfoUser, cookie, id,"1");
       GetListGroupAndUserxGroup(setGroupxUserandList, cookie, id);
     }
   }, []);
@@ -68,7 +68,7 @@ function CreatePage({ cookie, id }) {
       <EditUser
         InforSampleDetails={InforSampleDetails}
         InforSampleTips={InforSampleTips}
-        InforSampleInfoUser={InforSampleInfoUser}
+        InforSampleInfoUser={InforSampleInfoUser.InformacionUsuario}
         id_usu={id}
         GroupxUserandList={GroupxUserandList}
       ></EditUser>

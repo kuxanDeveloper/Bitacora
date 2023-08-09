@@ -46,7 +46,6 @@ function ComponentTrazaBitIndex({
 
     return newObje;
   };
-console.log(InforSampleDetails);
   return (
     <>
       <section className={styles.Index_users}>
@@ -101,7 +100,10 @@ console.log(InforSampleDetails);
             >
               Exportar csv
             </Link>
-            <table className={styleTable.tableStyleTraza}>
+            <table
+              style={{ marginTop: "10px" }}
+              className={styleTable.tableStyleTraza}
+            >
               <thead>
                 <tr>
                   <th style={{ width: "20%" }}>
@@ -119,68 +121,72 @@ console.log(InforSampleDetails);
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null && InforSampleDetails != undefined ?
-                InforSampleDetails.ListadotrazabilidadBitacora != null &&
-                InforSampleDetails.ListadotrazabilidadBitacora != undefined
-                  ? InforSampleDetails.ListadotrazabilidadBitacora.map(
-                      (data, index) => (
-                        <tr key={index}>
-                          <td style={{ width: "20%" }}>
-                            <p>
-                              <b>Numero de Sticker:</b> {data.NUMERO_STICKER}
-                              <br></br>
-                              <b>Sufijo:</b> {data.SUFIJO_STICKER}
-                            </p>
-                          </td>
-                          <td style={{ width: "25%" }}>
-                            <p>
-                              <b>Responsable:</b>{" "}
-                              {data.USU_CREADOR_AUD_BITACORA}
-                              <br></br>
-                              <b>Fecha Trazabilidad:</b>{" "}
-                              {data.FECHA_AUDITORIA_FORMAT}
-                            </p>
-                          </td>
-                          <td style={{ width: "20%" }}>
-                            <p>{data.ACCION_BITACORA}</p>
-                          </td>
-                          <td style={{ width: "35%" }}>
-                            <p>
-                              {data.DESCRIPCION_BITACORA}
+                {InforSampleDetails != null && InforSampleDetails != undefined
+                  ? InforSampleDetails.ListadotrazabilidadBitacora != null &&
+                    InforSampleDetails.ListadotrazabilidadBitacora != undefined
+                    ? InforSampleDetails.ListadotrazabilidadBitacora.map(
+                        (data, index) => (
+                          <tr key={index}>
+                            <td style={{ width: "20%" }}>
+                              <p>
+                                <b>Numero de Sticker:</b> {data.NUMERO_STICKER}
+                                <br></br>
+                                <b>Sufijo:</b> {data.SUFIJO_STICKER}
+                              </p>
+                            </td>
+                            <td style={{ width: "25%" }}>
+                              <p>
+                                <b>Responsable:</b>{" "}
+                                {data.USU_CREADOR_AUD_BITACORA}
+                                <br></br>
+                                <b>Fecha Trazabilidad:</b>{" "}
+                                {data.FECHA_AUDITORIA_FORMAT}
+                              </p>
+                            </td>
+                            <td style={{ width: "20%" }}>
+                              <p>{data.ACCION_BITACORA}</p>
+                            </td>
+                            <td style={{ width: "35%" }}>
+                              <p>
+                                {data.DESCRIPCION_BITACORA}
 
-                              {data.TIPO_TRAZA == "3" ? (
-                                <p>
-                                  <b>Calculo del resultado:</b>{" "}
-                                  {data.CALCULO_TIEMPO_RESULTADO}
-                                </p>
-                              ) : (
-                                ""
-                              )}
-                            </p>
-                          </td>
-                        </tr>
+                                {data.TIPO_TRAZA == "3" ? (
+                                  <p>
+                                    <b>Calculo del resultado:</b>{" "}
+                                    {data.CALCULO_TIEMPO_RESULTADO}
+                                  </p>
+                                ) : (
+                                  ""
+                                )}
+                              </p>
+                            </td>
+                          </tr>
+                        )
                       )
-                    )
-                  : "" :""}
+                    : ""
+                  : ""}
               </tbody>
             </table>
-            {InforSampleDetails != null && InforSampleDetails != undefined ?
-            InforSampleDetails.ListadotrazabilidadBitacora != null &&
-            InforSampleDetails.ListadotrazabilidadBitacora != undefined ? (
-              <>
-                <br></br>
-                <Pagination
-                  TotalPage={InforSampleDetails.TotalPage}
-                  page={query.page}
-                  pathname={router.pathname}
-                  queryArme={Addobjnew()}
-                  hash={null}
-                  CountPage={InforSampleDetails.Per_PAge}
-                ></Pagination>
-              </>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.ListadotrazabilidadBitacora != null &&
+              InforSampleDetails.ListadotrazabilidadBitacora != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={Addobjnew()}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
             ) : (
               ""
-            ) :""}
+            )}
           </div>
         </div>
       </section>
