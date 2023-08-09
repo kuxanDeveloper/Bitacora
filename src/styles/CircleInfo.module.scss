@@ -1,0 +1,30 @@
+.circle {
+  max-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  .title {
+    color: #000;
+  }
+  .total {
+    padding: 1rem;
+    width: 70px;
+    height: 70px;
+    border: 5px #3073f0 solid;
+    color: #3073f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .porcent {
+    text-align: center;
+    color: #e57d00;
+    font-weight: 500;
+  }
+}
