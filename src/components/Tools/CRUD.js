@@ -200,6 +200,50 @@ export const onSubmitCreateResult = ({
     });
 };
 
+export const onSubmitCreateResultBloque = ({
+  ListadoBitacoras,
+  ListResultMultiple
+}) => {
+  const StickerRetorno = COD_BITACORA;
+  return userService
+    .CrearResultBloq(
+      ListadoBitacoras,
+      ListResultMultiple
+    )
+    .then(() => {
+      //   const returnUrl = router.query.returnUrl || "/";
+      // Router.push({
+      //   pathname: "/Sample/FullDetails/[id]",
+      //   query: { id: StickerRetorno },
+      //   hash: "Pruebas",
+      // });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in crear resultado");
+    });
+};
+
+
 export const onSubmitEditResult = ({
   Codigo_resultado_bitacora,
   Codigo_prueba,

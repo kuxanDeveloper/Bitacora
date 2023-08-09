@@ -601,14 +601,12 @@ function Pop_up({
                             Guardar Fechas
                           </button>
                         )}
-                        <Link
+                        <div
                           className={styles2.btn_cancel}
-                          href={{
-                            pathname: "/Configuration/Groups/IndexGroup",
-                          }}
+                          onClick={onClose}
                         >
                           Cancelar
-                        </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
