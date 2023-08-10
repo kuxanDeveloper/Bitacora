@@ -48,12 +48,11 @@ function PageCreateResult({ cookie, group, name_group }) {
     setListadoBitacoras(LstBitacoras);
   });
 
-console.log(ListadoBitacoras);
 
   return (
     <>
       <Head>
-        <title>{`Agregar resultado a el bloque stickers | Bitácora BD`}</title>
+        <title>{`Agregar estatus en bloque | Bitácora BD`}</title>
         <meta
           name="description"
           content={`Agrega una prueba con un resultado realizado al sticker con su grupo perteneciente`}
@@ -67,7 +66,7 @@ console.log(ListadoBitacoras);
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Agregar resultado a el bloque stickers | Bitácora BD`}
+          content={`Agregar estatus en bloque | Bitácora BD`}
         />
         <meta
           name="twitter:description"
@@ -75,7 +74,7 @@ console.log(ListadoBitacoras);
         ></meta>
         <meta
           property="og:title"
-          content={`Agregar resultado a el bloque stickers | Bitácora BD`}
+          content={`Agregar estatus en bloque | Bitácora BD`}
         />
         <meta
           property="og:description"

@@ -125,7 +125,15 @@ function ComponentCreateResult({
                       >
                         Números de sticker :
                       </label>
-                      <p className={styles.inline}></p>
+                      <p className={styles.inline}>
+
+                      {ListadoBitacoras != null && ListadoBitacoras != undefined
+                          ? ListadoBitacoras.map((data, index) => (
+                              `${data.split('_')[0]}, `
+                            ))
+                          : ""}
+
+                      </p>
                     </div>
                   </div>
                   <div className={styles.form_group}>
@@ -362,7 +370,7 @@ function ComponentCreateResult({
                           setValue("ListResultMultiple", ListAddResultMultple);
                         }}
                       >
-                        guardar cambios
+                        Guardar cambios
                       </button>
                     )}
 

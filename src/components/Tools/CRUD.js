@@ -204,7 +204,6 @@ export const onSubmitCreateResultBloque = ({
   ListadoBitacoras,
   ListResultMultiple
 }) => {
-  const StickerRetorno = COD_BITACORA;
   return userService
     .CrearResultBloq(
       ListadoBitacoras,
@@ -212,11 +211,11 @@ export const onSubmitCreateResultBloque = ({
     )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
-      // Router.push({
-      //   pathname: "/Sample/FullDetails/[id]",
-      //   query: { id: StickerRetorno },
-      //   hash: "Pruebas",
-      // });
+      Router.push({
+        pathname: "/[id]",
+        query: { id: GrupoSticker, page: "1" },
+        hash: "Cactive#OverallSample",
+      });
     })
     .catch((error) => {
       if (
