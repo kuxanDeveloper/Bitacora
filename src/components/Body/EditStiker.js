@@ -108,7 +108,6 @@ function EditStickerComponents({
       setcodJefeLab(InforSampleDetails.infoBitacora[0].ID_JEFE_LABORATORIO);
       setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
 
-      debugger;
       const fechabd =
         InforSampleDetails.infoBitacora[0].FECHA_FORMAT_RECOGIDA_MUESTRA;
 

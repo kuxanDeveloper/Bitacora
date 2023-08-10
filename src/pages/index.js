@@ -14,7 +14,7 @@ import IndexComponentAdmin from "../components/RolesComponents/Ancestro/IndexCom
 export default function Home({ cookie }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "");
+    SampleDetailsAncestro(setInfoAncestro, cookie, "","1");
   }, []);
 
   return (
@@ -50,7 +50,7 @@ export default function Home({ cookie }) {
       </Head>
 
       <div className="cases_container">
-        <IndexComponentAdmin InfoAncestro={InfoAncestro}></IndexComponentAdmin>
+        <IndexComponentAdmin InfoAncestro={InfoAncestro.listadoAncestros}></IndexComponentAdmin>
       </div>
     </>
   );

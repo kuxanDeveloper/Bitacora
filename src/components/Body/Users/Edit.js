@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import Link from "next/link";
 import {
   setCheckUsuEstado,
-  SearchValueArrayListGroupCheck,
   AddListSetValue,
   SelectAllCheck,
 } from "../../Tools/functiones";
@@ -13,7 +12,7 @@ import { onSubmitCreateEdit } from "../../Tools/crudUsers";
 import styles from "../../../styles/CreateNotes.module.scss";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize"
 function ComponentGroup({
   InforSampleDetails,
   InforSampleTips,
@@ -96,7 +95,6 @@ function ComponentGroup({
   }, [InforSampleTips, InforSampleDetails, InforSampleInfoUser]);
 
   useEffect(() => {
-    debugger;
     if (
       GroupxUserandList.ListadoinfoGrupo != undefined &&
       GroupxUserandList.ListadoinfoGrupo != null
@@ -120,13 +118,16 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1920}
-          height={1080}
-          alt="a"
-          className={styles.background_img}
-        />
+      <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

@@ -10,10 +10,10 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
+function CreatePage({ cookie, query }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "");
+    SampleDetailsAncestro(setInfoAncestro, cookie, "", query.page);
   }, []);
 
   return (
@@ -39,7 +39,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde se listan los grupos Home de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Listado de grupos Home - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Listado de grupos Home - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde se listan los grupos Home de el sistema`}
@@ -48,7 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexAncestro InfoAncestro={InfoAncestro}></IndexAncestro>
+      <IndexAncestro InfoAncestro={InfoAncestro} query={query}></IndexAncestro>
     </>
   );
 }
@@ -81,11 +84,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      !Options.GroupConfigCreateAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return { props: { query: ctx.query, cookie: cookie } };
   } else {
     return {
       redirect: {
