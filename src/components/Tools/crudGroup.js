@@ -9,7 +9,7 @@ export const onSubmitCreateGroup = ({
   AlertaHoras,
   OrdenGrupo,
   ListSufijo,
-  Lst_Pruebas
+  Lst_Pruebas,
 }) => {
   return userService
     .CreatGroup(
@@ -31,6 +31,7 @@ export const onSubmitCreateGroup = ({
 
       Router.push({
         pathname: "/Configuration/Groups/IndexGroup",
+        query: { page: "1" },
       });
     })
     .catch((error) => {
@@ -66,7 +67,7 @@ export const onSubmitUpdateGroup = ({
   AlertaHoras,
   OrdenGrupo,
   ListSufijo,
-  Lst_Pruebas
+  Lst_Pruebas,
 }) => {
   return userService
     .EditGroup(
@@ -116,12 +117,13 @@ export const onSubmitUpdateGroup = ({
     });
 };
 
-export const getListGroup = (estado, idGrupo, cookie) => {
+export const getListGroup = (estado, idGrupo, cookie, page) => {
   return userService
     .InfoGroup(
       estado == null ? "" : estado,
       idGrupo == null ? "" : idGrupo,
-      cookie
+      cookie,
+      page
     )
     .catch((error) => {
       if (

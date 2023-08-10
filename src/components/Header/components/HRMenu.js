@@ -34,11 +34,11 @@ function HRMenu({ Roles }) {
               <li className={Styles.nav_li}>
                 <Link
                   href="/"
-                  onClick={(e) => {
+                  onClick={() => {
                     OnclickNAvToggle(MenuShow, setMenuShow);
                   }}
                   className={`${Styles.nav_link} ${
-                    !LocationUrl(router, "configuration") ? Styles.active : ""
+                    !LocationUrl(router, "configuration") && !LocationUrl(router, "Statistics")  ? Styles.active : ""
                   }`}
                 >
                   Home
@@ -47,11 +47,11 @@ function HRMenu({ Roles }) {
               <li className={Styles.nav_li}>
                 <Link
                   href="/Statistics/Index"
-                  onClick={(e) => {
+                  onClick={() => {
                     OnclickNAvToggle(MenuShow, setMenuShow);
                   }}
                   className={`${Styles.nav_link} ${
-                    !LocationUrl(router, "Statistics") ? Styles.active : ""
+                    LocationUrl(router, "Statistics") ? Styles.active : ""
                   }`}
                 >
                   Estadísticas
@@ -139,12 +139,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/Ancestros/IndexAncestros"
+                              href="/Configuration/Ancestros/IndexAncestros?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexAncestros")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -159,7 +159,7 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/Groups/IndexGroup"
+                              href="/Configuration/Groups/IndexGroup?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
@@ -179,12 +179,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/JefeLaboratorio/IndexJefe"
+                              href="/Configuration/JefeLaboratorio/IndexJefe?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexJefe")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -199,12 +199,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/SitioAnatomico/IndexSitio"
+                              href="/Configuration/SitioAnatomico/IndexSitio?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexSitio")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -219,12 +219,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/TiposMuestras/IndexTipo"
+                              href="/Configuration/TiposMuestras/IndexTipo?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexTipo")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -239,12 +239,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/PruebaResultado/IndexPrueba"
+                              href="/Configuration/PruebaResultado/IndexPrueba?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexPrueba")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -259,12 +259,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/PlantillaResultado/IndexPlantilla"
+                              href="/Configuration/PlantillaResultado/IndexPlantilla?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexPlantilla")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -279,12 +279,12 @@ function HRMenu({ Roles }) {
                         {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/OptionsResult/IndexOption"
+                              href="/Configuration/OptionsResult/IndexOption?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexGroup")
+                                LocationUrl(router, "IndexOption")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -299,7 +299,7 @@ function HRMenu({ Roles }) {
                         {Roles.ObservacionPredeCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/DefaultObservations/IndexObservations"
+                              href="/Configuration/DefaultObservations/IndexObservations?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}

@@ -96,7 +96,6 @@ function ComponentGroup({
   }, [InforSampleTips, InforSampleDetails, InforSampleInfoUser]);
 
   useEffect(() => {
-    debugger;
     if (
       GroupxUserandList.ListadoinfoGrupo != undefined &&
       GroupxUserandList.ListadoinfoGrupo != null

@@ -22,8 +22,6 @@ function CreatePage({ cookie, id }) {
       SampleDetailsGroup(setInforOptionsSelc, cookie, "");
     }, []);
 
-console.log(InfoTipoMue);
-
   return (
     <>
       <Head>

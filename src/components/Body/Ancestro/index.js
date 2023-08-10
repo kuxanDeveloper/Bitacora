@@ -2,9 +2,11 @@ import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-import Image from "next/image";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentancestroIndex({ InfoAncestro }) {
+import { useRouter } from "next/router";
+import Pagination from "../../Tools/Pagination";
+function ComponentancestroIndex({ InfoAncestro, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -36,6 +38,7 @@ function ComponentancestroIndex({ InfoAncestro }) {
           <Link
             href={{
               pathname: "/Configuration/Ancestros/CreateAncestros",
+              query: { page: "1" },
             }}
             className={styles.btn_create}
           >
@@ -53,8 +56,9 @@ function ComponentancestroIndex({ InfoAncestro }) {
                 </tr>
               </thead>
               <tbody>
-                {InfoAncestro != null && InfoAncestro != undefined
-                  ? InfoAncestro.map((data, index) => (
+                {InfoAncestro.listadoAncestros != null &&
+                InfoAncestro.listadoAncestros != undefined
+                  ? InfoAncestro.listadoAncestros.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_ANCESTRO}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -106,6 +110,26 @@ function ComponentancestroIndex({ InfoAncestro }) {
                   : ""}
               </tbody>
             </table>
+            {InfoAncestro != null && InfoAncestro != undefined ? (
+              InfoAncestro.listadoAncestros != null &&
+              InfoAncestro.listadoAncestros != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InfoAncestro.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InfoAncestro.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

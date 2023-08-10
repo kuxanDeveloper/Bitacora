@@ -310,7 +310,6 @@ function CreatSticker(
 }
 
 function CrearResult(COD_BITACORA, ListResultMultiple) {
-  debugger;
   let variable = JSON.stringify(ListResultMultiple);
   const formData = new FormData();
   formData.append("COD_BITACORA", COD_BITACORA);
@@ -458,9 +457,9 @@ function EditGroup(
   );
 }
 
-function InfoGroup(estado, idGrupo, cookie) {
+function InfoGroup(estado, idGrupo, cookie, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}`,
+    `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}&page=${page}`,
     cookie
   );
 }
@@ -972,9 +971,9 @@ function EditAncestro(
   );
 }
 
-function GetlistAncestro(cookie, COD_ANCESTRO) {
+function GetlistAncestro(cookie, COD_ANCESTRO, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=`,
+    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=&page=${page}`,
     cookie
   );
 }

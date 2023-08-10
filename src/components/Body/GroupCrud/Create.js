@@ -10,7 +10,7 @@ import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListPrueba from "./ListPruebas";
 import ListSufij from "./ListSufijos";
 import Image from "next/image";
-function ComponentGroup({InforOptionsSelc}) {
+function ComponentGroup({ InforOptionsSelc }) {
   const [ListSufijo, setListSufijo] = useState([]);
 
   const [ListPruebas, setListPruebas] = useState([]);
@@ -49,7 +49,7 @@ function ComponentGroup({InforOptionsSelc}) {
   return (
     <>
       <section className={styles.create_note}>
-      <Image
+        <Image
           src="/img/bg_image.jpg"
           width={1000}
           height={1000}
@@ -61,7 +61,7 @@ function ComponentGroup({InforOptionsSelc}) {
             <Link
               href={{
                 pathname: "/Configuration/Groups/IndexGroup",
-                hash: "Normal",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -173,6 +173,7 @@ function ComponentGroup({InforOptionsSelc}) {
                       className={styles.btn_cancel}
                       href={{
                         pathname: "/Configuration/Groups/IndexGroup",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar
