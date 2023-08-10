@@ -8,7 +8,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckAncestro } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListGrupos from "./ListGrupos";
-import Pagination from "../../Tools/Pagination";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentGroup({ InforOptionsSelc }) {
   const [ListGruposAnc, setListGruposAnc] = useState([]);
 

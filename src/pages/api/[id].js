@@ -63,7 +63,7 @@ export const ApiQueryGeneralSample = async (
   }
 
   let lstObsevraPredeter = await QueryObserva(cookie);
-  setLstObservacionesPrede(lstObsevraPredeter);
+  setLstObservacionesPrede(lstObsevraPredeter.listadoObservacion);
   if (
     Lisgrupo == "401: Token incorrecto o vencido" ||
     listActivoMue == "401: Token incorrecto o vencido" ||

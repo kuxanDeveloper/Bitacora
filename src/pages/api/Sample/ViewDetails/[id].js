@@ -18,7 +18,7 @@ export const SampleDetailsEdit = async (
   let inforSample = await QueryMuestraEdit(cookie, id);
   let lstObervsa = await QueryObserva(cookie);
   setLInforSampleDetails(inforSample);
-  setLstObservacionesPrede(lstObervsa);
+  setLstObservacionesPrede(lstObervsa.listadoObservacion);
 };
 
 export const InfoteNoteEditApi = async (

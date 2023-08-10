@@ -18,5 +18,5 @@ export const UpdateNote = ({
 
 export const ListObservacion = async (cookie, setLstObservacionesPrede) => {
   let lstObservaPrete = await QueryObserva(cookie);
-  setLstObservacionesPrede(lstObservaPrete);
+  setLstObservacionesPrede(lstObservaPrete.listadoObservacion);
 };
