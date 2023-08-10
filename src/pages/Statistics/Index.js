@@ -29,26 +29,22 @@ function Index() {
         ></Image>
         <section className={Styles.filters}>
           <div className={Styles.content}>
-            <h1 className={Styles.title}>Estadisticas</h1>
+            {/* <h2 className={Styles.title}>Estadisticas</h2> */}
 
             <div className={Styles.inputs_container}>
-              <label className={Styles.filter_label}>
-                Desde
-                <input
-                  className={Styles.label_input}
-                  type="datetime-local"
-                  placeholder="Desde"
-                />
-              </label>
+              <label className={Styles.filter_label}>Estadisticas Desde</label>
+              <input
+                className={Styles.label_input}
+                type="datetime-local"
+                placeholder="Desde"
+              />
 
-              <label className={Styles.filter_label}>
-                Hasta
-                <input
-                  className={Styles.label_input}
-                  type="datetime-local"
-                  placeholder="Hasta"
-                />
-              </label>
+              <label className={Styles.filter_label}>Hasta</label>
+              <input
+                className={Styles.label_input}
+                type="datetime-local"
+                placeholder="Hasta"
+              />
 
               <button className={Styles.search_btn}>
                 <svg
@@ -75,7 +71,7 @@ function Index() {
         {/* circulos de informacion */}
         <div className={Styles.content}>
           <section className={Styles.circles}>
-            <h2 className={Styles.title}>Hemocultivo</h2>
+            {/* <h2 className={Styles.title}>Hemocultivo</h2> */}
 
             <div className={Styles.circles_container}>
               <CircleInfo></CircleInfo>
