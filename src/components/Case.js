@@ -28,6 +28,7 @@ export default function Case({
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
   setHasValueSample,
+  hrefhash
 }) {
   const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
@@ -375,7 +376,7 @@ export default function Case({
                   <td colSpan={5} className={styleTable.btn_options}>
                     <button 
                     onClick={() => {
-                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO);
+                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,hrefhash,HrefArmado);
                     }}
                     className={styleTable.btn_sticker}>
                     <span>&#10010; </span>

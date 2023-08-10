@@ -13,7 +13,7 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function PageCreateResult({ cookie, group, name_group }) {
+function PageCreateResult({ cookie, group, name_group,hrefhash }) {
   const [ListResultados, setListResultados] = useState([]);
   const [ListOptiones, setListOptiones] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
@@ -47,7 +47,6 @@ function PageCreateResult({ cookie, group, name_group }) {
     let LstBitacoras = JSON.parse(sessionStorage.getItem("ListadoBitacoras"));
     setListadoBitacoras(LstBitacoras);
   });
-
 
   return (
     <>
@@ -97,6 +96,7 @@ function PageCreateResult({ cookie, group, name_group }) {
         setListAddResultMultple={setListAddResultMultple}
         ListMicroorganismo={ListMicroorganismo}
         ListNumber={ListNumber}
+        hrefhash={hrefhash}
       />
     </>
   );
@@ -147,7 +147,8 @@ export async function getServerSideProps(ctx) {
       props: {
         cookie: cookie,
         group: ctx.query.group,
-        name_group: ctx.query.name_group
+        name_group: ctx.query.name_group,
+        hrefhash: ctx.query.hrefhash
       },
     };
   } else {

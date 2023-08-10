@@ -922,7 +922,7 @@ export const AddListSetValue = (setValue, nameInput) => {
   }
 };
 
-export const AddListCodBitacora = (nameInput,group,name_group) => {
+export const AddListCodBitacora = (nameInput,group,name_group,hrefhash,HrefArmado) => {
   let arrayList = [];
   const element = document.getElementsByName(nameInput);
 
@@ -943,7 +943,8 @@ export const AddListCodBitacora = (nameInput,group,name_group) => {
       pathname: "/Sample/CreateResultBloque/CreateBloq",
       query: {
         group: group,
-        name_group: name_group
+        name_group: name_group,
+        hrefhash: hrefhash
       },
     });
   }
