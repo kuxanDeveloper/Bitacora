@@ -513,7 +513,7 @@ function CloseCaseSample(id, observacionCaso, Estado) {
 
 function lstObservall(cookie) {
   return fetchWrapper.get(
-    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=&EstadoObservacion=1`,
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=&EstadoObservacion=1&page=1`,
     cookie
   );
 }

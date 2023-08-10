@@ -37,7 +37,6 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
     ListSitioAnatomico(cookie, setListadoSitioAna);
     ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
   }, []);
-
   useEffect(() => {
     ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
