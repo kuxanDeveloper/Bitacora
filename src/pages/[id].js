@@ -293,7 +293,6 @@ function HomeMuestraxGrupo({
     }
   }, [HasValueSample]);
 
-console.log(query);
 
   return (
     <>
@@ -354,7 +353,6 @@ console.log(query);
         HrefArmado={{ pathname: "/[id]", query: query }}
         isTrueActive={isTrueActive}
         isActiveCase={false}
-        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
       ></CaseStatus>
       <Case
@@ -371,6 +369,7 @@ console.log(query);
         LstObservacionesPrede={LstObservacionesPrede}
         setHasValueSample={setHasValueSample}
         hrefhash={router.asPath}
+        query={query}
       ></Case>
     </>
   );

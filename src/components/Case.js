@@ -11,25 +11,27 @@ import caseStyles from "../styles/case.module.scss";
 import styleTable from "../styles/StickerTable.module.scss";
 import Link from "next/link";
 import ImageOptimize from "./Tools/ImageOptimize";
-import { Button } from "react-scroll";
-import { setLazyProp } from "next/dist/server/api-utils";
 import StickersTable from "./Body/StickersTable";
-import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import Pagination from "./Tools/Pagination";
 export default function Case({
   ListadoGrupo,
   ListadoMuestraActivo,
   ListadoMuestraInactivo,
   isTrueActive,
   idGruop,
-  // isUserInterno,
   isSampleGeneral,
   HrefArmado,
   Options,
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
   setHasValueSample,
-  hrefhash
+  hrefhash,
+  query
 }) {
+  console.log(ListadoMuestraActivo, "activo");
+  console.log(ListadoMuestraInactivo, "inactivo");
+  const router = useRouter();
   const [List, SetList] = useState(false);
 
   const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
@@ -46,7 +48,6 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
-  console.log(ListadoMuestraActivo, ListadoResultadoxMuestra, "aglgo");
 
   //#region funciones para ordenar de manera ascendente y descendente
   const orderByAlphabeticalAsc = (array, getter, order = "asc") => {
@@ -230,13 +231,8 @@ export default function Case({
         isTrueActive={isTrueActive}
         isSampleGeneral={isSampleGeneral}
       ></CaseNav>
-      <section
-        className={caseStyles.cases}
-        // style={{ backgroundImage: `url('${urlImagenDinamyc}')` }}
-      >
+      <section className={caseStyles.cases}>
         <div>
-          {/* <img className={caseStyles.cases_bg} src={urlImagenDinamyc} alt="" /> */}
-
           {urlImagenDinamyc != null &&
           urlImagenDinamyc != undefined &&
           urlImagenDinamyc != "" ? (
@@ -662,18 +658,57 @@ export default function Case({
                   : "Sin Stickers inactivos"}
                 <tr className={`${styleTable.table_btn} checkListResult`}>
                   <td colSpan={5} className={styleTable.btn_options}>
-                    <button 
-                    onClick={() => {
-                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,hrefhash,HrefArmado);
-                    }}
-                    className={styleTable.btn_sticker}>
-                    <span>&#10010; </span>
+                    <button
+                      onClick={() => {
+                        AddListCodBitacora(
+                          "inputCheckoutResult",
+                          idGruop,
+                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
+                          hrefhash,
+                          HrefArmado
+                        );
+                      }}
+                      className={styleTable.btn_sticker}
+                    >
+                      <span>&#10010; </span>
                       Agregar estatus masivo
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <>
+              <br></br>
+              {isTrueActive ? (
+                ListadoMuestraActivo != null &&
+                ListadoMuestraActivo != undefined &&
+                ListadoMuestraActivo.length > 0 ? (
+                  <Pagination
+                    TotalPage={ListadoMuestraActivo[0].TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={ListadoMuestraActivo[0].Per_PAge}
+                  ></Pagination>
+                ) : (
+                  ""
+                )
+              ) : ListadoMuestraInactivo != null &&
+                ListadoMuestraInactivo != undefined &&
+                ListadoMuestraInactivo.length > 0 ? (
+                <Pagination
+                  TotalPage={ListadoMuestraInactivo[0].TotalPage}
+                  page={query.page}
+                  pathname={router.pathname}
+                  queryArme={{ page: "1" }}
+                  hash={null}
+                  CountPage={ListadoMuestraInactivo[0].Per_PAge}
+                ></Pagination>
+              ) : (
+                ""
+              )}
+            </>
           </div>
         ) : (
           <div className={caseStyles.cases_container}>
@@ -710,7 +745,40 @@ export default function Case({
                     LstObservacionesPrede={LstObservacionesPrede}
                   ></CaseComponent>
                 ))
-              : "Cargando..."}
+              : ""}
+
+            <>
+              <br></br>
+              {isTrueActive ? (
+                ListadoMuestraActivo != null &&
+                ListadoMuestraActivo != undefined &&
+                ListadoMuestraActivo.length > 0 ? (
+                  <Pagination
+                    TotalPage={ListadoMuestraActivo[0].TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={ListadoMuestraActivo[0].Per_PAge}
+                  ></Pagination>
+                ) : (
+                  ""
+                )
+              ) : ListadoMuestraInactivo != null &&
+                ListadoMuestraInactivo != undefined &&
+                ListadoMuestraInactivo.length > 0 ? (
+                <Pagination
+                  TotalPage={ListadoMuestraInactivo[0].TotalPage}
+                  page={query.page}
+                  pathname={router.pathname}
+                  queryArme={{ page: "1" }}
+                  hash={null}
+                  CountPage={ListadoMuestraInactivo[0].Per_PAge}
+                ></Pagination>
+              ) : (
+                ""
+              )}
+            </>
           </div>
         )}
       </section>

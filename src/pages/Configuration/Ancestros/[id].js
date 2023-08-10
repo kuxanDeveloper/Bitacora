@@ -1,7 +1,11 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditAncestro from "../../../components/Body/Ancestro/Edit";
-import { SampleDetailsGroup,SampleDetailsAncestro,SampleDetailsGruposXAncestro } from "../../api/Sample/ViewDetailsAncestro/[id]";
+import {
+  SampleDetailsGroup,
+  SampleDetailsAncestro,
+  SampleDetailsGruposXAncestro,
+} from "../../api/Sample/ViewDetailsAncestro/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,14 +14,13 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({cookie, id}) {
+function CreatePage({ cookie, id }) {
+  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+  useEffect(() => {
+    SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+  }, []);
 
-    const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
-    useEffect(() => {
-        SampleDetailsGroup(setInforOptionsSelc, cookie, "");
-      }, []);
-
-      const [InfoAncestro, setInfoAncestro] = useState([]);
+  const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
     SampleDetailsAncestro(setInfoAncestro, cookie, id);
   }, []);
@@ -50,7 +53,10 @@ function CreatePage({cookie, id}) {
           name="twitter:description"
           content={`Lugar donde editan los Grupos Home del sistema`}
         ></meta>
-        <meta property="og:title" content={`Edición de Grupo Home - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Edición de Grupo Home - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde editan los Grupos Home del sistema`}
@@ -59,11 +65,12 @@ function CreatePage({cookie, id}) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditAncestro 
-      InfoAncestro={InfoAncestro} 
-      InforOptionsSelc={InforOptionsSelc} 
-      InforGruposXAncest={InfoGrupXAncs}
-      idAncestro={id}></EditAncestro>
+      <EditAncestro
+        InfoAncestro={InfoAncestro}
+        InforOptionsSelc={InforOptionsSelc}
+        InforGruposXAncest={InfoGrupXAncs}
+        idAncestro={id}
+      ></EditAncestro>
     </>
   );
 }
@@ -96,13 +103,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (ctx.query.id == undefined ||
-        ctx.query.id == null || !Options.GroupConfigCreateAndUrl) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.GroupConfigCreateAndUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie,
-        id: ctx.query.id, } };
+    return { props: { cookie: cookie, id: ctx.query.id } };
   } else {
     return {
       redirect: {
