@@ -8,7 +8,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckAncestro } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListGrupos from "./ListGrupos";
-import Image from "next/image";
+import Pagination from "../../Tools/Pagination";
 function ComponentGroup({
   InfoAncestro,
   InforOptionsSelc,
@@ -39,13 +39,16 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

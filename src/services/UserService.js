@@ -94,7 +94,7 @@ export const userService = {
   CreateMicroorganismo,
   EditMicroorganismo,
   GetlistMicroorganismo,
-  CrearResultBloq
+  CrearResultBloq,
 };
 
 async function login(username, password) {
@@ -257,8 +257,6 @@ function ListMultipleMixPruxNum(cookie, idGroup) {
     cookie
   );
 }
-
-
 
 function ListResults(cookie, idPrueba, idBitacora) {
   return fetchWrapper.get(
@@ -539,8 +537,11 @@ function lstSufijoGetall(cookie) {
   return fetchWrapper.get(`${baseUrl}/IndexBitacora/LstGetallSufijo`, cookie);
 }
 
-function InfoSampleUsers(cookie, IdUser,page) {
-  return fetchWrapper.get(`${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}&page=${page}`, cookie);
+function InfoSampleUsers(cookie, IdUser, page) {
+  return fetchWrapper.get(
+    `${baseUrl}/Usus/GetInfoUsu?IdUsu=${IdUser}&page=${page}`,
+    cookie
+  );
 }
 function InfoGroupAndUserxGroup(cookie, idUser) {
   return fetchWrapper.get(
@@ -997,12 +998,7 @@ function GetlistGruposXAncestro(cookie, COD_ANCESTRO) {
   );
 }
 
-function CreateJefeLaboratorio(
-  DESCRIPCION,
-  ESTADO,
-  DOCUMENTO,
-  INF_ADICIONAL
-) {
+function CreateJefeLaboratorio(DESCRIPCION, ESTADO, DOCUMENTO, INF_ADICIONAL) {
   const formData = new FormData();
 
   formData.append("DESCRIPCION", DESCRIPCION);
@@ -1039,17 +1035,14 @@ function EditJefeLaboratorio(
   );
 }
 
-function GetlistJefeLaboratorio(cookie, ID, ESTADO) {
+function GetlistJefeLaboratorio(cookie, ID, ESTADO, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistJefesLaboratorio?ID=${ID}&ESTADO=${ESTADO}`,
+    `${baseUrl}/Stickers/GetlistJefesLaboratorio?ID=${ID}&ESTADO=${ESTADO}&page=${page}`,
     cookie
   );
 }
 
-function CreateSitioAnatomico(
-  DESCRIPCION,
-  ESTADO
-) {
+function CreateSitioAnatomico(DESCRIPCION, ESTADO) {
   const formData = new FormData();
 
   formData.append("DESCRIPCION", DESCRIPCION);
@@ -1062,11 +1055,7 @@ function CreateSitioAnatomico(
   );
 }
 
-function EditSitioAnatomico(
-  ID,
-  DESCRIPCION,
-  ESTADO
-) {
+function EditSitioAnatomico(ID, DESCRIPCION, ESTADO) {
   const formData = new FormData();
 
   formData.append("ID", ID);
@@ -1087,15 +1076,11 @@ function GetlistSitiosAnatomicos(cookie, ID, ESTADO) {
   );
 }
 
-function CreateTipoMuestra(
-  NOMBRE_TIPO_MUESTRA,
-  ESTADO,
-  ID_GRUPO
-) {
+function CreateTipoMuestra(NOMBRE_TIPO_MUESTRA, ESTADO, ID_GRUPO) {
   const formData = new FormData();
 
   formData.append("NOMBRE_TIPO_MUESTRA", NOMBRE_TIPO_MUESTRA);
-  formData.append("ESTADO", ESTADO);  
+  formData.append("ESTADO", ESTADO);
   formData.append("ID_GRUPO", ID_GRUPO);
 
   return fetchWrapper.postHeader(
@@ -1105,17 +1090,12 @@ function CreateTipoMuestra(
   );
 }
 
-function EditTipoMuestra(
-  ID,
-  NOMBRE_TIPO_MUESTRA,
-  ESTADO,
-  ID_GRUPO
-) {
+function EditTipoMuestra(ID, NOMBRE_TIPO_MUESTRA, ESTADO, ID_GRUPO) {
   const formData = new FormData();
 
   formData.append("ID", ID);
   formData.append("NOMBRE_TIPO_MUESTRA", NOMBRE_TIPO_MUESTRA);
-  formData.append("ESTADO", ESTADO);  
+  formData.append("ESTADO", ESTADO);
   formData.append("ID_GRUPO", ID_GRUPO);
 
   return fetchWrapper.postHeader(
@@ -1133,15 +1113,15 @@ function GetlistTiposMuestra(cookie, ID, ESTADO) {
 }
 
 function guardFechasbitacora(
-    COD_BITACORAv,
-    FECHA_HORA_INGRESO,
-    FECHA_HORA_VERIFICACION,
-    FECHA_INGRESO_BOTELLA,
-    FECHA_HORA_SUENA_POSITIVO,
-    FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
-    FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
-    FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
-    FECHA_HORA_VALIDACION_ANTIBIOGRAMA
+  COD_BITACORAv,
+  FECHA_HORA_INGRESO,
+  FECHA_HORA_VERIFICACION,
+  FECHA_INGRESO_BOTELLA,
+  FECHA_HORA_SUENA_POSITIVO,
+  FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
+  FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
+  FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
+  FECHA_HORA_VALIDACION_ANTIBIOGRAMA
 ) {
   const formData = new FormData();
   formData.append("COD_BITACORA", COD_BITACORAv);
@@ -1149,10 +1129,22 @@ function guardFechasbitacora(
   formData.append("FECHA_HORA_VERIFICACION", FECHA_HORA_VERIFICACION);
   formData.append("FECHA_INGRESO_BOTELLA", FECHA_INGRESO_BOTELLA);
   formData.append("FECHA_HORA_SUENA_POSITIVO", FECHA_HORA_SUENA_POSITIVO);
-  formData.append("FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO", FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO);
-  formData.append("FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA", FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA);
-  formData.append("FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL", FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL);
-  formData.append("FECHA_HORA_VALIDACION_ANTIBIOGRAMA", FECHA_HORA_VALIDACION_ANTIBIOGRAMA);
+  formData.append(
+    "FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO",
+    FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO
+  );
+  formData.append(
+    "FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA",
+    FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA
+  );
+  formData.append(
+    "FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL",
+    FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL
+  );
+  formData.append(
+    "FECHA_HORA_VALIDACION_ANTIBIOGRAMA",
+    FECHA_HORA_VALIDACION_ANTIBIOGRAMA
+  );
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditarFechasBitacoras`,
@@ -1172,10 +1164,7 @@ function DeleteResult(Codigo_resultado_bitacora) {
   );
 }
 
-function CreateMicroorganismo(
-  DESCRIPCION,
-  ESTADO
-) {
+function CreateMicroorganismo(DESCRIPCION, ESTADO) {
   const formData = new FormData();
 
   formData.append("DESCRIPCION", DESCRIPCION);
@@ -1188,11 +1177,7 @@ function CreateMicroorganismo(
   );
 }
 
-function EditMicroorganismo(
-  ID,
-  DESCRIPCION,
-  ESTADO
-) {
+function EditMicroorganismo(ID, DESCRIPCION, ESTADO) {
   const formData = new FormData();
 
   formData.append("ID", ID);
@@ -1206,7 +1191,7 @@ function EditMicroorganismo(
   );
 }
 
-function GetlistMicroorganismo(ID, ESTADO,cookie) {
+function GetlistMicroorganismo(ID, ESTADO, cookie) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistMiroOrganismo?ID=${ID}&ESTADO=${ESTADO}`,
     cookie

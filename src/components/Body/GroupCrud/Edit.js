@@ -9,7 +9,7 @@ import { setCheckindividual } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListSufij from "./ListSufijos";
 import ListPrueba from "./ListPruebas";
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentGroup({
   InforGroup,
   InforSufijos,
@@ -82,13 +82,16 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+      <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link

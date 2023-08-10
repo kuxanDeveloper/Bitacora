@@ -7,7 +7,7 @@ import { onSubmitCreateJefeLab } from "../../Tools/crudJefeLaboratorio";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentCreateJefeLab() {
   const validarEsquemaobservation = Yup.object().shape({
     DESCRIPCION: Yup.string().required(
@@ -19,7 +19,7 @@ function ComponentCreateJefeLab() {
     DOCUMENTO: Yup.string().required(
       "El campo documento del jefe de laboratorio es obligatorio"
     ),
-    INF_ADICIONAL: Yup.string().notRequired()
+    INF_ADICIONAL: Yup.string().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaobservation) };
@@ -35,11 +35,22 @@ function ComponentCreateJefeLab() {
   return (
     <>
       <section className={styles.create_note}>
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -122,7 +133,7 @@ function ComponentCreateJefeLab() {
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckEstadoCrud(setValue);
+                          setCheckEstadoCrud(setValue);
                         }}
                         className={styles.btn_send}
                       >
@@ -133,6 +144,7 @@ function ComponentCreateJefeLab() {
                       className={styles.btn_cancel}
                       href={{
                         pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar

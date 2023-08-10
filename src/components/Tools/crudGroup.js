@@ -90,6 +90,7 @@ export const onSubmitUpdateGroup = ({
 
       Router.push({
         pathname: "/Configuration/Groups/IndexGroup",
+        query: { page: "1" },
       });
     })
     .catch((error) => {

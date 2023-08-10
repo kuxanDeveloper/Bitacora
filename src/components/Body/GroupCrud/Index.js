@@ -7,7 +7,6 @@ import Pagination from "../../Tools/Pagination";
 import { useRouter } from "next/router";
 function ComponentGroupIndex({ InforSampleDetails, query }) {
   const router = useRouter();
-  console.log(InforSampleDetails);
   return (
     <>
       <section className={styles.Index_users}>
