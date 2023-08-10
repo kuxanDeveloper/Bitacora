@@ -2,7 +2,7 @@ import { CloseCaseSample,DeleteResultSegm } from "../../pages/api/Sample/ViewDet
 import Router from "next/router";
 import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
-
+import dayjs from "dayjs";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -1383,3 +1383,9 @@ export const calcularDiffdate = (Fecheresult,FechaCreado) =>
     return false;
   }
 }
+
+export const setFechaActual = (idfecha) =>
+{
+  document.querySelector("." + idfecha +" input")
+                            .value = dayjs().format('DD/MM/YYYY hh:mm');
+};

@@ -150,6 +150,7 @@ export default function CaseComponent({
             >
               Ver Más
             </Link>
+            {isActive ?
             <Link
               href={{
                 pathname: "/Sample/CreateResult/[id]",
@@ -177,7 +178,7 @@ export default function CaseComponent({
               className={caseStyles.btn_sticker}
             >
               Agregar Estatus
-            </Link>
+            </Link> : ""}
           </div>
         </div>
         {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}

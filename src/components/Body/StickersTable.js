@@ -61,6 +61,7 @@ export default function StickersTable({
             >
               Ver Más
             </Link>
+            {isActive ?
             <Link
               href={{
                 pathname: "/Sample/CreateResult/[id]",
@@ -88,7 +89,7 @@ export default function StickersTable({
               className={styles.btn_sticker}
             >
               Agregar Estatus
-            </Link>
+            </Link> : ""}
         </td>
       </tr>
     </>

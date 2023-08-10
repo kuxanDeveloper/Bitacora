@@ -127,7 +127,7 @@ function EditStickerComponents({
     options.push({ value: data.ID, label: data.DESCRIPCION });
   });
   // console.log(codJefeLab, "codjefe")
-
+console.log(InforSampleDetails);
   return (
     <section className={styles.Create_sticker}>
       <Image
@@ -170,6 +170,7 @@ function EditStickerComponents({
                           <select
                             defaultValue={group}
                             {...register("GrupoSticker")}
+                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                             name="GrupoSticker"
                             id="GrupoSticker"
                             onChange={(e) =>
@@ -363,6 +364,7 @@ function EditStickerComponents({
                           </label>
                           <select
                             {...register("SitioAnatomico")}
+                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                             name="SitioAnatomico"
                             id="SitioAnatomico"
                             value={codSitioAnatomico}
@@ -401,6 +403,7 @@ function EditStickerComponents({
                                   : codJefeLab)
                               );
                             })}
+                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                             onChange={(e) => {
                               setcodJefeLab(e.value);
                             }}
@@ -426,6 +429,7 @@ function EditStickerComponents({
                             name="tipoMuestra"
                             id="tipoMuestra"
                             value={codTipoMuestra}
+                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                             onChange={(e) => setcodTipoMuestra(e.target.value)}
                           >
                             <option disabled value="">
@@ -450,6 +454,7 @@ function EditStickerComponents({
                           <select
                             name="sltObservaIni"
                             id="sltObservaIni"
+                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                             onChange={(e) => {
                               OnchangeObservaCrearEdit(
                                 e.target.value,
@@ -493,13 +498,15 @@ function EditStickerComponents({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
                               orientation="landscape"
                               value={fecha}
                               className="FechaHoraRecogida"
                             />
                           </LocalizationProvider>
 
-                          <button
+                          {InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? 
+                            <button
                             type="button"
                             title="Seleccionar la fecha de hoy"
                             onClick={() => {
@@ -532,6 +539,8 @@ function EditStickerComponents({
                               <path d="M19 16v6"></path>
                             </svg>
                           </button>
+                           : ""}
+                          
 
                           <div className={styles.invalid_feedback}>
                             {errors.FechaHoraRecogida?.message}
@@ -562,7 +571,7 @@ function EditStickerComponents({
                       </div>
 
                       <div className={styles.btn_container_send}>
-                        {!formState.isSubmitting && (
+                        {!formState.isSubmitting && InforSampleDetails.infoBitacora[0].ESTADO_STICKER && (
                           <button
                             onClick={(e) => {
                               isHabilteGroup == "true"
