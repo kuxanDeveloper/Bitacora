@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentGroupIndex(InforSampleDetails) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentGroupIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -35,6 +38,7 @@ function ComponentGroupIndex(InforSampleDetails) {
           <Link
             href={{
               pathname: "/Configuration/Groups/CreateGroup",
+              query: { page: "1" },
             }}
             className={styles.btn_create}
           >
@@ -53,9 +57,9 @@ function ComponentGroupIndex(InforSampleDetails) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails.InforSampleDetails != null &&
-                InforSampleDetails.InforSampleDetails != undefined
-                  ? InforSampleDetails.InforSampleDetails.map((data, index) => (
+                {InforSampleDetails.EdicionGrupo != null &&
+                InforSampleDetails.EdicionGrupo != undefined
+                  ? InforSampleDetails.EdicionGrupo.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_GRUPO}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -114,6 +118,26 @@ function ComponentGroupIndex(InforSampleDetails) {
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.EdicionGrupo != null &&
+              InforSampleDetails.EdicionGrupo != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

@@ -65,7 +65,6 @@ export default function Filters({
   const [isTrueActive, setisTrueActive] = useState(false);
 
   useEffect(() => {
-    debugger;
     if (Options.OrdersInactive) {
       if (
         window.performance.navigation.type ==

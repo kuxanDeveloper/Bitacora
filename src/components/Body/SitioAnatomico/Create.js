@@ -7,7 +7,7 @@ import { onSubmitCreateSitioAnat } from "../../Tools/crudSitioAnatomico";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentCreateSitAnt() {
   const validarEsquemaobservation = Yup.object().shape({
     DESCRIPCION: Yup.string().required(
@@ -31,11 +31,22 @@ function ComponentCreateSitAnt() {
   return (
     <>
       <section className={styles.create_note}>
+      <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/SitioAnatomico/IndexSitio",
+                query:{page:"1"}
               }}
               className={styles.back_btn}
             >
@@ -95,6 +106,7 @@ function ComponentCreateSitAnt() {
                       className={styles.btn_cancel}
                       href={{
                         pathname: "/Configuration/SitioAnatomico/IndexSitio",
+                        query:{page:"1"}
                       }}
                     >
                       Cancelar

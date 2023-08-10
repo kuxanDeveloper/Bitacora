@@ -7,7 +7,7 @@ import { onSubmitEditJefeLab } from "../../Tools/crudJefeLaboratorio";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
   const validarEsquemaobservation = Yup.object().shape({
     ID: Yup.string().required("Recivir el codigo es obligatorio"),
@@ -30,11 +30,22 @@ function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
   return (
     <>
       <section className={styles.create_note}>
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -50,8 +61,9 @@ function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  {InfoJefeLab != null && InfoJefeLab != undefined
-                    ? InfoJefeLab.map((data, index) => (
+                  {InfoJefeLab.listadojefes != null &&
+                  InfoJefeLab.listadojefes != undefined
+                    ? InfoJefeLab.listadojefes.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -76,7 +88,11 @@ function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
                               <label className={styles.group_title}>
                                 Estado del jefe de laboratorio
                               </label>
-                              <input id="Estado" defaultChecked={data.ESTADO} type="checkbox" />
+                              <input
+                                id="Estado"
+                                defaultChecked={data.ESTADO}
+                                type="checkbox"
+                              />
                               <div className={styles.invalid_feedback}>
                                 {errors.ESTADO?.message}
                               </div>
@@ -124,7 +140,7 @@ function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
                               <button
                                 onClick={() => {
                                   setCheckEstadoCrud(setValue);
-                                  setValue("ID",idJefe);
+                                  setValue("ID", idJefe);
                                 }}
                                 className={styles.btn_send}
                               >
@@ -136,6 +152,7 @@ function ComponentEditJefeLab({ InfoJefeLab, idJefe }) {
                               href={{
                                 pathname:
                                   "/Configuration/JefeLaboratorio/IndexJefe",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

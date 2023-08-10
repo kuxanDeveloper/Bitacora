@@ -6,51 +6,46 @@ export const onSubmitCreateJefeLab = ({
   DESCRIPCION,
   ESTADO,
   DOCUMENTO,
-  INF_ADICIONAL
-}) => {  
-  return userService.CreateJefeLaboratorio(
-    DESCRIPCION,
-    ESTADO,
-    DOCUMENTO,
-    INF_ADICIONAL
-  ).then(() =>
-  {
-    Swal.fire({
-      title: "¡Correcto!",
-      text: "El Jefe de laboratorio se creo correctamente",
-      icon: "success",
-      confirmButtonText: "Ok",
-    });
+  INF_ADICIONAL,
+}) => {
+  return userService
+    .CreateJefeLaboratorio(DESCRIPCION, ESTADO, DOCUMENTO, INF_ADICIONAL)
+    .then(() => {
+      Swal.fire({
+        title: "¡Correcto!",
+        text: "El Jefe de laboratorio se creo correctamente",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
 
-Router.push({
-  pathname: "/Configuration/JefeLaboratorio/IndexJefe"
-});
-  }    
-  ).catch((error) => {
-
+      Router.push({
+        pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+        query: { page: "1" },
+      });
+    })
+    .catch((error) => {
       if (
-          error == "Límite de tiempo excedido" ||
-          error == "Usuario o clave incorrectos" ||
-          error == "No se pudo hacer el login, revise los datos enviados"
-        ) {
-          Swal.fire({
-            title: "¡Advertencia!",
-            text: error,
-            icon: "warning",
-            confirmButtonText: "Cerrar",
-          });
-        } else {
-          Swal.fire({
-            title: "¡Ha ocurrido un error!",
-            text: error,
-            icon: "error",
-            confirmButtonText: "Cerrar",
-          });
-        }
-  
-        console.log(error, "error al crear jefe de laboratorio");
-  });
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
+      console.log(error, "error al crear jefe de laboratorio");
+    });
 };
 
 export const onSubmitEditJefeLab = ({
@@ -58,84 +53,80 @@ export const onSubmitEditJefeLab = ({
   DESCRIPCION,
   ESTADO,
   DOCUMENTO,
-  INF_ADICIONAL
+  INF_ADICIONAL,
 }) => {
-  return userService.EditJefeLaboratorio(
-    ID,
-    DESCRIPCION,
-    ESTADO,
-    DOCUMENTO,
-    INF_ADICIONAL
-  ).then(() =>
-  {
-    Swal.fire({
-      title: "¡Correcto!",
-      text: "El Jefe de laboratorio se edito correctamente",
-      icon: "success",
-      confirmButtonText: "Ok",
-    });
+  return userService
+    .EditJefeLaboratorio(ID, DESCRIPCION, ESTADO, DOCUMENTO, INF_ADICIONAL)
+    .then(() => {
+      Swal.fire({
+        title: "¡Correcto!",
+        text: "El Jefe de laboratorio se edito correctamente",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
 
-Router.push({
-  pathname: "/Configuration/JefeLaboratorio/IndexJefe"
-});
-  }    
-  ).catch((error) => {
-
+      Router.push({
+        pathname: "/Configuration/JefeLaboratorio/IndexJefe",
+        query: { page: "1" },
+      });
+    })
+    .catch((error) => {
       if (
-          error == "Límite de tiempo excedido" ||
-          error == "Usuario o clave incorrectos" ||
-          error == "No se pudo hacer el login, revise los datos enviados"
-        ) {
-          Swal.fire({
-            title: "¡Advertencia!",
-            text: error,
-            icon: "warning",
-            confirmButtonText: "Cerrar",
-          });
-        } else {
-          Swal.fire({
-            title: "¡Ha ocurrido un error!",
-            text: error,
-            icon: "error",
-            confirmButtonText: "Cerrar",
-          });
-        }
-  
-        console.log(error, "error al editar Jefe de laboratorio");
-  });
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
 
-};
-
-export const GetlistJefeLaboratorio = (cookie,
-    ID,ESTADO) => {
-    return userService.GetlistJefeLaboratorio(
-        cookie,
-        (ID == null ? "" : ID),
-        (ESTADO == null ? "" : ESTADO)
-    ).catch((error) => {
-
-        if (
-            error == "Límite de tiempo excedido" ||
-            error == "Usuario o clave incorrectos" ||
-            error == "No se pudo hacer el login, revise los datos enviados"
-          ) {
-            Swal.fire({
-              title: "¡Advertencia!",
-              text: error,
-              icon: "warning",
-              confirmButtonText: "Cerrar",
-            });
-          } else {
-            Swal.fire({
-              title: "¡Ha ocurrido un error!",
-              text: error,
-              icon: "error",
-              confirmButtonText: "Cerrar",
-            });
-          }
-    
-          console.log(error, "error al obtener la informacion de jefes de laboratorio");
+      console.log(error, "error al editar Jefe de laboratorio");
     });
-
 };
 
+export const GetlistJefeLaboratorio = (cookie, ID, ESTADO, page) => {
+  return userService
+    .GetlistJefeLaboratorio(
+      cookie,
+      ID == null ? "" : ID,
+      ESTADO == null ? "" : ESTADO,
+      page
+    )
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(
+        error,
+        "error al obtener la informacion de jefes de laboratorio"
+      );
+    });
+};

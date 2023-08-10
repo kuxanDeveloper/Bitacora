@@ -3,7 +3,10 @@ import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentSitioIndex({ InfoSitioAnt }) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentSitioIndex({ InfoSitioAnt, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -50,8 +53,9 @@ function ComponentSitioIndex({ InfoSitioAnt }) {
                 </tr>
               </thead>
               <tbody>
-                {InfoSitioAnt != null && InfoSitioAnt != undefined
-                  ? InfoSitioAnt.map((data, index) => (
+                {InfoSitioAnt.listadositios != null &&
+                InfoSitioAnt.listadositios != undefined
+                  ? InfoSitioAnt.listadositios.map((data, index) => (
                       <tr key={index}>
                         <td>{data.DESCRIPCION}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -100,6 +104,26 @@ function ComponentSitioIndex({ InfoSitioAnt }) {
                   : ""}
               </tbody>
             </table>
+            {InfoSitioAnt != null && InfoSitioAnt != undefined ? (
+              InfoSitioAnt.listadositios != null &&
+              InfoSitioAnt.listadositios != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InfoSitioAnt.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InfoSitioAnt.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

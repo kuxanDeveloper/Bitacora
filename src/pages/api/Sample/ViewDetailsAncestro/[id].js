@@ -6,8 +6,8 @@ import {
     getListGroup
   } from "../../../../components/Tools/crudGroup";
 
-   export const SampleDetailsAncestro = async (setInfoAncestro,cookie,COD_ANCESTRO) => {
-     let inforSample = await GetlistAncestro(cookie,COD_ANCESTRO);
+   export const SampleDetailsAncestro = async (setInfoAncestro,cookie,COD_ANCESTRO, page) => {
+     let inforSample = await GetlistAncestro(cookie,COD_ANCESTRO, page);
      setInfoAncestro(inforSample);
    };
 

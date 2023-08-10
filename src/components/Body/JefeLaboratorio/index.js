@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentjefeIndex({ InfoJefeLab }) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentjefeIndex({ InfoJefeLab, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -52,8 +55,9 @@ function ComponentjefeIndex({ InfoJefeLab }) {
                 </tr>
               </thead>
               <tbody>
-                {InfoJefeLab != null && InfoJefeLab != undefined
-                  ? InfoJefeLab.map((data, index) => (
+                {InfoJefeLab.listadojefes != null &&
+                InfoJefeLab.listadojefes != undefined
+                  ? InfoJefeLab.listadojefes.map((data, index) => (
                       <tr key={index}>
                         <td>{data.DESCRIPCION}</td>
                         <td>{data.DOCUMENTO}</td>
@@ -105,6 +109,26 @@ function ComponentjefeIndex({ InfoJefeLab }) {
                   : ""}
               </tbody>
             </table>
+            {InfoJefeLab != null && InfoJefeLab != undefined ? (
+              InfoJefeLab.listadojefes != null &&
+              InfoJefeLab.listadojefes != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InfoJefeLab.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InfoJefeLab.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>
