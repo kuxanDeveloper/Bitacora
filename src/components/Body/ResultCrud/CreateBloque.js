@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
@@ -48,6 +48,27 @@ function ComponentCreateResult({
   const { register, handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
   const { errors } = formState;
+
+  useEffect(() => {
+    if(ListadoBitacoras != null &&
+      ListadoBitacoras != undefined)
+    {
+      let NumBitacora = "";
+      ListadoBitacoras != null &&
+                          ListadoBitacoras != undefined
+                            ? ListadoBitacoras.map(
+                                (data, index) => 
+                                NumBitacora = NumBitacora + `${data.split("_")[0]}, `
+                              )
+                            : NumBitacora = NumBitacora + "";
+                            if(NumBitacora != "")
+                            {
+                                const pBit = document.getElementById("parrBitac");
+                                pBit.innerText = NumBitacora.substring(0, (NumBitacora.length - 2));  
+                            }
+    }
+    
+  },[ListadoBitacoras]);
 
   return (
     <>
@@ -128,13 +149,13 @@ function ComponentCreateResult({
                       >
                         Números de sticker :
                       </label>
-                      <p className={styles.inline}>
-                        {ListadoBitacoras != null &&
+                      <p className={styles.inline} id="parrBitac">
+                        {/* {ListadoBitacoras != null &&
                         ListadoBitacoras != undefined
                           ? ListadoBitacoras.map(
                               (data, index) => `${data.split("_")[0]}, `
                             )
-                          : ""}
+                          : ""} */}
                       </p>
                     </div>
                   </div>

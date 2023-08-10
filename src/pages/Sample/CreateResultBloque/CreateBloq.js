@@ -46,7 +46,7 @@ function PageCreateResult({ cookie, group, name_group,hrefhash }) {
   {
     let LstBitacoras = JSON.parse(sessionStorage.getItem("ListadoBitacoras"));
     setListadoBitacoras(LstBitacoras);
-  });
+  },[]);
 
   return (
     <>
