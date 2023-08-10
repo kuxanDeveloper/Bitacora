@@ -293,6 +293,8 @@ function HomeMuestraxGrupo({
     }
   }, [HasValueSample]);
 
+console.log(query);
+
   return (
     <>
       <Head>
@@ -368,6 +370,7 @@ function HomeMuestraxGrupo({
         Options={Options}
         LstObservacionesPrede={LstObservacionesPrede}
         setHasValueSample={setHasValueSample}
+        hrefhash={router.asPath}
       ></Case>
     </>
   );

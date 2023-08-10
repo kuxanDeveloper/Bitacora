@@ -5,7 +5,7 @@ import {
 import Router from "next/router";
 import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
-
+import dayjs from "dayjs";
 import Swal from "sweetalert2";
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -925,7 +925,7 @@ export const AddListSetValue = (setValue, nameInput) => {
   }
 };
 
-export const AddListCodBitacora = (nameInput, group, name_group) => {
+export const AddListCodBitacora = (nameInput,group,name_group,hrefhash,HrefArmado) => {
   let arrayList = [];
   const element = document.getElementsByName(nameInput);
 
@@ -945,6 +945,7 @@ export const AddListCodBitacora = (nameInput, group, name_group) => {
       query: {
         group: group,
         name_group: name_group,
+        hrefhash: hrefhash
       },
     });
   } else {
@@ -1372,6 +1373,13 @@ export const calcularDiffdate = (Fecheresult, FechaCreado) => {
   } else {
     return false;
   }
+}
+
+export const setFechaActual = (idfecha) =>
+{
+  document.querySelector("." + idfecha +" input")
+                            .value = dayjs().format('DD/MM/YYYY hh:mm');
+};
 };
 
 export const setCheckPruebaReslt = (setValue) => {

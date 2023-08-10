@@ -201,12 +201,13 @@ export const onSubmitCreateResult = ({
 };
 
 export const onSubmitCreateResultBloque = ({
-  ListadoBitacoras,
-  ListResultMultiple
+  ListadoBitacorasLst,
+  ListResultMultiple,
+  GrupoSticker
 }) => {
   return userService
     .CrearResultBloq(
-      ListadoBitacoras,
+      ListadoBitacorasLst,
       ListResultMultiple
     )
     .then(() => {
@@ -215,6 +216,13 @@ export const onSubmitCreateResultBloque = ({
         pathname: "/[id]",
         query: { id: GrupoSticker, page: "1" },
         hash: "Cactive#OverallSample",
+      });
+
+      Swal.fire({
+        title: "¡Estatus Guardados!",
+        text: "Los estatus en bloque se guardaron correctamente",
+        icon: "success",
+        confirmButtonText: "Cerrar",
       });
     })
     .catch((error) => {

@@ -27,6 +27,7 @@ function Pop_up({
   FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
   FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
   FECHA_HORA_VALIDACION_ANTIBIOGRAMA,
+  ESTADO_STICKER_bit
 }) {
   const validarEsquemaFecha = Yup.object().shape({
     COD_BITACORAv: Yup.string().required(),
@@ -98,6 +99,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_INGRESO != null &&
                                 FECHA_HORA_INGRESO != ""
@@ -107,6 +109,7 @@ function Pop_up({
                               className="fech_hora_ingreso"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -139,7 +142,9 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button> : ""}
+
+
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -151,6 +156,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_VERIFICACION != null &&
                                 FECHA_HORA_VERIFICACION != ""
@@ -160,6 +166,7 @@ function Pop_up({
                               className="fech_hora_verificacion"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -192,7 +199,8 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button> : ""}
+
                         </div>
                       </div>
 
@@ -209,6 +217,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_INGRESO_BOTELLA != null &&
                                 FECHA_INGRESO_BOTELLA != ""
@@ -218,6 +227,7 @@ function Pop_up({
                               className="fech_ingreso_botella"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -250,7 +260,7 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button> : ""}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -262,6 +272,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_SUENA_POSITIVO != null &&
                                 FECHA_HORA_SUENA_POSITIVO != ""
@@ -271,6 +282,7 @@ function Pop_up({
                               className="fech_hora_suena_positiv"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -304,6 +316,7 @@ function Pop_up({
                           <path d="M19 16v6"></path>
                         </svg>
                       </button>
+                      :""}
                         </div>
                       </div>
 
@@ -320,6 +333,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO !=
                                   null &&
@@ -332,6 +346,7 @@ function Pop_up({
                               className="fech_valid_hemo_positivo"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -364,7 +379,7 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button>:""}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -376,6 +391,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA !=
                                   null &&
@@ -389,6 +405,7 @@ function Pop_up({
                               className="fech_valid_identf_botella"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -421,7 +438,7 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button>:""}
                         </div>
                       </div>
 
@@ -438,6 +455,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL !=
                                   null &&
@@ -451,6 +469,7 @@ function Pop_up({
                               className="fech_valid_identf_final"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -483,7 +502,7 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button>:""}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -495,6 +514,7 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
+                              disabled={ESTADO_STICKER_bit == true ? false : true}
                               defaultValue={
                                 FECHA_HORA_VALIDACION_ANTIBIOGRAMA != null &&
                                 FECHA_HORA_VALIDACION_ANTIBIOGRAMA != ""
@@ -504,6 +524,7 @@ function Pop_up({
                               className="fech_valid_antibiograma"
                             />
                           </LocalizationProvider>
+                          {ESTADO_STICKER_bit == true ?
                           <button
                         type="button"
                         title="Seleccionar la fecha de hoy"
@@ -536,12 +557,13 @@ function Pop_up({
                           <path d="M16 19h6"></path>
                           <path d="M19 16v6"></path>
                         </svg>
-                      </button>
+                      </button>:""}
                         </div>
                       </div>
 
                       <div className={styles2.btn_container_send}>
-                        {!formState.isSubmitting && (
+                        {!formState.isSubmitting && ESTADO_STICKER_bit == true && (
+
                           <button
                             onClick={() => {
                               setValue("COD_BITACORAv", COD_BITACORA);
@@ -599,7 +621,7 @@ function Pop_up({
                             className={styles2.btn_send}
                           >
                             Guardar Fechas
-                          </button>
+                          </button> 
                         )}
                         <div
                           className={styles2.btn_cancel}

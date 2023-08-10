@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
@@ -27,15 +27,17 @@ function ComponentCreateResult({
   setListAddResultMultple,
   ListMicroorganismo,
   ListNumber,
+  hrefhash
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
     Codigo_resultado_preliminar_1: Yup.string().notRequired(),
     Codigo_opcion: Yup.string().notRequired(),
     SelectDinamyc: Yup.string().notRequired(),
+    GrupoSticker: Yup.string().notRequired(),
     ListadoBitacorasLst: Yup.array()
-    .min(2, "Debe por lo menos tener dos numeros de sticker agregados")
-    .required("Debe por lo menos tener dos numeros de sticker agregados"),
+      .min(2, "Debe por lo menos tener dos numeros de sticker agregados")
+      .required("Debe por lo menos tener dos numeros de sticker agregados"),
     ListResultMultiple: Yup.array()
       .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe por lo menos tener un estatus agregado"),
@@ -46,6 +48,27 @@ function ComponentCreateResult({
   const { register, handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
   const { errors } = formState;
+
+  useEffect(() => {
+    if(ListadoBitacoras != null &&
+      ListadoBitacoras != undefined)
+    {
+      let NumBitacora = "";
+      ListadoBitacoras != null &&
+                          ListadoBitacoras != undefined
+                            ? ListadoBitacoras.map(
+                                (data, index) => 
+                                NumBitacora = NumBitacora + `${data.split("_")[0]}, `
+                              )
+                            : NumBitacora = NumBitacora + "";
+                            if(NumBitacora != "")
+                            {
+                                const pBit = document.getElementById("parrBitac");
+                                pBit.innerText = NumBitacora.substring(0, (NumBitacora.length - 2));  
+                            }
+    }
+    
+  },[ListadoBitacoras]);
 
   return (
     <>
@@ -86,8 +109,9 @@ function ComponentCreateResult({
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Sample/FullDetails/[id]",
-                hash: "Pruebas",
+                pathname: "/[id]",
+                query: { id: group, page: "1" },
+                hash: "Cactive#OverallSample",
               }}
               className={styles.back_btn}
             >
@@ -125,14 +149,13 @@ function ComponentCreateResult({
                       >
                         Números de sticker :
                       </label>
-                      <p className={styles.inline}>
-
-                      {ListadoBitacoras != null && ListadoBitacoras != undefined
-                          ? ListadoBitacoras.map((data, index) => (
-                              `${data.split('_')[0]}, `
-                            ))
-                          : ""}
-
+                      <p className={styles.inline} id="parrBitac">
+                        {/* {ListadoBitacoras != null &&
+                        ListadoBitacoras != undefined
+                          ? ListadoBitacoras.map(
+                              (data, index) => `${data.split("_")[0]}, `
+                            )
+                          : ""} */}
                       </p>
                     </div>
                   </div>
@@ -316,7 +339,7 @@ function ComponentCreateResult({
                           setvaluePlantillachange,
                           ComboDynamic,
                           setListSelectDimanyc,
-                          setComboDynamic,
+                          setComboDynamic
                         );
                       }}
                     >
@@ -368,6 +391,7 @@ function ComponentCreateResult({
                         onClick={() => {
                           setValue("ListadoBitacorasLst", ListadoBitacoras);
                           setValue("ListResultMultiple", ListAddResultMultple);
+                          setValue("GrupoSticker", group);
                         }}
                       >
                         Guardar cambios
@@ -377,7 +401,9 @@ function ComponentCreateResult({
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Sample/FullDetails/[id]",
+                        pathname: "/[id]",
+                        query: { id: group, page: "1" },
+                        hash: "Cactive#OverallSample",
                       }}
                     >
                       Cancelar

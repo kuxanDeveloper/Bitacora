@@ -75,6 +75,7 @@ export default function StickerInfo({
                         ))
                     ) : (
                       <>
+                        {InforSampleDetails.infoDetalle.slice(0, 1).ESTADO_STICKER ? 
                         <Link
                           title="Agregar nota"
                           href={{
@@ -114,7 +115,8 @@ export default function StickerInfo({
                             <path d="M9 12l6 0" />
                             <path d="M12 9l0 6" />
                           </svg>
-                        </Link>
+                        </Link> : ""}
+                        
 
                         <h2>Sin nota registrada</h2>
                       </>
@@ -140,6 +142,7 @@ export default function StickerInfo({
                         ))
                     ) : (
                       <>
+                      {InforSampleDetails.infoDetalle.slice(0, 1).ESTADO_STICKER ? 
                         <Link
                           title="Agregar nota"
                           href={{
@@ -179,7 +182,7 @@ export default function StickerInfo({
                             <path d="M9 12l6 0" />
                             <path d="M12 9l0 6" />
                           </svg>
-                        </Link>
+                        </Link> : ""}
 
                         <h2>Sin estatus registrado</h2>
                       </>

@@ -28,6 +28,7 @@ export default function Case({
   ListadoResultadoxMuestra,
   LstObservacionesPrede,
   setHasValueSample,
+  hrefhash
 }) {
   const [List, SetList] = useState(false);
 
@@ -661,17 +662,12 @@ export default function Case({
                   : "Sin Stickers inactivos"}
                 <tr className={`${styleTable.table_btn} checkListResult`}>
                   <td colSpan={5} className={styleTable.btn_options}>
-                    <button
-                      onClick={() => {
-                        AddListCodBitacora(
-                          "inputCheckoutResult",
-                          idGruop,
-                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO
-                        );
-                      }}
-                      className={styleTable.btn_sticker}
-                    >
-                      <span>&#10010; </span>
+                    <button 
+                    onClick={() => {
+                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,hrefhash,HrefArmado);
+                    }}
+                    className={styleTable.btn_sticker}>
+                    <span>&#10010; </span>
                       Agregar estatus masivo
                     </button>
                   </td>

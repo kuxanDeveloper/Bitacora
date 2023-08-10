@@ -29,7 +29,8 @@ function InformacionStciker({
     setFECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
     setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
     setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
-    setFECHA_HORA_VALIDACION_ANTIBIOGRAMA
+    setFECHA_HORA_VALIDACION_ANTIBIOGRAMA,
+    setESTADO_STICKER_bit
   } = useContextBitacora();
 
   return (
@@ -56,6 +57,7 @@ function InformacionStciker({
                 setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA(data.FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA_DATETIME);
                 setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL(data.FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL_DATETIME);
                 setFECHA_HORA_VALIDACION_ANTIBIOGRAMA(data.FECHA_HORA_VALIDACION_ANTIBIOGRAMA_DATETIME);
+                setESTADO_STICKER_bit(data.ESTADO_STICKER);
               }}
               className={styles.photo}
             >
@@ -188,7 +190,7 @@ function InformacionStciker({
 
       {/* <!-- estado --> */}
       <div className={styles.card_body}>
-        {Options.BtnEditResultAndUrl ? (
+        {Options.BtnEditResultAndUrl && data.ESTADO_STICKER ? (
           <Link
             title="Editar sticker"
             className={styles.Edit_icon}
