@@ -7,7 +7,7 @@ import { onSubmitEditSitioAnat } from "../../Tools/crudSitioAnatomico";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
   const validarEsquemaobservation = Yup.object().shape({
     ID: Yup.string().required("El codigo es obligatorio"),
@@ -26,11 +26,22 @@ function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
   return (
     <>
       <section className={styles.create_note}>
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/SitioAnatomico/IndexSitio",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -46,8 +57,9 @@ function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  {InfoSitioAnt != null && InfoSitioAnt != undefined
-                    ? InfoSitioAnt.map((data, index) => (
+                  {InfoSitioAnt.listadositios != null &&
+                  InfoSitioAnt.listadositios != undefined
+                    ? InfoSitioAnt.listadositios.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -72,7 +84,11 @@ function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
                               <label className={styles.group_title}>
                                 Estado del Sitio Anatomico
                               </label>
-                              <input id="Estado" type="checkbox" defaultChecked={data.ESTADO} />
+                              <input
+                                id="Estado"
+                                type="checkbox"
+                                defaultChecked={data.ESTADO}
+                              />
                               <div className={styles.invalid_feedback}>
                                 {errors.ESTADO?.message}
                               </div>
@@ -84,7 +100,7 @@ function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
                               <button
                                 onClick={() => {
                                   setCheckEstadoCrud(setValue);
-                                  setValue("ID",idSitio);                                  
+                                  setValue("ID", idSitio);
                                 }}
                                 className={styles.btn_send}
                               >
@@ -96,6 +112,7 @@ function ComponentEditSitAnt({ InfoSitioAnt, idSitio }) {
                               href={{
                                 pathname:
                                   "/Configuration/SitioAnatomico/IndexSitio",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

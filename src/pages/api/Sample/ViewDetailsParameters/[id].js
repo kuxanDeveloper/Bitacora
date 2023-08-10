@@ -17,9 +17,10 @@ export const SampleDetailsSitioAnatm = async (
   setInfoSitioAnt,
   cookie,
   ID,
-  ESTADO
+  ESTADO,
+  page
 ) => {
-  let inforSample = await GetlistSitiosAnatomicos(cookie, ID, ESTADO);
+  let inforSample = await GetlistSitiosAnatomicos(cookie, ID, ESTADO,page);
   setInfoSitioAnt(inforSample);
 };
 

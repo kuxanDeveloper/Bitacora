@@ -1069,9 +1069,9 @@ function EditSitioAnatomico(ID, DESCRIPCION, ESTADO) {
   );
 }
 
-function GetlistSitiosAnatomicos(cookie, ID, ESTADO) {
+function GetlistSitiosAnatomicos(cookie, ID, ESTADO, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistSitiosAnatomicos?ID=${ID}&ESTADO=${ESTADO}`,
+    `${baseUrl}/Stickers/GetlistSitiosAnatomicos?ID=${ID}&ESTADO=${ESTADO}&page=${page}`,
     cookie
   );
 }

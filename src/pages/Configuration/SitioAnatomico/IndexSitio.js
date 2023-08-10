@@ -10,10 +10,10 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
+function CreatePage({ cookie, query }) {
   const [InfoSitioAnt, setInfoSitioAnt] = useState([]);
   useEffect(() => {
-    SampleDetailsSitioAnatm(setInfoSitioAnt, cookie, "","");
+    SampleDetailsSitioAnatm(setInfoSitioAnt, cookie, "", "", query.page);
   }, []);
 
   return (
@@ -39,7 +39,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde se listan los sitios anatomicos de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Listado de Sitios anatomicos - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Listado de Sitios anatomicos - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde se listan los sitios anatomicos de el sistema`}
@@ -48,7 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexSitio InfoSitioAnt={InfoSitioAnt}></IndexSitio>
+      <IndexSitio InfoSitioAnt={InfoSitioAnt} query={query}></IndexSitio>
     </>
   );
 }
@@ -81,11 +84,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      !Options.GroupConfigCreateAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return { props: { query: ctx.query, cookie: cookie } };
   } else {
     return {
       redirect: {
