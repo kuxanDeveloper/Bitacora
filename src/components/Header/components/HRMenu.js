@@ -299,32 +299,12 @@ function HRMenu({ Roles }) {
                         {Roles.ObservacionPredeCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Configuration/Microorganismos/IndexMicroorganismo"
+                              href="/Configuration/Microorganismos/IndexMicroorganismo?page=1"
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexObservations")
-                                  ? Styles.active
-                                  : ""
-                              }`}
-                            >
-                              Microorganismos
-                            </Link>
-                          </li>
-                        ) : (
-                          ""
-                        )}
-
-                        {Roles.ObservacionPredeCreateAndUrl ? (
-                          <li className={Styles.sub_li}>
-                            <Link
-                              href="/Configuration/Microorganismos/IndexMicroorganismo"
-                              onClick={() => {
-                                OnclickNAvToggle(MenuShow, setMenuShow);
-                              }}
-                              className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexObservations")
+                                LocationUrl(router, "IndexMicroorganismo")
                                   ? Styles.active
                                   : ""
                               }`}
