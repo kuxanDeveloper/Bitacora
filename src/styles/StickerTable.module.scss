@@ -21,6 +21,12 @@
 
 }
 
+.alineadoIzq{
+    text-align: left !important;
+    span{
+        margin-left: 5%;
+    }
+  }
 
 .table_body {
 
@@ -49,6 +55,32 @@
             border: none;
             text-align: center;
             cursor: pointer;
+        }
+    }
+}
+
+.table_btn {
+
+
+    td {
+        padding: 5px 0;        
+    }
+
+    .btn_options {
+        display: flex;
+        gap: 10px;        
+        .btn_sticker {
+            background-color: rgb(229, 125, 0);
+            font-size: 0.7em;
+            color: #fff;
+            padding: 5px 13px;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px 0px rgb(158, 158, 158);
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 5px;
         }
     }
 }

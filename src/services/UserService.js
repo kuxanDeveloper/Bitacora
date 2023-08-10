@@ -93,7 +93,8 @@ export const userService = {
   DeleteResult,
   CreateMicroorganismo,
   EditMicroorganismo,
-  GetlistMicroorganismo
+  GetlistMicroorganismo,
+  CrearResultBloq
 };
 
 async function login(username, password) {
@@ -316,6 +317,17 @@ function CrearResult(COD_BITACORA, ListResultMultiple) {
   formData.append("ListResultMultiple", JSON.stringify(ListResultMultiple));
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraResultado`,
+    null,
+    formData
+  );
+}
+
+function CrearResultBloq(ListadoBitacoras, ListResultMultiple) {
+  const formData = new FormData();
+  formData.append("Listado_Num_Bitacoras", JSON.stringify(ListadoBitacoras));
+  formData.append("ListResultMultiple", JSON.stringify(ListResultMultiple));
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/GuardBitacoraResultadoBloque`,
     null,
     formData
   );

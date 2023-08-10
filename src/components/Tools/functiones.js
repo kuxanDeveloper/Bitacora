@@ -922,6 +922,42 @@ export const AddListSetValue = (setValue, nameInput) => {
   }
 };
 
+export const AddListCodBitacora = (nameInput,group,name_group) => {
+  let arrayList = [];
+  const element = document.getElementsByName(nameInput);
+
+  if (element != null && element != undefined) {
+    element.forEach((data) => {
+      if (data.checked) {
+        arrayList.push(data.value);
+      }
+    });
+  }
+  
+  if (arrayList.length > 1) {
+
+    sessionStorage.setItem("ListadoBitacoras",
+    JSON.stringify(arrayList));
+
+    Router.push({
+      pathname: "/Sample/CreateResultBloque/CreateBloq",
+      query: {
+        group: group,
+        name_group: name_group
+      },
+    });
+  }
+  else
+  {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar por lo menos dos sticker para el ingreso de estatus en bloque",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+  }
+};
+
 export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
   let valorRetorno = ListArray.some((a) => a.Id_grupo == Value);
 
