@@ -4,7 +4,7 @@ import {
   UserActiveGenerales,
   UserActiveUrgencias,
   SelectAllCheck,
-  AddListCodBitacora
+  AddListCodBitacora,
 } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
@@ -29,9 +29,14 @@ export default function Case({
   LstObservacionesPrede,
   setHasValueSample,
 }) {
+  const [List, SetList] = useState(false);
+
   const [urlImagenDinamyc, seturlImagenDinamyc] = useState(null);
-  
+
   const [listMuestrasPendientes, setListMuestrasPendientes] = useState([]);
+  const [listMuestrasActivas, setListMuestrasActivas] = useState([]);
+  const [listMuestrasInactivas, setListMuestrasInactivas] = useState([]);
+
   const ListadoMuestraActiveGenerals = UserActiveGenerales(
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
@@ -40,7 +45,9 @@ export default function Case({
     ListadoMuestraActivo,
     ListadoResultadoxMuestra
   );
-console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
+  console.log(ListadoMuestraActivo, ListadoResultadoxMuestra, "aglgo");
+
+  //#region funciones para ordenar de manera ascendente y descendente
   const orderByAlphabeticalAsc = (array, getter, order = "asc") => {
     array.sort((a, b) => {
       const first = getter(a);
@@ -52,21 +59,137 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
     return array;
   };
 
+  const orderByAlphabeticalDesc = (array, getter, order = "Desc") => {
+    array.sort((a, b) => {
+      const first = getter(a);
+      const second = getter(b);
 
+      const compare = first.localeCompare(second);
+      return order == "Desc" ? -compare : compare;
+    });
+    return array;
+  };
 
+  //#endregion
 
-  function orderByAsc() {
-    let algo = orderByAlphabeticalAsc(
+  //#region Funciones que se ejecutan para ordenar de manera asendente y descendente las muestras PENDIENTES
+  function orderByDateAsc() {
+    let lstPendientesFecha = orderByAlphabeticalAsc(
       ListadoMuestrasActivePendiente,
       (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
     );
 
-    setListMuestrasPendientes(algo);
-
-
+    setListMuestrasPendientes(lstPendientesFecha);
   }
 
-  const [List, SetList] = useState(false);
+  function orderByDateDesc() {
+    let lstPendientesFecha = orderByAlphabeticalDesc(
+      ListadoMuestrasActivePendiente,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasPendientes(lstPendientesFecha);
+  }
+
+  function orderByStickereAsc() {
+    let lstPendientesSticker = orderByAlphabeticalAsc(
+      ListadoMuestrasActivePendiente,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasPendientes(lstPendientesSticker);
+  }
+
+  function orderByStickerDesc() {
+    let lstPendientesSticker = orderByAlphabeticalDesc(
+      ListadoMuestrasActivePendiente,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasPendientes(lstPendientesSticker);
+  }
+
+  //#endregion
+
+  //#region Funciones que se ejecutan para ordenar de manera asendente y descendente las muestras ACTIVAS GENERALES
+  function orderActiveByDateAsc() {
+    let lstActivasFecha = orderByAlphabeticalAsc(
+      ListadoMuestraActiveGenerals,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasActivas(lstActivasFecha);
+  }
+
+  function orderActiveByDateDesc() {
+    let lstActivasFecha = orderByAlphabeticalDesc(
+      ListadoMuestraActiveGenerals,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasActivas(lstActivasFecha);
+  }
+
+  function orderActiveByStickereAsc() {
+    // alert("entra");
+    let lstActivasSticker = orderByAlphabeticalAsc(
+      ListadoMuestraActiveGenerals,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasActivas(lstActivasSticker);
+  }
+
+  function orderActiveByStickerDesc() {
+    let lstActivasSticker = orderByAlphabeticalDesc(
+      ListadoMuestraActiveGenerals,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasActivas(lstActivasSticker);
+  }
+
+  //#endregion
+
+  //#region Funciones que se ejecutan para ordenar de manera asendente y descendente las muestras INACTIVAS
+  function orderInactiveByDateAsc() {
+    let lstActivasFecha = orderByAlphabeticalAsc(
+      ListadoMuestraInactivo,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasActivas(lstActivasFecha);
+  }
+
+  function orderInactiveByDateDesc() {
+    let lstActivasFecha = orderByAlphabeticalDesc(
+      ListadoMuestraInactivo,
+      (ord) => ord.FECHA_FORMAT_CREADO_BITACORA
+    );
+
+    setListMuestrasActivas(lstActivasFecha);
+  }
+
+  function orderInactiveByStickereAsc() {
+    // alert("entra");
+    let lstActivasSticker = orderByAlphabeticalAsc(
+      ListadoMuestraInactivo,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasActivas(lstActivasSticker);
+  }
+
+  function orderInactiveByStickerDesc() {
+    let lstActivasSticker = orderByAlphabeticalDesc(
+      ListadoMuestraInactivo,
+      (ord) => ord.NUMERO_STICKER
+    );
+
+    setListMuestrasActivas(lstActivasSticker);
+  }
+
+  //#endregion
 
   useEffect(() => {
     let objGroup = ListadoGrupo.find((e) => e.Id_grupo == idGruop);
@@ -86,10 +209,11 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
     }
   }, [ListadoGrupo]);
 
-  useEffect (() => {
-    setListMuestrasPendientes(ListadoMuestrasActivePendiente)
-  },[ListadoMuestraActivo,
-    ListadoResultadoxMuestra])
+  useEffect(() => {
+    setListMuestrasPendientes(ListadoMuestrasActivePendiente);
+    setListMuestrasActivas(ListadoMuestraActiveGenerals);
+    setListMuestrasInactivas(ListadoMuestraInactivo);
+  }, [ListadoResultadoxMuestra, ListadoMuestraInactivo]);
 
   function changeModeVew() {
     List ? SetList(false) : SetList(true);
@@ -355,14 +479,141 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
                     />
                   </th>
                   <th>
-                    <span className={styleTable.th_title}>N° sticker</span>
+                    <span className={styleTable.th_title}>
+                      N° sticker
+                      <button
+                        onClick={
+                          isTrueActive
+                            ? isSampleGeneral
+                              ? () => orderActiveByStickereAsc()
+                              : () => orderByStickereAsc()
+                            : listMuestrasInactivas.length > 0
+                            ? () => orderInactiveByStickereAsc()
+                            : () => {}
+                        }
+                        className={styleTable.btn_arrow}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-arrow-badge-up-filled"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M11.375 6.22l-5 4a1 1 0 0 0 -.375 .78v6l.006 .112a1 1 0 0 0 1.619 .669l4.375 -3.501l4.375 3.5a1 1 0 0 0 1.625 -.78v-6a1 1 0 0 0 -.375 -.78l-5 -4a1 1 0 0 0 -1.25 0z"
+                            stroke-width="0"
+                            fill="#e57d00"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={
+                          isTrueActive
+                            ? isSampleGeneral
+                              ? () => orderActiveByStickerDesc()
+                              : () => orderByStickerDesc()
+                            : listMuestrasInactivas.length > 0
+                            ? () => orderInactiveByStickerDesc()
+                            : () => {}
+                        }
+                        className={styleTable.btn_arrow}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-arrow-badge-down-filled"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
+                            stroke-width="0"
+                            fill="#e57d00"
+                          />
+                        </svg>
+                      </button>
+                    </span>
                   </th>
                   <th>
-                    <span
-                      onClick={() => orderByAsc()}
-                      className={styleTable.th_title}
-                    >
+                    <span className={styleTable.th_title}>
                       Fecha Ingreso
+                      <button
+                        onClick={
+                          isTrueActive
+                            ? isSampleGeneral
+                              ? () => orderActiveByDateAsc()
+                              : () => orderByDateAsc()
+                            : listMuestrasInactivas.length > 0
+                            ? () => orderInactiveByDateAsc()
+                            : () => {}
+                        }
+                        className={styleTable.btn_arrow}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-arrow-badge-up-filled"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M11.375 6.22l-5 4a1 1 0 0 0 -.375 .78v6l.006 .112a1 1 0 0 0 1.619 .669l4.375 -3.501l4.375 3.5a1 1 0 0 0 1.625 -.78v-6a1 1 0 0 0 -.375 -.78l-5 -4a1 1 0 0 0 -1.25 0z"
+                            stroke-width="0"
+                            fill="#e57d00"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={
+                          isTrueActive
+                            ? isSampleGeneral
+                              ? () => orderActiveByDateDesc()
+                              : () => orderByDateDesc()
+                            : listMuestrasInactivas.length > 0
+                            ? () => orderInactiveByDateDesc()
+                            : () => {}
+                        }
+                        className={styleTable.btn_arrow}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-arrow-badge-down-filled"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
+                            stroke-width="0"
+                            fill="#e57d00"
+                          />
+                        </svg>
+                      </button>
                     </span>
                   </th>
                   <th>
@@ -376,7 +627,7 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
               <tbody>
                 {isTrueActive
                   ? isSampleGeneral
-                    ? ListadoMuestraActiveGenerals.map((data, index) => (
+                    ? listMuestrasActivas.map((data, index) => (
                         <StickersTable
                           key={index}
                           data={data}
@@ -396,8 +647,8 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
                           LstObservacionesPrede={LstObservacionesPrede}
                         ></StickersTable>
                       ))
-                  : ListadoMuestraInactivo.length > 0
-                  ? ListadoMuestraInactivo.map((data, index) => (
+                  : listMuestrasInactivas.length > 0
+                  ? listMuestrasInactivas.map((data, index) => (
                       <StickersTable
                         key={index}
                         data={data}
@@ -410,12 +661,17 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
                   : "Sin Stickers inactivos"}
                 <tr className={`${styleTable.table_btn} checkListResult`}>
                   <td colSpan={5} className={styleTable.btn_options}>
-                    <button 
-                    onClick={() => {
-                      AddListCodBitacora("inputCheckoutResult",idGruop,ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO);
-                    }}
-                    className={styleTable.btn_sticker}>
-                    <span>&#10010; </span>
+                    <button
+                      onClick={() => {
+                        AddListCodBitacora(
+                          "inputCheckoutResult",
+                          idGruop,
+                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO
+                        );
+                      }}
+                      className={styleTable.btn_sticker}
+                    >
+                      <span>&#10010; </span>
                       Agregar estatus masivo
                     </button>
                   </td>
@@ -427,7 +683,7 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
           <div className={caseStyles.cases_container}>
             {isTrueActive
               ? isSampleGeneral
-                ? ListadoMuestraActiveGenerals.map((data, index) => (
+                ? listMuestrasActivas.map((data, index) => (
                     <CaseComponent
                       key={index}
                       data={data}
@@ -447,8 +703,8 @@ console.log(ListadoMuestraActivo,ListadoResultadoxMuestra,"aglgo")
                       LstObservacionesPrede={LstObservacionesPrede}
                     ></CaseComponent>
                   ))
-              : ListadoMuestraInactivo.length > 0
-              ? ListadoMuestraInactivo.map((data, index) => (
+              : listMuestrasInactivas.length > 0
+              ? listMuestrasInactivas.map((data, index) => (
                   <CaseComponent
                     key={index}
                     data={data}
