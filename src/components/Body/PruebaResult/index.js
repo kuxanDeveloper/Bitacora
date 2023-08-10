@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentpruebaIndex({ InforSampleDetails }) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentpruebaIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -52,8 +55,9 @@ function ComponentpruebaIndex({ InforSampleDetails }) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null && InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
+                {InforSampleDetails.listadoPrueba != null &&
+                InforSampleDetails.listadoPrueba != undefined
+                  ? InforSampleDetails.listadoPrueba.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_PRUEBA}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -105,6 +109,26 @@ function ComponentpruebaIndex({ InforSampleDetails }) {
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.listadoPrueba != null &&
+              InforSampleDetails.listadoPrueba != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

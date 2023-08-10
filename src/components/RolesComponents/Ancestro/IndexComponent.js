@@ -5,8 +5,8 @@ import CardStyles from "../../../styles/homeCard.module.scss";
 function IndexComponentAncestr({ InfoAncestro }) {
   return (
     <>
-      {InfoAncestro != null && InfoAncestro != undefined
-        ? InfoAncestro.map((data, index) => (
+      {InfoAncestro.listadoAncestros != null && InfoAncestro.listadoAncestros != undefined
+        ? InfoAncestro.listadoAncestros.map((data, index) => (
             <section key={index} className={CardStyles.home_card}>
               {/* ACTIVE */}
               <div className={CardStyles.card_content}>

@@ -7,7 +7,7 @@ import { onSubmitCreateTipoMue } from "../../Tools/crudTipoMuestra";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentCreateTipoMue({ InforOptionsSelc }) {
   const validarEsquemaobservation = Yup.object().shape({
     NOMBRE_TIPO_MUESTRA: Yup.string().required(
@@ -34,11 +34,22 @@ function ComponentCreateTipoMue({ InforOptionsSelc }) {
   return (
     <>
       <section className={styles.create_note}>
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/TiposMuestras/IndexTipo",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -94,15 +105,18 @@ function ComponentCreateTipoMue({ InforOptionsSelc }) {
                         maxLength="150"
                         className={styles.group_input}
                       >
-                        <option value="" selected>Seleccione un grupo</option>
-                      {InforOptionsSelc != null && InforOptionsSelc != undefined
-                        ? InforOptionsSelc.map((data, index) => (
-                            <option key={index} value={data.Id_grupo}>
-                              {data.NOMBRE_GRUPO}
-                            </option>
-                          ))
-                        : ""}
-                        </select>
+                        <option value="" selected>
+                          Seleccione un grupo
+                        </option>
+                        {InforOptionsSelc != null &&
+                        InforOptionsSelc != undefined
+                          ? InforOptionsSelc.map((data, index) => (
+                              <option key={index} value={data.Id_grupo}>
+                                {data.NOMBRE_GRUPO}
+                              </option>
+                            ))
+                          : ""}
+                      </select>
                       <div className={styles.invalid_feedback}>
                         {errors.ID_GRUPO?.message}
                       </div>
@@ -124,6 +138,7 @@ function ComponentCreateTipoMue({ InforOptionsSelc }) {
                       className={styles.btn_cancel}
                       href={{
                         pathname: "/Configuration/TiposMuestras/IndexTipo",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar

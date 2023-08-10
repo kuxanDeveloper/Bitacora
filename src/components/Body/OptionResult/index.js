@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentOptionIndex({ InforSampleDetails }) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentOptionIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -52,8 +55,9 @@ function ComponentOptionIndex({ InforSampleDetails }) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null && InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
+                {InforSampleDetails.listadoOpciones != null &&
+                InforSampleDetails.listadoOpciones != undefined
+                  ? InforSampleDetails.listadoOpciones.map((data, index) => (
                       <tr key={index}>
                         <td>{data.OPCION_DESCRIPCION}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -105,6 +109,26 @@ function ComponentOptionIndex({ InforSampleDetails }) {
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.listadoOpciones != null &&
+              InforSampleDetails.listadoOpciones != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

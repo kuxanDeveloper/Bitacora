@@ -17,13 +17,13 @@ import {
     getInfoPruebasXGrupo
    } from "../../../../components/Tools/crudGroup";
 
-   export const SampleDetailsOptionResult = async (setLInforSampleDetails,cookie,IdOpcion) => {
-     let inforSample = await getListOption(cookie,IdOpcion);
+   export const SampleDetailsOptionResult = async (setLInforSampleDetails,cookie,IdOpcion, page) => {
+     let inforSample = await getListOption(cookie,IdOpcion, page);
      setLInforSampleDetails(inforSample);
    };
 
-   export const SampleDetailsPlantillaResult = async (setLInforSampleDetails,cookie,Idplantilla) => {
-    let inforSample = await getListPlantilla(cookie,Idplantilla);
+   export const SampleDetailsPlantillaResult = async (setLInforSampleDetails,cookie,Idplantilla, page) => {
+    let inforSample = await getListPlantilla(cookie,Idplantilla, page);
     setLInforSampleDetails(inforSample);
   };
 
@@ -32,8 +32,8 @@ import {
     setInforOptionsXpruebas(inforSample);
   };
 
-  export const SampleDetailsPruebasResult = async (setLInforSampleDetails,cookie,Codprueba) => {
-    let inforSample = await getListPrueba(cookie,Codprueba);
+  export const SampleDetailsPruebasResult = async (setLInforSampleDetails,cookie,Codprueba, page) => {
+    let inforSample = await getListPrueba(cookie,Codprueba, page);
     setLInforSampleDetails(inforSample);
   };
 

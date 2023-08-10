@@ -48,6 +48,7 @@ function ComponentObservationEdit({ InforObservations, idObservation }) {
               href={{
                 pathname:
                   "/Configuration/DefaultObservations/IndexObservations",
+                  query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -62,8 +63,8 @@ function ComponentObservationEdit({ InforObservations, idObservation }) {
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
-                  {InforObservations != null && InforObservations != undefined
-                    ? InforObservations.map((data, index) => (
+                  {InforObservations.listadoObservacion != null && InforObservations.listadoObservacion != undefined
+                    ? InforObservations.listadoObservacion.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -169,6 +170,7 @@ function ComponentObservationEdit({ InforObservations, idObservation }) {
                               href={{
                                 pathname:
                                   "/Configuration/DefaultObservations/IndexObservations",
+                                  query: { page: "1" },
                               }}
                             >
                               Cancelar

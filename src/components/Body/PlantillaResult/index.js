@@ -1,13 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
-import Image from "next/image";
-function ComponentplantillaIndex({InforSampleDetails}) {
+import ImageOptimize from "../../Tools/ImageOptimize";
+import { useRouter } from "next/router";
+import Pagination from "../../Tools/Pagination";
+function ComponentplantillaIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
-      <Image src="/img/bg_image.jpg" width={1000} height={1000} alt="a" className={styles.background_img} />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
 
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
@@ -43,9 +55,9 @@ function ComponentplantillaIndex({InforSampleDetails}) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null &&
-                InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
+                {InforSampleDetails.listadoPlantilla != null &&
+                InforSampleDetails.listadoPlantilla != undefined
+                  ? InforSampleDetails.listadoPlantilla.map((data, index) => (
                       <tr key={index}>
                         <td>{data.RESULTADO_PLANTILLA}</td>
                         <td className={styleTable.textCenterColumn}>
@@ -63,7 +75,8 @@ function ComponentplantillaIndex({InforSampleDetails}) {
                             title="Editar Opcion"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/PlantillaResultado/[id]",
+                              pathname:
+                                "/Configuration/PlantillaResultado/[id]",
                               query: { id: data.COD_PLANTILLA },
                             }}
                           >
@@ -97,6 +110,26 @@ function ComponentplantillaIndex({InforSampleDetails}) {
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.listadoPlantilla != null &&
+              InforSampleDetails.listadoPlantilla != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

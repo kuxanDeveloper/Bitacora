@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import CreateMuestra from "../../../components/Body/TiposMuestra/Create";
 import {
@@ -11,12 +11,11 @@ import {
 import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsAncestro/[id]";
 
 function CreatePage(cookie) {
+  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+  useEffect(() => {
+    SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+  }, []);
 
-    const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
-    useEffect(() => {
-        SampleDetailsGroup(setInforOptionsSelc, cookie, "");
-      }, []);
-  
   return (
     <>
       <Head>
@@ -40,7 +39,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde crean los Tipos de muestra`}
         ></meta>
-        <meta property="og:title" content={`Creación de Tipo de muestra - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Creación de Tipo de muestra - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde crean los Tipos de muestra`}

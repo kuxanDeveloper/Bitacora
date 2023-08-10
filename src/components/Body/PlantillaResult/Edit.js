@@ -8,8 +8,13 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckPlantillaReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListOption from "./ListOptions";
-import Image from "next/image";
-function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, idPlantilla }) {
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentGroup({
+  InfoPlantilla,
+  InforOptionsSelc,
+  InforOptionsXpruebas,
+  idPlantilla,
+}) {
   const [ListOpciones, setListOpciones] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
@@ -35,18 +40,22 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/PlantillaResultado/IndexPlantilla",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -60,8 +69,9 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
             <form onSubmit={handleSubmit(onSubmitUpdatePlantilla)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
-                  {InfoPlantilla != null && InfoPlantilla != undefined
-                    ? InfoPlantilla.map((data, index) => (
+                  {InfoPlantilla.listadoPlantilla != null &&
+                  InfoPlantilla.listadoPlantilla != undefined
+                    ? InfoPlantilla.listadoPlantilla.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -76,7 +86,7 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                                 maxLength="100"
                                 type="text"
                                 min="0"
-                                className={styles.group_input} 
+                                className={styles.group_input}
                                 defaultValue={data.RESULTADO_PLANTILLA}
                               />
                               <div className={styles.invalid_feedback}>
@@ -92,7 +102,11 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                               <label className={styles.group_title}>
                                 Estado del seguimiento
                               </label>
-                              <input id="EstadoPlantilla" defaultChecked={data.ESTADO_PLANTILLA} type="checkbox" />
+                              <input
+                                id="EstadoPlantilla"
+                                defaultChecked={data.ESTADO_PLANTILLA}
+                                type="checkbox"
+                              />
                             </div>
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
@@ -116,7 +130,12 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                           <ListOption
                             ListOpciones={ListOpciones}
                             setListOpciones={setListOpciones}
-                            InforOptionsSelc={InforOptionsSelc}
+                            InforOptionsSelc={
+                              InforOptionsSelc != null &&
+                              InforOptionsSelc != undefined
+                                ? InforOptionsSelc.listadoOpciones
+                                : []
+                            }
                             InforOptionsXpruebas={InforOptionsXpruebas}
                           ></ListOption>
 
@@ -138,6 +157,7 @@ function ComponentGroup({ InfoPlantilla, InforOptionsSelc,InforOptionsXpruebas, 
                               href={{
                                 pathname:
                                   "/Configuration/PlantillaResultado/IndexPlantilla",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

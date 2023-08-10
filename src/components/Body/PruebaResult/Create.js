@@ -8,9 +8,8 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckPruebaReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListPlantilla from "./ListPlantilla";
-import Image from "next/image";
-function ComponentGroup({InforOptionsSelc}) {
-
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentGroup({ InforOptionsSelc }) {
   const [ListPlantillas, setListPlantillas] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
@@ -35,23 +34,25 @@ function ComponentGroup({InforOptionsSelc}) {
     checkbox1.checked = true;
   }, []);
 
-  
-
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/PruebaResultado/IndexPrueba"
+                pathname: "/Configuration/PruebaResultado/IndexPrueba",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -71,7 +72,9 @@ function ComponentGroup({InforOptionsSelc}) {
                     className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                   >
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Nombre Estatus</label>
+                      <label className={styles.group_title}>
+                        Nombre Estatus
+                      </label>
                       <input
                         {...register("Nombre_prueba")}
                         name="Nombre_prueba"
@@ -84,8 +87,6 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.Nombre_prueba?.message}
                       </div>
                     </div>
-
-                    
                   </div>
 
                   <div
@@ -98,7 +99,9 @@ function ComponentGroup({InforOptionsSelc}) {
                       <input id="EstadoPrueba" type="checkbox" />
                     </div>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>N° Orden Estatus</label>
+                      <label className={styles.group_title}>
+                        N° Orden Estatus
+                      </label>
                       <input
                         {...register("Orden_prueba")}
                         name="Orden_prueba"
@@ -111,21 +114,24 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.Orden_prueba?.message}
                       </div>
                     </div>
-                    
                   </div>
 
                   <ListPlantilla
                     ListPlantillas={ListPlantillas}
                     setListPlantillas={setListPlantillas}
-                    InforOptionsSelc={InforOptionsSelc}
+                    InforOptionsSelc={
+                      InforOptionsSelc != null && InforOptionsSelc != undefined
+                        ? InforOptionsSelc.listadoPlantilla
+                        : []
+                    }
                   ></ListPlantilla>
-                 
+
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckPruebaReslt(setValue);
-                            setValue("Lst_plantillas",ListPlantillas);
+                          setCheckPruebaReslt(setValue);
+                          setValue("Lst_plantillas", ListPlantillas);
                         }}
                         className={styles.btn_send}
                       >
@@ -135,7 +141,8 @@ function ComponentGroup({InforOptionsSelc}) {
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/PruebaResultado/IndexPrueba"
+                        pathname: "/Configuration/PruebaResultado/IndexPrueba",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar

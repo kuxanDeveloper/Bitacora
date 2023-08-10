@@ -8,7 +8,7 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import Image from "next/image";
-function ComponentMicroEdit({InforSampleDetails,id}) {
+function ComponentMicroEdit({ InforSampleDetails, id }) {
   const validarEsquemaobservation = Yup.object().shape({
     ID: Yup.string().required(),
     DESCRIPCION: Yup.string().required(
@@ -37,7 +37,8 @@ function ComponentMicroEdit({InforSampleDetails,id}) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/Microorganismos/IndexMicroorganismos",
+                pathname: "/Configuration/Microorganismos/IndexMicroorganismo",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -53,8 +54,8 @@ function ComponentMicroEdit({InforSampleDetails,id}) {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  {InforSampleDetails != null && InforSampleDetails != undefined
-                    ? InforSampleDetails.map((data, index) => (
+                  {InforSampleDetails.listadoMicroorganismo != null && InforSampleDetails.listadoMicroorganismo != undefined
+                    ? InforSampleDetails.listadoMicroorganismo.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -63,7 +64,11 @@ function ComponentMicroEdit({InforSampleDetails,id}) {
                               <label className={styles.group_title}>
                                 Estado
                               </label>
-                              <input defaultChecked={data.ESTADO} id="Estado" type="checkbox" />
+                              <input
+                                defaultChecked={data.ESTADO}
+                                id="Estado"
+                                type="checkbox"
+                              />
                               <div className={styles.invalid_feedback}>
                                 {errors.ESTADO?.message}
                               </div>
@@ -90,7 +95,7 @@ function ComponentMicroEdit({InforSampleDetails,id}) {
                               <button
                                 onClick={() => {
                                   setCheckEstadoCrud(setValue);
-                                  setValue("ID",id);
+                                  setValue("ID", id);
                                 }}
                                 className={styles.btn_send}
                               >
@@ -101,7 +106,8 @@ function ComponentMicroEdit({InforSampleDetails,id}) {
                               className={styles.btn_cancel}
                               href={{
                                 pathname:
-                                  "/Configuration/Microorganismos/IndexMicroorganismos",
+                                  "/Configuration/Microorganismos/IndexMicroorganismo",
+                                  query: { page: "1" },
                               }}
                             >
                               Cancelar

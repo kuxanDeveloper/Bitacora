@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React, { Fragment } from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentObservationIndex({ InforSampleDetails }) {
+import { useRouter } from "next/router";
+import Pagination from "../../Tools/Pagination";
+function ComponentObservationIndex({ InforSampleDetails, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -22,8 +25,8 @@ function ComponentObservationIndex({ InforSampleDetails }) {
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/[id]",
-                query: { id: 6, page: "1" },
+                pathname: "/",
+                hash: "Cactive",
               }}
               className={styles.back_btn}
             >
@@ -56,9 +59,9 @@ function ComponentObservationIndex({ InforSampleDetails }) {
                 </tr>
               </thead>
               <tbody>
-                {InforSampleDetails != null && InforSampleDetails != undefined
-                  ? InforSampleDetails.map((data, index) => (
-                      <>
+                {InforSampleDetails.listadoObservacion != null && InforSampleDetails.listadoObservacion != undefined
+                  ? InforSampleDetails.listadoObservacion.map((data, index) => (
+                      <Fragment key={index}>
                         <tr>
                           <td>{data.Descripcion_Observacion}</td>
                           <td className={styleTable.textCenterColumn}>
@@ -125,11 +128,31 @@ function ComponentObservationIndex({ InforSampleDetails }) {
                             </Link>
                           </td>
                         </tr>
-                      </>
+                      </Fragment>
                     ))
                   : ""}
               </tbody>
             </table>
+            {InforSampleDetails != null && InforSampleDetails != undefined ? (
+              InforSampleDetails.listadoObservacion != null &&
+              InforSampleDetails.listadoObservacion != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InforSampleDetails.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InforSampleDetails.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

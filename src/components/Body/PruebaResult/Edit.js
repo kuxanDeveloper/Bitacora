@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -8,24 +8,29 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckPruebaReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListPlantilla from "./ListPlantilla";
-import Image from "next/image";
-function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, idPrueba }) {
-    const [ListPlantillas, setListPlantillas] = useState([]);
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentGroup({
+  InfoPrueba,
+  InforOptionsSelc,
+  InforPlantillasXPrueba,
+  idPrueba,
+}) {
+  const [ListPlantillas, setListPlantillas] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
     Codigo_prueba: Yup.string().required(
       "El codigo del estatus es obligatorio"
     ),
     Nombre_prueba: Yup.string().required(
-        "El campo nombre del estatus es obligatorio"
-      ),
-      Estado_prueba: Yup.string().required(
-        "El campo de estado del estatus es obligatorio"
-      ),
-      Orden_prueba: Yup.string().required(
-        "El campo de orden del estatus es obligatorio"
-      ),
-      Lst_plantillas: Yup.array().notRequired(),
+      "El campo nombre del estatus es obligatorio"
+    ),
+    Estado_prueba: Yup.string().required(
+      "El campo de estado del estatus es obligatorio"
+    ),
+    Orden_prueba: Yup.string().required(
+      "El campo de orden del estatus es obligatorio"
+    ),
+    Lst_plantillas: Yup.array().notRequired(),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -35,18 +40,22 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/PruebaResultado/IndexPrueba"
+                pathname: "/Configuration/PruebaResultado/IndexPrueba",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -60,8 +69,9 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
             <form onSubmit={handleSubmit(onSubmitUpdatePrueba)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
-                  {InfoPrueba != null && InfoPrueba != undefined
-                    ? InfoPrueba.map((data, index) => (
+                  {InfoPrueba.listadoPrueba != null &&
+                  InfoPrueba.listadoPrueba != undefined
+                    ? InfoPrueba.listadoPrueba.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -76,7 +86,7 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
                                 maxLength="100"
                                 type="text"
                                 min="0"
-                                className={styles.group_input} 
+                                className={styles.group_input}
                                 defaultValue={data.NOMBRE_PRUEBA}
                               />
                               <div className={styles.invalid_feedback}>
@@ -92,7 +102,11 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
                               <label className={styles.group_title}>
                                 Estado del Estatus
                               </label>
-                              <input id="EstadoPrueba" defaultChecked={data.ESTADO_PRUEBA} type="checkbox" />
+                              <input
+                                id="EstadoPrueba"
+                                defaultChecked={data.ESTADO_PRUEBA}
+                                type="checkbox"
+                              />
                             </div>
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
@@ -124,8 +138,8 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
                             {!formState.isSubmitting && (
                               <button
                                 onClick={() => {
-                                    setCheckPruebaReslt(setValue);
-                                    setValue("Lst_plantillas",ListPlantillas);
+                                  setCheckPruebaReslt(setValue);
+                                  setValue("Lst_plantillas", ListPlantillas);
                                   setValue("Codigo_prueba", idPrueba);
                                 }}
                                 className={styles.btn_send}
@@ -136,7 +150,9 @@ function ComponentGroup({ InfoPrueba, InforOptionsSelc,InforPlantillasXPrueba, i
                             <Link
                               className={styles.btn_cancel}
                               href={{
-                                pathname: "/Configuration/PruebaResultado/IndexPrueba"
+                                pathname:
+                                  "/Configuration/PruebaResultado/IndexPrueba",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

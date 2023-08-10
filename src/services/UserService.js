@@ -673,9 +673,9 @@ function EditObservations(
   );
 }
 
-function InfoObservations(Cod_Observacion, cookie) {
+function InfoObservations(Cod_Observacion, cookie,page) {
   return fetchWrapper.get(
-    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=`,
+    `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=&page=${page}`,
     cookie
   );
 }
@@ -814,9 +814,9 @@ function EditOptionsResult(
   );
 }
 
-function InfoOptionsResult(cookie, IdOpcion) {
+function InfoOptionsResult(cookie, IdOpcion, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistOpcion?IdOpcion=${IdOpcion}&estado_opcion=`,
+    `${baseUrl}/Stickers/GetlistOpcion?IdOpcion=${IdOpcion}&estado_opcion=&page=${page}`,
     cookie
   );
 }
@@ -863,9 +863,9 @@ function EditPlantillaResult(
   );
 }
 
-function InfoPlantillaResult(cookie, Idplantilla) {
+function InfoPlantillaResult(cookie, Idplantilla, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistPlantillas?Idplantilla=${Idplantilla}&estado_plantilla=`,
+    `${baseUrl}/Stickers/GetlistPlantillas?Idplantilla=${Idplantilla}&estado_plantilla=&page=${page}`,
     cookie
   );
 }
@@ -921,9 +921,9 @@ function EditPruebaResult(
   );
 }
 
-function GetlistPruebas(cookie, Codprueba) {
+function GetlistPruebas(cookie, Codprueba, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistPruebas?Codprueba=${Codprueba}&EstadoPrueba=`,
+    `${baseUrl}/Stickers/GetlistPruebas?Codprueba=${Codprueba}&EstadoPrueba=&page=${page}`,
     cookie
   );
 }
@@ -1105,9 +1105,9 @@ function EditTipoMuestra(ID, NOMBRE_TIPO_MUESTRA, ESTADO, ID_GRUPO) {
   );
 }
 
-function GetlistTiposMuestra(cookie, ID, ESTADO) {
+function GetlistTiposMuestra(cookie, ID, ESTADO, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}`,
+    `${baseUrl}/Stickers/GetlistTiposMuestra?ID=${ID}&ESTADO=${ESTADO}&page=${page}`,
     cookie
   );
 }
@@ -1191,9 +1191,9 @@ function EditMicroorganismo(ID, DESCRIPCION, ESTADO) {
   );
 }
 
-function GetlistMicroorganismo(ID, ESTADO, cookie) {
+function GetlistMicroorganismo(ID, ESTADO, cookie, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistMiroOrganismo?ID=${ID}&ESTADO=${ESTADO}`,
+    `${baseUrl}/Stickers/GetlistMiroOrganismo?ID=${ID}&ESTADO=${ESTADO}&page=${page}`,
     cookie
   );
 }

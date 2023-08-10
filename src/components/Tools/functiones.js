@@ -1,4 +1,7 @@
-import { CloseCaseSample,DeleteResultSegm } from "../../pages/api/Sample/ViewDetails/[id]";
+import {
+  CloseCaseSample,
+  DeleteResultSegm,
+} from "../../pages/api/Sample/ViewDetails/[id]";
 import Router from "next/router";
 import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
@@ -922,7 +925,7 @@ export const AddListSetValue = (setValue, nameInput) => {
   }
 };
 
-export const AddListCodBitacora = (nameInput,group,name_group) => {
+export const AddListCodBitacora = (nameInput, group, name_group) => {
   let arrayList = [];
   const element = document.getElementsByName(nameInput);
 
@@ -933,22 +936,18 @@ export const AddListCodBitacora = (nameInput,group,name_group) => {
       }
     });
   }
-  
-  if (arrayList.length > 1) {
 
-    sessionStorage.setItem("ListadoBitacoras",
-    JSON.stringify(arrayList));
+  if (arrayList.length > 1) {
+    sessionStorage.setItem("ListadoBitacoras", JSON.stringify(arrayList));
 
     Router.push({
       pathname: "/Sample/CreateResultBloque/CreateBloq",
       query: {
         group: group,
-        name_group: name_group
+        name_group: name_group,
       },
     });
-  }
-  else
-  {
+  } else {
     Swal.fire({
       title: "¡Advertencia!",
       text: "Debe seleccionar por lo menos dos sticker para el ingreso de estatus en bloque",
@@ -1341,12 +1340,9 @@ export const validateResultArmadoIsOpciones = (
   return Validator;
 };
 
-export const DeleteRowStatusDataBase = (data,
-  IdPrub,
-  NombrePrub) => {
-
+export const DeleteRowStatusDataBase = (data, IdPrub, NombrePrub) => {
   Swal.fire({
-    title:`Eliminar Estatus ${NombrePrub}`,
+    title: `Eliminar Estatus ${NombrePrub}`,
     text: `¿Estás seguro de que desea Eliminar el estatus ${NombrePrub}, con el seguimiento "${data.PLANTILLA_RESULTADO}"?`,
     icon: "warning",
     showCancelButton: true,
@@ -1355,7 +1351,6 @@ export const DeleteRowStatusDataBase = (data,
     confirmButtonText: "Si, eliminar estatus",
   }).then((result) => {
     if (result.isConfirmed) {
-
       const rpt = DeleteResultSegm(
         data.CODIGO_RESULTADO_BITACORA,
         IdPrub,
@@ -1366,19 +1361,29 @@ export const DeleteRowStatusDataBase = (data,
   });
 };
 
-export const calcularDiffdate = (Fecheresult,FechaCreado) =>
-{
-  var moment = require('moment');
+export const calcularDiffdate = (Fecheresult, FechaCreado) => {
+  var moment = require("moment");
 
   var first = moment(Fecheresult);
   var second = moment(FechaCreado);
-  const minutes = first.diff(second, 'minutes');
-  if(minutes > 9)
-  {
+  const minutes = first.diff(second, "minutes");
+  if (minutes > 9) {
     return true;
-  }
-  else
-  {
+  } else {
     return false;
   }
-}
+};
+
+export const setCheckPruebaReslt = (setValue) => {
+  var checbox1 = document.getElementById("EstadoPrueba");
+
+  if (
+    checbox1.checked == null ||
+    checbox1.checked == undefined ||
+    checbox1.checked == false
+  ) {
+    setValue("Estado_prueba", "0");
+  } else {
+    setValue("Estado_prueba", "1");
+  }
+};

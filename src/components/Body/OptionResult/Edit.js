@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -7,12 +7,12 @@ import { onSubmitUpdateOption } from "../../Tools/crudOptionResult";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckOptionReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentOptionEdit({ InforOption, idOption }) {
   const validarEsquemaobservation = Yup.object().shape({
     Codigo_Opciones: Yup.string().required(
-        "Es obligatorio recivir el codigo de la opciones a editar"
-      ),
+      "Es obligatorio recivir el codigo de la opciones a editar"
+    ),
     Opcion_descripcion: Yup.string().required(
       "El campo descripcion de la opcion es obligatorio"
     ),
@@ -30,18 +30,22 @@ function ComponentOptionEdit({ InforOption, idOption }) {
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
                 pathname: "/Configuration/OptionsResult/IndexOption",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -55,8 +59,9 @@ function ComponentOptionEdit({ InforOption, idOption }) {
             <form onSubmit={handleSubmit(onSubmitUpdateOption)}>
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
-                  {InforOption != null && InforOption != undefined
-                    ? InforOption.map((data, index) => (
+                  {InforOption.listadoOpciones != null &&
+                  InforOption.listadoOpciones != undefined
+                    ? InforOption.listadoOpciones.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -65,10 +70,10 @@ function ComponentOptionEdit({ InforOption, idOption }) {
                               <label className={styles.group_title}>
                                 Estado de la Opcion
                               </label>
-                              <input 
-                              id="EstadoOpc" 
-                              type="checkbox" 
-                              defaultChecked={data.ESTADO_OPCION}
+                              <input
+                                id="EstadoOpc"
+                                type="checkbox"
+                                defaultChecked={data.ESTADO_OPCION}
                               />
                               <div className={styles.invalid_feedback}>
                                 {errors.Estado_opcion?.message}
@@ -87,7 +92,7 @@ function ComponentOptionEdit({ InforOption, idOption }) {
                                 {...register("Opcion_descripcion")}
                                 name="Opcion_descripcion"
                                 maxLength="150"
-                                className={styles.group_input} 
+                                className={styles.group_input}
                                 defaultValue={data.OPCION_DESCRIPCION}
                               />
                               <div className={styles.invalid_feedback}>
@@ -105,7 +110,7 @@ function ComponentOptionEdit({ InforOption, idOption }) {
                                 maxLength="100"
                                 type="number"
                                 min="0"
-                                className={styles.group_input} 
+                                className={styles.group_input}
                                 defaultValue={data.ORDEN}
                               />
                               <div className={styles.invalid_feedback}>
@@ -119,7 +124,7 @@ function ComponentOptionEdit({ InforOption, idOption }) {
                               <button
                                 onClick={() => {
                                   setCheckOptionReslt(setValue);
-                                  setValue("Codigo_Opciones",idOption);
+                                  setValue("Codigo_Opciones", idOption);
                                 }}
                                 className={styles.btn_send}
                               >
@@ -131,13 +136,14 @@ function ComponentOptionEdit({ InforOption, idOption }) {
                               href={{
                                 pathname:
                                   "/Configuration/OptionsResult/IndexOption",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar
                             </Link>
                           </div>
                         </div>
-                    ))
+                      ))
                     : ""}
                 </div>
               </div>

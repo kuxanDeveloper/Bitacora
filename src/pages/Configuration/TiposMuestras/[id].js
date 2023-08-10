@@ -12,15 +12,15 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage({ cookie, id }) {
-    const [InfoTipoMue, setInfoTipoMue] = useState([]);
+  const [InfoTipoMue, setInfoTipoMue] = useState([]);
   useEffect(() => {
-    SampleDetailsTipoMuestra(setInfoTipoMue, cookie, id,"");
+    SampleDetailsTipoMuestra(setInfoTipoMue, cookie, id, "");
   }, []);
 
   const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-      SampleDetailsGroup(setInforOptionsSelc, cookie, "");
-    }, []);
+    SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+  }, []);
 
   return (
     <>
@@ -57,7 +57,7 @@ function CreatePage({ cookie, id }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <EditTipo 
+      <EditTipo
         InfoTipoMue={InfoTipoMue}
         idTipo={id}
         InforOptionsSelc={InforOptionsSelc}

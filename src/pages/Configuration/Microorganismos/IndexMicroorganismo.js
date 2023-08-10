@@ -10,10 +10,10 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage({ cookie }) {
+function CreatePage({ cookie, query }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsMicro(setLInforSampleDetails, cookie, "","");
+    SampleDetailsMicro(setLInforSampleDetails, cookie, "", "", query.page);
   }, []);
 
   return (
@@ -51,7 +51,7 @@ function CreatePage({ cookie }) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexMicro InforSampleDetails={InforSampleDetails}></IndexMicro>
+      <IndexMicro InforSampleDetails={InforSampleDetails} query={query}></IndexMicro>
     </>
   );
 }
@@ -84,11 +84,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.OptionCreateAndUrl) {
+    if (
+      !Options.OptionCreateAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 
-    return { props: { cookie: cookie } };
+    return { props: { cookie: cookie, query: ctx.query } };
   } else {
     return {
       redirect: {

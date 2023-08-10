@@ -1,9 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
-function ComponentTipomueIndex({ InfoTipoMue }) {
+import Pagination from "../../Tools/Pagination";
+import { useRouter } from "next/router";
+function ComponentTipomueIndex({ InfoTipoMue, query }) {
+  const router = useRouter();
   return (
     <>
       <section className={styles.Index_users}>
@@ -51,8 +54,9 @@ function ComponentTipomueIndex({ InfoTipoMue }) {
                 </tr>
               </thead>
               <tbody>
-                {InfoTipoMue != null && InfoTipoMue != undefined
-                  ? InfoTipoMue.map((data, index) => (
+                {InfoTipoMue.listadotiposMU != null &&
+                InfoTipoMue.listadotiposMU != undefined
+                  ? InfoTipoMue.listadotiposMU.map((data, index) => (
                       <tr key={index}>
                         <td>{data.NOMBRE_TIPO_MUESTRA}</td>
                         <td>{data.NOMBRE_GRUPO}</td>
@@ -103,6 +107,26 @@ function ComponentTipomueIndex({ InfoTipoMue }) {
                   : ""}
               </tbody>
             </table>
+            {InfoTipoMue != null && InfoTipoMue != undefined ? (
+              InfoTipoMue.listadotiposMU != null &&
+              InfoTipoMue.listadotiposMU != undefined ? (
+                <>
+                  <br></br>
+                  <Pagination
+                    TotalPage={InfoTipoMue.TotalPage}
+                    page={query.page}
+                    pathname={router.pathname}
+                    queryArme={{ page: "1" }}
+                    hash={null}
+                    CountPage={InfoTipoMue.Per_PAge}
+                  ></Pagination>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </section>

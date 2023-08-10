@@ -10,10 +10,10 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
+function CreatePage({ cookie, query }) {
   const [InfoTipoMue, setInfoTipoMue] = useState([]);
   useEffect(() => {
-    SampleDetailsTipoMuestra(setInfoTipoMue, cookie, "","");
+    SampleDetailsTipoMuestra(setInfoTipoMue, cookie, "", "", query.page);
   }, []);
 
   return (
@@ -39,7 +39,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde se listan los tipos de muestra de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Listado de Tipos de muestra - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Listado de Tipos de muestra - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde se listan los tipos de muestra de el sistema`}
@@ -48,7 +51,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexMuestras InfoTipoMue={InfoTipoMue}></IndexMuestras>
+      <IndexMuestras InfoTipoMue={InfoTipoMue} query={query}></IndexMuestras>
     </>
   );
 }
@@ -81,11 +84,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      !Options.GroupConfigCreateAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return { props: { cookie: cookie, query: ctx.query } };
   } else {
     return {
       redirect: {

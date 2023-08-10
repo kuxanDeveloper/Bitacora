@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditPrueba from "../../../components/Body/PruebaResult/Edit";
-import { SampleDetailsPruebasResult,SampleDetailsPlantillasXPruebaResult, SampleDetailsPlantillaResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import {
+  SampleDetailsPruebasResult,
+  SampleDetailsPlantillasXPruebaResult,
+  SampleDetailsPlantillaResult,
+} from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -23,7 +27,7 @@ function CreatePage({ cookie, id }) {
 
   const [InforOptionsSelc, setLInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPlantillaResult(setLInforOptionsSelc, cookie, "");   
+    SampleDetailsPlantillaResult(setLInforOptionsSelc, cookie, "");
   }, []);
 
   return (
@@ -49,10 +53,7 @@ function CreatePage({ cookie, id }) {
           name="twitter:description"
           content={`Lugar donde editan los seguimientos de resultado que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta
-          property="og:title"
-          content={`Edicion de Opcion - Bitácora BD`}
-        />
+        <meta property="og:title" content={`Edicion de Opcion - Bitácora BD`} />
         <meta
           property="og:description"
           content={`Lugar donde editan los seguimientos de resultado que seleccionaran despues las bitacoras`}
@@ -63,7 +64,11 @@ function CreatePage({ cookie, id }) {
       </Head>
       <EditPrueba
         InfoPrueba={InforSampleDetails}
-        InforOptionsSelc={InforOptionsSelc}
+        InforOptionsSelc={
+          InforOptionsSelc != null && InforOptionsSelc != undefined
+            ? InforOptionsSelc.listadoPlantilla
+            : []
+        }
         InforPlantillasXPrueba={InforPlantillasXPrueba}
         idPrueba={id}
       ></EditPrueba>

@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -7,10 +7,12 @@ import { onSubmitCreateObservations } from "../../Tools/crudObservations";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckObservations } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentObservationCreate() {
   const validarEsquemaobservation = Yup.object().shape({
-    DescripcionObservacion: Yup.string().required("El campo descripcion de la observacion es obligatorio"),
+    DescripcionObservacion: Yup.string().required(
+      "El campo descripcion de la observacion es obligatorio"
+    ),
     obs_cierre: Yup.string().required(
       "El Campo observacion cierre es obligatorio"
     ),
@@ -21,8 +23,8 @@ function ComponentObservationCreate() {
       "El Campo observacion bitacora es obligatorio"
     ),
     Estado_observacion: Yup.string().required(
-        "Es obligatorio seleccionar un estado para la observacion"
-      ),
+      "Es obligatorio seleccionar un estado para la observacion"
+    ),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaobservation) };
@@ -38,18 +40,23 @@ function ComponentObservationCreate() {
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/DefaultObservations/IndexObservations"
+                pathname:
+                  "/Configuration/DefaultObservations/IndexObservations",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -65,7 +72,9 @@ function ComponentObservationCreate() {
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                  <div
+                    className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                  >
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
                         Estado de la Observacion
@@ -77,20 +86,25 @@ function ComponentObservationCreate() {
                     </div>
                   </div>
 
-                  <div className={`${styles.form_group} ${stylesCrud.SinLinea}`}>
+                  <div
+                    className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                  >
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Descripcion predeterminada de la observacion</label>
+                      <label className={styles.group_title}>
+                        Descripcion predeterminada de la observacion
+                      </label>
                       <textarea
                         {...register("DescripcionObservacion")}
                         name="DescripcionObservacion"
                         id="DescripcionObservacion"
                         cols="70"
                         rows="10"
-                        maxLength={1000}></textarea>                      
+                        maxLength={1000}
+                      ></textarea>
                       <div className={styles.invalid_feedback}>
                         {errors.DescripcionObservacion?.message}
                       </div>
-                    </div>                    
+                    </div>
                   </div>
 
                   <div className={styles.form_group}>
@@ -105,7 +119,7 @@ function ComponentObservationCreate() {
 
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                      Observacion de reapertura
+                        Observacion de reapertura
                       </label>
                       <input id="ObsReapertura" type="checkbox" />
 
@@ -114,7 +128,7 @@ function ComponentObservationCreate() {
 
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>
-                      Observacion de bitacora
+                        Observacion de bitacora
                       </label>
                       <input id="ObsBitacora" type="checkbox" />
 
@@ -122,13 +136,11 @@ function ComponentObservationCreate() {
                     </div>
                   </div>
 
-                  
-
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckObservations(setValue);
+                          setCheckObservations(setValue);
                         }}
                         className={styles.btn_send}
                       >
@@ -138,7 +150,9 @@ function ComponentObservationCreate() {
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/DefaultObservations/IndexObservations"
+                        pathname:
+                          "/Configuration/DefaultObservations/IndexObservations",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar

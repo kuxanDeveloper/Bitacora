@@ -7,7 +7,7 @@ import { onSubmitEditTipoMue } from "../../Tools/crudTipoMuestra";
 import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckEstadoCrud } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
-
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentEditTipoMue({ InfoTipoMue, idTipo, InforOptionsSelc }) {
   const validarEsquemaobservation = Yup.object().shape({
     ID: Yup.string().required(),
@@ -17,31 +17,39 @@ function ComponentEditTipoMue({ InfoTipoMue, idTipo, InforOptionsSelc }) {
     ESTADO: Yup.string().required(
       "Es obligatorio seleccionar el estado del tipo de muestra"
     ),
-    ID_GRUPO: Yup.string().required(
-      "El campo documento del jefe de laboratorio es obligatorio"
-    ),
+    ID_GRUPO: Yup.string().required("El campo grupo es obligatorio"),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaobservation) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
 
-     useEffect(() => {
-
-       if(InfoTipoMue != null && InfoTipoMue != undefined)
-       {
-if(InfoTipoMue.length > 0)
-{
-    const valorgrup = document.getElementById("ID_GRUPO");
-    valorgrup.value = InfoTipoMue[0].ID_GRUPO;
-}
-       }
-
-     },[InforOptionsSelc]);
+  useEffect(() => {
+    if (
+      InfoTipoMue.listadotiposMU != null &&
+      InfoTipoMue.listadotiposMU != undefined
+    ) {
+      if (InfoTipoMue.listadotiposMU.length > 0) {
+        const valorgrup = document.getElementById("ID_GRUPO");
+        valorgrup.value = InfoTipoMue.listadotiposMU[0].ID_GRUPO;
+        setValue("ID_GRUPO", InfoTipoMue.listadotiposMU[0].ID_GRUPO);
+      }
+    }
+  }, [InforOptionsSelc]);
 
   return (
     <>
       <section className={styles.create_note}>
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
@@ -62,8 +70,9 @@ if(InfoTipoMue.length > 0)
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
 
-                  {InfoTipoMue != null && InfoTipoMue != undefined
-                    ? InfoTipoMue.map((data, index) => (
+                  {InfoTipoMue.listadotiposMU != null &&
+                  InfoTipoMue.listadotiposMU != undefined
+                    ? InfoTipoMue.listadotiposMU.map((data, index) => (
                         <div key={index}>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
@@ -147,6 +156,7 @@ if(InfoTipoMue.length > 0)
                               href={{
                                 pathname:
                                   "/Configuration/TiposMuestras/IndexTipo",
+                                query: { page: "1" },
                               }}
                             >
                               Cancelar

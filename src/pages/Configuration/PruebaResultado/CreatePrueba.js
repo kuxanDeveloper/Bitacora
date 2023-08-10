@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import CreatePrueba from "../../../components/Body/PruebaResult/Create";
 import { SampleDetailsPlantillaResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
@@ -11,13 +11,13 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 
 function CreatePage(cookie) {
-
-    const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPlantillaResult(setInforOptionsSelc, cookie, "");   
+    SampleDetailsPlantillaResult(setInforOptionsSelc, cookie, "");
   }, []);
 
-  
+  console.log(InforOptionsSelc);
+
   return (
     <>
       <Head>
@@ -41,7 +41,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde crean los Estatus de resultado que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta property="og:title" content={`Creación de Estatus - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Creación de Estatus - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde crean los Estatus de resultado que seleccionaran despues las bitacoras`}

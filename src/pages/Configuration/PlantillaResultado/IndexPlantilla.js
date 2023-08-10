@@ -10,10 +10,15 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function CreatePage(cookie) {
+function CreatePage({ cookie, query }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   useEffect(() => {
-    SampleDetailsPlantillaResult(setLInforSampleDetails, cookie, "");
+    SampleDetailsPlantillaResult(
+      setLInforSampleDetails,
+      cookie,
+      "",
+      query.page
+    );
   }, []);
 
   return (
@@ -39,7 +44,10 @@ function CreatePage(cookie) {
           name="twitter:description"
           content={`Lugar donde se listan los seguimientos de las pruebas de el sistema`}
         ></meta>
-        <meta property="og:title" content={`Listado de seguimientos - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Listado de seguimientos - Bitácora BD`}
+        />
         <meta
           property="og:description"
           content={`Lugar donde se listan los seguimientos de las pruebas de el sistema`}
@@ -48,7 +56,10 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <IndexPlantilla InforSampleDetails={InforSampleDetails}></IndexPlantilla>
+      <IndexPlantilla
+        InforSampleDetails={InforSampleDetails}
+        query={query}
+      ></IndexPlantilla>
     </>
   );
 }
@@ -81,11 +92,15 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      !Options.GroupConfigCreateAndUrl ||
+      ctx.query.page == undefined ||
+      ctx.query.page == null
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return { props: { cookie: cookie, query: ctx.query } };
   } else {
     return {
       redirect: {

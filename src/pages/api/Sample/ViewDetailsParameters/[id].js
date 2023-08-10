@@ -28,8 +28,8 @@ export const SampleDetailsTipoMuestra = async (
   setInfoTipoMue,
   cookie,
   ID,
-  ESTADO
+  ESTADO, page
 ) => {
-  let inforSample = await GetlistTiposMuestra(cookie, ID, ESTADO);
+  let inforSample = await GetlistTiposMuestra(cookie, ID, ESTADO, page);
   setInfoTipoMue(inforSample);
 };

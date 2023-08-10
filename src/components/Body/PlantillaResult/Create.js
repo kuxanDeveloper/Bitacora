@@ -8,9 +8,8 @@ import styles from "../../../styles/CreateNotes.module.scss";
 import { setCheckPlantillaReslt } from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListOption from "./ListOptions";
-import Image from "next/image";
-function ComponentGroup({InforOptionsSelc}) {
-
+import ImageOptimize from "../../Tools/ImageOptimize";
+function ComponentGroup({ InforOptionsSelc }) {
   const [ListOpciones, setListOpciones] = useState([]);
 
   const validarEsquemaGrupo = Yup.object().shape({
@@ -35,23 +34,25 @@ function ComponentGroup({InforOptionsSelc}) {
     checkbox1.checked = true;
   }, []);
 
-  
-
   return (
     <>
       <section className={styles.create_note}>
-      <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/photo-1614935151651-0bea6508db6b.avif",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
               href={{
-                pathname: "/Configuration/PlantillaResultado/IndexPlantilla"
+                pathname: "/Configuration/PlantillaResultado/IndexPlantilla",
+                query: { page: "1" },
               }}
               className={styles.back_btn}
             >
@@ -71,7 +72,9 @@ function ComponentGroup({InforOptionsSelc}) {
                     className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                   >
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>Nombre Seguimiento</label>
+                      <label className={styles.group_title}>
+                        Nombre Seguimiento
+                      </label>
                       <input
                         {...register("Plantilla_resultado")}
                         name="Plantilla_resultado"
@@ -84,8 +87,6 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.Plantilla_resultado?.message}
                       </div>
                     </div>
-
-                    
                   </div>
 
                   <div
@@ -98,7 +99,9 @@ function ComponentGroup({InforOptionsSelc}) {
                       <input id="EstadoPlantilla" type="checkbox" />
                     </div>
                     <div className={styles.input_group}>
-                      <label className={styles.group_title}>N° Orden Seguimiento</label>
+                      <label className={styles.group_title}>
+                        N° Orden Seguimiento
+                      </label>
                       <input
                         {...register("Orden_plantilla")}
                         name="Orden_plantilla"
@@ -111,7 +114,6 @@ function ComponentGroup({InforOptionsSelc}) {
                         {errors.Orden_plantilla?.message}
                       </div>
                     </div>
-                    
                   </div>
 
                   <ListOption
@@ -119,13 +121,13 @@ function ComponentGroup({InforOptionsSelc}) {
                     setListOpciones={setListOpciones}
                     InforOptionsSelc={InforOptionsSelc}
                   ></ListOption>
-                 
+
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
                       <button
                         onClick={() => {
-                            setCheckPlantillaReslt(setValue);
-                            setValue("Lista_opciones",ListOpciones);
+                          setCheckPlantillaReslt(setValue);
+                          setValue("Lista_opciones", ListOpciones);
                         }}
                         className={styles.btn_send}
                       >
@@ -135,7 +137,9 @@ function ComponentGroup({InforOptionsSelc}) {
                     <Link
                       className={styles.btn_cancel}
                       href={{
-                        pathname: "/Configuration/PlantillaResultado/IndexPlantilla"
+                        pathname:
+                          "/Configuration/PlantillaResultado/IndexPlantilla",
+                        query: { page: "1" },
                       }}
                     >
                       Cancelar
