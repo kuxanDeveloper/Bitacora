@@ -925,7 +925,13 @@ export const AddListSetValue = (setValue, nameInput) => {
   }
 };
 
-export const AddListCodBitacora = (nameInput,group,name_group,hrefhash,HrefArmado) => {
+export const AddListCodBitacora = (
+  nameInput,
+  group,
+  name_group,
+  hrefhash,
+  HrefArmado
+) => {
   let arrayList = [];
   const element = document.getElementsByName(nameInput);
 
@@ -945,7 +951,7 @@ export const AddListCodBitacora = (nameInput,group,name_group,hrefhash,HrefArmad
       query: {
         group: group,
         name_group: name_group,
-        hrefhash: hrefhash
+        hrefhash: hrefhash,
       },
     });
   } else {
@@ -1373,13 +1379,11 @@ export const calcularDiffdate = (Fecheresult, FechaCreado) => {
   } else {
     return false;
   }
-}
-
-export const setFechaActual = (idfecha) =>
-{
-  document.querySelector("." + idfecha +" input")
-                            .value = dayjs().format('DD/MM/YYYY hh:mm');
 };
+
+export const setFechaActual = (idfecha) => {
+  document.querySelector("." + idfecha + " input").value =
+    dayjs().format("DD/MM/YYYY hh:mm");
 };
 
 export const setCheckPruebaReslt = (setValue) => {
