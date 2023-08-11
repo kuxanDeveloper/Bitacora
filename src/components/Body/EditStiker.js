@@ -55,9 +55,9 @@ function EditStickerComponents({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().required("Campo Sitio Anatómico obligatorio"),
+    SitioAnatomico: Yup.string().notRequired(),
     jefelaboratorio: Yup.string().notRequired(),
-    tipoMuestra: Yup.string().required("Campo Tipo de muestra obligatorio"),
+    tipoMuestra: Yup.string().notRequired(),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
     ),
