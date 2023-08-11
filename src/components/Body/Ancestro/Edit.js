@@ -29,7 +29,9 @@ function ComponentGroup({
     Orden_ancestro: Yup.string().required(
       "El campo de orden del grupo principal es obligatorio"
     ),
-    Lst_grupos: Yup.array().notRequired(),
+    Lst_grupos: Yup.array()
+      .min(1, "Debe por lo menos tener un grupo asignado")
+      .required("Debe por lo menos tener un grupo asignado"),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -134,6 +136,9 @@ function ComponentGroup({
                             InforOptionsSelc={InforOptionsSelc}
                             InforGruposXAncest={InforGruposXAncest}
                           ></ListGrupos>
+                          <div className={styles.invalid_feedback}>
+                            {errors.Lst_grupos?.message}
+                          </div>
 
                           <div className={styles.btn_container_send}>
                             {!formState.isSubmitting && (

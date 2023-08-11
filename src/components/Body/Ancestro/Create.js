@@ -22,7 +22,9 @@ function ComponentGroup({ InforOptionsSelc }) {
     Orden_ancestro: Yup.string().required(
       "El campo de orden del grupo principal es obligatorio"
     ),
-    Lst_grupos: Yup.array().notRequired(),
+    Lst_grupos: Yup.array()
+      .min(1, "Debe por lo menos tener un grupo asignado")
+      .required("Debe por lo menos tener un grupo asignado"),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -37,7 +39,7 @@ function ComponentGroup({ InforOptionsSelc }) {
   return (
     <>
       <section className={styles.create_note}>
-      <ImageOptimize
+        <ImageOptimize
           Values={{
             src: "/img/bg_image.jpg",
             alt: "Fondo BackGround",
@@ -122,6 +124,9 @@ function ComponentGroup({ InforOptionsSelc }) {
                     setListGruposAnc={setListGruposAnc}
                     InforOptionsSelc={InforOptionsSelc}
                   ></ListGrupos>
+                  <div className={styles.invalid_feedback}>
+                    {errors.Lst_grupos?.message}
+                  </div>
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (
