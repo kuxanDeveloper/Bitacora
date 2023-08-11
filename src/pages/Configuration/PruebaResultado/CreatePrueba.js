@@ -16,7 +16,6 @@ function CreatePage(cookie) {
     SampleDetailsPlantillaResult(setInforOptionsSelc, cookie, "");
   }, []);
 
-  console.log(InforOptionsSelc);
 
   return (
     <>

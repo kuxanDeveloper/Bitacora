@@ -121,14 +121,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -182,10 +182,10 @@ function Pop_up({
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -239,14 +239,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -294,14 +294,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -358,14 +358,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -417,14 +417,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -481,14 +481,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -536,14 +536,14 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
-                          stroke-width="2"
+                          strokeWidth="2"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path
                             stroke="none"
@@ -567,7 +567,6 @@ function Pop_up({
                           <button
                             onClick={() => {
                               setValue("COD_BITACORAv", COD_BITACORA);
-                              console.log("aquiModal");
                               setValue(
                                 "FECHA_HORA_INGRESO",
                                 document.querySelector(
@@ -616,7 +615,6 @@ function Pop_up({
                                   ".fech_valid_antibiograma input"
                                 ).value
                               );
-                              console.log("aquiModal2");
                             }}
                             className={styles2.btn_send}
                           >

@@ -37,7 +37,6 @@ export const CloseCaseSample = async (id, observacionCaso, Estado) => {
 
 export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresult) => {
   let infoNote = await QueryDeleteResult(Codigo_resultado_bitacora);
-  console.log(infoNote);
   if(infoNote == "Todo Eliminado")
   {    
     document.getElementById('Estatus' + IdPrub).remove();    
