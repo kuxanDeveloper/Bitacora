@@ -12,7 +12,6 @@ function ListGrupo({
 }) {
   const [valorGrupo, setvalorGrupo] = useState("");
   const [ListGruposAncNombre, setListGruposAncNombre] = useState([]);
-  console.log(InforOptionsSelc);
   useEffect(() => {
     if (
       InforGruposXAncest != null &&

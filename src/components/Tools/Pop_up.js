@@ -20,7 +20,11 @@ export default function Pop_up({
     <>
       <div className={styles.img_upload}>
         <div className={styles.upload_container}>
-          <span onClick={onClose} id="botonCierreModal" className={styles.close_btn}>
+          <span
+            onClick={onClose}
+            id="botonCierreModal"
+            className={styles.close_btn}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -132,38 +136,66 @@ export default function Pop_up({
               <>
                 {ValueImagesrc !== null || ValueImagesrcExterna !== null ? (
                   <div className={styles.prevew}>
-                    <ImageOptimize
-                      Values={{
-                        src: isImagenExterna
-                          ? ValueImagesrcExterna
-                          : URL.createObjectURL(ValueImagesrc),
-                        alt: "sticker imagen",
-                        title: "Sticker",
-                        classValue: styles.prevew_img,
-                        width: 256,
-                        height: 256,
-                        style: {},
-                      }}
-                    ></ImageOptimize>
+                    {isImagenExterna && ValueImagesrcExterna != null ? (
+                      <ImageOptimize
+                        Values={{
+                          src: ValueImagesrcExterna,
+                          alt: "sticker imagen",
+                          title: "Sticker",
+                          classValue: styles.prevew_img,
+                          width: 256,
+                          height: 256,
+                          style: {},
+                        }}
+                      ></ImageOptimize>
+                    ) : ValueImagesrc != null ? (
+                      <ImageOptimize
+                        Values={{
+                          src: URL.createObjectURL(ValueImagesrc),
+                          alt: "sticker imagen",
+                          title: "Sticker",
+                          classValue: styles.prevew_img,
+                          width: 256,
+                          height: 256,
+                          style: {},
+                        }}
+                      ></ImageOptimize>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ) : (
                   ""
                 )}
                 {ValueImagesrc2 != null || ValueImagesrcExterna2 !== null ? (
                   <div className={styles.prevew}>
-                    <ImageOptimize
-                      Values={{
-                        src: isImagenExterna
-                          ? ValueImagesrcExterna2
-                          : URL.createObjectURL(ValueImagesrc2),
-                        alt: "sticker imagen 2",
-                        title: "Sticker",
-                        classValue: styles.prevew_img,
-                        width: 256,
-                        height: 256,
-                        style: {},
-                      }}
-                    ></ImageOptimize>
+                    {isImagenExterna && ValueImagesrcExterna2 != null ? (
+                      <ImageOptimize
+                        Values={{
+                          src: ValueImagesrcExterna2,
+                          alt: "sticker imagen 2",
+                          title: "Sticker",
+                          classValue: styles.prevew_img,
+                          width: 256,
+                          height: 256,
+                          style: {},
+                        }}
+                      ></ImageOptimize>
+                    ) : ValueImagesrc2 != null ? (
+                      <ImageOptimize
+                        Values={{
+                          src: URL.createObjectURL(ValueImagesrc2),
+                          alt: "sticker imagen 2",
+                          title: "Sticker",
+                          classValue: styles.prevew_img,
+                          width: 256,
+                          height: 256,
+                          style: {},
+                        }}
+                      ></ImageOptimize>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 ) : (
                   ""
@@ -172,12 +204,44 @@ export default function Pop_up({
             ) : isImagenOne ? (
               ValueImagesrc !== null || ValueImagesrcExterna !== null ? (
                 <div className={styles.prevew}>
+                  {isImagenExterna && ValueImagesrcExterna != null ? (
+                    <ImageOptimize
+                      Values={{
+                        src: ValueImagesrcExterna,
+                        alt: "sticker imagen",
+                        title: "Sticker",
+                        classValue: styles.prevew_img,
+                        width: 256,
+                        height: 256,
+                        style: {},
+                      }}
+                    ></ImageOptimize>
+                  ) : ValueImagesrc != null ? (
+                    <ImageOptimize
+                      Values={{
+                        src: URL.createObjectURL(ValueImagesrc),
+                        alt: "sticker imagen",
+                        title: "Sticker",
+                        classValue: styles.prevew_img,
+                        width: 256,
+                        height: 256,
+                        style: {},
+                      }}
+                    ></ImageOptimize>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                ""
+              )
+            ) : ValueImagesrc2 !== null || ValueImagesrcExterna2 !== null ? (
+              <div className={styles.prevew}>
+                {isImagenExterna && ValueImagesrcExterna2 != null ? (
                   <ImageOptimize
                     Values={{
-                      src: isImagenExterna
-                        ? ValueImagesrcExterna
-                        : URL.createObjectURL(ValueImagesrc),
-                      alt: "sticker imagen",
+                      src: ValueImagesrcExterna2,
+                      alt: "sticker imagen 2",
                       title: "Sticker",
                       classValue: styles.prevew_img,
                       width: 256,
@@ -185,25 +249,21 @@ export default function Pop_up({
                       style: {},
                     }}
                   ></ImageOptimize>
-                </div>
-              ) : (
-                ""
-              )
-            ) : ValueImagesrc2 !== null || ValueImagesrcExterna2 !== null ? (
-              <div className={styles.prevew}>
-                <ImageOptimize
-                  Values={{
-                    src: isImagenExterna
-                      ? ValueImagesrcExterna2
-                      : URL.createObjectURL(ValueImagesrc2),
-                    alt: "sticker imagen 2",
-                    title: "Sticker",
-                    classValue: styles.prevew_img,
-                    width: 256,
-                    height: 256,
-                    style: {},
-                  }}
-                ></ImageOptimize>
+                ) : ValueImagesrc2 != null ? (
+                  <ImageOptimize
+                    Values={{
+                      src: URL.createObjectURL(ValueImagesrc2),
+                      alt: "sticker imagen 2",
+                      title: "Sticker",
+                      classValue: styles.prevew_img,
+                      width: 256,
+                      height: 256,
+                      style: {},
+                    }}
+                  ></ImageOptimize>
+                ) : (
+                  ""
+                )}
               </div>
             ) : (
               ""

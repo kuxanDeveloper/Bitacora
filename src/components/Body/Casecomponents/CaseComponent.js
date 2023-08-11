@@ -27,10 +27,6 @@ export default function CaseComponent({
       <div className={caseStyles.card_container}>
         <div className={caseStyles.sticker}>
           <p className={caseStyles.sticker_title}>Sticker</p>
-          {console.log(
-            data.URL_PRIMERA_IMAGEN,
-            process.env.NEXT_PUBLIC_URL_API
-          )}
           <button
             type="button"
             onClick={() => {

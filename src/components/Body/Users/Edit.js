@@ -57,7 +57,6 @@ function ComponentGroup({
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-  console.log(GroupxUserandList);
   useEffect(() => {
     if (
       InforSampleInfoUser != null &&

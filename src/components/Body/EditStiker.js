@@ -36,14 +36,15 @@ function EditStickerComponents({
     setShowModal,
     setishabiliteBtn,
     ValueImagesrc,
+    setValueImagesrc,
     ValueImagesrc2,
+    setValueImagesrc2,
     setisImagenOne,
     setisImagenExterna,
 
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
   } = useContextBitacora();
-
   const validationSchema = Yup.object().shape({
     COD_BITACORA: Yup.number(),
     NumSticker: Yup.string(),
@@ -61,14 +62,16 @@ function EditStickerComponents({
       "Campo fecha recogida de la muestra obligatorio"
     ),
   });
-
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codJefeLab, setcodJefeLab] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
   const [fecha, Setfecha] = useState("");
+  
   useEffect(() => {
+    debugger;
     setisImagenExterna(true);
-
+    setValueImagesrc(null);
+    setValueImagesrc2(null);
     if (
       InforSampleDetails.infoBitacora != null &&
       InforSampleDetails.infoBitacora != undefined
@@ -109,7 +112,7 @@ function EditStickerComponents({
       setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
 
       const fechabd =
-        InforSampleDetails.infoBitacora[0].FECHA_FORMAT_RECOGIDA_MUESTRA;
+        InforSampleDetails.infoBitacora[0].FECHA_RECOGIDA_DATETIME;
 
       if (fechabd != null && fechabd != undefined) {
         Setfecha(dayjs(fechabd));
@@ -126,8 +129,7 @@ function EditStickerComponents({
   ListadoJefeLaboratorio.map((data) => {
     options.push({ value: data.ID, label: data.DESCRIPCION });
   });
-  // console.log(codJefeLab, "codjefe")
-console.log(InforSampleDetails);
+
   return (
     <section className={styles.Create_sticker}>
       <Image
@@ -170,7 +172,12 @@ console.log(InforSampleDetails);
                           <select
                             defaultValue={group}
                             {...register("GrupoSticker")}
-                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                            disabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
                             name="GrupoSticker"
                             id="GrupoSticker"
                             onChange={(e) =>
@@ -364,7 +371,12 @@ console.log(InforSampleDetails);
                           </label>
                           <select
                             {...register("SitioAnatomico")}
-                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                            disabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
                             name="SitioAnatomico"
                             id="SitioAnatomico"
                             value={codSitioAnatomico}
@@ -403,7 +415,12 @@ console.log(InforSampleDetails);
                                   : codJefeLab)
                               );
                             })}
-                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                            disabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
                             onChange={(e) => {
                               setcodJefeLab(e.value);
                             }}
@@ -429,7 +446,12 @@ console.log(InforSampleDetails);
                             name="tipoMuestra"
                             id="tipoMuestra"
                             value={codTipoMuestra}
-                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                            disabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
                             onChange={(e) => setcodTipoMuestra(e.target.value)}
                           >
                             <option disabled value="">
@@ -454,7 +476,12 @@ console.log(InforSampleDetails);
                           <select
                             name="sltObservaIni"
                             id="sltObservaIni"
-                            disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                            disabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
                             onChange={(e) => {
                               OnchangeObservaCrearEdit(
                                 e.target.value,
@@ -498,49 +525,56 @@ console.log(InforSampleDetails);
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? false : true}
+                              disabled={
+                                InforSampleDetails.infoBitacora[0]
+                                  .ESTADO_STICKER == true
+                                  ? false
+                                  : true
+                              }
                               orientation="landscape"
                               value={fecha}
                               className="FechaHoraRecogida"
                             />
                           </LocalizationProvider>
 
-                          {InforSampleDetails.infoBitacora[0].ESTADO_STICKER == true ? 
+                          {InforSampleDetails.infoBitacora[0].ESTADO_STICKER ==
+                          true ? (
                             <button
-                            type="button"
-                            title="Seleccionar la fecha de hoy"
-                            onClick={() => {
-                              Setfecha(dayjs());
-                            }}
-                            className={styles.photo}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              stroke="#ffffff"
-                              class="icon icon-tabler icon-tabler-calendar-plus"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              stroke-width="2"
-                              fill="none"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                Setfecha(dayjs());
+                              }}
+                              className={styles.photo}
                             >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
                                 fill="none"
-                              ></path>
-                              <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                              <path d="M16 3v4"></path>
-                              <path d="M8 3v4"></path>
-                              <path d="M4 11h16"></path>
-                              <path d="M16 19h6"></path>
-                              <path d="M19 16v6"></path>
-                            </svg>
-                          </button>
-                           : ""}
-                          
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
 
                           <div className={styles.invalid_feedback}>
                             {errors.FechaHoraRecogida?.message}
@@ -571,42 +605,43 @@ console.log(InforSampleDetails);
                       </div>
 
                       <div className={styles.btn_container_send}>
-                        {!formState.isSubmitting && InforSampleDetails.infoBitacora[0].ESTADO_STICKER && (
-                          <button
-                            onClick={(e) => {
-                              isHabilteGroup == "true"
-                                ? setValue("GrupoSticker", group)
-                                : "";
-                              // setCheckinvalue(setValue);
-                              setImagenFileUpdate(
-                                ValueImagesrc,
-                                ValueImagesrc2,
-                                setValue,
-                                data.CODIGO_PRIMERA_IMAGEN,
-                                data.CODIGO_SEGUNDA_IMAGEN
-                              );
-                              setValue("NumSticker", data.NUMERO_STICKER);
-                              setValue("COD_BITACORA", data.CODIGO_BITACORA);
-                              setValue("Sufijo", data.SUFIJO);
-                              setValue(
-                                "FechaHoraRecogida",
-                                document.querySelector(
-                                  ".FechaHoraRecogida input"
-                                ).value
-                              );
-                              setValue("SitioAnatomico", codSitioAnatomico);
-                              setValue("tipoMuestra", codTipoMuestra);
-                              RegisterStickerObservaciones(
-                                setValue,
-                                codJefeLab,
-                                e
-                              );
-                            }}
-                            className={styles.btn_send}
-                          >
-                            Guardar Cambios
-                          </button>
-                        )}
+                        {!formState.isSubmitting &&
+                          InforSampleDetails.infoBitacora[0].ESTADO_STICKER && (
+                            <button
+                              onClick={(e) => {
+                                isHabilteGroup == "true"
+                                  ? setValue("GrupoSticker", group)
+                                  : "";
+                                // setCheckinvalue(setValue);
+                                setImagenFileUpdate(
+                                  ValueImagesrc,
+                                  ValueImagesrc2,
+                                  setValue,
+                                  data.CODIGO_PRIMERA_IMAGEN,
+                                  data.CODIGO_SEGUNDA_IMAGEN
+                                );
+                                setValue("NumSticker", data.NUMERO_STICKER);
+                                setValue("COD_BITACORA", data.CODIGO_BITACORA);
+                                setValue("Sufijo", data.SUFIJO);
+                                setValue(
+                                  "FechaHoraRecogida",
+                                  document.querySelector(
+                                    ".FechaHoraRecogida input"
+                                  ).value
+                                );
+                                setValue("SitioAnatomico", codSitioAnatomico);
+                                setValue("tipoMuestra", codTipoMuestra);
+                                RegisterStickerObservaciones(
+                                  setValue,
+                                  codJefeLab,
+                                  e
+                                );
+                              }}
+                              className={styles.btn_send}
+                            >
+                              Guardar Cambios
+                            </button>
+                          )}
 
                         <Link
                           href={{

@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "../../styles/CircleInfo.module.scss";
+import styled from "@emotion/styled";
 
-function CircleInfo() {
+function CircleInfo({ title, porcent, total, success }) {
+
+
   return (
     <>
       <div className={Styles.circle}>
-        <h3 className={Styles.title}>Hemocultivo</h3>
+        <h3 className={Styles.title}>{title}</h3>
 
-        <p className={Styles.total}>545</p>
+        <p className={Styles.porcent}>{porcent}%</p>
+        <div className={Styles.progress}>
+          <div style={{width: `${porcent}%`}}></div>
+        </div>
 
-        <span className={Styles.porcent}>80%</span>
+        <span className={Styles.total}>
+          {success}/<small>{total}</small>{" "}
+        </span>
       </div>
     </>
   );

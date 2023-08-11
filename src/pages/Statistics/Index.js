@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Styles from "../../styles/Statistics.module.scss";
 import CircleInfo from "../../components/Statistics/CircleInfo";
 import Image from "next/image";
 import Chart from "react-google-charts";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 
 export const data = [
   ["Task", "Hours per Day"],
@@ -18,6 +21,8 @@ export const options = {
 };
 
 function Index() {
+  const [fecha, Setfecha] = useState("");
+
   return (
     <>
       <div className={Styles.statistics}>
@@ -33,18 +38,28 @@ function Index() {
 
             <div className={Styles.inputs_container}>
               <label className={Styles.filter_label}>Estadisticas Desde</label>
-              <input
-                className={Styles.label_input}
-                type="datetime-local"
-                placeholder="Desde"
-              />
+              <LocalizationProvider
+                orientation="landscape"
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"en-gb"}
+              >
+                <MobileDateTimePicker
+                  value={fecha}
+                  className="FechaHoraRecogida"
+                />
+              </LocalizationProvider>
 
               <label className={Styles.filter_label}>Hasta</label>
-              <input
-                className={Styles.label_input}
-                type="datetime-local"
-                placeholder="Hasta"
-              />
+              <LocalizationProvider
+                orientation="landscape"
+                dateAdapter={AdapterDayjs}
+                adapterLocale={"en-gb"}
+              >
+                <MobileDateTimePicker
+                  value={fecha}
+                  className="FechaHoraRecogida"
+                />
+              </LocalizationProvider>
 
               <button className={Styles.search_btn}>
                 <svg
@@ -74,11 +89,48 @@ function Index() {
             {/* <h2 className={Styles.title}>Hemocultivo</h2> */}
 
             <div className={Styles.circles_container}>
-              <CircleInfo></CircleInfo>
-              <CircleInfo></CircleInfo>
-              <CircleInfo></CircleInfo>
-              <CircleInfo></CircleInfo>
-              <CircleInfo></CircleInfo>
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"30"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"10"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"40"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"50"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"80"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"98"}
+                success={546}
+                total={600}
+              />
+              <CircleInfo
+                title={"Hemocultivo"}
+                porcent={"25"}
+                success={546}
+                total={600}
+              ></CircleInfo>
             </div>
 
             <hr className={Styles.circle_hr} />

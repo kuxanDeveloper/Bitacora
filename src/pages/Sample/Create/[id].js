@@ -41,7 +41,7 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
   useEffect(() => {
     ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
-  console.log(LstObservacionesPrede);
+
   return (
     <>
       <Head>
