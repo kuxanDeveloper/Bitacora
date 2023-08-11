@@ -27,7 +27,7 @@ export default function Case({
   LstObservacionesPrede,
   setHasValueSample,
   hrefhash,
-  query
+  query,
 }) {
   console.log(ListadoMuestraActivo, "activo");
   console.log(ListadoMuestraInactivo, "inactivo");
@@ -711,75 +711,78 @@ export default function Case({
             </>
           </div>
         ) : (
-          <div className={caseStyles.cases_container}>
-            {isTrueActive
-              ? isSampleGeneral
-                ? listMuestrasActivas.map((data, index) => (
+          <>
+            <div className={caseStyles.cases_container}>
+              {isTrueActive
+                ? isSampleGeneral
+                  ? listMuestrasActivas.map((data, index) => (
+                      <CaseComponent
+                        key={index}
+                        data={data}
+                        isActive={true}
+                        Options={Options}
+                        isSampleGeneral={isSampleGeneral}
+                        LstObservacionesPrede={LstObservacionesPrede}
+                      ></CaseComponent>
+                    ))
+                  : listMuestrasPendientes.map((data, index) => (
+                      <CaseComponent
+                        key={index}
+                        data={data}
+                        isActive={true}
+                        Options={Options}
+                        isSampleGeneral={isSampleGeneral}
+                        LstObservacionesPrede={LstObservacionesPrede}
+                      ></CaseComponent>
+                    ))
+                : listMuestrasInactivas.length > 0
+                ? listMuestrasInactivas.map((data, index) => (
                     <CaseComponent
                       key={index}
                       data={data}
-                      isActive={true}
+                      isActive={false}
                       Options={Options}
-                      isSampleGeneral={isSampleGeneral}
+                      isSampleGeneral={true}
                       LstObservacionesPrede={LstObservacionesPrede}
                     ></CaseComponent>
                   ))
-                : listMuestrasPendientes.map((data, index) => (
-                    <CaseComponent
-                      key={index}
-                      data={data}
-                      isActive={true}
-                      Options={Options}
-                      isSampleGeneral={isSampleGeneral}
-                      LstObservacionesPrede={LstObservacionesPrede}
-                    ></CaseComponent>
-                  ))
-              : listMuestrasInactivas.length > 0
-              ? listMuestrasInactivas.map((data, index) => (
-                  <CaseComponent
-                    key={index}
-                    data={data}
-                    isActive={false}
-                    Options={Options}
-                    isSampleGeneral={true}
-                    LstObservacionesPrede={LstObservacionesPrede}
-                  ></CaseComponent>
-                ))
-              : ""}
+                : ""}
 
-            <>
-              <br></br>
-              {isTrueActive ? (
-                ListadoMuestraActivo != null &&
-                ListadoMuestraActivo != undefined &&
-                ListadoMuestraActivo.length > 0 ? (
+            
+            </div>
+              <>
+                <br></br>
+                {isTrueActive ? (
+                  ListadoMuestraActivo != null &&
+                  ListadoMuestraActivo != undefined &&
+                  ListadoMuestraActivo.length > 0 ? (
+                    <Pagination
+                      TotalPage={ListadoMuestraActivo[0].TotalPage}
+                      page={query.page}
+                      pathname={router.pathname}
+                      queryArme={{ page: "1" }}
+                      hash={null}
+                      CountPage={ListadoMuestraActivo[0].Per_PAge}
+                    ></Pagination>
+                  ) : (
+                    ""
+                  )
+                ) : ListadoMuestraInactivo != null &&
+                  ListadoMuestraInactivo != undefined &&
+                  ListadoMuestraInactivo.length > 0 ? (
                   <Pagination
-                    TotalPage={ListadoMuestraActivo[0].TotalPage}
+                    TotalPage={ListadoMuestraInactivo[0].TotalPage}
                     page={query.page}
                     pathname={router.pathname}
                     queryArme={{ page: "1" }}
                     hash={null}
-                    CountPage={ListadoMuestraActivo[0].Per_PAge}
+                    CountPage={ListadoMuestraInactivo[0].Per_PAge}
                   ></Pagination>
                 ) : (
                   ""
-                )
-              ) : ListadoMuestraInactivo != null &&
-                ListadoMuestraInactivo != undefined &&
-                ListadoMuestraInactivo.length > 0 ? (
-                <Pagination
-                  TotalPage={ListadoMuestraInactivo[0].TotalPage}
-                  page={query.page}
-                  pathname={router.pathname}
-                  queryArme={{ page: "1" }}
-                  hash={null}
-                  CountPage={ListadoMuestraInactivo[0].Per_PAge}
-                ></Pagination>
-              ) : (
-                ""
-              )}
-            </>
-          </div>
+                )}
+              </>
+          </>
         )}
       </section>
       {/* */}
