@@ -805,11 +805,34 @@ export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
   let slt = document.getElementById("sltObservaIni");
   var cmbgrupo = document.getElementById("GrupoSticker");
 
+  var cmbsitioAnt = document.getElementById("SitioAnatomico");
+  var cmbtipoMue = document.getElementById("tipoMuestra");
+
   if (cmbgrupo.value == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
         title: "Error",
         text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo Hemocultivo`,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }
+    if (cmbsitioAnt.value == null || cmbsitioAnt.value == "") {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar sitio anatomico para el grupo Hemocultivo`,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }
+    if (cmbtipoMue.value == null || cmbtipoMue.value == "") {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar el tipo de muestra para el grupo Hemocultivo`,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
