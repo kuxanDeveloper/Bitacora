@@ -207,7 +207,7 @@ function ComponentGroup({
                                 onClick={() => {
                                   setCheckindividual(setValue);
                                   setValue("ListSufijo", ListSufijo);
-                                  setValue("IdGrupo", InforGroup[0].Id_grupo);
+                                  setValue("IdGrupo", InforGroup.EdicionGrupo[0].Id_grupo);
                                   setValue("Lst_Pruebas", ListPruebas);
                                 }}
                                 className={styles.btn_send}
