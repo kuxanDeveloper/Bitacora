@@ -29,8 +29,6 @@ export default function Case({
   hrefhash,
   query,
 }) {
-  console.log(ListadoMuestraActivo, "activo");
-  console.log(ListadoMuestraInactivo, "inactivo");
   const router = useRouter();
   const [List, SetList] = useState(false);
 
@@ -492,20 +490,20 @@ export default function Case({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-arrow-badge-up-filled"
+                          className="icon icon-tabler icon-tabler-arrow-badge-up-filled"
                           width="14"
                           height="14"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="#ffffff"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path
                             d="M11.375 6.22l-5 4a1 1 0 0 0 -.375 .78v6l.006 .112a1 1 0 0 0 1.619 .669l4.375 -3.501l4.375 3.5a1 1 0 0 0 1.625 -.78v-6a1 1 0 0 0 -.375 -.78l-5 -4a1 1 0 0 0 -1.25 0z"
-                            stroke-width="0"
+                            strokeWidth="0"
                             fill="#e57d00"
                           />
                         </svg>
@@ -524,20 +522,20 @@ export default function Case({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-arrow-badge-down-filled"
+                          className="icon icon-tabler icon-tabler-arrow-badge-down-filled"
                           width="14"
                           height="14"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="#ffffff"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path
                             d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
-                            stroke-width="0"
+                            strokeWidth="0"
                             fill="#e57d00"
                           />
                         </svg>
@@ -561,20 +559,20 @@ export default function Case({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-arrow-badge-up-filled"
+                          className="icon icon-tabler icon-tabler-arrow-badge-up-filled"
                           width="14"
                           height="14"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="#ffffff"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path
                             d="M11.375 6.22l-5 4a1 1 0 0 0 -.375 .78v6l.006 .112a1 1 0 0 0 1.619 .669l4.375 -3.501l4.375 3.5a1 1 0 0 0 1.625 -.78v-6a1 1 0 0 0 -.375 -.78l-5 -4a1 1 0 0 0 -1.25 0z"
-                            stroke-width="0"
+                            strokeWidth="0"
                             fill="#e57d00"
                           />
                         </svg>
@@ -593,20 +591,20 @@ export default function Case({
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-arrow-badge-down-filled"
+                          className="icon icon-tabler icon-tabler-arrow-badge-down-filled"
                           width="14"
                           height="14"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="#ffffff"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                           <path
                             d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
-                            stroke-width="0"
+                            strokeWidth="0"
                             fill="#e57d00"
                           />
                         </svg>
