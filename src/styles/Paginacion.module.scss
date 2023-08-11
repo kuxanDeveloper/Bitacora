@@ -1,33 +1,47 @@
 ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
 }
 
-ul.pagination li {display: inline;}
+ul.pagination li {
+  display: inline;
+}
 
 ul.pagination li a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-    border: 1px solid #ddd;
-    margin: 0 4px;
+  color: #495cbf;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 ul.pagination li a.active {
-    background-color: #e57d00;
-    color: white;
-    border: 1px solid #e57d00;
+  background-color: #e57d00;
+  color: white;
+  border: 1px solid #e57d00;
 }
 
-ul.pagination li a:hover:not(.active) {background-color: #ddd;}
-
-.Centrarpag{
-    text-align: center;
+ul.pagination li a:hover:not(.active) {
+  background-color: #ddd;
 }
 
-.btnant{
-    pointer-events: none;
+.Centrarpag {
+  text-align: center;
+  position: relative;
+}
+
+.btnant {
+  pointer-events: none;
 }
