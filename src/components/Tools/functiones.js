@@ -994,6 +994,7 @@ export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
 };
 
 export const FormatPage = (totalStory, id, countPage) => {
+  debugger;
   let cantidadPage = totalStory / countPage;
   let isInteger = false;
   if (cantidadPage % 1 !== 0 && cantidadPage >= 1 && cantidadPage < 1.5) {
@@ -1001,6 +1002,11 @@ export const FormatPage = (totalStory, id, countPage) => {
   }
 
   let valorEntero = Math.round(cantidadPage);
+
+  if (cantidadPage > valorEntero) {
+    valorEntero = valorEntero + 1;
+  }
+
   let Arraypage = [];
   let contador = 0;
   let idInt = parseInt(id);
