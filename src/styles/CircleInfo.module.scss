@@ -1,3 +1,4 @@
+
 .circle {
   max-width: 200px;
   display: flex;
@@ -8,23 +9,43 @@
   padding: 6px;
   border-radius: 10px;
   .title {
-    color: #000;
+    color: #3073f0;
   }
-  .total {
-    padding: 1rem;
+
+  
+  .porcent {
     width: 70px;
     height: 70px;
-    border: 5px #3073f0 solid;
     color: #3073f0;
     border-radius: 50%;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
+    margin: 0;
   }
-  .porcent {
+
+  .progress {
+    margin: 0 0 1rem 0;
+    width: 150px;
+    height: 12px;
+    border-radius: 10px;
+    background-color: #acacac;
+
+    &>div {
+      height: 12px;
+      border-radius: 10px;
+      background-color: #e57d00;
+    }
+
+  }
+  
+
+  .total {
+    font-size: 1.3em;
     text-align: center;
     color: #e57d00;
-    font-weight: 500;
+    font-weight: 600;
   }
 }

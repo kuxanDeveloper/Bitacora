@@ -15,13 +15,15 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
       document.getElementById("Inicio").style.pointerEvents = "none";
     }
 
-    const maxpag = Math.max(...pageObject.array);
+    const maxpag = pageObject.final;
     if(maxpag == page)
     {
       document.getElementById("Siguiente").style.pointerEvents = "none";
       document.getElementById("Ultima").style.pointerEvents = "none";      
     }
   },[pageObject]);
+  console.log(page);
+  console.log(pageObject);
   return (
     <>
       {/* pagination */}

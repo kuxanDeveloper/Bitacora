@@ -37,7 +37,7 @@ function ComponentGroup({ InforOptionsSelc }) {
   return (
     <>
       <section className={styles.create_note}>
-      <ImageOptimize
+        <ImageOptimize
           Values={{
             src: "/img/bg_image.jpg",
             alt: "Fondo BackGround",
@@ -122,6 +122,9 @@ function ComponentGroup({ InforOptionsSelc }) {
                     setListGruposAnc={setListGruposAnc}
                     InforOptionsSelc={InforOptionsSelc}
                   ></ListGrupos>
+                  <div className={styles.invalid_feedback}>
+                    {errors.Lst_grupos?.message}
+                  </div>
 
                   <div className={styles.btn_container_send}>
                     {!formState.isSubmitting && (

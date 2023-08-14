@@ -134,6 +134,9 @@ function ComponentGroup({
                             InforOptionsSelc={InforOptionsSelc}
                             InforGruposXAncest={InforGruposXAncest}
                           ></ListGrupos>
+                          <div className={styles.invalid_feedback}>
+                            {errors.Lst_grupos?.message}
+                          </div>
 
                           <div className={styles.btn_container_send}>
                             {!formState.isSubmitting && (
