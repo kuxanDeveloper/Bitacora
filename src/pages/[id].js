@@ -45,6 +45,7 @@ function HomeMuestraxGrupo({
 
   const router = useRouter();
   useEffect(() => {
+    console.log(query.tipoSearch);
     ApiQueryGeneralSample(
       cookie,
       query.id,
@@ -64,7 +65,8 @@ function HomeMuestraxGrupo({
         ? 1
         : query.idAncestro,
       setListaAncestros,
-      query.page
+      query.page,
+      query.tipoSearch
     );
     setidAncestro(query.idAncestro);
   }, []);

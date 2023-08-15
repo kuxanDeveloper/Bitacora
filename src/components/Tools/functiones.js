@@ -1,6 +1,7 @@
 import {
   CloseCaseSample,
   DeleteResultSegm,
+  ValidNumeroSticker,
 } from "../../pages/api/Sample/ViewDetails/[id]";
 import Router from "next/router";
 import "dayjs/locale/en-gb";
@@ -81,22 +82,25 @@ export const backhistory = () => {
 
 export const FilterQuerySearch = (
   event,
-  id,
+  router,
+  // id,
   Numstiker,
   DateAdmission,
-  idAncest
+  idAncest,
+  cookie,
+  estd
 ) => {
   event.preventDefault();
-
-  if (id == "") {
-    Swal.fire({
-      title: "¡Advertencia!",
-      text: "Debes seleccionar un grupo para poder realizar la búsqueda...",
-      icon: "warning",
-      confirmButtonText: "Cerrar",
-    });
-    return;
-  }
+debugger;
+  // if (id == "") {
+  //   Swal.fire({
+  //     title: "¡Advertencia!",
+  //     text: "Debes seleccionar un grupo para poder realizar la búsqueda...",
+  //     icon: "warning",
+  //     confirmButtonText: "Cerrar",
+  //   });
+  //   return;
+  // }
 
   if (Numstiker == "" && DateAdmission == "") {
     Swal.fire({
@@ -111,16 +115,23 @@ export const FilterQuerySearch = (
   idAncest =
     idAncest == 0 || idAncest == undefined || idAncest == "" ? 1 : idAncest;
 
-  Router.push({
-    pathname: "/[id]",
-    query: {
-      id: id,
-      Numstiker: Numstiker,
-      DateAdmission: DateAdmission,
-      idAncestro: idAncest,
-      page: "1",
-    },
-  });
+    const rpt = ValidNumeroSticker(
+      cookie,
+      Numstiker,
+      estd,
+      idAncest
+    );
+
+  // Router.push({
+  //   pathname: "/[id]",
+  //   query: {
+  //     id: id,
+  //     Numstiker: Numstiker,
+  //     DateAdmission: DateAdmission,
+  //     idAncestro: idAncest,
+  //     page: "1",
+  //   },
+  // });
 };
 
 export const Recharge_home_ancestro = (event, router, idAncestro) => {

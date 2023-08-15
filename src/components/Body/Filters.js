@@ -31,6 +31,7 @@ export default function Filters({
   setcmbFiltroCambio,
   setHasValue,
   HasValue,
+  cookie
 }) {
   const router = useRouter();
   const [GruopValue, setGruopValue] = useState(
@@ -219,7 +220,7 @@ export default function Filters({
                         : ""}
                     </select>
 
-                    {isActiveGroup ? (
+                    {/* {isActiveGroup ? (
                       <select
                         defaultValue={GruopValue}
                         name="ListGroup"
@@ -239,7 +240,7 @@ export default function Filters({
                       </select>
                     ) : (
                       ""
-                    )}
+                    )} */}
                   </div>
 
                   {Option.OrdersInactive ? (
@@ -346,10 +347,12 @@ export default function Filters({
                       FilterQuerySearch(
                         e,
                         router,
-                        GruopValue,
+                        // GruopValue,
                         NumeroSticker,
                         FechaIngreso,
-                        document.getElementById("ListAncestro").value
+                        document.getElementById("ListAncestro").value,
+                        cookie,
+                        CasosActivo_Inactivos
                       );
                     }}
                     className={filterStyles.search}

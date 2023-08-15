@@ -7,7 +7,10 @@ import {
   QueryJefeLaboratorio,
   QuerySitioAnatomico,
   QueryTipoMuestra,
+  ValidNumSticker
 } from "../../../../components/Tools/Security";
+import Swal from "sweetalert2";
+import Router from "next/router";
 
 export const SampleDetailsEdit = async (
   cookie,
@@ -49,6 +52,35 @@ export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresul
   return infoNote;
 };
 
+export const ValidNumeroSticker = async (cookie, num_stricker, estadobit,idAncest) => {
+  let infoNote = await ValidNumSticker(cookie, num_stricker, estadobit);
+  debugger;
+  if(infoNote.mensajerpt == "Sin coincidencia")
+  {    
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe indicar el valor de algunos de los filtros disponible para realizar la búsqueda avanzada",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+  }
+  else
+  {
+    Router.push({
+      pathname: "/[id]",
+      query: {
+        id: infoNote.codigoGrupo,
+        Numstiker: num_stricker,
+        DateAdmission: "",
+        idAncestro: 1,
+        page: "1",
+        tipoSearch: infoNote.mensajerpt
+      },
+    });  
+  }
+  
+  return infoNote;
+};
 
 export const ListSitioAnatomico = async (cookie, setListadoSitioAna) => {
   let lstSitioAnatomico = await QuerySitioAnatomico(cookie);

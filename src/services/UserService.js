@@ -100,7 +100,8 @@ export const userService = {
   ListUpdatePanelSecundary,
   InfoFechaBitac,
   InfoGroupCombo,
-  ExportcsvFechas
+  ExportcsvFechas,
+  ValidNumSticker
 };
 
 async function login(username, password) {
@@ -214,8 +215,9 @@ function ListGroupForMue(
   NumeroSticker,
   FechaINgreso,
   Cod_sticker,
-  page
-) {
+  page,
+  tipoSearch
+  ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
   formData.append("Grupo_sticker", idGroup);
@@ -235,6 +237,8 @@ function ListGroupForMue(
   formData.append("COD_BITACORA", Cod_sticker);
 
   formData.append("page", page);
+
+  formData.append("tipoSearch", tipoSearch);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -1254,5 +1258,12 @@ function ExportcsvFechas(
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ExportCsvExcelFecha?FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Id_grupo=${Id_grupo}`,
     null
+  );
+}
+
+function ValidNumSticker(cookie, num_stricker, estadobit) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ValidacionFiltroNumeroSticker?num_stricker=${num_stricker}&estadobit=${estadobit}`,
+    cookie
   );
 }
