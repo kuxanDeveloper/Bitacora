@@ -8,7 +8,6 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
   
   const [valoropcion, setvaloropcion] = useState("");
   const [ListOpcionesNombre, setListOpcionesNombre] = useState([]);
-console.log(InforOptionsSelc);
   useEffect(() => {
 
     if(InforOptionsXpruebas != null &&

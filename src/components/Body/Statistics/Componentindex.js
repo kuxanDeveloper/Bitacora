@@ -26,7 +26,6 @@ function PageIndexStatisct({
   SetValueChangePruebaBarras,
   ListDashboardTerciarioFilterComponent,
 }) {
-  console.log(ListDashboardTerciarioFilterComponent);
   return (
     <>
       <div className={Styles.statistics}>

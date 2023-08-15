@@ -126,7 +126,6 @@ export default function Index({ cookie, query }) {
 
   useEffect(() => {
     if (ListDashboardTerciario != null && ListDashboardTerciario != undefined) {
-      debugger;
       if (ListDashboardTerciario.length > 0) {
         if (ListDashboardTerciarioFilterComponent.length > 0) {
           SetListDashboardTerciarioFilterComponent([]);
@@ -158,7 +157,6 @@ export default function Index({ cookie, query }) {
             arrayTwo.push(data.NOMBRE_PRUEBA);
 
             variables.map((d) => {
-              debugger;
               if (d != "Estatus") {
                 let search = newFilter.find((a) => a.RESULTADO_PLANTILLA == d);
                 if (search != undefined && search != null) {
