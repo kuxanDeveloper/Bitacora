@@ -7,15 +7,37 @@ import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
+
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
   return this;
 };
 
-const fechaformatActualGeneralUrgencia = (Fecha, DaysMore) => {
-  let d = new Date(Fecha).addDays(DaysMore);
+Date.prototype.RemoveDays = function (days) {
+  this.setDate(this.getDate() - days);
+  return this;
+};
 
-  return d.getTime();
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+export const FechaInitSearchDiffDays = (LessDays) => {
+  let DatimeInit = new Date().RemoveDays(LessDays);
+
+  let DateFormat =
+    [
+      DatimeInit.getDate().padLeft(),
+      (DatimeInit.getMonth() + 1).padLeft(),
+      DatimeInit.getFullYear(),
+    ].join("/") +
+    " " +
+    [DatimeInit.getHours().padLeft(), DatimeInit.getMinutes().padLeft()].join(
+      ":"
+    );
+
+  return DateFormat;
 };
 
 export const UserActiveGenerales = (query, ListadoResultadoxMuestra) => {
@@ -59,7 +81,6 @@ export const backhistory = () => {
 
 export const FilterQuerySearch = (
   event,
-  router,
   id,
   Numstiker,
   DateAdmission,
@@ -994,7 +1015,6 @@ export const SearchValueArrayListGroupCheck = (ListArray, Value) => {
 };
 
 export const FormatPage = (totalStory, id, countPage) => {
-  debugger;
   let cantidadPage = totalStory / countPage;
   let isInteger = false;
   if (cantidadPage % 1 !== 0 && cantidadPage >= 1 && cantidadPage < 1.5) {
@@ -1428,3 +1448,42 @@ export const setCheckPruebaReslt = (setValue) => {
     setValue("Estado_prueba", "1");
   }
 };
+
+export const strToDate = (dtStr) => {
+  if (!dtStr) return null;
+  let dateParts = dtStr.split("/");
+  let timeParts = dateParts[2].split(" ")[1].split(":");
+  dateParts[2] = dateParts[2].split(" ")[0];
+  // month is 0-based, that's why we need dataParts[1] - 1
+  return new Date(
+    +dateParts[2],
+    dateParts[1] - 1,
+    +dateParts[0],
+    timeParts[0],
+    timeParts[1]
+  );
+};
+
+export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
+  if (
+    fechaIni == undefined ||
+    fechaFin == null ||
+    fechaFin == null ||
+    fechaFin == undefined ||
+    fechaIni == "" ||
+    fechaFin == ""
+  ) {
+    Swal.fire({
+      title: "Búsqueda de información de estadística",
+      text: `La fecha inicial como la fecha inicial deben tener valor para poder realizar la búsqueda`,
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+  Router.push({
+    pathname: "/Statistics",
+    query: { DateIni: fechaIni, DateEnd: fechaFin },
+  });
+};
+

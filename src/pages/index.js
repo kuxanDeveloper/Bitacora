@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -79,6 +78,9 @@ export async function getServerSideProps(ctx) {
         }
       });
     }
+
+
+
 
     return {
       props: {

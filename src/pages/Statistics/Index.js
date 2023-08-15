@@ -1,184 +1,202 @@
-import React, { useState } from "react";
-import Styles from "../../styles/Statistics.module.scss";
-import CircleInfo from "../../components/Statistics/CircleInfo";
-import Image from "next/image";
-import Chart from "react-google-charts";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import {
+  OptionAdministrator,
+  OptionAsiste,
+  OptionTecnichal,
+  OptionConsult,
+  OptionDefault,
+} from "../../components/Tools/OpcitionHabilite";
+import Componentindex from "../../components/Body/Statistics/Componentindex";
+import {
+  ApiQueryStatistics,
+  ApiQueryListpruebaxGroup,
+  ApiQueryUpdateDataStatus,
+} from "../api/Statistics/[id]";
+import { strToDate } from "../../components/Tools/functiones";
+import { use } from "react";
+export default function Index({ cookie, query }) {
+  const [fechaIni, SetfechaIni] = useState("");
+  const [fechaFin, Setfechafin] = useState("");
+  const [ValueChangeGrupoBarras, SetValueChangeGrupoBarras] = useState("");
+  const [ValueChangeGrupoTorta, SetValueChangeGrupoTorta] = useState("");
+  const [ListDashboardPrinpal, SetListDashboardPrinpal] = useState([]);
+  const [ListDashboardSecundario, SetListDashboardSecundario] = useState([]);
+  const [
+    ListDashboardSecundarioFilterComponent,
+    SetListDashboardSecundarioFilterComponent,
+  ] = useState([["Estatus", "Total"]]);
+  const [ListDashboardTerciario, SetListDashboardTerciario] = useState([]);
+  const [ListGroup, SetListGroup] = useState([]);
+  const [ListStatus, SetListStatus] = useState([]);
 
-export const data = [
-  ["Task", "Hours per Day"],
-  ["Hemocultivo", 11],
-  ["Prueba1", 2],
-  ["Prueba2", 2],
-  ["Prueba3", 2],
-  ["Prueba 4", 7],
-];
+  useEffect(() => {
+    ApiQueryStatistics(
+      cookie,
+      query.DateIni,
+      query.DateEnd,
+      SetListDashboardPrinpal,
+      SetListDashboardSecundario,
+      SetListDashboardTerciario,
+      SetListGroup
+    );
+    SetfechaIni(strToDate(query.DateIni).toISOString());
+    Setfechafin(strToDate(query.DateEnd).toISOString());
 
-export const options = {
-  title: "My Daily Activities",
-};
+    if (
+      ListDashboardSecundario != undefined &&
+      ListDashboardSecundario != null
+    ) {
+      if (ListDashboardSecundario.length > 0) {
+        if (ListDashboardSecundarioFilterComponent.length > 1) {
+          SetListDashboardSecundarioFilterComponent([["Estatus", "Total"]]);
+        }
 
-function Index() {
-  const [fecha, Setfecha] = useState("");
+        ListDashboardSecundario.map((data) =>
+          SetListDashboardSecundarioFilterComponent((preventArray) => [
+            ...preventArray,
+            ...[[data.NOMBRE_PRUEBA, data.CANTIDAD_TOTAL]],
+          ])
+        );
+      }
+    }
+  }, [fechaIni, fechaFin]);
+
+  /* efecto para ejecutar el cambio de la data Torta */
+  useEffect(() => {
+    if (ValueChangeGrupoTorta != "") {
+      ApiQueryUpdateDataStatus(
+        cookie,
+        ValueChangeGrupoTorta,
+        query.DateIni,
+        query.DateEnd,
+        SetListDashboardSecundario
+      );
+    }
+  }, [ValueChangeGrupoTorta]);
+  useEffect(() => {
+
+    if (
+      ListDashboardSecundario != undefined &&
+      ListDashboardSecundario != null
+    ) {
+      if (ListDashboardSecundario.length > 0) {
+        if (ListDashboardSecundarioFilterComponent.length > 1) {
+          SetListDashboardSecundarioFilterComponent([["Estatus", "Total"]]);
+        }
+
+        ListDashboardSecundario.map((data) =>
+          SetListDashboardSecundarioFilterComponent((preventArray) => [
+            ...preventArray,
+            ...[[data.NOMBRE_PRUEBA, data.CANTIDAD_TOTAL]],
+          ])
+        );
+      }
+    }
+  }, [ListDashboardSecundario]);
+  /* efecto para ejecutar el cambio de la data de la barra */
+  useEffect(() => {
+    if (ValueChangeGrupoBarras != "") {
+      ApiQueryListpruebaxGroup(cookie, ValueChangeGrupoBarras, SetListStatus);
+    }
+  }, [ValueChangeGrupoBarras]);
 
   return (
     <>
-      <div className={Styles.statistics}>
-        <Image
-          className={Styles.bg_image}
-          width={1980}
-          height={800}
-          src={"/img/photo-1614935151651-0bea6508db6b.avif"}
-        ></Image>
-        <section className={Styles.filters}>
-          <div className={Styles.content}>
-            {/* <h2 className={Styles.title}>Estadisticas</h2> */}
+      <Head>
+        <title>{"Estadística | Bitácora BD"}</title>
+        <meta
+          name="description"
+          content={
+            "Proporciona información, a partir del análisis de un grupo relativamente pequeño de datos, que refleja la naturaleza de un grupo mayor"
+          }
+        />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
-            <div className={Styles.inputs_container}>
-              <label className={Styles.filter_label}>Estadisticas Desde</label>
-              <LocalizationProvider
-                orientation="landscape"
-                dateAdapter={AdapterDayjs}
-                adapterLocale={"en-gb"}
-              >
-                <MobileDateTimePicker
-                  value={fecha}
-                  className="FechaHoraRecogida"
-                />
-              </LocalizationProvider>
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta property="og:type" content="website" />
+        <meta name="language" content="spanish" />
+        <meta name="geo.region" content="CO" />
+        <meta name="twitter:title" content="Estadística - Bitácora BD" />
+        <meta
+          name="twitter:description"
+          content="Proporciona información, a partir del análisis de un grupo relativamente pequeño de datos, que refleja la naturaleza de un grupo mayor"
+        ></meta>
+        <meta property="og:title" content="Estadística - Bitácora BD" />
+        <meta
+          property="og:description"
+          content="Proporciona información, a partir del análisis de un grupo relativamente pequeño de datos, que refleja la naturaleza de un grupo mayor"
+        />
+        <meta property="og:site_name" content="Bitácora BD" />
+        <meta property="og:locale" content="es_CO" />
+        <meta property="og:locale:alternate" content="es_CO" />
+      </Head>
 
-              <label className={Styles.filter_label}>Hasta</label>
-              <LocalizationProvider
-                orientation="landscape"
-                dateAdapter={AdapterDayjs}
-                adapterLocale={"en-gb"}
-              >
-                <MobileDateTimePicker
-                  value={fecha}
-                  className="FechaHoraRecogida"
-                />
-              </LocalizationProvider>
-
-              <button className={Styles.search_btn}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-search"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                  <path d="M21 21l-6 -6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        {/* circulos de informacion */}
-        <div className={Styles.content}>
-          <section className={Styles.circles}>
-            {/* <h2 className={Styles.title}>Hemocultivo</h2> */}
-
-            <div className={Styles.circles_container}>
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"30"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"10"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"40"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"50"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"80"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"98"}
-                success={546}
-                total={600}
-              />
-              <CircleInfo
-                title={"Hemocultivo"}
-                porcent={"25"}
-                success={546}
-                total={600}
-              ></CircleInfo>
-            </div>
-
-            <hr className={Styles.circle_hr} />
-          </section>
-
-          <div className={Styles.graphics}>
-            <section className={Styles.round_statics}>
-              <div>
-                <select name="" id="">
-                  <option value="" selected disabled>
-                    Seleccione un grupo
-                  </option>
-                </select>
-              </div>
-              <Chart
-                chartType="PieChart"
-                data={data}
-                options={options}
-                width={"100%"}
-                height={"450px"}
-              />
-            </section>
-            <section className={Styles.bar_statics}>
-              <div>
-                <select name="" id="">
-                  <option value="" selected disabled>
-                    Seleccione un grupo
-                  </option>
-                </select>
-                <select name="" id="">
-                  <option value="" selected disabled>
-                    Seleccione
-                  </option>
-                </select>
-              </div>
-              <Chart
-                chartType="Bar"
-                data={data}
-                options={options}
-                width={"100%"}
-                height={"400px"}
-              />
-            </section>
-          </div>
-        </div>
-      </div>
+      <Componentindex
+        fechaIni={fechaIni}
+        fechaFin={fechaFin}
+        ListDashboardPrinpal={ListDashboardPrinpal}
+        ListDashboardSecundario={ListDashboardSecundario}
+        ListDashboardTerciario={ListDashboardTerciario}
+        ListGroup={ListGroup}
+        ListStatus={ListStatus}
+        SetValueChangeGrupoTorta={SetValueChangeGrupoTorta}
+        SetValueChangeGrupoBarras={SetValueChangeGrupoBarras}
+        ValueChangeGrupoTorta={ValueChangeGrupoTorta}
+        ListDashboardSecundarioFilterComponent={
+          ListDashboardSecundarioFilterComponent
+        }
+      ></Componentindex>
     </>
   );
 }
 
-export default Index;
+export async function getServerSideProps(ctx) {
+  const cookie = ctx.req.cookies["tokenUserCookie"];
+  const RolUser = ctx.req.cookies["RolUserCookie"];
+  let Roles = null;
+  let Options = null;
+  if (cookie) {
+    if (RolUser != null && RolUser != undefined && RolUser != "") {
+      // RolUser.map((data)=>()){
+      // }
+      Roles = JSON.parse(RolUser);
+      Roles.map((data) => {
+        if (data == 1) {
+          Options = OptionAdministrator;
+        } else if (data == 2) {
+          Options = OptionTecnichal;
+        } else if (data == 3) {
+          Options = OptionAsiste;
+        } else if (data == 4) {
+          Options = OptionConsult;
+        } else {
+          Options = OptionDefault;
+        }
+      });
+    }
+
+    if (
+      ctx.query.DateIni == null ||
+      ctx.query.DateIni == undefined ||
+      ctx.query.DateEnd == null ||
+      ctx.query.DateEnd == undefined
+    ) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        cookie: cookie,
+        query: ctx.query,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: "/account/Login",
+      },
+    };
+  }
+}

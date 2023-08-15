@@ -313,12 +313,10 @@ export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
 };
 
 export const QueryDeleteResult = (Codigo_resultado_bitacora) => {
-  return userService
-    .DeleteResult(Codigo_resultado_bitacora)
-    .catch((error) => {
-      console.log(error, "erro in eliminar resultado");
-      return Swal.showValidationMessage(`Request failed: ${error}`);
-    });
+  return userService.DeleteResult(Codigo_resultado_bitacora).catch((error) => {
+    console.log(error, "erro in eliminar resultado");
+    return Swal.showValidationMessage(`Request failed: ${error}`);
+  });
 };
 
 export const QueryObserva = (cookie) => {
@@ -387,8 +385,8 @@ export const QueryJefeLaboratorio = (cookie) => {
   });
 };
 
-export const QueryTipoMuestra = (cookie, idGrupo ) => {
-  return userService.lstTipoMuestra(cookie,idGrupo).catch((error) => {
+export const QueryTipoMuestra = (cookie, idGrupo) => {
+  return userService.lstTipoMuestra(cookie, idGrupo).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -453,7 +451,6 @@ export const QuerySufijoGetAll = (cookie) => {
   });
 };
 
-
 export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
   return userService.ListMultipleMixPruxNum(cookie, idGroup).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
@@ -472,7 +469,90 @@ export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
       });
     }
 
-    console.log(error, "erro in listado multiple de pruebas, microorganismo y numero");
+    console.log(
+      error,
+      "erro in listado multiple de pruebas, microorganismo y numero"
+    );
     return error;
   });
+};
+
+export const QueryStatistics = (cookie, FechaIni, FechaFin) => {
+  return userService
+    .ListStatisticsGeneral(cookie, FechaIni, FechaFin)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta estadisticas");
+      return error;
+    });
+};
+
+export const QueryPruebasSimple = (cookie, idGroup) => {
+  return userService
+    .ListPruebasxGruposSample(cookie, idGroup)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta Pruebas x grupos en combo");
+      return error;
+    });
+};
+
+export const QueryUpdatePanelsecundary = (
+  cookie,
+  idGroup,
+  fechaini,
+  fechafin
+) => {
+  return userService
+    .ListUpdatePanelSecundary(cookie, idGroup, fechaini, fechafin)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta Pruebas x grupos en combo");
+      return error;
+    });
 };
