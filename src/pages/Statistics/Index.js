@@ -126,15 +126,18 @@ export default function Index({ cookie, query }) {
 
   useEffect(() => {
     if (ListDashboardTerciario != null && ListDashboardTerciario != undefined) {
+      debugger;
       if (ListDashboardTerciario.length > 0) {
         if (ListDashboardTerciarioFilterComponent.length > 0) {
           SetListDashboardTerciarioFilterComponent([]);
         }
         let contador = 1;
         let arrayComplete = [];
+        let variables = [];
+        let arrayResulAdd = [];
         ListDashboardTerciario.map((data) => {
           if (contador === 1) {
-            let variables = [];
+            variables = [];
             variables.push("Estatus");
             ListDashboardTerciario.map((item) => {
               if (!variables.some((d) => d == item.RESULTADO_PLANTILLA)) {
@@ -142,12 +145,34 @@ export default function Index({ cookie, query }) {
               }
             });
             arrayComplete.push(variables);
-          }else{
-            
+          }
+
+          if (!arrayResulAdd.some((index) => index == data.NOMBRE_PRUEBA)) {
+            arrayResulAdd.push(data.NOMBRE_PRUEBA);
+            let arrayTwo = [];
+
+            let newFilter = ListDashboardTerciario.filter(
+              (itemDa) => data.COD_PRUEBA == itemDa.COD_PRUEBA
+            );
+
+            arrayTwo.push(data.NOMBRE_PRUEBA);
+
+            variables.map((d) => {
+              debugger;
+              if (d != "Estatus") {
+                let search = newFilter.find((a) => a.RESULTADO_PLANTILLA == d);
+                if (search != undefined && search != null) {
+                  arrayTwo.push(search.CANTIDAD_TOTAL);
+                } else {
+                  arrayTwo.push(0);
+                }
+              }
+            });
+
+            arrayComplete.push(arrayTwo);
           }
           contador++;
         });
-        console.log(arrayComplete);
         SetListDashboardTerciarioFilterComponent(arrayComplete);
       }
     }
@@ -201,6 +226,9 @@ export default function Index({ cookie, query }) {
         fechaFormatIni={query.DateIni}
         fechaFormatFin={query.DateEnd}
         ValueChangePruebaBarras={ValueChangePruebaBarras}
+        ListDashboardTerciarioFilterComponent={
+          ListDashboardTerciarioFilterComponent
+        }
       ></Componentindex>
     </>
   );

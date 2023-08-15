@@ -61,5 +61,6 @@ export const ApiQueryUpdateDataStatusPanelTerciario = async (
     fechaini,
     fechafin
   );
+
   SetListDashboardTerciario(QueryConsulta.ListDasboarTertiary);
 };

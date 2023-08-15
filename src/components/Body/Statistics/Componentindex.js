@@ -24,16 +24,9 @@ function PageIndexStatisct({
   fechaFormatFin,
   ValueChangePruebaBarras,
   SetValueChangePruebaBarras,
+  ListDashboardTerciarioFilterComponent,
 }) {
-  const data2 = [
-    ["Estatus", ],
-    ["Hemocultivo", 11],
-    ["Prueba1", 2],
-    ["Prueba2", 2],
-    ["Prueba3", 2],
-    ["Prueba 4", 7],
-  ];
-
+  console.log(ListDashboardTerciarioFilterComponent);
   return (
     <>
       <div className={Styles.statistics}>
@@ -195,7 +188,6 @@ function PageIndexStatisct({
                   }}
                 >
                   <option value="">Seleccione un estatus</option>
-                  <option value="0">Todas los estatus</option>
                   {ListStatus != null && ListStatus != undefined
                     ? ListStatus.map((data, index) => (
                         <option key={index} value={data.COD_PRUEBA}>
@@ -205,10 +197,11 @@ function PageIndexStatisct({
                     : ""}
                 </select>
               </div>
-              {ValueChangePruebaBarras != "" ? (
+              {ValueChangePruebaBarras != "" &&
+              ListDashboardTerciarioFilterComponent.length > 0 ? (
                 <Chart
                   chartType="Bar"
-                  data={data2}
+                  data={ListDashboardTerciarioFilterComponent}
                   options={{
                     chart: {
                       title: "Estatus creados con un seguimiento",
