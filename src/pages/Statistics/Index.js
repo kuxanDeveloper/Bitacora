@@ -142,6 +142,8 @@ export default function Index({ cookie, query }) {
               }
             });
             arrayComplete.push(variables);
+          }else{
+            
           }
           contador++;
         });

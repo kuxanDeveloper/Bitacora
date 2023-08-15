@@ -89,7 +89,7 @@ function HRMenu({ Roles }) {
                       onClick={(e) => {
                         e.preventDefault();
                         if (SelectMenuEstadistica)
-                        setSelectMenuEstadistica(false);
+                          setSelectMenuEstadistica(false);
                         else setSelectMenuEstadistica(true);
                       }}
                     >
@@ -120,7 +120,7 @@ function HRMenu({ Roles }) {
                       onClick={(e) => {
                         e.preventDefault();
                         if (SelectMenuEstadistica)
-                        setSelectMenuEstadistica(false);
+                          setSelectMenuEstadistica(false);
                         else setSelectMenuEstadistica(true);
                       }}
                     >
@@ -131,12 +131,18 @@ function HRMenu({ Roles }) {
                         {Roles.UserConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
-                              href="/Statistics/Index"
+                              href={{
+                                pathname: "/Statistics",
+                                query: {
+                                  DateIni: FechaInitSearchDiffDays(15),
+                                  DateEnd: FechaInitSearchDiffDays(0),
+                                },
+                              }}
                               onClick={() => {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexBitacora")
+                                LocationUrl(router, "Statistics")
                                   ? Styles.active
                                   : ""
                               }`}
