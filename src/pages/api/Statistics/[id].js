@@ -1,8 +1,8 @@
-import { requestAsyncStorage } from "next/dist/client/components/request-async-storage";
 import {
   QueryStatistics,
   QueryPruebasSimple,
   QueryUpdatePanelsecundary,
+  QueryUpdatePanelTerciario,
 } from "../../../components/Tools/Security";
 
 export const ApiQueryStatistics = async (
@@ -11,15 +11,12 @@ export const ApiQueryStatistics = async (
   FechaFin,
   SetListDashboardPrinpal,
   SetListDashboardSecundario,
-  SetListDashboardTerciario,
   SetListGroup
 ) => {
   let QueryGeneral = await QueryStatistics(cookie, FechaIni, FechaFin);
 
   SetListDashboardPrinpal(QueryGeneral.ListDasboarMain);
   SetListDashboardSecundario(QueryGeneral.ListDasboarMinor);
-
-  SetListDashboardTerciario(QueryGeneral.ListDasboarTertiary);
   SetListGroup(QueryGeneral.ListGrupo);
 };
 
@@ -46,4 +43,23 @@ export const ApiQueryUpdateDataStatus = async (
     fechafin
   );
   SetListDashboardSecundario(QueryConsulta.ListDasboarMinor);
+};
+
+export const ApiQueryUpdateDataStatusPanelTerciario = async (
+  cookie,
+  idGroup,
+  idStatus,
+  fechaini,
+  fechafin,
+  SetListDashboardTerciario
+) => {
+
+  let QueryConsulta = await QueryUpdatePanelTerciario(
+    cookie,
+    idGroup,
+    idStatus,
+    fechaini,
+    fechafin
+  );
+  SetListDashboardTerciario(QueryConsulta.ListDasboarTertiary);
 };

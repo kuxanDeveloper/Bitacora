@@ -556,3 +556,35 @@ export const QueryUpdatePanelsecundary = (
       return error;
     });
 };
+
+export const QueryUpdatePanelTerciario = (
+  cookie,
+  idGroup,
+  idStatus,
+  fechaini,
+  fechafin
+) => {
+
+  return userService
+    .ListUpdatePanelTertiary(cookie, idGroup, idStatus, fechaini, fechafin)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta Pruebas x grupos en combo");
+      return error;
+    });
+};
