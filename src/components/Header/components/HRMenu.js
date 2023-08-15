@@ -12,6 +12,8 @@ function HRMenu({ Roles }) {
     setSelectMenuConfigracion,
     SelectMenuTrazabilidad,
     setSelectMenuTrazabilidad,
+    SelectMenuEstadistica,
+    setSelectMenuEstadistica,
   } = useContextBitacora();
   const router = useRouter();
 
@@ -21,6 +23,10 @@ function HRMenu({ Roles }) {
 
   useEffect(() => {
     setSelectMenuTrazabilidad(LocationUrl(router, "trazabilidad"));
+  }, []);
+
+  useEffect(() => {
+    setSelectMenuEstadistica(LocationUrl(router, "estadistica"));
   }, []);
 
   return (
@@ -44,7 +50,7 @@ function HRMenu({ Roles }) {
                   Home
                 </Link>
               </li>
-              <li className={Styles.nav_li}>
+              {/* <li className={Styles.nav_li}>
                 <Link
                   href="/Statistics/Index"
                   onClick={() => {
@@ -56,7 +62,106 @@ function HRMenu({ Roles }) {
                 >
                   Estadísticas
                 </Link>
-              </li>
+              </li> */}
+
+              {Roles != null ? (
+                Roles.MenuSetting ? (
+                  <li
+                    className={`${Styles.nav_li}  ${
+                      SelectMenuEstadistica ? Styles.selected : ""
+                    }`}
+                  >
+                    <button
+                      className={Styles.open_icon}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuEstadistica)
+                        setSelectMenuEstadistica(false);
+                        else setSelectMenuEstadistica(true);
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#ff6e00"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M16.375 6.22l-4.375 3.498l-4.375 -3.5a1 1 0 0 0 -1.625 .782v6a1 1 0 0 0 .375 .78l5 4a1 1 0 0 0 1.25 0l5 -4a1 1 0 0 0 .375 -.78v-6a1 1 0 0 0 -1.625 -.78z"
+                          strokeWidth="0"
+                          fill="#ff6e00"
+                        />
+                      </svg>
+                    </button>
+                    <Link
+                      href={"#"}
+                      className={`${Styles.nav_link} ${
+                        LocationUrl(router, "estadistica") ? Styles.active : ""
+                      } `}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (SelectMenuEstadistica)
+                        setSelectMenuEstadistica(false);
+                        else setSelectMenuEstadistica(true);
+                      }}
+                    >
+                      Metricas
+                    </Link>
+                    <div className={Styles.submenu}>
+                      <ul className={Styles.sub_ul}>
+                        {Roles.UserConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Statistics/Index"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexBitacora")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Estadisticas
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+                        {Roles.GroupConfigCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Statistics/IndexCsv?page=1"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexSistema")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Indicadores
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+                      </ul>
+                    </div>
+                  </li>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
               {/* 
               <li className={Styles.nav_li}>
                 <a href="" className={`${Styles.nav_link} `}>

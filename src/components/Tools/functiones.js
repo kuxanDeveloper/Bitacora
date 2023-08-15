@@ -259,6 +259,62 @@ export const FilterSearchTrazaTables = (
   });
 };
 
+export const FilterSearchCsvTables = (
+  event,
+  router,
+  DateAdmission,
+  FechaIngresoFinal,
+  valueGrupo
+) => {
+  event.preventDefault();
+
+  if (
+    DateAdmission == "" &&
+    FechaIngresoFinal == "" && valueGrupo == ""
+  ) {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar un filtro para iniciar la busqueda",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+    return;
+  }
+
+  if (DateAdmission != "" || FechaIngresoFinal != "") {
+
+    if (DateAdmission == "" && FechaIngresoFinal != "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha inicial si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+
+    if (DateAdmission != "" && FechaIngresoFinal == "") {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "Debe seleccionar la fecha final si desea realizar la busqueda de fechas en bloque",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+      return;
+    }
+  }
+
+  router.push({
+    pathname: `/Statistics/IndexCsv`,
+    query: {
+      dateinicial: DateAdmission,
+      dateFinal: FechaIngresoFinal,
+      page: "1",
+      grupo: valueGrupo
+    },
+  });
+};
+
 export const ClearFilter = (e, router, idGrupo, idAncestro) => {
   e.preventDefault();
   let urlHref = window.location.href;

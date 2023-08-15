@@ -163,6 +163,74 @@ export const QueryMueForGroup = (
     });
 };
 
+export const QueryFechaBit = (cookie, DateIni, DateFin, page,grupo) => {
+  return userService
+    .InfoFechaBitac(cookie,
+      DateIni == null ? "" : DateIni,
+      DateFin == null ? "" : DateFin,
+      page == null || page == undefined ? "1" : page,
+      grupo== null ? "" : grupo)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in active grupo");
+      return error;
+    });
+};
+
+export const CsvFechaBit = (Fecha_inicial,
+  Fecha_final,
+  Id_grupo) => {
+  return userService
+    .ExportcsvFechas(
+      Fecha_inicial == null ? "" : Fecha_inicial,
+      Fecha_final == null ? "" : Fecha_final,
+      Id_grupo == null ? "" : Id_grupo)
+      .then((response) => {
+        Swal.fire({
+          title: "Archivo csv guardado",
+          text: "Se encuntra en la ruta: " + response,
+          icon: "success",
+          confirmButtonText: "Cerrar",
+        });
+      })
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error in csv Fechas");
+      return error;
+    });
+};
+
+
 export const QueryMuestraEdit = (cookie, idSticker) => {
   return userService.InfoSample(cookie, idSticker).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
@@ -313,12 +381,10 @@ export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
 };
 
 export const QueryDeleteResult = (Codigo_resultado_bitacora) => {
-  return userService
-    .DeleteResult(Codigo_resultado_bitacora)
-    .catch((error) => {
-      console.log(error, "erro in eliminar resultado");
-      return Swal.showValidationMessage(`Request failed: ${error}`);
-    });
+  return userService.DeleteResult(Codigo_resultado_bitacora).catch((error) => {
+    console.log(error, "erro in eliminar resultado");
+    return Swal.showValidationMessage(`Request failed: ${error}`);
+  });
 };
 
 export const QueryObserva = (cookie) => {
@@ -387,8 +453,8 @@ export const QueryJefeLaboratorio = (cookie) => {
   });
 };
 
-export const QueryTipoMuestra = (cookie, idGrupo ) => {
-  return userService.lstTipoMuestra(cookie,idGrupo).catch((error) => {
+export const QueryTipoMuestra = (cookie, idGrupo) => {
+  return userService.lstTipoMuestra(cookie, idGrupo).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -453,7 +519,6 @@ export const QuerySufijoGetAll = (cookie) => {
   });
 };
 
-
 export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
   return userService.ListMultipleMixPruxNum(cookie, idGroup).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
@@ -472,7 +537,10 @@ export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
       });
     }
 
-    console.log(error, "erro in listado multiple de pruebas, microorganismo y numero");
+    console.log(
+      error,
+      "erro in listado multiple de pruebas, microorganismo y numero"
+    );
     return error;
   });
 };

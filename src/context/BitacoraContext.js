@@ -37,8 +37,7 @@ export const BicatoraContexProvider = ({ children }) => {
   const [FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL, setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL] = useState("");
   const [FECHA_HORA_VALIDACION_ANTIBIOGRAMA, setFECHA_HORA_VALIDACION_ANTIBIOGRAMA] = useState("");
   const [ESTADO_STICKER_bit, setESTADO_STICKER_bit] = useState(null);
-
-  
+  const [SelectMenuEstadistica, setSelectMenuEstadistica] = useState(false);  
 
   const origin =
     typeof window !== "undefined" && window.location.origin
@@ -153,7 +152,9 @@ export const BicatoraContexProvider = ({ children }) => {
         FECHA_HORA_VALIDACION_ANTIBIOGRAMA,
         setFECHA_HORA_VALIDACION_ANTIBIOGRAMA,
         ESTADO_STICKER_bit,
-        setESTADO_STICKER_bit
+        setESTADO_STICKER_bit,
+        SelectMenuEstadistica,
+        setSelectMenuEstadistica
       }}
     >
       {children}
