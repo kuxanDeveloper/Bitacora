@@ -3,7 +3,11 @@ import Styles from "../../../styles/Header.module.scss";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { LocationUrl, OnclickNAvToggle } from "../../Tools/functiones";
+import {
+  LocationUrl,
+  OnclickNAvToggle,
+  FechaInitSearchDiffDays,
+} from "../../Tools/functiones";
 function HRMenu({ Roles }) {
   const {
     MenuShow,
@@ -44,7 +48,10 @@ function HRMenu({ Roles }) {
                     OnclickNAvToggle(MenuShow, setMenuShow);
                   }}
                   className={`${Styles.nav_link} ${
-                    !LocationUrl(router, "configuration") && !LocationUrl(router, "Statistics")  ? Styles.active : ""
+                    !LocationUrl(router, "configuration") &&
+                    !LocationUrl(router, "Statistics")
+                      ? Styles.active
+                      : ""
                   }`}
                 >
                   Home
@@ -52,7 +59,13 @@ function HRMenu({ Roles }) {
               </li>
               {/* <li className={Styles.nav_li}>
                 <Link
-                  href="/Statistics/Index"
+                  href={{
+                    pathname: "/Statistics",
+                    query: {
+                      DateIni: FechaInitSearchDiffDays(15),
+                      DateEnd: FechaInitSearchDiffDays(0),
+                    },
+                  }}
                   onClick={() => {
                     OnclickNAvToggle(MenuShow, setMenuShow);
                   }}

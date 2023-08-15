@@ -544,3 +544,84 @@ export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
     return error;
   });
 };
+
+export const QueryStatistics = (cookie, FechaIni, FechaFin) => {
+  return userService
+    .ListStatisticsGeneral(cookie, FechaIni, FechaFin)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta estadisticas");
+      return error;
+    });
+};
+
+export const QueryPruebasSimple = (cookie, idGroup) => {
+  return userService
+    .ListPruebasxGruposSample(cookie, idGroup)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta Pruebas x grupos en combo");
+      return error;
+    });
+};
+
+export const QueryUpdatePanelsecundary = (
+  cookie,
+  idGroup,
+  fechaini,
+  fechafin
+) => {
+  return userService
+    .ListUpdatePanelSecundary(cookie, idGroup, fechaini, fechafin)
+    .catch((error) => {
+      if (error == "401: Token incorrecto o vencido") {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: "Por favor comunicarse con soporte técnico",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "erro in listado consulta Pruebas x grupos en combo");
+      return error;
+    });
+};
+

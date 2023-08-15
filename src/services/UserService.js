@@ -95,6 +95,9 @@ export const userService = {
   EditMicroorganismo,
   GetlistMicroorganismo,
   CrearResultBloq,
+  ListStatisticsGeneral,
+  ListPruebasxGruposSample,
+  ListUpdatePanelSecundary,
   InfoFechaBitac,
   InfoGroupCombo,
   ExportcsvFechas
@@ -693,7 +696,7 @@ function EditObservations(
   );
 }
 
-function InfoObservations(Cod_Observacion, cookie,page) {
+function InfoObservations(Cod_Observacion, cookie, page) {
   return fetchWrapper.get(
     `${baseUrl}/Observacion/GetlistObservacionPredeterminadas?Cod_Observacion=${Cod_Observacion}&EstadoObservacion=&page=${page}`,
     cookie
@@ -1214,6 +1217,31 @@ function EditMicroorganismo(ID, DESCRIPCION, ESTADO) {
 function GetlistMicroorganismo(ID, ESTADO, cookie, page) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistMiroOrganismo?ID=${ID}&ESTADO=${ESTADO}&page=${page}`,
+    cookie
+  );
+}
+
+function ListStatisticsGeneral(cookie, FechaIni, FechaFin) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/StatisticGeneral?FechaIni=${FechaIni}&FechaFin=${FechaFin}`,
+    cookie
+  );
+}
+
+function ListPruebasxGruposSample(cookie, idGroup) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InfoMultipleComboestatus?Id_grupo=${
+      idGroup == null || idGroup == undefined ? "" : idGroup
+    }`,
+    cookie
+  );
+}
+
+function ListUpdatePanelSecundary(cookie, idGroup, fechaini, fechafin) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/UpdatePanelSecundary?FechaIni=${fechaini}&FechaFin=${fechafin}&idGrupo=${
+      idGroup == null || idGroup == undefined ? "" : idGroup
+    }`,
     cookie
   );
 }

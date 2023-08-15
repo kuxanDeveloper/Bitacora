@@ -68,7 +68,6 @@ function EditStickerComponents({
   const [fecha, Setfecha] = useState("");
   
   useEffect(() => {
-    debugger;
     setisImagenExterna(true);
     setValueImagesrc(null);
     setValueImagesrc2(null);
