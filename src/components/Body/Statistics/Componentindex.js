@@ -12,8 +12,6 @@ import "dayjs/locale/es";
 import { ValidateSearchStatistic } from "../../Tools/functiones";
 function PageIndexStatisct({
   ListDashboardPrinpal,
-  ListDashboardSecundario,
-  ListDashboardTerciario,
   fechaIni,
   fechaFin,
   ListGroup,
@@ -22,22 +20,12 @@ function PageIndexStatisct({
   SetValueChangeGrupoTorta,
   ValueChangeGrupoTorta,
   ListDashboardSecundarioFilterComponent,
+  fechaFormatIni,
+  fechaFormatFin,
+  ValueChangePruebaBarras,
+  SetValueChangePruebaBarras,
+  ListDashboardTerciarioFilterComponent,
 }) {
-
-  console.log(ListDashboardSecundarioFilterComponent, "propio");
-  const data2 = [
-    ["Task", "Hours per Day"],
-    ["Hemocultivo", 11],
-    ["Prueba1", 2],
-    ["Prueba2", 2],
-    ["Prueba3", 2],
-    ["Prueba 4", 7],
-  ];
-
-  const options2 = {
-    title: "Estatus por grupo",
-  };
-
   return (
     <>
       <div className={Styles.statistics}>
@@ -179,6 +167,7 @@ function PageIndexStatisct({
                   defaultValue={""}
                   onChange={(e) => {
                     SetValueChangeGrupoBarras(e.target.value);
+                    document.getElementById("StatusBarrar").value = "";
                   }}
                 >
                   <option value="">Seleccione un grupo</option>
@@ -193,7 +182,9 @@ function PageIndexStatisct({
                 <select
                   name="StatusBarrar"
                   id="StatusBarrar"
-                  onChange={(e) => {}}
+                  onChange={(e) => {
+                    SetValueChangePruebaBarras(e.target.value);
+                  }}
                 >
                   <option value="">Seleccione un estatus</option>
                   {ListStatus != null && ListStatus != undefined
@@ -205,13 +196,23 @@ function PageIndexStatisct({
                     : ""}
                 </select>
               </div>
-              <Chart
-                chartType="Bar"
-                data={data2}
-                options={options2}
-                width={"100%"}
-                height={"400px"}
-              />
+              {ValueChangePruebaBarras != "" &&
+              ListDashboardTerciarioFilterComponent.length > 0 ? (
+                <Chart
+                  chartType="Bar"
+                  data={ListDashboardTerciarioFilterComponent}
+                  options={{
+                    chart: {
+                      title: "Estatus creados con un seguimiento",
+                      subtitle: `Segumientos registrados desde ${fechaFormatIni} hasta ${fechaFormatFin}`,
+                    },
+                  }}
+                  width={"100%"}
+                  height={"400px"}
+                />
+              ) : (
+                ""
+              )}
             </section>
           </div>
         </div>

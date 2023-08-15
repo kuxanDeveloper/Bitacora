@@ -22,8 +22,6 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
       document.getElementById("Ultima").style.pointerEvents = "none";      
     }
   },[pageObject]);
-  console.log(page);
-  console.log(pageObject);
   return (
     <>
       {/* pagination */}

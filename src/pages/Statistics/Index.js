@@ -12,20 +12,28 @@ import {
   ApiQueryStatistics,
   ApiQueryListpruebaxGroup,
   ApiQueryUpdateDataStatus,
+  ApiQueryUpdateDataStatusPanelTerciario,
 } from "../api/Statistics/[id]";
 import { strToDate } from "../../components/Tools/functiones";
-import { use } from "react";
 export default function Index({ cookie, query }) {
   const [fechaIni, SetfechaIni] = useState("");
   const [fechaFin, Setfechafin] = useState("");
   const [ValueChangeGrupoBarras, SetValueChangeGrupoBarras] = useState("");
+  const [ValueChangePruebaBarras, SetValueChangePruebaBarras] = useState("");
   const [ValueChangeGrupoTorta, SetValueChangeGrupoTorta] = useState("");
+
   const [ListDashboardPrinpal, SetListDashboardPrinpal] = useState([]);
   const [ListDashboardSecundario, SetListDashboardSecundario] = useState([]);
   const [
     ListDashboardSecundarioFilterComponent,
     SetListDashboardSecundarioFilterComponent,
   ] = useState([["Estatus", "Total"]]);
+
+  const [
+    ListDashboardTerciarioFilterComponent,
+    SetListDashboardTerciarioFilterComponent,
+  ] = useState([]);
+
   const [ListDashboardTerciario, SetListDashboardTerciario] = useState([]);
   const [ListGroup, SetListGroup] = useState([]);
   const [ListStatus, SetListStatus] = useState([]);
@@ -37,7 +45,6 @@ export default function Index({ cookie, query }) {
       query.DateEnd,
       SetListDashboardPrinpal,
       SetListDashboardSecundario,
-      SetListDashboardTerciario,
       SetListGroup
     );
     SetfechaIni(strToDate(query.DateIni).toISOString());
@@ -74,8 +81,8 @@ export default function Index({ cookie, query }) {
       );
     }
   }, [ValueChangeGrupoTorta]);
-  useEffect(() => {
 
+  useEffect(() => {
     if (
       ListDashboardSecundario != undefined &&
       ListDashboardSecundario != null
@@ -94,12 +101,80 @@ export default function Index({ cookie, query }) {
       }
     }
   }, [ListDashboardSecundario]);
+
   /* efecto para ejecutar el cambio de la data de la barra */
   useEffect(() => {
     if (ValueChangeGrupoBarras != "") {
       ApiQueryListpruebaxGroup(cookie, ValueChangeGrupoBarras, SetListStatus);
     }
   }, [ValueChangeGrupoBarras]);
+
+  useEffect(() => {
+    if (ValueChangePruebaBarras != "") {
+      ApiQueryUpdateDataStatusPanelTerciario(
+        cookie,
+        ValueChangeGrupoBarras,
+        ValueChangePruebaBarras,
+        query.DateIni,
+        query.DateEnd,
+        SetListDashboardTerciario
+      );
+    } else {
+      SetListDashboardTerciarioFilterComponent([]);
+    }
+  }, [ValueChangePruebaBarras]);
+
+  useEffect(() => {
+    if (ListDashboardTerciario != null && ListDashboardTerciario != undefined) {
+      if (ListDashboardTerciario.length > 0) {
+        if (ListDashboardTerciarioFilterComponent.length > 0) {
+          SetListDashboardTerciarioFilterComponent([]);
+        }
+        let contador = 1;
+        let arrayComplete = [];
+        let variables = [];
+        let arrayResulAdd = [];
+        ListDashboardTerciario.map((data) => {
+          if (contador === 1) {
+            variables = [];
+            variables.push("Estatus");
+            ListDashboardTerciario.map((item) => {
+              if (!variables.some((d) => d == item.RESULTADO_PLANTILLA)) {
+                variables.push(item.RESULTADO_PLANTILLA);
+              }
+            });
+            arrayComplete.push(variables);
+          }
+
+          if (!arrayResulAdd.some((index) => index == data.NOMBRE_PRUEBA)) {
+            arrayResulAdd.push(data.NOMBRE_PRUEBA);
+            let arrayTwo = [];
+
+            let newFilter = ListDashboardTerciario.filter(
+              (itemDa) => data.COD_PRUEBA == itemDa.COD_PRUEBA
+            );
+
+            arrayTwo.push(data.NOMBRE_PRUEBA);
+
+            variables.map((d) => {
+              if (d != "Estatus") {
+                let search = newFilter.find((a) => a.RESULTADO_PLANTILLA == d);
+                if (search != undefined && search != null) {
+                  arrayTwo.push(search.CANTIDAD_TOTAL);
+                } else {
+                  arrayTwo.push(0);
+                }
+              }
+            });
+
+            arrayComplete.push(arrayTwo);
+          }
+          contador++;
+        });
+        SetListDashboardTerciarioFilterComponent(arrayComplete);
+      }
+    }
+  }, [ListDashboardTerciario]);
 
   return (
     <>
@@ -137,8 +212,6 @@ export default function Index({ cookie, query }) {
         fechaIni={fechaIni}
         fechaFin={fechaFin}
         ListDashboardPrinpal={ListDashboardPrinpal}
-        ListDashboardSecundario={ListDashboardSecundario}
-        ListDashboardTerciario={ListDashboardTerciario}
         ListGroup={ListGroup}
         ListStatus={ListStatus}
         SetValueChangeGrupoTorta={SetValueChangeGrupoTorta}
@@ -146,6 +219,13 @@ export default function Index({ cookie, query }) {
         ValueChangeGrupoTorta={ValueChangeGrupoTorta}
         ListDashboardSecundarioFilterComponent={
           ListDashboardSecundarioFilterComponent
+        }
+        SetValueChangePruebaBarras={SetValueChangePruebaBarras}
+        fechaFormatIni={query.DateIni}
+        fechaFormatFin={query.DateEnd}
+        ValueChangePruebaBarras={ValueChangePruebaBarras}
+        ListDashboardTerciarioFilterComponent={
+          ListDashboardTerciarioFilterComponent
         }
       ></Componentindex>
     </>

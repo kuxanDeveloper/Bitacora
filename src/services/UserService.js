@@ -98,6 +98,7 @@ export const userService = {
   ListStatisticsGeneral,
   ListPruebasxGruposSample,
   ListUpdatePanelSecundary,
+  ListUpdatePanelTertiary,
   InfoFechaBitac,
   InfoGroupCombo,
   ExportcsvFechas,
@@ -1246,6 +1247,21 @@ function ListUpdatePanelSecundary(cookie, idGroup, fechaini, fechafin) {
     `${baseUrl}/Stickers/UpdatePanelSecundary?FechaIni=${fechaini}&FechaFin=${fechafin}&idGrupo=${
       idGroup == null || idGroup == undefined ? "" : idGroup
     }`,
+    cookie
+  );
+}
+
+function ListUpdatePanelTertiary(
+  cookie,
+  idGroup,
+  idStatus,
+  fechaini,
+  fechafin
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/UpdatePanelTertiary?FechaIni=${fechaini}&FechaFin=${fechafin}&idGrupo=${
+      idGroup == null || idGroup == undefined ? "" : idGroup
+    }&idStatus=${idStatus}`,
     cookie
   );
 }
