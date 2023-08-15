@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
-import filterStyles from "../../styles/filters.module.scss";
+import filterStyles from "../../../styles/filters.module.scss";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
   FilterSearchCsvTables
-} from "../Tools/functiones";
+} from "../../Tools/functiones";
 import "dayjs/locale/en-gb";
   import dayjs from "dayjs";
 

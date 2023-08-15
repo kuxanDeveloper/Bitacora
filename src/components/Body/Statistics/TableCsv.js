@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "../../styles/IndexUsers.module.scss";
-import styleTable from "../../styles/TableStyles.module.scss";
-import { ExportToExcelcsvFechasBit } from "../../pages/api/Sample/ViewDetailsGroup/[id]";
+import styles from "../../../styles/IndexUsers.module.scss";
+import styleTable from "../../../styles/TableStyles.module.scss";
+import { ExportToExcelcsvFechasBit } from "../../../pages/api/Sample/ViewDetailsGroup/[id]";
 import { useRouter } from "next/router";
-import Pagination from "../Tools/Pagination";
-import ImageOptimize from "../Tools/ImageOptimize";
+import Pagination from "../../Tools/Pagination";
+import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
 
 function TableCsv({ InforSampleDetails, FechaIngreso, FechaIngresoFinal,valueGrupo,query }) {

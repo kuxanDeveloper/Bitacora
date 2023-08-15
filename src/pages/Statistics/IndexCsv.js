@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
-import FilterCsv from "../../components/Statistics/FilterCsv";
-import TableCsv from "../../components/Statistics/TableCsv";
+import FilterCsv from "../../components/Body/Statistics/FilterCsv";
+import TableCsv from "../../components/Body/Statistics/TableCsv";
 import { SampleComboGroup } from "../api/Sample/ViewDetailsGroup/[id]";
 import Head from "next/head";
 import {
