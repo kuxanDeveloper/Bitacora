@@ -99,6 +99,9 @@ export const userService = {
   ListPruebasxGruposSample,
   ListUpdatePanelSecundary,
   ListUpdatePanelTertiary,
+  InfoFechaBitac,
+  InfoGroupCombo,
+  ExportcsvFechas
 };
 
 async function login(username, password) {
@@ -238,6 +241,16 @@ function ListGroupForMue(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
     cookie,
     formData
+  );
+}
+
+function InfoFechaBitac(cookie, DateIni,
+  DateFin,
+  page,
+  grupo) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/InformacionFechasBitacora?Fecha_ingreso=${DateIni}&Fecha_final=${DateFin}&page=${page}&idgrupo=${grupo}`,
+    cookie
   );
 }
 
@@ -474,6 +487,13 @@ function EditGroup(
 function InfoGroup(estado, idGrupo, cookie, page) {
   return fetchWrapper.get(
     `${baseUrl}/Grupos/ObtenerGruposFiltro?estado=${estado}&Id_GRUPO=${idGrupo}&page=${page}`,
+    cookie
+  );
+}
+
+function InfoGroupCombo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboGrupoFech`,
     cookie
   );
 }
@@ -1239,5 +1259,16 @@ function ListUpdatePanelTertiary(
       idGroup == null || idGroup == undefined ? "" : idGroup
     }&idStatus=${idStatus}`,
     cookie
+  );
+}
+
+function ExportcsvFechas(
+  Fecha_inicial,
+  Fecha_final,
+  Id_grupo
+) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ExportCsvExcelFecha?FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Id_grupo=${Id_grupo}`,
+    null
   );
 }

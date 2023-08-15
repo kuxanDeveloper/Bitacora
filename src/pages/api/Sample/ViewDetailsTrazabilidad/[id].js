@@ -5,6 +5,10 @@ import {
   getExportToExcelSistema,
 } from "../../../../components/Tools/DetailsTrazabilidad";
 
+import {
+  QueryFechaBit
+} from "../../../../components/Tools/Security";
+
 export const SampleDetailsTrazaBit = async (
   setLInforSampleDetails,
   cookie,
@@ -47,6 +51,24 @@ export const SampleDetailsTrazaTabl = async (
     usuario_Traza,
     page,
     Mes
+  );
+  setLInforSampleDetails(inforSample);
+};
+
+export const SampleDetailsFechaBitc = async (
+  setLInforSampleDetails,
+  cookie,
+  dateinicial,
+  dateFinal,
+  page,
+  grupo
+) => {
+  let inforSample = await QueryFechaBit(
+  cookie,
+  dateinicial,
+  dateFinal,
+  page,
+  grupo
   );
   setLInforSampleDetails(inforSample);
 };

@@ -151,6 +151,36 @@ export const getListGroup = (estado, idGrupo, cookie, page) => {
     });
 };
 
+export const getGroupCombo = (cookie) => {
+  return userService
+    .InfoGroupCombo(
+      cookie
+    )
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error al obterner la inforamcion del grupo combo");
+    });
+};
+
 export const getInfoPruebasXGrupo = (cookie, Id_grupo) => {
   return userService
     .InfoPruebasXGrupo(cookie, Id_grupo == null ? "" : Id_grupo)
