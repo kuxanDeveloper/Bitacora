@@ -91,9 +91,9 @@ function ListPrueba({
           <option value={""} selected>
             Seleccione un estatus
           </option>
-          {InforOptionsSelc.listadoPrueba != null &&
-          InforOptionsSelc.listadoPrueba != undefined
-            ? InforOptionsSelc.listadoPrueba.map((data, index) => (
+          {InforOptionsSelc != null &&
+          InforOptionsSelc != undefined
+            ? InforOptionsSelc.map((data, index) => (
                 <option key={index} value={data.COD_PRUEBA}>
                   {data.NOMBRE_PRUEBA}
                 </option>

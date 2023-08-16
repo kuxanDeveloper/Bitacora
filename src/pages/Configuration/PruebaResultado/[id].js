@@ -4,7 +4,7 @@ import EditPrueba from "../../../components/Body/PruebaResult/Edit";
 import {
   SampleDetailsPruebasResult,
   SampleDetailsPlantillasXPruebaResult,
-  SampleDetailsPlantillaResult,
+  SampleListPlantillaCombo,
 } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
@@ -27,7 +27,7 @@ function CreatePage({ cookie, id }) {
 
   const [InforOptionsSelc, setLInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPlantillaResult(setLInforOptionsSelc, cookie, "");
+    SampleListPlantillaCombo(setLInforOptionsSelc, cookie);
   }, []);
 
   return (
@@ -64,11 +64,7 @@ function CreatePage({ cookie, id }) {
       </Head>
       <EditPrueba
         InfoPrueba={InforSampleDetails}
-        InforOptionsSelc={
-          InforOptionsSelc != null && InforOptionsSelc != undefined
-            ? InforOptionsSelc.listadoPlantilla
-            : []
-        }
+        InforOptionsSelc={InforOptionsSelc}
         InforPlantillasXPrueba={InforPlantillasXPrueba}
         idPrueba={id}
       ></EditPrueba>

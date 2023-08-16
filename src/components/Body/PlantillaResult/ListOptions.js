@@ -89,14 +89,13 @@ function ListOptions({ListOpciones, setListOpciones,InforOptionsSelc,InforOption
         className={styles.group_input}
         >
             <option value={""} selected>Seleccione una opcion</option>
-        {InforOptionsSelc != null && InforOptionsSelc != undefined ? 
-        InforOptionsSelc.listadoOpciones != null &&
-                InforOptionsSelc.listadoOpciones != undefined
-                  ? InforOptionsSelc.listadoOpciones.map((data, index) => (
+        {InforOptionsSelc != null &&
+                InforOptionsSelc != undefined
+                  ? InforOptionsSelc.map((data, index) => (
 
                         <option key={index} value={data.COD_OPCIONES}>{data.OPCION_DESCRIPCION}</option>
 
-                  )) : "": ""}
+                  )) : ""}
         </select>
         
 

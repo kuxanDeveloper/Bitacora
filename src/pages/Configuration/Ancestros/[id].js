@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditAncestro from "../../../components/Body/Ancestro/Edit";
 import {
-  SampleDetailsGroup,
+  SampleListGroupCombo,
   SampleDetailsAncestro,
   SampleDetailsGruposXAncestro,
 } from "../../api/Sample/ViewDetailsAncestro/[id]";
@@ -17,7 +17,7 @@ import {
 function CreatePage({ cookie, id }) {
   const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+    SampleListGroupCombo(setInforOptionsSelc, cookie);
   }, []);
 
   const [InfoAncestro, setInfoAncestro] = useState([]);

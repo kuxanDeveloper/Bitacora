@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditPlantilla from "../../../components/Body/PlantillaResult/Edit";
-import { SampleDetailsPlantillaResult,SampleDetailsOptionsXPruebaResult, SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import { SampleDetailsPlantillaResult,SampleDetailsOptionsXPruebaResult, SampleListOptionCmb } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -23,7 +23,7 @@ function CreatePage({ cookie, id }) {
 
   const [InforOptionsSelc, setLInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforOptionsSelc, cookie, "");   
+    SampleListOptionCmb(setLInforOptionsSelc, cookie);   
   }, []);
 
   return (

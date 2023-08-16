@@ -1,15 +1,18 @@
 import { empty } from "rxjs";
 import {
     getListOption,
+    getListOptionCmb
    } from "../../../../components/Tools/crudOptionResult";
 
    import {
     getListPlantilla,
+    getCmbPlantilla,
     getInfoOpcionesXPlantilla
    } from "../../../../components/Tools/crudPlantillaResult";
 
    import {
     getListPrueba,
+    getCmbPrueba,
     getInfoPlantillasXPrueba
    } from "../../../../components/Tools/crudPruebasResult";
 
@@ -22,10 +25,23 @@ import {
      setLInforSampleDetails(inforSample);
    };
 
+   export const SampleListOptionCmb = async (setLInforOptionsSelc,cookie) => {
+    let inforSample = await getListOptionCmb(cookie);
+    setLInforOptionsSelc(inforSample);
+  };
+   
+
    export const SampleDetailsPlantillaResult = async (setLInforSampleDetails,cookie,Idplantilla, page) => {
     let inforSample = await getListPlantilla(cookie,Idplantilla, page);
     setLInforSampleDetails(inforSample);
   };
+
+  export const SampleListPlantillaCombo = async (setLInforSampleDetails,cookie) => {
+    let inforSample = await getCmbPlantilla(cookie);
+    setLInforSampleDetails(inforSample);
+  };
+
+  
 
   export const SampleDetailsOptionsXPruebaResult = async (setInforOptionsXpruebas,cookie,Id_Plantilla) => {
     let inforSample = await getInfoOpcionesXPlantilla(cookie,Id_Plantilla);
@@ -36,6 +52,12 @@ import {
     let inforSample = await getListPrueba(cookie,Codprueba, page);
     setLInforSampleDetails(inforSample);
   };
+
+  export const SamplelistPruebasCombo = async (setInforOptionsSelc,cookie) => {
+    let inforSample = await getCmbPrueba(cookie);
+    setInforOptionsSelc(inforSample);
+  };
+  
 
   export const SampleDetailsPruebasGrupResult = async (setInforOptionsSelc,cookie,Codprueba) => {
     let inforSample = await getListPrueba(cookie,Codprueba);

@@ -802,13 +802,13 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
            }
          })}
           </select>` +
-          `<textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+          `<br><br><textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
           placeholder="${
             data.ESTADO_STICKER
               ? "Deje una observación para el cierre de la orden..."
               : "Deje una observación del porqué abre la orden..."
           }"                         cols="30"
-          rows="10"></textarea>`,
+          rows="50"></textarea>`,
 
         customClass: {
           cancelButton: "HidenLoaderCancel",
@@ -895,7 +895,7 @@ export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
 
   var cmbsitioAnt = document.getElementById("SitioAnatomico");
   var cmbtipoMue = document.getElementById("tipoMuestra");
-
+debugger;
   if (cmbgrupo.value == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({

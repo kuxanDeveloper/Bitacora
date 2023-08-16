@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import CreateAncestro from "../../../components/Body/Ancestro/Create";
-import { SampleDetailsGroup } from "../../api/Sample/ViewDetailsAncestro/[id]";
+import { SampleListGroupCombo } from "../../api/Sample/ViewDetailsAncestro/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -14,7 +14,7 @@ function CreatePage(cookie) {
 
     const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
     useEffect(() => {
-        SampleDetailsGroup(setInforOptionsSelc, cookie, "");
+      SampleListGroupCombo(setInforOptionsSelc, cookie);
       }, []);
 
   

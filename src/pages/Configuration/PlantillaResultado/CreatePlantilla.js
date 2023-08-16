@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Head from "next/head";
 import CreatePlantilla from "../../../components/Body/PlantillaResult/Create";
-import { SampleDetailsOptionResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import { SampleListOptionCmb } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -14,7 +14,7 @@ function CreatePage(cookie) {
 
     const [InforOptionsSelc, setLInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsOptionResult(setLInforOptionsSelc, cookie, "");   
+    SampleListOptionCmb(setLInforOptionsSelc, cookie);   
   }, []);
 
   

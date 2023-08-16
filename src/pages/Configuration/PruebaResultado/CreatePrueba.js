@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import CreatePrueba from "../../../components/Body/PruebaResult/Create";
-import { SampleDetailsPlantillaResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import { SampleListPlantillaCombo } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -13,7 +13,7 @@ import {
 function CreatePage(cookie) {
   const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPlantillaResult(setInforOptionsSelc, cookie, "");
+    SampleListPlantillaCombo(setInforOptionsSelc, cookie);
   }, []);
 
 

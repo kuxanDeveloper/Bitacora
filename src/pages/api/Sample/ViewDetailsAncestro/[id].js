@@ -3,11 +3,12 @@ import {
    } from "../../../../components/Tools/crudAncestro";
 
    import {
-    getListGroup
+    getListGroup,
+    getCmbGroup
   } from "../../../../components/Tools/crudGroup";
 
-   export const SampleDetailsAncestro = async (setInfoAncestro,cookie,COD_ANCESTRO, page) => {
-     let inforSample = await GetlistAncestro(cookie,COD_ANCESTRO, page);
+   export const SampleDetailsAncestro = async (setInfoAncestro,cookie,COD_ANCESTRO, page,ESTADO_ANCESTRO) => {
+     let inforSample = await GetlistAncestro(cookie,COD_ANCESTRO, page,ESTADO_ANCESTRO);
      setInfoAncestro(inforSample);
    };
 
@@ -20,3 +21,9 @@ import {
     let inforSample = await getListGroup("",Id,cookie);
     setInforOptionsSelc(inforSample.EdicionGrupo);
   };
+
+  export const SampleListGroupCombo = async (setInforOptionsSelc,cookie) => {
+    let inforSample = await getCmbGroup(cookie);
+    setInforOptionsSelc(inforSample);
+  };
+  

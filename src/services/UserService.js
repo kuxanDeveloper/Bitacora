@@ -102,7 +102,11 @@ export const userService = {
   InfoFechaBitac,
   InfoGroupCombo,
   ExportcsvFechas,
-  ValidNumSticker
+  ValidNumSticker,
+  CombogrupoActivo,
+  CombopruebaActivo,
+  ComboplantillaActivo,
+  ComboopcionesActivo,
 };
 
 async function login(username, password) {
@@ -1012,9 +1016,9 @@ function EditAncestro(
   );
 }
 
-function GetlistAncestro(cookie, COD_ANCESTRO, page) {
+function GetlistAncestro(cookie, COD_ANCESTRO, page,ESTADO_ANCESTRO) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=&page=${page}`,
+    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=${ESTADO_ANCESTRO}&page=${page}`,
     cookie
   );
 }
@@ -1280,6 +1284,34 @@ function ExportcsvFechas(
 function ValidNumSticker(cookie, num_stricker, estadobit) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ValidacionFiltroNumeroSticker?num_stricker=${num_stricker}&estadobit=${estadobit}`,
+    cookie
+  );
+}
+
+function CombogrupoActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboGrupoActv`,
+    cookie
+  );
+}
+
+function CombopruebaActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboPruebaActv`,
+    cookie
+  );
+}
+
+function ComboplantillaActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboPlantillaActv`,
+    cookie
+  );
+}
+
+function ComboopcionesActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboOpcionesActv`,
     cookie
   );
 }
