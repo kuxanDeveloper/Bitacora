@@ -101,7 +101,12 @@ export const userService = {
   ListUpdatePanelTertiary,
   InfoFechaBitac,
   InfoGroupCombo,
-  ExportcsvFechas
+  ExportcsvFechas,
+  ValidNumSticker,
+  CombogrupoActivo,
+  CombopruebaActivo,
+  ComboplantillaActivo,
+  ComboopcionesActivo,
 };
 
 async function login(username, password) {
@@ -215,8 +220,9 @@ function ListGroupForMue(
   NumeroSticker,
   FechaINgreso,
   Cod_sticker,
-  page
-) {
+  page,
+  tipoSearch
+  ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
   formData.append("Grupo_sticker", idGroup);
@@ -236,6 +242,8 @@ function ListGroupForMue(
   formData.append("COD_BITACORA", Cod_sticker);
 
   formData.append("page", page);
+
+  formData.append("tipoSearch", tipoSearch);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -1008,9 +1016,9 @@ function EditAncestro(
   );
 }
 
-function GetlistAncestro(cookie, COD_ANCESTRO, page) {
+function GetlistAncestro(cookie, COD_ANCESTRO, page,ESTADO_ANCESTRO) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=&page=${page}`,
+    `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=${ESTADO_ANCESTRO}&page=${page}`,
     cookie
   );
 }
@@ -1270,5 +1278,40 @@ function ExportcsvFechas(
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ExportCsvExcelFecha?FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Id_grupo=${Id_grupo}`,
     null
+  );
+}
+
+function ValidNumSticker(cookie, num_stricker, estadobit) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ValidacionFiltroNumeroSticker?num_stricker=${num_stricker}&estadobit=${estadobit}`,
+    cookie
+  );
+}
+
+function CombogrupoActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboGrupoActv`,
+    cookie
+  );
+}
+
+function CombopruebaActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboPruebaActv`,
+    cookie
+  );
+}
+
+function ComboplantillaActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboPlantillaActv`,
+    cookie
+  );
+}
+
+function ComboopcionesActivo(cookie) {
+  return fetchWrapper.get(
+    `${baseUrl}/Stickers/ComboOpcionesActv`,
+    cookie
   );
 }

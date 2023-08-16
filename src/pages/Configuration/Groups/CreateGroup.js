@@ -8,15 +8,15 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { SampleDetailsPruebasResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import { SamplelistPruebasCombo } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 
 function CreatePage(cookie) {
 
-  const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPruebasResult(setLInforSampleDetails, cookie, "");
+    SamplelistPruebasCombo(setInforOptionsSelc, cookie);
   }, []);
-
+  console.log(InforOptionsSelc);
   return (
     <>
       <Head>
@@ -49,7 +49,7 @@ function CreatePage(cookie) {
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateGroup InforOptionsSelc={InforSampleDetails}></CreateGroup>
+      <CreateGroup InforOptionsSelc={InforOptionsSelc}></CreateGroup>
     </>
   );
 }

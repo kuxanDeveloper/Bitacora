@@ -24,7 +24,8 @@ export const ApiQueryGeneralSample = async (
   setListadoGetFullSufijo,
   idAncestro,
   setListaAncestros,
-  page
+  page,
+  tipoSearch
 ) => {
   let Lisgrupo = await QueryGroupList(cookie,idAncestro);
   setListadoGrupo(Lisgrupo);
@@ -35,7 +36,8 @@ export const ApiQueryGeneralSample = async (
     Numstiker,
     DateAdmission,
     Cod_sticker,
-    page
+    page,
+    tipoSearch
   );
   setListadoMuestraActivo(listActivoMue.LstBitacora);
   setListadoResultadoxMuestra(listActivoMue.ListResultxBitacora);
@@ -47,7 +49,8 @@ export const ApiQueryGeneralSample = async (
     Numstiker,
     DateAdmission,
     Cod_sticker,
-    page
+    page,
+    tipoSearch
   );
 
   setListadoMuestraInactivo(listInactimue.LstBitacora);

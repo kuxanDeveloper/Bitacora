@@ -155,6 +155,7 @@ export default function Home({
           idAncestro={idAncst}
           HasValue={HasValue}
           setHasValue={setHasValue}
+          cookie={cookie}
         ></Filters>
       ) : (
         ""

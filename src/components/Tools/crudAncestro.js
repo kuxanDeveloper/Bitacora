@@ -106,9 +106,9 @@ export const onSubmitUpdateAncestro = ({
     });
 };
 
-export const GetlistAncestro = (cookie, COD_ANCESTRO, page) => {
+export const GetlistAncestro = (cookie, COD_ANCESTRO, page,ESTADO_ANCESTRO) => {
   return userService
-    .GetlistAncestro(cookie, COD_ANCESTRO == null ? "" : COD_ANCESTRO, page)
+    .GetlistAncestro(cookie, COD_ANCESTRO == null ? "" : COD_ANCESTRO, page,ESTADO_ANCESTRO == null ? "" : ESTADO_ANCESTRO)
     .catch((error) => {
       if (
         error == "Límite de tiempo excedido" ||

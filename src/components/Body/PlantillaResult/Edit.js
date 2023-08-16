@@ -130,12 +130,7 @@ function ComponentGroup({
                           <ListOption
                             ListOpciones={ListOpciones}
                             setListOpciones={setListOpciones}
-                            InforOptionsSelc={
-                              InforOptionsSelc != null &&
-                              InforOptionsSelc != undefined
-                                ? InforOptionsSelc.listadoOpciones
-                                : []
-                            }
+                            InforOptionsSelc={InforOptionsSelc}
                             InforOptionsXpruebas={InforOptionsXpruebas}
                           ></ListOption>
 

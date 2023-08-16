@@ -13,7 +13,7 @@ import IndexComponentAdmin from "../components/RolesComponents/Ancestro/IndexCom
 export default function Home({ cookie }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "", "1");
+    SampleDetailsAncestro(setInfoAncestro, cookie, "", "1","1");
   }, []);
   return (
     <>

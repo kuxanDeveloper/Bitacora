@@ -1,6 +1,7 @@
 import {
   CloseCaseSample,
   DeleteResultSegm,
+  ValidNumeroSticker,
 } from "../../pages/api/Sample/ViewDetails/[id]";
 import Router from "next/router";
 import "dayjs/locale/en-gb";
@@ -81,22 +82,25 @@ export const backhistory = () => {
 
 export const FilterQuerySearch = (
   event,
-  id,
+  router,
+  // id,
   Numstiker,
   DateAdmission,
-  idAncest
+  idAncest,
+  cookie,
+  estd
 ) => {
   event.preventDefault();
-
-  if (id == "") {
-    Swal.fire({
-      title: "¡Advertencia!",
-      text: "Debes seleccionar un grupo para poder realizar la búsqueda...",
-      icon: "warning",
-      confirmButtonText: "Cerrar",
-    });
-    return;
-  }
+debugger;
+  // if (id == "") {
+  //   Swal.fire({
+  //     title: "¡Advertencia!",
+  //     text: "Debes seleccionar un grupo para poder realizar la búsqueda...",
+  //     icon: "warning",
+  //     confirmButtonText: "Cerrar",
+  //   });
+  //   return;
+  // }
 
   if (Numstiker == "" && DateAdmission == "") {
     Swal.fire({
@@ -111,16 +115,23 @@ export const FilterQuerySearch = (
   idAncest =
     idAncest == 0 || idAncest == undefined || idAncest == "" ? 1 : idAncest;
 
-  Router.push({
-    pathname: "/[id]",
-    query: {
-      id: id,
-      Numstiker: Numstiker,
-      DateAdmission: DateAdmission,
-      idAncestro: idAncest,
-      page: "1",
-    },
-  });
+    const rpt = ValidNumeroSticker(
+      cookie,
+      Numstiker,
+      estd,
+      idAncest
+    );
+
+  // Router.push({
+  //   pathname: "/[id]",
+  //   query: {
+  //     id: id,
+  //     Numstiker: Numstiker,
+  //     DateAdmission: DateAdmission,
+  //     idAncestro: idAncest,
+  //     page: "1",
+  //   },
+  // });
 };
 
 export const Recharge_home_ancestro = (event, router, idAncestro) => {
@@ -791,13 +802,13 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
            }
          })}
           </select>` +
-          `<textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+          `<br><br><textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
           placeholder="${
             data.ESTADO_STICKER
               ? "Deje una observación para el cierre de la orden..."
               : "Deje una observación del porqué abre la orden..."
           }"                         cols="30"
-          rows="10"></textarea>`,
+          rows="50"></textarea>`,
 
         customClass: {
           cancelButton: "HidenLoaderCancel",
@@ -884,7 +895,7 @@ export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
 
   var cmbsitioAnt = document.getElementById("SitioAnatomico");
   var cmbtipoMue = document.getElementById("tipoMuestra");
-
+debugger;
   if (cmbgrupo.value == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({

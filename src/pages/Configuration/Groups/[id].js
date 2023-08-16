@@ -9,7 +9,7 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { SampleDetailsPruebasGrupResult,SampleDetailsPruebasXGrupoResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import { SamplelistPruebasCombo,SampleDetailsPruebasXGrupoResult } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
 
 function CreatePage({ cookie, id }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
@@ -22,7 +22,7 @@ function CreatePage({ cookie, id }) {
 
   const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
   useEffect(() => {
-    SampleDetailsPruebasGrupResult(setInforOptionsSelc, cookie, "");
+    SamplelistPruebasCombo(setInforOptionsSelc, cookie);
   }, []);
 
   const [InforPruebasXGrupo, setInforPruebasXGrupo] = useState([]);

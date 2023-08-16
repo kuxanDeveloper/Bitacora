@@ -129,7 +129,8 @@ export const QueryMueForGroup = (
   Numstiker,
   DateAdmission,
   Cod_sticker,
-  page
+  page,
+  tipoSearch
 ) => {
   return userService
     .ListGroupForMue(
@@ -139,7 +140,8 @@ export const QueryMueForGroup = (
       Numstiker,
       DateAdmission,
       Cod_sticker,
-      page
+      page,
+      tipoSearch
     )
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {
@@ -382,6 +384,13 @@ export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
 
 export const QueryDeleteResult = (Codigo_resultado_bitacora) => {
   return userService.DeleteResult(Codigo_resultado_bitacora).catch((error) => {
+    console.log(error, "erro in eliminar resultado");
+    return Swal.showValidationMessage(`Request failed: ${error}`);
+  });
+};
+
+export const ValidNumSticker = (cookie, num_stricker, estadobit) => {
+  return userService.ValidNumSticker(cookie, num_stricker, estadobit).catch((error) => {
     console.log(error, "erro in eliminar resultado");
     return Swal.showValidationMessage(`Request failed: ${error}`);
   });

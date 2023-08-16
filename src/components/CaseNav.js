@@ -28,6 +28,7 @@ export default function CaseNav({
       newObje.DateAdmission = obj.DateAdmission;
       newObje.result = obj.result;
       newObje.URS = obj.URS;
+      newObje.tipoSearch = obj.tipoSearch;
     }
 
     return newObje;

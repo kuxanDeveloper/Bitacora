@@ -119,11 +119,7 @@ function ComponentGroup({ InforOptionsSelc }) {
                   <ListPlantilla
                     ListPlantillas={ListPlantillas}
                     setListPlantillas={setListPlantillas}
-                    InforOptionsSelc={
-                      InforOptionsSelc != null && InforOptionsSelc != undefined
-                        ? InforOptionsSelc.listadoPlantilla
-                        : []
-                    }
+                    InforOptionsSelc={InforOptionsSelc}
                   ></ListPlantilla>
 
                   <div className={styles.btn_container_send}>
