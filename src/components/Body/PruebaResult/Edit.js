@@ -83,7 +83,7 @@ function ComponentGroup({
                               <input
                                 {...register("Nombre_prueba")}
                                 name="Nombre_prueba"
-                                maxLength="100"
+                                maxLength="200"
                                 type="text"
                                 min="0"
                                 className={styles.group_input}
