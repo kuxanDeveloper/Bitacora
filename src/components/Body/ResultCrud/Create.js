@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
@@ -12,8 +12,8 @@ import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
 import ListResulltAdd from "./ListResulltAdd";
-
-import Image from "next/image";
+import Select from "react-select";
+import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentCreateResult({
   ListPruebas,
   ListResultados,
@@ -39,23 +39,60 @@ function ComponentCreateResult({
       .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe por lo menos tener un estatus agregado"),
   });
+
+  console.log(ListAddResultMultple);
   const [ComboDynamic, setComboDynamic] = useState(false);
   const [ListSelectDimanyc, setListSelectDimanyc] = useState([]);
+  const [selectobjeEstatus, SetselectobjeEstatus] = useState({});
+  const [selectobjeSeguimiento, SetselectobjeSeguimiento] = useState(null);
+  const [selectobjeopciones, Setselectobjeopciones] = useState(null);
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, formState, setValue, clearErrors, setError } =
+  const { handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
   const { errors } = formState;
+  const optionStatus = [];
+  const optionSegumiento = [];
+  const optionOpciones = [];
+
+  if (ListPruebas != null && ListPruebas != undefined) {
+    ListPruebas.map((data) =>
+      optionStatus.push({ value: data.COD_PRUEBA, label: data.NOMBRE_PRUEBA })
+    );
+  }
+
+  if (ListResultados != null && ListResultados != undefined) {
+    ListResultados.map((data) =>
+      optionSegumiento.push({
+        value: data.COD_PLANTILLA,
+        label: data.RESULTADO_PLANTILLA,
+      })
+    );
+  }
+
+  if (ListOptiones != undefined && ListOptiones != null) {
+    if (ListOptiones.length > 0) {
+      ListOptiones.map((data) =>
+        optionOpciones.push({
+          value: data.COD_OPCIONES,
+          label: data.OPCION_DESCRIPCION,
+        })
+      );
+    }
+  }
 
   return (
     <>
       <section className={styles.Create_Result}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
@@ -144,15 +181,18 @@ function ComponentCreateResult({
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Estatus</label>
-
-                      <select
-                        {...register("Codigo_prueba")}
+                      <Select
+                        instanceId={"Codigo_prueba"}
                         name="Codigo_prueba"
                         id="Codigo_prueba"
                         defaultValue={""}
-                        className={styles.group_input}
+                        // className={styles.group_input}
                         onChange={(e) => {
-                          setvaluePruebachange(e.target.value);
+                          SetselectobjeEstatus({
+                            value: e.value,
+                            text: e.label,
+                          });
+                          setvaluePruebachange(e.value);
                           onclickPruebaTargetCreate(
                             setvaluePlantillachange,
                             setValue,
@@ -163,18 +203,9 @@ function ComponentCreateResult({
                           setListSelectDimanyc(false);
                           clearErrors("Codigo_prueba");
                         }}
-                      >
-                        <option disabled value="">
-                          Seleccione un estatus
-                        </option>
-                        {ListPruebas != null && ListPruebas != undefined
-                          ? ListPruebas.map((data, index) => (
-                              <option key={index} value={data.COD_PRUEBA}>
-                                {`${data.NOMBRE_PRUEBA}`}
-                              </option>
-                            ))
-                          : ""}
-                      </select>
+                        options={optionStatus}
+                        placeholder="Seleccione un estatus"
+                      ></Select>
 
                       <div className={styles.invalid_feedback}>
                         {errors.Codigo_prueba?.message}
@@ -185,17 +216,20 @@ function ComponentCreateResult({
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Seguimiento</label>
-                      <select
-                        {...register("Codigo_resultado_preliminar_1")}
+                      <Select
+                        instanceId={"Codigo_resultado_preliminar_1"}
                         name="Codigo_resultado_preliminar_1"
                         id="Codigo_resultado_preliminar_1"
-                        className={styles.group_input}
                         defaultValue={""}
                         onChange={(e) => {
-                          setvaluePlantillachange(e.target.value);
+                          SetselectobjeSeguimiento({
+                            value: e.value,
+                            label: e.label,
+                          });
+                          setvaluePlantillachange(e.value);
                           onclickPlantillaTargetCreate(setValue);
                           ComboDinamyc(
-                            e.target.id,
+                            e.label,
                             ListMicroorganismo,
                             ListNumber,
                             setListSelectDimanyc,
@@ -204,83 +238,93 @@ function ComponentCreateResult({
                           );
                           clearErrors("Codigo_resultado_preliminar_1");
                         }}
-                      >
-                        <option disabled value="">
-                          Seleccione un seguimiento
-                        </option>
-                        {ListResultados != null && ListResultados != undefined
-                          ? ListResultados.map((data, index) => (
-                              <option key={index} value={data.COD_PLANTILLA}>
-                                {`${data.RESULTADO_PLANTILLA}`}
-                              </option>
-                            ))
-                          : ""}
-                      </select>
+                        options={optionSegumiento}
+                        placeholder="Seleccione un seguimiento"
+                        value={selectobjeSeguimiento}
+                      ></Select>
                       <div className={styles.invalid_feedback}>
                         {errors.Codigo_resultado_preliminar_1?.message}
                       </div>
                     </div>
                   </div>
 
-                  {
-                    (ListOptiones =
-                      !undefined && ListOptiones != null ? (
-                        ListOptiones.length > 0 ? (
-                          <div className={styles.form_group}>
-                            <div className={styles.input_group}>
-                              <label className={styles.group_title}>
-                                Opciones
-                              </label>
-                              <select
-                                {...register("Codigo_opcion")}
-                                name="Codigo_opcion"
-                                id="Codigo_opcion"
-                                className={styles.input_group}
-                                defaultValue={""}
-                                onChange={(e) => {
-                                  clearErrors("Codigo_opcion");
-                                  ComboDinamyc(
-                                    e.target.id,
-                                    ListMicroorganismo,
-                                    ListNumber,
-                                    setListSelectDimanyc,
-                                    setComboDynamic,
-                                    clearErrors
-                                  );
-                                }}
-                              >
-                                <option disabled value="">
-                                  Seleccione una opción
-                                </option>
-                                {ListOptiones != null &&
-                                ListOptiones != undefined
-                                  ? ListOptiones.map((data, index) => (
-                                      <option
-                                        key={index}
-                                        value={data.COD_OPCIONES}
-                                      >
-                                        {`${data.OPCION_DESCRIPCION}`}
-                                      </option>
-                                    ))
-                                  : ""}
-                              </select>
-                              <div className={styles.invalid_feedback}>
-                                {errors.Codigo_opcion?.message}
-                              </div>
-                            </div>
+                  {ListOptiones != undefined && ListOptiones != null ? (
+                    ListOptiones.length > 0 ? (
+                      <div className={styles.form_group}>
+                        <div className={styles.input_group}>
+                          <label className={styles.group_title}>Opciones</label>
+
+                          <Select
+                            instanceId={"Codigo_opcion"}
+                            name="Codigo_opcion"
+                            id="Codigo_opcion"
+                            defaultValue={""}
+                            onChange={(e) => {
+                              Setselectobjeopciones({
+                                value: e.value,
+                                label: e.label,
+                              });
+                              clearErrors("Codigo_opcion");
+                              ComboDinamyc(
+                                e.label,
+                                ListMicroorganismo,
+                                ListNumber,
+                                setListSelectDimanyc,
+                                setComboDynamic,
+                                clearErrors
+                              );
+                            }}
+                            options={optionOpciones}
+                            placeholder="Seleccione una opción"
+                            value={selectobjeopciones}
+                          ></Select>
+                          {/* <select
+                            {...register("Codigo_opcion")}
+                            name="Codigo_opcion"
+                            id="Codigo_opcion"
+                            className={styles.input_group}
+                            defaultValue={""}
+                            onChange={(e) => {
+                              clearErrors("Codigo_opcion");
+                              ComboDinamyc(
+                                e.target.id,
+                                ListMicroorganismo,
+                                ListNumber,
+                                setListSelectDimanyc,
+                                setComboDynamic,
+                                clearErrors
+                              );
+                            }}
+                          >
+                            <option disabled value="">
+                              Seleccione una opción
+                            </option>
+                            {ListOptiones != null && ListOptiones != undefined
+                              ? ListOptiones.map((data, index) => (
+                                  <option key={index} value={data.COD_OPCIONES}>
+                                    {`${data.OPCION_DESCRIPCION}`}
+                                  </option>
+                                ))
+                              : ""}
+                          </select> */}
+                          <div className={styles.invalid_feedback}>
+                            {errors.Codigo_opcion?.message}
                           </div>
-                        ) : (
-                          ""
-                        )
-                      ) : (
-                        ""
-                      ))
-                  }
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
 
                   {ComboDynamic ? (
                     <>
                       <div className={`${styles.form_group}`}>
-                        {ListSelectDimanyc.map((data) => data)}
+                        {ListSelectDimanyc.map((data, index) => {
+                          return <Fragment key={index}>{data}</Fragment>;
+                        })}
                       </div>
                       <div className={styles.invalid_feedback}>
                         {errors.SelectDinamyc?.message}
@@ -298,9 +342,9 @@ function ComponentCreateResult({
                       onClick={(e) => {
                         e.preventDefault();
                         AddResultToList(
-                          "Codigo_prueba",
-                          "Codigo_resultado_preliminar_1",
-                          "Codigo_opcion",
+                          selectobjeEstatus,
+                          selectobjeSeguimiento,
+                          selectobjeopciones,
                           setListAddResultMultple,
                           ListAddResultMultple,
                           setError,
@@ -309,6 +353,8 @@ function ComponentCreateResult({
                           ComboDynamic,
                           setListSelectDimanyc,
                           setComboDynamic,
+                          SetselectobjeSeguimiento,
+                          Setselectobjeopciones
                         );
                       }}
                     >
