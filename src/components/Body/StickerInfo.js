@@ -75,7 +75,7 @@ export default function StickerInfo({
                         ))
                     ) : (
                       <>
-                        {InforSampleDetails.infoDetalle.slice(0, 1).ESTADO_STICKER ? 
+                        {InforSampleDetails.infoBitacora[0].ESTADO_STICKER ? 
                         <Link
                           title="Agregar nota"
                           href={{
@@ -142,7 +142,7 @@ export default function StickerInfo({
                         ))
                     ) : (
                       <>
-                      {InforSampleDetails.infoDetalle.slice(0, 1).ESTADO_STICKER ? 
+                      {InforSampleDetails.infoBitacora[0].ESTADO_STICKER ? 
                         <Link
                           title="Agregar nota"
                           href={{

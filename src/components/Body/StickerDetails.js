@@ -167,7 +167,7 @@ export default function StickerDetails({
 
                 {Pruebas ? (
                   <>
-                    {Options.BtnCrearResultAndUrl ? (
+                    {Options.BtnCrearResultAndUrl && EstadoFunction(InforSampleDetails) ? (
                       <Link
                         title="Agregar estatus"
                         className={styles.add_icon}
@@ -222,7 +222,7 @@ export default function StickerDetails({
                   </>
                 ) : (
                   <>
-                    {Options.BtnCrearNotaAndUrl ? (
+                    {Options.BtnCrearNotaAndUrl && EstadoFunction(InforSampleDetails) ? (
                       <Link
                         title="Agregar nota"
                         className={styles.add_icon}

@@ -44,7 +44,9 @@ function CreateSticker({
     setResultScanner,
   } = useContextBitacora();
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
-  const [ValueGroup, setValueGroup] = useState(false);
+  const [ValueGroup, setValueGroup] = useState("");
+  const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
+  const [codTipoMuestra, setcodTipoMuestra] = useState("");
   const [selectValue, SetSelectValue] = useState("");
   const [fecha, Setfecha] = useState("");
   const validationSchema = Yup.object().shape({
@@ -54,9 +56,9 @@ function CreateSticker({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().notRequired(),
+    SitioAnatomico: Yup.string().required("Debe seleccionar un sitio anatomico"),
     jefelaboratorio: Yup.string().notRequired(),
-    tipoMuestra: Yup.string().notRequired(),
+    tipoMuestra: Yup.string().required("Debe seleccionar un tipo de muestra"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
     ),
@@ -69,6 +71,10 @@ function CreateSticker({
     setValueImagesrcExterna(null);
     setValueImagesrcExterna2(null);
   }, []);
+
+  
+
+  
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {
@@ -110,6 +116,21 @@ function CreateSticker({
   const options = [];
   ListadoJefeLaboratorio.map((data) => {
     options.push({ value: data.ID, label: data.DESCRIPCION });
+  });
+
+  const optionsgrup = [];
+  ListadoGrupoActivo.map((data) => {
+    optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
+  });
+
+  const optionssitio = [];
+  ListadoSitioAna.map((data) => {
+    optionssitio.push({ value: data.ID, label: data.DESCRIPCION });
+  });
+
+  const optionsTipoMue = [];
+  ListadoTipoMuestra.map((data) => {
+    optionsTipoMue.push({ value: data.ID, label: data.NOMBRE_TIPO_MUESTRA });
   });
 
   return (
@@ -323,7 +344,25 @@ function CreateSticker({
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Grupo</label>
-                      <select
+                      <Select
+                        className="Grupo"
+                        value={optionsgrup.filter(function (optiong) {
+                          return (
+                            (optiong.value ==
+                            (ValueGroup == null || ValueGroup == undefined
+                              ? ""
+                              : ValueGroup))
+                          );
+                        })}
+                        onChange={(e) => {
+                          setValueGroup(e.value);
+                          setvalueGrupochange(e.value);
+                        }}
+                        options={optionsgrup}
+                        placeholder="Seleccione un grupo para el sticker"
+                      ></Select>
+
+                      {/* <select
                         {...register("GrupoSticker")}
                         name="GrupoSticker"
                         id="GrupoSticker"
@@ -341,7 +380,7 @@ function CreateSticker({
                             {data.NOMBRE_GRUPO}
                           </option>
                         ))}
-                      </select>
+                      </select> */}
 
                       <div className={styles.invalid_feedback}>
                         {errors.GrupoSticker?.message}
@@ -376,7 +415,17 @@ function CreateSticker({
                       <label className={styles.group_title}>
                         Sitio anatómico
                       </label>
-                      <select
+
+                      <Select
+                        className="SitioAnat"
+                        onChange={(e) => {
+                          setcodSitioAnatomico(e.value);
+                        }}
+                        options={optionssitio}
+                        placeholder="Seleccione un sitio anatomico"
+                      ></Select>
+
+                      {/* <select
                         {...register("SitioAnatomico")}
                         name="SitioAnatomico"
                         id="SitioAnatomico"
@@ -390,7 +439,7 @@ function CreateSticker({
                             {data.DESCRIPCION}
                           </option>
                         ))}
-                      </select>
+                      </select> */}
 
                       <div className={styles.invalid_feedback}>
                         {errors.SitioAnatomico?.message}
@@ -400,7 +449,16 @@ function CreateSticker({
                       <label className={styles.group_title}>
                         Tipo de muestra
                       </label>
-                      <select
+                      <Select
+                        className="TipoMue"                        
+                        options={optionsTipoMue}
+                        onChange={(e) => {
+                          setcodTipoMuestra(e.value);
+                        }}
+                        placeholder="Seleccione un tipo de muestra"
+                      ></Select>
+
+                      {/* <select
                         {...register("tipoMuestra")}
                         name="tipoMuestra"
                         id="tipoMuestra"
@@ -414,7 +472,7 @@ function CreateSticker({
                             {data.NOMBRE_TIPO_MUESTRA}
                           </option>
                         ))}
-                      </select>
+                      </select> */}
 
                       <div className={styles.invalid_feedback}>
                         {errors.tipoMuestra?.message}
@@ -550,7 +608,10 @@ function CreateSticker({
                           RegisterStickerObservaciones(
                             setValue,
                             selectValue,
-                            e
+                            codSitioAnatomico,
+                            codTipoMuestra,                            
+                            e,
+                            ValueGroup
                           );
                           setValue(
                             "FechaHoraRecogida",
@@ -560,6 +621,7 @@ function CreateSticker({
                                 ).value
                               : ""
                           );
+                          setvalue("GrupoSticker", ValueGroup);
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,

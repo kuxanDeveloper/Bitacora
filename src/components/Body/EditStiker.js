@@ -55,9 +55,11 @@ function EditStickerComponents({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().notRequired(),
+    SitioAnatomico: Yup.string().required(
+      "Debe seleccionar un sitio anatomico"
+    ),
     jefelaboratorio: Yup.string().notRequired(),
-    tipoMuestra: Yup.string().notRequired(),
+    tipoMuestra: Yup.string().required("Debe seleccionar un tipo de muestra"),
     FechaHoraRecogida: Yup.string().required(
       "Campo fecha recogida de la muestra obligatorio"
     ),
@@ -66,6 +68,7 @@ function EditStickerComponents({
   const [codJefeLab, setcodJefeLab] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
   const [fecha, Setfecha] = useState("");
+  const [ValueGroup, setValueGroup] = useState("");
 
   useEffect(() => {
     setisImagenExterna(true);
@@ -75,13 +78,13 @@ function EditStickerComponents({
       InforSampleDetails.infoBitacora != null &&
       InforSampleDetails.infoBitacora != undefined
     ) {
-      var grupoSticker = document.getElementById("GrupoSticker");
+      // var grupoSticker = document.getElementById("GrupoSticker");
 
-      if (isHabilteGroup == "true") {
-        grupoSticker.setAttribute("disabled", "");
-      } else {
-        grupoSticker.disabled = false;
-      }
+      // if (isHabilteGroup == "true") {
+      //   grupoSticker.setAttribute("disabled", "");
+      // } else {
+      //   grupoSticker.disabled = false;
+      // }
 
       if (LstObservacionesPrede != null && LstObservacionesPrede != undefined) {
         let retornoValor = LstObservacionesPrede.find(
@@ -107,6 +110,7 @@ function EditStickerComponents({
       setcodSitioAnatomico(
         InforSampleDetails.infoBitacora[0].ID_SITIO_ANATOMICO
       );
+      setValueGroup(group);
       setcodJefeLab(InforSampleDetails.infoBitacora[0].ID_JEFE_LABORATORIO);
       setcodTipoMuestra(InforSampleDetails.infoBitacora[0].ID_TIPO_MUESTRA);
 
@@ -128,6 +132,23 @@ function EditStickerComponents({
   ListadoJefeLaboratorio.map((data) => {
     options.push({ value: data.ID, label: data.DESCRIPCION });
   });
+
+  const optionssitio = [];
+  ListadoSitioAna.map((data) => {
+    optionssitio.push({ value: data.ID, label: data.DESCRIPCION });
+  });
+
+  const optionsTipoMue = [];
+  ListadoTipoMuestra.map((data) => {
+    optionsTipoMue.push({ value: data.ID, label: data.NOMBRE_TIPO_MUESTRA });
+  });
+
+  const optionsgrup = [];
+  ListadoGrupoActivo.map((data) => {
+    optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
+  });
+
+  console.log(isHabilteGroup);
 
   return (
     <section className={styles.Create_sticker}>
@@ -168,7 +189,31 @@ function EditStickerComponents({
 
                         <div className={styles.input_group}>
                           <label className={styles.group_title}>Grupo</label>
-                          <select
+                          <Select
+                            className="Grupo"
+                            value={optionsgrup.filter(function (optiong) {
+                              return (
+                                optiong.value ==
+                                (ValueGroup == null || ValueGroup == undefined
+                                  ? ""
+                                  : ValueGroup)
+                              );
+                            })}
+                            isDisabled={
+                              isHabilteGroup == "true" || InforSampleDetails.infoBitacora[0]
+                              .ESTADO_STICKER == false
+                                ? true
+                                : false
+                            }
+                            onChange={(e) => {
+                              setValueGroup(e.value);
+                              setvalueGrupochange(e.value);
+                            }}
+                            options={optionsgrup}
+                            placeholder="Seleccione un grupo para el sticker"
+                          ></Select>
+
+                          {/* <select
                             defaultValue={group}
                             {...register("GrupoSticker")}
                             disabled={
@@ -191,7 +236,7 @@ function EditStickerComponents({
                                 {data.NOMBRE_GRUPO}
                               </option>
                             ))}
-                          </select>
+                          </select> */}
 
                           <div className={styles.invalid_feedback}>
                             {errors.GrupoSticker?.message}
@@ -368,7 +413,32 @@ function EditStickerComponents({
                           <label className={styles.group_title}>
                             Sitio anatómico
                           </label>
-                          <select
+
+                          <Select
+                            className="SitioAnat"
+                            value={optionssitio.filter(function (optiong) {
+                              return (
+                                optiong.value ==
+                                (codSitioAnatomico == null ||
+                                codSitioAnatomico == undefined
+                                  ? ""
+                                  : codSitioAnatomico)
+                              );
+                            })}
+                            isDisabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
+                            onChange={(e) => {
+                              setcodSitioAnatomico(e.value);
+                            }}
+                            options={optionssitio}
+                            placeholder="Seleccione un sitio anatomico"
+                          ></Select>
+
+                          {/* <select
                             {...register("SitioAnatomico")}
                             disabled={
                               InforSampleDetails.infoBitacora[0]
@@ -391,7 +461,7 @@ function EditStickerComponents({
                                 {data.DESCRIPCION}
                               </option>
                             ))}
-                          </select>
+                          </select> */}
 
                           <div className={styles.invalid_feedback}>
                             {errors.SitioAnatomico?.message}
@@ -414,7 +484,7 @@ function EditStickerComponents({
                                   : codJefeLab)
                               );
                             })}
-                            disabled={
+                            isDisabled={
                               InforSampleDetails.infoBitacora[0]
                                 .ESTADO_STICKER == true
                                 ? false
@@ -440,7 +510,32 @@ function EditStickerComponents({
                           <label className={styles.group_title}>
                             Tipo de muestra
                           </label>
-                          <select
+
+                          <Select
+                            className="TipoMue"
+                            options={optionsTipoMue}
+                            value={optionsTipoMue.filter(function (optiong) {
+                              return (
+                                optiong.value ==
+                                (codTipoMuestra == null ||
+                                codTipoMuestra == undefined
+                                  ? ""
+                                  : codTipoMuestra)
+                              );
+                            })}
+                            isDisabled={
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == true
+                                ? false
+                                : true
+                            }
+                            onChange={(e) => {
+                              setcodTipoMuestra(e.value);
+                            }}
+                            placeholder="Seleccione un tipo de muestra"
+                          ></Select>
+
+                          {/* <select
                             {...register("tipoMuestra")}
                             name="tipoMuestra"
                             id="tipoMuestra"
@@ -461,7 +556,7 @@ function EditStickerComponents({
                                 {data.NOMBRE_TIPO_MUESTRA}
                               </option>
                             ))}
-                          </select>
+                          </select> */}
 
                           <div className={styles.invalid_feedback}>
                             {errors.tipoMuestra?.message}
@@ -611,7 +706,7 @@ function EditStickerComponents({
                               onClick={(e) => {
                                 isHabilteGroup == "true"
                                   ? setValue("GrupoSticker", group)
-                                  : "";
+                                  : setValue("GrupoSticker", ValueGroup);
                                 // setCheckinvalue(setValue);
                                 setImagenFileUpdate(
                                   ValueImagesrc,
@@ -631,12 +726,13 @@ function EditStickerComponents({
                                       ).value
                                     : ""
                                 );
-                                setValue("SitioAnatomico", codSitioAnatomico);
-                                setValue("tipoMuestra", codTipoMuestra);
                                 RegisterStickerObservaciones(
                                   setValue,
                                   codJefeLab,
-                                  e
+                                  codSitioAnatomico,
+                                  codTipoMuestra,
+                                  e,
+                                  ValueGroup
                                 );
                               }}
                               className={styles.btn_send}

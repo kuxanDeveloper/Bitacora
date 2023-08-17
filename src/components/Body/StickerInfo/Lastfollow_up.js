@@ -4,7 +4,7 @@ import Link from "next/link";
 function Lastfollow_up({ data, Options, infoBitacora }) {
   return (
     <div className={styles.follow_up_body}>
-      {Options.BtnCrearNotaAndUrl ? (
+      {Options.BtnCrearNotaAndUrl && infoBitacora[0].ESTADO_STICKER ? (
         <Link
           title="Agregar nota"
           href={{
