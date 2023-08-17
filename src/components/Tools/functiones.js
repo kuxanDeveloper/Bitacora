@@ -91,7 +91,6 @@ export const FilterQuerySearch = (
   estd
 ) => {
   event.preventDefault();
-debugger;
   // if (id == "") {
   //   Swal.fire({
   //     title: "¡Advertencia!",
@@ -895,7 +894,6 @@ export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
 
   var cmbsitioAnt = document.getElementById("SitioAnatomico");
   var cmbtipoMue = document.getElementById("tipoMuestra");
-debugger;
   if (cmbgrupo.value == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({

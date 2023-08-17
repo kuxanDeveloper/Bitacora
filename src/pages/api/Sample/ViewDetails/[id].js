@@ -54,7 +54,6 @@ export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresul
 
 export const ValidNumeroSticker = async (cookie, num_stricker, estadobit,idAncest) => {
   let infoNote = await ValidNumSticker(cookie, num_stricker, estadobit);
-  debugger;
   if(infoNote.mensajerpt == "Sin coincidencia")
   {    
     Swal.fire({

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useId } from "react";
 import styles from "../../styles/CreateSticker.module.scss";
 import ImageOptimize from "../Tools/ImageOptimize";
 import Link from "next/link";
@@ -15,11 +15,9 @@ import { useContextBitacora } from "../../context/BitacoraContext";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
-import "dayjs/locale/en-gb";
-import Image from "next/image";
+import "dayjs/locale/es";
 import Select from "react-select";
 import dayjs from "dayjs";
-
 function CreateSticker({
   ListadoGrupoActivo,
   id,
@@ -117,13 +115,16 @@ function CreateSticker({
   return (
     <>
       <section className={styles.Create_sticker}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
 
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
@@ -352,6 +353,7 @@ function CreateSticker({
                       </label>
 
                       <Select
+                        instanceId={useId()}
                         className="jefelaboratorio"
                         defaultValue={selectValue}
                         onChange={(e) => {
@@ -360,12 +362,10 @@ function CreateSticker({
                         options={options}
                         placeholder="Seleccione un jefe de laboratorio"
                       ></Select>
-               
 
                       <div className={styles.invalid_feedback}>
                         {errors.jefelaboratorio?.message}
                       </div>
-                     
                     </div>
                   </div>
 
@@ -420,10 +420,7 @@ function CreateSticker({
                         {errors.tipoMuestra?.message}
                       </div>
                     </div>
-
-                    
                   </div>
-
 
                   {/*-------------------------------Fecha de recodigo & Observaciones predeterminada------------------------------------------- */}
 
@@ -435,11 +432,12 @@ function CreateSticker({
                       <LocalizationProvider
                         orientation="landscape"
                         dateAdapter={AdapterDayjs}
-                        adapterLocale={"en-gb"}
+                        adapterLocale="es"
                       >
                         <MobileDateTimePicker
                           value={fecha}
                           className="FechaHoraRecogida"
+                          onChange={(value) => Setfecha(value)}
                         />
                       </LocalizationProvider>
 
@@ -556,8 +554,11 @@ function CreateSticker({
                           );
                           setValue(
                             "FechaHoraRecogida",
-                            document.querySelector(".FechaHoraRecogida input")
-                              .value
+                            fecha != ""
+                              ? document.querySelector(
+                                  ".FechaHoraRecogida input"
+                                ).value
+                              : ""
                           );
                           // setCheckinvalue(setValue);
                           setImagenFile(
@@ -572,10 +573,6 @@ function CreateSticker({
                       </button>
                     )}
 
-                    {/* <button
-                      id="buttonSubmitUnico"
-                      style={{ display: "none" }}
-                    ></button> */}
                     <Link
                       href={{
                         pathname: "/[id]",

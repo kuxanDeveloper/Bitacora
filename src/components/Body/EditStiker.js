@@ -14,7 +14,7 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
-import "dayjs/locale/en-gb";
+import "dayjs/locale/es";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { onSubmitUpdate } from "../Tools/CRUD";
@@ -66,7 +66,7 @@ function EditStickerComponents({
   const [codJefeLab, setcodJefeLab] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
   const [fecha, Setfecha] = useState("");
-  
+
   useEffect(() => {
     setisImagenExterna(true);
     setValueImagesrc(null);
@@ -520,8 +520,9 @@ function EditStickerComponents({
                             Fecha de recogida de la muestra
                           </label>
                           <LocalizationProvider
+                            orientation="landscape"
                             dateAdapter={AdapterDayjs}
-                            adapterLocale={"en-gb"}
+                            adapterLocale="es"
                           >
                             <MobileDateTimePicker
                               disabled={
@@ -530,8 +531,8 @@ function EditStickerComponents({
                                   ? false
                                   : true
                               }
-                              orientation="landscape"
                               value={fecha}
+                              onChange={(value) => Setfecha(value)}
                               className="FechaHoraRecogida"
                             />
                           </LocalizationProvider>
@@ -624,9 +625,11 @@ function EditStickerComponents({
                                 setValue("Sufijo", data.SUFIJO);
                                 setValue(
                                   "FechaHoraRecogida",
-                                  document.querySelector(
-                                    ".FechaHoraRecogida input"
-                                  ).value
+                                  fecha != ""
+                                    ? document.querySelector(
+                                        ".FechaHoraRecogida input"
+                                      ).value
+                                    : ""
                                 );
                                 setValue("SitioAnatomico", codSitioAnatomico);
                                 setValue("tipoMuestra", codTipoMuestra);
