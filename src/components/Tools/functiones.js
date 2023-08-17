@@ -91,7 +91,6 @@ export const FilterQuerySearch = (
   estd
 ) => {
   event.preventDefault();
-debugger;
   // if (id == "") {
   //   Swal.fire({
   //     title: "¡Advertencia!",
