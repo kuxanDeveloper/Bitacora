@@ -8,6 +8,7 @@ import "dayjs/locale/en-gb";
 import styles from "../../styles/Results.module.scss";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
+import Select from "react-select";
 
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -114,12 +115,7 @@ export const FilterQuerySearch = (
   idAncest =
     idAncest == 0 || idAncest == undefined || idAncest == "" ? 1 : idAncest;
 
-    const rpt = ValidNumeroSticker(
-      cookie,
-      Numstiker,
-      estd,
-      idAncest
-    );
+  const rpt = ValidNumeroSticker(cookie, Numstiker, estd, idAncest);
 
   // Router.push({
   //   pathname: "/[id]",
@@ -299,10 +295,7 @@ export const FilterSearchCsvTables = (
 ) => {
   event.preventDefault();
 
-  if (
-    DateAdmission == "" &&
-    FechaIngresoFinal == "" && valueGrupo == ""
-  ) {
+  if (DateAdmission == "" && FechaIngresoFinal == "" && valueGrupo == "") {
     Swal.fire({
       title: "¡Advertencia!",
       text: "Debe seleccionar un filtro para iniciar la busqueda",
@@ -313,7 +306,6 @@ export const FilterSearchCsvTables = (
   }
 
   if (DateAdmission != "" || FechaIngresoFinal != "") {
-
     if (DateAdmission == "" && FechaIngresoFinal != "") {
       Swal.fire({
         title: "¡Advertencia!",
@@ -341,7 +333,7 @@ export const FilterSearchCsvTables = (
       dateinicial: DateAdmission,
       dateFinal: FechaIngresoFinal,
       page: "1",
-      grupo: valueGrupo
+      grupo: valueGrupo,
     },
   });
 };
@@ -1146,9 +1138,9 @@ export const UpdateObject = (obj, valueInput) => {
 };
 
 export const AddResultToList = (
-  idPrueba,
-  idSeguimiento,
-  idOptiones,
+  Prueba,
+  Seguimiento,
+  Optiones,
   addListValue,
   ListAddResultMultple,
   setError,
@@ -1156,55 +1148,32 @@ export const AddResultToList = (
   setvaluePlantillachange,
   ComboDynamic,
   setListSelectDimanyc,
-  setComboDynamic
+  setComboDynamic,
+  SetselectobjeSeguimiento,
+  Setselectobjeopciones
 ) => {
   let validadorError = false;
   let OptionIsHabilite = false;
-  let valuePr = document.getElementById(idPrueba);
-  let ValueSegumiento = document.getElementById(idSeguimiento);
-  let optionesValue = document.getElementById(idOptiones);
-
-  if (valuePr !== null && valuePr !== undefined && valuePr !== "") {
-    if (
-      valuePr.value == null ||
-      valuePr.value == undefined ||
-      valuePr.value == ""
-    ) {
-      setError("Codigo_prueba", {
-        type: "custom",
-        message:
-          "Campo estatus obligatorio, para agregar un resultado al listado",
-      });
-      validadorError = true;
-    }
+  if (Prueba.value == null || Prueba.value == undefined || Prueba.value == "") {
+    setError("Codigo_prueba", {
+      type: "custom",
+      message:
+        "Campo estatus obligatorio, para agregar un resultado al listado",
+    });
+    validadorError = true;
   }
-
-  if (
-    ValueSegumiento !== null &&
-    ValueSegumiento !== undefined &&
-    ValueSegumiento !== ""
-  ) {
-    if (
-      ValueSegumiento.value == null ||
-      ValueSegumiento.value == undefined ||
-      ValueSegumiento.value == ""
-    ) {
-      setError("Codigo_resultado_preliminar_1", {
-        type: "custom",
-        message:
-          "Campo seguimiento obligatorio, para agregar un resultado al listado",
-      });
-      validadorError = true;
-    }
+  if (Seguimiento == null || Seguimiento == undefined || Seguimiento == "") {
+    setError("Codigo_resultado_preliminar_1", {
+      type: "custom",
+      message:
+        "Campo seguimiento obligatorio, para agregar un resultado al listado",
+    });
+    validadorError = true;
   }
 
   if (ListOptiones != null && ListOptiones != undefined && ListOptiones != "") {
     OptionIsHabilite = true;
-    if (
-      optionesValue.value == null ||
-      optionesValue.value == undefined ||
-      optionesValue.value == ""
-    ) {
+    if (Optiones == null || Optiones == undefined || Optiones == "") {
       setError("Codigo_opcion", {
         type: "custom",
         message:
@@ -1215,10 +1184,13 @@ export const AddResultToList = (
   }
 
   if (ComboDynamic) {
-    let selectMultip = document.getElementsByClassName("selectMultiple");
+    let selectMultip = document.querySelectorAll(".selectMultiple");
     if (selectMultip.length > 0) {
       for (let index = 0; index < selectMultip.length; index++) {
-        if (selectMultip[index].value == "") {
+        let ValueInput = document.querySelector(
+          'input[name="' + selectMultip[index].id + '"]'
+        );
+        if (ValueInput.value == "") {
           setError("SelectDinamyc", {
             type: "custom",
             message:
@@ -1233,16 +1205,13 @@ export const AddResultToList = (
 
   if (!validadorError) {
     let obj = {};
-    let seguimiento =
-      ValueSegumiento.options[ValueSegumiento.selectedIndex].text;
-    let opciones = OptionIsHabilite
-      ? optionesValue.options[optionesValue.selectedIndex].text
-      : "";
-    obj.EstatusID = valuePr.value;
-    obj.SegumientoId = ValueSegumiento.value;
-    obj.OptionID = OptionIsHabilite ? optionesValue.value : null;
+    let seguimiento = Seguimiento.label;
+    let opciones = OptionIsHabilite ? Optiones.label : "";
+    obj.EstatusID = Prueba.value;
+    obj.SegumientoId = Seguimiento.value;
+    obj.OptionID = OptionIsHabilite ? Optiones.value : null;
 
-    obj.TextoEstatus = valuePr.options[valuePr.selectedIndex].text;
+    obj.TextoEstatus = Prueba.text;
     obj.textoSeguimiento = seguimiento;
     obj.textoOption = opciones;
 
@@ -1256,16 +1225,19 @@ export const AddResultToList = (
         textSplitArray = seguimiento.split("@");
         for (let index = 0; index < textSplitArray.length; index++) {
           let ValorSearch = textSplitArray[index].toLowerCase();
+          let ValueInput = document.querySelector(
+            'input[name="' + selectMultip[countPosition].id + '"]'
+          );
           if (ValorSearch.search("#microbio") != -1) {
             textoPreArmado += textSplitArray[index].replace(
               "#MICROBIO",
-              selectMultip[countPosition].value
+              ValueInput.value
             );
             countPosition++;
           } else if (ValorSearch.search("#numero") != -1) {
             textoPreArmado += textSplitArray[index].replace(
               "#NUMERO",
-              selectMultip[countPosition].value
+              ValueInput.value
             );
 
             countPosition++;
@@ -1321,12 +1293,12 @@ export const AddResultToList = (
       return;
     } else {
       addListValue((preventArray) => [...preventArray, obj]);
-      ValueSegumiento.value = "";
-      OptionIsHabilite ? (optionesValue.value = "") : "";
       // valuePr.value = "";
       setvaluePlantillachange([]);
       setListSelectDimanyc([]);
       setComboDynamic(false);
+      SetselectobjeSeguimiento(null);
+      Setselectobjeopciones(null);
     }
   }
 };
@@ -1355,17 +1327,16 @@ export const DeleteRowStatus = (
 };
 
 export const ComboDinamyc = (
-  idInput,
+  ValueText,
   ListMicroorganismo,
   ListNumber,
   setListSelectDimanyc,
   setComboDynamic,
   clearErrors
 ) => {
-  let valueRetorno = document.getElementById(idInput);
   setListSelectDimanyc([]);
-  if (valueRetorno != undefined && valueRetorno != null) {
-    let textoSelect = valueRetorno.options[valueRetorno.selectedIndex].text;
+  if (ValueText != undefined && ValueText != null && ValueText != "") {
+    let textoSelect = ValueText;
 
     let textSplitArra = textoSelect.split("@");
 
@@ -1375,51 +1346,52 @@ export const ComboDinamyc = (
         let retorno = null;
         let ValorSearch = textSplitArra[index].toLowerCase();
         if (ValorSearch.search("#microbio") != -1) {
+          let option = [];
+          if (ListMicroorganismo != null && ListMicroorganismo != undefined) {
+            ListMicroorganismo.map((data) =>
+              option.push({
+                value: data.DESCRIPCION,
+                label: data.DESCRIPCION,
+              })
+            );
+          }
+
           retorno = (
             <div className={styles.input_group}>
               <label className={styles.group_title}>Microorganismo</label>
-              <select
-                name={`microorganismo_${index}`}
+              <Select
+                instanceId={`microorganismoSelect_${index}`}
+                name={`microorganismoSelect_${index}`}
                 id={`microorganismoSelect_${index}`}
-                className={`${styles.group_input} selectMultiple`}
+                className="selectMultiple"
                 defaultValue={""}
                 onChange={() => clearErrors("SelectDinamyc")}
-              >
-                <option disabled value="">
-                  Seleccione un microorganismo
-                </option>
-                {ListMicroorganismo != null && ListMicroorganismo != undefined
-                  ? ListMicroorganismo.map((data, index) => (
-                      <option key={index} value={data.DESCRIPCION}>
-                        {`${data.DESCRIPCION}`}
-                      </option>
-                    ))
-                  : ""}
-              </select>
+                placeholder={"Seleccione un microorganismo"}
+                options={option}
+              ></Select>
             </div>
           );
         } else if (ValorSearch.search("#numero") != -1) {
+          let option = [];
+          if (ListNumber != null && ListNumber != undefined) {
+            ListNumber.map((data) =>
+              option.push({ value: data.DESCRIPCION, label: data.DESCRIPCION })
+            );
+          }
+
           retorno = (
             <div className={styles.input_group}>
               <label className={styles.group_title}>Número</label>
-              <select
+              <Select
+                instanceId={`numberCount_${index}`}
                 name={`numberCount_${index}`}
                 id={`numberCount_${index}`}
-                className={`${styles.group_input} selectMultiple`}
+                className="selectMultiple"
                 defaultValue={""}
                 onChange={() => clearErrors("SelectDinamyc")}
-              >
-                <option disabled value="">
-                  Seleccione un número
-                </option>
-                {ListNumber != null && ListNumber != undefined
-                  ? ListNumber.map((data, index) => (
-                      <option key={index} value={data.DESCRIPCION}>
-                        {`${data.DESCRIPCION}`}
-                      </option>
-                    ))
-                  : ""}
-              </select>
+                options={option}
+                placeholder={"Seleccione un número"}
+              ></Select>
             </div>
           );
         }
@@ -1464,7 +1436,14 @@ export const validateResultArmadoIsOpciones = (
 export const DeleteRowStatusDataBase = (data, IdPrub, NombrePrub) => {
   Swal.fire({
     title: `Eliminar Estatus ${NombrePrub}`,
-    text: `¿Estás seguro de que desea Eliminar el estatus ${NombrePrub}, con el seguimiento "${data.PLANTILLA_RESULTADO}"?`,
+    text: `¿Estás seguro de que desea Eliminar el estatus ${NombrePrub}, con el seguimiento "${
+      validateResultArmadoIsSeguimiento(
+        data.PLANTILLA_RESULTADO,
+        data.RESULTADO_ARMADO
+      )
+        ? data.RESULTADO_ARMADO
+        : data.PLANTILLA_RESULTADO
+    }"?`,
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#e57d00",
@@ -1551,4 +1530,3 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
     query: { DateIni: fechaIni, DateEnd: fechaFin },
   });
 };
-
