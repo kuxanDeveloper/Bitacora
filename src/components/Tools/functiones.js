@@ -889,14 +889,11 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (setvalue, selectValue, e) => {
+export const RegisterStickerObservaciones = (setvalue, selectValue,
+  codSitioAnatomico,codTipoMuestra,ValueGroup, e) => {
   let slt = document.getElementById("sltObservaIni");
-  var cmbgrupo = document.getElementById("GrupoSticker");
 
-  var cmbsitioAnt = document.getElementById("SitioAnatomico");
-  var cmbtipoMue = document.getElementById("tipoMuestra");
-debugger;
-  if (cmbgrupo.value == 8) {
+  if (ValueGroup == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
         title: "Error",
@@ -906,30 +903,13 @@ debugger;
       });
       e.preventDefault();
       return;
-    }
-    if (cmbsitioAnt.value == null || cmbsitioAnt.value == "") {
-      Swal.fire({
-        title: "Error",
-        text: `Es obligatorio seleccionar sitio anatomico para el grupo Hemocultivo`,
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-      e.preventDefault();
-      return;
-    }
-    if (cmbtipoMue.value == null || cmbtipoMue.value == "") {
-      Swal.fire({
-        title: "Error",
-        text: `Es obligatorio seleccionar el tipo de muestra para el grupo Hemocultivo`,
-        icon: "error",
-        confirmButtonText: "Cerrar",
-      });
-      e.preventDefault();
-      return;
-    }
+    }    
   }
+
+  setvalue("SitioAnatomico", codSitioAnatomico);
+  setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
-  setvalue("GrupoSticker", cmbgrupo.value);
+  setvalue("GrupoSticker", ValueGroup);
   if (slt.value != "") {
     if (slt.value != "5") {
       setvalue("ObservaInici", slt.options[slt.selectedIndex].text);
