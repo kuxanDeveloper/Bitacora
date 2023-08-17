@@ -889,9 +889,8 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
 };
 
 export const RegisterStickerObservaciones = (setvalue, selectValue,
-  codSitioAnatomico,codTipoMuestra, e,ValueGroup) => {
-  let slt = document.getElementById("sltObservaIni");
-
+  codSitioAnatomico,codTipoMuestra, e,ValueGroup,codobservacionCmb,DescobservacionCmb) => {
+debugger;
   if (ValueGroup == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
@@ -909,12 +908,10 @@ export const RegisterStickerObservaciones = (setvalue, selectValue,
   setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
   
-  if (slt.value != "") {
-    if (slt.value != "5") {
-      setvalue("ObservaInici", slt.options[slt.selectedIndex].text);
+  if (codobservacionCmb != "") {
+    if (codobservacionCmb != "5") {
+      setvalue("ObservaInici", DescobservacionCmb);
     }
-  } else {
-    setvalue("ObservaInici", slt.value);
   }
 };
 
