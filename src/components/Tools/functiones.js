@@ -889,7 +889,7 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
 };
 
 export const RegisterStickerObservaciones = (setvalue, selectValue,
-  codSitioAnatomico,codTipoMuestra,ValueGroup, e) => {
+  codSitioAnatomico,codTipoMuestra, e,ValueGroup) => {
   let slt = document.getElementById("sltObservaIni");
 
   if (ValueGroup == 8) {
@@ -908,7 +908,7 @@ export const RegisterStickerObservaciones = (setvalue, selectValue,
   setvalue("SitioAnatomico", codSitioAnatomico);
   setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
-  setvalue("GrupoSticker", ValueGroup);
+  
   if (slt.value != "") {
     if (slt.value != "5") {
       setvalue("ObservaInici", slt.options[slt.selectedIndex].text);

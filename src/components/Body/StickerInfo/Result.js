@@ -8,7 +8,7 @@ function Result({ data, infoBitacora, Options }) {
   return (
     <div>
       <div style={{justifyContent: "center"}} className={styles.result_body}>
-        {Options.BtnCrearResultAndUrl ? (
+        {Options.BtnCrearResultAndUrl && infoBitacora[0].ESTADO_STICKER ? (
           <Link
             href={{
               pathname: "/Sample/CreateResult/[id]",

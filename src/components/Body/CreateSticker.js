@@ -106,7 +106,6 @@ function CreateSticker({
 
   useEffect(() => {
     setValueGroup(id);
-    setValueGroup(id);
   }, []);
 
   //The class name can vary
@@ -452,7 +451,7 @@ function CreateSticker({
                       </label>
                       <Select
                         className="TipoMue"                        
-                        options={optionssitio}
+                        options={optionsTipoMue}
                         onChange={(e) => {
                           setcodTipoMuestra(e.value);
                         }}
@@ -610,9 +609,9 @@ function CreateSticker({
                             setValue,
                             selectValue,
                             codSitioAnatomico,
-                            codTipoMuestra,
-                            ValueGroup,
-                            e
+                            codTipoMuestra,                            
+                            e,
+                            ValueGroup
                           );
                           setValue(
                             "FechaHoraRecogida",
@@ -622,6 +621,7 @@ function CreateSticker({
                                 ).value
                               : ""
                           );
+                          setvalue("GrupoSticker", ValueGroup);
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,
