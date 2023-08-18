@@ -1,5 +1,6 @@
 import {
   CloseCaseSample,
+  CierreMasiveCaseSample,
   DeleteResultSegm,
   ValidNumeroSticker,
 } from "../../pages/api/Sample/ViewDetails/[id]";
@@ -870,6 +871,159 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
       });
     }
   });
+};
+
+export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) => {
+  window.OnchangeValueSelect = function (value) {
+    let valueGetId = document.getElementById("Observacionother");
+
+    if (valueGetId != undefined && valueGetId != null) {
+      if (value == "5") {
+        valueGetId.style.display = "";
+      } else {
+        valueGetId.style.display = "none";
+      }
+    }
+  };
+
+  let arrayList = [];
+  const element = document.getElementsByName(nameInput);
+
+  if (element != null && element != undefined) {
+    element.forEach((data) => {
+      if (data.checked) {
+        arrayList.push(data.value);
+      }
+    });
+  }
+
+  if (arrayList.length > 1) {
+    const ListadoBitacoras = arrayList;
+
+    Swal.fire({
+      title: estado
+        ? `Cerrar bloque de stickers`
+        : `Reabrir bloque de stickers`,
+      text: estado
+        ? "¿Estás seguro de que deseas cerrar los stickers seleccionados?"
+        : "¿Estás seguro de que deseas reabrir los stickers seleccionados?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e57d00",
+      cancelButtonColor: "#767676",
+      confirmButtonText: estado
+        ? "Si,cerrar stickers"
+        : "Si,abrir stickers",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: estado
+            ? "Observación de cierre masivo"
+            : "Observación de reapertura masiva",
+          html:
+            `<select id='sltObservcaciones' onchange="window.OnchangeValueSelect(
+            this.value)" class="swal2-input">
+            <option disabled selected value="">Seleccione una observación</option>
+           ${LstObservacionesPrede.map((info) => {
+             if (estado) {
+               if (info.Observacion_cierre) {
+                 return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+               }
+             } else {
+               if (info.Observacion_reapertura) {
+                 return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+               }
+             }
+           })}
+            </select>` +
+            `<br><br><textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+            placeholder="${
+              estado
+                ? "Deje una observación para el cierre masivo para los stickers..."
+                : "Deje una observación del porqué se reabren los stickers..."
+            }"                         cols="30"
+            rows="50"></textarea>`,
+  
+          customClass: {
+            cancelButton: "HidenLoaderCancel",
+          },
+          showCancelButton: true,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#e57d00",
+          cancelButtonColor: "#767676",
+          showLoaderOnConfirm: true,
+          preConfirm: () => {
+            let selectObserva = document.getElementById("sltObservcaciones");
+            let TextAreaObservacion = document.getElementById("Observacionother");
+            // Validate input
+            if (
+              selectObserva.value == "" ||
+              (selectObserva.value == "5" && TextAreaObservacion.value == "")
+            ) {
+              Swal.showValidationMessage(
+                estado
+                  ? "Es obligatorio la observación para el cierre en bloque de los stickers"
+                  : "Es obligatorio la observación para la reapertura en bloque de los stickers"
+              );
+              Swal.hideLoading();
+              Swal.enableButtons();
+            } else {
+              Swal.resetValidationMessage();
+  
+              return CierreMasiveCaseSample(
+                ListadoBitacoras,
+                selectObserva.value == "5"
+                  ? TextAreaObservacion.value
+                  : selectObserva.options[selectObserva.selectedIndex].text,
+                  estado ? "0" : "1"
+              );
+            }
+          },
+          allowOutsideClick: () => !Swal.isLoading(),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            estado
+              ? Swal.fire({
+                  icon: "success",
+                  title: "Stickers cerrados",
+                  showConfirmButton: false,
+                  timer: 4000,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                }).then((result) => {
+                  /* Read more about handling dismissals below */
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                  }
+                })
+              : Swal.fire({
+                  icon: "success",
+                  title: "Stickers reabiertos",
+                  showConfirmButton: false,
+                  timer: 4000,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                }).then((result) => {
+                  /* Read more about handling dismissals below */
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                  }
+                });
+          }
+        });
+      }
+    });
+  } else {
+    Swal.fire({
+      title: "¡Advertencia!",
+      text: "Debe seleccionar por lo menos dos sticker para el cierre de stickers en bloque",
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+  }
+
+
+
 };
 
 export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {

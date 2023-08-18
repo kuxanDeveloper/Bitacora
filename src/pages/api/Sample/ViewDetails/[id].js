@@ -2,6 +2,7 @@ import {
   QueryMuestraEdit,
   QueryNoteEdit,
   QueryCloseCaseSample,
+  CloseMasiveCaseSample,
   QueryDeleteResult,
   QueryObserva,
   QueryJefeLaboratorio,
@@ -37,6 +38,13 @@ export const CloseCaseSample = async (id, observacionCaso, Estado) => {
   let infoNote = await QueryCloseCaseSample(id, observacionCaso, Estado);
   return infoNote;
 };
+
+export const CierreMasiveCaseSample = async (ListadoBitacoras, observacionCaso, Estado) => {
+  let infoNote = await CloseMasiveCaseSample(ListadoBitacoras, observacionCaso, Estado);
+  return infoNote;
+};
+
+
 
 export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresult) => {
   let infoNote = await QueryDeleteResult(Codigo_resultado_bitacora);
