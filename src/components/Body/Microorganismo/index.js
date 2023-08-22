@@ -5,6 +5,7 @@ import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Pagination from "../../Tools/Pagination";
 import { useRouter } from "next/router";
+import { ClickButtonMenuConf } from "../../Tools/functiones";
 function ComponentOptionIndex({ InforSampleDetails, query }) {
   const router = useRouter();
   return (
@@ -24,10 +25,10 @@ function ComponentOptionIndex({ InforSampleDetails, query }) {
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href={{
-                pathname: "/",
-                hash: "Cactive",
-              }}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault;
+                ClickButtonMenuConf();}}
               className={styles.back_btn}
             >
               Volver{" "}

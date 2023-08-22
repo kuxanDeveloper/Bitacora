@@ -4,6 +4,7 @@ import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Pagination from "../../Tools/Pagination";
+import { ClickButtonMenuConf } from "../../Tools/functiones";
 import { useRouter } from "next/router";
 function ComponentGroupIndex({ InforSampleDetails, query }) {
   const router = useRouter();
@@ -24,10 +25,10 @@ function ComponentGroupIndex({ InforSampleDetails, query }) {
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href={{
-                pathname: "/",
-                hash: "Cactive",
-              }}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault;
+                ClickButtonMenuConf();}}
               className={styles.back_btn}
             >
               Volver{" "}

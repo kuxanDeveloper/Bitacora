@@ -6,6 +6,7 @@ import { ExportToExcelcsvTrazaBitacora } from "../../../pages/api/Sample/ViewDet
 import Pagination from "../../Tools/Pagination";
 import { useRouter } from "next/router";
 import ImageOptimize from "../../Tools/ImageOptimize";
+import { ClickButtonMenuConf } from "../../Tools/functiones";
 function ComponentTrazaBitIndex({
   InforSampleDetails,
   NumeroSticker,
@@ -65,10 +66,10 @@ function ComponentTrazaBitIndex({
         >
           <div className={styles.back_btn_container}>
             <Link
-              href={{
-                pathname: "/",
-                hash: "Cactive",
-              }}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault;
+                ClickButtonMenuConf();}}
               className={styles.back_btn}
             >
               Volver{" "}

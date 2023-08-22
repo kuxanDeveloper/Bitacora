@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import CaseNavStyles from "../styles/CaseNav.module.scss";
 import Link from "next/link";
 export default function CaseNav({
@@ -33,10 +33,24 @@ export default function CaseNav({
 
     return newObje;
   }
+
+  useEffect(() => {
+    // window.scroll(0,findPos(document.getElementById("IdScroll")));
+    setTimeout(() => {
+      const idScro = document.getElementById("IdScroll");
+      if(idScro != null && idScro != undefined)
+      {
+        idScro.scrollIntoView({behavior: "smooth"});
+      }
+    }, 1000);
+    
+  },[ListadoGrupo]);
+
   function Retorno() {
     try {
       return ListadoGrupo.map((data, index) => (
         <li
+          id={data.Id_grupo == idGruop ? "IdScroll" : "IdNorm"}
           key={index}
           className={`${CaseNavStyles.nav_li} ${
             data.Id_grupo == idGruop ? CaseNavStyles.selected : ""

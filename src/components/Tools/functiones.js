@@ -1026,6 +1026,11 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
 
 };
 
+export const ClickButtonMenuConf = () => {
+  const btnMenu = document.getElementById("btnMenuPrincipal");
+  btnMenu.click();
+};
+
 export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   if (value == "5") {
     setShowobservaTextare(true);
