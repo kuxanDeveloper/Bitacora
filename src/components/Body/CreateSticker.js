@@ -51,6 +51,7 @@ function CreateSticker({
   const [descobservacionCmb, setdescobservacionCmb] = useState("");
   const [selectValue, SetSelectValue] = useState("");
   const [fecha, Setfecha] = useState("");
+  const [optionsgrup, Setoptionsgrup] = useState([]);
   const validationSchema = Yup.object().shape({
     NumSticker: Yup.string().required("Campo N° de sticker obligatorio"),
     GrupoSticker: Yup.string().required("Campo grupo obligatorio"),
@@ -106,6 +107,15 @@ function CreateSticker({
 
   useEffect(() => {
     setValueGroup(id);
+
+    let optionsgrupLst = [];
+    ListadoGrupoActivo.map((data) => {
+      optionsgrupLst.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
+    });
+
+    if (optionsgrupLst != []) {
+      Setoptionsgrup(optionsgrupLst);
+    }
   }, []);
 
   //The class name can vary
@@ -116,11 +126,6 @@ function CreateSticker({
   const options = [];
   ListadoJefeLaboratorio.map((data) => {
     options.push({ value: data.ID, label: data.DESCRIPCION });
-  });
-
-  const optionsgrup = [];
-  ListadoGrupoActivo.map((data) => {
-    optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
   });
 
   const optionssitio = [];
@@ -135,8 +140,57 @@ function CreateSticker({
 
   const optionsObservation = [];
   LstObservacionesPrede.map((data) => {
-    optionsObservation.push({ value: data.Codigo_observacion, label: data.Descripcion_Observacion });
+    optionsObservation.push({
+      value: data.Codigo_observacion,
+      label: data.Descripcion_Observacion,
+    });
   });
+
+  function comprobarSufijoGrup() {
+    const valorNumero = document.getElementById("Sufijo").value;
+    if (valorNumero != "") {
+      const vlNumero = parseInt(valorNumero);
+      let lstGrupos = ListadoGrupoActivo.filter((item) =>
+        item.listadoSufijos.find((e) => e.SUFIJO_GRUPO === vlNumero)
+      );
+      Setoptionsgrup([]);
+      let optionsgrupLst2 = [];
+      lstGrupos.map((data) => {
+        optionsgrupLst2.push({
+          value: data.Id_grupo,
+          label: data.NOMBRE_GRUPO,
+        });
+      });      
+
+      Setoptionsgrup(optionsgrupLst2);
+
+      if(optionsgrupLst2.length > 0)
+      {
+        setValueGroup(optionsgrupLst2[0].value);   
+      }
+      else
+      {
+        setValueGroup(""); 
+      }
+    } else {
+      let optionsgrupLstRc = [];
+      ListadoGrupoActivo.map((data) => {
+        optionsgrupLstRc.push({
+          value: data.Id_grupo,
+          label: data.NOMBRE_GRUPO,
+        });
+      });
+
+      if (optionsgrupLstRc.length > 0) {
+        Setoptionsgrup(optionsgrupLstRc);
+        setValueGroup(optionsgrupLstRc[0].value); 
+      }
+      else
+      {
+        setValueGroup(""); 
+      }
+    }
+  }
 
   return (
     <>
@@ -202,6 +256,9 @@ function CreateSticker({
                         maxLength="10"
                         type="number"
                         min="0"
+                        onKeyUp={() => {
+                          comprobarSufijoGrup();
+                        }}
                         className={styles.group_input}
                       />
 
@@ -351,6 +408,7 @@ function CreateSticker({
                       <label className={styles.group_title}>Grupo</label>
                       <Select
                         className="Grupo"
+                        id="Grupo"
                         value={optionsgrup.filter(function (optiong) {
                           return (
                             optiong.value ==

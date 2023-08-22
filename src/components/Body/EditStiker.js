@@ -147,7 +147,6 @@ function EditStickerComponents({
     optionsTipoMue.push({ value: data.ID, label: data.NOMBRE_TIPO_MUESTRA });
   });
 
-  const optionsgrup = [];
   ListadoGrupoActivo.map((data) => {
     optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
   });
