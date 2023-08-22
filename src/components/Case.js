@@ -241,7 +241,6 @@ export default function Case({
               Values={{
                 src: urlImagenDinamyc,
                 alt: "grupo",
-                title: "Imagen background",
                 classValue: caseStyles.cases_bg,
                 width: 1920,
                 height: 1080,

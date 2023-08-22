@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Pagination from "../../Tools/Pagination";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Link from "next/link";
+import { ClickButtonMenuConf } from "../../Tools/functiones";
 
 function TableCsv({ InforSampleDetails, FechaIngreso, FechaIngresoFinal,valueGrupo,query }) {
 
@@ -48,10 +49,10 @@ function TableCsv({ InforSampleDetails, FechaIngreso, FechaIngresoFinal,valueGru
         >
           <div className={styles.back_btn_container}>
             <Link
-              href={{
-                pathname: "/",
-                hash: "Cactive",
-              }}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault;
+                ClickButtonMenuConf();}}
               className={styles.back_btn}
             >
               Volver{" "}

@@ -9,6 +9,7 @@ function HRButtonMenuNav() {
     <>
       <Link
         href={""}
+        id="btnMenuPrincipal"
         title="Menú opciones"
         onClick={(e) => {
           e.preventDefault();
