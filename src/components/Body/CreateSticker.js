@@ -72,9 +72,6 @@ function CreateSticker({
     setValueImagesrcExterna2(null);
   }, []);
 
-  
-
-  
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {

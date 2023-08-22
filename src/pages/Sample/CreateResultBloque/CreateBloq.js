@@ -31,7 +31,6 @@ function PageCreateResult({ cookie, group, name_group,hrefhash }) {
       setListMicroorganismo,
       setListNumber
     );
-    // ListPruebaxGroupApi(cookie, setListPruebas, group, id);
   }, []);
 
   useEffect(() => {

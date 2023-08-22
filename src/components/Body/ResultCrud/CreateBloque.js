@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
@@ -12,8 +12,8 @@ import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
 import ListResulltAdd from "./ListResulltAdd";
+import ImageOptimize from "../Tools/ImageOptimize";
 
-import Image from "next/image";
 function ComponentCreateResult({
   ListPruebas,
   ListResultados,
@@ -27,7 +27,6 @@ function ComponentCreateResult({
   setListAddResultMultple,
   ListMicroorganismo,
   ListNumber,
-  hrefhash
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
@@ -50,36 +49,34 @@ function ComponentCreateResult({
   const { errors } = formState;
 
   useEffect(() => {
-    if(ListadoBitacoras != null &&
-      ListadoBitacoras != undefined)
-    {
+    if (ListadoBitacoras != null && ListadoBitacoras != undefined) {
       let NumBitacora = "";
-      ListadoBitacoras != null &&
-                          ListadoBitacoras != undefined
-                            ? ListadoBitacoras.map(
-                                (data, index) => 
-                                NumBitacora = NumBitacora + `${data.split("_")[0]}, `
-                              )
-                            : NumBitacora = NumBitacora + "";
-                            if(NumBitacora != "")
-                            {
-                                const pBit = document.getElementById("parrBitac");
-                                pBit.innerText = NumBitacora.substring(0, (NumBitacora.length - 2));  
-                            }
+      ListadoBitacoras != null && ListadoBitacoras != undefined
+        ? ListadoBitacoras.map(
+            (data) => (NumBitacora = NumBitacora + `${data.split("_")[0]}, `)
+          )
+        : (NumBitacora = NumBitacora + "");
+      if (NumBitacora != "") {
+        const pBit = document.getElementById("parrBitac");
+        pBit.innerText = NumBitacora.substring(0, NumBitacora.length - 2);
+      }
     }
-    
-  },[ListadoBitacoras]);
+  }, [ListadoBitacoras]);
 
   return (
     <>
       <section className={styles.Create_Result}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
