@@ -382,6 +382,16 @@ export const QueryCloseCaseSample = (id, observacionCaso, Estado) => {
     });
 };
 
+export const CloseMasiveCaseSample = (ListadoBitacoras, observacionCaso, Estado) => {
+  return userService
+    .CloseMasiveStickers(ListadoBitacoras, observacionCaso, Estado)
+    .catch((error) => {
+      console.log(error, "erro in cerrar bloque");
+      return Swal.showValidationMessage(`Request failed: ${error}`);
+    });
+};
+
+
 export const QueryDeleteResult = (Codigo_resultado_bitacora) => {
   return userService.DeleteResult(Codigo_resultado_bitacora).catch((error) => {
     console.log(error, "erro in eliminar resultado");

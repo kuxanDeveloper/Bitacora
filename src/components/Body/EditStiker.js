@@ -67,6 +67,8 @@ function EditStickerComponents({
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codJefeLab, setcodJefeLab] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
+  const [observacionCmb, setobservacionCmb] = useState("");
+  const [descobservacionCmb, setdescobservacionCmb] = useState("");
   const [fecha, Setfecha] = useState("");
   const [ValueGroup, setValueGroup] = useState("");
 
@@ -94,8 +96,10 @@ function EditStickerComponents({
         );
 
         if (retornoValor != undefined && retornoValor != null) {
-          document.getElementById("sltObservaIni").value =
-            retornoValor.Codigo_observacion;
+          // document.getElementById("sltObservaIni").value =
+          //   retornoValor.Codigo_observacion;
+
+            setobservacionCmb(retornoValor.Codigo_observacion);
         } else if (
           InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES != "" &&
           InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES.toLowerCase() !=
@@ -103,7 +107,7 @@ function EditStickerComponents({
         ) {
           setShowobservaTextare(true);
         } else {
-          document.getElementById("sltObservaIni").value = "";
+          // document.getElementById("sltObservaIni").value = "";
         }
       }
 
@@ -148,7 +152,13 @@ function EditStickerComponents({
     optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
   });
 
-  console.log(isHabilteGroup);
+  const optionsObservation = [];
+  LstObservacionesPrede.map((data) => {
+    optionsObservation.push({
+      value: data.Codigo_observacion,
+      label: data.Descripcion_Observacion,
+    });
+  });
 
   return (
     <section className={styles.Create_sticker}>
@@ -200,8 +210,9 @@ function EditStickerComponents({
                               );
                             })}
                             isDisabled={
-                              isHabilteGroup == "true" || InforSampleDetails.infoBitacora[0]
-                              .ESTADO_STICKER == false
+                              isHabilteGroup == "true" ||
+                              InforSampleDetails.infoBitacora[0]
+                                .ESTADO_STICKER == false
                                 ? true
                                 : false
                             }
@@ -567,7 +578,30 @@ function EditStickerComponents({
                           <label className={styles.group_title}>
                             Obsevraciones predeterminada
                           </label>
-                          <select
+
+                          <Select
+                            className="observaci"
+                            options={optionsObservation}
+                            value={optionsObservation.filter(function (optiong) {
+                              return (
+                                optiong.value ==
+                                (observacionCmb == null ||
+                                  observacionCmb == undefined
+                                  ? ""
+                                  : observacionCmb)
+                              );
+                            })}
+                            onChange={(e) => {
+                              OnchangeObservaCrearEdit(
+                                e.value,
+                                setShowobservaTextare
+                              );
+                              setobservacionCmb(e.value);
+                              setdescobservacionCmb(e.label);
+                            }}
+                            placeholder="Seleccione una observacion"
+                          ></Select>
+                          {/* <select
                             name="sltObservaIni"
                             id="sltObservaIni"
                             disabled={
@@ -603,7 +637,7 @@ function EditStickerComponents({
                                   })
                                 : ""
                               : ""}
-                          </select>
+                          </select> */}
                         </div>
                       </div>
 
@@ -732,7 +766,9 @@ function EditStickerComponents({
                                   codSitioAnatomico,
                                   codTipoMuestra,
                                   e,
-                                  ValueGroup
+                                  ValueGroup,
+                                  observacionCmb,
+                                  descobservacionCmb
                                 );
                               }}
                               className={styles.btn_send}

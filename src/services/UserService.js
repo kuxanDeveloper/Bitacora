@@ -107,6 +107,7 @@ export const userService = {
   CombopruebaActivo,
   ComboplantillaActivo,
   ComboopcionesActivo,
+  CloseMasiveStickers
 };
 
 async function login(username, password) {
@@ -538,6 +539,19 @@ function CloseCaseSample(id, observacionCaso, Estado) {
   formData.append("Estado_sticker", Estado);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/CambioEstadoBitacora`,
+    null,
+    formData
+  );
+}
+
+function CloseMasiveStickers(ListadoBitacoras, observacionCaso, Estado) {
+  const formData = new FormData();
+  formData.append("Listado_Num_Bitacoras", JSON.stringify(ListadoBitacoras));
+  formData.append("Observacion_estado", observacionCaso);
+  formData.append("Estado_sticker", Estado);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/Stickers/CambioEstadoBitacoraBloque`,
     null,
     formData
   );

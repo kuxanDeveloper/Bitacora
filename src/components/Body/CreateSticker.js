@@ -47,6 +47,8 @@ function CreateSticker({
   const [ValueGroup, setValueGroup] = useState("");
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codTipoMuestra, setcodTipoMuestra] = useState("");
+  const [observacionCmb, setobservacionCmb] = useState("");
+  const [descobservacionCmb, setdescobservacionCmb] = useState("");
   const [selectValue, SetSelectValue] = useState("");
   const [fecha, Setfecha] = useState("");
   const validationSchema = Yup.object().shape({
@@ -56,7 +58,9 @@ function CreateSticker({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().required("Debe seleccionar un sitio anatomico"),
+    SitioAnatomico: Yup.string().required(
+      "Debe seleccionar un sitio anatomico"
+    ),
     jefelaboratorio: Yup.string().notRequired(),
     tipoMuestra: Yup.string().required("Debe seleccionar un tipo de muestra"),
     FechaHoraRecogida: Yup.string().required(
@@ -71,7 +75,6 @@ function CreateSticker({
     setValueImagesrcExterna(null);
     setValueImagesrcExterna2(null);
   }, []);
-
 
   useEffect(() => {
     if (ResultScanner != "" && ResultScanner != null) {
@@ -128,6 +131,11 @@ function CreateSticker({
   const optionsTipoMue = [];
   ListadoTipoMuestra.map((data) => {
     optionsTipoMue.push({ value: data.ID, label: data.NOMBRE_TIPO_MUESTRA });
+  });
+
+  const optionsObservation = [];
+  LstObservacionesPrede.map((data) => {
+    optionsObservation.push({ value: data.Codigo_observacion, label: data.Descripcion_Observacion });
   });
 
   return (
@@ -345,10 +353,10 @@ function CreateSticker({
                         className="Grupo"
                         value={optionsgrup.filter(function (optiong) {
                           return (
-                            (optiong.value ==
+                            optiong.value ==
                             (ValueGroup == null || ValueGroup == undefined
                               ? ""
-                              : ValueGroup))
+                              : ValueGroup)
                           );
                         })}
                         onChange={(e) => {
@@ -447,7 +455,7 @@ function CreateSticker({
                         Tipo de muestra
                       </label>
                       <Select
-                        className="TipoMue"                        
+                        className="TipoMue"
                         options={optionsTipoMue}
                         onChange={(e) => {
                           setcodTipoMuestra(e.value);
@@ -538,7 +546,21 @@ function CreateSticker({
                       <label className={styles.group_title}>
                         Observaciones predeterminada
                       </label>
-                      <select
+                      <Select
+                        className="observaci"
+                        options={optionsObservation}
+                        onChange={(e) => {
+                          OnchangeObservaCrearEdit(
+                            e.value,
+                            setShowobservaTextare
+                          );
+                          setobservacionCmb(e.value);
+                          setdescobservacionCmb(e.label);
+                        }}
+                        placeholder="Seleccione una observacion"
+                      ></Select>
+
+                      {/* <select
                         defaultValue={""}
                         name="sltObservaIni"
                         id="sltObservaIni"
@@ -569,7 +591,7 @@ function CreateSticker({
                               })
                             : ""
                           : ""}
-                      </select>
+                      </select> */}
                     </div>
                   </div>
 
@@ -606,9 +628,11 @@ function CreateSticker({
                             setValue,
                             selectValue,
                             codSitioAnatomico,
-                            codTipoMuestra,                            
+                            codTipoMuestra,
                             e,
-                            ValueGroup
+                            ValueGroup,
+                            observacionCmb,
+                            descobservacionCmb
                           );
                           setValue(
                             "FechaHoraRecogida",
@@ -618,7 +642,7 @@ function CreateSticker({
                                 ).value
                               : ""
                           );
-                          setvalue("GrupoSticker", ValueGroup);
+                          setValue("GrupoSticker", ValueGroup);
                           // setCheckinvalue(setValue);
                           setImagenFile(
                             ValueImagesrc,

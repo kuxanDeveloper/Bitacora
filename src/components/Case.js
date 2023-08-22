@@ -5,6 +5,7 @@ import {
   UserActiveUrgencias,
   SelectAllCheck,
   AddListCodBitacora,
+  AperturaandCierreMasivo,
 } from "./Tools/functiones";
 import CaseComponent from "./Body/Casecomponents/CaseComponent";
 import caseStyles from "../styles/case.module.scss";
@@ -218,6 +219,8 @@ export default function Case({
   function changeModeVew() {
     List ? SetList(false) : SetList(true);
   }
+
+  console.log(isTrueActive);
 
   return (
     <>
@@ -451,6 +454,61 @@ export default function Case({
             style={{ display: "block", overflow: "auto" }}
             className={caseStyles.cases_container}
           >
+            <div className={`${styleTable.table_btn} checkListResult`}>
+              <th colspan={5} className={styleTable.btn_options}>
+                {isTrueActive ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        AddListCodBitacora(
+                          "inputCheckoutResult",
+                          idGruop,
+                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
+                          hrefhash,
+                          HrefArmado
+                        );
+                      }}
+                      className={styleTable.btn_sticker}
+                    >
+                      <span>&#10010; </span>
+                      Agregar estatus masivo
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        AperturaandCierreMasivo(
+                          LstObservacionesPrede,
+                          isTrueActive,
+                          "inputCheckoutResult"
+                        );
+                      }}
+                      className={styleTable.btn_sticker}
+                    >
+                      <span>&#10010; </span>
+                      Cierre de las ordenes
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        AperturaandCierreMasivo(
+                          LstObservacionesPrede,
+                          isTrueActive,
+                          "inputCheckoutResult"
+                        );
+                      }}
+                      className={styleTable.btn_sticker}
+                    >
+                      <span>&#10010; </span>
+                      Reabrir de las ordenes
+                    </button>
+                  </>
+                )}
+              </th>
+              <br></br>
+            </div>
             <table
               className={styleTable.table}
               style={{ width: "100%", position: "relative" }}
@@ -654,25 +712,6 @@ export default function Case({
                       ></StickersTable>
                     ))
                   : "Sin Stickers inactivos"}
-                <tr className={`${styleTable.table_btn} checkListResult`}>
-                  <td colSpan={5} className={styleTable.btn_options}>
-                    <button
-                      onClick={() => {
-                        AddListCodBitacora(
-                          "inputCheckoutResult",
-                          idGruop,
-                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
-                          hrefhash,
-                          HrefArmado
-                        );
-                      }}
-                      className={styleTable.btn_sticker}
-                    >
-                      <span>&#10010; </span>
-                      Agregar estatus masivo
-                    </button>
-                  </td>
-                </tr>
               </tbody>
             </table>
             <>
@@ -745,41 +784,39 @@ export default function Case({
                     ></CaseComponent>
                   ))
                 : ""}
-
-            
             </div>
-              <>
-                <br></br>
-                {isTrueActive ? (
-                  ListadoMuestraActivo != null &&
-                  ListadoMuestraActivo != undefined &&
-                  ListadoMuestraActivo.length > 0 ? (
-                    <Pagination
-                      TotalPage={ListadoMuestraActivo[0].TotalPage}
-                      page={query.page}
-                      pathname={router.pathname}
-                      queryArme={{ page: "1" }}
-                      hash={null}
-                      CountPage={ListadoMuestraActivo[0].Per_PAge}
-                    ></Pagination>
-                  ) : (
-                    ""
-                  )
-                ) : ListadoMuestraInactivo != null &&
-                  ListadoMuestraInactivo != undefined &&
-                  ListadoMuestraInactivo.length > 0 ? (
+            <>
+              <br></br>
+              {isTrueActive ? (
+                ListadoMuestraActivo != null &&
+                ListadoMuestraActivo != undefined &&
+                ListadoMuestraActivo.length > 0 ? (
                   <Pagination
-                    TotalPage={ListadoMuestraInactivo[0].TotalPage}
+                    TotalPage={ListadoMuestraActivo[0].TotalPage}
                     page={query.page}
                     pathname={router.pathname}
                     queryArme={{ page: "1" }}
                     hash={null}
-                    CountPage={ListadoMuestraInactivo[0].Per_PAge}
+                    CountPage={ListadoMuestraActivo[0].Per_PAge}
                   ></Pagination>
                 ) : (
                   ""
-                )}
-              </>
+                )
+              ) : ListadoMuestraInactivo != null &&
+                ListadoMuestraInactivo != undefined &&
+                ListadoMuestraInactivo.length > 0 ? (
+                <Pagination
+                  TotalPage={ListadoMuestraInactivo[0].TotalPage}
+                  page={query.page}
+                  pathname={router.pathname}
+                  queryArme={{ page: "1" }}
+                  hash={null}
+                  CountPage={ListadoMuestraInactivo[0].Per_PAge}
+                ></Pagination>
+              ) : (
+                ""
+              )}
+            </>
           </>
         )}
       </section>
