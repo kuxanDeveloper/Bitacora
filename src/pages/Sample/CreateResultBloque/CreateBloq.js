@@ -13,7 +13,7 @@ import {
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
 
-function PageCreateResult({ cookie, group, name_group,hrefhash }) {
+function PageCreateResult({ cookie, group, name_group, hrefhash }) {
   const [ListResultados, setListResultados] = useState([]);
   const [ListOptiones, setListOptiones] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
@@ -31,7 +31,6 @@ function PageCreateResult({ cookie, group, name_group,hrefhash }) {
       setListMicroorganismo,
       setListNumber
     );
-    // ListPruebaxGroupApi(cookie, setListPruebas, group, id);
   }, []);
 
   useEffect(() => {
@@ -42,11 +41,10 @@ function PageCreateResult({ cookie, group, name_group,hrefhash }) {
     ListOptionesxPlantilla(cookie, setListOptiones, valuePlantillachange, "");
   }, [valuePlantillachange]);
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     let LstBitacoras = JSON.parse(sessionStorage.getItem("ListadoBitacoras"));
     setListadoBitacoras(LstBitacoras);
-  },[]);
+  }, []);
 
   return (
     <>
@@ -129,8 +127,6 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    
-
     if (
       ctx.query.group == null ||
       ctx.query.group == undefined ||
@@ -148,7 +144,7 @@ export async function getServerSideProps(ctx) {
         cookie: cookie,
         group: ctx.query.group,
         name_group: ctx.query.name_group,
-        hrefhash: ctx.query.hrefhash
+        hrefhash: ctx.query.hrefhash,
       },
     };
   } else {

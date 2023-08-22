@@ -39,8 +39,6 @@ function ComponentCreateResult({
       .min(1, "Debe por lo menos tener un estatus agregado")
       .required("Debe por lo menos tener un estatus agregado"),
   });
-
-  console.log(ListAddResultMultple);
   const [ComboDynamic, setComboDynamic] = useState(false);
   const [ListSelectDimanyc, setListSelectDimanyc] = useState([]);
   const [selectobjeEstatus, SetselectobjeEstatus] = useState({});
@@ -190,7 +188,7 @@ function ComponentCreateResult({
                         onChange={(e) => {
                           SetselectobjeEstatus({
                             value: e.value,
-                            text: e.label,
+                            label: e.label,
                           });
                           setvaluePruebachange(e.value);
                           onclickPruebaTargetCreate(
@@ -278,35 +276,7 @@ function ComponentCreateResult({
                             placeholder="Seleccione una opción"
                             value={selectobjeopciones}
                           ></Select>
-                          {/* <select
-                            {...register("Codigo_opcion")}
-                            name="Codigo_opcion"
-                            id="Codigo_opcion"
-                            className={styles.input_group}
-                            defaultValue={""}
-                            onChange={(e) => {
-                              clearErrors("Codigo_opcion");
-                              ComboDinamyc(
-                                e.target.id,
-                                ListMicroorganismo,
-                                ListNumber,
-                                setListSelectDimanyc,
-                                setComboDynamic,
-                                clearErrors
-                              );
-                            }}
-                          >
-                            <option disabled value="">
-                              Seleccione una opción
-                            </option>
-                            {ListOptiones != null && ListOptiones != undefined
-                              ? ListOptiones.map((data, index) => (
-                                  <option key={index} value={data.COD_OPCIONES}>
-                                    {`${data.OPCION_DESCRIPCION}`}
-                                  </option>
-                                ))
-                              : ""}
-                          </select> */}
+
                           <div className={styles.invalid_feedback}>
                             {errors.Codigo_opcion?.message}
                           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import {
   onclickPruebaTargetCreate,
   onclickPlantillaTargetCreate,
@@ -12,8 +12,8 @@ import * as Yup from "yup";
 import Link from "next/link";
 import styles from "../../../styles/Results.module.scss";
 import ListResulltAdd from "./ListResulltAdd";
-
-import Image from "next/image";
+import ImageOptimize from "../../Tools/ImageOptimize";
+import Select from "react-select";
 function ComponentCreateResult({
   ListPruebas,
   ListResultados,
@@ -27,7 +27,6 @@ function ComponentCreateResult({
   setListAddResultMultple,
   ListMicroorganismo,
   ListNumber,
-  hrefhash
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
@@ -44,42 +43,73 @@ function ComponentCreateResult({
   });
   const [ComboDynamic, setComboDynamic] = useState(false);
   const [ListSelectDimanyc, setListSelectDimanyc] = useState([]);
+  const [selectobjeEstatus, SetselectobjeEstatus] = useState({});
+  const [selectobjeSeguimiento, SetselectobjeSeguimiento] = useState(null);
+  const [selectobjeopciones, Setselectobjeopciones] = useState(null);
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState, setValue, clearErrors, setError } =
     useForm(formOptions);
   const { errors } = formState;
 
+  const optionStatus = [];
+  const optionSegumiento = [];
+  const optionOpciones = [];
+
   useEffect(() => {
-    if(ListadoBitacoras != null &&
-      ListadoBitacoras != undefined)
-    {
+    if (ListadoBitacoras != null && ListadoBitacoras != undefined) {
       let NumBitacora = "";
-      ListadoBitacoras != null &&
-                          ListadoBitacoras != undefined
-                            ? ListadoBitacoras.map(
-                                (data, index) => 
-                                NumBitacora = NumBitacora + `${data.split("_")[0]}, `
-                              )
-                            : NumBitacora = NumBitacora + "";
-                            if(NumBitacora != "")
-                            {
-                                const pBit = document.getElementById("parrBitac");
-                                pBit.innerText = NumBitacora.substring(0, (NumBitacora.length - 2));  
-                            }
+      ListadoBitacoras != null && ListadoBitacoras != undefined
+        ? ListadoBitacoras.map(
+            (data) => (NumBitacora = NumBitacora + `${data.split("_")[0]}, `)
+          )
+        : (NumBitacora = NumBitacora + "");
+      if (NumBitacora != "") {
+        const pBit = document.getElementById("parrBitac");
+        pBit.innerText = NumBitacora.substring(0, NumBitacora.length - 2);
+      }
     }
-    
-  },[ListadoBitacoras]);
+  }, [ListadoBitacoras]);
+
+  if (ListPruebas != null && ListPruebas != undefined) {
+    ListPruebas.map((data) =>
+      optionStatus.push({ value: data.COD_PRUEBA, label: data.NOMBRE_PRUEBA })
+    );
+  }
+
+  if (ListResultados != null && ListResultados != undefined) {
+    ListResultados.map((data) =>
+      optionSegumiento.push({
+        value: data.COD_PLANTILLA,
+        label: data.RESULTADO_PLANTILLA,
+      })
+    );
+  }
+
+  if (ListOptiones != undefined && ListOptiones != null) {
+    if (ListOptiones.length > 0) {
+      ListOptiones.map((data) =>
+        optionOpciones.push({
+          value: data.COD_OPCIONES,
+          label: data.OPCION_DESCRIPCION,
+        })
+      );
+    }
+  }
 
   return (
     <>
       <section className={styles.Create_Result}>
-        <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+        <ImageOptimize
+          Values={{
+            src: "/img/bg_image.jpg",
+            alt: "Fondo BackGround",
+            title: "Fondo BackGround",
+            classValue: styles.background_img,
+            width: 1920,
+            height: 1080,
+          }}
+        ></ImageOptimize>
+
         <div className={styles.sticker_container}>
           <div className={styles.home_btn_container}>
             <Link
@@ -149,14 +179,7 @@ function ComponentCreateResult({
                       >
                         Números de sticker :
                       </label>
-                      <p className={styles.inline} id="parrBitac">
-                        {/* {ListadoBitacoras != null &&
-                        ListadoBitacoras != undefined
-                          ? ListadoBitacoras.map(
-                              (data, index) => `${data.split("_")[0]}, `
-                            )
-                          : ""} */}
-                      </p>
+                      <p className={styles.inline} id="parrBitac"></p>
                     </div>
                   </div>
                   <div className={styles.form_group}>
@@ -175,8 +198,31 @@ function ComponentCreateResult({
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Estatus</label>
-
-                      <select
+                      <Select
+                        instanceId={"Codigo_prueba"}
+                        name="Codigo_prueba"
+                        id="Codigo_prueba"
+                        defaultValue={""}
+                        onChange={(e) => {
+                          SetselectobjeEstatus({
+                            value: e.value,
+                            label: e.label,
+                          });
+                          setvaluePruebachange(e.value);
+                          onclickPruebaTargetCreate(
+                            setvaluePlantillachange,
+                            setValue,
+                            setComboDynamic,
+                            setListSelectDimanyc
+                          );
+                          setComboDynamic(false);
+                          setListSelectDimanyc(false);
+                          clearErrors("Codigo_prueba");
+                        }}
+                        placeholder={"Seleccione un estatus"}
+                        options={optionStatus}
+                      ></Select>
+                      {/* <select
                         {...register("Codigo_prueba")}
                         name="Codigo_prueba"
                         id="Codigo_prueba"
@@ -205,7 +251,7 @@ function ComponentCreateResult({
                               </option>
                             ))
                           : ""}
-                      </select>
+                      </select> */}
 
                       <div className={styles.invalid_feedback}>
                         {errors.Codigo_prueba?.message}
@@ -216,7 +262,33 @@ function ComponentCreateResult({
                   <div className={styles.form_group}>
                     <div className={styles.input_group}>
                       <label className={styles.group_title}>Seguimiento</label>
-                      <select
+                      <Select
+                        instanceId={"Codigo_resultado_preliminar_1"}
+                        name="Codigo_resultado_preliminar_1"
+                        id="Codigo_resultado_preliminar_1"
+                        defaultValue={""}
+                        onChange={(e) => {
+                          SetselectobjeSeguimiento({
+                            value: e.value,
+                            label: e.label,
+                          });
+                          setvaluePlantillachange(e.value);
+                          onclickPlantillaTargetCreate(setValue);
+                          ComboDinamyc(
+                            e.label,
+                            ListMicroorganismo,
+                            ListNumber,
+                            setListSelectDimanyc,
+                            setComboDynamic,
+                            clearErrors
+                          );
+                          clearErrors("Codigo_resultado_preliminar_1");
+                        }}
+                        options={optionSegumiento}
+                        placeholder="Seleccione un seguimiento"
+                        value={selectobjeSeguimiento}
+                      ></Select>
+                      {/* <select
                         {...register("Codigo_resultado_preliminar_1")}
                         name="Codigo_resultado_preliminar_1"
                         id="Codigo_resultado_preliminar_1"
@@ -246,7 +318,7 @@ function ComponentCreateResult({
                               </option>
                             ))
                           : ""}
-                      </select>
+                      </select> */}
                       <div className={styles.invalid_feedback}>
                         {errors.Codigo_resultado_preliminar_1?.message}
                       </div>
@@ -262,7 +334,31 @@ function ComponentCreateResult({
                               <label className={styles.group_title}>
                                 Opciones
                               </label>
-                              <select
+                              <Select
+                                instanceId={"Codigo_opcion"}
+                                name="Codigo_opcion"
+                                id="Codigo_opcion"
+                                defaultValue={""}
+                                onChange={(e) => {
+                                  Setselectobjeopciones({
+                                    value: e.value,
+                                    label: e.label,
+                                  });
+                                  clearErrors("Codigo_opcion");
+                                  ComboDinamyc(
+                                    e.label,
+                                    ListMicroorganismo,
+                                    ListNumber,
+                                    setListSelectDimanyc,
+                                    setComboDynamic,
+                                    clearErrors
+                                  );
+                                }}
+                                options={optionOpciones}
+                                placeholder="Seleccione una opción"
+                                value={selectobjeopciones}
+                              ></Select>
+                              {/* <select
                                 {...register("Codigo_opcion")}
                                 name="Codigo_opcion"
                                 id="Codigo_opcion"
@@ -294,7 +390,7 @@ function ComponentCreateResult({
                                       </option>
                                     ))
                                   : ""}
-                              </select>
+                              </select> */}
                               <div className={styles.invalid_feedback}>
                                 {errors.Codigo_opcion?.message}
                               </div>
@@ -311,7 +407,9 @@ function ComponentCreateResult({
                   {ComboDynamic ? (
                     <>
                       <div className={`${styles.form_group}`}>
-                        {ListSelectDimanyc.map((data) => data)}
+                        {ListSelectDimanyc.map((data, index) => {
+                          return <Fragment key={index}>{data}</Fragment>;
+                        })}
                       </div>
                       <div className={styles.invalid_feedback}>
                         {errors.SelectDinamyc?.message}
@@ -329,9 +427,9 @@ function ComponentCreateResult({
                       onClick={(e) => {
                         e.preventDefault();
                         AddResultToList(
-                          "Codigo_prueba",
-                          "Codigo_resultado_preliminar_1",
-                          "Codigo_opcion",
+                          selectobjeEstatus,
+                          selectobjeSeguimiento,
+                          selectobjeopciones,
                           setListAddResultMultple,
                           ListAddResultMultple,
                           setError,
@@ -339,7 +437,9 @@ function ComponentCreateResult({
                           setvaluePlantillachange,
                           ComboDynamic,
                           setListSelectDimanyc,
-                          setComboDynamic
+                          setComboDynamic,
+                          SetselectobjeSeguimiento,
+                          Setselectobjeopciones
                         );
                       }}
                     >

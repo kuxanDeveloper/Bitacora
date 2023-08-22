@@ -1348,7 +1348,7 @@ export const AddResultToList = (
     obj.SegumientoId = Seguimiento.value;
     obj.OptionID = OptionIsHabilite ? Optiones.value : null;
 
-    obj.TextoEstatus = Prueba.text;
+    obj.TextoEstatus = Prueba.label;
     obj.textoSeguimiento = seguimiento;
     obj.textoOption = opciones;
 
