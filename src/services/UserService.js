@@ -107,7 +107,9 @@ export const userService = {
   CombopruebaActivo,
   ComboplantillaActivo,
   ComboopcionesActivo,
-  CloseMasiveStickers
+  CloseMasiveStickers,
+  ListNumberGeneral,
+  CreatNumber
 };
 
 async function login(username, password) {
@@ -223,7 +225,7 @@ function ListGroupForMue(
   Cod_sticker,
   page,
   tipoSearch
-  ) {
+) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
   formData.append("Grupo_sticker", idGroup);
@@ -253,10 +255,7 @@ function ListGroupForMue(
   );
 }
 
-function InfoFechaBitac(cookie, DateIni,
-  DateFin,
-  page,
-  grupo) {
+function InfoFechaBitac(cookie, DateIni, DateFin, page, grupo) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/InformacionFechasBitacora?Fecha_ingreso=${DateIni}&Fecha_final=${DateFin}&page=${page}&idgrupo=${grupo}`,
     cookie
@@ -335,7 +334,6 @@ function CreatSticker(
 }
 
 function CrearResult(COD_BITACORA, ListResultMultiple) {
-  let variable = JSON.stringify(ListResultMultiple);
   const formData = new FormData();
   formData.append("COD_BITACORA", COD_BITACORA);
   formData.append("ListResultMultiple", JSON.stringify(ListResultMultiple));
@@ -501,10 +499,7 @@ function InfoGroup(estado, idGrupo, cookie, page) {
 }
 
 function InfoGroupCombo(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboGrupoFech`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboGrupoFech`, cookie);
 }
 
 function UpdateNote(
@@ -1030,7 +1025,7 @@ function EditAncestro(
   );
 }
 
-function GetlistAncestro(cookie, COD_ANCESTRO, page,ESTADO_ANCESTRO) {
+function GetlistAncestro(cookie, COD_ANCESTRO, page, ESTADO_ANCESTRO) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/GetlistAncestro?COD_ANCESTRO=${COD_ANCESTRO}&ESTADO_ANCESTRO=${ESTADO_ANCESTRO}&page=${page}`,
     cookie
@@ -1284,11 +1279,7 @@ function ListUpdatePanelTertiary(
   );
 }
 
-function ExportcsvFechas(
-  Fecha_inicial,
-  Fecha_final,
-  Id_grupo
-) {
+function ExportcsvFechas(Fecha_inicial, Fecha_final, Id_grupo) {
   return fetchWrapper.get(
     `${baseUrl}/Stickers/ExportCsvExcelFecha?FechaInicial=${Fecha_inicial}&Fecha_final=${Fecha_final}&Id_grupo=${Id_grupo}`,
     null
@@ -1303,29 +1294,36 @@ function ValidNumSticker(cookie, num_stricker, estadobit) {
 }
 
 function CombogrupoActivo(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboGrupoActv`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboGrupoActv`, cookie);
 }
 
 function CombopruebaActivo(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboPruebaActv`,
-    cookie
-  );
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboPruebaActv`, cookie);
 }
 
 function ComboplantillaActivo(cookie) {
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboPlantillaActv`, cookie);
+}
+
+function ComboopcionesActivo(cookie) {
+  return fetchWrapper.get(`${baseUrl}/Stickers/ComboOpcionesActv`, cookie);
+}
+
+function ListNumberGeneral(cookie, page) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboPlantillaActv`,
+    `${baseUrl}/IndexBitacora/LstNumberGeneral?page=${page}`,
     cookie
   );
 }
 
-function ComboopcionesActivo(cookie) {
-  return fetchWrapper.get(
-    `${baseUrl}/Stickers/ComboOpcionesActv`,
-    cookie
+function CreatNumber(ListNumber) {
+  debugger;
+  const formData = new FormData();
+  formData.append("ListadoNumero", JSON.stringify(ListNumber));
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/IndexBitacora/GuardarNumero`,
+    null,
+    formData
   );
 }

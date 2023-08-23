@@ -30,7 +30,7 @@ function HRMenu({ Roles }) {
   }, []);
 
   useEffect(() => {
-    setSelectMenuEstadistica(LocationUrl(router, "estadistica"));
+    setSelectMenuEstadistica(LocationUrl(router, "Statistics"));
   }, []);
 
   return (
@@ -115,7 +115,7 @@ function HRMenu({ Roles }) {
                     <Link
                       href={"#"}
                       className={`${Styles.nav_link} ${
-                        LocationUrl(router, "estadistica") ? Styles.active : ""
+                        LocationUrl(router, "Statistics") ? Styles.active : ""
                       } `}
                       onClick={(e) => {
                         e.preventDefault();
@@ -142,7 +142,8 @@ function HRMenu({ Roles }) {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "Statistics")
+                                LocationUrl(router, "Statistics") &&
+                                !LocationUrl(router, "IndexCsv")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -161,7 +162,7 @@ function HRMenu({ Roles }) {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "IndexSistema")
+                                LocationUrl(router, "IndexCsv")
                                   ? Styles.active
                                   : ""
                               }`}
@@ -454,6 +455,26 @@ function HRMenu({ Roles }) {
                               }`}
                             >
                               Observaciones Predeterminadas
+                            </Link>
+                          </li>
+                        ) : (
+                          ""
+                        )}
+
+                        {Roles.NumberCreateAndUrl ? (
+                          <li className={Styles.sub_li}>
+                            <Link
+                              href="/Configuration/Number/IndexNumber?page=1"
+                              onClick={() => {
+                                OnclickNAvToggle(MenuShow, setMenuShow);
+                              }}
+                              className={`${Styles.sub_link} ${
+                                LocationUrl(router, "IndexNumber")
+                                  ? Styles.active
+                                  : ""
+                              }`}
+                            >
+                              Número
                             </Link>
                           </li>
                         ) : (

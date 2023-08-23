@@ -873,7 +873,11 @@ export const AperturaandCierre = (data, LstObservacionesPrede) => {
   });
 };
 
-export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) => {
+export const AperturaandCierreMasivo = (
+  LstObservacionesPrede,
+  estado,
+  nameInput
+) => {
   window.OnchangeValueSelect = function (value) {
     let valueGetId = document.getElementById("Observacionother");
 
@@ -911,9 +915,7 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
       showCancelButton: true,
       confirmButtonColor: "#e57d00",
       cancelButtonColor: "#767676",
-      confirmButtonText: estado
-        ? "Si,cerrar stickers"
-        : "Si,abrir stickers",
+      confirmButtonText: estado ? "Si,cerrar stickers" : "Si,abrir stickers",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
@@ -943,7 +945,7 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
                 : "Deje una observación del porqué se reabren los stickers..."
             }"                         cols="30"
             rows="50"></textarea>`,
-  
+
           customClass: {
             cancelButton: "HidenLoaderCancel",
           },
@@ -954,7 +956,8 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
           showLoaderOnConfirm: true,
           preConfirm: () => {
             let selectObserva = document.getElementById("sltObservcaciones");
-            let TextAreaObservacion = document.getElementById("Observacionother");
+            let TextAreaObservacion =
+              document.getElementById("Observacionother");
             // Validate input
             if (
               selectObserva.value == "" ||
@@ -969,13 +972,13 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
               Swal.enableButtons();
             } else {
               Swal.resetValidationMessage();
-  
+
               return CierreMasiveCaseSample(
                 ListadoBitacoras,
                 selectObserva.value == "5"
                   ? TextAreaObservacion.value
                   : selectObserva.options[selectObserva.selectedIndex].text,
-                  estado ? "0" : "1"
+                estado ? "0" : "1"
               );
             }
           },
@@ -1021,9 +1024,6 @@ export const AperturaandCierreMasivo = (LstObservacionesPrede,estado,nameInput) 
       confirmButtonText: "Cerrar",
     });
   }
-
-
-
 };
 
 export const ClickButtonMenuConf = () => {
@@ -1039,9 +1039,16 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (setvalue, selectValue,
-  codSitioAnatomico,codTipoMuestra, e,ValueGroup,codobservacionCmb,DescobservacionCmb) => {
-debugger;
+export const RegisterStickerObservaciones = (
+  setvalue,
+  selectValue,
+  codSitioAnatomico,
+  codTipoMuestra,
+  e,
+  ValueGroup,
+  codobservacionCmb,
+  DescobservacionCmb
+) => {
   if (ValueGroup == 8) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
@@ -1052,13 +1059,13 @@ debugger;
       });
       e.preventDefault();
       return;
-    }    
+    }
   }
 
   setvalue("SitioAnatomico", codSitioAnatomico);
   setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
-  
+
   if (codobservacionCmb != "") {
     if (codobservacionCmb != "5") {
       setvalue("ObservaInici", DescobservacionCmb);
@@ -1666,4 +1673,60 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
     pathname: "/Statistics",
     query: { DateIni: fechaIni, DateEnd: fechaFin },
   });
+};
+
+export const AddtolistNumber = (
+  Description,
+  estado,
+  ListadoNumero,
+  setListNumberAddObje,
+  setError,
+  setValueinput
+) => {
+  let validadorError = false;
+  if (Description == null || Description == undefined || Description == "") {
+    setError("Description", {
+      type: "custom",
+      message: "Campo número obligatorio, para agregar al listado",
+    });
+    validadorError = true;
+  }
+
+  // if (
+  //   estado.checked == null ||
+  //   estado.checked == undefined ||
+  //   estado.checked == ""
+  // ) {
+  //   setError("Estado", {
+  //     type: "custom",
+  //     message: "Campo estado obligatorio, para agregar al listado",
+  //   });
+  //   validadorError = true;
+  // }
+  if (!validadorError) {
+    let obj = {};
+    obj.number = Description;
+    obj.Estado = estado.checked;
+
+    if (ListadoNumero.some((a) => a.number == obj.number)) {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: "El número que intentas agregar ya se encuentra registrada en el listado",
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      setListNumberAddObje((preventArray) => [...preventArray, obj]);
+      estado.checked = false;
+      setValueinput("");
+    }
+  }
+};
+
+export const DeleteRowNumber = (
+  idRow,
+  setListNumberAddObje,
+  ListNumberAddObje
+) => {
+  setListNumberAddObje(ListNumberAddObje.filter((item) => item.number !== idRow));
 };
