@@ -25,7 +25,7 @@ export const QueryNumber = (cookie, page) => {
   });
 };
 
-export const SubmitCreateNumber = ( ListNumber ) => {
+export const SubmitCreateNumber = (ListNumber) => {
   return userService
     .CreatNumber(ListNumber)
     .then(() => {
@@ -63,5 +63,75 @@ export const SubmitCreateNumber = ( ListNumber ) => {
       }
 
       console.log(error, "error al crear numero");
+    });
+};
+
+export const QueryEditNumner = (cookie, ID) => {
+  return userService
+    .GetEditNumber(cookie, ID == null ? "" : ID)
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error al obtener la informacion de numero en editar");
+    });
+};
+
+
+export const SubmitEditNumber = (ID, description, Estado) => {
+  return userService
+    .EditNumber(ID, description, Estado)
+    .then(() => {
+      Swal.fire({
+        title: "¡Correcto!",
+        text: "El número se edito correctamente",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+
+      Router.push({
+        pathname: "/Configuration/Number/IndexNumber",
+        query: { page: "1" },
+      });
+    })
+    .catch((error) => {
+      if (
+        error == "Límite de tiempo excedido" ||
+        error == "Usuario o clave incorrectos" ||
+        error == "No se pudo hacer el login, revise los datos enviados"
+      ) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: error,
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Ha ocurrido un error!",
+          text: error,
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+      }
+
+      console.log(error, "error al editar numero");
     });
 };

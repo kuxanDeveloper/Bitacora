@@ -109,7 +109,9 @@ export const userService = {
   ComboopcionesActivo,
   CloseMasiveStickers,
   ListNumberGeneral,
-  CreatNumber
+  CreatNumber,
+  GetEditNumber,
+  EditNumber,
 };
 
 async function login(username, password) {
@@ -1317,7 +1319,6 @@ function ListNumberGeneral(cookie, page) {
 }
 
 function CreatNumber(ListNumber) {
-  debugger;
   const formData = new FormData();
   formData.append("ListadoNumero", JSON.stringify(ListNumber));
 
@@ -1325,5 +1326,25 @@ function CreatNumber(ListNumber) {
     `${baseUrl}/IndexBitacora/GuardarNumero`,
     null,
     formData
+  );
+}
+
+function EditNumber(ID, description, Estado) {
+  const formData = new FormData();
+  formData.append("ID", ID);
+  formData.append("description", description);
+  formData.append("Estado", Estado);
+
+  return fetchWrapper.postHeader(
+    `${baseUrl}/IndexBitacora/EditarNumero`,
+    null,
+    formData
+  );
+}
+
+function GetEditNumber(cookie, page) {
+  return fetchWrapper.get(
+    `${baseUrl}/IndexBitacora/ObtenerEdicionNumero?id=${page}`,
+    cookie
   );
 }
