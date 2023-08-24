@@ -67,7 +67,6 @@ function ComponentGroup({ InforOptionsSelc }) {
               <div className={styles.stickers_container}>
                 <div className={styles.card_sticker}>
                   {/* <!-- estado --> */}
-
                   <div
                     className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                   >

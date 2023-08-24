@@ -56,11 +56,6 @@ function ComponentGroup({
           ? null
           : InforGroup.EdicionGrupo[0].ESTADO;
 
-      // var checkbox2 = document.getElementById("AdmiteSufijo");
-      // checkbox2.checked =
-      //   InforGroup.InforGroup[0].ADMITE_SUFIJO == false
-      //     ? null
-      //     : InforGroup.InforGroup[0].ADMITE_SUFIJO;
     }
   }, [InforGroup.EdicionGrupo]);
 
@@ -82,7 +77,7 @@ function ComponentGroup({
   return (
     <>
       <section className={styles.create_note}>
-      <ImageOptimize
+        <ImageOptimize
           Values={{
             src: "/img/bg_image.jpg",
             alt: "Fondo BackGround",
@@ -207,7 +202,10 @@ function ComponentGroup({
                                 onClick={() => {
                                   setCheckindividual(setValue);
                                   setValue("ListSufijo", ListSufijo);
-                                  setValue("IdGrupo", InforGroup.EdicionGrupo[0].Id_grupo);
+                                  setValue(
+                                    "IdGrupo",
+                                    InforGroup.EdicionGrupo[0].Id_grupo
+                                  );
                                   setValue("Lst_Pruebas", ListPruebas);
                                 }}
                                 className={styles.btn_send}

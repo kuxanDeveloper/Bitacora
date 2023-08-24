@@ -28,7 +28,8 @@ function ComponentpruebaIndex({ InforSampleDetails, query }) {
               href="#"
               onClick={(e) => {
                 e.preventDefault;
-                ClickButtonMenuConf();}}
+                ClickButtonMenuConf();
+              }}
               className={styles.back_btn}
             >
               Volver{" "}
@@ -49,6 +50,7 @@ function ComponentpruebaIndex({ InforSampleDetails, query }) {
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
+                  <th>Código prueba</th>
                   <th>Descripcion Estatus</th>
                   <th>Estado</th>
                   <th>Orden del Estatus</th>
@@ -60,6 +62,7 @@ function ComponentpruebaIndex({ InforSampleDetails, query }) {
                 InforSampleDetails.listadoPrueba != undefined
                   ? InforSampleDetails.listadoPrueba.map((data, index) => (
                       <tr key={index}>
+                        <td>{data.COD_PRUEBA}</td>
                         <td>{data.NOMBRE_PRUEBA}</td>
                         <td className={styleTable.textCenterColumn}>
                           {data.ESTADO_PRUEBA == true ? (

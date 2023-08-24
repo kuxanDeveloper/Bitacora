@@ -36,7 +36,7 @@ function ComponentGroup({
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
   const { register, handleSubmit, formState, setValue } = useForm(formOptions);
   const { errors } = formState;
-
+  console.log(InfoPrueba.ListadoGrupoXPrueba);
   return (
     <>
       <section className={styles.create_note}>
@@ -73,6 +73,24 @@ function ComponentGroup({
                   InfoPrueba.listadoPrueba != undefined
                     ? InfoPrueba.listadoPrueba.map((data, index) => (
                         <div key={index}>
+                          <div className={`${styles.form_group}`}>
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Grupo perteneciente:
+                              </label>
+                              <label>
+                                {InfoPrueba.ListadoGrupoXPrueba.map((data) => {
+                                  if (
+                                    InfoPrueba.ListadoGrupoXPrueba.length > 1
+                                  ) {
+                                    return data.Value + ", ";
+                                  } else {
+                                    return data.Value;
+                                  }
+                                })}
+                              </label>
+                            </div>
+                          </div>
                           <div
                             className={`${styles.form_group} ${stylesCrud.SinLinea}`}
                           >
