@@ -41,7 +41,7 @@ function EditStickerComponents({
     setValueImagesrc2,
     setisImagenOne,
     setisImagenExterna,
-
+    setshowModalJefes,
     setValueImagesrcExterna,
     setValueImagesrcExterna2,
   } = useContextBitacora();
@@ -55,14 +55,10 @@ function EditStickerComponents({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().required(
-      "Debe seleccionar un sitio anatomico"
-    ),
+    SitioAnatomico: Yup.string().notRequired(),
     jefelaboratorio: Yup.string().notRequired(),
-    tipoMuestra: Yup.string().required("Debe seleccionar un tipo de muestra"),
-    FechaHoraRecogida: Yup.string().required(
-      "Campo fecha recogida de la muestra obligatorio"
-    ),
+    tipoMuestra: Yup.string().notRequired(),
+    FechaHoraRecogida: Yup.string().notRequired()
   });
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codJefeLab, setcodJefeLab] = useState("");
@@ -99,7 +95,7 @@ function EditStickerComponents({
           // document.getElementById("sltObservaIni").value =
           //   retornoValor.Codigo_observacion;
 
-            setobservacionCmb(retornoValor.Codigo_observacion);
+          setobservacionCmb(retornoValor.Codigo_observacion);
         } else if (
           InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES != "" &&
           InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES.toLowerCase() !=
@@ -147,6 +143,7 @@ function EditStickerComponents({
     optionsTipoMue.push({ value: data.ID, label: data.NOMBRE_TIPO_MUESTRA });
   });
 
+  const optionsgrup = [];
   ListadoGrupoActivo.map((data) => {
     optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
   });
@@ -503,10 +500,18 @@ function EditStickerComponents({
                             onChange={(e) => {
                               setcodJefeLab(e.value);
                             }}
-                            placeholder="Seleccione el tipo de jefe"
+                            placeholder="Seleccione un jefe de laboratorio"
                             options={options}
                           ></Select>
-
+                          <button
+                            className={styles.btn_barcode}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setshowModalJefes(true);
+                            }}
+                          >
+                            Crear Jefe
+                          </button>
                           <div className={styles.invalid_feedback}>
                             {errors.jefelaboratorio?.message}
                           </div>
@@ -581,11 +586,13 @@ function EditStickerComponents({
                           <Select
                             className="observaci"
                             options={optionsObservation}
-                            value={optionsObservation.filter(function (optiong) {
+                            value={optionsObservation.filter(function (
+                              optiong
+                            ) {
                               return (
                                 optiong.value ==
                                 (observacionCmb == null ||
-                                  observacionCmb == undefined
+                                observacionCmb == undefined
                                   ? ""
                                   : observacionCmb)
                               );
@@ -750,15 +757,7 @@ function EditStickerComponents({
                                 );
                                 setValue("NumSticker", data.NUMERO_STICKER);
                                 setValue("COD_BITACORA", data.CODIGO_BITACORA);
-                                setValue("Sufijo", data.SUFIJO);
-                                setValue(
-                                  "FechaHoraRecogida",
-                                  fecha != ""
-                                    ? document.querySelector(
-                                        ".FechaHoraRecogida input"
-                                      ).value
-                                    : ""
-                                );
+                                setValue("Sufijo", data.SUFIJO);                                
                                 RegisterStickerObservaciones(
                                   setValue,
                                   codJefeLab,
@@ -767,7 +766,13 @@ function EditStickerComponents({
                                   e,
                                   ValueGroup,
                                   observacionCmb,
-                                  descobservacionCmb
+                                  descobservacionCmb,
+                                  ListadoGrupoActivo,
+                                  fecha != ""
+                                    ? document.querySelector(
+                                        ".FechaHoraRecogida input"
+                                      ).value
+                                    : ""
                                 );
                               }}
                               className={styles.btn_send}

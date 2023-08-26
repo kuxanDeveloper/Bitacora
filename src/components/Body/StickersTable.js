@@ -11,14 +11,20 @@ export default function StickersTable({
   Options,
   isSampleGeneral,
   LstObservacionesPrede,
+  idGruop
 }) {
-
+console.log(data);
   return (
     <>
       <tr className={`${styles.table_body} checkListResult`}>
         <td><input id={`IdBitc_${data.CODIGO_BITACORA}`} value={`${data.NUMERO_STICKER}-${data.SUFIJO}_${data.CODIGO_BITACORA}`} name="inputCheckoutResult" type="checkbox" /></td>
         <td>{data.NUMERO_STICKER + `-` + data.SUFIJO}</td>
         <td>{data.FECHA_FORMAT_CREADO_COMPLETA}</td>
+        {idGruop == 0 ? (
+                    <td>{data.NOMBRE_GRUPO_ASIGNADO}</td>
+                  ) : (
+                    ""
+                  )}
         <td>{isActive == true ? (
                             <span>&#x2705;</span>
                           ) : (

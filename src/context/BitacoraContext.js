@@ -38,6 +38,9 @@ export const BicatoraContexProvider = ({ children }) => {
   const [FECHA_HORA_VALIDACION_ANTIBIOGRAMA, setFECHA_HORA_VALIDACION_ANTIBIOGRAMA] = useState("");
   const [ESTADO_STICKER_bit, setESTADO_STICKER_bit] = useState(null);
   const [SelectMenuEstadistica, setSelectMenuEstadistica] = useState(false);  
+  const [showModalJefes, setshowModalJefes] = useState(false);
+  const [Nuvjefe, setNuvjefe] = useState(0);  
+  
 
   const origin =
     typeof window !== "undefined" && window.location.origin
@@ -154,7 +157,11 @@ export const BicatoraContexProvider = ({ children }) => {
         ESTADO_STICKER_bit,
         setESTADO_STICKER_bit,
         SelectMenuEstadistica,
-        setSelectMenuEstadistica
+        setSelectMenuEstadistica,
+        showModalJefes,
+        setshowModalJefes,
+        Nuvjefe,
+        setNuvjefe
       }}
     >
       {children}

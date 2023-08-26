@@ -208,6 +208,10 @@ export default function Case({
         seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
       }
     }
+    else
+    {
+      seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
+    }
   }, [ListadoGrupo]);
 
   useEffect(() => {
@@ -220,7 +224,11 @@ export default function Case({
     List ? SetList(false) : SetList(true);
   }
 
-  console.log(isTrueActive);
+  let pru = hrefhash.split("#");
+  var removed = pru.splice(1, pru.length);
+  let stringhash = "#" + removed.join("#");
+
+  console.log(idGruop);
 
   return (
     <>
@@ -457,6 +465,9 @@ export default function Case({
               <th colspan={5} className={styleTable.btn_options}>
                 {isTrueActive ? (
                   <>
+                  {idGruop == 0 ? (
+                    ""
+                  ) : (
                     <button
                       onClick={() => {
                         AddListCodBitacora(
@@ -464,7 +475,8 @@ export default function Case({
                           idGruop,
                           ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
                           hrefhash,
-                          HrefArmado
+                          HrefArmado,
+                          LstObservacionesPrede
                         );
                       }}
                       className={styleTable.btn_sticker}
@@ -472,6 +484,8 @@ export default function Case({
                       <span>&#10010; </span>
                       Agregar estatus masivo
                     </button>
+                  )}
+                    
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -501,7 +515,7 @@ export default function Case({
                       className={styleTable.btn_sticker}
                     >
                       <span>&#10010; </span>
-                      Reabrir de las ordenes
+                      Reabrir ordenes
                     </button>
                   </>
                 )}
@@ -668,6 +682,13 @@ export default function Case({
                       </button>
                     </span>
                   </th>
+                  {idGruop == 0 ? (
+                    <th>
+                      <span className={styleTable.th_title}>Grupo</span>
+                    </th>
+                  ) : (
+                    ""
+                  )}
                   <th>
                     <span className={styleTable.th_title}>Estado</span>
                   </th>
@@ -687,6 +708,7 @@ export default function Case({
                           Options={Options}
                           isSampleGeneral={isSampleGeneral}
                           LstObservacionesPrede={LstObservacionesPrede}
+                          idGruop={idGruop}
                         ></StickersTable>
                       ))
                     : listMuestrasPendientes.map((data, index) => (
@@ -697,6 +719,7 @@ export default function Case({
                           Options={Options}
                           isSampleGeneral={isSampleGeneral}
                           LstObservacionesPrede={LstObservacionesPrede}
+                          idGruop={idGruop}
                         ></StickersTable>
                       ))
                   : listMuestrasInactivas.length > 0
@@ -708,6 +731,7 @@ export default function Case({
                         Options={Options}
                         isSampleGeneral={true}
                         LstObservacionesPrede={LstObservacionesPrede}
+                        idGruop={idGruop}
                       ></StickersTable>
                     ))
                   : "Sin Stickers inactivos"}
@@ -723,8 +747,8 @@ export default function Case({
                     TotalPage={ListadoMuestraActivo[0].TotalPage}
                     page={query.page}
                     pathname={router.pathname}
-                    queryArme={{ page: "1" }}
-                    hash={null}
+                    queryArme={HrefArmado.query}
+                    hash={stringhash}
                     CountPage={ListadoMuestraActivo[0].Per_PAge}
                   ></Pagination>
                 ) : (
@@ -737,8 +761,8 @@ export default function Case({
                   TotalPage={ListadoMuestraInactivo[0].TotalPage}
                   page={query.page}
                   pathname={router.pathname}
-                  queryArme={{ page: "1" }}
-                  hash={null}
+                  queryArme={HrefArmado.query}
+                  hash={stringhash}
                   CountPage={ListadoMuestraInactivo[0].Per_PAge}
                 ></Pagination>
               ) : (
@@ -759,6 +783,7 @@ export default function Case({
                         Options={Options}
                         isSampleGeneral={isSampleGeneral}
                         LstObservacionesPrede={LstObservacionesPrede}
+                        idGruop={idGruop}
                       ></CaseComponent>
                     ))
                   : listMuestrasPendientes.map((data, index) => (
@@ -769,6 +794,7 @@ export default function Case({
                         Options={Options}
                         isSampleGeneral={isSampleGeneral}
                         LstObservacionesPrede={LstObservacionesPrede}
+                        idGruop={idGruop}
                       ></CaseComponent>
                     ))
                 : listMuestrasInactivas.length > 0
@@ -780,6 +806,7 @@ export default function Case({
                       Options={Options}
                       isSampleGeneral={true}
                       LstObservacionesPrede={LstObservacionesPrede}
+                      idGruop={idGruop}
                     ></CaseComponent>
                   ))
                 : ""}
@@ -794,8 +821,8 @@ export default function Case({
                     TotalPage={ListadoMuestraActivo[0].TotalPage}
                     page={query.page}
                     pathname={router.pathname}
-                    queryArme={{ page: "1" }}
-                    hash={null}
+                    queryArme={HrefArmado.query}
+                    hash={stringhash}
                     CountPage={ListadoMuestraActivo[0].Per_PAge}
                   ></Pagination>
                 ) : (
@@ -808,8 +835,8 @@ export default function Case({
                   TotalPage={ListadoMuestraInactivo[0].TotalPage}
                   page={query.page}
                   pathname={router.pathname}
-                  queryArme={{ page: "1" }}
-                  hash={null}
+                  queryArme={HrefArmado.query}
+                  hash={stringhash}
                   CountPage={ListadoMuestraInactivo[0].Per_PAge}
                 ></Pagination>
               ) : (

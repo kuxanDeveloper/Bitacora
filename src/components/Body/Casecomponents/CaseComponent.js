@@ -10,6 +10,7 @@ export default function CaseComponent({
   Options,
   isSampleGeneral,
   LstObservacionesPrede,
+  idGruop,
 }) {
   const {
     setShowModal,
@@ -56,7 +57,7 @@ export default function CaseComponent({
             data.URL_PRIMERA_IMAGEN != null &&
             data.URL_PRIMERA_IMAGEN != "" ? (
               <>
-              {/* <img  src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}/> */}
+                {/* <img  src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}/> */}
                 <ImageOptimize
                   Values={{
                     src:
@@ -103,10 +104,23 @@ export default function CaseComponent({
           <p className={caseStyles.card_number}>
             {data.NUMERO_STICKER + `-` + data.SUFIJO}
           </p>
+
+          {idGruop == 0 ? (
+            <>
+              <span className={caseStyles.body_title}>Grupo</span>
+              <p className={caseStyles.card_date}>
+                {data.NOMBRE_GRUPO_ASIGNADO}
+              </p>
+            </>
+          ) : (
+            ""
+          )}
           <span className={caseStyles.body_title}> Fecha de Ingreso</span>
           <p className={caseStyles.card_date}>
             {data.FECHA_FORMAT_CREADO_COMPLETA}
           </p>
+
+          
 
           <div className={caseStyles.card_btn_container}>
             {isActive ? (
@@ -146,35 +160,36 @@ export default function CaseComponent({
             >
               Ver Más
             </Link>
-            {isActive ?
-            <Link
-              href={{
-                pathname: "/Sample/CreateResult/[id]",
-                query: {
-                  id: data.CODIGO_BITACORA,
-                  group:
-                    data.ID_GRUPO_ASIGNADO != undefined &&
-                    data.ID_GRUPO_ASIGNADO != null
-                      ? data.ID_GRUPO_ASIGNADO
-                      : "",
-                  name_group:
-                    data.NOMBRE_GRUPO_ASIGNADO != undefined &&
-                    data.NOMBRE_GRUPO_ASIGNADO != null
-                      ? data.NOMBRE_GRUPO_ASIGNADO
-                      : "",
-                  sticker:
-                  data.NUMERO_STICKER != undefined &&
-                  data.NUMERO_STICKER != null
-                      ? data.NUMERO_STICKER +
-                        "-" +
-                        data.SUFIJO
-                      : "",
-                },
-              }}
-              className={caseStyles.btn_sticker}
-            >
-              Agregar Estatus
-            </Link> : ""}
+            {isActive ? (
+              <Link
+                href={{
+                  pathname: "/Sample/CreateResult/[id]",
+                  query: {
+                    id: data.CODIGO_BITACORA,
+                    group:
+                      data.ID_GRUPO_ASIGNADO != undefined &&
+                      data.ID_GRUPO_ASIGNADO != null
+                        ? data.ID_GRUPO_ASIGNADO
+                        : "",
+                    name_group:
+                      data.NOMBRE_GRUPO_ASIGNADO != undefined &&
+                      data.NOMBRE_GRUPO_ASIGNADO != null
+                        ? data.NOMBRE_GRUPO_ASIGNADO
+                        : "",
+                    sticker:
+                      data.NUMERO_STICKER != undefined &&
+                      data.NUMERO_STICKER != null
+                        ? data.NUMERO_STICKER + "-" + data.SUFIJO
+                        : "",
+                  },
+                }}
+                className={caseStyles.btn_sticker}
+              >
+                Agregar Estatus
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {/* <div className={caseStyles.sticker} style={{color:"red", fontWeight:"500"}}>aaa</div> */}

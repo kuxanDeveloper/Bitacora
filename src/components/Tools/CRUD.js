@@ -211,7 +211,7 @@ export const onSubmitCreateResultBloque = ({
       ListResultMultiple
     )
     .then(() => {
-      //   const returnUrl = router.query.returnUrl || "/";
+
       Router.push({
         pathname: "/[id]",
         query: { id: GrupoSticker, page: "1" },
@@ -224,6 +224,7 @@ export const onSubmitCreateResultBloque = ({
         icon: "success",
         confirmButtonText: "Cerrar",
       });
+
     })
     .catch((error) => {
       if (

@@ -130,7 +130,8 @@ export const QueryMueForGroup = (
   DateAdmission,
   Cod_sticker,
   page,
-  tipoSearch
+  tipoSearch,
+  idAncestro
 ) => {
   return userService
     .ListGroupForMue(
@@ -141,7 +142,8 @@ export const QueryMueForGroup = (
       DateAdmission,
       Cod_sticker,
       page,
-      tipoSearch
+      tipoSearch,      
+      idAncestro == null || idAncestro == undefined ? "" : idAncestro
     )
     .catch((error) => {
       if (error == "401: Token incorrecto o vencido") {

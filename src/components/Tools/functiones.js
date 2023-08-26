@@ -10,6 +10,7 @@ import styles from "../../styles/Results.module.scss";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import {CreateJefeLabActive} from "../Tools/crudJefeLaboratorio"
 
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -467,6 +468,54 @@ export const setCheckindividual = (setValue) => {
     setValue("EstadoGrupo", "0");
   } else {
     setValue("EstadoGrupo", "1");
+  }
+
+  var checbox2 = document.getElementById("JefeLab");
+
+  if (
+    checbox2.checked == null ||
+    checbox2.checked == undefined ||
+    checbox2.checked == false
+  ) {
+    setValue("JefeObligatorio", "0");
+  } else {
+    setValue("JefeObligatorio", "1");
+  }
+
+  var checbox3 = document.getElementById("SitioAnatm");
+
+  if (
+    checbox3.checked == null ||
+    checbox3.checked == undefined ||
+    checbox3.checked == false
+  ) {
+    setValue("SitioObligatorio", "0");
+  } else {
+    setValue("SitioObligatorio", "1");
+  }
+
+  var checbox4 = document.getElementById("TipoMuestra");
+
+  if (
+    checbox4.checked == null ||
+    checbox4.checked == undefined ||
+    checbox4.checked == false
+  ) {
+    setValue("TipoMueObligatorio", "0");
+  } else {
+    setValue("TipoMueObligatorio", "1");
+  }
+
+  var checbox5 = document.getElementById("FechaRecog");
+
+  if (
+    checbox5.checked == null ||
+    checbox5.checked == undefined ||
+    checbox5.checked == false
+  ) {
+    setValue("FechaRecgObligatorio", "0");
+  } else {
+    setValue("FechaRecgObligatorio", "1");
   }
 
   setValue("AdmiteSufijo", "1");
@@ -1039,21 +1088,18 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (
-  setvalue,
-  selectValue,
-  codSitioAnatomico,
-  codTipoMuestra,
-  e,
-  ValueGroup,
-  codobservacionCmb,
-  DescobservacionCmb
-) => {
-  if (ValueGroup == 8) {
+export const RegisterStickerObservaciones = (setvalue, selectValue,
+  codSitioAnatomico,codTipoMuestra, e,ValueGroup,codobservacionCmb,DescobservacionCmb,
+  ListadoGrupoActivo, FechaRecogida) => {
+  debugger;
+  let GrupoValid = ListadoGrupoActivo.find((data) => data.Id_grupo === ValueGroup);
+
+  if(GrupoValid.JEFE_LABORATORIO_OBLIG == true)
+  {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
         title: "Error",
-        text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo Hemocultivo`,
+        text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo ` + GrupoValid.NOMBRE_GRUPO,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -1062,6 +1108,52 @@ export const RegisterStickerObservaciones = (
     }
   }
 
+  if(GrupoValid.SITIO_ANATOMICO_OBLIG == true)
+  {
+    if (codSitioAnatomico == null || codSitioAnatomico == "") {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar el sitio anatomico para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }    
+  }
+
+  if(GrupoValid.TIPO_MUESTRAS_OBLIG == true)
+  {
+    if (codTipoMuestra == null || codTipoMuestra == "") {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar el tipo de muestra para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }    
+  }
+
+  if(GrupoValid.FECHA_RECOGIDA_MUESTRA_OBLIG == true)
+  {
+    if (FechaRecogida == null || FechaRecogida == "") {
+      Swal.fire({
+        title: "Error",
+        text: `Es obligatorio seleccionar una fecha de recogida para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+      e.preventDefault();
+      return;
+    }    
+  }
+
+  setvalue(
+    "FechaHoraRecogida",
+     FechaRecogida
+  );
   setvalue("SitioAnatomico", codSitioAnatomico);
   setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
@@ -1175,7 +1267,8 @@ export const AddListCodBitacora = (
   group,
   name_group,
   hrefhash,
-  HrefArmado
+  HrefArmado,
+  LstObservacionesPrede
 ) => {
   let arrayList = [];
   const element = document.getElementsByName(nameInput);
@@ -1190,13 +1283,14 @@ export const AddListCodBitacora = (
 
   if (arrayList.length > 1) {
     sessionStorage.setItem("ListadoBitacoras", JSON.stringify(arrayList));
+    sessionStorage.setItem("LstObservcPrede", JSON.stringify(LstObservacionesPrede));
 
     Router.push({
       pathname: "/Sample/CreateResultBloque/CreateBloq",
       query: {
         group: group,
         name_group: name_group,
-        hrefhash: hrefhash,
+        hrefhash: hrefhash
       },
     });
   } else {
@@ -1605,6 +1699,20 @@ export const DeleteRowStatusDataBase = (data, IdPrub, NombrePrub) => {
   });
 };
 
+export const guardarJefe = (DESCRIPCION,
+  DOCUMENTO,
+  setNuvjefe,
+  Nuvjefe) =>
+{
+  debugger;
+  CreateJefeLabActive(DESCRIPCION,
+    DOCUMENTO,
+    setNuvjefe,
+    Nuvjefe);
+
+    return;
+};
+
 export const calcularDiffdate = (Fecheresult, FechaCreado) => {
   var moment = require("moment");
 
@@ -1673,6 +1781,139 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
     pathname: "/Statistics",
     query: { DateIni: fechaIni, DateEnd: fechaFin },
   });
+};
+
+
+export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => {
+  
+  window.OnchangeValueSelect = function (value) {
+    let valueGetId = document.getElementById("Observacionother");
+
+    if (valueGetId != undefined && valueGetId != null) {
+      if (value == "5") {
+        valueGetId.style.display = "";
+      } else {
+        valueGetId.style.display = "none";
+      }
+    }
+  };
+  debugger;
+  if (ListadoBitacoras.length > 1) {
+
+    Swal.fire({
+      title: `Cerrar bloque de stickers`,
+      text: "¿Estás seguro de que deseas cerrar los stickers seleccionados?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e57d00",
+      cancelButtonColor: "#767676",
+      confirmButtonText: "Si,cerrar stickers",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Observación de cierre masivo",
+          html:
+            `<select id='sltObservcaciones' onchange="window.OnchangeValueSelect(
+            this.value)" class="swal2-input">
+            <option disabled selected value="">Seleccione una observación</option>
+           ${LstObservacionesPrede.map((info) => {
+
+               if (info.Observacion_cierre) {
+                 return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+               }
+             
+           })}
+            </select>` +
+            `<br><br><textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
+            placeholder="Digite una observación para el cierre masivo para los stickers..."
+            cols="30"
+            rows="50"></textarea>`,
+  
+          customClass: {
+            cancelButton: "HidenLoaderCancel",
+          },
+          showCancelButton: true,
+          confirmButtonText: "OK",
+          confirmButtonColor: "#e57d00",
+          cancelButtonColor: "#767676",
+          showLoaderOnConfirm: true,
+          preConfirm: () => {
+            let selectObserva = document.getElementById("sltObservcaciones");
+            let TextAreaObservacion = document.getElementById("Observacionother");
+            // Validate input
+            if (
+              selectObserva.value == "" ||
+              (selectObserva.value == "5" && TextAreaObservacion.value == "")
+            ) {
+              Swal.showValidationMessage(
+                "Es obligatorio la observación para el cierre en bloque de los stickers"
+              );
+              Swal.hideLoading();
+              Swal.enableButtons();
+            } else {
+              Swal.resetValidationMessage();
+  
+              return CierreMasiveCaseSample(
+                ListadoBitacoras,
+                selectObserva.value == "5"
+                  ? TextAreaObservacion.value
+                  : selectObserva.options[selectObserva.selectedIndex].text,
+                  "0"
+              );
+            }
+          },
+          allowOutsideClick: () => !Swal.isLoading(),
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+               Swal.fire({
+                  icon: "success",
+                  title: "Stickers cerrados",
+                  showConfirmButton: false,
+                  timer: 4000,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                }).then((result) => {
+                  /* Read more about handling dismissals below */
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    document.getElementById("btnGuardarMasivo").click();
+                  }
+                });
+                
+          }
+        });
+      }
+    });
+  } 
+  
+};
+
+export const comprobarCambioestadomasivo = (ListAddResultMultple) => {
+  debugger;
+  var checbox1 = document.getElementById("CierreBloqCheck");
+
+  if(ListAddResultMultple.length > 0)
+  {
+    if (
+      checbox1.checked == true 
+    ) {
+      document.getElementById("btnGuardarCierreMasivo").click();
+    } else {
+      document.getElementById("btnGuardarMasivo").click();
+    }
+  }
+  else
+  {
+    Swal.fire({
+      title: "Error",
+      text: `Recuerde agregar los estatus para el bloque de stickers antes de continuar`,
+      icon: "warning",
+      confirmButtonText: "Cerrar",
+    });
+
+  }
+
+  
 };
 
 export const AddtolistNumber = (

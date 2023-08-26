@@ -38,6 +38,18 @@ function ComponentGroup({
       .min(1, "Es obligatorio digitar por lo menos un sufijo para el grupo")
       .required("Es obligatorio digitar por lo menos un sufijo para el grupo"),
     Lst_Pruebas: Yup.array().notRequired(),
+    JefeObligatorio: Yup.string().required(
+      "El campo de Jefe de laboratorio es obligatorio"
+    ),
+    SitioObligatorio: Yup.string().required(
+      "El campo de Sitio anatomico es obligatorio"
+    ),
+    TipoMueObligatorio: Yup.string().required(
+      "El campo de Tipo muestra es obligatorio"
+    ),
+    FechaRecgObligatorio: Yup.string().required(
+      "El campo de Fecha recogida es obligatorio"
+    ),
   });
 
   const formOptions = { resolver: yupResolver(validarEsquemaGrupo) };
@@ -55,6 +67,30 @@ function ComponentGroup({
         InforGroup.EdicionGrupo[0].ESTADO == false
           ? null
           : InforGroup.EdicionGrupo[0].ESTADO;
+
+      var checkbox2 = document.getElementById("JefeLab");
+      checkbox2.checked =
+        InforGroup.EdicionGrupo[0].JEFE_LABORATORIO_OBLIG == false
+          ? null
+          : InforGroup.EdicionGrupo[0].JEFE_LABORATORIO_OBLIG;
+
+      var checkbox3 = document.getElementById("SitioAnatm");
+      checkbox3.checked =
+        InforGroup.EdicionGrupo[0].SITIO_ANATOMICO_OBLIG == false
+          ? null
+          : InforGroup.EdicionGrupo[0].SITIO_ANATOMICO_OBLIG;
+
+      var checkbox4 = document.getElementById("FechaRecog");
+      checkbox4.checked =
+        InforGroup.EdicionGrupo[0].FECHA_RECOGIDA_MUESTRA_OBLIG == false
+          ? null
+          : InforGroup.EdicionGrupo[0].FECHA_RECOGIDA_MUESTRA_OBLIG;
+
+      var checkbox5 = document.getElementById("TipoMuestra");
+      checkbox5.checked =
+        InforGroup.EdicionGrupo[0].TIPO_MUESTRAS_OBLIG == false
+          ? null
+          : InforGroup.EdicionGrupo[0].TIPO_MUESTRAS_OBLIG;
     }
   }, [InforGroup.EdicionGrupo]);
 
@@ -140,9 +176,7 @@ function ComponentGroup({
                             </div>
                           </div>
 
-                          <div
-                            className={`${styles.form_group} ${stylesCrud.SinLinea}`}
-                          >
+                          <div className={`${styles.form_group}`}>
                             <div className={styles.input_group}>
                               <label className={styles.group_title}>
                                 Orden Grupo
@@ -177,6 +211,43 @@ function ComponentGroup({
                               <div className={styles.invalid_feedback}>
                                 {errors.AlertaHoras?.message}
                               </div>
+                            </div>
+                          </div>
+
+                          <div
+                            className={`${styles.form_group} ${stylesCrud.SinLinea}`}
+                          >
+                            <div className={styles.input_group}>
+                              <label>
+                                Seleccione los campos que seran obligatorios
+                                para el momento de crear stickers de este grupo
+                              </label>
+                            </div>
+                          </div>
+                          <div className={`${styles.form_group}`}>
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Jefe de laboratorio
+                              </label>
+                              <input id="JefeLab" type="checkbox" />
+                            </div>
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Sitio anatomico
+                              </label>
+                              <input id="SitioAnatm" type="checkbox" />
+                            </div>
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Tipo de muestra
+                              </label>
+                              <input id="TipoMuestra" type="checkbox" />
+                            </div>
+                            <div className={styles.input_group}>
+                              <label className={styles.group_title}>
+                                Fecha de recogida
+                              </label>
+                              <input id="FechaRecog" type="checkbox" />
                             </div>
                           </div>
 

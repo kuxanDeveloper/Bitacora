@@ -22,6 +22,7 @@ function Pagination({ TotalPage, page, pathname, queryArme, hash, CountPage }) {
       document.getElementById("Ultima").style.pointerEvents = "none";      
     }
   },[pageObject]);
+
   return (
     <>
       {/* pagination */}

@@ -23,6 +23,7 @@ function PageCreateResult({ cookie, group, name_group, hrefhash }) {
   const [valuePlantillachange, setvaluePlantillachange] = useState("");
   const [ListAddResultMultple, setListAddResultMultple] = useState([]);
   const [ListadoBitacoras, setListadoBitacoras] = useState([]);
+  const [LstObservacionesPrede, setLstObservacionesPrede] = useState([]);
   useEffect(() => {
     ListMultipleMicroxTestxNumber(
       cookie,
@@ -44,6 +45,8 @@ function PageCreateResult({ cookie, group, name_group, hrefhash }) {
   useEffect(() => {
     let LstBitacoras = JSON.parse(sessionStorage.getItem("ListadoBitacoras"));
     setListadoBitacoras(LstBitacoras);
+    let Lstobs = JSON.parse(sessionStorage.getItem("LstObservcPrede"));
+    setLstObservacionesPrede(Lstobs);
   }, []);
 
   return (
@@ -95,6 +98,7 @@ function PageCreateResult({ cookie, group, name_group, hrefhash }) {
         ListMicroorganismo={ListMicroorganismo}
         ListNumber={ListNumber}
         hrefhash={hrefhash}
+        LstObservacionesPrede={LstObservacionesPrede}
       />
     </>
   );
@@ -144,7 +148,7 @@ export async function getServerSideProps(ctx) {
         cookie: cookie,
         group: ctx.query.group,
         name_group: ctx.query.name_group,
-        hrefhash: ctx.query.hrefhash,
+        hrefhash: ctx.query.hrefhash
       },
     };
   } else {

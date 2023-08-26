@@ -44,7 +44,6 @@ function Pop_up({
   const formOptionsFech = { resolver: yupResolver(validarEsquemaFecha) };
   const { register, handleSubmit, formState, setValue } =
     useForm(formOptionsFech);
-  const { errors } = formState;
 
   return (
     <>
@@ -76,12 +75,11 @@ function Pop_up({
           </span>
 
           <section className={styles2.create_note}>
-            <div className={styles2.sticker_container}>
-              <div className={styles2.back_btn_container}></div>
+            
 
               <p className={styles2.title}>Fechas Sticker</p>
-              <br />
 
+            <div className={styles2.sticker_container}>
               <div className={styles2.card}>
                 <form onSubmit={handleSubmit(guardFechasbitacora)}>
                   <div className={styles2.stickers_container}>

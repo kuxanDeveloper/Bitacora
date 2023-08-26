@@ -10,6 +10,10 @@ export const onSubmitCreateGroup = ({
   OrdenGrupo,
   ListSufijo,
   Lst_Pruebas,
+  JefeObligatorio,
+  SitioObligatorio,
+  TipoMueObligatorio,
+  FechaRecgObligatorio
 }) => {
   return userService
     .CreatGroup(
@@ -19,7 +23,11 @@ export const onSubmitCreateGroup = ({
       AlertaHoras,
       OrdenGrupo,
       ListSufijo,
-      Lst_Pruebas
+      Lst_Pruebas,
+      JefeObligatorio,
+      SitioObligatorio,
+      TipoMueObligatorio,
+      FechaRecgObligatorio
     )
     .then(() => {
       Swal.fire({
@@ -68,6 +76,10 @@ export const onSubmitUpdateGroup = ({
   OrdenGrupo,
   ListSufijo,
   Lst_Pruebas,
+  JefeObligatorio,
+  SitioObligatorio,
+  TipoMueObligatorio,
+  FechaRecgObligatorio
 }) => {
   return userService
     .EditGroup(
@@ -78,7 +90,11 @@ export const onSubmitUpdateGroup = ({
       AlertaHoras,
       OrdenGrupo,
       ListSufijo,
-      Lst_Pruebas
+      Lst_Pruebas,
+      JefeObligatorio,
+      SitioObligatorio,
+      TipoMueObligatorio,
+      FechaRecgObligatorio
     )
     .then(() => {
       Swal.fire({
