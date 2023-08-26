@@ -677,3 +677,6 @@ export const QueryUpdatePanelTerciario = (
       return error;
     });
 };
+
+
+

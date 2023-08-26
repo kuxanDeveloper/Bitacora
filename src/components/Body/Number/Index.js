@@ -1,13 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import styles from "../../../styles/IndexUsers.module.scss";
 import styleTable from "../../../styles/TableStyles.module.scss";
 import ImageOptimize from "../../Tools/ImageOptimize";
 import Pagination from "../../Tools/Pagination";
 import { useRouter } from "next/router";
 import { ClickButtonMenuConf } from "../../Tools/functiones";
-function ComponentjefeIndex({ InfoJefeLab, query }) {
+import Link from "next/link";
+function IndexNumber({ InfoNumber, query }) {
   const router = useRouter();
+
   return (
     <>
       <section className={styles.Index_users}>
@@ -36,35 +37,31 @@ function ComponentjefeIndex({ InfoJefeLab, query }) {
             </Link>
           </div>
 
-          <p className={styles.title}>Listado de Jefes de laboratorio</p>
+          <p className={styles.title}>Listado de números</p>
           <Link
             href={{
-              pathname: "/Configuration/JefeLaboratorio/CreateJefe",
+              pathname: "/Configuration/Number/Create",
             }}
             className={styles.btn_create}
           >
             <span>&#10010; </span>
-            Crear Jefe de Laboratorio
+            Crear número
           </Link>
           <div className={styles.card}>
             <table className={styleTable.tableStyle}>
               <thead>
                 <tr>
-                  <th>Jefe de laboratorio</th>
-                  <th>Documento</th>
-                  <th>Informacion Adicional</th>
+                  <th>Descripción</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                {InfoJefeLab.listadojefes != null &&
-                InfoJefeLab.listadojefes != undefined
-                  ? InfoJefeLab.listadojefes.map((data, index) => (
+                {InfoNumber.ListadoNumber != null &&
+                InfoNumber.ListadoNumber != undefined
+                  ? InfoNumber.ListadoNumber.map((data, index) => (
                       <tr key={index}>
                         <td>{data.DESCRIPCION}</td>
-                        <td>{data.DOCUMENTO}</td>
-                        <td>{data.INF_ADICIONAL}</td>
                         <td className={styleTable.textCenterColumn}>
                           {data.ESTADO == true ? (
                             <span>&#x2705;</span>
@@ -78,7 +75,7 @@ function ComponentjefeIndex({ InfoJefeLab, query }) {
                             title="Editar Opcion"
                             className={styles.add_icon}
                             href={{
-                              pathname: "/Configuration/JefeLaboratorio/[id]",
+                              pathname: "/Configuration/Number/[id]",
                               query: { id: data.ID },
                             }}
                           >
@@ -112,18 +109,18 @@ function ComponentjefeIndex({ InfoJefeLab, query }) {
                   : ""}
               </tbody>
             </table>
-            {InfoJefeLab != null && InfoJefeLab != undefined ? (
-              InfoJefeLab.listadojefes != null &&
-              InfoJefeLab.listadojefes != undefined ? (
+            {InfoNumber != null && InfoNumber != undefined ? (
+              InfoNumber.ListadoNumber != null &&
+              InfoNumber.ListadoNumber != undefined ? (
                 <>
                   <br></br>
                   <Pagination
-                    TotalPage={InfoJefeLab.TotalPage}
+                    TotalPage={InfoNumber.TotalPage}
                     page={query.page}
                     pathname={router.pathname}
                     queryArme={{ page: "1" }}
                     hash={null}
-                    CountPage={InfoJefeLab.Per_PAge}
+                    CountPage={InfoNumber.Per_PAge}
                   ></Pagination>
                 </>
               ) : (
@@ -139,4 +136,4 @@ function ComponentjefeIndex({ InfoJefeLab, query }) {
   );
 }
 
-export default ComponentjefeIndex;
+export default IndexNumber;

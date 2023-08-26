@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from "react";
+import React from "react";
 import Head from "next/head";
-import CreateGroup from "../../../components/Body/GroupCrud/Create";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -8,21 +7,16 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { SamplelistPruebasCombo } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
+import CreateComponent from "../../../components/Body/Number/CreateComponent";
 
-function CreatePage(cookie) {
-
-  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
-  useEffect(() => {
-    SamplelistPruebasCombo(setInforOptionsSelc, cookie);
-  }, []);
+function Create() {
   return (
     <>
       <Head>
-        <title>{`Creación de grupo | Bitácora BD`}</title>
+        <title>{`Creación de número | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde crean los números que seleccionaran despues las bitacoras`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -33,27 +27,30 @@ function CreatePage(cookie) {
         <meta name="geo.region" content="CO" />
         <meta
           name="twitter:title"
-          content={`Creación de grupo - Bitácora BD`}
+          content={`Creación de número | Bitácora BD`}
         />
         <meta
           name="twitter:description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde crean los números que seleccionaran despues las bitacoras`}
         ></meta>
-        <meta property="og:title" content={`Creación de grupo - Bitácora BD`} />
+        <meta
+          property="og:title"
+          content={`Creación de número | Bitácora BD`}
+        />
         <meta
           property="og:description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde crean los números que seleccionaran despues las bitacoras`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateGroup InforOptionsSelc={InforOptionsSelc}></CreateGroup>
+      <CreateComponent></CreateComponent>
     </>
   );
 }
 
-export default CreatePage;
+export default Create;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
@@ -81,7 +78,7 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (!Options.NumberCreateAndUrl) {
       return { notFound: true };
     }
 

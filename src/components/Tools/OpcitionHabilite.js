@@ -18,6 +18,8 @@ export const OptionAsiste = {
   ObservacionPredeEditAndUrl: true,
   OptionCreateAndUrl: false,
   OptionEditAndUrl: false,
+  NumberCreateAndUrl: false,
+  NumberEditAndUrl: false,
 };
 
 export const OptionTecnichal = {
@@ -40,6 +42,8 @@ export const OptionTecnichal = {
   ObservacionPredeEditAndUrl: true,
   OptionCreateAndUrl: true,
   OptionEditAndUrl: true,
+  NumberCreateAndUrl: true,
+  NumberEditAndUrl: true,
 };
 
 export const OptionConsult = {
@@ -62,6 +66,8 @@ export const OptionConsult = {
   ObservacionPredeEditAndUrl: false,
   OptionCreateAndUrl: false,
   OptionEditAndUrl: false,
+  NumberCreateAndUrl: false,
+  NumberEditAndUrl: false,
 };
 
 export const OptionAdministrator = {
@@ -84,6 +90,8 @@ export const OptionAdministrator = {
   ObservacionPredeEditAndUrl: true,
   OptionCreateAndUrl: true,
   OptionEditAndUrl: true,
+  NumberCreateAndUrl: true,
+  NumberEditAndUrl: true,
 };
 
 export const OptionDefault = {
@@ -106,4 +114,6 @@ export const OptionDefault = {
   ObservacionPredeEditAndUrl: false,
   OptionCreateAndUrl: false,
   OptionEditAndUrl: false,
+  NumberCreateAndUrl: false,
+  NumberEditAndUrl: false,
 };

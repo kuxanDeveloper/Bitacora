@@ -1,6 +1,5 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import CreateGroup from "../../../components/Body/GroupCrud/Create";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -8,21 +7,20 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../../components/Tools/OpcitionHabilite";
-import { SamplelistPruebasCombo } from "../../api/Sample/ViewDetailsCRUDResult/[id]";
-
-function CreatePage(cookie) {
-
-  const [InforOptionsSelc, setInforOptionsSelc] = useState([]);
+import EditCompnent from "../../../components/Body/Number/EditCompnent";
+import { GetEditNumber } from "../../api/Number/Crud";
+function EditPAge({ cookie, id }) {
+  const [InfoNumber, setInfoNumber] = useState(null);
   useEffect(() => {
-    SamplelistPruebasCombo(setInforOptionsSelc, cookie);
+    GetEditNumber(setInfoNumber, cookie, id);
   }, []);
   return (
     <>
       <Head>
-        <title>{`Creación de grupo | Bitácora BD`}</title>
+        <title>{`Edición número | Bitácora BD`}</title>
         <meta
           name="description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde editan los números dinámicos`}
         />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -31,29 +29,26 @@ function CreatePage(cookie) {
         <meta property="og:type" content="website" />
         <meta name="language" content="spanish" />
         <meta name="geo.region" content="CO" />
-        <meta
-          name="twitter:title"
-          content={`Creación de grupo - Bitácora BD`}
-        />
+        <meta name="twitter:title" content={`Edición número | Bitácora BD`} />
         <meta
           name="twitter:description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde editan los números dinámicos`}
         ></meta>
-        <meta property="og:title" content={`Creación de grupo - Bitácora BD`} />
+        <meta property="og:title" content={`Edición número | Bitácora BD`} />
         <meta
           property="og:description"
-          content={`Lugar donde crea el grupo que seleccionaran despues las bitacoras`}
+          content={`Lugar donde editan los números dinámicos`}
         />
         <meta property="og:site_name" content="Bitácora BD" />
         <meta property="og:locale" content="es_CO" />
         <meta property="og:locale:alternate" content="es_CO" />
       </Head>
-      <CreateGroup InforOptionsSelc={InforOptionsSelc}></CreateGroup>
+      <EditCompnent InfoNumber={InfoNumber} idNumber={id}></EditCompnent>
     </>
   );
 }
 
-export default CreatePage;
+export default EditPAge;
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req.cookies["tokenUserCookie"];
@@ -81,11 +76,20 @@ export async function getServerSideProps(ctx) {
       });
     }
 
-    if (!Options.GroupConfigCreateAndUrl) {
+    if (
+      ctx.query.id == undefined ||
+      ctx.query.id == null ||
+      !Options.NumberEditAndUrl
+    ) {
       return { notFound: true };
     }
 
-    return { props: { mensaje: null } };
+    return {
+      props: {
+        cookie: cookie,
+        id: ctx.query.id,
+      },
+    };
   } else {
     return {
       redirect: {

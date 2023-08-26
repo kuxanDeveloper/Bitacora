@@ -5,8 +5,7 @@ import Swal from "sweetalert2";
 import React, { useState } from "react";
 import { OnkeyDowNumber, OnPasteNumber } from "../../Tools/functiones";
 
-function ListSufijos({ListSufijo, setListSufijo}) {
-  
+function ListSufijos({ ListSufijo, setListSufijo }) {
   const [valorsufijo, setvalorsufijo] = useState("");
 
   function AgregarSufijolist() {
@@ -21,32 +20,26 @@ function ListSufijos({ListSufijo, setListSufijo}) {
       });
       return;
     } else {
-        let sufij = txtSufijo.value;
-        if(ListSufijo.filter((item) => item === sufij).length > 0)
-        {
+      let sufij = txtSufijo.value;
+      if (ListSufijo.filter((item) => item === sufij).length > 0) {
+        Swal.fire({
+          title: "¡Advertencia!",
+          text: "El número de sufijo que intenta guardar ya se encuentra agregado en el listado",
+          icon: "warning",
+          confirmButtonText: "Cerrar",
+        });
+        setvalorsufijo("");
+        return;
+      }
 
-            Swal.fire({
-                title: "¡Advertencia!",
-                text: "El número de sufijo que intenta guardar ya se encuentra agregado en el listado",
-                icon: "warning",
-                confirmButtonText: "Cerrar",
-              });
-              setvalorsufijo("");
-              return;
-              
-        }
-
-      
       setListSufijo((prevArray) => [...prevArray, sufij]);
       setvalorsufijo("");
-      
     }
   }
 
   function DeleteRowSufijo(idRow) {
     setListSufijo(ListSufijo.filter((item) => item !== idRow));
   }
-
 
   return (
     <div className={styles.form_group}>
@@ -89,28 +82,29 @@ function ListSufijos({ListSufijo, setListSufijo}) {
             </tr>
           </thead>
           <tbody>
-            {ListSufijo != null && ListSufijo != undefined ?
-            ListSufijo.map((data, index) => (
-              <tr key={index} id={data}>
-                <td className={styleTable.textCenterColumn}>
-                  <p>{data}</p>
-                </td>
-                <td>
-                  <Link
-                    title="Eliminar Sufijo"
-                    className={styleTable.colorrojoBoton}
-                    type="button"
-                    href={""}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      DeleteRowSufijo(data);
-                    }}
-                  >
-                    <span>&#128941;</span>
-                  </Link>
-                </td>
-              </tr>
-            )): ""}
+            {ListSufijo != null && ListSufijo != undefined
+              ? ListSufijo.map((data, index) => (
+                  <tr key={index} id={data}>
+                    <td className={styleTable.textCenterColumn}>
+                      <p>{data}</p>
+                    </td>
+                    <td>
+                      <Link
+                        title="Eliminar Sufijo"
+                        className={styleTable.colorrojoBoton}
+                        type="button"
+                        href={""}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          DeleteRowSufijo(data);
+                        }}
+                      >
+                        <span>&#128941;</span>
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              : ""}
           </tbody>
         </table>
       </div>
