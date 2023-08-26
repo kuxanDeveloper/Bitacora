@@ -18,7 +18,7 @@ import {
 import { useContextBitacora } from "../../../context/BitacoraContext";
 
 function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
-  const { LstObservacionesPrede, setLstObservacionesPrede } =
+  const { LstObservacionesPrede, setLstObservacionesPrede,Nuvjefe } =
     useContextBitacora();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [ListadoSitioAna, setListadoSitioAna] = useState([]);
@@ -40,6 +40,13 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
   useEffect(() => {
     ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
+
+  useEffect(() => {
+    if(Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0)
+    {
+      ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
+    }
+  },[Nuvjefe]);
 
   return (
     <>

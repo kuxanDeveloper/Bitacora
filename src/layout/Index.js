@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Pop_up from "../components/Tools/Pop_up";
 import Pop_upScanner from "../components/Tools/Pop_upScanner";
 import Pop_upFechas from "../components/Tools/Pop_up_Fechas";
+import Pop_upJefe from "../components/Tools/Pop_up_JefeLab";
 import HeaderIndex from "../components/Header/HeaderIndex";
 import { initLogInactive } from "../components/Tools/Loginactivity";
 import { useContextBitacora } from "../context/BitacoraContext";
@@ -36,24 +37,29 @@ function Index({ children }) {
     setshowModalFechas,
     COD_BITACORA,
     FECHA_HORA_INGRESO,
-  setFECHA_HORA_INGRESO,
-  FECHA_HORA_VERIFICACION, 
-  setFECHA_HORA_VERIFICACION, 
-  FECHA_INGRESO_BOTELLA,
-  setFECHA_INGRESO_BOTELLA,
-  FECHA_HORA_SUENA_POSITIVO,
-  setFECHA_HORA_SUENA_POSITIVO,
-  FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
-  setFECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
-  FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
-  setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
-  FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
-  setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
-  FECHA_HORA_VALIDACION_ANTIBIOGRAMA,
-  setFECHA_HORA_VALIDACION_ANTIBIOGRAMA,
-  ESTADO_STICKER_bit,
-        setESTADO_STICKER_bit
+    setFECHA_HORA_INGRESO,
+    FECHA_HORA_VERIFICACION,
+    setFECHA_HORA_VERIFICACION,
+    FECHA_INGRESO_BOTELLA,
+    setFECHA_INGRESO_BOTELLA,
+    FECHA_HORA_SUENA_POSITIVO,
+    setFECHA_HORA_SUENA_POSITIVO,
+    FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
+    setFECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO,
+    FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
+    setFECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
+    FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
+    setFECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
+    FECHA_HORA_VALIDACION_ANTIBIOGRAMA,
+    setFECHA_HORA_VALIDACION_ANTIBIOGRAMA,
+    ESTADO_STICKER_bit,
+    setESTADO_STICKER_bit,
+    showModalJefes,
+    setshowModalJefes,
+    setNuvjefe,
+    Nuvjefe
   } = useContextBitacora();
+
 
   const HandleButtonClick_Close = (stateModal) => {
     setShowModal(stateModal);
@@ -61,6 +67,7 @@ function Index({ children }) {
     setisImagenOne(false);
     setdobleImagen(false);
     setshowModalFechas(false);
+    setshowModalJefes(false);
   };
 
   return (
@@ -104,22 +111,41 @@ function Index({ children }) {
             ""
           )}
 
-{showModalFechas ? (
+          {showModalFechas ? (
             <Pop_upFechas
-            onClose={() => {
-              HandleButtonClick_Close(false);
-            }}
-            COD_BITACORA={COD_BITACORA}
-            FECHA_HORA_INGRESO={FECHA_HORA_INGRESO}
-            FECHA_HORA_VERIFICACION={FECHA_HORA_VERIFICACION}
-            FECHA_INGRESO_BOTELLA={FECHA_INGRESO_BOTELLA}
-            FECHA_HORA_SUENA_POSITIVO={FECHA_HORA_SUENA_POSITIVO}
-            FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO={FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO}
-            FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA={FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA}
-            FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL={FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL}
-            FECHA_HORA_VALIDACION_ANTIBIOGRAMA={FECHA_HORA_VALIDACION_ANTIBIOGRAMA}
-            ESTADO_STICKER_bit={ESTADO_STICKER_bit}
+              onClose={() => {
+                HandleButtonClick_Close(false);
+              }}
+              COD_BITACORA={COD_BITACORA}
+              FECHA_HORA_INGRESO={FECHA_HORA_INGRESO}
+              FECHA_HORA_VERIFICACION={FECHA_HORA_VERIFICACION}
+              FECHA_INGRESO_BOTELLA={FECHA_INGRESO_BOTELLA}
+              FECHA_HORA_SUENA_POSITIVO={FECHA_HORA_SUENA_POSITIVO}
+              FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO={
+                FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO
+              }
+              FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA={
+                FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA
+              }
+              FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL={
+                FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL
+              }
+              FECHA_HORA_VALIDACION_ANTIBIOGRAMA={
+                FECHA_HORA_VALIDACION_ANTIBIOGRAMA
+              }
+              ESTADO_STICKER_bit={ESTADO_STICKER_bit}
             ></Pop_upFechas>
+          ) : (
+            ""
+          )}
+          {showModalJefes ? (
+            <Pop_upJefe
+              onClose={() => {
+                HandleButtonClick_Close(false);
+              }}
+              setNuvjefe={setNuvjefe}
+              Nuvjefe={Nuvjefe}
+            ></Pop_upJefe>
           ) : (
             ""
           )}

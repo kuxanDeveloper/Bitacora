@@ -222,7 +222,8 @@ function ListGroupForMue(
   FechaINgreso,
   Cod_sticker,
   page,
-  tipoSearch
+  tipoSearch,
+  idAncestro
   ) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
@@ -245,6 +246,8 @@ function ListGroupForMue(
   formData.append("page", page);
 
   formData.append("tipoSearch", tipoSearch);
+
+  formData.append("ancestro", idAncestro);  
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -447,7 +450,11 @@ function CreatGroup(
   AlertaHoras,
   OrdenGrupo,
   ListSufijo,
-  Lst_Pruebas
+  Lst_Pruebas,
+  JefeObligatorio,
+  SitioObligatorio,
+  TipoMueObligatorio,
+  FechaRecgObligatorio
 ) {
   const formData = new FormData();
   formData.append("nombre_Grupo", NombreGrupo);
@@ -457,6 +464,10 @@ function CreatGroup(
   formData.append("Orden_Grupo", OrdenGrupo);
   formData.append("Lst_Sufijos", ListSufijo);
   formData.append("Lst_Pruebas", Lst_Pruebas);
+  formData.append("jefe_oblig", JefeObligatorio);
+  formData.append("sitio_oblig", SitioObligatorio);
+  formData.append("tipomue_oblig", TipoMueObligatorio);
+  formData.append("fechaRecogida_oblig", FechaRecgObligatorio);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/GuardGrupos`,
@@ -473,7 +484,11 @@ function EditGroup(
   AlertaHoras,
   OrdenGrupo,
   ListSufijo,
-  Lst_Pruebas
+  Lst_Pruebas,
+  JefeObligatorio,
+  SitioObligatorio,
+  TipoMueObligatorio,
+  FechaRecgObligatorio
 ) {
   const formData = new FormData();
 
@@ -485,6 +500,10 @@ function EditGroup(
   formData.append("Orden_Grupo", OrdenGrupo);
   formData.append("Lst_Sufijos", ListSufijo);
   formData.append("Lst_Pruebas", Lst_Pruebas);
+  formData.append("jefe_oblig", JefeObligatorio);
+  formData.append("sitio_oblig", SitioObligatorio);
+  formData.append("tipomue_oblig", TipoMueObligatorio);
+  formData.append("fechaRecogida_oblig", FechaRecgObligatorio);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Grupos/EditarGrupos`,

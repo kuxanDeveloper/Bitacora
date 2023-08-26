@@ -11,11 +11,12 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../components/Tools/OpcitionHabilite";
+import Link from "next/link";
 import { SampleDetailsWhitAncestro } from "./api/Ancestro/[id]";
-
+import CardStyles from "../styles/homeCard.module.scss";
 import IndexComponentAdmin from "../components/RolesComponents/Administrator/IndexComponent";
 import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
-
+import ImageOptimize from "../components/Tools/ImageOptimize";
 import IndexComponentAssis from "../components/RolesComponents/Assistant/IndexComponent";
 
 import IndexComponentConsul from "../components/RolesComponents/Consultation/IndexComponent";
@@ -162,6 +163,56 @@ export default function Home({
       )}
 
       <div className="cases_container">
+        <section className={CardStyles.home_card}>
+          {/* ACTIVE */}
+          <div className={CardStyles.card_content}>
+            <figure className={CardStyles.card_figure}>
+              <ImageOptimize
+                Values={{
+                  src: "/img/premium_photo-1676325102583-0839e57d7a1f.avif",
+                  classValue: CardStyles.card_img,
+                  width: 500,
+                  height: 109,
+                  style: {},
+                }}
+              />
+            </figure>
+
+            <div className={CardStyles.card_body}>
+              <Link
+                href={{
+                  pathname: "/[id]",
+                  query: { id: 0, idAncestro: (idAncestro == "" || idAncestro == null ? 0 : idAncestro), page:"1" },
+                  hash: isTrueActive == true ? "Cactive#OverallSample" : "Cinactvie#OverallSample",
+                }}
+                className={CardStyles.body_container}
+              >
+                <h3 className={CardStyles.card_name}>
+                  Todos
+                  <i className={CardStyles.arrow_icon}></i>
+                </h3>
+
+                {/* <p className={CardStyles.follow}>
+                          <ImageOptimize
+                            Values={{
+                              src: "/img/Imagen_3.png",
+                              alt: "warning grupo",
+                              title: "Seguimiento",
+                              classValue: CardStyles.follow_icon,
+                              width: 28,
+                              height: 28,
+                              style: {},
+                            }}
+                          />
+                          <span className={CardStyles.follow_conunter}>
+                            {data.SEGUIMIENTOS}
+                          </span>
+                          Seguimientos
+                        </p> */}
+              </Link>
+            </div>
+          </div>
+        </section>
         {Roles.map((data, index) => {
           switch (data) {
             case 1:

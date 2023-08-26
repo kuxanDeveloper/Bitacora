@@ -16,11 +16,10 @@ import {
   ListJefeLaboratorio,
   ListTipoMuestra,
 } from "../../api/Sample/CreateResultApi";
-
 import { useContextBitacora } from "../../../context/BitacoraContext";
 
 function CreatePage({ ListadoGrupoActivo, id, cookie }) {
-  const { LstObservacionesPrede, setLstObservacionesPrede } =
+  const { LstObservacionesPrede, setLstObservacionesPrede,Nuvjefe } =
     useContextBitacora();
 
   const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
@@ -41,6 +40,13 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
   useEffect(() => {
     ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
+
+  useEffect(() => {
+    if(Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0)
+    {
+      ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
+    }
+  },[Nuvjefe]);
 
   return (
     <>

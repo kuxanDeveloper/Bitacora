@@ -26,7 +26,7 @@ function CreateSticker({
   ListadoTipoMuestra,
   ListadoJefeLaboratorio,
   ListadoSitioAna,
-  setvalueGrupochange,
+  setvalueGrupochange
 }) {
   const {
     setShowModal,
@@ -42,6 +42,7 @@ function CreateSticker({
     ResultScanner,
     setshowModalScanner,
     setResultScanner,
+    setshowModalJefes
   } = useContextBitacora();
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
   const [ValueGroup, setValueGroup] = useState("");
@@ -59,14 +60,10 @@ function CreateSticker({
     file: Yup.mixed().notRequired(),
     file2: Yup.mixed().notRequired(),
     Sufijo: Yup.number().notRequired(),
-    SitioAnatomico: Yup.string().required(
-      "Debe seleccionar un sitio anatomico"
-    ),
+    SitioAnatomico: Yup.string().notRequired(),
     jefelaboratorio: Yup.string().notRequired(),
-    tipoMuestra: Yup.string().required("Debe seleccionar un tipo de muestra"),
-    FechaHoraRecogida: Yup.string().required(
-      "Campo fecha recogida de la muestra obligatorio"
-    ),
+    tipoMuestra: Yup.string().notRequired(),
+    FechaHoraRecogida: Yup.string().notRequired(),
   });
 
   useEffect(() => {
@@ -160,17 +157,14 @@ function CreateSticker({
           value: data.Id_grupo,
           label: data.NOMBRE_GRUPO,
         });
-      });      
+      });
 
       Setoptionsgrup(optionsgrupLst2);
 
-      if(optionsgrupLst2.length > 0)
-      {
-        setValueGroup(optionsgrupLst2[0].value);   
-      }
-      else
-      {
-        setValueGroup(""); 
+      if (optionsgrupLst2.length > 0) {
+        setValueGroup(optionsgrupLst2[0].value);
+      } else {
+        setValueGroup("");
       }
     } else {
       let optionsgrupLstRc = [];
@@ -183,14 +177,13 @@ function CreateSticker({
 
       if (optionsgrupLstRc.length > 0) {
         Setoptionsgrup(optionsgrupLstRc);
-        setValueGroup(optionsgrupLstRc[0].value); 
-      }
-      else
-      {
-        setValueGroup(""); 
+        setValueGroup(optionsgrupLstRc[0].value);
+      } else {
+        setValueGroup("");
       }
     }
   }
+
 
   return (
     <>
@@ -464,7 +457,15 @@ function CreateSticker({
                         options={options}
                         placeholder="Seleccione un jefe de laboratorio"
                       ></Select>
-
+                      <button
+                        className={styles.btn_barcode}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setshowModalJefes(true);
+                        }}
+                      >
+                        Crear Jefe
+                      </button>
                       <div className={styles.invalid_feedback}>
                         {errors.jefelaboratorio?.message}
                       </div>
@@ -690,16 +691,14 @@ function CreateSticker({
                             e,
                             ValueGroup,
                             observacionCmb,
-                            descobservacionCmb
-                          );
-                          setValue(
-                            "FechaHoraRecogida",
+                            descobservacionCmb,
+                            ListadoGrupoActivo,
                             fecha != ""
                               ? document.querySelector(
                                   ".FechaHoraRecogida input"
                                 ).value
                               : ""
-                          );
+                          );                          
                           setValue("GrupoSticker", ValueGroup);
                           // setCheckinvalue(setValue);
                           setImagenFile(

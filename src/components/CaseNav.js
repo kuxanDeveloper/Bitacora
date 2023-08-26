@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import CaseNavStyles from "../styles/CaseNav.module.scss";
 import Link from "next/link";
 export default function CaseNav({
@@ -38,13 +38,11 @@ export default function CaseNav({
     // window.scroll(0,findPos(document.getElementById("IdScroll")));
     setTimeout(() => {
       const idScro = document.getElementById("IdScroll");
-      if(idScro != null && idScro != undefined)
-      {
-        idScro.scrollIntoView({behavior: "smooth"});
+      if (idScro != null && idScro != undefined) {
+        idScro.scrollIntoView({ behavior: "smooth" });
       }
     }, 1000);
-    
-  },[ListadoGrupo]);
+  }, [ListadoGrupo]);
 
   function Retorno() {
     try {
@@ -93,6 +91,27 @@ export default function CaseNav({
                 Inicio
               </Link>
             </li>
+            {ListadoGrupo != null && ListadoGrupo != undefined ? (
+              <li className={`${CaseNavStyles.nav_li} ${
+                idGruop == 0 ? CaseNavStyles.selected : ""
+              }`}>
+                <Link
+                  href={{
+                    pathname: "/[id]",
+                    query: QueryReturnNew(HrefArmado.query, 0),
+                    hash: `${isTrueActive ? "Cactive" : "Cinactvie"}${
+                      isSampleGeneral ? "#OverallSample" : "#UrgentSamples"
+                    }`,
+                  }}
+                  className={CaseNavStyles.nav_link}
+                >
+                  Todos
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
+
             {ListadoGrupo != null && ListadoGrupo != undefined ? Retorno() : ""}
           </nav>
         </div>
