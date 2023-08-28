@@ -47,7 +47,9 @@ function ListPlantillas({
       return;
     } else {
       let opc = txtopcion.value;
-      let textopc = txtopcion.options[txtopcion.selectedIndex].text;
+      let textopc = txtopcion.options[txtopcion.selectedIndex].text
+        .split("|")[1]
+        .trim();
       if (
         ListPlantillasNombre.filter((item) => item.codigo === opc).length > 0
       ) {
@@ -80,82 +82,89 @@ function ListPlantillas({
   }
 
   return (
-    <div className={styles.form_group}>
-      <div className={styles.input_group}>
-        <label className={styles.group_title}>Seguimientos</label>
+    <>
+      <div className={styles.form_group}>
+        <div className={styles.input_group}>
+          <label className={styles.group_title}>Seguimientos</label>
 
-        <select
-          name="plantillaResult"
-          id="plantillaResult"
-          onChange={(e) => setvalorplantilla(e.target.value)}
-          value={valorplantilla}
-          className={styles.group_input}
-        >
-          <option value={""} selected>
-            Seleccione un seguimiento
-          </option>
-          {InforOptionsSelc != null && InforOptionsSelc != undefined
-            ? InforOptionsSelc.map((data, index) => (
-                <option key={index} value={data.COD_PLANTILLA}>
-                  {data.RESULTADO_PLANTILLA}
-                </option>
-              ))
-            : ""}
-        </select>
-
-        <div
-          className={`${styles.btn_container_send} ${styles.btn_blue} ${styleTable.width_max_group}`}
-        >
-          <button
-            title="Agregar Opcion"
-            className={styles.btn_send}
-            onClick={(e) => {
-              e.preventDefault();
-              Agregarplantillalist();
-            }}
+          <select
+            name="plantillaResult"
+            id="plantillaResult"
+            onChange={(e) => setvalorplantilla(e.target.value)}
+            value={valorplantilla}
+            className={styles.group_input}
           >
-            <span>&#10010; </span>
-            Agregar Seguimiento
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.input_group}>
-        <table className={styleTable.tableStyle} id="TablaSeguimiento">
-          <thead>
-            <tr>
-              <th>Descripcion Seguimiento</th>
-              <th>Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ListPlantillasNombre != null && ListPlantillasNombre != undefined
-              ? ListPlantillasNombre.map((data, index) => (
-                  <tr key={index} id={data.codigo}>
-                    <td className={styleTable.textCenterColumn}>
-                      <p>{data.nombre}</p>
-                    </td>
-                    <td>
-                      <Link
-                        title="Eliminar Plantilla"
-                        className={styleTable.colorrojoBoton}
-                        type="button"
-                        href={""}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          DeleteRowPlantilla(data.codigo);
-                        }}
-                      >
-                        <span>&#128941;</span>
-                      </Link>
-                    </td>
-                  </tr>
+            <option value={""} selected>
+              Seleccione un seguimiento
+            </option>
+            {InforOptionsSelc != null && InforOptionsSelc != undefined
+              ? InforOptionsSelc.map((data, index) => (
+                  <option key={index} value={data.COD_PLANTILLA}>
+                    {data.COD_PLANTILLA + " | " + data.RESULTADO_PLANTILLA}
+                  </option>
                 ))
               : ""}
-          </tbody>
-        </table>
+          </select>
+
+          <div
+            className={`${styles.btn_container_send} ${styles.btn_blue} ${styleTable.width_max_group}`}
+          >
+            <button
+              title="Agregar Opcion"
+              className={styles.btn_send}
+              onClick={(e) => {
+                e.preventDefault();
+                Agregarplantillalist();
+              }}
+            >
+              <span>&#10010; </span>
+              Agregar Seguimiento
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+      <div className={styles.form_group}>
+        <div className={styles.input_group}>
+          <table className={styleTable.tableStyle} id="TablaSeguimiento">
+            <thead>
+              <tr>
+                <th>Código de seguimiento</th>
+                <th>Descripcion Seguimiento</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ListPlantillasNombre != null && ListPlantillasNombre != undefined
+                ? ListPlantillasNombre.map((data, index) => (
+                    <tr key={index} id={data.codigo}>
+                      <td className={styleTable.textCenterColumn}>
+                        <p>{data.codigo}</p>
+                      </td>
+                      <td className={styleTable.textCenterColumn}>
+                        <p>{data.nombre}</p>
+                      </td>
+                      <td>
+                        <Link
+                          title="Eliminar Plantilla"
+                          className={styleTable.colorrojoBoton}
+                          type="button"
+                          href={""}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            DeleteRowPlantilla(data.codigo);
+                          }}
+                        >
+                          <span>&#128941;</span>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                : ""}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
   );
 }
 export default ListPlantillas;

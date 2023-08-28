@@ -45,7 +45,6 @@ function HomeMuestraxGrupo({
 
   const router = useRouter();
   useEffect(() => {
-    console.log(query.tipoSearch);
     ApiQueryGeneralSample(
       cookie,
       query.id,

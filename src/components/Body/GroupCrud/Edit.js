@@ -100,7 +100,7 @@ function ComponentGroup({
       InforSufijos != undefined &&
       InforSufijos.length > 0
     ) {
-      InforSufijos.map((data, index) => {
+      InforSufijos.map((data) => {
         setListSufijo((prevArray) => [
           ...prevArray,
           data.SUFIJO_GRUPO.toString(),

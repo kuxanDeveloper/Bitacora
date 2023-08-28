@@ -47,7 +47,7 @@ function ListPrueba({
     } else {
       let opc = txtopcion.value;
       let textopc = txtopcion.options[txtopcion.selectedIndex].text
-        .split("-")[1]
+        .split("|")[1]
         .trim();
       if (ListPruebasNombre.filter((item) => item.codigo === opc).length > 0) {
         Swal.fire({
@@ -96,7 +96,7 @@ function ListPrueba({
             {InforOptionsSelc != null && InforOptionsSelc != undefined
               ? InforOptionsSelc.map((data, index) => (
                   <option key={index} value={data.COD_PRUEBA}>
-                    {data.COD_PRUEBA + " - " + data.NOMBRE_PRUEBA}
+                    {data.COD_PRUEBA + " | " + data.NOMBRE_PRUEBA}
                   </option>
                 ))
               : ""}
