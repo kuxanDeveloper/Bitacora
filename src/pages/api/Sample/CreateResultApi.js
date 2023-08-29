@@ -80,13 +80,16 @@ export const ListOptionesxPlantilla = async (
 export const ListMultipleMicroxTestxNumber = async (
   cookie,
   idGroup,
+  sticker,
   setListPruebas,
   setListMicroorganismo,
-  setListNumber
+  setListNumber,
+  setListResultFirst
 ) => {
-  let ReturnValue = await queryListMultipleMicroxTextxNumber(cookie, idGroup);
+  let ReturnValue = await queryListMultipleMicroxTextxNumber(cookie, idGroup, sticker);
 
   setListPruebas(ReturnValue.Listadopruebas);
   setListMicroorganismo(ReturnValue.ListadoMicroorganismo);
   setListNumber(ReturnValue.ListadoNumerosConteo);
+  setListResultFirst(ReturnValue.ListadoResultFirst);
 };

@@ -5,13 +5,17 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { onSubmitCreatePrueba } from "../../Tools/crudPruebasResult";
 import styles from "../../../styles/CreateNotes.module.scss";
-import { setCheckPruebaReslt } from "../../Tools/functiones";
+import {
+  setCheckPruebaReslt,
+  OnkeyDowNumber,
+  OnPasteNumber,
+} from "../../Tools/functiones";
 import stylesCrud from "../../../styles/StylesCRUDS.module.scss";
 import ListPlantilla from "./ListPlantilla";
 import ImageOptimize from "../../Tools/ImageOptimize";
 function ComponentGroup({ InforOptionsSelc }) {
   const [ListPlantillas, setListPlantillas] = useState([]);
-
+  const [HoursValue, setHoursValue] = useState("0");
   const validarEsquemaGrupo = Yup.object().shape({
     Nombre_prueba: Yup.string().required(
       "El campo nombre del estatus es obligatorio"
@@ -21,6 +25,9 @@ function ComponentGroup({ InforOptionsSelc }) {
     ),
     Orden_prueba: Yup.string().required(
       "El campo de orden del estatus es obligatorio"
+    ),
+    HORAS_ACTIVAR: Yup.string().required(
+      "El campo de Horas activación estatus es obligatorio"
     ),
     Lst_plantillas: Yup.array().notRequired(),
   });
@@ -113,6 +120,34 @@ function ComponentGroup({ InforOptionsSelc }) {
                         {errors.Orden_prueba?.message}
                       </div>
                     </div>
+                    <div className={styles.input_group}>
+                      <label className={styles.group_title}>
+                        Horas para activación de estatus
+                      </label>
+                      <input
+                        name="HORAS_ACTIVACION"
+                        id="HORAS_ACTIVACION"
+                        autoComplete="off"
+                        maxLength="15"
+                        type="text"
+                        onKeyPress={(e) => OnkeyDowNumber(e)}
+                        className={styles.group_input}
+                        onPaste={(e) =>
+                          OnPasteNumber(
+                            e,
+                            document.getElementById("HORAS_ACTIVACION"),
+                            setHoursValue
+                          )
+                        }
+                        onChange={(e) => {
+                          setHoursValue(e.target.value);
+                        }}
+                        value={HoursValue}
+                      />
+                      <div className={styles.invalid_feedback}>
+                        {errors.HORAS_ACTIVAR?.message}
+                      </div>
+                    </div>
                   </div>
 
                   <ListPlantilla
@@ -127,6 +162,7 @@ function ComponentGroup({ InforOptionsSelc }) {
                         onClick={() => {
                           setCheckPruebaReslt(setValue);
                           setValue("Lst_plantillas", ListPlantillas);
+                          setValue("HORAS_ACTIVAR", HoursValue);
                         }}
                         className={styles.btn_send}
                       >

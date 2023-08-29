@@ -540,8 +540,8 @@ export const QuerySufijoGetAll = (cookie) => {
   });
 };
 
-export const queryListMultipleMicroxTextxNumber = (cookie, idGroup) => {
-  return userService.ListMultipleMixPruxNum(cookie, idGroup).catch((error) => {
+export const queryListMultipleMicroxTextxNumber = (cookie, idGroup, sticker) => {
+  return userService.ListMultipleMixPruxNum(cookie, idGroup, sticker).catch((error) => {
     if (error == "401: Token incorrecto o vencido") {
       Swal.fire({
         title: "¡Advertencia!",

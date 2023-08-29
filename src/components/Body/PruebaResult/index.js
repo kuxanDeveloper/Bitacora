@@ -55,6 +55,7 @@ function ComponentpruebaIndex({ InforSampleDetails, query }) {
                   <th>Grupo</th>
                   <th>Estado</th>
                   <th>Orden del Estatus</th>
+                  <th>Activacón estatus Hrs.</th>
                   <th>Opciones</th>
                 </tr>
               </thead>
@@ -82,16 +83,12 @@ function ComponentpruebaIndex({ InforSampleDetails, query }) {
                         )}
                       </td>
                       <td className={styleTable.textCenterColumn}>
-                        {InforSampleDetails.ListadoGrupoXPrueba.find(
-                          (a) => a.Key == data.COD_PRUEBA
-                        ) != undefined
-                          ? InforSampleDetails.ListadoGrupoXPrueba.find(
-                              (a) => a.Key == data.COD_PRUEBA
-                            ).Value
-                          : ""}
+                        {data.ORDEN}
                       </td>
                       <td className={styleTable.textCenterColumn}>
-                        {data.ORDEN}
+                        {data.HORAS_ACTIVAR != null
+                          ? data.HORAS_ACTIVAR + " Hrs."
+                          : ""}
                       </td>
 
                       <td className={styleTable.textCenterColumn}>

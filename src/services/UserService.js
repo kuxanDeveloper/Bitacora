@@ -228,7 +228,7 @@ function ListGroupForMue(
   page,
   tipoSearch,
   idAncestro
-  ) {
+) {
   const formData = new FormData();
   formData.append("Estado_sticker", Estado);
   formData.append("Grupo_sticker", idGroup);
@@ -251,7 +251,7 @@ function ListGroupForMue(
 
   formData.append("tipoSearch", tipoSearch);
 
-  formData.append("ancestro", idAncestro);  
+  formData.append("ancestro", idAncestro);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/InformacionBitacoraMuestra`,
@@ -281,9 +281,9 @@ function ListTests(cookie, idGroup, idBitacora) {
   );
 }
 
-function ListMultipleMixPruxNum(cookie, idGroup) {
+function ListMultipleMixPruxNum(cookie, idGroup, sticker) {
   return fetchWrapper.get(
-    `${baseUrl}/Stickers/InfoMultipleComboTestxMicroxNumber?Id_grupo=${idGroup}`,
+    `${baseUrl}/Stickers/InfoMultipleComboTestxMicroxNumber?Id_grupo=${idGroup}&sticker=${sticker}`,
     cookie
   );
 }
@@ -944,7 +944,8 @@ function CreatePruebaResult(
   Nombre_prueba,
   Estado_prueba,
   Orden_prueba,
-  Lst_plantillas
+  Lst_plantillas,
+  HORAS_ACTIVAR
 ) {
   const formData = new FormData();
 
@@ -953,6 +954,7 @@ function CreatePruebaResult(
   formData.append("Estado_prueba", Estado_prueba);
   formData.append("Orden_prueba", Orden_prueba);
   formData.append("Lst_plantillas", Lst_plantillas);
+  formData.append("HORAS_ACTIVAR", HORAS_ACTIVAR);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardarPruebasBitacoras`,
@@ -966,7 +968,8 @@ function EditPruebaResult(
   Nombre_prueba,
   Estado_prueba,
   Orden_prueba,
-  Lst_plantillas
+  Lst_plantillas,
+  HORAS_ACTIVAR
 ) {
   const formData = new FormData();
 
@@ -976,6 +979,7 @@ function EditPruebaResult(
   formData.append("Estado_prueba", Estado_prueba);
   formData.append("Orden_prueba", Orden_prueba);
   formData.append("Lst_plantillas", Lst_plantillas);
+  formData.append("HORAS_ACTIVAR", HORAS_ACTIVAR);
 
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/EditarPruebasBitacoras`,

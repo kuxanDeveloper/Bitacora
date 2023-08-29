@@ -7,13 +7,15 @@ export const onSubmitCreatePrueba = ({
   Estado_prueba,
   Orden_prueba,
   Lst_plantillas,
+  HORAS_ACTIVAR,
 }) => {
   return userService
     .CreatePruebaResult(
       Nombre_prueba,
       Estado_prueba,
       Orden_prueba,
-      Lst_plantillas
+      Lst_plantillas,
+      HORAS_ACTIVAR
     )
     .then(() => {
       Swal.fire({
@@ -25,7 +27,7 @@ export const onSubmitCreatePrueba = ({
 
       Router.push({
         pathname: "/Configuration/PruebaResultado/IndexPrueba",
-        query:{page:"1"}
+        query: { page: "1" },
       });
     })
     .catch((error) => {
@@ -59,6 +61,7 @@ export const onSubmitUpdatePrueba = ({
   Estado_prueba,
   Orden_prueba,
   Lst_plantillas,
+  HORAS_ACTIVAR
 }) => {
   return userService
     .EditPruebaResult(
@@ -66,7 +69,8 @@ export const onSubmitUpdatePrueba = ({
       Nombre_prueba,
       Estado_prueba,
       Orden_prueba,
-      Lst_plantillas
+      Lst_plantillas,
+      HORAS_ACTIVAR
     )
     .then(() => {
       Swal.fire({
@@ -78,7 +82,7 @@ export const onSubmitUpdatePrueba = ({
 
       Router.push({
         pathname: "/Configuration/PruebaResultado/IndexPrueba",
-        query:{page:"1"}
+        query: { page: "1" },
       });
     })
     .catch((error) => {
@@ -142,36 +146,29 @@ export const getListPrueba = (cookie, Codprueba, page) => {
 };
 
 export const getCmbPrueba = (cookie) => {
-  return userService
-    .CombopruebaActivo(
-      cookie
-    )
-    .catch((error) => {
-      if (
-        error == "Límite de tiempo excedido" ||
-        error == "Usuario o clave incorrectos" ||
-        error == "No se pudo hacer el login, revise los datos enviados"
-      ) {
-        Swal.fire({
-          title: "¡Advertencia!",
-          text: error,
-          icon: "warning",
-          confirmButtonText: "Cerrar",
-        });
-      } else {
-        Swal.fire({
-          title: "¡Ha ocurrido un error!",
-          text: error,
-          icon: "error",
-          confirmButtonText: "Cerrar",
-        });
-      }
+  return userService.CombopruebaActivo(cookie).catch((error) => {
+    if (
+      error == "Límite de tiempo excedido" ||
+      error == "Usuario o clave incorrectos" ||
+      error == "No se pudo hacer el login, revise los datos enviados"
+    ) {
+      Swal.fire({
+        title: "¡Advertencia!",
+        text: error,
+        icon: "warning",
+        confirmButtonText: "Cerrar",
+      });
+    } else {
+      Swal.fire({
+        title: "¡Ha ocurrido un error!",
+        text: error,
+        icon: "error",
+        confirmButtonText: "Cerrar",
+      });
+    }
 
-      console.log(
-        error,
-        "error al obterner la inforamcion de los estatus combo"
-      );
-    });
+    console.log(error, "error al obterner la inforamcion de los estatus combo");
+  });
 };
 
 export const getInfoPlantillasXPrueba = (cookie, Id_prueba) => {
