@@ -18,6 +18,7 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
   const [ListOptiones, setListOptiones] = useState([]);
   const [ListPruebas, setListPruebas] = useState([]);
   const [ListMicroorganismo, setListMicroorganismo] = useState([]);
+  const [ListResultFirst, setListResultFirst] = useState([]);
   const [ListNumber, setListNumber] = useState([]);
   const [valuePruebachange, setvaluePruebachange] = useState("");
   const [valuePlantillachange, setvaluePlantillachange] = useState("");
@@ -26,9 +27,11 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
     ListMultipleMicroxTestxNumber(
       cookie,
       group,
+      sticker,
       setListPruebas,
       setListMicroorganismo,
-      setListNumber
+      setListNumber,
+      setListResultFirst
     );
     // ListPruebaxGroupApi(cookie, setListPruebas, group, id);
   }, []);
@@ -90,6 +93,7 @@ function PageCreateResult({ id, cookie, group, name_group, sticker }) {
         setListAddResultMultple={setListAddResultMultple}
         ListMicroorganismo={ListMicroorganismo}
         ListNumber={ListNumber}
+        ListResultFirst={ListResultFirst}
       />
     </>
   );

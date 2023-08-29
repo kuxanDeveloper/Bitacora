@@ -4,6 +4,7 @@ import {
   onclickPlantillaTargetCreate,
   AddResultToList,
   ComboDinamyc,
+  calcularDiffdateHours
 } from "../../Tools/functiones";
 import { onSubmitCreateResult } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -28,6 +29,7 @@ function ComponentCreateResult({
   setListAddResultMultple,
   ListMicroorganismo,
   ListNumber,
+  ListResultFirst,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
@@ -54,7 +56,7 @@ function ComponentCreateResult({
 
   if (ListPruebas != null && ListPruebas != undefined) {
     ListPruebas.map((data) =>
-      optionStatus.push({ value: data.COD_PRUEBA, label: data.NOMBRE_PRUEBA })
+      optionStatus.push({ value: data.COD_PRUEBA, label: data.NOMBRE_PRUEBA, isDisabled: calcularDiffdateHours(ListResultFirst, data.HORAS_ACTIVAR)  })
     );
   }
 

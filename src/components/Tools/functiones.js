@@ -10,7 +10,7 @@ import styles from "../../styles/Results.module.scss";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
 import Select from "react-select";
-import {CreateJefeLabActive} from "../Tools/crudJefeLaboratorio"
+import { CreateJefeLabActive } from "../Tools/crudJefeLaboratorio";
 
 Date.prototype.addDays = function (days) {
   this.setDate(this.getDate() + days);
@@ -1088,18 +1088,30 @@ export const OnchangeObservaCrearEdit = (value, setShowobservaTextare) => {
   }
 };
 
-export const RegisterStickerObservaciones = (setvalue, selectValue,
-  codSitioAnatomico,codTipoMuestra, e,ValueGroup,codobservacionCmb,DescobservacionCmb,
-  ListadoGrupoActivo, FechaRecogida) => {
+export const RegisterStickerObservaciones = (
+  setvalue,
+  selectValue,
+  codSitioAnatomico,
+  codTipoMuestra,
+  e,
+  ValueGroup,
+  codobservacionCmb,
+  DescobservacionCmb,
+  ListadoGrupoActivo,
+  FechaRecogida
+) => {
   debugger;
-  let GrupoValid = ListadoGrupoActivo.find((data) => data.Id_grupo === ValueGroup);
+  let GrupoValid = ListadoGrupoActivo.find(
+    (data) => data.Id_grupo === ValueGroup
+  );
 
-  if(GrupoValid.JEFE_LABORATORIO_OBLIG == true)
-  {
+  if (GrupoValid.JEFE_LABORATORIO_OBLIG == true) {
     if (selectValue == null || selectValue == "") {
       Swal.fire({
         title: "Error",
-        text: `Es obligatorio seleccionar el jefe de laboratorio para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        text:
+          `Es obligatorio seleccionar el jefe de laboratorio para el grupo ` +
+          GrupoValid.NOMBRE_GRUPO,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
@@ -1108,52 +1120,52 @@ export const RegisterStickerObservaciones = (setvalue, selectValue,
     }
   }
 
-  if(GrupoValid.SITIO_ANATOMICO_OBLIG == true)
-  {
+  if (GrupoValid.SITIO_ANATOMICO_OBLIG == true) {
     if (codSitioAnatomico == null || codSitioAnatomico == "") {
       Swal.fire({
         title: "Error",
-        text: `Es obligatorio seleccionar el sitio anatomico para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        text:
+          `Es obligatorio seleccionar el sitio anatomico para el grupo ` +
+          GrupoValid.NOMBRE_GRUPO,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
       e.preventDefault();
       return;
-    }    
+    }
   }
 
-  if(GrupoValid.TIPO_MUESTRAS_OBLIG == true)
-  {
+  if (GrupoValid.TIPO_MUESTRAS_OBLIG == true) {
     if (codTipoMuestra == null || codTipoMuestra == "") {
       Swal.fire({
         title: "Error",
-        text: `Es obligatorio seleccionar el tipo de muestra para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        text:
+          `Es obligatorio seleccionar el tipo de muestra para el grupo ` +
+          GrupoValid.NOMBRE_GRUPO,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
       e.preventDefault();
       return;
-    }    
+    }
   }
 
-  if(GrupoValid.FECHA_RECOGIDA_MUESTRA_OBLIG == true)
-  {
+  if (GrupoValid.FECHA_RECOGIDA_MUESTRA_OBLIG == true) {
     if (FechaRecogida == null || FechaRecogida == "") {
       Swal.fire({
         title: "Error",
-        text: `Es obligatorio seleccionar una fecha de recogida para el grupo ` + GrupoValid.NOMBRE_GRUPO,
+        text:
+          `Es obligatorio seleccionar una fecha de recogida para el grupo ` +
+          GrupoValid.NOMBRE_GRUPO,
         icon: "error",
         confirmButtonText: "Cerrar",
       });
       e.preventDefault();
       return;
-    }    
+    }
   }
 
-  setvalue(
-    "FechaHoraRecogida",
-     FechaRecogida
-  );
+  setvalue("FechaHoraRecogida", FechaRecogida);
   setvalue("SitioAnatomico", codSitioAnatomico);
   setvalue("tipoMuestra", codTipoMuestra);
   setvalue("jefelaboratorio", selectValue);
@@ -1283,14 +1295,17 @@ export const AddListCodBitacora = (
 
   if (arrayList.length > 1) {
     sessionStorage.setItem("ListadoBitacoras", JSON.stringify(arrayList));
-    sessionStorage.setItem("LstObservcPrede", JSON.stringify(LstObservacionesPrede));
+    sessionStorage.setItem(
+      "LstObservcPrede",
+      JSON.stringify(LstObservacionesPrede)
+    );
 
     Router.push({
       pathname: "/Sample/CreateResultBloque/CreateBloq",
       query: {
         group: group,
         name_group: name_group,
-        hrefhash: hrefhash
+        hrefhash: hrefhash,
       },
     });
   } else {
@@ -1699,18 +1714,10 @@ export const DeleteRowStatusDataBase = (data, IdPrub, NombrePrub) => {
   });
 };
 
-export const guardarJefe = (DESCRIPCION,
-  DOCUMENTO,
-  setNuvjefe,
-  Nuvjefe) =>
-{
-  debugger;
-  CreateJefeLabActive(DESCRIPCION,
-    DOCUMENTO,
-    setNuvjefe,
-    Nuvjefe);
+export const guardarJefe = (DESCRIPCION, DOCUMENTO, setNuvjefe, Nuvjefe) => {
+  CreateJefeLabActive(DESCRIPCION, DOCUMENTO, setNuvjefe, Nuvjefe);
 
-    return;
+  return;
 };
 
 export const calcularDiffdate = (Fecheresult, FechaCreado) => {
@@ -1723,6 +1730,27 @@ export const calcularDiffdate = (Fecheresult, FechaCreado) => {
     return true;
   } else {
     return false;
+  }
+};
+
+export const calcularDiffdateHours = (ListResultFirst, HourCount) => {
+  var moment = require("moment");
+debugger;
+  if (ListResultFirst != null) {
+    var first = moment(new Date().toISOString());
+    var second = moment(ListResultFirst.FECHA_CREACION_RESULTADO);
+    const Hours = first.diff(second, "minutes");
+    if (HourCount > Hours) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (HourCount == 0 || HourCount == null || HourCount == undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 };
 
@@ -1783,9 +1811,10 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
   });
 };
 
-
-export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => {
-  
+export const CierreMasivoXestatus = (
+  LstObservacionesPrede,
+  ListadoBitacoras
+) => {
   window.OnchangeValueSelect = function (value) {
     let valueGetId = document.getElementById("Observacionother");
 
@@ -1799,7 +1828,6 @@ export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => 
   };
   debugger;
   if (ListadoBitacoras.length > 1) {
-
     Swal.fire({
       title: `Cerrar bloque de stickers`,
       text: "¿Estás seguro de que deseas cerrar los stickers seleccionados?",
@@ -1817,18 +1845,16 @@ export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => 
             this.value)" class="swal2-input">
             <option disabled selected value="">Seleccione una observación</option>
            ${LstObservacionesPrede.map((info) => {
-
-               if (info.Observacion_cierre) {
-                 return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
-               }
-             
+             if (info.Observacion_cierre) {
+               return `<option value="${info.Codigo_observacion}">${info.Descripcion_Observacion}</option>`;
+             }
            })}
             </select>` +
             `<br><br><textarea style="display:none" class="swal2-input" id="Observacionother"  maxLength="1000"
             placeholder="Digite una observación para el cierre masivo para los stickers..."
             cols="30"
             rows="50"></textarea>`,
-  
+
           customClass: {
             cancelButton: "HidenLoaderCancel",
           },
@@ -1839,7 +1865,8 @@ export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => 
           showLoaderOnConfirm: true,
           preConfirm: () => {
             let selectObserva = document.getElementById("sltObservcaciones");
-            let TextAreaObservacion = document.getElementById("Observacionother");
+            let TextAreaObservacion =
+              document.getElementById("Observacionother");
             // Validate input
             if (
               selectObserva.value == "" ||
@@ -1852,68 +1879,57 @@ export const CierreMasivoXestatus = (LstObservacionesPrede,ListadoBitacoras) => 
               Swal.enableButtons();
             } else {
               Swal.resetValidationMessage();
-  
+
               return CierreMasiveCaseSample(
                 ListadoBitacoras,
                 selectObserva.value == "5"
                   ? TextAreaObservacion.value
                   : selectObserva.options[selectObserva.selectedIndex].text,
-                  "0"
+                "0"
               );
             }
           },
           allowOutsideClick: () => !Swal.isLoading(),
         }).then((result) => {
           if (result.isConfirmed) {
-
-               Swal.fire({
-                  icon: "success",
-                  title: "Stickers cerrados",
-                  showConfirmButton: false,
-                  timer: 4000,
-                  timerProgressBar: true,
-                  allowOutsideClick: false,
-                }).then((result) => {
-                  /* Read more about handling dismissals below */
-                  if (result.dismiss === Swal.DismissReason.timer) {
-                    document.getElementById("btnGuardarMasivo").click();
-                  }
-                });
-                
+            Swal.fire({
+              icon: "success",
+              title: "Stickers cerrados",
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              allowOutsideClick: false,
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                document.getElementById("btnGuardarMasivo").click();
+              }
+            });
           }
         });
       }
     });
-  } 
-  
+  }
 };
 
 export const comprobarCambioestadomasivo = (ListAddResultMultple) => {
   debugger;
   var checbox1 = document.getElementById("CierreBloqCheck");
 
-  if(ListAddResultMultple.length > 0)
-  {
-    if (
-      checbox1.checked == true 
-    ) {
+  if (ListAddResultMultple.length > 0) {
+    if (checbox1.checked == true) {
       document.getElementById("btnGuardarCierreMasivo").click();
     } else {
       document.getElementById("btnGuardarMasivo").click();
     }
-  }
-  else
-  {
+  } else {
     Swal.fire({
       title: "Error",
       text: `Recuerde agregar los estatus para el bloque de stickers antes de continuar`,
       icon: "warning",
       confirmButtonText: "Cerrar",
     });
-
   }
-
-  
 };
 
 export const AddtolistNumber = (
@@ -1969,5 +1985,7 @@ export const DeleteRowNumber = (
   setListNumberAddObje,
   ListNumberAddObje
 ) => {
-  setListNumberAddObje(ListNumberAddObje.filter((item) => item.number !== idRow));
+  setListNumberAddObje(
+    ListNumberAddObje.filter((item) => item.number !== idRow)
+  );
 };
