@@ -122,6 +122,9 @@ function Results({ data, Options, group, name_group, sticker }) {
               TipoTabla={true}
               UsuCreador={data.Email}
               FechaCreacion={data.FECHA_CREACION_MINIMO}
+              group={group}
+              name_group={name_group}
+              sticker={sticker}
             ></ListSegum>
           </div>
         </div>

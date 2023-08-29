@@ -77,6 +77,7 @@ function Result({ data, infoBitacora, Options }) {
               TipoTabla={false}
               UsuCreador={data.Email}
               FechaCreacion={data.FECHA_CREACION_MINIMO}
+              infoBitacora={infoBitacora}
             ></ListSegum>
           </div>
         </div>

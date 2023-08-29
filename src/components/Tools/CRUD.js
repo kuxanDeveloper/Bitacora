@@ -304,10 +304,13 @@ export const onSubmitCreateNote = ({
   Observaciones_detalle,
   file,
   COD_BITACORA,
+  codigo_resultado
 }) => {
   const StickerRetorno = COD_BITACORA;
   return userService
-    .CrearNote(Observaciones_detalle, file, COD_BITACORA)
+    .CrearNote(Observaciones_detalle, file, COD_BITACORA,
+      codigo_resultado == null ? "" : codigo_resultado
+      )
     .then(() => {
       //   const returnUrl = router.query.returnUrl || "/";
       Router.push({

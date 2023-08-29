@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../../styles/StickerDetails.module.scss";
 import Link from "next/link";
 import { useContextBitacora } from "../../../context/BitacoraContext";
-function Details({ data, Options, name_group, sticker }) {
+function Details({ data, Options, name_group, sticker,group }) {
   const {
     setShowModal,
     setishabiliteBtn,
@@ -14,6 +14,9 @@ function Details({ data, Options, name_group, sticker }) {
     setValueImagesrc2,
     setValueImagesrc,
   } = useContextBitacora();
+
+  console.log(data);
+
   return (
     <div className={styles.followup}>
       {/* <!-- pruebas --> */}
@@ -60,12 +63,26 @@ function Details({ data, Options, name_group, sticker }) {
         <Link
           title="Editar nota"
           href={{
-            pathname: "/Sample/EditFollowUp/[id]",
-            query: {
-              id: data.COD_DETALLE_BITACORA,
-              name_group: name_group,
-              sticker: sticker,
-            },
+            pathname:
+              data.ESTATUS != null
+                ? "/Sample/EditNoteXSeguimiento/[id]"
+                : "/Sample/EditFollowUp/[id]",
+            query:
+              (data.ESTATUS != null
+                ? {
+                    id: data.COD_DETALLE_BITACORA,
+                    estatus: data.ESTATUS,
+                    seguimiento: data.SEGUIMNIENTO,
+                    opcion: data.OPCION_DESCRIPCION,
+                    name_group: name_group,
+                    group: group,
+                    sticker: sticker,
+                  }
+                : {
+                    id: data.COD_DETALLE_BITACORA,
+                    name_group: name_group,
+                    sticker: sticker,
+                  }),
           }}
           className={styles.update_icon}
         >
@@ -91,23 +108,57 @@ function Details({ data, Options, name_group, sticker }) {
 
       <div className={styles.form_group}>
         <div className={styles.info_group}>
-          <span className={`${styles.info_title} ${styles.inline}`}>Creado por:</span>
-          <p className={`${styles.info_text} ${styles.inline}`}>{data.EMAIL_CREADOR_DETALLE}</p>
+          <span className={`${styles.info_title} ${styles.inline}`}>
+            Creado por:
+          </span>
+          <p className={`${styles.info_text} ${styles.inline}`}>
+            {data.EMAIL_CREADOR_DETALLE}
+          </p>
         </div>
-
-     
+        <div className={styles.info_group}>
+          <span className={`${styles.info_title} ${styles.inline}`}>
+            Fecha de creación
+          </span>
+          <p className={`${styles.info_text} ${styles.inline}`}>
+            {data.FECHA_CREADO_DETALLE_FORMAT}
+          </p>
+        </div>
       </div>
 
-      <div className={styles.form_group}>
-        <div className={styles.info_group}>
-          <span className={`${styles.info_title} ${styles.inline}`}>Fecha de creación</span>
-          <p className={`${styles.info_text} ${styles.inline}`}>{data.FECHA_CREADO_DETALLE_FORMAT}</p>
+      {data.ESTATUS != null ? (
+        <div className={styles.form_group}>
+          <div className={styles.info_group}>
+            <span className={`${styles.info_title} ${styles.inline}`}>
+              Estatus:
+            </span>
+            <p className={`${styles.info_text} ${styles.inline}`}>
+              {data.ESTATUS}
+            </p>
+          </div>
+          <div className={styles.info_group}>
+            <span className={`${styles.info_title} ${styles.inline}`}>
+              Seguimiento:
+            </span>
+            <p className={`${styles.info_text} ${styles.inline}`}>
+              {data.SEGUIMNIENTO}
+            </p>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
 
       <div className={styles.form_group}>
+        {data.OPCION_DESCRIPCION != null ? (
+          <div className={styles.info_group}>
+            <span className={styles.info_title}>Opcion: </span>
+            <p className={styles.info_text}>{data.OPCION_DESCRIPCION}</p>
+          </div>
+        ) : (
+          ""
+        )}
         <div className={styles.info_group}>
-          <span className={styles.info_title}>Observaciones</span>
+          <span className={styles.info_title}>Observaciones: </span>
           <p className={styles.info_text}>{data.OBSERVACIONES_DETALLE}</p>
         </div>
       </div>

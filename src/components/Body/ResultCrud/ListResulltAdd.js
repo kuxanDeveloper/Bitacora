@@ -6,7 +6,7 @@ function ListResulltAdd({ ListAddResultMultple, setListAddResultMultple }) {
     <>
       {ListAddResultMultple.length > 0
         ? ListAddResultMultple.map((data, index) => (
-            <div key={index} className={styles.list_card}>
+            <div key={index} className={styles.list_card}>              
               <button
                 className={styles.btn_eliminar}
                 title="Eliminar status"

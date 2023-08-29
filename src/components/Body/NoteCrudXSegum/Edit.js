@@ -18,6 +18,10 @@ function ComponentEditNote({
   sticker,
   name_group,
   LstObservacionesPrede,
+  estatus,
+  seguimiento,
+  opcion,
+  group,
 }) {
   const {
     setShowModal,
@@ -80,13 +84,13 @@ function ComponentEditNote({
 
   return (
     <section className={styles.create_note}>
-         <Image
-          src="/img/bg_image.jpg"
-          width={1000}
-          height={1000}
-          alt="a"
-          className={styles.background_img}
-        />
+      <Image
+        src="/img/bg_image.jpg"
+        width={1000}
+        height={1000}
+        alt="a"
+        className={styles.background_img}
+      />
       <div className={styles.sticker_container}>
         <div className={styles.back_btn_container}>
           <Link
@@ -108,7 +112,7 @@ function ComponentEditNote({
           </Link>
         </div>
 
-        <p className={styles.title}>Editar nota general para el sticker</p>
+        <p className={styles.title}>Editar nota de el seguimiento</p>
         <br />
         <div className={styles.card}>
           <form onSubmit={handleSubmit(UpdateNote)}>
@@ -193,18 +197,54 @@ function ComponentEditNote({
                       </div>
                       {/* <!-- estado --> */}
 
-                      <div className={styles.form_group}>
+                      <div className={`${styles.form_group} ${styles.SinLinea}`}>
                         <div className={styles.input_group}>
-                          <label className={styles.group_title}>
+                          <label className={`${styles.group_title} ${styles.inline}`}>
                             Número de sticker :
                           </label>
-                          <p>{sticker}</p>
+                          <p className={styles.inline}>{sticker}</p>
                         </div>
                         <div className={styles.input_group}>
-                          <label className={styles.group_title}>Grupo :</label>
-                          <p>{name_group}</p>
+                          <label className={`${styles.group_title} ${styles.inline}`}>Grupo :</label>
+                          <p className={styles.inline}>{name_group}</p>
                         </div>
                       </div>
+
+                      <div
+                        className={`${styles.form_group} ${styles.SinLinea}`}
+                      >
+                        <div className={styles.input_group}>
+                          <label
+                            className={`${styles.group_title} ${styles.inline}`}
+                          >
+                            Estatus :
+                          </label>
+                          <p className={styles.inline}>{estatus}</p>
+                        </div>
+                        <div className={styles.input_group}>
+                          <label
+                            className={`${styles.group_title} ${styles.inline}`}
+                          >
+                            Seguimiento :
+                          </label>
+                          <p className={styles.inline}>{seguimiento}</p>
+                        </div>
+                      </div>
+
+                      {opcion != "" && opcion != null ? (
+                    <div className={styles.form_group}>
+                      <div className={styles.input_group}>
+                        <label
+                          className={`${styles.group_title} ${styles.inline}`}
+                        >
+                          Opcion :
+                        </label>
+                        <p className={styles.inline}>{opcion}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                       {/* <!-- form group --> */}
                       <div className={styles.form_group}>
