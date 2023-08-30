@@ -6,7 +6,7 @@ import {
   ComboDinamyc,
   AperturaandCierreMasivo,
   CierreMasivoXestatus,
-  comprobarCambioestadomasivo
+  comprobarCambioestadomasivo,
 } from "../../Tools/functiones";
 import { onSubmitCreateResultBloque } from "../../Tools/CRUD";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,7 @@ function ComponentCreateResult({
   setListAddResultMultple,
   ListMicroorganismo,
   ListNumber,
-  LstObservacionesPrede
+  LstObservacionesPrede,
 }) {
   const validationSchema = Yup.object().shape({
     Codigo_prueba: Yup.string().notRequired(),
@@ -490,31 +490,35 @@ function ComponentCreateResult({
 
                   <div className={styles.btn_container_send}>
                     <input id="CierreBloqCheck" type="checkbox" />
-                    <label><b>Cerrar el bloque de stickers</b></label>                    
+                    <label>
+                      <b>Cerrar el bloque de stickers</b>
+                    </label>
                   </div>
 
                   <div className={styles.btn_container_send}>
-                      <button 
-                        className={`${styles.btn_send}`}
-                        onClick={(e) => {
-                          e.preventDefault;
-                          comprobarCambioestadomasivo(ListAddResultMultple);
-                        }}
-                      >
-                        Guardar cambios
-                      </button>
+                    <button
+                      className={`${styles.btn_send}`}
+                      onClick={(e) => {
+                        e.preventDefault;
+                        comprobarCambioestadomasivo(ListAddResultMultple);
+                      }}
+                    >
+                      Guardar cambios
+                    </button>
 
-                      <button 
-                        className={`${styles.btn_send} ${styles.ocultar}`}
-                        id="btnGuardarCierreMasivo"
-                        onClick={(e) => {
-                          e.preventDefault;
-                          CierreMasivoXestatus(LstObservacionesPrede, ListadoBitacoras);
-                        }}
-                      >
-                      </button>
+                    <button
+                      className={`${styles.btn_send} ${styles.ocultar}`}
+                      id="btnGuardarCierreMasivo"
+                      onClick={(e) => {
+                        e.preventDefault;
+                        CierreMasivoXestatus(
+                          LstObservacionesPrede,
+                          ListadoBitacoras
+                        );
+                      }}
+                    ></button>
                     {!formState.isSubmitting && (
-                      <button 
+                      <button
                         className={`${styles.btn_send} ${styles.ocultar}`}
                         id="btnGuardarMasivo"
                         onClick={() => {
@@ -522,8 +526,7 @@ function ComponentCreateResult({
                           setValue("ListResultMultiple", ListAddResultMultple);
                           setValue("GrupoSticker", group);
                         }}
-                      >
-                      </button>
+                      ></button>
                     )}
 
                     <Link
