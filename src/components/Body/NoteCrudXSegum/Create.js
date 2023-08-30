@@ -19,6 +19,10 @@ function ComponentsCreateNote({
   name_group,
   group,
   LstObservacionesPrede,
+  codigo_result,
+  estatus,
+  seguimiento,
+  opcion,
 }) {
   const {
     setValueImagesrc,
@@ -40,6 +44,7 @@ function ComponentsCreateNote({
     ),
     COD_BITACORA: Yup.number(),
     file: Yup.mixed().notRequired(),
+    codigo_resultado: Yup.string().required("Campo observaciones obligatorio"),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -57,7 +62,7 @@ function ComponentsCreateNote({
   return (
     <>
       <section className={styles.create_note}>
-      <Image
+        <Image
           src="/img/bg_image.jpg"
           width={1000}
           height={1000}
@@ -119,7 +124,7 @@ function ComponentsCreateNote({
             </Link>
           </div>
 
-          <p className={styles.title}>Crear nota general para el sticker</p>
+          <p className={styles.title}>Crear nota para el seguimiento</p>
           <br />
           <div className={styles.card}>
             <form onSubmit={handleSubmit(onSubmitCreateNote)}>
@@ -187,7 +192,7 @@ function ComponentsCreateNote({
                   </div>
                   {/* <!-- estado --> */}
 
-                  <div className={styles.form_group}>
+                  <div className={`${styles.form_group} ${styles.SinLinea}`}>
                     <div className={styles.input_group}>
                       <label
                         className={`${styles.group_title} ${styles.inline}`}
@@ -205,6 +210,40 @@ function ComponentsCreateNote({
                       <p className={styles.inline}>{name_group}</p>
                     </div>
                   </div>
+
+                  <div className={`${styles.form_group} ${styles.SinLinea}`}>
+                    <div className={styles.input_group}>
+                      <label
+                        className={`${styles.group_title} ${styles.inline}`}
+                      >
+                        Estatus :
+                      </label>
+                      <p className={styles.inline}>{estatus}</p>
+                    </div>
+                    <div className={styles.input_group}>
+                      <label
+                        className={`${styles.group_title} ${styles.inline}`}
+                      >
+                        Seguimiento :
+                      </label>
+                      <p className={styles.inline}>{seguimiento}</p>
+                    </div>
+                  </div>
+
+                  {opcion != "" && opcion != null ? (
+                    <div className={styles.form_group}>
+                      <div className={styles.input_group}>
+                        <label
+                          className={`${styles.group_title} ${styles.inline}`}
+                        >
+                          Opcion :
+                        </label>
+                        <p className={styles.inline}>{opcion}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
                   {/* <!-- form group --> */}
                   <div className={styles.form_group}>
@@ -244,7 +283,9 @@ function ComponentsCreateNote({
                             : ""
                           : ""}
                       </select>
-                      <div className={styles.invalid_feedback}>{errors.Observaciones_detalle?.message}</div>
+                      <div className={styles.invalid_feedback}>
+                        {errors.Observaciones_detalle?.message}
+                      </div>
                     </div>
                     {ShowobservaTextare ? (
                       <div className={styles.input_group}>
@@ -259,7 +300,9 @@ function ComponentsCreateNote({
                           maxLength={1500}
                           {...register("Observaciones_detalle")}
                         ></textarea>
-                        <div className={styles.invalid_feedback}>{errors.Observaciones_detalle?.message}</div>
+                        <div className={styles.invalid_feedback}>
+                          {errors.Observaciones_detalle?.message}
+                        </div>
                       </div>
                     ) : (
                       ""
@@ -274,9 +317,10 @@ function ComponentsCreateNote({
                           setValue("COD_BITACORA", id);
                           setValue("file", ValueImagesrc);
                           RegisterEditNoteObservaciones(setValue);
+                          setValue("codigo_resultado", codigo_result);
                         }}
                       >
-                        Guardar cambios
+                        Guardar nota
                       </button>
                     )}
                     <Link

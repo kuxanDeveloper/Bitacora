@@ -24,7 +24,7 @@ export default function StickerDetails({
     setValueImagesrc2,
     setValueImagesrc,
   } = useContextBitacora();
-
+console.log(InforSampleDetails);
   return (
     <>
       <div className={styles.sticker_details}>
@@ -443,6 +443,13 @@ export default function StickerDetails({
                         name_group={
                           InforSampleDetails.infoBitacora[0]
                             .NOMBRE_GRUPO_ASIGNADO
+                        }
+                        group={
+                          InforSampleDetails.infoBitacora != undefined &&
+                          InforSampleDetails.infoBitacora != null
+                            ? InforSampleDetails.infoBitacora[0]
+                                .ID_GRUPO_ASIGNADO
+                            : ""
                         }
                         sticker={
                           InforSampleDetails.infoBitacora[0].NUMERO_STICKER +

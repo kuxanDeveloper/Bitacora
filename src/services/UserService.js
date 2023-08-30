@@ -382,11 +382,12 @@ function EditResult(
   );
 }
 
-function CrearNote(Observaciones_detalle, file, COD_BITACORA) {
+function CrearNote(Observaciones_detalle, file, COD_BITACORA,codigo_resultado) {
   const formData = new FormData();
   formData.append("Observaciones_detalle", Observaciones_detalle);
   formData.append("file", file);
   formData.append("COD_BITACORA", COD_BITACORA);
+  formData.append("CODIGO_RESULTADO_BITACORA", codigo_resultado);
   return fetchWrapper.postHeader(
     `${baseUrl}/Stickers/GuardBitacoraDetalle`,
     null,
