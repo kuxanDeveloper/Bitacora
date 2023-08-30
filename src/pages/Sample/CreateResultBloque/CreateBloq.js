@@ -28,9 +28,11 @@ function PageCreateResult({ cookie, group, name_group, hrefhash }) {
     ListMultipleMicroxTestxNumber(
       cookie,
       group,
+      "",
       setListPruebas,
       setListMicroorganismo,
-      setListNumber
+      setListNumber,
+      null
     );
   }, []);
 

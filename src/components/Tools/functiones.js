@@ -1735,11 +1735,10 @@ export const calcularDiffdate = (Fecheresult, FechaCreado) => {
 
 export const calcularDiffdateHours = (ListResultFirst, HourCount) => {
   var moment = require("moment");
-debugger;
   if (ListResultFirst != null) {
     var first = moment(new Date().toISOString());
     var second = moment(ListResultFirst.FECHA_CREACION_RESULTADO);
-    const Hours = first.diff(second, "minutes");
+    const Hours = first.diff(second, "hours");
     if (HourCount > Hours) {
       return true;
     } else {
@@ -1806,7 +1805,7 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
     return;
   }
   Router.push({
-    pathname: "/Statistics",
+    pathname: "/Statistics/IndexStatistics",
     query: { DateIni: fechaIni, DateEnd: fechaFin },
   });
 };

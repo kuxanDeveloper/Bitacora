@@ -132,7 +132,7 @@ function HRMenu({ Roles }) {
                           <li className={Styles.sub_li}>
                             <Link
                               href={{
-                                pathname: "/Statistics",
+                                pathname: "/Statistics/IndexStatistics",
                                 query: {
                                   DateIni: FechaInitSearchDiffDays(15),
                                   DateEnd: FechaInitSearchDiffDays(0),
@@ -142,8 +142,7 @@ function HRMenu({ Roles }) {
                                 OnclickNAvToggle(MenuShow, setMenuShow);
                               }}
                               className={`${Styles.sub_link} ${
-                                LocationUrl(router, "Statistics") &&
-                                !LocationUrl(router, "IndexCsv")
+                                LocationUrl(router, "IndexStatistics")
                                   ? Styles.active
                                   : ""
                               }`}
