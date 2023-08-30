@@ -496,6 +496,7 @@ function ComponentCreateResult({
                   <div className={styles.btn_container_send}>
                       <button 
                         className={`${styles.btn_send}`}
+                        id="btnVisibleEstatus"
                         onClick={(e) => {
                           e.preventDefault;
                           comprobarCambioestadomasivo(ListAddResultMultple);
