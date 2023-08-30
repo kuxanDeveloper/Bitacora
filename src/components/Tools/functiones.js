@@ -1102,7 +1102,7 @@ export const RegisterStickerObservaciones = (
 ) => {
   debugger;
   let GrupoValid = ListadoGrupoActivo.find(
-    (data) => data.Id_grupo === ValueGroup
+    (data) => data.Id_grupo === parseInt(ValueGroup)
   );
 
   if (GrupoValid.JEFE_LABORATORIO_OBLIG == true) {
