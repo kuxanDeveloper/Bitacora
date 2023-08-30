@@ -1805,7 +1805,7 @@ export const ValidateSearchStatistic = (fechaIni, fechaFin) => {
     return;
   }
   Router.push({
-    pathname: "/Statistics",
+    pathname: "/Statistics/IndexStatistics",
     query: { DateIni: fechaIni, DateEnd: fechaFin },
   });
 };

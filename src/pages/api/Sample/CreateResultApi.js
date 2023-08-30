@@ -86,10 +86,16 @@ export const ListMultipleMicroxTestxNumber = async (
   setListNumber,
   setListResultFirst
 ) => {
-  let ReturnValue = await queryListMultipleMicroxTextxNumber(cookie, idGroup, sticker);
+  let ReturnValue = await queryListMultipleMicroxTextxNumber(
+    cookie,
+    idGroup,
+    sticker
+  );
 
   setListPruebas(ReturnValue.Listadopruebas);
   setListMicroorganismo(ReturnValue.ListadoMicroorganismo);
   setListNumber(ReturnValue.ListadoNumerosConteo);
-  setListResultFirst(ReturnValue.ListadoResultFirst);
+  if (setListResultFirst != null && setListResultFirst != undefined) {
+    setListResultFirst(ReturnValue.ListadoResultFirst);
+  }
 };
