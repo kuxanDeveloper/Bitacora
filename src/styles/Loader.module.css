@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("http://192.168.0.100:8081/img/Grupo_21.png");
+  background-image: url("https://epi-app:1443/img/Grupo_21.png");
   background-size: cover;
   background-repeat: no-repeat;
 }
