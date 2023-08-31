@@ -22,7 +22,6 @@ function MyApp({ Component, pageProps }) {
               <Component {...pageProps} />
             </ErrorBoundary>
           </Layout>
-          // <Component {...pageProps} />
         )}
       </BicatoraContexProvider>
     </ErrorBoundary>

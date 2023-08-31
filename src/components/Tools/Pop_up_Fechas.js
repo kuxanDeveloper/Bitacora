@@ -176,7 +176,7 @@ function Pop_up({
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           stroke="#ffffff"
-                          class="icon icon-tabler icon-tabler-calendar-plus"
+                          className="icon icon-tabler icon-tabler-calendar-plus"
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"

@@ -58,7 +58,7 @@ function EditStickerComponents({
     SitioAnatomico: Yup.string().notRequired(),
     jefelaboratorio: Yup.string().notRequired(),
     tipoMuestra: Yup.string().notRequired(),
-    FechaHoraRecogida: Yup.string().notRequired()
+    FechaHoraRecogida: Yup.string().notRequired(),
   });
   const [codSitioAnatomico, setcodSitioAnatomico] = useState("");
   const [codJefeLab, setcodJefeLab] = useState("");
@@ -76,14 +76,6 @@ function EditStickerComponents({
       InforSampleDetails.infoBitacora != null &&
       InforSampleDetails.infoBitacora != undefined
     ) {
-      // var grupoSticker = document.getElementById("GrupoSticker");
-
-      // if (isHabilteGroup == "true") {
-      //   grupoSticker.setAttribute("disabled", "");
-      // } else {
-      //   grupoSticker.disabled = false;
-      // }
-
       if (LstObservacionesPrede != null && LstObservacionesPrede != undefined) {
         let retornoValor = LstObservacionesPrede.find(
           (e) =>
@@ -92,9 +84,6 @@ function EditStickerComponents({
         );
 
         if (retornoValor != undefined && retornoValor != null) {
-          // document.getElementById("sltObservaIni").value =
-          //   retornoValor.Codigo_observacion;
-
           setobservacionCmb(retornoValor.Codigo_observacion);
         } else if (
           InforSampleDetails.infoBitacora[0].OBSERVACIONES_INICIALES != "" &&
@@ -103,7 +92,6 @@ function EditStickerComponents({
         ) {
           setShowobservaTextare(true);
         } else {
-          // document.getElementById("sltObservaIni").value = "";
         }
       }
 
@@ -144,9 +132,11 @@ function EditStickerComponents({
   });
 
   const optionsgrup = [];
-  ListadoGrupoActivo.map((data) => {
-    optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
-  });
+  if (ListadoGrupoActivo != null && ListadoGrupoActivo != undefined) {
+    ListadoGrupoActivo.map((data) => {
+      optionsgrup.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
+    });
+  }
 
   const optionsObservation = [];
   LstObservacionesPrede.map((data) => {
@@ -757,7 +747,7 @@ function EditStickerComponents({
                                 );
                                 setValue("NumSticker", data.NUMERO_STICKER);
                                 setValue("COD_BITACORA", data.CODIGO_BITACORA);
-                                setValue("Sufijo", data.SUFIJO);                                
+                                setValue("Sufijo", data.SUFIJO);
                                 RegisterStickerObservaciones(
                                   setValue,
                                   codJefeLab,

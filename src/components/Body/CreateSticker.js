@@ -26,7 +26,7 @@ function CreateSticker({
   ListadoTipoMuestra,
   ListadoJefeLaboratorio,
   ListadoSitioAna,
-  setvalueGrupochange
+  setvalueGrupochange,
 }) {
   const {
     setShowModal,
@@ -42,7 +42,7 @@ function CreateSticker({
     ResultScanner,
     setshowModalScanner,
     setResultScanner,
-    setshowModalJefes
+    setshowModalJefes,
   } = useContextBitacora();
   const [ShowobservaTextare, setShowobservaTextare] = useState(false);
   const [ValueGroup, setValueGroup] = useState("");
@@ -104,16 +104,20 @@ function CreateSticker({
 
   useEffect(() => {
     setValueGroup(id);
+  }, []);
 
-    let optionsgrupLst = [];
-    ListadoGrupoActivo.map((data) => {
-      optionsgrupLst.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
-    });
+  useEffect(() => {
+    const optionsgrupLst = [];
+    if (ListadoGrupoActivo != null && ListadoGrupoActivo != undefined) {
+      ListadoGrupoActivo.map((data) => {
+        optionsgrupLst.push({ value: data.Id_grupo, label: data.NOMBRE_GRUPO });
+      });
+    }
 
     if (optionsgrupLst != []) {
       Setoptionsgrup(optionsgrupLst);
     }
-  }, []);
+  }, [ListadoGrupoActivo]);
 
   //The class name can vary
 
@@ -183,7 +187,6 @@ function CreateSticker({
       }
     }
   }
-
 
   return (
     <>
@@ -698,7 +701,7 @@ function CreateSticker({
                                   ".FechaHoraRecogida input"
                                 ).value
                               : ""
-                          );                          
+                          );
                           setValue("GrupoSticker", ValueGroup);
                           // setCheckinvalue(setValue);
                           setImagenFile(

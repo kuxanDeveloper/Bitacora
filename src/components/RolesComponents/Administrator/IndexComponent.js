@@ -72,7 +72,7 @@ function IndexComponentAdmin({
                   </div>
                 </section>
               ))
-            : "Sin grupo seleccionado"
+            : "Sin grupo seleccionado o cargando..."
           : "Sin grupo ó sin conexion al API"
         : ListadoGrupoInactivo != undefined && ListadoGrupoInactivo != null
         ? ListadoGrupoInactivo.length > 0

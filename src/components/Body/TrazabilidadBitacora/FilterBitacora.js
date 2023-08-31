@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   FilterSearchTrazaBitacora,
-  ClearFilterTrazaBitacora
+  ClearFilterTrazaBitacora,
 } from "../../Tools/functiones";
 import filterStyles from "../../../styles/filters.module.scss";
 import Link from "next/link";
@@ -20,22 +20,16 @@ export default function Filters({
   Sufijo,
   setSufijo,
   MesAnio,
-  setMesAnio
+  setMesAnio,
 }) {
   const router = useRouter();
 
-
-  
   return (
     <>
-      <div
-        className={filterStyles.filters}
-      >
-        
+      <div className={filterStyles.filters}>
         <form>
           <div className={filterStyles.filters_container}>
             <div className={filterStyles.inputs_container}>
-
               <input
                 type="text"
                 className={filterStyles.filter_input}
@@ -50,7 +44,7 @@ export default function Filters({
                 className={filterStyles.filter_input}
                 placeholder="Sufijo"
                 onChange={(e) => {
-                    setSufijo(e.target.value);
+                  setSufijo(e.target.value);
                 }}
                 value={Sufijo}
               />
@@ -70,7 +64,7 @@ export default function Filters({
                 className={filterStyles.filter_input}
                 placeholder="Seleccione una fecha final"
                 onChange={(e) => {
-                    setFechaFinal(e.target.value);
+                  setFechaFinal(e.target.value);
                 }}
                 value={FechaIngresoFinal}
               />
@@ -83,42 +77,18 @@ export default function Filters({
                 <option value="" disabled>
                   Seleccione un mes para el filtro
                 </option>
-                <option value="1">
-                  Enero
-                </option>
-                <option value="2">
-                  Febrero
-                </option>
-                <option value="3">
-                  Marzo
-                </option>
-                <option value="4">
-                  Abril
-                </option>
-                <option value="5">
-                  Mayo
-                </option>
-                <option value="6">
-                  Junio
-                </option>
-                <option value="7">
-                  Julio
-                </option>
-                <option value="8">
-                  Agosto
-                </option>
-                <option value="9">
-                  Septiembre
-                </option>
-                <option value="10">
-                  Octubre
-                </option>
-                <option value="11">
-                  Noviembre
-                </option>
-                <option value="12">
-                  Diciembre
-                </option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
               </select>
               <select
                 defaultValue={UserRegisterStiker}
@@ -126,10 +96,9 @@ export default function Filters({
                 onClick={(e) => setUserRegisterStiker(e.target.value)}
                 className={filterStyles.filter_input}
               >
-                <option value="">
-                  Seleccione un usuario
-                </option>
-                {ListadoUsuariosRegistrados != null
+                <option value="">Seleccione un usuario</option>
+                {ListadoUsuariosRegistrados != null &&
+                ListadoUsuariosRegistrados != undefined
                   ? ListadoUsuariosRegistrados.map((data, index) => (
                       <option key={index} value={data.Id}>
                         {`${data.Numero_de_Identidad} - ${data.Email}`}

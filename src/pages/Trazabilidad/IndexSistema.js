@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexTrazaSis from "../../components/Body/TrazabilidadSistema/index";
 import FilterTrazaSis from "../../components/Body/TrazabilidadSistema/FilterSistema";
-import { SampleDetailsTrazaTabl } from "../api/Sample/ViewDetailsTrazabilidad/[id]";
+import {
+  SampleDetailsTrazaTabl,
+  QueryGetallUser,
+} from "../api/Sample/ViewDetailsTrazabilidad/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,9 +13,13 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../components/Tools/OpcitionHabilite";
-import { queryListUserAll } from "../../components/Tools//Security";
 
-function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
+function CreatePage({ cookie, query }) {
+
+  const [ListadoUsuariosRegistrados, setListadoUsuariosRegistrados] = useState(
+    []
+  );
+
   const [FechaIngreso, setFechaIngreso] = useState(
     query.dateAdmision != undefined && query.dateAdmision != null
       ? query.dateAdmision
@@ -52,6 +59,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.page,
       query.Mes
     );
+    QueryGetallUser(cookie, setListadoUsuariosRegistrados);
   }, []);
 
   return (
@@ -124,8 +132,6 @@ export async function getServerSideProps(ctx) {
   let Options = null;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
-      // RolUser.map((data)=>()){
-      // }
       Roles = JSON.parse(RolUser);
 
       Roles.map((data) => {
@@ -151,12 +157,10 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
         cookie: cookie,
         query: ctx.query,
-        ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
       },
     };
   } else {

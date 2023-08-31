@@ -8,8 +8,9 @@ import {
   QueryJefeLaboratorio,
   QuerySitioAnatomico,
   QueryTipoMuestra,
-  ValidNumSticker
+  ValidNumSticker,
 } from "../../../../components/Tools/Security";
+import { QueryActivegroup } from "../../../../components/Tools/CRUD";
 import Swal from "sweetalert2";
 import Router from "next/router";
 
@@ -25,11 +26,7 @@ export const SampleDetailsEdit = async (
   setLstObservacionesPrede(lstObervsa.listadoObservacion);
 };
 
-export const InfoteNoteEditApi = async (
-  cookie,
-  id,
-  setInfoNote,
-) => {
+export const InfoteNoteEditApi = async (cookie, id, setInfoNote) => {
   let infoNote = await QueryNoteEdit(cookie, id);
   setInfoNote(infoNote);
 };
@@ -39,40 +36,49 @@ export const CloseCaseSample = async (id, observacionCaso, Estado) => {
   return infoNote;
 };
 
-export const CierreMasiveCaseSample = async (ListadoBitacoras, observacionCaso, Estado) => {
-  let infoNote = await CloseMasiveCaseSample(ListadoBitacoras, observacionCaso, Estado);
+export const CierreMasiveCaseSample = async (
+  ListadoBitacoras,
+  observacionCaso,
+  Estado
+) => {
+  let infoNote = await CloseMasiveCaseSample(
+    ListadoBitacoras,
+    observacionCaso,
+    Estado
+  );
   return infoNote;
 };
 
-
-
-export const DeleteResultSegm = async (Codigo_resultado_bitacora,IdPrub,codresult) => {
+export const DeleteResultSegm = async (
+  Codigo_resultado_bitacora,
+  IdPrub,
+  codresult
+) => {
   let infoNote = await QueryDeleteResult(Codigo_resultado_bitacora);
-  if(infoNote == "Todo Eliminado")
-  {    
-    document.getElementById('Estatus' + IdPrub).remove();    
+  if (infoNote == "Todo Eliminado") {
+    document.getElementById("Estatus" + IdPrub).remove();
+  } else if (infoNote == "El estatus se elimino correctamente") {
+    document.getElementById("SeguRest" + codresult).remove();
   }
-  else if(infoNote == "El estatus se elimino correctamente")
-  {
-    document.getElementById('SeguRest' + codresult).remove();
-  }
-  
+
   return infoNote;
 };
 
-export const ValidNumeroSticker = async (cookie, num_stricker, estadobit,idAncest) => {
+export const ValidNumeroSticker = async (
+  cookie,
+  num_stricker,
+  estadobit,
+  idAncest
+) => {
   let infoNote = await ValidNumSticker(cookie, num_stricker, estadobit);
-  if(infoNote.mensajerpt == "Sin coincidencia")
-  {    
+  if (infoNote.mensajerpt == "Sin coincidencia") {
     Swal.fire({
       title: "¡Advertencia!",
       text: "Debe indicar el valor de algunos de los filtros disponible para realizar la búsqueda avanzada",
       icon: "warning",
       confirmButtonText: "Cerrar",
     });
-  }
-  else
-  {
+  } else {
     Router.push({
       pathname: "/[id]",
       query: {
@@ -81,11 +87,11 @@ export const ValidNumeroSticker = async (cookie, num_stricker, estadobit,idAnces
         DateAdmission: "",
         idAncestro: 1,
         page: "1",
-        tipoSearch: infoNote.mensajerpt
+        tipoSearch: infoNote.mensajerpt,
       },
-    });  
+    });
   }
-  
+
   return infoNote;
 };
 
@@ -109,4 +115,9 @@ export const ListTipoMuestra = async (
 ) => {
   let lstTipoMuestra = await QueryTipoMuestra(cookie, idGroup);
   setListadoTipoMuestra(lstTipoMuestra);
+};
+
+export const queryGroup = async (cookie, setListadoGrupoActivo) => {
+  let ListGroup = await QueryActivegroup(cookie, "1");
+  setListadoGrupoActivo(ListGroup);
 };

@@ -320,7 +320,7 @@ export default function Case({
                   {List ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-id"
+                      className="icon icon-tabler icon-tabler-id"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -340,7 +340,7 @@ export default function Case({
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-table-filled"
+                      className="icon icon-tabler icon-tabler-table-filled"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -397,7 +397,7 @@ export default function Case({
                   {List ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-id"
+                      className="icon icon-tabler icon-tabler-id"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
@@ -417,7 +417,7 @@ export default function Case({
                   ) : (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-table-filled"
+                      className="icon icon-tabler icon-tabler-table-filled"
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"

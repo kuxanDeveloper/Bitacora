@@ -62,8 +62,6 @@ export async function getServerSideProps(ctx) {
   let Options = null;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
-      // RolUser.map((data)=>()){
-      // }
       Roles = JSON.parse(RolUser);
 
       Roles.map((data) => {
