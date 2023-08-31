@@ -1825,7 +1825,7 @@ export const CierreMasivoXestatus = (
       }
     }
   };
-  debugger;
+
   if (ListadoBitacoras.length > 1) {
     Swal.fire({
       title: `Cerrar bloque de stickers`,
@@ -1891,6 +1891,7 @@ export const CierreMasivoXestatus = (
           allowOutsideClick: () => !Swal.isLoading(),
         }).then((result) => {
           if (result.isConfirmed) {
+            document.getElementById("btnGuardarMasivo").click();
             Swal.fire({
               icon: "success",
               title: "Stickers cerrados",
@@ -1901,11 +1902,14 @@ export const CierreMasivoXestatus = (
             }).then((result) => {
               /* Read more about handling dismissals below */
               if (result.dismiss === Swal.DismissReason.timer) {
-                document.getElementById("btnGuardarMasivo").click();
+                
               }
             });
           }
         });
+      }
+      else if(result.dismiss == 'cancel'){
+        document.getElementById("btnVisibleEstatus").style.display = "";
       }
     });
   }
@@ -1916,7 +1920,8 @@ export const comprobarCambioestadomasivo = (ListAddResultMultple) => {
   var checbox1 = document.getElementById("CierreBloqCheck");
 
   if (ListAddResultMultple.length > 0) {
-    if (checbox1.checked == true) {
+    document.getElementById("btnVisibleEstatus").style.display = "none";
+    if (checbox1.checked == true) {            
       document.getElementById("btnGuardarCierreMasivo").click();
     } else {
       document.getElementById("btnGuardarMasivo").click();

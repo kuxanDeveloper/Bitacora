@@ -7,9 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { guardFechasbitacora } from "../Tools/FechasBitacoras";
 import Link from "next/link";
-import {
-  setFechaActual
-} from "../Tools/functiones";
+import { setFechaActual } from "../Tools/functiones";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -27,7 +25,7 @@ function Pop_up({
   FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA,
   FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL,
   FECHA_HORA_VALIDACION_ANTIBIOGRAMA,
-  ESTADO_STICKER_bit
+  ESTADO_STICKER_bit,
 }) {
   const validarEsquemaFecha = Yup.object().shape({
     COD_BITACORAv: Yup.string().required(),
@@ -77,9 +75,10 @@ function Pop_up({
           <section className={styles2.create_note}>
             
 
-              <p className={styles2.title}>Fechas Sticker</p>
-
             <div className={styles2.sticker_container}>
+              <div className={styles2.back_btn_container}></div>
+              <p className={styles2.title}>Fechas Sticker</p>
+              <br />
               <div className={styles2.card}>
                 <form onSubmit={handleSubmit(guardFechasbitacora)}>
                   <div className={styles2.stickers_container}>
@@ -97,7 +96,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_INGRESO != null &&
                                 FECHA_HORA_INGRESO != ""
@@ -107,42 +108,43 @@ function Pop_up({
                               className="fech_hora_ingreso"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_hora_ingreso");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button> : ""}
-
-
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_hora_ingreso");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -154,7 +156,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_VERIFICACION != null &&
                                 FECHA_HORA_VERIFICACION != ""
@@ -164,41 +168,43 @@ function Pop_up({
                               className="fech_hora_verificacion"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_hora_verificacion");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button> : ""}
-
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_hora_verificacion");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                class="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
 
@@ -215,7 +221,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_INGRESO_BOTELLA != null &&
                                 FECHA_INGRESO_BOTELLA != ""
@@ -225,40 +233,43 @@ function Pop_up({
                               className="fech_ingreso_botella"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_ingreso_botella");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button> : ""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_ingreso_botella");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -270,7 +281,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_SUENA_POSITIVO != null &&
                                 FECHA_HORA_SUENA_POSITIVO != ""
@@ -280,41 +293,43 @@ function Pop_up({
                               className="fech_hora_suena_positiv"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_hora_suena_positiv");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>
-                      :""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_hora_suena_positiv");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
 
@@ -331,7 +346,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO !=
                                   null &&
@@ -344,40 +361,43 @@ function Pop_up({
                               className="fech_valid_hemo_positivo"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_valid_hemo_positivo");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>:""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_valid_hemo_positivo");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -389,7 +409,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA !=
                                   null &&
@@ -403,40 +425,43 @@ function Pop_up({
                               className="fech_valid_identf_botella"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_valid_identf_botella");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>:""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_valid_identf_botella");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
 
@@ -453,7 +478,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL !=
                                   null &&
@@ -467,40 +494,43 @@ function Pop_up({
                               className="fech_valid_identf_final"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_valid_identf_final");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>:""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_valid_identf_final");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <div className={styles2.input_group}>
                           <label className={styles2.group_title}>
@@ -512,7 +542,9 @@ function Pop_up({
                             adapterLocale={"en-gb"}
                           >
                             <MobileDateTimePicker
-                              disabled={ESTADO_STICKER_bit == true ? false : true}
+                              disabled={
+                                ESTADO_STICKER_bit == true ? false : true
+                              }
                               defaultValue={
                                 FECHA_HORA_VALIDACION_ANTIBIOGRAMA != null &&
                                 FECHA_HORA_VALIDACION_ANTIBIOGRAMA != ""
@@ -522,107 +554,107 @@ function Pop_up({
                               className="fech_valid_antibiograma"
                             />
                           </LocalizationProvider>
-                          {ESTADO_STICKER_bit == true ?
-                          <button
-                        type="button"
-                        title="Seleccionar la fecha de hoy"
-                        onClick={() => {
-                          setFechaActual("fech_valid_antibiograma");
-                        }}
-                        className={styles2.photo}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          stroke="#ffffff"
-                          className="icon icon-tabler icon-tabler-calendar-plus"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          strokeWidth="2"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                          ></path>
-                          <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
-                          <path d="M16 3v4"></path>
-                          <path d="M8 3v4"></path>
-                          <path d="M4 11h16"></path>
-                          <path d="M16 19h6"></path>
-                          <path d="M19 16v6"></path>
-                        </svg>
-                      </button>:""}
+                          {ESTADO_STICKER_bit == true ? (
+                            <button
+                              type="button"
+                              title="Seleccionar la fecha de hoy"
+                              onClick={() => {
+                                setFechaActual("fech_valid_antibiograma");
+                              }}
+                              className={styles2.photo}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                stroke="#ffffff"
+                                className="icon icon-tabler icon-tabler-calendar-plus"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M12.5 21h-6.5a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v5"></path>
+                                <path d="M16 3v4"></path>
+                                <path d="M8 3v4"></path>
+                                <path d="M4 11h16"></path>
+                                <path d="M16 19h6"></path>
+                                <path d="M19 16v6"></path>
+                              </svg>
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
 
                       <div className={styles2.btn_container_send}>
-                        {!formState.isSubmitting && ESTADO_STICKER_bit == true && (
-
-                          <button
-                            onClick={() => {
-                              setValue("COD_BITACORAv", COD_BITACORA);
-                              setValue(
-                                "FECHA_HORA_INGRESO",
-                                document.querySelector(
-                                  ".fech_hora_ingreso input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_VERIFICACION",
-                                document.querySelector(
-                                  ".fech_hora_verificacion input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_INGRESO_BOTELLA",
-                                document.querySelector(
-                                  ".fech_ingreso_botella input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_SUENA_POSITIVO",
-                                document.querySelector(
-                                  ".fech_hora_suena_positiv input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO",
-                                document.querySelector(
-                                  ".fech_valid_hemo_positivo input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA",
-                                document.querySelector(
-                                  ".fech_valid_identf_botella input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL",
-                                document.querySelector(
-                                  ".fech_valid_identf_final input"
-                                ).value
-                              );
-                              setValue(
-                                "FECHA_HORA_VALIDACION_ANTIBIOGRAMA",
-                                document.querySelector(
-                                  ".fech_valid_antibiograma input"
-                                ).value
-                              );
-                            }}
-                            className={styles2.btn_send}
-                          >
-                            Guardar Fechas
-                          </button> 
-                        )}
-                        <div
-                          className={styles2.btn_cancel}
-                          onClick={onClose}
-                        >
+                        {!formState.isSubmitting &&
+                          ESTADO_STICKER_bit == true && (
+                            <button
+                              onClick={() => {
+                                setValue("COD_BITACORAv", COD_BITACORA);
+                                setValue(
+                                  "FECHA_HORA_INGRESO",
+                                  document.querySelector(
+                                    ".fech_hora_ingreso input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_VERIFICACION",
+                                  document.querySelector(
+                                    ".fech_hora_verificacion input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_INGRESO_BOTELLA",
+                                  document.querySelector(
+                                    ".fech_ingreso_botella input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_SUENA_POSITIVO",
+                                  document.querySelector(
+                                    ".fech_hora_suena_positiv input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_VALIDACION_HEMOCULTIVO_POSITIVO",
+                                  document.querySelector(
+                                    ".fech_valid_hemo_positivo input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_VALIDACION_IDENTIFICACION_BOTELLA",
+                                  document.querySelector(
+                                    ".fech_valid_identf_botella input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_VALIDACION_INDENTIFICACION_FINAL",
+                                  document.querySelector(
+                                    ".fech_valid_identf_final input"
+                                  ).value
+                                );
+                                setValue(
+                                  "FECHA_HORA_VALIDACION_ANTIBIOGRAMA",
+                                  document.querySelector(
+                                    ".fech_valid_antibiograma input"
+                                  ).value
+                                );
+                              }}
+                              className={styles2.btn_send}
+                            >
+                              Guardar Fechas
+                            </button>
+                          )}
+                        <div className={styles2.btn_cancel} onClick={onClose}>
                           Cancelar
                         </div>
                       </div>
