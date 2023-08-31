@@ -78,10 +78,6 @@ export async function getServerSideProps(ctx) {
         }
       });
     }
-
-
-
-
     return {
       props: {
         cookie: cookie,

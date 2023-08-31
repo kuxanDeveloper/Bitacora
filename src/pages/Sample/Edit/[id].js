@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import EditStickerComponents from "../../../components/Body/EditStiker";
-import { QueryActivegroup } from "../../../components/Tools/CRUD";
+
 import {
   SampleDetailsEdit,
   ListSitioAnatomico,
   ListJefeLaboratorio,
   ListTipoMuestra,
+  queryGroup
 } from "../../api/Sample/ViewDetails/[id]";
 import {
   OptionAdministrator,
@@ -17,16 +18,18 @@ import {
 } from "../../../components/Tools/OpcitionHabilite";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 
-function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
-  const { LstObservacionesPrede, setLstObservacionesPrede,Nuvjefe } =
+function EditPage({ id, group, cookie, isHabilteGroup }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede, Nuvjefe } =
     useContextBitacora();
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
   const [ListadoSitioAna, setListadoSitioAna] = useState([]);
   const [ListadoJefeLaboratorio, setListadoJefeLaboratorio] = useState([]);
   const [ListadoTipoMuestra, setListadoTipoMuestra] = useState([]);
+  const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [valueGrupochange, setvalueGrupochange] = useState(
     group !== null && group !== undefined && group !== "" ? group : "6"
   );
+
   useEffect(() => {
     SampleDetailsEdit(
       cookie,
@@ -36,17 +39,18 @@ function EditPage({ ListadoGrupoActivo, id, group, cookie, isHabilteGroup }) {
     );
     ListSitioAnatomico(cookie, setListadoSitioAna);
     ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
+    queryGroup(cookie, setListadoGrupoActivo);
   }, []);
+
   useEffect(() => {
     ListTipoMuestra(cookie, setListadoTipoMuestra, valueGrupochange);
   }, [valueGrupochange]);
 
   useEffect(() => {
-    if(Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0)
-    {
+    if (Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0) {
       ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
     }
-  },[Nuvjefe]);
+  }, [Nuvjefe]);
 
   return (
     <>
@@ -127,8 +131,6 @@ export async function getServerSideProps(ctx) {
 
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
-      // RolUser.map((data)=>()){
-      // }
       Roles = JSON.parse(RolUser);
       Roles.map((data) => {
         if (data == 1) {
@@ -157,12 +159,9 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie, "1");
-
     return {
       props: {
         cookie: cookie,
-        ListadoGrupoActivo: ListadoGrupoActivo,
         id: ctx.query.id,
         group: ctx.query.group,
         isHabilteGroup: ctx.query.isHabilteGroup,

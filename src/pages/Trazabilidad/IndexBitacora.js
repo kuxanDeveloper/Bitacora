@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import IndexTrazaBit from "../../components/Body/TrazabilidadBitacora/index";
 import FilterTrazaBit from "../../components/Body/TrazabilidadBitacora/FilterBitacora";
-import { SampleDetailsTrazaBit } from "../api/Sample/ViewDetailsTrazabilidad/[id]";
+import { SampleDetailsTrazaBit, QueryGetallUser } from "../api/Sample/ViewDetailsTrazabilidad/[id]";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -10,10 +10,12 @@ import {
   OptionConsult,
   OptionDefault,
 } from "../../components/Tools/OpcitionHabilite";
-import { queryListUserAll } from "../../components/Tools//Security";
 
-function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
+function CreatePage({ cookie, query }) {
   const [InforSampleDetails, setLInforSampleDetails] = useState([]);
+  const [ListadoUsuariosRegistrados, setListadoUsuariosRegistrados] = useState(
+    []
+  );
   useEffect(() => {
     SampleDetailsTrazaBit(
       setLInforSampleDetails,
@@ -26,6 +28,7 @@ function CreatePage({ cookie, ListadoUsuariosRegistrados, query }) {
       query.page,
       query.Mes
     );
+    QueryGetallUser(cookie, setListadoUsuariosRegistrados);
   }, []);
 
   const [NumeroSticker, setNumeroSticker] = useState(
@@ -131,8 +134,6 @@ export async function getServerSideProps(ctx) {
   let Options = null;
   if (cookie && RolUser) {
     if (RolUser != null && RolUser != undefined && RolUser != "") {
-      // RolUser.map((data)=>()){
-      // }
       Roles = JSON.parse(RolUser);
 
       Roles.map((data) => {
@@ -158,12 +159,10 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoUsuariosRegistrados = await queryListUserAll(cookie);
     return {
       props: {
         cookie: cookie,
         query: ctx.query,
-        ListadoUsuariosRegistrados: ListadoUsuariosRegistrados,
       },
     };
   } else {

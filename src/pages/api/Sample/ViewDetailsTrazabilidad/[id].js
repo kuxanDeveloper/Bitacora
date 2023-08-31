@@ -6,7 +6,8 @@ import {
 } from "../../../../components/Tools/DetailsTrazabilidad";
 
 import {
-  QueryFechaBit
+  QueryFechaBit,
+  queryListUserAll,
 } from "../../../../components/Tools/Security";
 
 export const SampleDetailsTrazaBit = async (
@@ -64,11 +65,11 @@ export const SampleDetailsFechaBitc = async (
   grupo
 ) => {
   let inforSample = await QueryFechaBit(
-  cookie,
-  dateinicial,
-  dateFinal,
-  page,
-  grupo
+    cookie,
+    dateinicial,
+    dateFinal,
+    page,
+    grupo
   );
   setLInforSampleDetails(inforSample);
 };
@@ -117,4 +118,12 @@ export const ExportToExcelcsvTrazaSistema = async (
     Mes
   );
   return Result;
+};
+
+export const QueryGetallUser = async (
+  cookie,
+  setListadoUsuariosRegistrados
+) => {
+  let Usuario = await queryListUserAll(cookie);
+  setListadoUsuariosRegistrados(Usuario);
 };

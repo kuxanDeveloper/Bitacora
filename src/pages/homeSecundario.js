@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { QueryActiveInactivegroup_GetUsers } from "../components/Tools/Security";
+
 import { userService } from "../services/UserService";
 import Filters from "../components/Body/Filters";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -18,14 +17,10 @@ import IndexComponentAdmin from "../components/RolesComponents/Administrator/Ind
 import IndexComponentTechni from "../components/RolesComponents/Technical/IndexComponent";
 import ImageOptimize from "../components/Tools/ImageOptimize";
 import IndexComponentAssis from "../components/RolesComponents/Assistant/IndexComponent";
-
 import IndexComponentConsul from "../components/RolesComponents/Consultation/IndexComponent";
+import {queryGroupGetUsers} from "./api/Sample/ViewHomeSecondary/[id]"
 
 export default function Home({
-  ListadoGrupoActivossr,
-  ListadoGrupoInactivossr,
-  ListadoSufijosxGroupAll,
-  ListaAncestros,
   Options,
   Roles,
   cookie,
@@ -33,15 +28,23 @@ export default function Home({
 }) {
   const [HasValue, setHasValue] = useState("");
   const [isTrueActive, setisTrueActive] = useState(false);
-  // const [Returncomponent, setReturncomponent] = useState("");
   const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [ListadoGrupoInactivo, setListadoGrupoInactivo] = useState([]);
+  const [ListadoSufijosxGroupAll, setListadoSufijosxGroupAll] = useState([]);
+  const [ListaAncestros, setListaAncestros] = useState([]);
   const [idAncestro, setidAncestro] = useState("");
   const [cmbFiltroCambio, setcmbFiltroCambio] = useState("");
-  // const router = useRouter();
 
   useEffect(() => {
     setidAncestro(idAncst);
+    queryGroupGetUsers(
+      cookie,
+      idAncst,
+      setListadoGrupoActivo,
+      setListadoGrupoInactivo,
+      setListadoSufijosxGroupAll,
+      setListaAncestros
+    );
   }, []);
 
   useEffect(() => {
@@ -94,10 +97,6 @@ export default function Home({
     }
   }, [idAncestro]);
 
-  useEffect(() => {
-    setListadoGrupoActivo(ListadoGrupoActivossr);
-    setListadoGrupoInactivo(ListadoGrupoInactivossr);
-  }, []);
 
   if (
     ListadoGrupoActivo == "401: Token incorrecto o vencido" ||
@@ -163,7 +162,16 @@ export default function Home({
       )}
 
       <div className="cases_container">
-        <section className={CardStyles.home_card}>
+        {
+         ListadoGrupoActivo != undefined &&
+         ListadoGrupoActivo.length > 0 &&
+         ListadoGrupoInactivo != undefined &&
+         ListadoGrupoInactivo.length > 0  && 
+         ListadoSufijosxGroupAll != undefined &&
+         ListadoSufijosxGroupAll.length > 0 &&
+         ListaAncestros != undefined &&
+         ListaAncestros.length > 0 ?
+         <section className={CardStyles.home_card}>
           {/* ACTIVE */}
           <div className={CardStyles.card_content}>
             <figure className={CardStyles.card_figure}>
@@ -191,28 +199,12 @@ export default function Home({
                   Todos
                   <i className={CardStyles.arrow_icon}></i>
                 </h3>
-
-                {/* <p className={CardStyles.follow}>
-                          <ImageOptimize
-                            Values={{
-                              src: "/img/Imagen_3.png",
-                              alt: "warning grupo",
-                              title: "Seguimiento",
-                              classValue: CardStyles.follow_icon,
-                              width: 28,
-                              height: 28,
-                              style: {},
-                            }}
-                          />
-                          <span className={CardStyles.follow_conunter}>
-                            {data.SEGUIMIENTOS}
-                          </span>
-                          Seguimientos
-                        </p> */}
               </Link>
             </div>
           </div>
-        </section>
+        </section>:"Cargando..."
+        }
+        
         {Roles.map((data, index) => {
           switch (data) {
             case 1:
@@ -280,8 +272,6 @@ export default function Home({
           }
         })}
       </div>
-
-      {/* <Skeleton></Skeleton> */}
     </>
   );
 }
@@ -312,24 +302,17 @@ export async function getServerSideProps(ctx) {
     }
 
     const idAnc = ctx.query.idAncest;
-    const consultataGeneral = await QueryActiveInactivegroup_GetUsers(
-      cookie,
-      idAnc
-    );
-    const ListadoGrupoActivo = await consultataGeneral.lstGroupActive;
-    const ListadoGrupoInactivo = await consultataGeneral.lstGroupInactive;
-    const ListadoSufijosxGroupAll = await consultataGeneral.ListaSufijoGetAll;
-    const ListaAncestros = await consultataGeneral.ListaAncestros;
+   
 
     return {
       props: {
-        ListadoGrupoActivossr:
-          ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
-        ListadoGrupoInactivossr:
-          ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
-        ListadoSufijosxGroupAll:
-          ListadoSufijosxGroupAll == undefined ? null : ListadoSufijosxGroupAll,
-        ListaAncestros: ListaAncestros == undefined ? null : ListaAncestros,
+        // ListadoGrupoActivossr:
+        //   ListadoGrupoActivo == undefined ? null : ListadoGrupoActivo,
+        // ListadoGrupoInactivossr:
+        //   ListadoGrupoInactivo == undefined ? null : ListadoGrupoInactivo,
+        // ListadoSufijosxGroupAll:
+        //   ListadoSufijosxGroupAll == undefined ? null : ListadoSufijosxGroupAll,
+        // ListaAncestros: ListaAncestros == undefined ? null : ListaAncestros,
         Options,
         Roles,
         cookie: cookie,

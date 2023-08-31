@@ -9,6 +9,7 @@ import {
   QueryTipoMuestra,
   queryListMultipleMicroxTextxNumber,
 } from "../../../components/Tools/Security";
+import { QueryActivegroup } from "../../../components/Tools/CRUD";
 
 export const ListPruebaxGroupApi = async (
   cookie,
@@ -98,4 +99,9 @@ export const ListMultipleMicroxTestxNumber = async (
   if (setListResultFirst != null && setListResultFirst != undefined) {
     setListResultFirst(ReturnValue.ListadoResultFirst);
   }
+};
+
+export const queryGroup = async (cookie, setListadoGrupoActivo) => {
+  let ListGroup = await QueryActivegroup(cookie, "1");
+  setListadoGrupoActivo(ListGroup);
 };

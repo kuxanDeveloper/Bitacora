@@ -29,7 +29,6 @@ function HomeMuestraxGrupo({
   const [isTrueActive, setisTrueActive] = useState(false);
   const [HasValue, setHasValue] = useState("");
   const [HasValueSample, setHasValueSample] = useState("");
-  // const [isUserInterno, setisUserInterno] = useState(false);
   const [isSampleGeneral, setisSampleGeneral] = useState(false);
   const [IdGrupAncest, setIdGrupAncest] = useState(false);
   const [GrupoNombre, setGrupoNombre] = useState("");
@@ -41,7 +40,6 @@ function HomeMuestraxGrupo({
   const [idAncestro, setidAncestro] = useState("");
   const [cmbFiltroCambio, setcmbFiltroCambio] = useState("");
   const [ListaAncestros, setListaAncestros] = useState([]);
-  // const [idAncestroSelc, setidAncestroSelc] = useState('');
 
   const router = useRouter();
   useEffect(() => {
@@ -339,7 +337,6 @@ function HomeMuestraxGrupo({
         NumSticker={query.Numstiker}
         dateAdmision={query.DateAdmission}
         HrefArmado={{ pathname: "/[id]", query: query }}
-        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
         Options={Options}
         ListaAncestros={ListaAncestros}
@@ -364,7 +361,6 @@ function HomeMuestraxGrupo({
         ListadoResultadoxMuestra={ListadoResultadoxMuestra}
         isTrueActive={isTrueActive}
         idGruop={query.id}
-        // isUserInterno={isUserInterno}
         isSampleGeneral={isSampleGeneral}
         Options={Options}
         LstObservacionesPrede={LstObservacionesPrede}
@@ -391,8 +387,6 @@ export async function getServerSideProps(ctx) {
     }
 
     if (RolUser != null && RolUser != undefined && RolUser != "") {
-      // RolUser.map((data)=>()){
-      // }
       Roles = JSON.parse(RolUser);
       Roles.map((data) => {
         if (data == 1) {

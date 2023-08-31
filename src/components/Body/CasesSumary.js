@@ -11,7 +11,7 @@ export default function CasesSumary() {
               <span className={styles.card_arrow}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-arrow-right"
+                  className="icon icon-tabler icon-tabler-arrow-right"
                   width="60"
                   height="60"
                   viewBox="0 0 24 24"

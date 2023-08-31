@@ -16,9 +16,9 @@ export default function Filters({
   setFechaIngreso,
   setFechaFinal,
   setUserRegisterStiker,
-  setTipo_tabla,  
+  setTipo_tabla,
   MesAnio,
-  setMesAnio
+  setMesAnio,
 }) {
   const router = useRouter();
 
@@ -57,42 +57,18 @@ export default function Filters({
                 <option value="" disabled>
                   Seleccione un mes para el filtro
                 </option>
-                <option value="1">
-                  Enero
-                </option>
-                <option value="2">
-                  Febrero
-                </option>
-                <option value="3">
-                  Marzo
-                </option>
-                <option value="4">
-                  Abril
-                </option>
-                <option value="5">
-                  Mayo
-                </option>
-                <option value="6">
-                  Junio
-                </option>
-                <option value="7">
-                  Julio
-                </option>
-                <option value="8">
-                  Agosto
-                </option>
-                <option value="9">
-                  Septiembre
-                </option>
-                <option value="10">
-                  Octubre
-                </option>
-                <option value="11">
-                  Noviembre
-                </option>
-                <option value="12">
-                  Diciembre
-                </option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
               </select>
               <select
                 defaultValue={UserRegisterStiker}
@@ -101,7 +77,8 @@ export default function Filters({
                 className={filterStyles.filter_input}
               >
                 <option value="">Seleccione un usuario</option>
-                {ListadoUsuariosRegistrados != null
+                {ListadoUsuariosRegistrados != null &&
+                ListadoUsuariosRegistrados != undefined
                   ? ListadoUsuariosRegistrados.map((data, index) => (
                       <option key={index} value={data.Id}>
                         {`${data.Numero_de_Identidad} - ${data.Email}`}

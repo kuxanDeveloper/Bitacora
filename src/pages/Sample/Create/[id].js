@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import CreateSticker from "../../../components/Body/CreateSticker";
-import { QueryActivegroup } from "../../../components/Tools/CRUD";
 import {
   OptionAdministrator,
   OptionAsiste,
@@ -15,25 +14,28 @@ import {
   ListSitioAnatomico,
   ListJefeLaboratorio,
   ListTipoMuestra,
+  queryGroup,
 } from "../../api/Sample/CreateResultApi";
 import { useContextBitacora } from "../../../context/BitacoraContext";
 
-function CreatePage({ ListadoGrupoActivo, id, cookie }) {
-  const { LstObservacionesPrede, setLstObservacionesPrede,Nuvjefe } =
+function CreatePage({ id, cookie }) {
+  const { LstObservacionesPrede, setLstObservacionesPrede, Nuvjefe } =
     useContextBitacora();
 
   const [ListadoGetFullSufijo, setListadoGetFullSufijo] = useState([]);
   const [ListadoSitioAna, setListadoSitioAna] = useState([]);
   const [ListadoJefeLaboratorio, setListadoJefeLaboratorio] = useState([]);
+  const [ListadoGrupoActivo, setListadoGrupoActivo] = useState([]);
   const [ListadoTipoMuestra, setListadoTipoMuestra] = useState([]);
   const [valueGrupochange, setvalueGrupochange] = useState(
     id !== null && id !== undefined && id !== "" ? id : "6"
   );
+
   useEffect(() => {
     ListObservacion(cookie, setLstObservacionesPrede);
     ListSitioAnatomico(cookie, setListadoSitioAna);
     ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
-
+    queryGroup(cookie, setListadoGrupoActivo);
     ListSufijoUser(cookie, setListadoGetFullSufijo);
   }, []);
 
@@ -42,11 +44,10 @@ function CreatePage({ ListadoGrupoActivo, id, cookie }) {
   }, [valueGrupochange]);
 
   useEffect(() => {
-    if(Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0)
-    {
+    if (Nuvjefe != null && Nuvjefe != undefined && Nuvjefe != 0) {
       ListJefeLaboratorio(cookie, setListadoJefeLaboratorio);
     }
-  },[Nuvjefe]);
+  }, [Nuvjefe]);
 
   return (
     <>
@@ -129,12 +130,9 @@ export async function getServerSideProps(ctx) {
       return { notFound: true };
     }
 
-    const ListadoGrupoActivo = await QueryActivegroup(cookie, "1");
-
     return {
       props: {
         cookie: cookie,
-        ListadoGrupoActivo: ListadoGrupoActivo,
         id: ctx.query.id,
       },
     };

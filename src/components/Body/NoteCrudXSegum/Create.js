@@ -77,7 +77,7 @@ function ComponentsCreateNote({
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class={styles.icon}
+                className={styles.icon}
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
