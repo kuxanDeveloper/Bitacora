@@ -4,7 +4,6 @@ import {
   onclickPlantillaTargetCreate,
   AddResultToList,
   ComboDinamyc,
-  AperturaandCierreMasivo,
   CierreMasivoXestatus,
   comprobarCambioestadomasivo,
 } from "../../Tools/functiones";
