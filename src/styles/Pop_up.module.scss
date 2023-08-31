@@ -1,12 +1,13 @@
 .img_upload {
-  height: calc(100% - 40px);
+  height: 102% !important;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.39);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  position: absolute;
+  position: fixed;
+  margin-top: -4%;
   .upload_container {
     position: relative;
     width: 90vw;

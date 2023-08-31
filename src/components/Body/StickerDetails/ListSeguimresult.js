@@ -77,10 +77,10 @@ function ListResulltAdd({
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
-                      DeleteRowStatus(
+                      DeleteRowStatusDataBase(
                         data,
-                        setListAddResultMultple,
-                        ListAddResultMultple
+                        data.CODIGO_PRUEBA,
+                        data.NOMBRE_PRUEBA
                       );
                     }}
                   >
