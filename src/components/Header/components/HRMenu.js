@@ -33,6 +33,8 @@ function HRMenu({ Roles }) {
     setSelectMenuEstadistica(LocationUrl(router, "Statistics"));
   }, []);
 
+  console.log(Roles);
+
   return (
     <>
       {/* anada la clase open para abrir el menu */}

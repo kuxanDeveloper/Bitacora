@@ -160,7 +160,7 @@ export default function CaseComponent({
             >
               Ver Más
             </Link>
-            {isActive ? (
+            {isActive && Options.BtnCrearResultAndUrl ? (
               <Link
                 href={{
                   pathname: "/Sample/CreateResult/[id]",

@@ -67,7 +67,8 @@ console.log(data);
             >
               Ver Más
             </Link>
-            {isActive ?
+            {isActive &&
+            Options.BtnCrearResultAndUrl ?
             <Link
               href={{
                 pathname: "/Sample/CreateResult/[id]",
@@ -95,7 +96,8 @@ console.log(data);
               className={styles.btn_sticker}
             >
               Agregar Estatus
-            </Link> : ""}
+            </Link>
+            : ""}
         </td>
       </tr>
     </>

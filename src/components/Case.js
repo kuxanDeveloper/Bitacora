@@ -207,9 +207,7 @@ export default function Case({
         seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
         seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
       }
-    }
-    else
-    {
+    } else {
       seturlImagenDinamyc("/img/photo-1614935151651-0bea6508db6b.avif");
     }
   }, [ListadoGrupo]);
@@ -465,58 +463,66 @@ export default function Case({
               <th colspan={5} className={styleTable.btn_options}>
                 {isTrueActive ? (
                   <>
-                  {idGruop == 0 ? (
-                    ""
-                  ) : (
-                    <button
-                      onClick={() => {
-                        AddListCodBitacora(
-                          "inputCheckoutResult",
-                          idGruop,
-                          ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
-                          hrefhash,
-                          HrefArmado,
-                          LstObservacionesPrede
-                        );
-                      }}
-                      className={styleTable.btn_sticker}
-                    >
-                      <span>&#10010; </span>
-                      Agregar estatus masivo
-                    </button>
-                  )}
-                    
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        AperturaandCierreMasivo(
-                          LstObservacionesPrede,
-                          isTrueActive,
-                          "inputCheckoutResult"
-                        );
-                      }}
-                      className={styleTable.btn_sticker}
-                    >
-                      <span>&#10010; </span>
-                      Cierre de las ordenes
-                    </button>
+                    {idGruop != 0 && Options.BtnCrearResultAndUrl ? (
+                      <button
+                        onClick={() => {
+                          AddListCodBitacora(
+                            "inputCheckoutResult",
+                            idGruop,
+                            ListadoMuestraActivo[0].NOMBRE_GRUPO_ASIGNADO,
+                            hrefhash,
+                            HrefArmado,
+                            LstObservacionesPrede
+                          );
+                        }}
+                        className={styleTable.btn_sticker}
+                      >
+                        <span>&#10010; </span>
+                        Agregar estatus masivo
+                      </button>
+                    ) : (
+                      ""
+                    )}
+
+                    {Options.Cerrarorden ? (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          AperturaandCierreMasivo(
+                            LstObservacionesPrede,
+                            isTrueActive,
+                            "inputCheckoutResult"
+                          );
+                        }}
+                        className={styleTable.btn_sticker}
+                      >
+                        <span>&#10010; </span>
+                        Cierre de las ordenes
+                      </button>
+                    ) : (
+                      ""
+                    )}
                   </>
                 ) : (
                   <>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        AperturaandCierreMasivo(
-                          LstObservacionesPrede,
-                          isTrueActive,
-                          "inputCheckoutResult"
-                        );
-                      }}
-                      className={styleTable.btn_sticker}
-                    >
-                      <span>&#10010; </span>
-                      Reabrir ordenes
-                    </button>
+                    {Options.ActivarOrden ? (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          AperturaandCierreMasivo(
+                            LstObservacionesPrede,
+                            isTrueActive,
+                            "inputCheckoutResult"
+                          );
+                        }}
+                        className={styleTable.btn_sticker}
+                      >
+                        <span>&#10010; </span>
+                        Reabrir ordenes
+                      </button>
+                    ) : (
+                      ""
+                    )}
                   </>
                 )}
               </th>

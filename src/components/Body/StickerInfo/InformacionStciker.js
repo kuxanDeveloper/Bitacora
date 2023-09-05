@@ -190,7 +190,7 @@ function InformacionStciker({
 
       {/* <!-- estado --> */}
       <div className={styles.card_body}>
-        {Options.BtnEditResultAndUrl && data.ESTADO_STICKER ? (
+        {Options.BtnEditStickerAndUrl && data.ESTADO_STICKER ? (
           <Link
             title="Editar sticker"
             className={styles.Edit_icon}
