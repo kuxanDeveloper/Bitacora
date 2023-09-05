@@ -205,6 +205,7 @@ function EditStickerComponents({
                             onChange={(e) => {
                               setValueGroup(e.value);
                               setvalueGrupochange(e.value);
+                              
                             }}
                             options={optionsgrup}
                             placeholder="Seleccione un grupo para el sticker"

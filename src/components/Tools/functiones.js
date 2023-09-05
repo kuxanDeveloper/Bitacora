@@ -421,10 +421,16 @@ export const OnclickComboEstadoCase = (
 
 export const onclickPruebaTargetCreate = (
   setvaluePlantillachange,
-  setValue
+  setValue,
+  SetselectobjeSeguimiento
 ) => {
+  SetselectobjeSeguimiento({
+    value: "",
+    label: "",
+  });
   document.getElementById("Codigo_resultado_preliminar_1").value = "";
   setvaluePlantillachange([]);
+  
   setValue("Codigo_opcion", "");
   let option = document.getElementById("Codigo_opcion");
   if (option != null && option != undefined) {
@@ -1469,6 +1475,7 @@ export const AddResultToList = (
     obj.textoOption = opciones;
 
     if (ComboDynamic) {
+      debugger;
       let countPosition = 0;
       let textoPreArmado = "";
       let textSplitArray = null;
@@ -1503,16 +1510,19 @@ export const AddResultToList = (
         obj.Issegumiento = false;
         for (let index = 0; index < textSplitArray.length; index++) {
           let ValorSearch = textSplitArray[index].toLowerCase();
+          let ValueInput = document.querySelector(
+            'input[name="' + selectMultip[countPosition].id + '"]'
+          );
           if (ValorSearch.search("#microbio") != -1) {
             textoPreArmado += textSplitArray[index].replace(
               "#MICROBIO",
-              selectMultip[countPosition].value
+              ValueInput.value
             );
             countPosition++;
           } else if (ValorSearch.search("#numero") != -1) {
             textoPreArmado += textSplitArray[index].replace(
               "#NUMERO",
-              selectMultip[countPosition].value
+              ValueInput.value
             );
 
             countPosition++;
@@ -1585,8 +1595,18 @@ export const ComboDinamyc = (
   ListNumber,
   setListSelectDimanyc,
   setComboDynamic,
-  clearErrors
+  clearErrors,
+  Setselectobjeopciones,
+  valuroptnnull
 ) => {
+  if(valuroptnnull)
+  {
+    Setselectobjeopciones({
+      value: "",
+      label: "",
+    });
+  }
+
   setListSelectDimanyc([]);
   if (ValueText != undefined && ValueText != null && ValueText != "") {
     let textoSelect = ValueText;

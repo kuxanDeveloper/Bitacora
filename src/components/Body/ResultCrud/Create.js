@@ -80,6 +80,8 @@ function ComponentCreateResult({
     }
   }
 
+  console.log(ListOptiones);
+
   return (
     <>
       <section className={styles.Create_Result}>
@@ -197,7 +199,8 @@ function ComponentCreateResult({
                             setvaluePlantillachange,
                             setValue,
                             setComboDynamic,
-                            setListSelectDimanyc
+                            setListSelectDimanyc,
+                            SetselectobjeSeguimiento
                           );
                           setComboDynamic(false);
                           setListSelectDimanyc(false);
@@ -220,7 +223,6 @@ function ComponentCreateResult({
                         instanceId={"Codigo_resultado_preliminar_1"}
                         name="Codigo_resultado_preliminar_1"
                         id="Codigo_resultado_preliminar_1"
-                        defaultValue={""}
                         onChange={(e) => {
                           SetselectobjeSeguimiento({
                             value: e.value,
@@ -234,13 +236,26 @@ function ComponentCreateResult({
                             ListNumber,
                             setListSelectDimanyc,
                             setComboDynamic,
-                            clearErrors
+                            clearErrors,
+                            Setselectobjeopciones,
+                            true
                           );
                           clearErrors("Codigo_resultado_preliminar_1");
                         }}
                         options={optionSegumiento}
                         placeholder="Seleccione un seguimiento"
-                        value={selectobjeSeguimiento}
+                        value={optionSegumiento.filter(function (optiong) {
+                          return (
+                            optiong.value ==
+                            (selectobjeSeguimiento != null && selectobjeSeguimiento != undefined ?
+                              selectobjeSeguimiento.value == null ||
+                              selectobjeSeguimiento.value == undefined
+                              ? ""
+                              : selectobjeSeguimiento.value
+                              :""
+                              )
+                          );
+                        })}
                       ></Select>
                       <div className={styles.invalid_feedback}>
                         {errors.Codigo_resultado_preliminar_1?.message}
@@ -258,7 +273,6 @@ function ComponentCreateResult({
                             instanceId={"Codigo_opcion"}
                             name="Codigo_opcion"
                             id="Codigo_opcion"
-                            defaultValue={""}
                             onChange={(e) => {
                               Setselectobjeopciones({
                                 value: e.value,
@@ -271,12 +285,25 @@ function ComponentCreateResult({
                                 ListNumber,
                                 setListSelectDimanyc,
                                 setComboDynamic,
-                                clearErrors
+                                clearErrors,
+                                Setselectobjeopciones,
+                                false
                               );
                             }}
                             options={optionOpciones}
                             placeholder="Seleccione una opción"
-                            value={selectobjeopciones}
+                            value={optionOpciones.filter(function (optiong) {
+                              return (
+                                optiong.value ==
+                                (selectobjeopciones != null && selectobjeopciones != undefined ?
+                                  selectobjeopciones.value == null ||
+                                  selectobjeopciones.value == undefined
+                                  ? ""
+                                  : selectobjeopciones.value
+                                  :""
+                                  )
+                              );
+                            })}
                           ></Select>
 
                           <div className={styles.invalid_feedback}>

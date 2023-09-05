@@ -167,6 +167,7 @@ function CreateSticker({
 
       if (optionsgrupLst2.length > 0) {
         setValueGroup(optionsgrupLst2[0].value);
+        setvalueGrupochange(optionsgrupLst2[0].value);
       } else {
         setValueGroup("");
       }
@@ -182,6 +183,7 @@ function CreateSticker({
       if (optionsgrupLstRc.length > 0) {
         Setoptionsgrup(optionsgrupLstRc);
         setValueGroup(optionsgrupLstRc[0].value);
+        setvalueGrupochange(optionsgrupLstRc[0].value);
       } else {
         setValueGroup("");
       }
@@ -254,6 +256,7 @@ function CreateSticker({
                         min="0"
                         onKeyUp={() => {
                           comprobarSufijoGrup();
+                          setcodTipoMuestra("");
                         }}
                         className={styles.group_input}
                       />
@@ -416,6 +419,7 @@ function CreateSticker({
                         onChange={(e) => {
                           setValueGroup(e.value);
                           setvalueGrupochange(e.value);
+                          setcodTipoMuestra("");
                         }}
                         options={optionsgrup}
                         placeholder="Seleccione un grupo para el sticker"
@@ -522,6 +526,16 @@ function CreateSticker({
                         onChange={(e) => {
                           setcodTipoMuestra(e.value);
                         }}
+                        value={optionsTipoMue.filter(function (optiong) {
+                          return (
+                            optiong.value ==
+                            (codTipoMuestra == null ||
+                              codTipoMuestra == undefined
+                              ? ""
+                              : codTipoMuestra
+                              )
+                          );
+                        })}
                         placeholder="Seleccione un tipo de muestra"
                       ></Select>
 
