@@ -13,7 +13,6 @@ export default function StickersTable({
   LstObservacionesPrede,
   idGruop
 }) {
-console.log(data);
   return (
     <>
       <tr className={`${styles.table_body} checkListResult`}>

@@ -24,7 +24,7 @@ export default function StickerDetails({
     setValueImagesrc2,
     setValueImagesrc,
   } = useContextBitacora();
-console.log(InforSampleDetails);
+  
   return (
     <>
       <div className={styles.sticker_details}>

@@ -226,8 +226,6 @@ export default function Case({
   var removed = pru.splice(1, pru.length);
   let stringhash = "#" + removed.join("#");
 
-  console.log(idGruop);
-
   return (
     <>
       {/* grupos */}

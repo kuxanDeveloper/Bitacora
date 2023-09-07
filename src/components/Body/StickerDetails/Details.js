@@ -15,8 +15,6 @@ function Details({ data, Options, name_group, sticker,group }) {
     setValueImagesrc,
   } = useContextBitacora();
 
-  console.log(data);
-
   return (
     <div className={styles.followup}>
       {/* <!-- pruebas --> */}

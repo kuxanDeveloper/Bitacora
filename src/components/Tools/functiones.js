@@ -1106,7 +1106,6 @@ export const RegisterStickerObservaciones = (
   ListadoGrupoActivo,
   FechaRecogida
 ) => {
-  debugger;
   let GrupoValid = ListadoGrupoActivo.find(
     (data) => data.Id_grupo === parseInt(ValueGroup)
   );
@@ -1475,7 +1474,6 @@ export const AddResultToList = (
     obj.textoOption = opciones;
 
     if (ComboDynamic) {
-      debugger;
       let countPosition = 0;
       let textoPreArmado = "";
       let textSplitArray = null;
@@ -1936,7 +1934,6 @@ export const CierreMasivoXestatus = (
 };
 
 export const comprobarCambioestadomasivo = (ListAddResultMultple) => {
-  debugger;
   var checbox1 = document.getElementById("CierreBloqCheck");
 
   if (ListAddResultMultple.length > 0) {

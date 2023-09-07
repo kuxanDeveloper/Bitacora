@@ -22,7 +22,6 @@ function ListResulltAdd({
   sticker,
   Options,
 }) {
-  console.log(ListadoSeguimientos);
   return (
     <>
       {ListadoSeguimientos.length > 0

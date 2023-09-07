@@ -80,8 +80,6 @@ function ComponentCreateResult({
     }
   }
 
-  console.log(ListOptiones);
-
   return (
     <>
       <section className={styles.Create_Result}>

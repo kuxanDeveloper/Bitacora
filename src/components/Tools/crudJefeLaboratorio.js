@@ -56,7 +56,6 @@ export const CreateJefeLabActive = async (
   Nuvjefe
 ) => {
 
-debugger;
   return userService
     .CreateJefeLaboratorio(DESCRIPCION, "1", DOCUMENTO, "")
     .then(() => {
