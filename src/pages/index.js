@@ -9,12 +9,18 @@ import {
 } from "../components/Tools/OpcitionHabilite";
 import { SampleDetailsAncestro } from "./api/Sample/ViewDetailsAncestro/[id]";
 import IndexComponentAdmin from "../components/RolesComponents/Ancestro/IndexComponent";
+import Webcam from "react-webcam";
+
+
 
 export default function Home({ cookie }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
   useEffect(() => {
-    SampleDetailsAncestro(setInfoAncestro, cookie, "", "1","1");
+    SampleDetailsAncestro(setInfoAncestro, cookie, "", "1", "1");
   }, []);
+
+
+
   return (
     <>
       <Head>
