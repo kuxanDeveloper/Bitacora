@@ -22,6 +22,8 @@ function ListResulltAdd({
   sticker,
   Options,
 }) {
+
+  console.log(ListadoSeguimientos);
   return (
     <>
       {ListadoSeguimientos.length > 0
@@ -44,8 +46,18 @@ function ListResulltAdd({
                           id: data.CODIGO_BITACORA,
                           codigo_resultado: data.CODIGO_RESULTADO_BITACORA,
                           estatus: data.NOMBRE_PRUEBA,
-                          seguimiento: data.PLANTILLA_RESULTADO,
-                          opcion: data.OPCION_DESCRIPCION,
+                          seguimiento: validateResultArmadoIsSeguimiento(
+                            data.PLANTILLA_RESULTADO,
+                            data.RESULTADO_ARMADO
+                          )
+                            ? data.RESULTADO_ARMADO
+                            : data.PLANTILLA_RESULTADO,
+                          opcion: validateResultArmadoIsOpciones(
+                            data.OPCION_DESCRIPCION,
+                            data.RESULTADO_ARMADO
+                          )
+                            ? data.RESULTADO_ARMADO
+                            : data.OPCION_DESCRIPCION,
                           name_group: name_group,
                           group: group,
                           sticker: sticker,

@@ -36,7 +36,10 @@ function ComponentRecoveryAdmin({ id }) {
         <div className={styles.sticker_container}>
           <div className={styles.back_btn_container}>
             <Link
-              href={"/Configuration/Users/IndexUsers"}
+              href={{
+                pathname: "/Configuration/Users/IndexUsers",
+                query: { page: "1" },
+              }}
               className={styles.back_btn}
             >
               Volver
@@ -104,7 +107,10 @@ function ComponentRecoveryAdmin({ id }) {
                     )}
                     <Link
                       className={styles.btn_cancel}
-                      href={"/Configuration/Users/IndexUsers"}
+                      href={{
+                        pathname: "/Configuration/Users/IndexUsers",
+                        query: { page: "1" },
+                      }}
                     >
                       Cancelar
                     </Link>
