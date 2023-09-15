@@ -4,13 +4,6 @@ import ImageOptimize from "../Tools/ImageOptimize";
 import { useMediaQuery } from "react-responsive";
 import { UploadImageSticker } from "../Tools/functiones";
 import Webcam from "react-webcam";
-import zIndex from "@mui/material/styles/zIndex";
-
-const videoConstraints = {
-  width: 400,
-  height: 400,
-  facingMode: "user",
-};
 
 export default function Pop_up({
   onClose,
@@ -27,15 +20,30 @@ export default function Pop_up({
   ValueImagesrcExterna2,
 }) {
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
-
+  const videoConstraints = {
+    width: 400,
+    height: 400,
+    facingMode: "user",
+  };
   const [activeDesktopCamera, setActiveDesktopCamera] = useState("false");
 
   const [picture, setPicture] = useState("");
   const webcamRef = useRef(null);
   const capture = useCallback(() => {
+    let date = new Date();
     const pictureSrc = webcamRef.current.getScreenshot();
     setPicture(pictureSrc);
+    fetch(pictureSrc)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], `CaptureImage_${date.toUTCString()}`, { type: "image/webp" });
+        isImagenOne ? setValueImagesrc(file) : setValueImagesrc2(file)
+        setisImagenExterna(true);
+        setPicture("")
+      });
   });
+  console.log(picture);
+  console.log(webcamRef.current);
 
   function showWebCam() {
     activeDesktopCamera
@@ -206,7 +214,7 @@ export default function Pop_up({
               <div style={{ position: "relative" }}>
                 <div
                   style={{
-                    maxWidth:"400px",
+                    maxWidth: "400px",
                     margin: "0 auto",
                     maxHeight: "400px",
                     display: "flex",
@@ -219,7 +227,8 @@ export default function Pop_up({
                       height={500}
                       ref={webcamRef}
                       width={300}
-                      screenshotFormat="image/jpeg"
+                      imageSmoothing={true}
+                      screenshotFormat="image/webp"
                       videoConstraints={videoConstraints}
                     />
                   ) : (
@@ -228,6 +237,7 @@ export default function Pop_up({
                 </div>
                 <div>
                   {picture != "" ? (
+                    // recaptura
                     <button
                       onClick={(e) => {
                         e.preventDefault();
@@ -265,6 +275,7 @@ export default function Pop_up({
                       </svg>
                     </button>
                   ) : (
+                    // captura
                     <button
                       style={{
                         position: "relative",

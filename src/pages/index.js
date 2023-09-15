@@ -11,11 +11,7 @@ import { SampleDetailsAncestro } from "./api/Sample/ViewDetailsAncestro/[id]";
 import IndexComponentAdmin from "../components/RolesComponents/Ancestro/IndexComponent";
 import Webcam from "react-webcam";
 
-const videoConstraints = {
-  width: 400,
-  height: 400,
-  facingMode: "user",
-};
+
 
 export default function Home({ cookie }) {
   const [InfoAncestro, setInfoAncestro] = useState([]);
@@ -23,12 +19,7 @@ export default function Home({ cookie }) {
     SampleDetailsAncestro(setInfoAncestro, cookie, "", "1", "1");
   }, []);
 
-  const [picture, setPicture] = useState("");
-  const webcamRef = React.useRef(null);
-  const capture = React.useCallback(() => {
-    const pictureSrc = webcamRef.current.getScreenshot();
-    setPicture(pictureSrc);
-  });
+
 
   return (
     <>
@@ -63,45 +54,6 @@ export default function Home({ cookie }) {
       </Head>
 
       <div className="cases_container">
-        <div>
-          <div>
-            {picture == "" ? (
-              <Webcam
-                audio={false}
-                height={800}
-                ref={webcamRef}
-                width={800}
-                screenshotFormat="image/jpeg"
-                videoConstraints={videoConstraints}
-              />
-            ) : (
-              <img src={picture} />
-            )}
-          </div>
-          <div>
-            {picture != "" ? (
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPicture('');
-                }}
-                className="btn btn-primary"
-              >
-                Retake
-              </button>
-            ) : (
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  capture();
-                }}
-                className="btn btn-danger"
-              >
-                Capture
-              </button>
-            )}
-          </div>
-        </div>
         <IndexComponentAdmin InfoAncestro={InfoAncestro}></IndexComponentAdmin>
       </div>
     </>
