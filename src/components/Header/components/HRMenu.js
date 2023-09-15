@@ -78,7 +78,7 @@ function HRMenu({ Roles }) {
               </li> */}
 
               {Roles != null ? (
-                Roles.MenuSetting ? (
+                Roles.SectionMetrics ? (
                   <li
                     className={`${Styles.nav_li}  ${
                       SelectMenuEstadistica ? Styles.selected : ""
@@ -127,8 +127,7 @@ function HRMenu({ Roles }) {
                       Metricas
                     </Link>
                     <div className={Styles.submenu}>
-                      <ul className={Styles.sub_ul}>
-                        {Roles.UserConfigCreateAndUrl ? (
+                      <ul className={Styles.sub_ul}>                       
                           <li className={Styles.sub_li}>
                             <Link
                               href={{
@@ -150,10 +149,8 @@ function HRMenu({ Roles }) {
                               Estadisticas
                             </Link>
                           </li>
-                        ) : (
-                          ""
-                        )}
-                        {Roles.GroupConfigCreateAndUrl ? (
+                       
+                        
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Statistics/IndexCsv?page=1"
@@ -168,10 +165,7 @@ function HRMenu({ Roles }) {
                             >
                               Indicadores
                             </Link>
-                          </li>
-                        ) : (
-                          ""
-                        )}
+                          </li>                        
                       </ul>
                     </div>
                   </li>
@@ -260,7 +254,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateGroupHome ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/Ancestros/IndexAncestros?page=1"
@@ -300,7 +294,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateBossLab ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/JefeLaboratorio/IndexJefe?page=1"
@@ -320,7 +314,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateSiteAnatm ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/SitioAnatomico/IndexSitio?page=1"
@@ -340,7 +334,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateTypeMue ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/TiposMuestras/IndexTipo?page=1"
@@ -360,7 +354,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateEstatusMenu ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/PruebaResultado/IndexPrueba?page=1"
@@ -380,7 +374,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateSeguimientosMenu ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/PlantillaResultado/IndexPlantilla?page=1"
@@ -400,7 +394,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.GroupConfigCreateAndUrl ? (
+                        {Roles.CreateOptionsMenu ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/OptionsResult/IndexOption?page=1"
@@ -420,7 +414,7 @@ function HRMenu({ Roles }) {
                           ""
                         )}
 
-                        {Roles.ObservacionPredeCreateAndUrl ? (
+                        {Roles.CreateMicroorganismos ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Configuration/Microorganismos/IndexMicroorganismo?page=1"
@@ -490,7 +484,7 @@ function HRMenu({ Roles }) {
               )}
 
               {Roles != null ? (
-                Roles.MenuSetting ? (
+                Roles.SectionTrazability ? (
                   <li
                     className={`${Styles.nav_li}  ${
                       SelectMenuTrazabilidad ? Styles.selected : ""
@@ -540,7 +534,7 @@ function HRMenu({ Roles }) {
                     </Link>
                     <div className={Styles.submenu}>
                       <ul className={Styles.sub_ul}>
-                        {Roles.UserConfigCreateAndUrl ? (
+                        
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Trazabilidad/IndexBitacora?page=1"
@@ -556,10 +550,6 @@ function HRMenu({ Roles }) {
                               Sticker
                             </Link>
                           </li>
-                        ) : (
-                          ""
-                        )}
-                        {Roles.GroupConfigCreateAndUrl ? (
                           <li className={Styles.sub_li}>
                             <Link
                               href="/Trazabilidad/IndexSistema?page=1"
@@ -574,10 +564,7 @@ function HRMenu({ Roles }) {
                             >
                               Sistema
                             </Link>
-                          </li>
-                        ) : (
-                          ""
-                        )}
+                          </li>                        
                       </ul>
                     </div>
                   </li>
