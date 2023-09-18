@@ -36,7 +36,7 @@ export default function Pop_up({
     fetch(pictureSrc)
       .then((res) => res.blob())
       .then((blob) => {
-        const file = new File([blob], `CaptureImage_${date.toUTCString()}`, { type: "image/webp" });
+        const file = new File([blob], `CaptureImage_${date.toUTCString()}.webp`, { type: "image/webp" });
         isImagenOne ? setValueImagesrc(file) : setValueImagesrc2(file)
         setisImagenExterna(true);
         setPicture("")
