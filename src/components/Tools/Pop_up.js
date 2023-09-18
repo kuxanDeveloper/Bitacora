@@ -90,6 +90,7 @@ export default function Pop_up({
                       <button
                         onClick={() => showWebCam()}
                         className={styles.option_link}
+                        id="filePhoto"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
