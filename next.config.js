@@ -58,6 +58,9 @@ const nextConfig = withPWA({
   },
 
   images: {
+    domains:[
+      'epi-app'
+    ],
     remotePatterns: [
       {
         protocol: "https",
