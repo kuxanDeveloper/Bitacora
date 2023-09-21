@@ -129,7 +129,7 @@ export default function StickerDetails({
                             .URL_PRIMERA_IMAGEN != undefined &&
                           InforSampleDetails.infoBitacora[0]
                             .URL_PRIMERA_IMAGEN != ""
-                          ? process.env.NEXT_PUBLIC_URL_API +
+                          ? /*process.env.NEXT_PUBLIC_URL_API +*/
                             InforSampleDetails.infoBitacora[0]
                               .URL_PRIMERA_IMAGEN
                           : null
@@ -144,7 +144,7 @@ export default function StickerDetails({
                             .URL_SEGUNDA_IMAGEN != undefined &&
                           InforSampleDetails.infoBitacora[0]
                             .URL_SEGUNDA_IMAGEN != ""
-                          ? process.env.NEXT_PUBLIC_URL_API +
+                          ? /*process.env.NEXT_PUBLIC_URL_API +*/
                             InforSampleDetails.infoBitacora[0]
                               .URL_SEGUNDA_IMAGEN
                           : null

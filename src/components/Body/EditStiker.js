@@ -254,7 +254,7 @@ function EditStickerComponents({
                               Values={{
                                 src:
                                   data.URL_PRIMERA_IMAGEN != null
-                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                    ? /*process.env.NEXT_PUBLIC_URL_API +*/
                                       data.URL_PRIMERA_IMAGEN
                                     : ValueImagesrc != null
                                     ? URL.createObjectURL(ValueImagesrc)
@@ -279,7 +279,7 @@ function EditStickerComponents({
                                   : setisImagenExterna(true);
                                 data.URL_PRIMERA_IMAGEN != null
                                   ? setValueImagesrcExterna(
-                                      process.env.NEXT_PUBLIC_URL_API +
+                                      /*process.env.NEXT_PUBLIC_URL_API +*/
                                         data.URL_PRIMERA_IMAGEN
                                     )
                                   : setValueImagesrcExterna(null);
@@ -330,7 +330,7 @@ function EditStickerComponents({
                               Values={{
                                 src:
                                   data.URL_PRIMERA_IMAGEN != null
-                                    ? process.env.NEXT_PUBLIC_URL_API +
+                                    ? /*process.env.NEXT_PUBLIC_URL_API +*/
                                       data.URL_SEGUNDA_IMAGEN
                                     : ValueImagesrc2 != null
                                     ? URL.createObjectURL(ValueImagesrc2)
@@ -356,7 +356,7 @@ function EditStickerComponents({
                                   : setisImagenExterna(true);
                                 data.URL_SEGUNDA_IMAGEN != null
                                   ? setValueImagesrcExterna2(
-                                      process.env.NEXT_PUBLIC_URL_API +
+                                      /*process.env.NEXT_PUBLIC_URL_API +*/
                                         data.URL_SEGUNDA_IMAGEN
                                     )
                                   : setValueImagesrcExterna2(null);

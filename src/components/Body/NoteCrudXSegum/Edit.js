@@ -130,7 +130,7 @@ function ComponentEditNote({
                                 src:
                                   ValueImagesrc != null
                                     ? URL.createObjectURL(ValueImagesrc)
-                                    : process.env.NEXT_PUBLIC_URL_API +
+                                    : /*process.env.NEXT_PUBLIC_URL_API +*/
                                       data.URL_PRIMERA_IMAGEN_DETALLE,
                                 alt: "Notaimg",
                                 title: "imagen nota",
@@ -151,7 +151,7 @@ function ComponentEditNote({
                                   : setisImagenExterna(true);
                                 data.URL_PRIMERA_IMAGEN_DETALLE != null
                                   ? setValueImagesrcExterna(
-                                      process.env.NEXT_PUBLIC_URL_API +
+                                      /*process.env.NEXT_PUBLIC_URL_API +*/
                                         data.URL_PRIMERA_IMAGEN_DETALLE
                                     )
                                   : setValueImagesrcExterna(null);

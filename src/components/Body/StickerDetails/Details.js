@@ -29,7 +29,7 @@ function Details({ data, Options, name_group, sticker,group }) {
           setValueImagesrcExterna(
             data.URL_PRIMERA_IMAGEN_DETALLE != null &&
               data.URL_PRIMERA_IMAGEN_DETALLE != undefined
-              ? process.env.NEXT_PUBLIC_URL_API +
+              ? /*process.env.NEXT_PUBLIC_URL_API +*/
                   data.URL_PRIMERA_IMAGEN_DETALLE
               : null
           );

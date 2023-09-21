@@ -41,14 +41,14 @@ export default function CaseComponent({
                 data.URL_PRIMERA_IMAGEN != null &&
                   data.URL_PRIMERA_IMAGEN != undefined &&
                   data.URL_PRIMERA_IMAGEN != ""
-                  ? process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN
+                  ? /*process.env.NEXT_PUBLIC_URL_API +*/ data.URL_PRIMERA_IMAGEN
                   : null
               );
               setValueImagesrcExterna2(
                 data.URL_SEGUNDA_IMAGEN != null &&
                   data.URL_SEGUNDA_IMAGEN != undefined &&
                   data.URL_SEGUNDA_IMAGEN != ""
-                  ? process.env.NEXT_PUBLIC_URL_API + data.URL_SEGUNDA_IMAGEN
+                  ? /*process.env.NEXT_PUBLIC_URL_API +*/ data.URL_SEGUNDA_IMAGEN
                   : null
               );
             }}
@@ -57,11 +57,10 @@ export default function CaseComponent({
             data.URL_PRIMERA_IMAGEN != null &&
             data.URL_PRIMERA_IMAGEN != "" ? (
               <>
-                {/* <img  src={process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN}/> */}
                 <ImageOptimize
                   Values={{
                     src:
-                      process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN,
+                      /*process.env.NEXT_PUBLIC_URL_API +*/ data.URL_PRIMERA_IMAGEN,
                     alt: "sticker",
                     title: "imagen sticker",
                     classValue: "",
@@ -80,7 +79,7 @@ export default function CaseComponent({
               <ImageOptimize
                 Values={{
                   src:
-                    process.env.NEXT_PUBLIC_URL_API + data.URL_SEGUNDA_IMAGEN,
+                   /* process.env.NEXT_PUBLIC_URL_API +*/ data.URL_SEGUNDA_IMAGEN,
                   alt: "sticker",
                   title: "imagen sticker",
                   classValue: "",

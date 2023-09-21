@@ -94,14 +94,14 @@ function InformacionStciker({
                   data.URL_PRIMERA_IMAGEN != null &&
                     data.URL_PRIMERA_IMAGEN != undefined &&
                     data.URL_PRIMERA_IMAGEN != ""
-                    ? process.env.NEXT_PUBLIC_URL_API + data.URL_PRIMERA_IMAGEN
+                    ? /*process.env.NEXT_PUBLIC_URL_API +*/ data.URL_PRIMERA_IMAGEN
                     : null
                 );
                 setValueImagesrcExterna2(
                   data.URL_SEGUNDA_IMAGEN != null &&
                     data.URL_SEGUNDA_IMAGEN != undefined &&
                     data.URL_SEGUNDA_IMAGEN != ""
-                    ? process.env.NEXT_PUBLIC_URL_API + data.URL_SEGUNDA_IMAGEN
+                    ? /*process.env.NEXT_PUBLIC_URL_API +*/ data.URL_SEGUNDA_IMAGEN
                     : null
                 );
               }}
